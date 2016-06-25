@@ -15,3 +15,36 @@ memo: 内部で利用するライブラリによってmockの仕方を変える�
 そう言えば、昔、botoの内部のrequestが見たくて以下の様なパッケージを作っていた。
 
 https://github.com/podhmo/requests-snooper
+
+
+# jsonmaker
+
+そう言えば、以前、jsonを生成するためのshell script風のミニ言語を作ったりしていたのだった。
+
+```sh
+mkobject foo
+cd foo; put name "foo"; put age 20
+cd ../
+mkarray members
+cp foo members/0
+cp foo members/1
+put members/1/name "bar"
+rm foo
+```
+
+こういう感じのJSONを吐く
+
+```javascript
+{
+  "members": [
+    {
+      "name": "foo",
+      "age": "20"
+    },
+    {
+      "name": "bar",
+      "age": "20"
+    }
+  ]
+  }
+```
