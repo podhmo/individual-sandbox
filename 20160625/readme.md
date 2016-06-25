@@ -54,7 +54,7 @@ rm foo
 profileの事のやつもコピーしておきたいかも。
 
 - まじめにコードから使うときには、`cProfile.run()` で `.prof` のファイルを作るよりは `pstats` を使ったほうが良い
-- simpleな統計をとるには？ -> `python -m pstats <foo>.prof`
+- pstatsに `.prof` を見る簡易的なUIが付属している
 - pstatsつらい -> snakevizを使う
 - call graphを見たい -> gprof2dot
 
@@ -88,3 +88,8 @@ python -m pstats foo.prof
 ```
 gprof2dot.py -f pstats profile_dump.prof | dot -Tsvg -o profile_graph.svg
 ```
+
+# links
+
+- ipython notebook作るときの歴史的な話 [Fernando Perez: The IPython notebook: a historical retrospective](http://blog.fperez.org/2012/01/ipython-notebook-historical.html)
+- 関数型言語likeな言語からpythonへのtranspiler [Coconut — Coconut documentation](http://coconut.readthedocs.io/en/master/README.html)
