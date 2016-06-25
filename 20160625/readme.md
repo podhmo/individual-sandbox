@@ -48,3 +48,43 @@ rm foo
   ]
   }
 ```
+
+# profile
+
+profileの事のやつもコピーしておきたいかも。
+
+- まじめにコードから使うときには、`cProfile.run()` で `.prof` のファイルを作るよりは `pstats` を使ったほうが良い
+- simpleな統計をとるには？ -> `python -m pstats <foo>.prof`
+- pstatsつらい -> snakevizを使う
+- call graphを見たい -> gprof2dot
+
+
+## pstatsでの `.prof` ファイルの作成方法
+
+```python
+profile = cProfile.Profile()
+profile.enable()
+do_something()
+profile.disable()
+
+s = pstats.Stats(profile)
+s.dump_stats("xxxx.prof")
+```
+
+## pstatsに `.prof` を見る簡易的なUIが付属している
+
+```sh
+python -m pstats foo.prof
+% help
+% stats
+# とりあえず cumtimeを見つつpercallを見るという感じ？
+% sort totime # total spent time in the given function
+% sort percall # totime / ncalls
+% sort cumtime # 全てのsub functionを含めた累積時間
+```
+
+## gprof2dotの使い方
+
+```
+gprof2dot.py -f pstats profile_dump.prof | dot -Tsvg -o profile_graph.svg
+```
