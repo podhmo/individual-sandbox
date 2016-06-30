@@ -103,3 +103,74 @@ with with_clear_connection(c, "prefetch"):
     print(len(c.queries))  # => 1 + 3 * 1 = 10
     print([(o.__class__.__name__, o.id) for o in content_list])
 ```
+
+# 強引にprefetch_related可能なものを作る
+
+reverse relationは考えていない。
+
+```python
+class CustomPrefetchDescriptor(object):
+    def __init__(self, cache_name, choices):
+        self.cache_name = cache_name
+        self.value_to_model = {k: v for k, v in choices}
+        self.model_to_value = {v: k for k, v in choices}
+
+    def is_cached(self, instance):
+        return False  # xxx
+
+    def get_prefetch_queryset(self, objs, qs):
+        if qs is not None:
+            raise ValueError("Custom queryset can't be used for this lookup.")
+
+        from collections import defaultdict
+        d = defaultdict(list)
+        for ob in objs:
+            d[self.value_to_model[ob.content_type]].append(ob.object_id)
+
+        result = []
+        for model, id_list in d.items():
+            result.extend(model.objects.filter(id__in=id_list))
+
+        return (
+            result,
+            self.get_rel_obj_attr,
+            self.get_instance_attr,
+            True,
+            self.cache_name
+        )
+
+    def get_rel_obj_attr(self, relobj):
+        return (self.model_to_value[relobj.__class__], relobj._get_pk_val())
+
+    def get_instance_attr(self, obj):
+        return (obj.content_type, obj.object_id)
+
+class Feed(models.Model):
+    class Meta:
+        db_table = "feed"
+        unique_together = ("content_type", "object_id")
+
+    object_id = models.PositiveIntegerField()
+    content_type = models.PositiveIntegerField(choices=([(1, "a"), (2, "b"), (3, "c")]))
+    content_set = CustomPrefetchDescriptor("content_set", [(1, A), (2, B), (3, C)])
+
+    @property
+    def content(self):
+        # cached_property?
+        return self.content_set.value_to_model[self.content_type].objects.get(id=self.object_id)
+
+    @classmethod
+    def with_prefetch(cls, to_attr):
+        from django.db.models import Prefetch
+        return Prefetch("content_set", to_attr=to_attr)
+```
+
+こうやって使える
+
+```python
+# prefetch: content2, content2__k
+qs = Feed.objects.all().prefetch_related(Feed.with_prefetch("content2"), "content2__k")
+content_list = []
+for feed in qs:
+    content_list.append((feed.content2,feed.content2.k)
+```
