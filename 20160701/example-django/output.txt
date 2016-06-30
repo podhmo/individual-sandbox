@@ -1,0 +1,51 @@
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "a" ("id", "name") SELECT 1, 'a0' UNION ALL SELECT 2, 'a1' UNION ALL SELECT 3, 'a2'; args=(1, 'a0', 2, 'a1', 3, 'a2')
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "b" ("id", "name") SELECT 10, 'b0' UNION ALL SELECT 20, 'b1' UNION ALL SELECT 30, 'b2'; args=(10, 'b0', 20, 'b1', 30, 'b2')
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "c" ("id", "name") SELECT 100, 'c0' UNION ALL SELECT 200, 'c1' UNION ALL SELECT 300, 'c2'; args=(100, 'c0', 200, 'c1', 300, 'c2')
+(0.000) SELECT "a"."id", "a"."name" FROM "a"; args=()
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'a' AND "django_content_type"."app_label" = '__main__'); args=('a', '__main__')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'a' AND "django_content_type"."app_label" = '__main__'); args=('a', '__main__')
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('__main__', 'a'); args=['__main__', 'a']
+(0.000) SELECT "b"."id", "b"."name" FROM "b"; args=()
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'b' AND "django_content_type"."app_label" = '__main__'); args=('b', '__main__')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'b' AND "django_content_type"."app_label" = '__main__'); args=('b', '__main__')
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('__main__', 'b'); args=['__main__', 'b']
+(0.000) SELECT "c"."id", "c"."name" FROM "c"; args=()
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'c' AND "django_content_type"."app_label" = '__main__'); args=('c', '__main__')
+(0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'c' AND "django_content_type"."app_label" = '__main__'); args=('c', '__main__')
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "django_content_type" ("app_label", "model") VALUES ('__main__', 'c'); args=['__main__', 'c']
+(0.000) BEGIN; args=None
+(0.000) INSERT INTO "feed" ("object_id", "content_type_id") SELECT 1, 1 UNION ALL SELECT 2, 1 UNION ALL SELECT 3, 1 UNION ALL SELECT 10, 2 UNION ALL SELECT 20, 2 UNION ALL SELECT 30, 2 UNION ALL SELECT 100, 3 UNION ALL SELECT 200, 3 UNION ALL SELECT 300, 3; args=(1, 1, 2, 1, 3, 1, 10, 2, 20, 2, 30, 2, 100, 3, 200, 3, 300, 3)
+(0.000) SELECT "feed"."id", "feed"."object_id", "feed"."content_type_id" FROM "feed"; args=()
+(0.000) SELECT "a"."id", "a"."name" FROM "a" WHERE "a"."id" = 1; args=(1,)
+(0.000) SELECT "a"."id", "a"."name" FROM "a" WHERE "a"."id" = 2; args=(2,)
+(0.000) SELECT "a"."id", "a"."name" FROM "a" WHERE "a"."id" = 3; args=(3,)
+(0.000) SELECT "b"."id", "b"."name" FROM "b" WHERE "b"."id" = 10; args=(10,)
+(0.000) SELECT "b"."id", "b"."name" FROM "b" WHERE "b"."id" = 20; args=(20,)
+(0.000) SELECT "b"."id", "b"."name" FROM "b" WHERE "b"."id" = 30; args=(30,)
+(0.000) SELECT "c"."id", "c"."name" FROM "c" WHERE "c"."id" = 100; args=(100,)
+(0.000) SELECT "c"."id", "c"."name" FROM "c" WHERE "c"."id" = 200; args=(200,)
+(0.000) SELECT "c"."id", "c"."name" FROM "c" WHERE "c"."id" = 300; args=(300,)
+(0.000) SELECT "feed"."id", "feed"."object_id", "feed"."content_type_id" FROM "feed"; args=()
+(0.000) SELECT "a"."id", "a"."name" FROM "a" WHERE "a"."id" IN (1, 2, 3); args=(1, 2, 3)
+(0.000) SELECT "b"."id", "b"."name" FROM "b" WHERE "b"."id" IN (10, 20, 30); args=(10, 20, 30)
+(0.000) SELECT "c"."id", "c"."name" FROM "c" WHERE "c"."id" IN (200, 100, 300); args=(200, 100, 300)
+
+========================================
+n + 1
+========================================
+0
+10
+[('A', 1), ('A', 2), ('A', 3), ('B', 10), ('B', 20), ('B', 30), ('C', 100), ('C', 200), ('C', 300)]
+
+========================================
+prefetch
+========================================
+0
+4
+[('A', 1), ('A', 2), ('A', 3), ('B', 10), ('B', 20), ('B', 30), ('C', 100), ('C', 200), ('C', 300)]
