@@ -18,3 +18,10 @@ class Dummy:
         if expected != actual:
             # AssertionError送出
 ```
+
+以下の様に実際のobjectの変わりにdummyを使ってあげれば良い。
+
+```python
+# f(a, "x") が呼ばれる (fはmでmock)
+m.assert_called_with(Dummy(), "x")
+```
