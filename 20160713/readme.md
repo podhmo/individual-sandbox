@@ -6,6 +6,8 @@
 AttributeError: can't set attribute
 ```
 
+単にsetterを定義すれば良いだけ。
+
 # pandasとか弄る気になった
 
 ついでにipython notebook越しに使ってみよう
