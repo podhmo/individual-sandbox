@@ -8,12 +8,12 @@ from twisted.python.modules import getModule
 class ConsoleWriter():
     def write(self, data, type):
         if (data):
-            lines = data.split("\n")
+            lines = data.decode("utf-8").split("\n")
             prefix = "<" if type == "request" else ">"
             for line in lines:
-                sys.stdout.write("%s %s\n" % (prefix, line))
+                print("%s %s" % (prefix, line))
         else:
-            sys.stdout.write("No response from server\n")
+            print("No response from server\n")
 
 
 class DebugHttpClientProtocol(protocol.Protocol):
@@ -45,6 +45,7 @@ class DebugHttpServerProtocol(protocol.Protocol):
         # 証明書とか自分で取ってこないとダメ？
         certData = getModule(__name__).filePath.sibling('public.pem').getContent()
         authority = ssl.Certificate.loadPEM(certData)
+        print(authority)
         options = ssl.optionsForClientTLS(u'google.com', authority)
         d = client.connectSSL(self.factory.targetHost, self.factory.targetPort, options)
         d.addCallback(self.forwardToClient, client)
