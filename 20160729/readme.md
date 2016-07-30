@@ -1,6 +1,6 @@
 # `python setup.py test` のこと
 
-[コチラの記事](qiita.com/Kensuke-Mitsuzawa/items/7717f823df5a30c27077)に概ね同意なのだけれど。
+[コチラの記事](http://qiita.com/Kensuke-Mitsuzawa/items/7717f823df5a30c27077)に概ね同意なのだけれど。
 test_all作る必要ないんじゃないかなと思ったりした。
 
 こんな感じで良さそうだし。
