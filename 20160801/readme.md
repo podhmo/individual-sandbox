@@ -86,3 +86,17 @@ func main(){
 	}
 }
 ```
+
+## おまけ MarshalJSONはpointerにしないほうが良いかも
+
+以下の様に書いている時、pointerを渡さないと期待した出力にならない。
+
+```go
+func (p *MyPerson2) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		FullName string `json:"full_name"`
+	}{
+		FullName: p.FirstName + " " + p.LastName,
+	})
+}
+```
