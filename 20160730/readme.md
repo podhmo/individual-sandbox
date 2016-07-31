@@ -15,13 +15,4 @@ fmt.Printf("%v\n", m) // => map[{10 20}:2 {10 10}:1]
 ```
 # golangの練習
 
-golangの練習にgrepのsubsetでも作ろう
-
-1. 正規表現を使う
-2. コマンドライン引数で複数ファイル指定
-3. コマンドライン引数でオプションを取れるようにする
-4. ディレクトリ階層を再帰的な探索をする(`-r`)
-5. grepの対象を絞る(`--include`, `--exclude`)
-6. defaultのoptionを設定ファイルにより設定できる(tomlを使う)
-7. 並行動作させる
-
+https://gist.github.com/podhmo/3cd3c1cd8bb1392dafc2eedc07f3cf35
