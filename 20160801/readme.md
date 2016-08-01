@@ -1,3 +1,46 @@
+# golangでstack traceを取る方法
+
+[runtime パッケージ](https://golang.org/pkg/runtime/#Stack)を使う
+
+```go
+func f(n int) int {
+	if n < 1 {
+        printStack()
+		return 1
+	} else {
+		return n * f(n-1)
+	}
+}
+
+func printStack() {
+	var buf [4096]byte
+	n := runtime.Stack(buf[:], false)
+	os.Stdout.Write(buf[:n])
+}
+```
+
+結果
+```
+goroutine 1 [running]:
+main.printStack()
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:20 +0x70
+main.f(0x0, 0x2120a8)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:11 +0x23
+main.f(0x1, 0x50)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:14 +0x40
+main.f(0x2, 0xc820012190)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:14 +0x40
+main.f(0x3, 0xf9f2)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:14 +0x40
+main.f(0x4, 0x0)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:14 +0x40
+main.f(0x5, 0xc8200180b8)
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:14 +0x40
+main.main()
+	~/sandbox/20160801/get-stacktrace/01get-stacktrace.go:25 +0x35
+f(n=5) = 120
+```
+
 # golangのembedなどで名前が衝突した時の動作
 
 - embedしたものとの名前の衝突(親と子)
