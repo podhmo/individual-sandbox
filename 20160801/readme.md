@@ -100,7 +100,7 @@ func (p Person) ForMarshal() MyPerson {
 	return MyPerson{Person: &p, Age: MyInt(p.Age)}
 }
 
-p := Person{Name: "foo", Age: 20}.ForMarshal()
+p := Person{Name: "foo", Age: 20}
 mp := p.ForMarshal()
 output, _ := json.Marshal(&mp)
 // => {"Name":"foo","Age":20}
