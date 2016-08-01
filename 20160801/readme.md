@@ -80,7 +80,7 @@ type MyPerson2 struct {
 }
 ```
 
-また以下の様に書いてしまったい場合には、値を渡さないとzero値で初期化されてしまう。
+また以下の様に書いてしまっていた場合には、値を渡さないとzero値で初期化されてしまう。
 
 ```go
 type MyPerson struct {
