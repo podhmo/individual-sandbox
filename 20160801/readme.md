@@ -1,3 +1,111 @@
+# golangのembedなどで名前が衝突した時の動作
+
+- embedしたものとの名前の衝突(親と子)
+- embedしたものとの名前の衝突衝突(子1と子2)
+- embedしたのと同名のtype alias
+
+## embedしたものとの名前の衝突(親と子)
+
+親が優先されるはず。
+
+```go
+type Person struct {
+	Id   string
+	Name string
+	Age  int
+}
+
+type WrappedPerson struct {
+	Id int
+	Person
+}
+```
+
+期待通り。
+
+```
+person = main.Person{Id:"p1", Name:"Foo", Age:20}
+output: {"Id":"p1","Name":"Foo","Age":20}
+----------------------------------------
+wrapped person = main.WrappedPerson{Id:1, Person:main.Person{Id:"p1", Name:"Foo", Age:20}}
+output: {"Id":1,"Name":"Foo","Age":20}
+```
+
+## embedしたものとの名前の衝突衝突(子1と子2)
+
+予想: compile errorになるか。後のものが優先される。
+
+```go
+type Child1 struct {
+	Id   string
+	Name string
+}
+
+type Child2 struct {
+	Id    int
+	Value int
+}
+
+type Person struct {
+	Child1
+	Child2
+}
+```
+
+予想外。衝突した部分(上の例ではId)は無視される模様
+
+```
+person: main.Person{Child1:main.Child1{Id:"p1", Name:"foo"}, Child2:main.Child2{Id:2, Value:10}}
+output: {"Name":"foo","Value":10}
+```
+
+## embedしたのと同名のtype alias
+
+cast出来るか調べてみる。そもそも以下はcastできない。
+
+```go
+type MyInt int
+type Person struct {
+	Name string
+	Age  int
+}
+
+type MyPerson struct {
+	Name string
+	Age  MyInt
+}
+type MyPerson2 struct {
+    Person
+	Age  MyInt
+}
+```
+
+また以下の様に書いてしまったい場合には、値を渡さないとzero値で初期化されてしまう。
+
+```go
+type MyPerson struct {
+    *Person
+	Age  MyInt
+}
+
+mp := MyPerson{Person: &Person{Name: "foo", Age: 20}}
+output, _ := json.Marshal(&mp)
+// => {"Name":"foo","Age":0}
+```
+
+こういう感じの変換を書いておくのが無難。あるコンテキスト上では全部ForMarshalみたいなもので変換してからjson.Marshalを実行すると良いかもしれない。
+
+```go
+func (p Person) ForMarshal() MyPerson {
+	return MyPerson{Person: &p, Age: MyInt(p.Age)}
+}
+
+p := Person{Name: "foo", Age: 20}.ForMarshal()
+mp := p.ForMarshal()
+output, _ := json.Marshal(&mp)
+// => {"Name":"foo","Age":20}
+```
+
 # golangでjsonのoutput
 
 - marshal時にsnake_caseにする
