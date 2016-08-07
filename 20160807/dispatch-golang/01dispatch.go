@@ -22,7 +22,6 @@ func (a A) Foo() string {
 	return fmt.Sprintf("%p - a.%s", &a, a.Name)
 }
 
-
 func (b B) Foo() string {
 	return fmt.Sprintf("b=%p, a=%p - b.%s", &b, b.A, b.Name)
 }
@@ -42,14 +41,14 @@ func main() {
 		foo(a)
 		foo(&a)
 	}
-    fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------")
 	{
 		b := B{A: &a}
 		fmt.Printf("original: b=%p, a=%p\n", &b, &(b.A))
 		foo(b)
 		foo(&b)
 	}
-    fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------")
 	{
 		c := C{A: &a}
 		fmt.Printf("original: c=%p, a=%p\n", &c, c.A)

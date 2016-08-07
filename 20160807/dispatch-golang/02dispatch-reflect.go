@@ -25,9 +25,9 @@ func (b *B) Foo() string {
 }
 
 func foo(o interface{}) {
-    v := reflect.ValueOf(o)
-    f := v.Interface().(Fooable)
-    fmt.Println(f.Foo())
+	v := reflect.ValueOf(o)
+	f := v.Interface().(Fooable)
+	fmt.Println(f.Foo())
 }
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 		foo(a)
 		foo(&a)
 	}
-    fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------")
 	{
 		b := B{A: a}
 		fmt.Printf("original: %p\n", &b)
