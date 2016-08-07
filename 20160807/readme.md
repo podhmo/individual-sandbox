@@ -1,3 +1,20 @@
+# pointerを渡さなければもちろん毎回copyされる
+
+type aliasであってもstrucctであっても。
+
+```go
+type Foo struct {
+	name string
+}
+
+func foo(foo Foo) {
+	fmt.Printf("%p %s\n", &foo, foo.name) // copied
+}
+func foo2(foo *Foo) {
+	fmt.Printf("%p %s\n", foo, foo.name)
+}
+```
+
 # interfaceによるreceiverの選択
 
 基本的にinterfaceでのsignature的なものは実行時の変換(`a.Foo` が `(&a).Foo` とみなされるようなやつ)が行われずdispatchされる。
