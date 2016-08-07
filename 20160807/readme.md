@@ -1,6 +1,29 @@
 # interfaceによるreceiverの選択
 
 基本的にinterfaceでのsignature的なものは実行時の変換が行われずdispatchされる。
+
+```go
+type Greeter interface {
+	Greet() string
+}
+
+type Foo struct {
+	name string
+}
+
+func (f *Foo) Greet() string {
+	return fmt.Sprintf("pointer of %s", f.name)
+}
+
+func foo(f Greeter) string {
+	return f.Greet()
+}
+
+f := Foo{name: "foo"}
+// fmt.Println(foo(f)) // compile error
+fmt.Println(foo(&f)) // => "pointer of foo"
+```
+
 なので `MarshalJSON` をpointerをreceiverにして実装した場合にはpointerを渡してあげないとダメ。
 
 ```go
