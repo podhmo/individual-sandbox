@@ -1,6 +1,6 @@
 # interfaceによるreceiverの選択
 
-基本的にinterfaceでのsignature的なものは実行時の変換が行われずdispatchされる。
+基本的にinterfaceでのsignature的なものは実行時の変換(`a.Foo` が `(&a).Foo` とみなされるような)が行われずdispatchされる。
 
 ```go
 type Greeter interface {
