@@ -1,6 +1,6 @@
 # interfaceによるreceiverの選択
 
-基本的にinterfaceでのsignature的なものは実行時の変換(`a.Foo` が `(&a).Foo` とみなされるような)が行われずdispatchされる。
+基本的にinterfaceでのsignature的なものは実行時の変換(`a.Foo` が `(&a).Foo` とみなされるようなやつ)が行われずdispatchされる。
 
 ```go
 type Greeter interface {
@@ -22,6 +22,13 @@ func foo(f Greeter) string {
 f := Foo{name: "foo"}
 // fmt.Println(foo(f)) // compile error
 fmt.Println(foo(&f)) // => "pointer of foo"
+```
+
+こういうエラーメッセージ。
+
+```
+use f (type Foo) as type Greeter in argument to foo:
+	Foo does not implement Greeter (Greet method has pointer receiver)
 ```
 
 なので `MarshalJSON` をpointerをreceiverにして実装した場合にはpointerを渡してあげないとダメ。

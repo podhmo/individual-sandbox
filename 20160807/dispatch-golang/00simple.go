@@ -22,6 +22,6 @@ func foo(f Greeter) string {
 
 func main() {
 	f := Foo{name: "foo"}
-	// fmt.Println(foo(f)) // compile error
+	// fmt.Println(foo(f))  // compile error
 	fmt.Println(foo(&f)) // => "pointer of foo"
 }
