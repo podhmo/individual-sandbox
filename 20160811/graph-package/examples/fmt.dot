@@ -1,0 +1,60 @@
+digraph deps {
+  graph [
+    charset = "UTF-8";
+    labelloc = "t",
+    labeljust = "c",
+//    bgcolor = "#ffffff",
+//    fontcolor = "#000000",
+    fontsize = 18,
+    style = "filled",
+    rankdir = TB,
+//    margin = 0.2,
+//    layout = circo
+//    layout = dot
+//    layout = fdp
+//    layout = neato
+//    layout = osage
+    layout = sfdp
+//    layout = twopi
+  ];
+syscall[label="syscall", ];
+	unicode_utf8[label="unicode/utf8", ];
+	strconv[label="strconv", ];
+	math[label="math", ];
+	io[label="io", ];
+	errors[label="errors", ];
+	sync_atomic[label="sync/atomic", ];
+	sync[label="sync", ];
+	fmt[label="fmt", shape="doublecircle"];
+	os[label="os", ];
+	reflect[label="reflect", ];
+	time[label="time", ];
+	fmt -> errors
+	fmt -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+}

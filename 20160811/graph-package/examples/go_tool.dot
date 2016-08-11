@@ -1,0 +1,287 @@
+digraph deps {
+  graph [
+    charset = "UTF-8";
+    labelloc = "t",
+    labeljust = "c",
+//    bgcolor = "#ffffff",
+//    fontcolor = "#000000",
+    fontsize = 18,
+    style = "filled",
+    rankdir = TB,
+//    margin = 0.2,
+//    layout = circo
+//    layout = dot
+//    layout = fdp
+//    layout = neato
+//    layout = osage
+    layout = sfdp
+//    layout = twopi
+  ];
+io[label="io", ];
+	time[label="time", ];
+	syscall[label="syscall", ];
+	bytes[label="bytes", ];
+	go_importer[label="go/importer", shape="doublecircle"];
+	go_constant[label="go/constant", ];
+	sync[label="sync", ];
+	sync_atomic[label="sync/atomic", ];
+	go_ast[label="go/ast", ];
+	container_heap[label="container/heap", ];
+	strconv[label="strconv", ];
+	path_filepath[label="path/filepath", ];
+	strings[label="strings", ];
+	reflect[label="reflect", ];
+	math_big[label="math/big", ];
+	go_scanner[label="go/scanner", ];
+	errors[label="errors", ];
+	go_printer[label="go/printer", ];
+	go_parser[label="go/parser", ];
+	encoding_binary[label="encoding/binary", ];
+	math[label="math", ];
+	go_format[label="go/format", shape="doublecircle"];
+	os[label="os", ];
+	unicode_utf8[label="unicode/utf8", ];
+	unicode[label="unicode", ];
+	math_rand[label="math/rand", ];
+	io_ioutil[label="io/ioutil", ];
+	sort[label="sort", ];
+	fmt[label="fmt", ];
+	go_token[label="go/token", ];
+	go_types[label="go/types", ];
+	text_tabwriter[label="text/tabwriter", ];
+	go_format -> bytes
+	bytes -> errors
+	bytes -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	bytes -> unicode
+	bytes -> unicode_utf8
+	go_format -> fmt
+	fmt -> errors
+	fmt -> io
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+	go_format -> go_ast
+	go_ast -> bytes
+	go_ast -> fmt
+	go_ast -> go_scanner
+	go_scanner -> bytes
+	go_scanner -> fmt
+	go_scanner -> go_token
+	go_token -> fmt
+	go_token -> sort
+	go_token -> strconv
+	go_token -> sync
+	go_scanner -> io
+	go_scanner -> path_filepath
+	path_filepath -> errors
+	path_filepath -> os
+	path_filepath -> sort
+	path_filepath -> strings
+	strings -> errors
+	strings -> io
+	strings -> unicode
+	strings -> unicode_utf8
+	path_filepath -> unicode_utf8
+	go_scanner -> sort
+	go_scanner -> strconv
+	go_scanner -> unicode
+	go_scanner -> unicode_utf8
+	go_ast -> go_token
+	go_ast -> io
+	go_ast -> os
+	go_ast -> reflect
+	go_ast -> sort
+	go_ast -> strconv
+	go_ast -> strings
+	go_ast -> unicode
+	go_ast -> unicode_utf8
+	go_format -> go_parser
+	go_parser -> bytes
+	go_parser -> errors
+	go_parser -> fmt
+	go_parser -> go_ast
+	go_parser -> go_scanner
+	go_parser -> go_token
+	go_parser -> io
+	go_parser -> io_ioutil
+	io_ioutil -> bytes
+	io_ioutil -> io
+	io_ioutil -> os
+	io_ioutil -> path_filepath
+	io_ioutil -> sort
+	io_ioutil -> strconv
+	io_ioutil -> sync
+	io_ioutil -> time
+	go_parser -> os
+	go_parser -> path_filepath
+	go_parser -> strconv
+	go_parser -> strings
+	go_parser -> unicode
+	go_format -> go_printer
+	go_printer -> bytes
+	go_printer -> fmt
+	go_printer -> go_ast
+	go_printer -> go_token
+	go_printer -> io
+	go_printer -> os
+	go_printer -> strconv
+	go_printer -> strings
+	go_printer -> text_tabwriter
+	text_tabwriter -> bytes
+	text_tabwriter -> io
+	text_tabwriter -> unicode_utf8
+	go_printer -> unicode
+	go_printer -> unicode_utf8
+	go_format -> go_token
+	go_format -> io
+	go_format -> strings
+	go_importer -> go_types
+	go_types -> bytes
+	bytes -> errors
+	bytes -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	bytes -> unicode
+	bytes -> unicode_utf8
+	go_types -> container_heap
+	container_heap -> sort
+	go_types -> fmt
+	fmt -> errors
+	fmt -> io
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+	go_types -> go_ast
+	go_ast -> bytes
+	go_ast -> fmt
+	go_ast -> go_scanner
+	go_scanner -> bytes
+	go_scanner -> fmt
+	go_scanner -> go_token
+	go_token -> fmt
+	go_token -> sort
+	go_token -> strconv
+	go_token -> sync
+	go_scanner -> io
+	go_scanner -> path_filepath
+	path_filepath -> errors
+	path_filepath -> os
+	path_filepath -> sort
+	path_filepath -> strings
+	strings -> errors
+	strings -> io
+	strings -> unicode
+	strings -> unicode_utf8
+	path_filepath -> unicode_utf8
+	go_scanner -> sort
+	go_scanner -> strconv
+	go_scanner -> unicode
+	go_scanner -> unicode_utf8
+	go_ast -> go_token
+	go_ast -> io
+	go_ast -> os
+	go_ast -> reflect
+	go_ast -> sort
+	go_ast -> strconv
+	go_ast -> strings
+	go_ast -> unicode
+	go_ast -> unicode_utf8
+	go_types -> go_constant
+	go_constant -> fmt
+	go_constant -> go_token
+	go_constant -> math
+	go_constant -> math_big
+	math_big -> bytes
+	math_big -> encoding_binary
+	encoding_binary -> errors
+	encoding_binary -> io
+	encoding_binary -> math
+	encoding_binary -> reflect
+	math_big -> errors
+	math_big -> fmt
+	math_big -> io
+	math_big -> math
+	math_big -> math_rand
+	math_rand -> math
+	math_rand -> sync
+	math_big -> strconv
+	math_big -> strings
+	math_big -> sync
+	go_constant -> strconv
+	go_constant -> unicode_utf8
+	go_types -> go_parser
+	go_parser -> bytes
+	go_parser -> errors
+	go_parser -> fmt
+	go_parser -> go_ast
+	go_parser -> go_scanner
+	go_parser -> go_token
+	go_parser -> io
+	go_parser -> io_ioutil
+	io_ioutil -> bytes
+	io_ioutil -> io
+	io_ioutil -> os
+	io_ioutil -> path_filepath
+	io_ioutil -> sort
+	io_ioutil -> strconv
+	io_ioutil -> sync
+	io_ioutil -> time
+	go_parser -> os
+	go_parser -> path_filepath
+	go_parser -> strconv
+	go_parser -> strings
+	go_parser -> unicode
+	go_types -> go_token
+	go_types -> io
+	go_types -> math
+	go_types -> sort
+	go_types -> strconv
+	go_types -> strings
+	go_types -> sync
+	go_types -> unicode
+	go_importer -> io
+}

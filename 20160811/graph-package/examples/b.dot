@@ -1,0 +1,6 @@
+digraph deps {
+  a[label = "a", shape = "doublecircle"];
+  b[label = "a/b"];
+  c[label = "a/b/c"];
+  a -> b -> c;
+}

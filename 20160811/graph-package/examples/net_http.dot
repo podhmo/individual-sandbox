@@ -1,0 +1,408 @@
+digraph deps {
+  graph [
+    charset = "UTF-8";
+    labelloc = "t",
+    labeljust = "c",
+//    bgcolor = "#ffffff",
+//    fontcolor = "#000000",
+    fontsize = 18,
+    style = "filled",
+    rankdir = TB,
+//    margin = 0.2,
+//    layout = circo
+//    layout = dot
+//    layout = fdp
+//    layout = neato
+//    layout = osage
+    layout = sfdp
+//    layout = twopi
+  ];
+io_ioutil[label="io/ioutil", ];
+	net_url[label="net/url", ];
+	math[label="math", ];
+	encoding_base64[label="encoding/base64", ];
+	unicode[label="unicode", ];
+	strings[label="strings", ];
+	bytes[label="bytes", ];
+	crypto_rsa[label="crypto/rsa", ];
+	math_big[label="math/big", ];
+	crypto_rand[label="crypto/rand", ];
+	net_http[label="net/http", shape="doublecircle"];
+	time[label="time", ];
+	net_textproto[label="net/textproto", ];
+	path_filepath[label="path/filepath", ];
+	crypto_des[label="crypto/des", ];
+	bufio[label="bufio", ];
+	container_list[label="container/list", ];
+	sort[label="sort", ];
+	hash[label="hash", ];
+	path[label="path", ];
+	unicode_utf8[label="unicode/utf8", ];
+	crypto_hmac[label="crypto/hmac", ];
+	crypto_sha512[label="crypto/sha512", ];
+	io[label="io", ];
+	crypto_rc4[label="crypto/rc4", ];
+	hash_crc32[label="hash/crc32", ];
+	log[label="log", ];
+	crypto_ecdsa[label="crypto/ecdsa", ];
+	compress_flate[label="compress/flate", ];
+	crypto_subtle[label="crypto/subtle", ];
+	mime[label="mime", ];
+	encoding_binary[label="encoding/binary", ];
+	fmt[label="fmt", ];
+	strconv[label="strconv", ];
+	crypto[label="crypto", ];
+	syscall[label="syscall", ];
+	sync_atomic[label="sync/atomic", ];
+	errors[label="errors", ];
+	mime_quotedprintable[label="mime/quotedprintable", ];
+	crypto_x509[label="crypto/x509", ];
+	encoding_hex[label="encoding/hex", ];
+	C[label="C", ];
+	crypto_sha256[label="crypto/sha256", ];
+	net[label="net", ];
+	sync[label="sync", ];
+	crypto_x509_pkix[label="crypto/x509/pkix", ];
+	math_rand[label="math/rand", ];
+	crypto_sha1[label="crypto/sha1", ];
+	crypto_md5[label="crypto/md5", ];
+	os_exec[label="os/exec", ];
+	encoding_pem[label="encoding/pem", ];
+	os[label="os", ];
+	compress_gzip[label="compress/gzip", ];
+	encoding_asn1[label="encoding/asn1", ];
+	crypto_cipher[label="crypto/cipher", ];
+	crypto_aes[label="crypto/aes", ];
+	reflect[label="reflect", ];
+	mime_multipart[label="mime/multipart", ];
+	crypto_tls[label="crypto/tls", ];
+	crypto_elliptic[label="crypto/elliptic", ];
+	crypto_dsa[label="crypto/dsa", ];
+	net_http -> bufio
+	bufio -> bytes
+	bytes -> errors
+	bytes -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	bytes -> unicode
+	bytes -> unicode_utf8
+	bufio -> errors
+	bufio -> io
+	bufio -> unicode_utf8
+	net_http -> bytes
+	net_http -> compress_gzip
+	compress_gzip -> bufio
+	compress_gzip -> compress_flate
+	compress_flate -> bufio
+	compress_flate -> fmt
+	fmt -> errors
+	fmt -> io
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+	compress_flate -> io
+	compress_flate -> math
+	compress_flate -> sort
+	compress_flate -> strconv
+	compress_flate -> sync
+	compress_gzip -> errors
+	compress_gzip -> fmt
+	compress_gzip -> hash
+	hash -> io
+	compress_gzip -> hash_crc32
+	hash_crc32 -> hash
+	hash_crc32 -> sync
+	compress_gzip -> io
+	compress_gzip -> time
+	net_http -> crypto_tls
+	crypto_tls -> bytes
+	crypto_tls -> container_list
+	crypto_tls -> crypto
+	crypto -> hash
+	crypto -> io
+	crypto -> strconv
+	crypto_tls -> crypto_aes
+	crypto_aes -> crypto_cipher
+	crypto_cipher -> crypto_subtle
+	crypto_cipher -> errors
+	crypto_cipher -> io
+	crypto_aes -> crypto_subtle
+	crypto_aes -> errors
+	crypto_aes -> strconv
+	crypto_tls -> crypto_cipher
+	crypto_tls -> crypto_des
+	crypto_des -> crypto_cipher
+	crypto_des -> encoding_binary
+	encoding_binary -> errors
+	encoding_binary -> io
+	encoding_binary -> math
+	encoding_binary -> reflect
+	crypto_des -> strconv
+	crypto_tls -> crypto_ecdsa
+	crypto_ecdsa -> crypto
+	crypto_ecdsa -> crypto_aes
+	crypto_ecdsa -> crypto_cipher
+	crypto_ecdsa -> crypto_elliptic
+	crypto_elliptic -> io
+	crypto_elliptic -> math_big
+	math_big -> bytes
+	math_big -> encoding_binary
+	math_big -> errors
+	math_big -> fmt
+	math_big -> io
+	math_big -> math
+	math_big -> math_rand
+	math_rand -> math
+	math_rand -> sync
+	math_big -> strconv
+	math_big -> strings
+	strings -> errors
+	strings -> io
+	strings -> unicode
+	strings -> unicode_utf8
+	math_big -> sync
+	crypto_elliptic -> sync
+	crypto_ecdsa -> crypto_sha512
+	crypto_sha512 -> crypto
+	crypto_sha512 -> hash
+	crypto_ecdsa -> encoding_asn1
+	encoding_asn1 -> bytes
+	encoding_asn1 -> errors
+	encoding_asn1 -> fmt
+	encoding_asn1 -> io
+	encoding_asn1 -> math_big
+	encoding_asn1 -> reflect
+	encoding_asn1 -> strconv
+	encoding_asn1 -> strings
+	encoding_asn1 -> time
+	encoding_asn1 -> unicode_utf8
+	crypto_ecdsa -> errors
+	crypto_ecdsa -> io
+	crypto_ecdsa -> math_big
+	crypto_tls -> crypto_elliptic
+	crypto_tls -> crypto_hmac
+	crypto_hmac -> crypto_subtle
+	crypto_hmac -> hash
+	crypto_tls -> crypto_md5
+	crypto_md5 -> crypto
+	crypto_md5 -> hash
+	crypto_tls -> crypto_rand
+	crypto_rand -> bufio
+	crypto_rand -> crypto_aes
+	crypto_rand -> crypto_cipher
+	crypto_rand -> errors
+	crypto_rand -> io
+	crypto_rand -> math_big
+	crypto_rand -> os
+	crypto_rand -> sync
+	crypto_rand -> syscall
+	crypto_rand -> time
+	crypto_tls -> crypto_rc4
+	crypto_rc4 -> strconv
+	crypto_tls -> crypto_rsa
+	crypto_rsa -> bytes
+	crypto_rsa -> crypto
+	crypto_rsa -> crypto_rand
+	crypto_rsa -> crypto_subtle
+	crypto_rsa -> errors
+	crypto_rsa -> hash
+	crypto_rsa -> io
+	crypto_rsa -> math_big
+	crypto_tls -> crypto_sha1
+	crypto_sha1 -> crypto
+	crypto_sha1 -> hash
+	crypto_tls -> crypto_sha256
+	crypto_sha256 -> crypto
+	crypto_sha256 -> hash
+	crypto_tls -> crypto_sha512
+	crypto_tls -> crypto_subtle
+	crypto_tls -> crypto_x509
+	crypto_x509 -> C
+	crypto_x509 -> bytes
+	crypto_x509 -> crypto
+	crypto_x509 -> crypto_aes
+	crypto_x509 -> crypto_cipher
+	crypto_x509 -> crypto_des
+	crypto_x509 -> crypto_dsa
+	crypto_dsa -> errors
+	crypto_dsa -> io
+	crypto_dsa -> math_big
+	crypto_x509 -> crypto_ecdsa
+	crypto_x509 -> crypto_elliptic
+	crypto_x509 -> crypto_md5
+	crypto_x509 -> crypto_rsa
+	crypto_x509 -> crypto_sha1
+	crypto_x509 -> crypto_sha256
+	crypto_x509 -> crypto_sha512
+	crypto_x509 -> crypto_x509_pkix
+	crypto_x509_pkix -> encoding_asn1
+	crypto_x509_pkix -> math_big
+	crypto_x509_pkix -> time
+	crypto_x509 -> encoding_asn1
+	crypto_x509 -> encoding_hex
+	encoding_hex -> bytes
+	encoding_hex -> errors
+	encoding_hex -> fmt
+	encoding_hex -> io
+	crypto_x509 -> encoding_pem
+	encoding_pem -> bytes
+	encoding_pem -> encoding_base64
+	encoding_base64 -> io
+	encoding_base64 -> strconv
+	encoding_pem -> errors
+	encoding_pem -> io
+	encoding_pem -> sort
+	encoding_pem -> strings
+	crypto_x509 -> errors
+	crypto_x509 -> fmt
+	crypto_x509 -> io
+	crypto_x509 -> math_big
+	crypto_x509 -> net
+	net -> C
+	net -> errors
+	net -> io
+	net -> math_rand
+	net -> os
+	net -> sort
+	net -> sync
+	net -> sync_atomic
+	net -> syscall
+	net -> time
+	crypto_x509 -> os_exec
+	os_exec -> bytes
+	os_exec -> errors
+	os_exec -> io
+	os_exec -> os
+	os_exec -> path_filepath
+	path_filepath -> errors
+	path_filepath -> os
+	path_filepath -> sort
+	path_filepath -> strings
+	path_filepath -> unicode_utf8
+	os_exec -> strconv
+	os_exec -> strings
+	os_exec -> sync
+	os_exec -> syscall
+	crypto_x509 -> strconv
+	crypto_x509 -> strings
+	crypto_x509 -> sync
+	crypto_x509 -> time
+	crypto_x509 -> unicode_utf8
+	crypto_tls -> encoding_asn1
+	crypto_tls -> encoding_pem
+	crypto_tls -> errors
+	crypto_tls -> fmt
+	crypto_tls -> hash
+	crypto_tls -> io
+	crypto_tls -> io_ioutil
+	io_ioutil -> bytes
+	io_ioutil -> io
+	io_ioutil -> os
+	io_ioutil -> path_filepath
+	io_ioutil -> sort
+	io_ioutil -> strconv
+	io_ioutil -> sync
+	io_ioutil -> time
+	crypto_tls -> math_big
+	crypto_tls -> net
+	crypto_tls -> strconv
+	crypto_tls -> strings
+	crypto_tls -> sync
+	crypto_tls -> sync_atomic
+	crypto_tls -> time
+	net_http -> encoding_base64
+	net_http -> encoding_binary
+	net_http -> errors
+	net_http -> fmt
+	net_http -> io
+	net_http -> io_ioutil
+	net_http -> log
+	log -> fmt
+	log -> io
+	log -> os
+	log -> sync
+	log -> time
+	net_http -> mime
+	mime -> bufio
+	mime -> bytes
+	mime -> encoding_base64
+	mime -> errors
+	mime -> fmt
+	mime -> io
+	mime -> os
+	mime -> sort
+	mime -> strings
+	mime -> sync
+	mime -> unicode
+	mime -> unicode_utf8
+	net_http -> mime_multipart
+	mime_multipart -> bufio
+	mime_multipart -> bytes
+	mime_multipart -> crypto_rand
+	mime_multipart -> errors
+	mime_multipart -> fmt
+	mime_multipart -> io
+	mime_multipart -> io_ioutil
+	mime_multipart -> mime
+	mime_multipart -> mime_quotedprintable
+	mime_quotedprintable -> bufio
+	mime_quotedprintable -> bytes
+	mime_quotedprintable -> fmt
+	mime_quotedprintable -> io
+	mime_multipart -> net_textproto
+	net_textproto -> bufio
+	net_textproto -> bytes
+	net_textproto -> fmt
+	net_textproto -> io
+	net_textproto -> io_ioutil
+	net_textproto -> net
+	net_textproto -> strconv
+	net_textproto -> strings
+	net_textproto -> sync
+	mime_multipart -> os
+	mime_multipart -> strings
+	net_http -> net
+	net_http -> net_textproto
+	net_http -> net_url
+	net_url -> bytes
+	net_url -> errors
+	net_url -> fmt
+	net_url -> sort
+	net_url -> strconv
+	net_url -> strings
+	net_http -> os
+	net_http -> path
+	path -> errors
+	path -> strings
+	path -> unicode_utf8
+	net_http -> path_filepath
+	net_http -> reflect
+	net_http -> sort
+	net_http -> strconv
+	net_http -> strings
+	net_http -> sync
+	net_http -> sync_atomic
+	net_http -> time
+	net_http -> unicode_utf8
+}

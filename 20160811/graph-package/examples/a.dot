@@ -1,0 +1,3 @@
+digraph deps {
+  a -> b -> c;
+}

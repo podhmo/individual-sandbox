@@ -1,0 +1,121 @@
+digraph deps {
+  graph [
+    charset = "UTF-8";
+    labelloc = "t",
+    labeljust = "c",
+//    bgcolor = "#ffffff",
+//    fontcolor = "#000000",
+    fontsize = 18,
+    style = "filled",
+    rankdir = TB,
+//    margin = 0.2,
+//    layout = circo
+//    layout = dot
+//    layout = fdp
+//    layout = neato
+//    layout = osage
+    layout = sfdp
+//    layout = twopi
+  ];
+strings[label="strings", ];
+	sort[label="sort", ];
+	bytes[label="bytes", ];
+	math[label="math", ];
+	unicode_utf16[label="unicode/utf16", ];
+	io[label="io", ];
+	syscall[label="syscall", ];
+	encoding[label="encoding", ];
+	encoding_base64[label="encoding/base64", ];
+	unicode_utf8[label="unicode/utf8", ];
+	time[label="time", ];
+	strconv[label="strconv", ];
+	fmt[label="fmt", ];
+	encoding_json[label="encoding/json", shape="doublecircle"];
+	sync_atomic[label="sync/atomic", ];
+	errors[label="errors", ];
+	reflect[label="reflect", ];
+	os[label="os", ];
+	unicode[label="unicode", ];
+	sync[label="sync", ];
+	fmt -> errors
+	fmt -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+	encoding_json -> bytes
+	bytes -> errors
+	bytes -> io
+	io -> errors
+	io -> sync
+	sync -> sync_atomic
+	bytes -> unicode
+	bytes -> unicode_utf8
+	encoding_json -> encoding
+	encoding_json -> encoding_base64
+	encoding_base64 -> io
+	encoding_base64 -> strconv
+	strconv -> errors
+	strconv -> math
+	strconv -> unicode_utf8
+	encoding_json -> errors
+	encoding_json -> fmt
+	fmt -> errors
+	fmt -> io
+	fmt -> math
+	fmt -> os
+	os -> errors
+	os -> io
+	os -> sync
+	os -> sync_atomic
+	os -> syscall
+	syscall -> errors
+	syscall -> sync
+	os -> time
+	time -> errors
+	time -> sync
+	time -> syscall
+	fmt -> reflect
+	reflect -> math
+	reflect -> strconv
+	reflect -> sync
+	fmt -> strconv
+	fmt -> sync
+	fmt -> unicode_utf8
+	encoding_json -> io
+	encoding_json -> math
+	encoding_json -> reflect
+	encoding_json -> sort
+	encoding_json -> strconv
+	encoding_json -> strings
+	strings -> errors
+	strings -> io
+	strings -> unicode
+	strings -> unicode_utf8
+	encoding_json -> sync
+	encoding_json -> unicode
+	encoding_json -> unicode_utf16
+	encoding_json -> unicode_utf8
+}
