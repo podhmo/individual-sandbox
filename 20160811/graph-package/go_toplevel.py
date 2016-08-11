@@ -26,7 +26,7 @@ class Control:
     def is_toplevel(self, s):
         return len(self.nodes.get(s)) <= 0
 
-    def is_skip(self, s):
+    def is_skipped(self, s):
         return any(x in s for x in self.skips)
 
     def node_line(self, s):
@@ -57,7 +57,7 @@ def graph_body(package, control, seen):
         control.assign(package)
 
     for dep in get_imports(package):
-        if dep and not control.is_skip(dep):
+        if dep and not control.is_skipped(dep):
             control.subassign(package, dep)
             yield control.edge_line(package, dep)
             yield from graph_body(dep, control, seen)
@@ -67,7 +67,7 @@ def main(*packages):
     control = Control(skips=["internal", "unsafe", "runtime"])
     # control = Control(skips=["internal", "unsafe", "runtime", "sync", "errors", "unicode"])
     [line for package in packages for line in graph_body(package, control, set())]
-    nodes = [s for s in control.nodes.keys() if control.is_toplevel(s) and not control.is_skip(s)]
+    nodes = [s for s in control.nodes.keys() if control.is_toplevel(s) and not control.is_skipped(s)]
     import json
     return json.dumps(sorted(nodes), indent=2)
 
