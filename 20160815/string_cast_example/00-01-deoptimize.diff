@@ -1,0 +1,102 @@
+--- 00-hello-simple-deoptimize.asm	2016-08-15 00:44:39.000000000 +0900
++++ 01-hello-simple-deoptimize.asm	2016-08-15 00:44:39.000000000 +0900
+@@ -1,18 +1,33 @@
+-TEXT	"".main(SB), $144-0
++TEXT	"".main(SB), $176-0
+ MOVQ	(TLS), CX
+-LEAQ	-16(SP), AX
++LEAQ	-48(SP), AX
+ CMPQ	AX, 16(CX)
+-JLS	299
+-SUBQ	$144, SP
++JLS	393
++SUBQ	$176, SP
+ FUNCDATA	$0, gclocals·7d2d5fca80364273fb07d5820a76fef4(SB)
+-FUNCDATA	$1, gclocals·ac3ef59631d389f8690304bed09d23c2(SB)
++FUNCDATA	$1, gclocals·decfa17fe033bd4c3f6d4e5d747ef904(SB)
+ LEAQ	go.string."hello world"(SB), BX
+ MOVQ	BX, "".s+56(SP)
+ MOVQ	$11, "".s+64(SP)
++MOVQ	$0, (SP)
+ MOVQ	"".s+56(SP), BX
+-MOVQ	BX, "".autotmp_0000+104(SP)
++MOVQ	BX, 8(SP)
+ MOVQ	"".s+64(SP), BX
+-MOVQ	BX, "".autotmp_0000+112(SP)
++MOVQ	BX, 16(SP)
++PCDATA	$0, $0
++CALL	runtime.stringtoslicebyte(SB)
++MOVQ	24(SP), BX
++MOVQ	BX, "".casted+104(SP)
++MOVQ	32(SP), BX
++MOVQ	BX, "".casted+112(SP)
++MOVQ	40(SP), BX
++MOVQ	BX, "".casted+120(SP)
++MOVQ	"".casted+104(SP), BX
++MOVQ	BX, "".autotmp_0000+152(SP)
++MOVQ	"".casted+112(SP), BX
++MOVQ	BX, "".autotmp_0000+160(SP)
++MOVQ	"".casted+120(SP), BX
++MOVQ	BX, "".autotmp_0000+168(SP)
+ MOVQ	$0, BX
+ MOVQ	BX, "".autotmp_0004+88(SP)
+ MOVQ	BX, "".autotmp_0004+96(SP)
+@@ -20,13 +35,13 @@
+ MOVQ	BX, "".autotmp_0002+48(SP)
+ MOVQ	"".autotmp_0002+48(SP), BX
+ CMPQ	BX, $0
+-JEQ	$1, 292
+-MOVQ	$1, "".autotmp_0001+128(SP)
++JEQ	$1, 386
+ MOVQ	$1, "".autotmp_0001+136(SP)
+-MOVQ	BX, "".autotmp_0001+120(SP)
+-LEAQ	type.string(SB), BX
++MOVQ	$1, "".autotmp_0001+144(SP)
++MOVQ	BX, "".autotmp_0001+128(SP)
++LEAQ	type.[]uint8(SB), BX
+ MOVQ	BX, (SP)
+-LEAQ	"".autotmp_0000+104(SP), BX
++LEAQ	"".autotmp_0000+152(SP), BX
+ MOVQ	BX, 8(SP)
+ MOVQ	$0, 16(SP)
+ PCDATA	$0, $1
+@@ -35,31 +50,31 @@
+ MOVQ	BX, "".autotmp_0005+72(SP)
+ MOVQ	32(SP), BX
+ MOVQ	BX, "".autotmp_0005+80(SP)
+-MOVQ	"".autotmp_0001+120(SP), BX
++MOVQ	"".autotmp_0001+128(SP), BX
+ MOVQ	"".autotmp_0005+72(SP), BP
+ MOVQ	BP, (BX)
+ MOVQ	"".autotmp_0005+80(SP), BP
+ CMPB	runtime.writeBarrier(SB), $0
+-JNE	$0, 272
++JNE	$0, 366
+ MOVQ	BP, 8(BX)
+-MOVQ	"".autotmp_0001+120(SP), BX
+-MOVQ	BX, (SP)
+ MOVQ	"".autotmp_0001+128(SP), BX
+-MOVQ	BX, 8(SP)
++MOVQ	BX, (SP)
+ MOVQ	"".autotmp_0001+136(SP), BX
++MOVQ	BX, 8(SP)
++MOVQ	"".autotmp_0001+144(SP), BX
+ MOVQ	BX, 16(SP)
+ PCDATA	$0, $2
+ CALL	fmt.Println(SB)
+-ADDQ	$144, SP
++ADDQ	$176, SP
+ RET
+ LEAQ	8(BX), R8
+ MOVQ	R8, (SP)
+ MOVQ	BP, 8(SP)
+ PCDATA	$0, $1
+ CALL	runtime.writebarrierptr(SB)
+-JMP	224
++JMP	315
+ MOVL	AX, (BX)
+-JMP	109
++JMP	191
+ NOP
+ CALL	runtime.morestack_noctxt(SB)
+ JMP	0
