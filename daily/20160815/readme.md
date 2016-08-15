@@ -39,6 +39,7 @@ mini-grepという名前ですすめてく。
 
 grepの対象を絞る(--include, --exclude)
 
+- :notebook: filepath.Globは直接ファイルを探索してしまう
 
 # [wip]golang 正規表現を使う方法
 
@@ -51,6 +52,19 @@ import "regexp"
 
 regexp.MustCompile()
 ```
+
+# [wip]golang globパターンでのマッチング
+
+[filepath - The Go Programming Language](https://golang.org/pkg/path/filepath/#Glob)
+
+```golang
+$ gore
+:import path/filepath
+filepath.Glob("*.py")
+```
+
+ただし文字列の集合に対してglobパターンでマッチングとかはできない。
+
 
 # [wip] golang []byte へのcastでmemory copy
 
