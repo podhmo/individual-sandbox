@@ -19,12 +19,19 @@ mini-grepという名前ですすめてく。
 
 - これは単にos.Stdinを見るようにすれば良い
 - ついでにファイルの存在チェックもすることに -> os.Stat()の結果を見る
-- そう言えばswitchで分岐できるのだったっけ？
+- @:そう言えば、switchで分岐できるのだったっけ？
 - @:そう言えば、sytax checkerが動いていない。
 
 ## 3. コマンドライン引数でオプションを取れるようにする(-r で再帰的な探索)
 
 - コマンドラインoptionはflagパッケージを使えば良いはず。
+- flag.Bool()を使ってflag.Parse()を呼ぶし。os.Argsの代わりにflag.Args()の結果を使う
+- @:そう言えば、高階関数はmini-grepの中ではここで初めて使っている
+- golintを通すには公開関数にはdocstringを追加しないとだめっぽい。
+- !: golangではclosureのmutual recursionは無理？
+
+flagパッケージを使って、short optionとlong optionを同時に指定する方法がよくわからない。
+
 ## 4. grepの対象を絞る(--include, --exclude)
 
 
