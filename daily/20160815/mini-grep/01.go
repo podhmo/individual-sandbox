@@ -31,7 +31,6 @@ func main() {
 	if len(os.Args) <= 2 {
 		fmt.Fprintln(os.Stderr, "mini-grep <regexp> [filename] ...")
 	} else {
-		fmt.Println(os.Args)
 		rx := regexp.MustCompile(os.Args[1])
 		for _, filename := range os.Args[2:] {
 			err := miniGrep(rx, filename)
