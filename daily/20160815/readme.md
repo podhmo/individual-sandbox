@@ -4,35 +4,35 @@
 
 mini-grepという名前ですすめてく。
 
-## 0. とりあえず正規表現を使ったコードを書く。
+0. とりあえず正規表現を使ったコードを書く。
 
 - regexpを使えば良いっぽい
 - stripの方法がわからない -> strings.TrimSpace()
 
-## 1. コマンドライン引数を受け取って受け取ったファイルに対してgrep的な処理をする
+1. コマンドライン引数を受け取って受け取ったファイルに対してgrep的な処理をする
 
 - コマンドライン引数の取り方がわからない -> os.Args
 - ファイルIOの方法がわからない -> os.Open()
 - 行ごとの取得の方法がわからない -> io.Readerをbufio.NewScannerに渡す -> その後sc.Scan() + sc.Text()
 
-## 2. 無引数の場合には標準入力を見る
+2. 無引数の場合には標準入力を見る
 
 - これは単にos.Stdinを見るようにすれば良い
 - ついでにファイルの存在チェックもすることに -> os.Stat()の結果を見る
-- @:そう言えば、switchで分岐できるのだったっけ？
-- @:そう言えば、sytax checkerが動いていない。
+- :notebook:: そう言えば、switchで分岐できるのだったっけ？
+- :notebook:: そう言えば、sytax checkerが動いていない。
 
-## 3. コマンドライン引数でオプションを取れるようにする(-r で再帰的な探索)
+3. コマンドライン引数でオプションを取れるようにする(-r で再帰的な探索)
 
 - コマンドラインoptionはflagパッケージを使えば良いはず。
 - flag.Bool()を使ってflag.Parse()を呼ぶし。os.Argsの代わりにflag.Args()の結果を使う
-- @:そう言えば、高階関数はmini-grepの中ではここで初めて使っている
-- golintを通すには公開関数にはdocstringを追加しないとだめっぽい。
-- !: golangではclosureのmutual recursionは無理？
+- :notebook:: そう言えば、高階関数はmini-grepの中ではここで初めて使っている
+- :notebook:: golintを通すには公開関数にはdocstringを追加しないとだめっぽい。
+- :exclamation:: golangではclosureのmutual recursionは無理？
 
 flagパッケージを使って、short optionとlong optionを同時に指定する方法がよくわからない。
 
-## 4. grepの対象を絞る(--include, --exclude)
+4. grepの対象を絞る(--include, --exclude)
 
 
 # [wip]golang 正規表現を使う方法
