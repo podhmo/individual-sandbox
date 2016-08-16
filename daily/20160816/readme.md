@@ -4,6 +4,23 @@
 
 gistのclientのようなものを作る。とりあえずselfishという感じの名前にする。
 
+# [wip] golangで structに不足したfieldが存在した場合
+
+Q. golangで structに不足したfieldが存在した場合はどうなるんだっけ？
+A. 不足した属性はゼロ値で初期化される
+
+```go
+// Data represents a xxxx's data.
+type Data struct {
+	ID        *string    `json:"id,omitempty"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+}
+
+data := Data{}
+fmt.Printf("data: %[1]T -- %#[1]v\n", data)
+// data: main.Data main.Data{ID:(*string)(nil), CreatedAt:(*time.Time)(nil)}
+```
+
 # [wip] golangの `go build` で生成される名前を変えることできないのかな？
 
 a.out みたいな雑な名前で生成してgitignoreにマッチするようにしたい。
