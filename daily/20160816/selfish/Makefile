@@ -3,6 +3,6 @@ default:
 	make run
 
 run:
-	./a.out `cat ./selfish.config`
+	./a.out `cat ./selfish.config` hello.md
 
 .PHONY: run default

@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
+	"io/ioutil"
 	"log"
 	"os"
+	"path"
 )
 
 func ppJSON(target interface{}) {
@@ -31,14 +33,62 @@ func CreateClient(token string) *github.Client {
 }
 
 // AppMain is main function of Application
-func AppMain(client *github.Client) {
-	// list all repositories for the authenticated user
-	repos, _, err := client.Repositories.List("", nil)
-
+func AppMain(client *github.Client, filenames []string) {
+	gist, err := NewGist(filenames)
 	if err != nil {
 		log.Fatal(err)
 	}
-	ppJSON(repos)
+
+	_, response, err := client.Gists.Create(gist)
+	if err != nil {
+		log.Fatal(err)
+	}
+	ppJSON(response)
+}
+
+// NewGist is shorthand of github.Gist object creation
+func NewGist(filenames []string) (*github.Gist, error) {
+	public := true
+	files := make(map[github.GistFilename]github.GistFile)
+
+	for _, filename := range filenames {
+		gistfile, err := NewGistFile(filename)
+		if err != nil {
+			log.Printf("skip file=%s err=%v\n", filename, err)
+			continue
+		}
+		k := github.GistFilename(path.Base(filename))
+		files[k] = *gistfile
+	}
+
+	gist := github.Gist{
+		Public: &public,
+		Files:  files,
+	}
+	return &gist, nil
+}
+
+// NewGistFile is shorthand of github.GistFile object creation
+func NewGistFile(filename string) (*github.GistFile, error) {
+	basename := path.Base(filename)
+	finfo, err := os.Stat(filename)
+	if err != nil {
+		return nil, err
+	}
+	size := int(finfo.Size())
+
+	byte, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	content := string(byte)
+
+	gistfile := github.GistFile{
+		Size:     &size,
+		Filename: &basename,
+		Content:  &content,
+	}
+	return &gistfile, nil
 }
 
 func main() {
@@ -48,5 +98,5 @@ func main() {
 	}
 	token := os.Args[1]
 	client := CreateClient(token)
-	AppMain(client)
+	AppMain(client, os.Args[2:])
 }
