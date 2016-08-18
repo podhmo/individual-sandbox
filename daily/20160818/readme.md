@@ -3,7 +3,11 @@
 - panicは大丈夫
 - errorの時には？ -> [pkg/errors](https://github.com/pkg/errors) 便利
 
+書いた: [使い捨てのコードのエラー処理について - podhmo's diary](http://pod.hatenablog.com/entry/2016/08/18/045136)
+
 # golang time.Timeの取り扱い
+
+[time - The Go Programming Language](https://golang.org/pkg/time/)
 
 ## 所定のformatの文字列からtime.Timeを取り出す
 
