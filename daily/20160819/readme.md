@@ -5,6 +5,46 @@
 
 # golang ファイルの読み書きが存在する処理のテスト
 
+## tmpfileを直接作成する場合
+
+tmpfileの作成にはio/ioutilの関数を使えば良いという話だった。
+
+例えば、以下のような `prepareFile()` を作ってどうにかする？
+(並行したアクセスがあることは考えていない)
+
+```go
+func prepareFile(filename string, content string) (*os.File, error) {
+	// setup
+	fp, err := ioutil.TempFile(".", filename)
+    defer fp.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	w := bufio.NewWriter(fp)
+	w.WriteString(content)
+	w.Flush()
+	return fp, nil
+}
+
+func TestFoo(t *testing.T) {
+	// setup
+	fp, err := prepareFile("testtext-", "hello")
+	if err != nil {
+		t.Error(err)
+	}
+	tmpName := fp.Name()
+
+	// teardown
+	defer os.Remove(tmpName)
+
+	// test main
+    // do something
+}
+```
+
+## stringIO的なものを利用する場合(ファイルは作成しない)
+
 たかだかunit testのために実ファイルを作るのはバカバカしい。
 pythonで言う StringIO のような物がほしい。
 
@@ -33,7 +73,7 @@ func foo(r io.Reader, w io.Writer) error {
 
 テストの時にはfooだけテストする。
 
-## stringIO的な何かは `bytes.Buffer`
+### stringIO的な何かは `bytes.Buffer`
 
 StringIO的な振る舞いをするものがほしい時には、[bytes.Buffer](https://golang.org/pkg/bytes/#Buffer)を使えば良さそう。
 
@@ -44,7 +84,7 @@ var r io.Reader
 r = bytes.NewBufferString("<text message>")
 ```
 
-## `fmt.Printf()` 的なものの呼び出しがある場合には？
+### `fmt.Printf()` 的なものの呼び出しがある場合には？
 
 `fmt.Printf()` 的なものの呼び出しがある場合には、`fmt.FPrintf()` に `os.Stdout`　渡す感じにするのが無難かもしれない。
 
