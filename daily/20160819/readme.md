@@ -1,3 +1,13 @@
+# gitで不要なファイルを永久追放
+
+たまにしか使わないので忘れる
+
+```bash
+$ git filter-branch --tree-filter "rm -f <filename>" HEAD
+$ git gc --aggressive --prune=now
+```
+
+
 # golang go testの際に標準出力を殺さない方法
 
 `-v` 付ければ良い `go test -v`
@@ -5,7 +15,7 @@
 
 # golang ファイルの読み書きが存在する処理のテスト
 
-以下の２つ
+以下の２つの場合が考えられる。
 
 - tmpfileを直接作成する場合
 - stringIO的なものを利用する場合(ファイルは作成しない)
