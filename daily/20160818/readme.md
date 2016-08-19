@@ -67,3 +67,15 @@ const (
 	StampNano  = "Jan _2 15:04:05.000000000"
 )
 ```
+
+# golang tmpfileの作成
+
+ioutilに `TempFile()` と `TempDir()` が存在する。
+
+```go
+import io/ioutil
+
+fp, err := ioutil.TempFile(".", "tmp-")
+```
+
+:notebook: 空文字を渡すと `/var/folders/b7/2rk7xp2d0hb2r21zbzjwxb_m0000gn/T/` のような(macの場合)良い感じの名前のディレクトリ内に保存できる。
