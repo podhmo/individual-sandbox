@@ -1,3 +1,2 @@
 default:
-	go test
-	rm *.test
+	go test; rm *.test
