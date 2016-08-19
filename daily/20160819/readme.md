@@ -49,10 +49,10 @@ r = bytes.NewBufferString("<text message>")
 fmt.Printf("hai")
 
 // こうする
-fmt.FPrintf(os.Stdout, "hai")
+fmt.Fprintf(os.Stdout, "hai")
 
 // 実際には
 var w io.Writer
 w = <>
-fmt.FPrintf(w, "hai")
+fmt.Fprintf(w, "hai")
 ```
