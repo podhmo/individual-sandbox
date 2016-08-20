@@ -59,3 +59,33 @@ import (
 
 // foo.XXX みたいな形で使う。
 ```
+
+# golang 統一的なマスキングの処理をしたい場合どうすれば良いんだろう？
+
+reflection使わないとダメなのかな？
+
+```go
+type User struct {
+	Name     string
+	Password string
+}
+
+type Maskable interface {
+	Mask() interface{}
+}
+
+func Mask(o interface{}) interface{} {
+	v := reflect.ValueOf(o)
+	if t, ok := v.Interface().(Maskable); ok {
+		return t.Mask()
+	}
+	return o
+}
+
+func (u User) Mask() interface{} {
+	// object u is copied.
+	rx := regexp.MustCompile(".")
+	u.Password = rx.ReplaceAllLiteralString(u.Password, "*")
+	return u
+}
+```
