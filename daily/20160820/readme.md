@@ -1,3 +1,39 @@
+# golang method により struct -> interfaceの解釈が入るとnilではなくなる。
+
+以下の様な定義がある。
+
+```go
+type barker interface {
+	Bark()
+}
+
+type dog struct {
+}
+
+func (d *dog) Bark() {
+	fmt.Println("\tわんわん")
+}
+
+func play(b barker) {
+	fmt.Printf("\tplay with %[1]T: %[1]v\n", b, b)
+	if b != nil {
+		b.Bark()
+	}
+}
+```
+
+ここで、dog型のzero valueをreceiverとして `play()` を呼び出すと、 `b != nil` の部分がtrueになってしまう。
+
+```
+var d *dog // この時点ではnil
+play(d)
+
+/*
+	play with *main.dog: <nil>
+	わんわん
+*/
+```
+
 # 妖しいもの
 
 gistにuploadしたものをpackageとして利用できるみたいな感じ？(古いのでだめかも)
