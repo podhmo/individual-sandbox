@@ -16,7 +16,14 @@ gistにuploadしたものをpackageとして利用できるみたいな感じ？
 repository名と同一のファイルを１個作る。readme.mdもあっても良い。
 
 例えば、 `https://github.com/<username>/foo` に `foo.go` を置いたrepositoryを作る。
-すると `go get github.com/<username>/foo` で `$GOPATH/bin` に入る。
+すると以下で `$GOPATH/bin` に入る。
+
+```
+go get github.com/<username>/foo
+```
+
+例えば[こういう感じ](https://github.com/podhmo/individual-sandbox/tree/master/daily/20160820/hai/)で作れる
+
 
 ## それなりに階層が複雑なもの
 
