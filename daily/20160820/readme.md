@@ -62,7 +62,7 @@ import (
 
 # golang 統一的なマスキングの処理をしたい場合どうすれば良いんだろう？
 
-reflection使わないとダメなのかな？
+reflect package使わないとダメなのかな？
 
 ```go
 type User struct {
@@ -87,5 +87,19 @@ func (u User) Mask() interface{} {
 	rx := regexp.MustCompile(".")
 	u.Password = rx.ReplaceAllLiteralString(u.Password, "*")
 	return u
+}
+```
+
+いや、reflect packageは不要。
+
+```go
+type I interface {
+}
+
+func Mask(o I) I {
+	if o, ok := o.(Maskable); ok {
+		return o.Mask()
+	}
+	return o
 }
 ```
