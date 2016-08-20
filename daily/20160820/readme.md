@@ -1,3 +1,6 @@
+# golang embedされたものも含めたmappingを上手くやる方法がわからない
+
+
 # golang method により struct -> interfaceの解釈が入るとnilではなくなる。
 
 以下の様な定義がある。
