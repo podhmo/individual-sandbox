@@ -90,7 +90,7 @@ func (u User) Mask() interface{} {
 }
 ```
 
-いや、reflect packageは不要。
+いや、reflect packageは不要。 type assertionがあればどうにかなりそう。
 
 ```go
 type I interface {
@@ -101,5 +101,18 @@ func Mask(o I) I {
 		return o.Mask()
 	}
 	return o
+}
+```
+
+これでも良い。
+
+```go
+func Mask(o I) I {
+	switch o := o.(type) {
+	case Maskable:
+		return o.Mask()
+	default:
+		return o
+	}
 }
 ```
