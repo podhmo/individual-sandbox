@@ -13,6 +13,35 @@
 strings.Repeat(" ", 10)
 ```
 
+# golang golang.org/x/net/context
+
+とりあえず以下の様な感じで使えば良いのかな？
+
+```go
+import "golang.org/x/net/context"
+
+ctx := context.Background()
+ctx, cancel := context.WithCancel(ctx)
+ctx, cancel = context.WithTimeout(ctx, time.Duration(6)*time.Second)
+
+go do(ctx)
+```
+
+内部では以下のようなものをで管理すれば良い？
+
+```go
+func do(ctx context.Context){
+    select {
+    case <- ctx.Done():
+        return // skip
+    default:
+        do_something()
+        return
+    }
+}
+```
+
+
 # golang time.Ticker
 
 これだとダメ。ticker.Stop()されてもchannelはcloseされないらしい。
