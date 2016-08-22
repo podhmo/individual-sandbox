@@ -22,7 +22,7 @@ func task(cb func()) {
 }
 
 func main() {
-	for i := 0; i < 2; i++ {
+	for i := 0; i < 3; i++ {
 		var wg sync.WaitGroup
 		wg.Add(1)
 		go task(func() { wg.Done() })
