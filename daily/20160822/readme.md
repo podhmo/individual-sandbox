@@ -16,6 +16,8 @@ strings.Repeat(" ", 10)
 # golang time.Ticker
 
 これだとダメ。ticker.Stop()されてもchannelはcloseされないらしい。
+([ここ](http://okzk.hatenablog.com/entry/2015/12/01/001924) ただし確かめ方がまだよく分かっていない)
+
 ```go
 ticker := time.NewTicker(waitTime)
 go func() {
