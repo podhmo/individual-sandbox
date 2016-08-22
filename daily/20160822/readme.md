@@ -12,3 +12,39 @@
 ```
 strings.Repeat(" ", 10)
 ```
+
+* golang time.Ticker
+
+これだとダメ。ticker.Stop()されてもchannelはcloseされないらしい。
+```go
+ticker := time.NewTicker(waitTime)
+go func() {
+    for t := range ticker.C {
+        fmt.Println("Tick at", t)
+    }
+}()
+
+doSomething()
+ticker.Stop()
+```
+
+selectで頑張る。
+
+```go
+ticker := time.NewTicker(waitTime)
+stop := make(chan struct{})
+go func() {
+    loop:
+    select {
+    case t := <- ticker.C:
+        fmt.Println("Tick at", t)
+    case <- stop:
+        break loop
+    }
+}()
+
+doSomething()
+ticker.Stop()
+stop <- struct{}{}
+close(stop)
+```
