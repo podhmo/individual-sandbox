@@ -1,4 +1,4 @@
-# golang graceful stop
+# wip golang graceful stop
 
 参考
 
@@ -13,7 +13,7 @@
 strings.Repeat(" ", 10)
 ```
 
-* golang time.Ticker
+# golang time.Ticker
 
 これだとダメ。ticker.Stop()されてもchannelはcloseされないらしい。
 ```go
