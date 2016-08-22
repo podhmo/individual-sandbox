@@ -23,7 +23,7 @@ $ go run 02*
 ```
 
 handling signal.
-(want to intercept running this program, but also want to waiting that first task is ending completely)
+(want to intercept running this program, but also want to waiting until first task is finished completely)
 
 
 ```
