@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	_ "os"
+	_ "os/signal"
 	"sync"
 	"time"
 )
@@ -43,6 +45,8 @@ func main() {
 	var wg sync.WaitGroup
 	st := time.Now()
 	tickerCloseFn := runTicker(time.Duration(100)*time.Millisecond, st)
+	// sigC := make(chan os.Signal, 1)
+	// signal.Notify(sigC, os.Interrupt)
 
 	for i := 0; i < 20; i++ {
 		i := i
@@ -52,6 +56,7 @@ func main() {
 			wg.Done()
 		}()
 	}
+
 	wg.Wait()
 	tickerCloseFn()
 	fmt.Printf("end with %s\n", time.Now().Sub(st))
