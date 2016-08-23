@@ -16,26 +16,25 @@ func task(id int, d time.Duration) error {
 }
 
 func main() {
-    semaphore := make(chan struct{}, 10)
+	semaphore := make(chan struct{}, 10)
 
 	st := time.Now()
 	var wg sync.WaitGroup
 	var mx sync.Mutex
 	errs := map[int]error{}
 
-
 	for i := 0; i < 100; i++ {
 		i := i
 		wg.Add(1)
 		go func() {
-            semaphore <- struct{}{}
+			semaphore <- struct{}{}
 			err := task(i, time.Duration(rand.Intn(100))*time.Millisecond)
 			if err != nil {
 				mx.Lock()
 				errs[i] = err
 				mx.Unlock()
 			}
-            <- semaphore
+			<-semaphore
 			wg.Done()
 		}()
 	}
