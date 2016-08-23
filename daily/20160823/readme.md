@@ -23,3 +23,13 @@ p0 -> t0 -> t1 -> t2 -> ... -> c0
 
 fan-inするために `merge()` を作っている。内部では `sync.WaitGroup` で状態管理。
 
+# 並行処理の無理矢理なwait
+
+example_wait
+
+- 00全部channelで
+- 01sync.WaigGroup
+
+普通にsync.WaigGroupの方が便利な感じはする。
+
+
