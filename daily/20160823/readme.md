@@ -29,6 +29,8 @@ example_wait
 
 - 00全部channelで
 - 01sync.WaigGroup
+- 02まじめにエラー管理するにはerrorを格納するmapにlock掛けないとだめ？
+- 03goroutineの数を制限したい
 
 普通にsync.WaigGroupの方が便利な感じはする。
 
