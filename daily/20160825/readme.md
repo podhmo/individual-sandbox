@@ -1,10 +1,64 @@
-# golang idiomatic go toricks
+# golang memo sandbox用のコードで別パッケージのものを書く方法
+
+実際のコードではあまりやるのは推奨されていないが `import .xxx` などと書くと現在のmainからの相対的なimportが記述できる。
+例えば以下の様な感じ。
+
+```bash
+$ tree ex*
+example_private_type
+├── main.go
+└── ymd
+    ├── convert.go
+    └── show.go
+
+1 directory, 3 files
+```
+
+ここで `main.go` の中で `import .ymd` とすることで、GOPATHに含まれないpackageをimport出来る。
+
+
+# golang 制限をかけたprivate 型を定義
+
+値を制限する型とかを作れないかどうか考えたりしていた。一番無難なのは以下の様な形かもしれない。
+
+- privateな型を定義
+- 公開するのはinterfaceにする
+
+例えば以下の様な感じ。
+
+```go
+package ymd
+
+// Month is restricted int for month's expression(1 <= x <= 12)
+type Month interface {
+	Month() int
+}
+
+type month int // private type
+
+func (m month) Month() int {
+	return int(m)
+}
+
+// NewMonth is factory of Month
+func NewMonth(m int) (Month, error) {
+	if m < 1 || 12 < m {
+		return nil, fmt.Errorf("out of range must be 1 <= x <= 12")
+	}
+    return month(m), nil
+}
+```
+
+このようにすると、とりあえず、特殊な迂回したメソッドを実装しないかぎり、制限した範囲の値以外が渡ることを防げるようにはなる。
+
+
+# wip golang idiomatic go toricks
 
 これ良い。
 
 - [Idiomatic Go Tricks](http://go-talks.appspot.com/github.com/matryer/present/idiomatic-go-tricks/main.slide#1)
 
-# golang goroutineの使い方
+# wip golang goroutineの使い方
 
 一連の記事読むと良い。
 
