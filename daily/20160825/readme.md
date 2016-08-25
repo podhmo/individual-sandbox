@@ -51,6 +51,19 @@ func NewMonth(m int) (Month, error) {
 
 このようにすると、とりあえず、特殊な迂回したメソッドを実装しないかぎり、制限した範囲の値以外が渡ることを防げるようにはなる。
 
+```go
+package main
+import ./ymd
+
+// intはymd.Monthではないので明示的な型変換が必要。
+func doSomething(m ymd.Month) {
+}
+
+func main(){
+    m, err := ymd.NewMonth(13)  // error. out of range
+}
+```
+
 
 # wip golang idiomatic go toricks
 
