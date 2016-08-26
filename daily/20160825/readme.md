@@ -1,3 +1,12 @@
+# python namedtupleでattributeをupdateしたくなった時
+
+```
+pip install namedlist
+```
+
+recordtypeはpython3.xをサポートしていない。
+
+
 # golang memo sandbox用のコードで別パッケージのものを書く方法
 
 実際のコードではあまりやるのは推奨されていないが `import .xxx` などと書くと現在のmainからの相対的なimportが記述できる。
@@ -79,4 +88,9 @@ func main(){
 - http://blog.kaneshin.co/entry/2016/08/18/190435
 - http://okzk.hatenablog.com/entry/2016/08/19/121652
 - http://okzk.hatenablog.com/entry/2016/08/22/002909
+
+
+# wip golang 知らないもの
+
+- https://golang.org/pkg/regexp/#Regexp.FindAllStringSubmatchIndex
 
