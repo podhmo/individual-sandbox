@@ -2,12 +2,44 @@
 
 - [Idiomatic Go Tricks](http://go-talks.appspot.com/github.com/matryer/present/idiomatic-go-tricks/main.slide#1)
 
-テキトウに写してみる。実行はできなそう
+テキトウに写してみる。実行はできなそう。
 
 # golang type conversion, type switch, type assertion
 
 綺麗な例が思いつかない。
-type assertionとtype switchはdowncastの際に使っている感じはする。
+type assertionとtype switchingはdown castの際に使っている感じはする。
+
+type conversion
+
+```go
+time.Sleep(time.Duration(1) * time.Second)
+```
+
+これはよく使う。
+
+
+type assertion
+
+```go
+ob, ok := v.(<type>)
+```
+
+多分 interfaceから 具象型に変換したい時に使う。(down cast)
+
+type switching
+
+```
+switch ob := v.(type) {
+case myint:
+    return hmm()
+case int:
+    return hmm2()
+default:
+    return hmm3()
+}
+```
+
+あとは、別の異なるinterfaceに変換みたいなこともあるかも? Reader的なもので集めたところでCloser的なものを取り出すとか。
 
 # golang もう少しsortのサンプル
 
