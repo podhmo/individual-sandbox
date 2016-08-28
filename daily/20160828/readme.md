@@ -1,3 +1,9 @@
+# golang idiomatic tricks
+
+- [Idiomatic Go Tricks](http://go-talks.appspot.com/github.com/matryer/present/idiomatic-go-tricks/main.slide#1)
+
+テキトウに写してみる。実行はできなそう
+
 # golang type conversion, type switch, type assertion
 
 綺麗な例が思いつかない。
