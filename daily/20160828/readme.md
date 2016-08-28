@@ -4,6 +4,25 @@
 
 テキトウに写してみる。実行はできなそう。
 
+# golang golang.org/x/time/rate
+
+golang.org/x系のライブラリ結構ある。今回はlimitの話。
+
+```go
+
+import golang.org/x/time/rate
+
+ctx := context.Background()
+n := rate.Every(time.Second / time.Duration(M))
+l := rate.NewLimitter(n, M)
+
+if err := l.Wait(ctx); err != nil {
+    do_somehing(err)
+}
+```
+
+- [golang.org/x/time/rateで速度制限を行う - Qiita](http://qiita.com/lufia/items/29bf1aeb0a0fe69d16f0)
+
 # golang type conversion, type switch, type assertion
 
 綺麗な例が思いつかない。
