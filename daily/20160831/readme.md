@@ -31,3 +31,12 @@ $ sudo -E go get golang.org/x/tools/cmd/godoc
 
 [この辺?](https://github.com/golang/go/wiki/InstallTroubleshooting#why-does-go-get-work-for-some-packages-and-report-permission-denied-in-goroot-for-some-others-with-gopath-set-properly)
 
+コード読もう。 [この辺り](https://github.com/golang/go/blob/release-branch.go1.6/src/cmd/go/pkg.go#L807)
+
+そして 1.7では [個別のmappingは消えている](https://github.com/golang/go/blob/release-branch.go1.7/src/cmd/go/pkg.go#L693)。
+
+```
+GOBIN=$GOPATH/bin go install golang.org/x/tools/cmd/godoc
+```
+
+とりあえずこれで誤魔化せそうだし。1.7からなら無視して大丈夫そう。
