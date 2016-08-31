@@ -3,3 +3,7 @@
 https://github.com/cybozu-go/
 
 :notebook: あとでよさそうなものpickupしておく。
+
+# wip emacs golang
+
+
