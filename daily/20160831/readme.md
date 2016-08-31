@@ -1,3 +1,7 @@
+# hmm
+
+- [開発組織マネジメントのコツ // Speaker Deck](https://speakerdeck.com/naoya/kai-fa-zu-zhi-manezimentofalsekotu)
+
 # wip golang tool作るのに見ていきたい感じのものたち
 
 https://github.com/cybozu-go/
