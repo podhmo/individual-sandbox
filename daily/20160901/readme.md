@@ -37,26 +37,26 @@ subcommandの作成。この辺りが人気？
 
 [https://github.com/spf13/cobra]
 
-- example_cobra
+- [example_cobra](example_cobra)
 
 ### mitchellh/cli使ってみる
 
 [https://github.com/mitchellh/cli]
 
-- example_mitchellh_cli1
-- example_mitchellh_cli2
+- [example_mitchellh_cli1](example_mitchellh_cli1)
+- [example_mitchellh_cli2](example_mitchellh_cli2)
 
 ### mkideal/cli使ってみる
 
 [https://github.com/mkideal/cli]
 
-- example_mkideal_cli
+- [example_mkideal_cli](example_mkideal_cli)
 
 ### ukautz/clif使ってみる
 
 [https://github.com/ukautz/clif]
 
-- example_clif
+- [example_clif](example_clif)
 
 # golang そろそろweb関係のものも見ていく
 
