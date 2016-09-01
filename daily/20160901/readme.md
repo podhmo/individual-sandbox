@@ -1,3 +1,41 @@
+# golang 知らなかったこと
+
+## time.Durationでcastする必要ない。
+
+```go
+// 良くない
+t := time.Duration(30) * time.Second
+fmt.Printf("%[1]T: %[1]v\n", t)
+
+// 良い
+t := 30 * time.Second
+fmt.Printf("%[1]T: %[1]v\n", t)
+```
+
+## closeのdeferは確認したほうが良いらしい?
+
+```go
+// http://ukai-go-talks.appspot.com/2014/gocon.slide#11
+func run() (err error) {
+    in, err := os.Open(*input)
+    if err != nil {
+        return err
+    }
+    defer in.Close()
+
+    out, err := os.Create(*output)
+    if err != nil {
+        return err
+    }
+    defer func() {
+        if cerr := out.Close(); err == nil {
+            err = cerr
+        }
+    }()
+    // some code
+}
+```
+
 # golang buildした生成物の置き場所
 
 - toolとか他の環境でも使う場合 -> $GOPATH/bin以下
