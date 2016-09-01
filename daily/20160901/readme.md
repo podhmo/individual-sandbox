@@ -31,8 +31,8 @@ subcommandの作成。この辺りが人気？
 
 [https://github.com/mitchellh/cli]
 
-- example_cli1
-- example_cli2
+- example_mitchellh_cli1
+- example_mitchellh_cli2
 
 
 # golang そろそろweb関係のものも見ていく
