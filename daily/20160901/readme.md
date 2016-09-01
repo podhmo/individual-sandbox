@@ -21,8 +21,18 @@ subcommandの作成。この辺りが人気？
 - https://github.com/mitchellh/cli
 - https://github.com/spf13/cobra
 
-## cobraつかってみる
+## spf13/cobraつかってみる
 
+[https://github.com/spf13/cobra]
+
+- example_cobra
+
+## mitchellh/cliつかってみる
+
+[https://github.com/mitchellh/cli]
+
+- example_cli1
+- example_cli2
 
 
 # golang そろそろweb関係のものも見ていく
