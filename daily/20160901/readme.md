@@ -26,6 +26,8 @@ subcommandの作成。この辺りが人気？
 - https://github.com/mkideal/cli
 - https://github.com/ukautz/clif
 
+個人的にはcobraが良い気がした。clifは慣れると便利かもしれないけれど。少し学習コストが高めな感じ。
+
 ## spf13/cobra使ってみる
 
 [https://github.com/spf13/cobra]
