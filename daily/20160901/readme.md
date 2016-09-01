@@ -1,5 +1,9 @@
 # golang 知らなかったこと
 
+- [Go言語によるCLIツール開発とUNIX哲学について - ゆううきブログ](http://blog.yuuk.io/entry/go-cli-unix)
+- [コマンドラインツールを作るときに参考にしている資料 | SOTA](http://deeeet.com/writing/2014/08/27/cli-reference/)
+- [Goに入ってはGoに従え](http://ukai-go-talks.appspot.com/2014/gocon.slide)
+
 ## time.Durationでcastする必要ない。
 
 ```go
@@ -33,6 +37,23 @@ func run() (err error) {
         }
     }()
     // some code
+}
+```
+
+## memo: chan struct{}で同期
+
+http://ukai-go-talks.appspot.com/2014/gocon.slide#35
+
+selectにdefault付けた状態だとすぐにblockせず値返ってくるのだっけ？(後で調べる)
+
+```go
+func (s *Stream) IsClosed() bool {
+    select {
+    case <-s.cc:
+        return true
+    default:
+        return false
+    }
 }
 ```
 
