@@ -28,26 +28,31 @@ subcommandの作成。この辺りが人気？
 
 個人的にはcobraが良い気がした。clifは慣れると便利かもしれないけれど。少し学習コストが高めな感じ。
 
-## spf13/cobra使ってみる
+やったことは以下だけ。subというsubcommandを作成してみている。
+
+- cmd
+- cmd/sub
+
+### spf13/cobra使ってみる
 
 [https://github.com/spf13/cobra]
 
 - example_cobra
 
-## mitchellh/cli使ってみる
+### mitchellh/cli使ってみる
 
 [https://github.com/mitchellh/cli]
 
 - example_mitchellh_cli1
 - example_mitchellh_cli2
 
-## mkideal/cli使ってみる
+### mkideal/cli使ってみる
 
 [https://github.com/mkideal/cli]
 
 - example_mkideal_cli
 
-## ukautz/clif使ってみる
+### ukautz/clif使ってみる
 
 [https://github.com/ukautz/clif]
 
