@@ -21,6 +21,11 @@ subcommandの作成。この辺りが人気？
 - https://github.com/mitchellh/cli
 - https://github.com/spf13/cobra
 
+この辺りも少しだけ気になる
+
+- https://github.com/mkideal/cli
+- https://github.com/ukautz/clif
+
 ## spf13/cobra使ってみる
 
 [https://github.com/spf13/cobra]
@@ -40,6 +45,11 @@ subcommandの作成。この辺りが人気？
 
 - example_mkideal_cli
 
+## ukautz/clif使ってみる
+
+[https://github.com/ukautz/clif]
+
+- example_clif
 
 # golang そろそろweb関係のものも見ていく
 
