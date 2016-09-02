@@ -14,6 +14,5 @@ class TBThread(threading.Thread):
         except Exception as e:
             logger.warn(e, exc_info=True)
             raise
-
 ```
 
