@@ -1,0 +1,15 @@
+DEBUG:__main__:started thread: id=123145307557888, method=<function main.<locals>.f at 0x109bd2158>, args=(), kwargs={}
+DEBUG:__main__:started thread: id=123145312813056, method=<function main.<locals>.g at 0x109bd21e0>, args=(), kwargs={}
+DEBUG:__main__:started thread: id=123145307557888, method=<function main.<locals>.f at 0x1101621e0>, args=(), kwargs={}
+WARNING:__main__:oops
+Traceback (most recent call last):
+  File "qr_93150k6W.py", line 23, in run
+    return super().run(*args, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/threading.py", line 862, in run
+    self._target(*self._args, **self._kwargs)
+  File "qr_93150k6W.py", line 33, in <lambda>
+    thread = TBThread(target=lambda: method(*args, **kwargs))
+  File "qr_93150k6W.py", line 53, in g
+    raise Exception("oops")
+Exception: oops
+DEBUG:__main__:started thread: id=123145312813056, method=<function main.<locals>.g at 0x110162268>, args=(), kwargs={}
