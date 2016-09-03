@@ -5,6 +5,30 @@
   (pp (symbol-function 'flycheck-start-command-checker)))
 ```
 
+# emacs byte codeをいじったりしてみた。
+
+- [play-with-elisp-byte-code][play-with-elisp-byte-code]
+
+# emacs golang goの環境調整
+
+- flycheckが無駄に複数回走る
+
+これはflycheckの走るタイミングが良くないっぽい。auto-saveのせい。
+
+```lisp
+;; default
+(defcustom flycheck-check-syntax-automatically '(save
+                                                 idle-change
+                                                 new-line
+                                                 mode-enabled))
+
+;; これで十分
+(progn ;; flycheck
+  (eval-after-load 'flycheck
+    '(setq flycheck-check-syntax-automatically '(save mode-enabled)))
+  )
+```
+
 # wip golang rate limitの方法
 
 まず使用方法を調べる。その後実装を見てみる
