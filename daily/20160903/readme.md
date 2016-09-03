@@ -34,7 +34,7 @@
 まず使用方法を調べる。その後実装を見てみる
 
 
-# golang ツール作成関係は以下を見ると色々身につきそう？
+# wip golang ツール作成関係は以下を見ると色々身につきそう？
 
 - [Go でいい感じのコマンドを作れるツールキットの紹介 - Cybozu Inside Out | サイボウズエンジニアのブログ](http://blog.cybozu.io/entry/cybozu-go-cmd)
 - [Tutorial · cybozu-go/cmd Wiki](https://github.com/cybozu-go/cmd/wiki/Tutorial)
@@ -57,7 +57,7 @@ $ sudo port upgrade go
 
 channelを使ったsyncの部分とか復習したほうが良さそう。
 
-# vagrantでちょっとしたlinux環境はあってもよいか
+# vagrantでちょっとしたlinux環境はあっても
 
 - https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04
 
