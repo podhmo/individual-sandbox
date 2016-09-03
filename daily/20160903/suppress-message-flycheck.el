@@ -6,16 +6,14 @@
              syntax-check args))))
 
 (defun my:flycheck-report-buffer-checker-status
-    (syntax-check* status &optional data)
+    (syntax-check status &optional data)
   (flet ((message
           (format-string &rest args)
           (let* ((s (apply #'format format-string args))
                  (lines (split-string s "\n")))
             (princ (first lines)))))
-    (flycheck-report-buffer-checker-status syntax-check* status data)))
+    (flycheck-report-buffer-checker-status syntax-check status data)))
 
 ;; activate
 (defalias 'flycheck-buffer-status-callback 'my:flycheck-buffer-status-callback)
 ;; (setq debug-on-error t)
-
-;; TODO: running checker two times, every changing, for auto-save and content edit
