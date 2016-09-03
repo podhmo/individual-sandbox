@@ -57,7 +57,7 @@ $ sudo port upgrade go
 
 channelを使ったsyncの部分とか復習したほうが良さそう。
 
-# vagrantでちょっとしたlinux環境はあっても
+# vagrantでちょっとしたlinux環境はあっても良いかも
 
 - https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04
 
