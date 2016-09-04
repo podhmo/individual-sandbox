@@ -1,3 +1,92 @@
+# daily
+
+これをもう少しまともに書きたい。
+
+- https://gist.github.com/podhmo/68d1367183274b861ed7cb043fd6ca2a
+
+# js ocaml bucklescript
+
+- [bloomberg/bucklescript: A backend for the OCaml compiler which emits JavaScript.](https://github.com/bloomberg/bucklescript)
+
+js_of_ocamlとかとの関係がわからない。わりと綺麗なコード生成するんだろうか？
+
+# emacs golang $GOPATH以下のsrcをanythingで選択
+
+```lisp
+(defvar my:anything-c-source-go-src-selection
+  '((name . "Go src selection")
+    (init
+     . (lambda ()
+         (let ((buf (anything-candidate-buffer " *go src*"))
+               (cmd "find $GOPATH/src -type d -mindepth 3 -maxdepth 3"))
+           (flet ((display-buffer (&rest args) nil))
+             (shell-command cmd buf buf))
+           )))
+    (candidates-in-buffer)
+    (type . file)))
+
+(defun my:anything-go-src-selection ()
+  (interactive)
+  (let ((sources '(my:anything-c-source-go-src-selection)))
+    (anything-other-buffer sources "*anything go packages*")))
+```
+
+# emacs emacsの起動を早くする
+
+これが面白い。
+
+- [Emacsのスタートアップを視覚的に理解する - Qiita](http://qiita.com/yuttie/items/0f38870817c11b2166bd)
+
+```lisp
+(require-and-fetch-if-not 'initchart :url "https://raw.githubusercontent.com/yuttie/initchart/master/initchart.el")
+(initchart-record-execution-time-of load file)
+(initchart-record-execution-time-of require feature)
+;(initchart-visualize-init-sequence)
+```
+
+load,require以外の状況も把握しておきたい感じ
+
+###  色々な関数を集める
+
+```lisp
+(progn
+  (mapatoms (lambda (e) 
+              (prin1 (list e (functionp e) (subrp e) (and (functionp e) (find-lisp-object-file-name e (symbol-function e)))))
+              (terpri)))
+  nil
+  )
+```
+### 関数の引数の数を数えたい
+
+```lisp
+;; とりあえずdocstringを取る
+(documentation 'anything)
+```
+
+
+### require,load以外の状況も見たい
+
+```
+(defmacro my:initchart-record-execution-all ()
+  (let ((targets (list)))
+    (mapatoms (lambda (sym)
+                (when (and (functionp sym) (not (subrp (symbol-function sym))))
+                  (push sym targets)
+                  )
+                ))
+    (let ((body (mapcar (lambda (sym) `(initchart-record-execution-time-of ,sym)) targets)))
+      `(progn
+         ,@body
+         )))
+  )
+
+;; 試す
+(let (print-length print-depth (message-log-max 100000))
+  (pp (macroexpand '(my:initchart-record-execution-all))))
+```
+
+結論としては失敗。全部にadviceを仕掛けるのは現実的ではない。
+
 # emacs major-mode, minor-mode
 
 ## major-mode
