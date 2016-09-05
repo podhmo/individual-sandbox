@@ -27,7 +27,7 @@ $ go get -u github.com/golang/lint/golint
 
 # wip golang 外部コマンドの実行
 
-`os/execを使えば良い？`
+`os/exec` を使えば良い？
 
 [example_exec](example_exec)
 
