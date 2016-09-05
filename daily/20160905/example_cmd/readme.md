@@ -63,8 +63,8 @@ func (e *Environment) Wait() error {
 
 ## １個見ていったけれどよく分からないので全体を見ることにした。
 
-- default.go
-- env.go
+- :done: default.go
+- :done: env.go
 - exec.go
 - graceful.go
 - http.go
@@ -75,7 +75,69 @@ func (e *Environment) Wait() error {
 - logfile_windows.go
 - reqid.go
 - server.go
-- signal.go
+- :done: signal.go
 - stopsig.go
 - stopsig_windows.go
+
+
+### environment.go 全体の設計
+
+- Environmentというものが存在
+- Environmentが内部にContextを持つ。
+
+内部的にもう少し情報を持っていて、アクセス制御のためのlockだとか状態だとかを持っている
+
+```go
+// Environment implements context-based goroutine management.
+type Environment struct {
+	ctx       context.Context
+	cancel    context.CancelFunc
+	wg        sync.WaitGroup
+	generator *IDGenerator
+
+	mu       sync.RWMutex
+	stopped  bool
+	stopCh   chan struct{}
+	canceled bool
+	err      error
+}
+```
+
+知りたいこと。たぶん以下の様な感じ
+
+- waitGroupはgoroutineの同期
+- RWMutexは内部の状態変数を触る時のlock
+- stopChはキャンセルした時などに止まる(stopped=trueになりつつ。close(stopCh)する)
+- `cancel()` は通常内部のcontextのキャンセル関数が格納
+
+memo
+
+- Stop(), Wait() と Go(), GoWithID()色々lockしたりされているけれど。名前の通り
+- :notebook: contextから生成したいので、 `NewEnvironment()` も存在
+- :notebook: stop()時点で新規のタスク生成早めて、wait()で全部のタスクを待つ感じでgraceful stop
+
+### default.go
+
+内部的にショートカット用のEnvironmentが生成されている。それを利用した関数が公開されている。
+
+:notebook WithRequestIDで作られるidが良く分からない。 (lamport timestampみたいなやつ？)
+
+```go
+var (
+	defaultEnv *Environment
+)
+
+func init() {
+	defaultEnv = NewEnvironment(context.Background())
+	handleSignal(defaultEnv)
+}
+```
+
+### signal.go
+
+:notebook: `handleSignal()` はsignal.goで定義されていて、なんかシグナルをキャッチしたら警告をログに出して。contextをcancelする。
+
+### exec.go
+
+そもそもexecのやつってなんなんだろ？ 標準ライブラリの `os/exec` をwrapしたものなのかな。
 
