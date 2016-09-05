@@ -1,64 +1,12 @@
-# golang cybozu-go/cmd見てみる。
+# golang emacs
 
-## decorator pattern っぽい感じになっている？
+- 標準ライブラリにも移動したい
+- prefixが邪魔
 
-e.g. cmd.HTTPServer は net.http.Serverをwrap?
-(cmd.Serverと勘違いしていた)
+直した。ついでに C-c : で動くようにした。
 
-https://github.com/cybozu-go/cmd/blob/master/example_test.go#L41
+# golang 読む
 
-```go
-	accessLog := log.NewLogger()
-	accessLog.SetFormatter(log.JSONFormat{})
-	accessLog.SetOutput(w)
+- cybozu-go/cmd
+- wantedly/apig
 
-	// HTTP server.
-	serv := &cmd.HTTPServer{
-		Server: &http.Server{
-			Handler: http.FileServer(http.Dir("/path/to/directory")),
-		},
-		AccessLog: accessLog,
-	}
-
-	err = serv.ListenAndServe()
-	if err != nil {
-		log.ErrorExit(err)
-	}
-	err = cmd.Wait()
-```
-
-ちょっと必要そうな者のコードの整理
-
-```go
-func (s *HTTPServer) ListenAndServe() error {
-	addr := s.Server.Addr
-	if addr == "" {
-		addr = ":http"
-	}
-	ln, err := net.Listen("tcp", addr)
-	if err != nil {
-		return err
-	}
-	return s.Serve(ln)
-}
-
-func Wait() error {
-	return defaultEnv.Wait()
-}
-
-func (e *Environment) Wait() error {
-	<-e.stopCh
-	if log.Enabled(log.LvDebug) {
-		log.Debug("cmd: waiting for all goroutines to complete", nil)
-	}
-	e.wg.Wait()
-	e.cancel() // in case no one calls Cancel
-
-	e.mu.Lock()
-	defer e.mu.Unlock()
-
-	return e.err
-}
-```
-
-hmm状況がまだわからん。
