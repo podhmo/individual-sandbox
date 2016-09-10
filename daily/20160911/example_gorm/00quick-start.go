@@ -8,13 +8,16 @@ import (
 
 type Product struct {
 	gorm.Model
-	Code  string
+	Code  string `gorm:"unique_index:idx_product_code"`
 	Price uint
 }
 
 func setup(db *gorm.DB) {
+    db.LogMode(true)
+
 	// migrate schema
 	db.AutoMigrate(&Product{})
+    // db.Model(&Product{}).AddUniqueIndex("idx_product_code", "code") // tagで設定しても良い
 }
 
 func run(db *gorm.DB) {
