@@ -15,13 +15,13 @@ type User struct {
 	Name     string `gorm:"size:255"` // Default size for string is 255, reset it with this tag
 	Num      int    `gorm:"AUTO_INCREMENT"`
 
-	CreditCard CreditCard // One-To-One relationship (has one - use CreditCard's UserID as foreign key)
-	Emails     []Email    // One-To-Many relationship (has many - use Email's UserID as foreign key)
+	CreditCard CreditCard `gorm:"ForeignKey:Id"` // One-To-One relationship (has one - use CreditCard's UserID as foreign key)
+	Emails     []Email  `gorm:"ForeignKey:Id"`   // One-To-Many relationship (has many - use Email's UserID as foreign key)
 
-	BillingAddress   Address // One-To-One relationship (belongs to - use BillingAddressID as foreign key)
+	BillingAddress   Address  `gorm:"ForeignKey:Id"` // One-To-One relationship (belongs to - use BillingAddressID as foreign key)
 	BillingAddressID sql.NullInt64
 
-	ShippingAddress   Address // One-To-One relationship (belongs to - use ShippingAddressID as foreign key)
+	ShippingAddress   Address  `gorm:"ForeignKey:Id"`// One-To-One relationship (belongs to - use ShippingAddressID as foreign key)
 	ShippingAddressID int
 
 	IgnoreMe  int        `gorm:"-"`                         // Ignore this field
@@ -69,6 +69,11 @@ func setup(db *gorm.DB) {
 }
 
 func run(db *gorm.DB) {
+    if relation, ok := db.NewScope(&User{}).FieldByName("Emails"); ok {
+        log.Printf("\t relation kind: %q\n", relation.Relationship.Kind)
+        log.Printf("\t relation foreign field name: %v \n", relation.Relationship.ForeignFieldNames)
+        log.Printf("\t relation foreign association field name: %v \n", relation.Relationship.AssociationForeignFieldNames)
+	}
 }
 
 func main() {
