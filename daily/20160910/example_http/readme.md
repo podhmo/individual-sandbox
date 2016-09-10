@@ -1,5 +1,5 @@
-1. 単純な文字列を返す http server
-2. json responseを返す http server (雑なtest付き)
+- 00 単純な文字列を返す http server
+- 01 json responseを返す http server (雑なtest付き)
 
 # http packageの使い方を整理していく
 
