@@ -8,3 +8,13 @@ gormわりと文字列ベースであんまり型の力は利用できなさそ�
 ## 思ったこと
 
 - tagの仕様をどうにかしてcompletion可能な感じにしたいな〜。
+- tagの取得は GetModelStruct付近のコードっぽい。
+- scopeを直接取り出して実行する方法はないものか。。
+
+# sqlite foreignkey constraint
+
+sqlite add constraint文サポートしていないじゃん
+
+- [SQLite Foreign Key Support](https://www.sqlite.org/foreignkeys.html)
+- [SQL Features That SQLite Does Not Implement](https://www.sqlite.org/omitted.html)
+- [sql - How do I add a foreign key to an existing sqlite (3.6.21) table? - Stack Overflow](http://stackoverflow.com/questions/1884818/how-do-i-add-a-foreign-key-to-an-existing-sqlite-3-6-21-table)
