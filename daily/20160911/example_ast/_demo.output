@@ -1,0 +1,316 @@
+package main
+file demo.go
+types.Config.Check got package main ("./")
+*ast.File
+*ast.Ident
+*ast.GenDecl
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.ImportSpec
+*ast.BasicLit
+*ast.GenDecl
+*ast.ValueSpec
+*ast.Ident : untyped string
+*ast.BasicLit : untyped string
+*ast.FuncDecl
+*ast.Ident : func()
+*ast.FuncType
+*ast.FieldList
+*ast.BlockStmt
+*ast.AssignStmt
+*ast.Ident : *go/token.FileSet
+*ast.CallExpr : *go/token.FileSet
+*ast.SelectorExpr : func() *go/token.FileSet
+*ast.Ident : invalid type
+*ast.Ident : func() *go/token.FileSet
+*ast.AssignStmt
+*ast.Ident : map[string]*go/ast.Package
+*ast.Ident : error
+*ast.CallExpr : (pkgs map[string]*go/ast.Package, first error)
+*ast.SelectorExpr : func(fset *go/token.FileSet, path string, filter func(os.FileInfo) bool, mode go/parser.Mode) (pkgs map[string]*go/ast.Package, first error)
+*ast.Ident : invalid type
+*ast.Ident : func(fset *go/token.FileSet, path string, filter func(os.FileInfo) bool, mode go/parser.Mode) (pkgs map[string]*go/ast.Package, first error)
+*ast.Ident : *go/token.FileSet
+*ast.Ident : string
+*ast.Ident : untyped nil
+*ast.BasicLit : go/parser.Mode
+*ast.IfStmt
+*ast.BinaryExpr : untyped bool
+*ast.Ident : error
+*ast.Ident : untyped nil
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : ()
+*ast.SelectorExpr : func(v ...interface{})
+*ast.Ident : invalid type
+*ast.Ident : func(v ...interface{})
+*ast.Ident : error
+*ast.ReturnStmt
+*ast.AssignStmt
+*ast.Ident : []*go/ast.File
+*ast.CallExpr : []*go/ast.File
+*ast.Ident : func([]*go/ast.File, int) []*go/ast.File
+*ast.ArrayType : []*go/ast.File
+*ast.StarExpr : *go/ast.File
+*ast.SelectorExpr : go/ast.File
+*ast.Ident : invalid type
+*ast.Ident : go/ast.File
+*ast.BasicLit : int
+*ast.RangeStmt
+*ast.Ident : string
+*ast.Ident : *go/ast.Package
+*ast.Ident : map[string]*go/ast.Package
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(format string, a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(format string, a ...interface{}) (n int, err error)
+*ast.BasicLit : string
+*ast.SelectorExpr : string
+*ast.Ident : *go/ast.Package
+*ast.Ident : string
+*ast.RangeStmt
+*ast.Ident : string
+*ast.Ident : *go/ast.File
+*ast.SelectorExpr : map[string]*go/ast.File
+*ast.Ident : *go/ast.Package
+*ast.Ident : map[string]*go/ast.File
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(format string, a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(format string, a ...interface{}) (n int, err error)
+*ast.BasicLit : string
+*ast.Ident : string
+*ast.AssignStmt
+*ast.Ident : []*go/ast.File
+*ast.CallExpr : []*go/ast.File
+*ast.Ident : func([]*go/ast.File, ...*go/ast.File) []*go/ast.File
+*ast.Ident : []*go/ast.File
+*ast.Ident : *go/ast.File
+*ast.AssignStmt
+*ast.Ident : *go/types.Config
+*ast.UnaryExpr : *go/types.Config
+*ast.CompositeLit : go/types.Config
+*ast.SelectorExpr : go/types.Config
+*ast.Ident : invalid type
+*ast.Ident : go/types.Config
+*ast.KeyValueExpr
+*ast.Ident : func(err error)
+*ast.FuncLit : func(e error)
+*ast.FuncType : func(e error)
+*ast.FieldList
+*ast.Field
+*ast.Ident : error
+*ast.Ident : error
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(a ...interface{}) (n int, err error)
+*ast.Ident : error
+*ast.KeyValueExpr
+*ast.Ident : go/types.Importer
+*ast.CallExpr : go/types.Importer
+*ast.SelectorExpr : func() go/types.Importer
+*ast.Ident : invalid type
+*ast.Ident : func() go/types.Importer
+*ast.AssignStmt
+*ast.Ident : go/types.Info
+*ast.CompositeLit : go/types.Info
+*ast.SelectorExpr : go/types.Info
+*ast.Ident : invalid type
+*ast.Ident : go/types.Info
+*ast.KeyValueExpr
+*ast.Ident : map[go/ast.Expr]go/types.TypeAndValue
+*ast.CallExpr : map[go/ast.Expr]go/types.TypeAndValue
+*ast.Ident : func(map[go/ast.Expr]go/types.TypeAndValue) map[go/ast.Expr]go/types.TypeAndValue
+*ast.MapType : map[go/ast.Expr]go/types.TypeAndValue
+*ast.SelectorExpr : go/ast.Expr
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Expr
+*ast.SelectorExpr : go/types.TypeAndValue
+*ast.Ident : invalid type
+*ast.Ident : go/types.TypeAndValue
+*ast.KeyValueExpr
+*ast.Ident : map[*go/ast.Ident]go/types.Object
+*ast.CallExpr : map[*go/ast.Ident]go/types.Object
+*ast.Ident : func(map[*go/ast.Ident]go/types.Object) map[*go/ast.Ident]go/types.Object
+*ast.MapType : map[*go/ast.Ident]go/types.Object
+*ast.StarExpr : *go/ast.Ident
+*ast.SelectorExpr : go/ast.Ident
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Ident
+*ast.SelectorExpr : go/types.Object
+*ast.Ident : invalid type
+*ast.Ident : go/types.Object
+*ast.KeyValueExpr
+*ast.Ident : map[*go/ast.Ident]go/types.Object
+*ast.CallExpr : map[*go/ast.Ident]go/types.Object
+*ast.Ident : func(map[*go/ast.Ident]go/types.Object) map[*go/ast.Ident]go/types.Object
+*ast.MapType : map[*go/ast.Ident]go/types.Object
+*ast.StarExpr : *go/ast.Ident
+*ast.SelectorExpr : go/ast.Ident
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Ident
+*ast.SelectorExpr : go/types.Object
+*ast.Ident : invalid type
+*ast.Ident : go/types.Object
+*ast.AssignStmt
+*ast.Ident : *go/types.Package
+*ast.Ident : error
+*ast.CallExpr : (*go/types.Package, error)
+*ast.SelectorExpr : func(path string, fset *go/token.FileSet, files []*go/ast.File, info *go/types.Info) (*go/types.Package, error)
+*ast.Ident : *go/types.Config
+*ast.Ident : func(path string, fset *go/token.FileSet, files []*go/ast.File, info *go/types.Info) (*go/types.Package, error)
+*ast.Ident : string
+*ast.Ident : *go/token.FileSet
+*ast.Ident : []*go/ast.File
+*ast.UnaryExpr : *go/types.Info
+*ast.Ident : go/types.Info
+*ast.IfStmt
+*ast.BinaryExpr : untyped bool
+*ast.Ident : error
+*ast.Ident : untyped nil
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(a ...interface{}) (n int, err error)
+*ast.Ident : error
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(format string, a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(format string, a ...interface{}) (n int, err error)
+*ast.BasicLit : string
+*ast.CallExpr : string
+*ast.SelectorExpr : func() string
+*ast.Ident : *go/types.Package
+*ast.Ident : func() string
+*ast.RangeStmt
+*ast.Ident : int
+*ast.Ident : *go/ast.File
+*ast.Ident : []*go/ast.File
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : ()
+*ast.SelectorExpr : func(v go/ast.Visitor, node go/ast.Node)
+*ast.Ident : invalid type
+*ast.Ident : func(v go/ast.Visitor, node go/ast.Node)
+*ast.UnaryExpr : *./.PrintASTVisitor
+*ast.CompositeLit : ./.PrintASTVisitor
+*ast.Ident : ./.PrintASTVisitor
+*ast.UnaryExpr : *go/types.Info
+*ast.Ident : go/types.Info
+*ast.Ident : *go/ast.File
+*ast.GenDecl
+*ast.TypeSpec
+*ast.Ident : ./.PrintASTVisitor
+*ast.StructType : struct{info *go/types.Info}
+*ast.FieldList
+*ast.Field
+*ast.Ident : *go/types.Info
+*ast.StarExpr : *go/types.Info
+*ast.SelectorExpr : go/types.Info
+*ast.Ident : invalid type
+*ast.Ident : go/types.Info
+*ast.FuncDecl
+*ast.FieldList
+*ast.Field
+*ast.Ident : *./.PrintASTVisitor
+*ast.StarExpr : *./.PrintASTVisitor
+*ast.Ident : ./.PrintASTVisitor
+*ast.Ident : func(node go/ast.Node) go/ast.Visitor
+*ast.FuncType
+*ast.FieldList
+*ast.Field
+*ast.Ident : go/ast.Node
+*ast.SelectorExpr : go/ast.Node
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Node
+*ast.FieldList
+*ast.Field
+*ast.SelectorExpr : go/ast.Visitor
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Visitor
+*ast.BlockStmt
+*ast.IfStmt
+*ast.BinaryExpr : untyped bool
+*ast.Ident : go/ast.Node
+*ast.Ident : untyped nil
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(format string, a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(format string, a ...interface{}) (n int, err error)
+*ast.BasicLit : string
+*ast.CallExpr : string
+*ast.SelectorExpr : func() string
+*ast.CallExpr : reflect.Type
+*ast.SelectorExpr : func(i interface{}) reflect.Type
+*ast.Ident : invalid type
+*ast.Ident : func(i interface{}) reflect.Type
+*ast.Ident : go/ast.Node
+*ast.Ident : func() string
+*ast.TypeSwitchStmt
+*ast.ExprStmt
+*ast.TypeAssertExpr
+*ast.Ident : go/ast.Node
+*ast.BlockStmt
+*ast.CaseClause
+*ast.SelectorExpr : go/ast.Expr
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Expr
+*ast.AssignStmt
+*ast.Ident : go/types.Type
+*ast.CallExpr : go/types.Type
+*ast.SelectorExpr : func(e go/ast.Expr) go/types.Type
+*ast.SelectorExpr : *go/types.Info
+*ast.Ident : *./.PrintASTVisitor
+*ast.Ident : *go/types.Info
+*ast.Ident : func(e go/ast.Expr) go/types.Type
+*ast.TypeAssertExpr : go/ast.Expr
+*ast.Ident : go/ast.Node
+*ast.SelectorExpr : go/ast.Expr
+*ast.Ident : invalid type
+*ast.Ident : go/ast.Expr
+*ast.IfStmt
+*ast.BinaryExpr : untyped bool
+*ast.Ident : go/types.Type
+*ast.Ident : untyped nil
+*ast.BlockStmt
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(format string, a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(format string, a ...interface{}) (n int, err error)
+*ast.BasicLit : string
+*ast.CallExpr : string
+*ast.SelectorExpr : func() string
+*ast.Ident : go/types.Type
+*ast.Ident : func() string
+*ast.ExprStmt
+*ast.CallExpr : (n int, err error)
+*ast.SelectorExpr : func(a ...interface{}) (n int, err error)
+*ast.Ident : invalid type
+*ast.Ident : func(a ...interface{}) (n int, err error)
+*ast.ReturnStmt
+*ast.Ident : *./.PrintASTVisitor
