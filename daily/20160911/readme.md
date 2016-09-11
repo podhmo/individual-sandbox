@@ -3,6 +3,19 @@
 orm使わない状態で何ができるかも把握しておきたい感ある。
 
 - [sql - The Go Programming Language](https://golang.org/pkg/database/sql/)
+- [Go database/sql tutorial](http://go-database-sql.org/)
+
+driverをテキトウに選んでimportしないとダメ。
+
+```go
+// sqliteの場合
+import (
+	"database/sql"
+	_ "github.com/mattn/go-sqlite3"
+)
+```
+
+
 
 # golang gormの使い方
 

@@ -7,12 +7,16 @@ import (
 )
 
 func setup(db *sql.DB) error {
+	// The database/sql doesn’t explicitly have multiple statement support,
+	// which means that the behavior of this is backend dependent:
+    // (see: http://go-database-sql.org/surprises.html)
+
 	if _, err := db.Exec(`
 CREATE TABLE world (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   country VARCHAR(255),
   capital VARCHAR(255)
-);
+)
 `); err != nil {
 		return err
 	}
@@ -23,7 +27,7 @@ func run(db *sql.DB) error {
 	// insertion
 	{
 		stmt, err := db.Prepare(`
-INSERT INTO world (country, capital) VALUES (?, ?);
+INSERT INTO world (country, capital) VALUES (?, ?)
 `)
 		if err != nil {
 			return err
@@ -46,7 +50,7 @@ INSERT INTO world (country, capital) VALUES (?, ?);
 	// querying
 	{
 		stmt, err := db.Prepare(`
-select * from world where country = ?;
+select * from world where country = ?
 `)
 		if err != nil {
 			return err
@@ -76,6 +80,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.Close()
+
 	err = setup(db)
 	if err != nil {
 		log.Fatal(err)
