@@ -1,3 +1,9 @@
+# daily 何か盆栽プロジェクト的なものをしたくなった。
+
+この辺りを見ていきたいような感じ。goでできるかな。
+
+- [The Nature of Code](http://natureofcode.com/)
+
 # golang database/sql
 
 orm使わない状態で何ができるかも把握しておきたい感ある。
