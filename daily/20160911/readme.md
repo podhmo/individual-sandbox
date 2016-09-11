@@ -1,3 +1,9 @@
+# golang database/sql
+
+orm使わない状態で何ができるかも把握しておきたい感ある。
+
+- [sql - The Go Programming Language](https://golang.org/pkg/database/sql/)
+
 # golang gormの使い方
 
 - [example_gorm](example_gorm)
