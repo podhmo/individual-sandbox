@@ -1,4 +1,4 @@
-# gormの使い方
+# wip gormの使い方
 
 - [GORM Guide](http://jinzhu.me/gorm/)
 

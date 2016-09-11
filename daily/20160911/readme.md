@@ -4,6 +4,18 @@
 
 - [The Nature of Code](http://natureofcode.com/)
 
+# wip golang astをイジってみたくなった？
+
+[example_ast](example_ast)
+
+- [Go と reflect と generate - Qiita](http://qiita.com/naoina/items/7966f73f3a807b3d25d6)
+- [Demonstrate powerful golang packages -- go/ast, go/parser and go/types](https://gist.github.com/cxwangyi/e1887879dcaa750e5469)
+
+- go/parser
+- go/ast
+
+を使う？
+
 # golang database/sql
 
 orm使わない状態で何ができるかも把握しておきたい感ある。
