@@ -50,7 +50,6 @@ gormわりと文字列ベースであんまり型の力は利用できなさそ�
 
 - tagの仕様をどうにかしてcompletion可能な感じにしたいな〜。
 - tagの取得は GetModelStruct付近のコードっぽい。
-- scopeを直接取り出して実行する方法はないものか。。
 
 # sqlite foreignkey constraint
 
