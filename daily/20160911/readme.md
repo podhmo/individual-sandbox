@@ -15,7 +15,29 @@ import (
 )
 ```
 
+## tracer
 
+これが面白い。
+
+- [Go言語でSQLのトレースをする - Shogo's Blog](https://shogo82148.github.io/blog/2015/05/13/golang-sql-proxy/)
+
+そう言えば、sql.DBとsql.Txが両方渡せるinterfaceはdatabase/sqlには定義されていないっぽい？
+
+```go
+type Preparer interface {
+    Prepare(query string) (*sql.Stmt, error)
+}
+
+func run(db Preparer) error {
+}
+
+tx, err := db.Begin()
+if err != nil {
+    log.Fatal(err)
+}
+defer tx.Rollback()
+err = run(tx)
+```
 
 # golang gormの使い方
 
