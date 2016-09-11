@@ -9,7 +9,7 @@ import (
 )
 
 type Preparer interface {
-    Prepare(query string) (*sql.Stmt, error)
+	Prepare(query string) (*sql.Stmt, error)
 }
 
 func init() {
@@ -134,11 +134,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-    tx, err := db.Begin()
+	tx, err := db.Begin()
 	if err != nil {
 		log.Fatal(err)
 	}
-    defer tx.Rollback()
+	defer tx.Rollback()
 	err = run(tx)
 	if err != nil {
 		log.Fatal(err)
