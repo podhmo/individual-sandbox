@@ -54,7 +54,7 @@ $ cask install --verbose
 :notebook: そういえば、gui版のemacsはemacs-appだった。
 
 
-## problemm
+## problem
 
 `Invalid version syntax: 'DEV'` というエラー。
 原因は以下のような感じ。
@@ -99,12 +99,20 @@ export PATH=~/.cask/bin:/opt/local/bin:$PATH
 export GOPATH=~/work/go
 export PATH=$GOPATH/bin:$PATH
 
+```
+
+.bashrc
+
+```
 # short hand
 alias sandbox="cd ~/work/individual-sandbox/daily"
 alias e="emacsclient -q -n"
+alias grep="grep --color=auto"
+function replace () { grep -lr $1 . | xargs gsed -i "s@$1@$2@g"; }
+function replace2 () { echo "grep -lr \"$1\" . | xargs gsed -i \"s@$1@$2@g\";"; }
 ```
 
-# go wip goの環境
+# go goの環境
 
 GOPATHの設定とかもしないとか。
 
