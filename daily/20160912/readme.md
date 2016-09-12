@@ -15,7 +15,7 @@ $ sudo port install emacs emacs-app
 $ mkdir ~/work; cd ~/work
 $ git clone https://github.com/podhmo/emacs-sandbox.git
 $ ln -s ~/work/emacs-sandbox/emacs.d ~/.emacs.d
-# cask
+# cask install --verbose
 $ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 $ echo 'export PATH=~/.cask/bin:$PATH' >> ~/.bash_profile
 $ cd ~/.emacs.d
@@ -24,6 +24,29 @@ $ cask
 
 :notebook: そういえば、gui版のemacsはemacs-appだった。
 
+
+## problemm
+
+`Invalid version syntax: 'DEV'` というエラー。
+原因は以下のような感じ。
+
+```
+./.cask/24.5/elpa/cask-20160907.306/cask.el:If DEV-MODE is true, the dev template is used, otherwise the
+./.cask/24.5/elpa/flymake-easy-20140818.55/flymake-easy.el:;; Version: DEV
+./.cask/24.5/elpa/flymake-ruby-20121104.1059/flymake-ruby.el:;;; Version: DEV
+./3rdparty/flymake-easy-20140818.55/flymake-easy.el:;; Version: DEV
+./3rdparty/flymake-eslint-0.0.0/flymake-eslint-pkg.el:(define-package "flymake-eslint" "DEV" "no description" (quote nil))
+./3rdparty/flymake-eslint-0.0.0/flymake-eslint.el:;;; Version: DEV
+```
+
+versionがないやつがある。これがインストールされてしまって結果として死ぬ。
+
+## 雑な対応
+
+```
+$ sudo port install gsed
+$ grep -rl --include='*.el' DEV . | xargs gsed -i 's@DEV@0.0.0@g'
+```
 # terminal mac terminalの設定
 
 とりあえず以下だけあれば良い。
@@ -52,11 +75,14 @@ alias sandbox="cd ~/work/individual-sandbox/daily"
 alias e="emacsclient -q -n"
 ```
 
-# goの環境
+# go wip goの環境
 
 GOPATHの設定とかもしないとか。
 
 ```
 $ sudo port install go
-$ go get -u 
+$ go get -u golang.org/x/tools/cmd/godoc
+$ go get -u github.com/golang/lint/golint
+$ go get -u github.com/nsf/gocode
+$ go get -u github.com/podhmo/selfish/cmd/selfish
 ```
