@@ -1,3 +1,12 @@
+# git go privateのrepositoryを `go get` できるようにする
+
+sshでpushできるようにして、 `~/.gitconfig` に以下を加える。
+
+```
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+```
+
 # git githubのoriginの設定書き換え
 
 ```bash
@@ -5,6 +14,17 @@ git remote remove origin
 git remote add origin git@github.com:podhmo/individual-sandbox.git
 git push --set-upstream origin master
 ```
+
+# mac カーソルの移動をもう少し早くする
+
+- https://pqrs.org/osx/karabiner/index.html.ja
+
+key repeat タブ選ぶ。
+
+- Delay until repeat 350
+- Key repeat 33
+
+こういうの単に設定ファイルの書き換えで済ませられないのかな？
 
 # emacs mac emacsの設定
 
@@ -15,11 +35,11 @@ $ sudo port install emacs emacs-app
 $ mkdir ~/work; cd ~/work
 $ git clone https://github.com/podhmo/emacs-sandbox.git
 $ ln -s ~/work/emacs-sandbox/emacs.d ~/.emacs.d
-# cask install --verbose
+# cask
 $ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 $ echo 'export PATH=~/.cask/bin:$PATH' >> ~/.bash_profile
 $ cd ~/.emacs.d
-$ cask
+$ cask install --verbose
 ```
 
 :notebook: そういえば、gui版のemacsはemacs-appだった。
