@@ -1,3 +1,12 @@
+# golang emacs emacs上で `$GOPATH` の値を利用したい場合
+
+以下のような設定を利用する。(.bash_profileで設定しているならloginを使わないとダメ)
+
+```lisp
+(let ((output (shell-command-to-string "$SHELL --login -i -c 'echo $GOPATH'")))
+  (setenv "GOPATH" (car (last (split-string output)))))
+```
+
 # git go privateのrepositoryを `go get` できるようにする
 
 sshでpushできるようにして、 `~/.gitconfig` に以下を加える。
