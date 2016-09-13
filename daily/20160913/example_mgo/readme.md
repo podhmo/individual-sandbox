@@ -1,0 +1,5 @@
+# prepare
+
+```
+docker-compose up
+```

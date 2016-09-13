@@ -1,0 +1,7 @@
+# mongodb
+mongodb:
+  image: mongo:2.6
+  # volumes:
+  #   - "$PWD/.local/data/mongo:/data/db"
+  ports:
+    - "37017:27017"
