@@ -28,3 +28,10 @@ for i := 0; i<3; i++ {
     r = append(r, func(){ fmt.Println(i) })
 }
 ```
+
+# mac applicationの uninstall
+
+```
+rm -rf /Application/<app>
+rm -rf ~/Library/<app>
+```
