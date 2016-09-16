@@ -12,12 +12,13 @@ const (
 
 この時 validは 1とかただの値が出るだけ。 %Tつければ型は分かるけれど。
 
-# shell mac 手軽にlocalの環境でCPUなどの使用率を記録したい場合
+# shell mac psでcpu使用率
+
+手軽にlocalの環境でCPUなどの使用率を記録したい場合
 
 ```
 $ ps -o '%cpu,%mem,pid,rss,time,command'
 ```
-
 
 # mac numpyとかの環境
 
