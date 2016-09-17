@@ -1,3 +1,87 @@
+# golang 既存のmethodを壊さずに内部のmethodを書き換える方法
+
+以下のような状況で `m.F0()` を呼びたいのだけれど。その内部で呼ばれる `m.f()`は呼んでほしくない場合。
+
+```go
+type M struct {
+}
+
+func (m *M) F0() error {
+    // do something
+    return m.f()
+}
+
+func (m *M) F1() error {
+    // do something
+    return m.f()
+}
+
+func (m *M) f() error {
+    // この処理を呼びたくない
+}
+```
+
+以下はどう考えてもダメ。
+
+```go
+
+type mockM struct {
+    *M
+}
+
+func (m *M) f() error {
+    // こちらが呼ばれてくれると嬉しいけれど
+}
+```
+
+
+内部の部分を切り分けてembedするのが無難そう。
+
+型定義を以下の様に変える。
+
+```go
+type mClient interface {
+    f() error
+}
+
+type M struct {
+    *MClient
+}
+```
+
+内部で利用するclientのinterfaceを定義。
+
+```go
+type actualMClient struct {
+}
+
+func (c *actualMailerClient) f() error {
+    // この処理を呼びたくない
+}
+
+type mockedClient struct {
+}
+
+func (c *mockedClient) f() error {
+    // こちらが呼ばれてくれると嬉しい
+}
+```
+
+以下のような関数があるとうれしいかも？
+
+```go
+func NewM() *M{
+    client := actualMClient{}
+    m := M{mClient: &client}
+    return &m
+}
+```
+
+# vim 削除の話
+
+- `C` カーソルから行末まで削除 + insertion mode
+- `J` 改行削除
+
 # python matplotlib widgetを使いたい
 
 -[radio button](http://matplotlib.org/examples/widgets/radio_buttons.html)

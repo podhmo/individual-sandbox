@@ -1,0 +1,64 @@
+--- 01simple.go	2016-09-17 23:27:57.000000000 +0900
++++ 02one-answer.go	2016-09-17 23:38:45.000000000 +0900
+@@ -4,28 +4,38 @@
+ 	"fmt"
+ )
+ 
+-type Mailer struct {
++type MailerClient interface {
++	SendMail(subject, body string) error
+ }
+ 
+-func (m *Mailer) SendXMail() error {
+-	subject := "about x"
+-	body := fmt.Sprintf("body: %q", "xxx")
+-	return m.sendMail(subject, body)
++type ActualMailerClient struct {
+ }
+ 
+-func (m *Mailer) sendMail(subject, body string) error {
++func (c *ActualMailerClient) SendMail(subject, body string) error {
+ 	// テストの時などここの処理は呼ばれてほしくない。
+ 	panic(fmt.Sprintf("don't call this (subject=%q)", subject))
+ }
+ 
+-// 実際のMailer.sendMailは呼びたくない。ただしSendXMailの処理は実行させたい。
+-// もちろん、以下の様に書くとダメ。
++type Mailer struct {
++	MailerClient
++}
++
++func NewMailer() *Mailer {
++	client := &ActualMailerClient{}
++	mailer := &Mailer{MailerClient: client}
++	return mailer
++}
++
++func (m *Mailer) SendXMail() error {
++	subject := "about x"
++	body := fmt.Sprintf("body: %q", "xxx")
++	return m.SendMail(subject, body)
++}
+ 
+-type MockedMailer struct {
+-	*Mailer
++type mockedClient struct {
+ }
+ 
+-func (m *MockedMailer) sendMail(subject, body string) error {
++func (m *mockedClient) SendMail(subject, body string) error {
+ 	fmt.Println(subject)
+ 	fmt.Println("----------------------------------------")
+ 	fmt.Println(body)
+@@ -33,9 +43,9 @@
+ }
+ 
+ func main() {
+-	m := Mailer{}
+ 	{
+-		m := MockedMailer{Mailer: &m}
++		client := &mockedClient{}
++		m := Mailer{MailerClient: client}
+ 		m.SendXMail()
+ 	}
+ }
