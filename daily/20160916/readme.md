@@ -29,7 +29,7 @@ sudo port select python3 python35
 sudo port install py35-numpy py35-scipy py35-matplotlib
 ```
 
-## virtualenv
+## 仮想環境
 
 ```
 # もし必要なら
@@ -54,7 +54,7 @@ RuntimeError: Python is not installed as a framework. The Mac OS X backend will 
 https://github.com/matplotlib/matplotlib/blob/v1.5.3/src/_macosx.m#L6285
 
 
-### 手抜きの解決方法
+### 手抜きの解決方法(macosxのbackendを使わない)
 
 ```
 echo "backend: WebAgg" >> ~/.matplotlib/matplotlibrc
@@ -71,5 +71,5 @@ http://matplotlib.org/faq/environment_variables_faq.html#envvar-MPLBACKEND
 # python realtime plotting
 
 - [Realtime plotting | hardsoftlucid](https://hardsoftlucid.wordpress.com/various-stuff/realtime-plotting/)
-
+- https://gist.github.com/podhmo/e57af31389990776c981169700a442db
 
