@@ -32,11 +32,19 @@ sudo port install py35-numpy py35-scipy py35-matplotlib
 ## virtualenv
 
 ```
+# もし必要なら
+python3.5 -m ensurepip --user
+echo 'export PATH=~/Library/Python/3.5/bin:$PATH' >> ~/.bash_profile
 virtualenv --python=`which python3.5` --system-site-packages viz
 ```
 
 ## RuntimeError: Python is not installed as a framework
 
+### 手抜きの解決方法
+
+```
+echo "backend: CocoaAgg" >> ~/.matplotlib/matplotlibrc
+```
 
 # python realtime plotting
 
