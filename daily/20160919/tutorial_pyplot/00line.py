@@ -1,6 +1,16 @@
 import matplotlib.pyplot as plt
 
-
+# plt.style.use('ggplot')
+# plt.style.use('seaborn-paper')
+# plt.style.use('seaborn-poster')
+# plt.style.use('seaborn-ticks')
+# plt.style.use('seaborn-bright')
+# plt.style.use('seaborn-talk')
+# plt.style.use('seaborn-notebook')
+# plt.style.use('seaborn-darkgrid')
+# plt.style.use('seaborn-whitegrid')
+# plt.style.use('fivethirtyeight')
+# plt.style.use('classic')
 plt.plot([1, 2, 3, 4])
 plt.ylabel('some numbers')
 plt.show()

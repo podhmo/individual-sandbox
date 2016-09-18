@@ -23,7 +23,7 @@ $ ps -o '%cpu,%mem,pid,rss,time,command'
 # mac numpyとかの環境
 
 ```
-sudo port install python35
+sudo port install python35 +readline
 sudo port select python python35
 sudo port select python3 python35
 sudo port install py35-numpy py35-scipy py35-matplotlib
