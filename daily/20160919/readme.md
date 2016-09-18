@@ -55,6 +55,14 @@ plt.style.use('ggplot')
 
 - [matplotlib/lib/matplotlib/mpl-data/stylelib at master · matplotlib/matplotlib](https://github.com/matplotlib/matplotlib/tree/master/lib/matplotlib/mpl-data/stylelib)
 
+# python pyplot jupyter-notebook
+
+jpyter-notebook上で描画したい場合は以下のマジックコマンドを付けておく
+
+```
+%matplotlib inline
+```
+
 # python pyplot
 
 tutorialに書かれていることだけでも整理しておきたい気持ちがあるな。
