@@ -13,6 +13,34 @@ sudo port install python35 +readline
 
 ok
 
+## pythonのvariants (macports)
+
+```
+$ port variants python35
+python35 has the variants:
+   readline: Use readline instead of libedit
+   universal: Build for multiple architectures
+```
+
+## ついでにnotes
+
+```
+$ port notes python35
+python35 has the following notes:
+To make this the default Python or Python 3 (i.e., the version run by the 'python' or 'python3' commands), run one or both of:
+
+    sudo port select --set python python35
+    sudo port select --set python3 python35
+
+##############################################################
+# IF YOU ARE USING PYTHON FROM THE TERMINAL, PLEASE INSTALL:
+#   py35-readline
+# TO AVOID A LIBEDIT / PYTHON INTERACTION ISSUE.
+# REF: https://trac.macports.org/ticket/48807
+##############################################################
+```
+
+
 # python pyplot matplotlib
 
 見た目は `ggplot` のstyleを使うと綺麗
