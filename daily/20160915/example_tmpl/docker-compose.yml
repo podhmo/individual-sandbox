@@ -1,8 +1,4 @@
 go1.6:
   image: golang:1.6-alpine
   volumes:
-    - "$PWD:/tmp/data"
-  ports:
-    - '4444:4444'
-  # command: 'go run /tmp/data/00hello.go'
-  command: 'go run /tmp/data/01hello-error-on-private.go'
+    - "$PWD:/go"
