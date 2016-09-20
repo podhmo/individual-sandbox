@@ -19,3 +19,49 @@ source:increfetch
 
 あと自由に追加できる
 ```
+
+# python connexion
+
+
+- [zalando/connexion: Swagger/OpenAPI First framework for Python on top of Flask with automatic endpoint validation and OAuth2 support](
+https://github.com/zalando/connexion)
+
+Open API specification (2.0)
+- [OpenAPI-Specification/2.0.md at OpenAPI.next · OAI/OpenAPI-Specification]
+(https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/versions/2.0.md#fixed-fields-7)
+
+#### handling
+
+利用するyamlに情報を含めたい。
+
+- api.yamlに `{{varname}}`
+- app.pyのところで `app.add_apiのところでarguments={'varname': xxxx}`
+
+各yamlで利用するviewを指定したい
+
+- yaml内の各pathのoperationId に `<module>.<symbol>`
+
+custom typeの定義の仕方
+
+- [Connexion Cookbook — Connexion 0.5 documentation](https://connexion.readthedocs.io/en/latest/cookbook.html#custom-type-format)
+
+内部ではjsonschemaの設定を使っているっぽい。
+
+```python
+from jsonschema import draft4_format_checker
+
+@draft4_format_checker.checks('money')
+def is_money(val):
+    ...
+```
+
+swaggerのyamlからapi serverを立ち上げる
+
+```
+connexion run your_api.yaml --stub --debug
+```
+
+swaggerのuiは `open http://localhost:5000/ui`
+
+https://connexion.readthedocs.io/en/latest/cli.html
+
