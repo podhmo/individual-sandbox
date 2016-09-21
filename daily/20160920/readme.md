@@ -1,3 +1,7 @@
+# python state machine
+
+- [tyarkoni/transitions: A lightweight, object-oriented finite state machine implementation in Python](https://github.com/tyarkoni/transitions)
+
 # python logrusに近いlogger
 
 structlogを使う？
@@ -65,3 +69,8 @@ swaggerのuiは `open http://localhost:5000/ui`
 
 https://connexion.readthedocs.io/en/latest/cli.html
 
+
+# python mongodb
+
+- pymongoは単なるclient
+- ORM的なものは色々ある。mongoengineが一番有名っぽい？
