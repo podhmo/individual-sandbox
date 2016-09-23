@@ -1,0 +1,7 @@
+ui:
+  build: ./swagger-ui
+  ports:
+    - "4444:8080"
+  volumes:
+    - "$PWD/data:/data"
+

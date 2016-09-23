@@ -9,7 +9,7 @@ import mongoengine as m
 
 
 class Post(m.Document):
-    author = m.StringField(length=32, required=True)
+    author = m.StringField(length=32, required=True, unique=True)
     title = m.StringField(length=255)
     text = m.StringField()
     tags = m.ListField(m.StringField())
