@@ -1,0 +1,1480 @@
+Traceback (most recent call last):
+  File "00check.py", line 14, in <module>
+    print(jsonschema.validate(data, schema))
+  File "~/vboxshare/venvs/my3/lib/python3.5/site-packages/jsonschema/validators.py", line 478, in validate
+    cls(schema, *args, **kwargs).validate(instance)
+  File "~/vboxshare/venvs/my3/lib/python3.5/site-packages/jsonschema/validators.py", line 123, in validate
+    raise error
+jsonschema.exceptions.ValidationError: 'swagger' is a required property
+
+Failed validating 'required' in schema:
+    {'$schema': 'http://json-schema.org/draft-04/schema#',
+     'additionalProperties': False,
+     'definitions': {'apiKeySecurity': {'additionalProperties': False,
+                                        'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                        'properties': {'description': {'type': 'string'},
+                                                       'in': {'enum': ['header',
+                                                                       'query'],
+                                                              'type': 'string'},
+                                                       'name': {'type': 'string'},
+                                                       'type': {'enum': ['apiKey'],
+                                                                'type': 'string'}},
+                                        'required': ['type', 'name', 'in'],
+                                        'type': 'object'},
+                     'basicAuthenticationSecurity': {'additionalProperties': False,
+                                                     'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                     'properties': {'description': {'type': 'string'},
+                                                                    'type': {'enum': ['basic'],
+                                                                             'type': 'string'}},
+                                                     'required': ['type'],
+                                                     'type': 'object'},
+                     'bodyParameter': {'additionalProperties': False,
+                                       'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                       'properties': {'description': {'description': 'A '
+                                                                                     'brief '
+                                                                                     'description '
+                                                                                     'of '
+                                                                                     'the '
+                                                                                     'parameter. '
+                                                                                     'This '
+                                                                                     'could '
+                                                                                     'contain '
+                                                                                     'examples '
+                                                                                     'of '
+                                                                                     'use.  '
+                                                                                     'GitHub '
+                                                                                     'Flavored '
+                                                                                     'Markdown '
+                                                                                     'is '
+                                                                                     'allowed.',
+                                                                      'type': 'string'},
+                                                      'in': {'description': 'Determines '
+                                                                            'the '
+                                                                            'location '
+                                                                            'of '
+                                                                            'the '
+                                                                            'parameter.',
+                                                             'enum': ['body'],
+                                                             'type': 'string'},
+                                                      'name': {'description': 'The '
+                                                                              'name '
+                                                                              'of '
+                                                                              'the '
+                                                                              'parameter.',
+                                                               'type': 'string'},
+                                                      'required': {'default': False,
+                                                                   'description': 'Determines '
+                                                                                  'whether '
+                                                                                  'or '
+                                                                                  'not '
+                                                                                  'this '
+                                                                                  'parameter '
+                                                                                  'is '
+                                                                                  'required '
+                                                                                  'or '
+                                                                                  'optional.',
+                                                                   'type': 'boolean'},
+                                                      'schema': {'$ref': '#/definitions/schema'}},
+                                       'required': ['name', 'in', 'schema'],
+                                       'type': 'object'},
+                     'collectionFormat': {'default': 'csv',
+                                          'enum': ['csv',
+                                                   'ssv',
+                                                   'tsv',
+                                                   'pipes'],
+                                          'type': 'string'},
+                     'collectionFormatWithMulti': {'default': 'csv',
+                                                   'enum': ['csv',
+                                                            'ssv',
+                                                            'tsv',
+                                                            'pipes',
+                                                            'multi'],
+                                                   'type': 'string'},
+                     'contact': {'additionalProperties': False,
+                                 'description': 'Contact information for '
+                                                'the owners of the API.',
+                                 'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                 'properties': {'email': {'description': 'The '
+                                                                         'email '
+                                                                         'address '
+                                                                         'of '
+                                                                         'the '
+                                                                         'contact '
+                                                                         'person/organization.',
+                                                          'format': 'email',
+                                                          'type': 'string'},
+                                                'name': {'description': 'The '
+                                                                        'identifying '
+                                                                        'name '
+                                                                        'of '
+                                                                        'the '
+                                                                        'contact '
+                                                                        'person/organization.',
+                                                         'type': 'string'},
+                                                'url': {'description': 'The '
+                                                                       'URL '
+                                                                       'pointing '
+                                                                       'to '
+                                                                       'the '
+                                                                       'contact '
+                                                                       'information.',
+                                                        'format': 'uri',
+                                                        'type': 'string'}},
+                                 'type': 'object'},
+                     'default': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/default'},
+                     'definitions': {'additionalProperties': {'$ref': '#/definitions/schema'},
+                                     'description': 'One or more JSON '
+                                                    'objects describing '
+                                                    'the schemas being '
+                                                    'consumed and produced '
+                                                    'by the API.',
+                                     'type': 'object'},
+                     'description': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/description'},
+                     'enum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/enum'},
+                     'examples': {'additionalProperties': True,
+                                  'type': 'object'},
+                     'exclusiveMaximum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/exclusiveMaximum'},
+                     'exclusiveMinimum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/exclusiveMinimum'},
+                     'externalDocs': {'additionalProperties': False,
+                                      'description': 'information about '
+                                                     'external '
+                                                     'documentation',
+                                      'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                      'properties': {'description': {'type': 'string'},
+                                                     'url': {'format': 'uri',
+                                                             'type': 'string'}},
+                                      'required': ['url'],
+                                      'type': 'object'},
+                     'fileSchema': {'additionalProperties': False,
+                                    'description': 'A deterministic '
+                                                   'version of a JSON '
+                                                   'Schema object.',
+                                    'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                    'properties': {'default': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/default'},
+                                                   'description': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/description'},
+                                                   'example': {},
+                                                   'externalDocs': {'$ref': '#/definitions/externalDocs'},
+                                                   'format': {'type': 'string'},
+                                                   'readOnly': {'default': False,
+                                                                'type': 'boolean'},
+                                                   'required': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/stringArray'},
+                                                   'title': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/title'},
+                                                   'type': {'enum': ['file'],
+                                                            'type': 'string'}},
+                                    'required': ['type'],
+                                    'type': 'object'},
+                     'formDataParameterSubSchema': {'additionalProperties': False,
+                                                    'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                    'properties': {'allowEmptyValue': {'default': False,
+                                                                                       'description': 'allows '
+                                                                                                      'sending '
+                                                                                                      'a '
+                                                                                                      'parameter '
+                                                                                                      'by '
+                                                                                                      'name '
+                                                                                                      'only '
+                                                                                                      'or '
+                                                                                                      'with '
+                                                                                                      'an '
+                                                                                                      'empty '
+                                                                                                      'value.',
+                                                                                       'type': 'boolean'},
+                                                                   'collectionFormat': {'$ref': '#/definitions/collectionFormatWithMulti'},
+                                                                   'default': {'$ref': '#/definitions/default'},
+                                                                   'description': {'description': 'A '
+                                                                                                  'brief '
+                                                                                                  'description '
+                                                                                                  'of '
+                                                                                                  'the '
+                                                                                                  'parameter. '
+                                                                                                  'This '
+                                                                                                  'could '
+                                                                                                  'contain '
+                                                                                                  'examples '
+                                                                                                  'of '
+                                                                                                  'use.  '
+                                                                                                  'GitHub '
+                                                                                                  'Flavored '
+                                                                                                  'Markdown '
+                                                                                                  'is '
+                                                                                                  'allowed.',
+                                                                                   'type': 'string'},
+                                                                   'enum': {'$ref': '#/definitions/enum'},
+                                                                   'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                                                   'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                                                   'format': {'type': 'string'},
+                                                                   'in': {'description': 'Determines '
+                                                                                         'the '
+                                                                                         'location '
+                                                                                         'of '
+                                                                                         'the '
+                                                                                         'parameter.',
+                                                                          'enum': ['formData'],
+                                                                          'type': 'string'},
+                                                                   'items': {'$ref': '#/definitions/primitivesItems'},
+                                                                   'maxItems': {'$ref': '#/definitions/maxItems'},
+                                                                   'maxLength': {'$ref': '#/definitions/maxLength'},
+                                                                   'maximum': {'$ref': '#/definitions/maximum'},
+                                                                   'minItems': {'$ref': '#/definitions/minItems'},
+                                                                   'minLength': {'$ref': '#/definitions/minLength'},
+                                                                   'minimum': {'$ref': '#/definitions/minimum'},
+                                                                   'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                                                   'name': {'description': 'The '
+                                                                                           'name '
+                                                                                           'of '
+                                                                                           'the '
+                                                                                           'parameter.',
+                                                                            'type': 'string'},
+                                                                   'pattern': {'$ref': '#/definitions/pattern'},
+                                                                   'required': {'default': False,
+                                                                                'description': 'Determines '
+                                                                                               'whether '
+                                                                                               'or '
+                                                                                               'not '
+                                                                                               'this '
+                                                                                               'parameter '
+                                                                                               'is '
+                                                                                               'required '
+                                                                                               'or '
+                                                                                               'optional.',
+                                                                                'type': 'boolean'},
+                                                                   'type': {'enum': ['string',
+                                                                                     'number',
+                                                                                     'boolean',
+                                                                                     'integer',
+                                                                                     'array',
+                                                                                     'file'],
+                                                                            'type': 'string'},
+                                                                   'uniqueItems': {'$ref': '#/definitions/uniqueItems'}}},
+                     'header': {'additionalProperties': False,
+                                'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                'properties': {'collectionFormat': {'$ref': '#/definitions/collectionFormat'},
+                                               'default': {'$ref': '#/definitions/default'},
+                                               'description': {'type': 'string'},
+                                               'enum': {'$ref': '#/definitions/enum'},
+                                               'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                               'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                               'format': {'type': 'string'},
+                                               'items': {'$ref': '#/definitions/primitivesItems'},
+                                               'maxItems': {'$ref': '#/definitions/maxItems'},
+                                               'maxLength': {'$ref': '#/definitions/maxLength'},
+                                               'maximum': {'$ref': '#/definitions/maximum'},
+                                               'minItems': {'$ref': '#/definitions/minItems'},
+                                               'minLength': {'$ref': '#/definitions/minLength'},
+                                               'minimum': {'$ref': '#/definitions/minimum'},
+                                               'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                               'pattern': {'$ref': '#/definitions/pattern'},
+                                               'type': {'enum': ['string',
+                                                                 'number',
+                                                                 'integer',
+                                                                 'boolean',
+                                                                 'array'],
+                                                        'type': 'string'},
+                                               'uniqueItems': {'$ref': '#/definitions/uniqueItems'}},
+                                'required': ['type'],
+                                'type': 'object'},
+                     'headerParameterSubSchema': {'additionalProperties': False,
+                                                  'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                  'properties': {'collectionFormat': {'$ref': '#/definitions/collectionFormat'},
+                                                                 'default': {'$ref': '#/definitions/default'},
+                                                                 'description': {'description': 'A '
+                                                                                                'brief '
+                                                                                                'description '
+                                                                                                'of '
+                                                                                                'the '
+                                                                                                'parameter. '
+                                                                                                'This '
+                                                                                                'could '
+                                                                                                'contain '
+                                                                                                'examples '
+                                                                                                'of '
+                                                                                                'use.  '
+                                                                                                'GitHub '
+                                                                                                'Flavored '
+                                                                                                'Markdown '
+                                                                                                'is '
+                                                                                                'allowed.',
+                                                                                 'type': 'string'},
+                                                                 'enum': {'$ref': '#/definitions/enum'},
+                                                                 'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                                                 'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                                                 'format': {'type': 'string'},
+                                                                 'in': {'description': 'Determines '
+                                                                                       'the '
+                                                                                       'location '
+                                                                                       'of '
+                                                                                       'the '
+                                                                                       'parameter.',
+                                                                        'enum': ['header'],
+                                                                        'type': 'string'},
+                                                                 'items': {'$ref': '#/definitions/primitivesItems'},
+                                                                 'maxItems': {'$ref': '#/definitions/maxItems'},
+                                                                 'maxLength': {'$ref': '#/definitions/maxLength'},
+                                                                 'maximum': {'$ref': '#/definitions/maximum'},
+                                                                 'minItems': {'$ref': '#/definitions/minItems'},
+                                                                 'minLength': {'$ref': '#/definitions/minLength'},
+                                                                 'minimum': {'$ref': '#/definitions/minimum'},
+                                                                 'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                                                 'name': {'description': 'The '
+                                                                                         'name '
+                                                                                         'of '
+                                                                                         'the '
+                                                                                         'parameter.',
+                                                                          'type': 'string'},
+                                                                 'pattern': {'$ref': '#/definitions/pattern'},
+                                                                 'required': {'default': False,
+                                                                              'description': 'Determines '
+                                                                                             'whether '
+                                                                                             'or '
+                                                                                             'not '
+                                                                                             'this '
+                                                                                             'parameter '
+                                                                                             'is '
+                                                                                             'required '
+                                                                                             'or '
+                                                                                             'optional.',
+                                                                              'type': 'boolean'},
+                                                                 'type': {'enum': ['string',
+                                                                                   'number',
+                                                                                   'boolean',
+                                                                                   'integer',
+                                                                                   'array'],
+                                                                          'type': 'string'},
+                                                                 'uniqueItems': {'$ref': '#/definitions/uniqueItems'}}},
+                     'headers': {'additionalProperties': {'$ref': '#/definitions/header'},
+                                 'type': 'object'},
+                     'info': {'additionalProperties': False,
+                              'description': 'General information about '
+                                             'the API.',
+                              'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                              'properties': {'contact': {'$ref': '#/definitions/contact'},
+                                             'description': {'description': 'A '
+                                                                            'longer '
+                                                                            'description '
+                                                                            'of '
+                                                                            'the '
+                                                                            'API. '
+                                                                            'Should '
+                                                                            'be '
+                                                                            'different '
+                                                                            'from '
+                                                                            'the '
+                                                                            'title.  '
+                                                                            'GitHub '
+                                                                            'Flavored '
+                                                                            'Markdown '
+                                                                            'is '
+                                                                            'allowed.',
+                                                             'type': 'string'},
+                                             'license': {'$ref': '#/definitions/license'},
+                                             'termsOfService': {'description': 'The '
+                                                                               'terms '
+                                                                               'of '
+                                                                               'service '
+                                                                               'for '
+                                                                               'the '
+                                                                               'API.',
+                                                                'type': 'string'},
+                                             'title': {'description': 'A '
+                                                                      'unique '
+                                                                      'and '
+                                                                      'precise '
+                                                                      'title '
+                                                                      'of '
+                                                                      'the '
+                                                                      'API.',
+                                                       'type': 'string'},
+                                             'version': {'description': 'A '
+                                                                        'semantic '
+                                                                        'version '
+                                                                        'number '
+                                                                        'of '
+                                                                        'the '
+                                                                        'API.',
+                                                         'type': 'string'}},
+                              'required': ['version', 'title'],
+                              'type': 'object'},
+                     'jsonReference': {'additionalProperties': False,
+                                       'properties': {'$ref': {'type': 'string'}},
+                                       'required': ['$ref'],
+                                       'type': 'object'},
+                     'license': {'additionalProperties': False,
+                                 'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                 'properties': {'name': {'description': 'The '
+                                                                        'name '
+                                                                        'of '
+                                                                        'the '
+                                                                        'license '
+                                                                        'type. '
+                                                                        "It's "
+                                                                        'encouraged '
+                                                                        'to '
+                                                                        'use '
+                                                                        'an '
+                                                                        'OSI '
+                                                                        'compatible '
+                                                                        'license.',
+                                                         'type': 'string'},
+                                                'url': {'description': 'The '
+                                                                       'URL '
+                                                                       'pointing '
+                                                                       'to '
+                                                                       'the '
+                                                                       'license.',
+                                                        'format': 'uri',
+                                                        'type': 'string'}},
+                                 'required': ['name'],
+                                 'type': 'object'},
+                     'maxItems': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveInteger'},
+                     'maxLength': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveInteger'},
+                     'maximum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/maximum'},
+                     'mediaTypeList': {'items': {'$ref': '#/definitions/mimeType'},
+                                       'type': 'array',
+                                       'uniqueItems': True},
+                     'mimeType': {'description': 'The MIME type of the '
+                                                 'HTTP message.',
+                                  'type': 'string'},
+                     'minItems': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0'},
+                     'minLength': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0'},
+                     'minimum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/minimum'},
+                     'multipleOf': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/multipleOf'},
+                     'nonBodyParameter': {'oneOf': [{'$ref': '#/definitions/headerParameterSubSchema'},
+                                                    {'$ref': '#/definitions/formDataParameterSubSchema'},
+                                                    {'$ref': '#/definitions/queryParameterSubSchema'},
+                                                    {'$ref': '#/definitions/pathParameterSubSchema'}],
+                                          'required': ['name',
+                                                       'in',
+                                                       'type'],
+                                          'type': 'object'},
+                     'oauth2AccessCodeSecurity': {'additionalProperties': False,
+                                                  'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                  'properties': {'authorizationUrl': {'format': 'uri',
+                                                                                      'type': 'string'},
+                                                                 'description': {'type': 'string'},
+                                                                 'flow': {'enum': ['accessCode'],
+                                                                          'type': 'string'},
+                                                                 'scopes': {'$ref': '#/definitions/oauth2Scopes'},
+                                                                 'tokenUrl': {'format': 'uri',
+                                                                              'type': 'string'},
+                                                                 'type': {'enum': ['oauth2'],
+                                                                          'type': 'string'}},
+                                                  'required': ['type',
+                                                               'flow',
+                                                               'authorizationUrl',
+                                                               'tokenUrl'],
+                                                  'type': 'object'},
+                     'oauth2ApplicationSecurity': {'additionalProperties': False,
+                                                   'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                   'properties': {'description': {'type': 'string'},
+                                                                  'flow': {'enum': ['application'],
+                                                                           'type': 'string'},
+                                                                  'scopes': {'$ref': '#/definitions/oauth2Scopes'},
+                                                                  'tokenUrl': {'format': 'uri',
+                                                                               'type': 'string'},
+                                                                  'type': {'enum': ['oauth2'],
+                                                                           'type': 'string'}},
+                                                   'required': ['type',
+                                                                'flow',
+                                                                'tokenUrl'],
+                                                   'type': 'object'},
+                     'oauth2ImplicitSecurity': {'additionalProperties': False,
+                                                'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                'properties': {'authorizationUrl': {'format': 'uri',
+                                                                                    'type': 'string'},
+                                                               'description': {'type': 'string'},
+                                                               'flow': {'enum': ['implicit'],
+                                                                        'type': 'string'},
+                                                               'scopes': {'$ref': '#/definitions/oauth2Scopes'},
+                                                               'type': {'enum': ['oauth2'],
+                                                                        'type': 'string'}},
+                                                'required': ['type',
+                                                             'flow',
+                                                             'authorizationUrl'],
+                                                'type': 'object'},
+                     'oauth2PasswordSecurity': {'additionalProperties': False,
+                                                'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                'properties': {'description': {'type': 'string'},
+                                                               'flow': {'enum': ['password'],
+                                                                        'type': 'string'},
+                                                               'scopes': {'$ref': '#/definitions/oauth2Scopes'},
+                                                               'tokenUrl': {'format': 'uri',
+                                                                            'type': 'string'},
+                                                               'type': {'enum': ['oauth2'],
+                                                                        'type': 'string'}},
+                                                'required': ['type',
+                                                             'flow',
+                                                             'tokenUrl'],
+                                                'type': 'object'},
+                     'oauth2Scopes': {'additionalProperties': {'type': 'string'},
+                                      'type': 'object'},
+                     'operation': {'additionalProperties': False,
+                                   'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                   'properties': {'consumes': {'allOf': [{'$ref': '#/definitions/mediaTypeList'}],
+                                                               'description': 'A '
+                                                                              'list '
+                                                                              'of '
+                                                                              'MIME '
+                                                                              'types '
+                                                                              'the '
+                                                                              'API '
+                                                                              'can '
+                                                                              'consume.'},
+                                                  'deprecated': {'default': False,
+                                                                 'type': 'boolean'},
+                                                  'description': {'description': 'A '
+                                                                                 'longer '
+                                                                                 'description '
+                                                                                 'of '
+                                                                                 'the '
+                                                                                 'operation, '
+                                                                                 'GitHub '
+                                                                                 'Flavored '
+                                                                                 'Markdown '
+                                                                                 'is '
+                                                                                 'allowed.',
+                                                                  'type': 'string'},
+                                                  'externalDocs': {'$ref': '#/definitions/externalDocs'},
+                                                  'operationId': {'description': 'A '
+                                                                                 'unique '
+                                                                                 'identifier '
+                                                                                 'of '
+                                                                                 'the '
+                                                                                 'operation.',
+                                                                  'type': 'string'},
+                                                  'parameters': {'$ref': '#/definitions/parametersList'},
+                                                  'produces': {'allOf': [{'$ref': '#/definitions/mediaTypeList'}],
+                                                               'description': 'A '
+                                                                              'list '
+                                                                              'of '
+                                                                              'MIME '
+                                                                              'types '
+                                                                              'the '
+                                                                              'API '
+                                                                              'can '
+                                                                              'produce.'},
+                                                  'responses': {'$ref': '#/definitions/responses'},
+                                                  'schemes': {'$ref': '#/definitions/schemesList'},
+                                                  'security': {'$ref': '#/definitions/security'},
+                                                  'summary': {'description': 'A '
+                                                                             'brief '
+                                                                             'summary '
+                                                                             'of '
+                                                                             'the '
+                                                                             'operation.',
+                                                              'type': 'string'},
+                                                  'tags': {'items': {'type': 'string'},
+                                                           'type': 'array',
+                                                           'uniqueItems': True}},
+                                   'required': ['responses'],
+                                   'type': 'object'},
+                     'parameter': {'oneOf': [{'$ref': '#/definitions/bodyParameter'},
+                                             {'$ref': '#/definitions/nonBodyParameter'}]},
+                     'parameterDefinitions': {'additionalProperties': {'$ref': '#/definitions/parameter'},
+                                              'description': 'One or more '
+                                                             'JSON '
+                                                             'representations '
+                                                             'for '
+                                                             'parameters',
+                                              'type': 'object'},
+                     'parametersList': {'additionalItems': False,
+                                        'description': 'The parameters '
+                                                       'needed to send a '
+                                                       'valid API call.',
+                                        'items': {'oneOf': [{'$ref': '#/definitions/parameter'},
+                                                            {'$ref': '#/definitions/jsonReference'}]},
+                                        'type': 'array',
+                                        'uniqueItems': True},
+                     'pathItem': {'additionalProperties': False,
+                                  'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                  'properties': {'$ref': {'type': 'string'},
+                                                 'delete': {'$ref': '#/definitions/operation'},
+                                                 'get': {'$ref': '#/definitions/operation'},
+                                                 'head': {'$ref': '#/definitions/operation'},
+                                                 'options': {'$ref': '#/definitions/operation'},
+                                                 'parameters': {'$ref': '#/definitions/parametersList'},
+                                                 'patch': {'$ref': '#/definitions/operation'},
+                                                 'post': {'$ref': '#/definitions/operation'},
+                                                 'put': {'$ref': '#/definitions/operation'}},
+                                  'type': 'object'},
+                     'pathParameterSubSchema': {'additionalProperties': False,
+                                                'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                'properties': {'collectionFormat': {'$ref': '#/definitions/collectionFormat'},
+                                                               'default': {'$ref': '#/definitions/default'},
+                                                               'description': {'description': 'A '
+                                                                                              'brief '
+                                                                                              'description '
+                                                                                              'of '
+                                                                                              'the '
+                                                                                              'parameter. '
+                                                                                              'This '
+                                                                                              'could '
+                                                                                              'contain '
+                                                                                              'examples '
+                                                                                              'of '
+                                                                                              'use.  '
+                                                                                              'GitHub '
+                                                                                              'Flavored '
+                                                                                              'Markdown '
+                                                                                              'is '
+                                                                                              'allowed.',
+                                                                               'type': 'string'},
+                                                               'enum': {'$ref': '#/definitions/enum'},
+                                                               'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                                               'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                                               'format': {'type': 'string'},
+                                                               'in': {'description': 'Determines '
+                                                                                     'the '
+                                                                                     'location '
+                                                                                     'of '
+                                                                                     'the '
+                                                                                     'parameter.',
+                                                                      'enum': ['path'],
+                                                                      'type': 'string'},
+                                                               'items': {'$ref': '#/definitions/primitivesItems'},
+                                                               'maxItems': {'$ref': '#/definitions/maxItems'},
+                                                               'maxLength': {'$ref': '#/definitions/maxLength'},
+                                                               'maximum': {'$ref': '#/definitions/maximum'},
+                                                               'minItems': {'$ref': '#/definitions/minItems'},
+                                                               'minLength': {'$ref': '#/definitions/minLength'},
+                                                               'minimum': {'$ref': '#/definitions/minimum'},
+                                                               'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                                               'name': {'description': 'The '
+                                                                                       'name '
+                                                                                       'of '
+                                                                                       'the '
+                                                                                       'parameter.',
+                                                                        'type': 'string'},
+                                                               'pattern': {'$ref': '#/definitions/pattern'},
+                                                               'required': {'description': 'Determines '
+                                                                                           'whether '
+                                                                                           'or '
+                                                                                           'not '
+                                                                                           'this '
+                                                                                           'parameter '
+                                                                                           'is '
+                                                                                           'required '
+                                                                                           'or '
+                                                                                           'optional.',
+                                                                            'enum': [True],
+                                                                            'type': 'boolean'},
+                                                               'type': {'enum': ['string',
+                                                                                 'number',
+                                                                                 'boolean',
+                                                                                 'integer',
+                                                                                 'array'],
+                                                                        'type': 'string'},
+                                                               'uniqueItems': {'$ref': '#/definitions/uniqueItems'}},
+                                                'required': ['required']},
+                     'paths': {'additionalProperties': False,
+                               'description': 'Relative paths to the '
+                                              'individual endpoints. They '
+                                              'must be relative to the '
+                                              "'basePath'.",
+                               'patternProperties': {'^/': {'$ref': '#/definitions/pathItem'},
+                                                     '^x-': {'$ref': '#/definitions/vendorExtension'}},
+                               'type': 'object'},
+                     'pattern': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/pattern'},
+                     'primitivesItems': {'additionalProperties': False,
+                                         'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                         'properties': {'collectionFormat': {'$ref': '#/definitions/collectionFormat'},
+                                                        'default': {'$ref': '#/definitions/default'},
+                                                        'enum': {'$ref': '#/definitions/enum'},
+                                                        'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                                        'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                                        'format': {'type': 'string'},
+                                                        'items': {'$ref': '#/definitions/primitivesItems'},
+                                                        'maxItems': {'$ref': '#/definitions/maxItems'},
+                                                        'maxLength': {'$ref': '#/definitions/maxLength'},
+                                                        'maximum': {'$ref': '#/definitions/maximum'},
+                                                        'minItems': {'$ref': '#/definitions/minItems'},
+                                                        'minLength': {'$ref': '#/definitions/minLength'},
+                                                        'minimum': {'$ref': '#/definitions/minimum'},
+                                                        'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                                        'pattern': {'$ref': '#/definitions/pattern'},
+                                                        'type': {'enum': ['string',
+                                                                          'number',
+                                                                          'integer',
+                                                                          'boolean',
+                                                                          'array'],
+                                                                 'type': 'string'},
+                                                        'uniqueItems': {'$ref': '#/definitions/uniqueItems'}},
+                                         'type': 'object'},
+                     'queryParameterSubSchema': {'additionalProperties': False,
+                                                 'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                                 'properties': {'allowEmptyValue': {'default': False,
+                                                                                    'description': 'allows '
+                                                                                                   'sending '
+                                                                                                   'a '
+                                                                                                   'parameter '
+                                                                                                   'by '
+                                                                                                   'name '
+                                                                                                   'only '
+                                                                                                   'or '
+                                                                                                   'with '
+                                                                                                   'an '
+                                                                                                   'empty '
+                                                                                                   'value.',
+                                                                                    'type': 'boolean'},
+                                                                'collectionFormat': {'$ref': '#/definitions/collectionFormatWithMulti'},
+                                                                'default': {'$ref': '#/definitions/default'},
+                                                                'description': {'description': 'A '
+                                                                                               'brief '
+                                                                                               'description '
+                                                                                               'of '
+                                                                                               'the '
+                                                                                               'parameter. '
+                                                                                               'This '
+                                                                                               'could '
+                                                                                               'contain '
+                                                                                               'examples '
+                                                                                               'of '
+                                                                                               'use.  '
+                                                                                               'GitHub '
+                                                                                               'Flavored '
+                                                                                               'Markdown '
+                                                                                               'is '
+                                                                                               'allowed.',
+                                                                                'type': 'string'},
+                                                                'enum': {'$ref': '#/definitions/enum'},
+                                                                'exclusiveMaximum': {'$ref': '#/definitions/exclusiveMaximum'},
+                                                                'exclusiveMinimum': {'$ref': '#/definitions/exclusiveMinimum'},
+                                                                'format': {'type': 'string'},
+                                                                'in': {'description': 'Determines '
+                                                                                      'the '
+                                                                                      'location '
+                                                                                      'of '
+                                                                                      'the '
+                                                                                      'parameter.',
+                                                                       'enum': ['query'],
+                                                                       'type': 'string'},
+                                                                'items': {'$ref': '#/definitions/primitivesItems'},
+                                                                'maxItems': {'$ref': '#/definitions/maxItems'},
+                                                                'maxLength': {'$ref': '#/definitions/maxLength'},
+                                                                'maximum': {'$ref': '#/definitions/maximum'},
+                                                                'minItems': {'$ref': '#/definitions/minItems'},
+                                                                'minLength': {'$ref': '#/definitions/minLength'},
+                                                                'minimum': {'$ref': '#/definitions/minimum'},
+                                                                'multipleOf': {'$ref': '#/definitions/multipleOf'},
+                                                                'name': {'description': 'The '
+                                                                                        'name '
+                                                                                        'of '
+                                                                                        'the '
+                                                                                        'parameter.',
+                                                                         'type': 'string'},
+                                                                'pattern': {'$ref': '#/definitions/pattern'},
+                                                                'required': {'default': False,
+                                                                             'description': 'Determines '
+                                                                                            'whether '
+                                                                                            'or '
+                                                                                            'not '
+                                                                                            'this '
+                                                                                            'parameter '
+                                                                                            'is '
+                                                                                            'required '
+                                                                                            'or '
+                                                                                            'optional.',
+                                                                             'type': 'boolean'},
+                                                                'type': {'enum': ['string',
+                                                                                  'number',
+                                                                                  'boolean',
+                                                                                  'integer',
+                                                                                  'array'],
+                                                                         'type': 'string'},
+                                                                'uniqueItems': {'$ref': '#/definitions/uniqueItems'}}},
+                     'response': {'additionalProperties': False,
+                                  'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                  'properties': {'description': {'type': 'string'},
+                                                 'examples': {'$ref': '#/definitions/examples'},
+                                                 'headers': {'$ref': '#/definitions/headers'},
+                                                 'schema': {'oneOf': [{'$ref': '#/definitions/schema'},
+                                                                      {'$ref': '#/definitions/fileSchema'}]}},
+                                  'required': ['description'],
+                                  'type': 'object'},
+                     'responseDefinitions': {'additionalProperties': {'$ref': '#/definitions/response'},
+                                             'description': 'One or more '
+                                                            'JSON '
+                                                            'representations '
+                                                            'for '
+                                                            'parameters',
+                                             'type': 'object'},
+                     'responseValue': {'oneOf': [{'$ref': '#/definitions/response'},
+                                                 {'$ref': '#/definitions/jsonReference'}]},
+                     'responses': {'additionalProperties': False,
+                                   'description': 'Response objects names '
+                                                  'can either be any valid '
+                                                  'HTTP status code or '
+                                                  "'default'.",
+                                   'minProperties': 1,
+                                   'not': {'additionalProperties': False,
+                                           'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                           'type': 'object'},
+                                   'patternProperties': {'^([0-9]{3})$|^(default)$': {'$ref': '#/definitions/responseValue'},
+                                                         '^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                   'type': 'object'},
+                     'schema': {'additionalProperties': False,
+                                'description': 'A deterministic version of '
+                                               'a JSON Schema object.',
+                                'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                                'properties': {'$ref': {'type': 'string'},
+                                               'additionalProperties': {'anyOf': [{'$ref': '#/definitions/schema'},
+                                                                                  {'type': 'boolean'}],
+                                                                        'default': {}},
+                                               'allOf': {'items': {'$ref': '#/definitions/schema'},
+                                                         'minItems': 1,
+                                                         'type': 'array'},
+                                               'default': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/default'},
+                                               'description': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/description'},
+                                               'discriminator': {'type': 'string'},
+                                               'enum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/enum'},
+                                               'example': {},
+                                               'exclusiveMaximum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/exclusiveMaximum'},
+                                               'exclusiveMinimum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/exclusiveMinimum'},
+                                               'externalDocs': {'$ref': '#/definitions/externalDocs'},
+                                               'format': {'type': 'string'},
+                                               'items': {'anyOf': [{'$ref': '#/definitions/schema'},
+                                                                   {'items': {'$ref': '#/definitions/schema'},
+                                                                    'minItems': 1,
+                                                                    'type': 'array'}],
+                                                         'default': {}},
+                                               'maxItems': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveInteger'},
+                                               'maxLength': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveInteger'},
+                                               'maxProperties': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveInteger'},
+                                               'maximum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/maximum'},
+                                               'minItems': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0'},
+                                               'minLength': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0'},
+                                               'minProperties': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0'},
+                                               'minimum': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/minimum'},
+                                               'multipleOf': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/multipleOf'},
+                                               'pattern': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/pattern'},
+                                               'properties': {'additionalProperties': {'$ref': '#/definitions/schema'},
+                                                              'default': {},
+                                                              'type': 'object'},
+                                               'readOnly': {'default': False,
+                                                            'type': 'boolean'},
+                                               'required': {'$ref': 'http://json-schema.org/draft-04/schema#/definitions/stringArray'},
+                                               'title': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/title'},
+                                               'type': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/type'},
+                                               'uniqueItems': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/uniqueItems'},
+                                               'xml': {'$ref': '#/definitions/xml'}},
+                                'type': 'object'},
+                     'schemesList': {'description': 'The transfer protocol '
+                                                    'of the API.',
+                                     'items': {'enum': ['http',
+                                                        'https',
+                                                        'ws',
+                                                        'wss'],
+                                               'type': 'string'},
+                                     'type': 'array',
+                                     'uniqueItems': True},
+                     'security': {'items': {'$ref': '#/definitions/securityRequirement'},
+                                  'type': 'array',
+                                  'uniqueItems': True},
+                     'securityDefinitions': {'additionalProperties': {'oneOf': [{'$ref': '#/definitions/basicAuthenticationSecurity'},
+                                                                                {'$ref': '#/definitions/apiKeySecurity'},
+                                                                                {'$ref': '#/definitions/oauth2ImplicitSecurity'},
+                                                                                {'$ref': '#/definitions/oauth2PasswordSecurity'},
+                                                                                {'$ref': '#/definitions/oauth2ApplicationSecurity'},
+                                                                                {'$ref': '#/definitions/oauth2AccessCodeSecurity'}]},
+                                             'type': 'object'},
+                     'securityRequirement': {'additionalProperties': {'items': {'type': 'string'},
+                                                                      'type': 'array',
+                                                                      'uniqueItems': True},
+                                             'type': 'object'},
+                     'tag': {'additionalProperties': False,
+                             'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                             'properties': {'description': {'type': 'string'},
+                                            'externalDocs': {'$ref': '#/definitions/externalDocs'},
+                                            'name': {'type': 'string'}},
+                             'required': ['name'],
+                             'type': 'object'},
+                     'title': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/title'},
+                     'uniqueItems': {'$ref': 'http://json-schema.org/draft-04/schema#/properties/uniqueItems'},
+                     'vendorExtension': {'additionalItems': True,
+                                         'additionalProperties': True,
+                                         'description': 'Any property '
+                                                        'starting with x- '
+                                                        'is valid.'},
+                     'xml': {'additionalProperties': False,
+                             'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+                             'properties': {'attribute': {'default': False,
+                                                          'type': 'boolean'},
+                                            'name': {'type': 'string'},
+                                            'namespace': {'type': 'string'},
+                                            'prefix': {'type': 'string'},
+                                            'wrapped': {'default': False,
+                                                        'type': 'boolean'}},
+                             'type': 'object'}},
+     'id': 'http://swagger.io/v2/schema.json#',
+     'patternProperties': {'^x-': {'$ref': '#/definitions/vendorExtension'}},
+     'properties': {'basePath': {'description': 'The base path to the API. '
+                                                "Example: '/api'.",
+                                 'pattern': '^/',
+                                 'type': 'string'},
+                    'consumes': {'allOf': [{'$ref': '#/definitions/mediaTypeList'}],
+                                 'description': 'A list of MIME types '
+                                                'accepted by the API.'},
+                    'definitions': {'$ref': '#/definitions/definitions'},
+                    'externalDocs': {'$ref': '#/definitions/externalDocs'},
+                    'host': {'description': 'The host (name or ip) of the '
+                                            "API. Example: 'swagger.io'",
+                             'pattern': '^[^{}/ :\\\\]+(?::\\d+)?$',
+                             'type': 'string'},
+                    'info': {'$ref': '#/definitions/info'},
+                    'parameters': {'$ref': '#/definitions/parameterDefinitions'},
+                    'paths': {'$ref': '#/definitions/paths'},
+                    'produces': {'allOf': [{'$ref': '#/definitions/mediaTypeList'}],
+                                 'description': 'A list of MIME types the '
+                                                'API can produce.'},
+                    'responses': {'$ref': '#/definitions/responseDefinitions'},
+                    'schemes': {'$ref': '#/definitions/schemesList'},
+                    'security': {'$ref': '#/definitions/security'},
+                    'securityDefinitions': {'$ref': '#/definitions/securityDefinitions'},
+                    'swagger': {'description': 'The Swagger version of '
+                                               'this document.',
+                                'enum': ['2.0'],
+                                'type': 'string'},
+                    'tags': {'items': {'$ref': '#/definitions/tag'},
+                             'type': 'array',
+                             'uniqueItems': True}},
+     'required': ['swagger', 'info', 'paths'],
+     'title': 'A JSON Schema for Swagger 2.0 API.',
+     'type': 'object'}
+
+On instance:
+    {'basePath': '/v1',
+     'definitions': {'Activities': {'properties': {'count': {'description': 'Total '
+                                                                            'number '
+                                                                            'of '
+                                                                            'items '
+                                                                            'available.',
+                                                             'format': 'int32',
+                                                             'type': 'integer'},
+                                                   'history': {'items': {'$ref': '#/definitions/Activity'},
+                                                               'type': 'array'},
+                                                   'limit': {'description': 'Number '
+                                                                            'of '
+                                                                            'items '
+                                                                            'to '
+                                                                            'retrieve '
+                                                                            '(100 '
+                                                                            'max).',
+                                                             'format': 'int32',
+                                                             'type': 'integer'},
+                                                   'offset': {'description': 'Position '
+                                                                             'in '
+                                                                             'pagination.',
+                                                              'format': 'int32',
+                                                              'type': 'integer'}},
+                                    'type': 'object'},
+                     'Activity': {'properties': {'uuid': {'description': 'Unique '
+                                                                         'identifier '
+                                                                         'for '
+                                                                         'the '
+                                                                         'activity',
+                                                          'type': 'string'}},
+                                  'type': 'object'},
+                     'Error': {'properties': {'code': {'format': 'int32',
+                                                       'type': 'integer'},
+                                              'fields': {'type': 'string'},
+                                              'message': {'type': 'string'}},
+                               'type': 'object'},
+                     'PriceEstimate': {'properties': {'currency_code': {'description': '[ISO '
+                                                                                       '4217](http://en.wikipedia.org/wiki/ISO_4217) '
+                                                                                       'currency '
+                                                                                       'code.',
+                                                                        'type': 'string'},
+                                                      'display_name': {'description': 'Display '
+                                                                                      'name '
+                                                                                      'of '
+                                                                                      'product.',
+                                                                       'type': 'string'},
+                                                      'estimate': {'description': 'Formatted '
+                                                                                  'string '
+                                                                                  'of '
+                                                                                  'estimate '
+                                                                                  'in '
+                                                                                  'local '
+                                                                                  'currency '
+                                                                                  'of '
+                                                                                  'the '
+                                                                                  'start '
+                                                                                  'location. '
+                                                                                  'Estimate '
+                                                                                  'could '
+                                                                                  'be '
+                                                                                  'a '
+                                                                                  'range, '
+                                                                                  'a '
+                                                                                  'single '
+                                                                                  'number '
+                                                                                  '(flat '
+                                                                                  'rate) '
+                                                                                  'or '
+                                                                                  '"Metered" '
+                                                                                  'for '
+                                                                                  'TAXI.',
+                                                                   'type': 'string'},
+                                                      'high_estimate': {'description': 'Upper '
+                                                                                       'bound '
+                                                                                       'of '
+                                                                                       'the '
+                                                                                       'estimated '
+                                                                                       'price.',
+                                                                        'type': 'number'},
+                                                      'low_estimate': {'description': 'Lower '
+                                                                                      'bound '
+                                                                                      'of '
+                                                                                      'the '
+                                                                                      'estimated '
+                                                                                      'price.',
+                                                                       'type': 'number'},
+                                                      'product_id': {'description': 'Unique '
+                                                                                    'identifier '
+                                                                                    'representing '
+                                                                                    'a '
+                                                                                    'specific '
+                                                                                    'product '
+                                                                                    'for '
+                                                                                    'a '
+                                                                                    'given '
+                                                                                    'latitude '
+                                                                                    '& '
+                                                                                    'longitude. '
+                                                                                    'For '
+                                                                                    'example, '
+                                                                                    'uberX '
+                                                                                    'in '
+                                                                                    'San '
+                                                                                    'Francisco '
+                                                                                    'will '
+                                                                                    'have '
+                                                                                    'a '
+                                                                                    'different '
+                                                                                    'product_id '
+                                                                                    'than '
+                                                                                    'uberX '
+                                                                                    'in '
+                                                                                    'Los '
+                                                                                    'Angeles',
+                                                                     'type': 'string'},
+                                                      'surge_multiplier': {'description': 'Expected '
+                                                                                          'surge '
+                                                                                          'multiplier. '
+                                                                                          'Surge '
+                                                                                          'is '
+                                                                                          'active '
+                                                                                          'if '
+                                                                                          'surge_multiplier '
+                                                                                          'is '
+                                                                                          'greater '
+                                                                                          'than '
+                                                                                          '1. '
+                                                                                          'Price '
+                                                                                          'estimate '
+                                                                                          'already '
+                                                                                          'factors '
+                                                                                          'in '
+                                                                                          'the '
+                                                                                          'surge '
+                                                                                          'multiplier.',
+                                                                           'type': 'number'}},
+                                       'type': 'object'},
+                     'Product': {'properties': {'capacity': {'description': 'Capacity '
+                                                                            'of '
+                                                                            'product. '
+                                                                            'For '
+                                                                            'example, '
+                                                                            '4 '
+                                                                            'people.',
+                                                             'type': 'string'},
+                                                'description': {'description': 'Description '
+                                                                               'of '
+                                                                               'product.',
+                                                                'type': 'string'},
+                                                'display_name': {'description': 'Display '
+                                                                                'name '
+                                                                                'of '
+                                                                                'product.',
+                                                                 'type': 'string'},
+                                                'image': {'description': 'Image '
+                                                                         'URL '
+                                                                         'representing '
+                                                                         'the '
+                                                                         'product.',
+                                                          'type': 'string'},
+                                                'product_id': {'description': 'Unique '
+                                                                              'identifier '
+                                                                              'representing '
+                                                                              'a '
+                                                                              'specific '
+                                                                              'product '
+                                                                              'for '
+                                                                              'a '
+                                                                              'given '
+                                                                              'latitude '
+                                                                              '& '
+                                                                              'longitude. '
+                                                                              'For '
+                                                                              'example, '
+                                                                              'uberX '
+                                                                              'in '
+                                                                              'San '
+                                                                              'Francisco '
+                                                                              'will '
+                                                                              'have '
+                                                                              'a '
+                                                                              'different '
+                                                                              'product_id '
+                                                                              'than '
+                                                                              'uberX '
+                                                                              'in '
+                                                                              'Los '
+                                                                              'Angeles.',
+                                                               'type': 'string'}},
+                                 'type': 'object'},
+                     'Profile': {'properties': {'email': {'description': 'Email '
+                                                                         'address '
+                                                                         'of '
+                                                                         'the '
+                                                                         'Uber '
+                                                                         'user',
+                                                          'type': 'string'},
+                                                'first_name': {'description': 'First '
+                                                                              'name '
+                                                                              'of '
+                                                                              'the '
+                                                                              'Uber '
+                                                                              'user.',
+                                                               'type': 'string'},
+                                                'last_name': {'description': 'Last '
+                                                                             'name '
+                                                                             'of '
+                                                                             'the '
+                                                                             'Uber '
+                                                                             'user.',
+                                                              'type': 'string'},
+                                                'picture': {'description': 'Image '
+                                                                           'URL '
+                                                                           'of '
+                                                                           'the '
+                                                                           'Uber '
+                                                                           'user.',
+                                                            'type': 'string'},
+                                                'promo_code': {'description': 'Promo '
+                                                                              'code '
+                                                                              'of '
+                                                                              'the '
+                                                                              'Uber '
+                                                                              'user.',
+                                                               'type': 'string'}},
+                                 'type': 'object'}},
+     'host': 'api.uber.com',
+     'info': {'description': 'Move your app forward with the Uber API',
+              'title': 'Uber API',
+              'version': '1.0.0'},
+     'paths': {'/estimates/price': {'get': {'description': 'The Price '
+                                                           'Estimates '
+                                                           'endpoint '
+                                                           'returns an '
+                                                           'estimated '
+                                                           'price range\n'
+                                                           'for each '
+                                                           'product '
+                                                           'offered at a '
+                                                           'given '
+                                                           'location. The '
+                                                           'price estimate '
+                                                           'is\n'
+                                                           'provided as a '
+                                                           'formatted '
+                                                           'string with '
+                                                           'the full price '
+                                                           'range and the '
+                                                           'localized\n'
+                                                           'currency '
+                                                           'symbol.<br><br>The '
+                                                           'response also '
+                                                           'includes low '
+                                                           'and high '
+                                                           'estimates,\n'
+                                                           'and the [ISO '
+                                                           '4217](http://en.wikipedia.org/wiki/ISO_4217) '
+                                                           'currency code '
+                                                           'for\n'
+                                                           'situations '
+                                                           'requiring '
+                                                           'currency '
+                                                           'conversion. '
+                                                           'When surge is '
+                                                           'active for a '
+                                                           'particular\n'
+                                                           'product, its '
+                                                           'surge_multiplier '
+                                                           'will be '
+                                                           'greater than '
+                                                           '1, but the '
+                                                           'price '
+                                                           'estimate\n'
+                                                           'already '
+                                                           'factors in '
+                                                           'this '
+                                                           'multiplier.\n',
+                                            'parameters': [{'description': 'Latitude '
+                                                                           'component '
+                                                                           'of '
+                                                                           'start '
+                                                                           'location.',
+                                                            'format': 'double',
+                                                            'in': 'query',
+                                                            'name': 'start_latitude',
+                                                            'required': True,
+                                                            'type': 'number'},
+                                                           {'description': 'Longitude '
+                                                                           'component '
+                                                                           'of '
+                                                                           'start '
+                                                                           'location.',
+                                                            'format': 'double',
+                                                            'in': 'query',
+                                                            'name': 'start_longitude',
+                                                            'required': True,
+                                                            'type': 'number'},
+                                                           {'description': 'Latitude '
+                                                                           'component '
+                                                                           'of '
+                                                                           'end '
+                                                                           'location.',
+                                                            'format': 'double',
+                                                            'in': 'query',
+                                                            'name': 'end_latitude',
+                                                            'required': True,
+                                                            'type': 'number'},
+                                                           {'description': 'Longitude '
+                                                                           'component '
+                                                                           'of '
+                                                                           'end '
+                                                                           'location.',
+                                                            'format': 'double',
+                                                            'in': 'query',
+                                                            'name': 'end_longitude',
+                                                            'required': True,
+                                                            'type': 'number'}],
+                                            'responses': {'200': {'description': 'An '
+                                                                                 'array '
+                                                                                 'of '
+                                                                                 'price '
+                                                                                 'estimates '
+                                                                                 'by '
+                                                                                 'product',
+                                                                  'schema': {'items': {'$ref': '#/definitions/PriceEstimate'},
+                                                                             'type': 'array'}},
+                                                          'default': {'description': 'Unexpected '
+                                                                                     'error',
+                                                                      'schema': {'$ref': '#/definitions/Error'}}},
+                                            'summary': 'Price Estimates',
+                                            'tags': ['Estimates']}},
+               '/estimates/time': {'get': {'description': 'The Time '
+                                                          'Estimates '
+                                                          'endpoint '
+                                                          'returns ETAs '
+                                                          'for all '
+                                                          'products '
+                                                          'offered at a '
+                                                          'given location, '
+                                                          'with the '
+                                                          'responses '
+                                                          'expressed as '
+                                                          'integers in '
+                                                          'seconds. We '
+                                                          'recommend that '
+                                                          'this endpoint '
+                                                          'be called every '
+                                                          'minute to '
+                                                          'provide the '
+                                                          'most accurate, '
+                                                          'up-to-date '
+                                                          'ETAs.',
+                                           'parameters': [{'description': 'Latitude '
+                                                                          'component '
+                                                                          'of '
+                                                                          'start '
+                                                                          'location.',
+                                                           'format': 'double',
+                                                           'in': 'query',
+                                                           'name': 'start_latitude',
+                                                           'required': True,
+                                                           'type': 'number'},
+                                                          {'description': 'Longitude '
+                                                                          'component '
+                                                                          'of '
+                                                                          'start '
+                                                                          'location.',
+                                                           'format': 'double',
+                                                           'in': 'query',
+                                                           'name': 'start_longitude',
+                                                           'required': True,
+                                                           'type': 'number'},
+                                                          {'description': 'Unique '
+                                                                          'customer '
+                                                                          'identifier '
+                                                                          'to '
+                                                                          'be '
+                                                                          'used '
+                                                                          'for '
+                                                                          'experience '
+                                                                          'customization.',
+                                                           'format': 'uuid',
+                                                           'in': 'query',
+                                                           'name': 'customer_uuid',
+                                                           'type': 'string'},
+                                                          {'description': 'Unique '
+                                                                          'identifier '
+                                                                          'representing '
+                                                                          'a '
+                                                                          'specific '
+                                                                          'product '
+                                                                          'for '
+                                                                          'a '
+                                                                          'given '
+                                                                          'latitude '
+                                                                          '& '
+                                                                          'longitude.',
+                                                           'in': 'query',
+                                                           'name': 'product_id',
+                                                           'type': 'string'}],
+                                           'responses': {'200': {'description': 'An '
+                                                                                'array '
+                                                                                'of '
+                                                                                'products',
+                                                                 'schema': {'items': {'$ref': '#/definitions/Product'},
+                                                                            'type': 'array'}},
+                                                         'default': {'description': 'Unexpected '
+                                                                                    'error',
+                                                                     'schema': {'$ref': '#/definitions/Error'}}},
+                                           'summary': 'Time Estimates',
+                                           'tags': ['Estimates']}},
+               '/history': {'get': {'description': 'The User Activity '
+                                                   'endpoint returns data '
+                                                   "about a user's "
+                                                   'lifetime activity with '
+                                                   'Uber. The response '
+                                                   'will include pickup '
+                                                   'locations and times, '
+                                                   'dropoff locations and '
+                                                   'times, the distance of '
+                                                   'past requests, and '
+                                                   'information about '
+                                                   'which products were '
+                                                   'requested.<br><br>The '
+                                                   'history array in the '
+                                                   'response will have a '
+                                                   'maximum length based '
+                                                   'on the limit '
+                                                   'parameter. The '
+                                                   'response value count '
+                                                   'may exceed limit, '
+                                                   'therefore subsequent '
+                                                   'API requests may be '
+                                                   'necessary.',
+                                    'parameters': [{'description': 'Offset '
+                                                                   'the '
+                                                                   'list '
+                                                                   'of '
+                                                                   'returned '
+                                                                   'results '
+                                                                   'by '
+                                                                   'this '
+                                                                   'amount. '
+                                                                   'Default '
+                                                                   'is '
+                                                                   'zero.',
+                                                    'format': 'int32',
+                                                    'in': 'query',
+                                                    'name': 'offset',
+                                                    'type': 'integer'},
+                                                   {'description': 'Number '
+                                                                   'of '
+                                                                   'items '
+                                                                   'to '
+                                                                   'retrieve. '
+                                                                   'Default '
+                                                                   'is 5, '
+                                                                   'maximum '
+                                                                   'is '
+                                                                   '100.',
+                                                    'format': 'int32',
+                                                    'in': 'query',
+                                                    'name': 'limit',
+                                                    'type': 'integer'}],
+                                    'responses': {'200': {'description': 'History '
+                                                                         'information '
+                                                                         'for '
+                                                                         'the '
+                                                                         'given '
+                                                                         'user',
+                                                          'schema': {'$ref': '#/definitions/Activities'}},
+                                                  'default': {'description': 'Unexpected '
+                                                                             'error',
+                                                              'schema': {'$ref': '#/definitions/Error'}}},
+                                    'summary': 'User Activity',
+                                    'tags': ['User']}},
+               '/me': {'get': {'description': 'The User Profile endpoint '
+                                              'returns information about '
+                                              'the Uber user that has '
+                                              'authorized with the '
+                                              'application.',
+                               'responses': {'200': {'description': 'Profile '
+                                                                    'information '
+                                                                    'for a '
+                                                                    'user',
+                                                     'schema': {'$ref': '#/definitions/Profile'}},
+                                             'default': {'description': 'Unexpected '
+                                                                        'error',
+                                                         'schema': {'$ref': '#/definitions/Error'}}},
+                               'summary': 'User Profile',
+                               'tags': ['User']}},
+               '/products': {'get': {'description': 'The Products endpoint '
+                                                    'returns information '
+                                                    'about the *Uber* '
+                                                    'products\n'
+                                                    'offered at a given '
+                                                    'location. The '
+                                                    'response includes the '
+                                                    'display name\n'
+                                                    'and other details '
+                                                    'about each product, '
+                                                    'and lists the '
+                                                    'products in the\n'
+                                                    'proper display '
+                                                    'order.\n',
+                                     'parameters': [{'description': 'Latitude '
+                                                                    'component '
+                                                                    'of '
+                                                                    'location.',
+                                                     'format': 'double',
+                                                     'in': 'query',
+                                                     'name': 'latitude',
+                                                     'required': True,
+                                                     'type': 'number'},
+                                                    {'description': 'Longitude '
+                                                                    'component '
+                                                                    'of '
+                                                                    'location.',
+                                                     'format': 'double',
+                                                     'in': 'query',
+                                                     'name': 'longitude',
+                                                     'required': True,
+                                                     'type': 'number'}],
+                                     'responses': {'200': {'description': 'An '
+                                                                          'array '
+                                                                          'of '
+                                                                          'products',
+                                                           'schema': {'items': {'$ref': '#/definitions/Product'},
+                                                                      'type': 'array'}},
+                                                   'default': {'description': 'Unexpected '
+                                                                              'error',
+                                                               'schema': {'$ref': '#/definitions/Error'}}},
+                                     'summary': 'Product Types',
+                                     'tags': ['Products']}}},
+     'produces': ['application/json'],
+     'schemes': ['https']}
