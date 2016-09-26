@@ -22,6 +22,7 @@ def do_loop():
             logger.info("sleep 3")
             yield from asyncio.sleep(3)
         else:
+            logger.info("sleep 1")
             yield from asyncio.sleep(1)
 
 if __name__ == "__main__":
