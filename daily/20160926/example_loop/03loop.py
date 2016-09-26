@@ -1,3 +1,4 @@
+import subprocess
 import random
 import asyncio
 import signal
@@ -71,6 +72,15 @@ async def action(i, uid="(uid)"):
     logger.info("end uid=%s, i=%d", uid, i)
     return i + 1
 
+async def ls(i, uid="(uid)"):
+    wait = random.random() * 3.0
+    logger.info("start uid=%s, i=%d, wait=%f", uid, i, wait)
+    p = await asyncio.create_subprocess_exec("ls", stdout=subprocess.PIPE)
+    logger.info(await p.stdout.read())
+    await asyncio.sleep(wait)
+    logger.info("end uid=%s, i=%d", uid, i)
+    return i + 1
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format="%(levelname)s\t%(asctime)s\t%(message)s")
@@ -82,6 +92,7 @@ if __name__ == "__main__":
     supervisor.register(partial(action, uid="C"), 1)
     supervisor.register(partial(action, uid="D"), 1)
     supervisor.register(partial(action, uid="E"), 1)
+    supervisor.register(partial(ls, uid="E"), 1)
 
     supervisor.setup([signal.SIGINT])
     loop.run_until_complete(supervisor.run_loop())
