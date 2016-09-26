@@ -64,6 +64,12 @@ $ open http://localhost:4444
 https://gist.githubusercontent.com/podhmo/e045502fd42311376b6f2ee050b79168/raw/52c962a74bbbb479b7e2b3b2a151e3adacc16d15/swagger.yaml
 ```
 
+## swaggerを手元で動かす2
+
+手元で頑張るより公開されているイメージを使ったほうが楽。
+
+- [Dockerを使ってswagger.yamlをサクッとみる - Qiita](http://qiita.com/NewGyu/items/08589572875467de5a1b)
+
 ## docker-compose reference
 
 - [Docker Compose - docker-compose.yml リファレンス - Qiita](http://qiita.com/zembutsu/items/9e9d80e05e36e882caaa)
