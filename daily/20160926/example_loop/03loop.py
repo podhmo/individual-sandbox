@@ -73,11 +73,10 @@ async def action(i, uid="(uid)"):
     return i + 1
 
 async def ls(i, uid="(uid)"):
-    wait = random.random() * 3.0
-    logger.info("start uid=%s, i=%d, wait=%f", uid, i, wait)
-    p = await asyncio.create_subprocess_exec("ls", stdout=subprocess.PIPE)
+    logger.info("start ls uid=%s, i=%d, wait=%f", uid, i, 2)
+    p = await asyncio.create_subprocess_shell("sleep 2 && ls", stdout=subprocess.PIPE)
     logger.info(await p.stdout.read())
-    await asyncio.sleep(wait)
+    await p.wait()
     logger.info("end uid=%s, i=%d", uid, i)
     return i + 1
 
