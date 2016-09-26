@@ -22,10 +22,9 @@ class Supervisor:
         for s in signums:
             signal.signal(s, self.on_interrupt)
 
-    @asyncio.coroutine
-    def teardown(self):
+    async def teardown(self):
         logger.info("graceful stop")
-        yield from asyncio.gather(*self.async_tasks)
+        await asyncio.gather(*self.async_tasks)
 
     def on_finished(self):
         logger.info("finished")
@@ -57,27 +56,20 @@ class Supervisor:
         item = Item(coro_fn=coro_fn, step=step, value=value)
         self.q.put_nowait(item)
 
-    @asyncio.coroutine
-    def run_loop(self, loop=None):
+    async def run_loop(self, loop=None):
         self.is_running = True
         while self.is_running:
-            item = yield from self.q.get()
+            item = await self.q.get()
             self.consume(item)
-        yield from self.teardown()
+        await self.teardown()
 
 
-@asyncio.coroutine
-def action(i, uid="(uid)"):
+async def action(i, uid="(uid)"):
     wait = random.random() * 3.0
     logger.info("start uid=%s, i=%d, wait=%f", uid, i, wait)
-    yield from asyncio.sleep(wait)
+    await asyncio.sleep(wait)
     logger.info("end uid=%s, i=%d", uid, i)
     return i + 1
-
-
-@asyncio.coroutine
-def do_loop(supervisor):
-    yield from supervisor.run_loop()
 
 
 if __name__ == "__main__":
@@ -92,4 +84,4 @@ if __name__ == "__main__":
     supervisor.register(partial(action, uid="E"), 1)
 
     supervisor.setup([signal.SIGINT])
-    loop.run_until_complete(do_loop(supervisor))
+    loop.run_until_complete(supervisor.run_loop())
