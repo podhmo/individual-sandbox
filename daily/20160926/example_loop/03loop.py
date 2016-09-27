@@ -95,3 +95,4 @@ if __name__ == "__main__":
 
     supervisor.setup([signal.SIGINT])
     loop.run_until_complete(supervisor.run_loop())
+    loop.close()

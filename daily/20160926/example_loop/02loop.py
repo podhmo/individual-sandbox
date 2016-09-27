@@ -57,3 +57,4 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format="%(levelname)s\t%(asctime)s\t%(message)s")
     loop = asyncio.get_event_loop()
     loop.run_until_complete(do_loop())
+    loop.close()
