@@ -1,3 +1,8 @@
+# python flaskをthreadingで立ち上げてテストする方法
+
+- daemon=Trueにしたりするのが重要
+- config["debug"] = Trueにしたりするとマズイ。
+
 # python
 
 以下まとめておきたい
