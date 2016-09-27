@@ -1,3 +1,11 @@
+# python
+
+以下まとめておきたい
+
+- 全テストの開始前と全テストが終了後に呼ぶ処理を付加する方法(setUpModuleなどよりも広いスコープ)
+- requestsでしばらくsleepしつつretryする簡易的な書き方
+- REST APIについてのrequestsの呼び方
+
 # python subprocessを実行したpythonで呼ぶ。
 
 以下ではまずいはず。
