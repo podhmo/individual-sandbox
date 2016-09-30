@@ -9,3 +9,11 @@
 
 結局、ensure_future + futureのset_resultをawaitするみたいになった。
 callback hellをやっつけられない。
+
+# python moduleに `from xxx import *` する方法どうするのだっけ？
+
+```
+D = {"a": "b"}
+globals().update(D)
+print(a)  # => "b"
+```
