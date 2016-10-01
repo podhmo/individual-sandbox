@@ -4,6 +4,10 @@
 
 - [Tornado Web Server — Tornado 4.4.2 documentation](http://www.tornadoweb.org/en/stable/)
 
+tornadoのtcpechoのclientとserverをasyncioで書き直してみる？
+そういえば、TCPのserver,clientをasyncioで作ったことあったっけ？
+
+
 # python 文字列リテラル
 
 こういう描き方することある。xの方はコメントが書けて便利
