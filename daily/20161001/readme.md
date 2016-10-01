@@ -1,4 +1,22 @@
+# python 物理的なファイル名を指定してimport
+
+いつからだったかすごい楽になった記憶がある。
+
+```
+from importlib import machinery
+module = machinery.SourceFileLoader(module_id, path)
+```
+
 # python tornado + connexion = non blocking?
+
+やり方自体はここに書いてある。ただし効果がわからない。 => 結論としてはtornado上でWSGIアプリを動かしているだけなので不要。
+
+- [Quickstart — Connexion 0.5 documentation](http://connexion.readthedocs.io/en/latest/quickstart.html?highlight=tornado#server-backend)
+
+```python
+import connexion
+connexion.App(<>, server="tornado")
+```
 
 ## まず tornadoの入門しないとダメ
 
@@ -7,6 +25,15 @@
 tornadoのtcpechoのclientとserverをasyncioで書き直してみる？
 そういえば、TCPのserver,clientをasyncioで作ったことあったっけ？
 
+# websocket
+
+そう言えば、細かなprotocol理解していない。以下のようなイベントがあるイメージ
+
+- on_open
+- on_message
+- on_close
+
+そしてwrite_messageで書き込める。
 
 # python 文字列リテラル
 
