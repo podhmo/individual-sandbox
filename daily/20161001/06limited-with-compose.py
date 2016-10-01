@@ -2,17 +2,11 @@
 
 """
 
-WIP
-
-
 numbers = [0, 1, 2, 3, 4]
 taskA = 2s (limit = 3)
 taskB = 1s (limit = 3)
 
 total: 5s
-
-final version::
-(find-file "../../20161001/06limited-with-compose.py")
 """
 
 import asyncio
@@ -48,28 +42,20 @@ async def do_limitted_task_b(i):
         return await do_task_b(i)
 
 
+async def do_task(i):
+    j = await do_limitted_task_a(i)
+    return await do_limitted_task_b(j)
+
+
 async def do_loop():
     nums = range(5)
-    finished = []
-    f = loop.create_future()
-
-    def consume_a(i):
-        fut = asyncio.ensure_future(do_limitted_task_a(i))
-        fut.add_done_callback(consume_b)
-
-    def consume_b(_fut):
-        j = _fut.result()
-        fut = asyncio.ensure_future(do_limitted_task_b(j))
-        fut.add_done_callback(finish)
-
-    def finish(_fut):
-        finished.append(_fut.result())
-        if len(finished) == 5:
-            f.set_result(finished)
-
+    futs = []
     for i in nums:
-        consume_a(i)
-    await f
+        futs.append(asyncio.ensure_future(do_task(i)))
+
+    results, pendings = await asyncio.wait(futs)
+    for fut in results:
+        print(fut.result())
 
 
 if __name__ == "__main__":
