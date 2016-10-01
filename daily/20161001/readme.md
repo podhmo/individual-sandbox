@@ -1,6 +1,55 @@
+# python
+
+# python 文字列リテラル
+
+こういう描き方することある。xの方はコメントが書けて便利
+
+```python
+x = (
+    "foo"  # hmm
+    "bar"  # yyy
+    "boo"
+)
+y = """\
+- foo
+- bar
+- boo"""
+```
+
 # python asyncio 続き
 
 以前のやつマシにする方法がわかったかも。[こちら](../20160929/example_asyncio/)の続き。
+
+## qiitaにasyncioの便利な記事あったっけ？
+
+実質これだけっぽい。
+
+- [Pythonにおける非同期処理: asyncio逆引きリファレンス - Qiita](http://qiita.com/icoxfog417/items/07cbf5110ca82629aca0)
+
+### 細かなtips
+
+- [ズンドコキヨシ with asyncio - Qiita](http://qiita.com/sharow/items/873cd32fa28f1334bce5)
+
+```python
+import asyncio
+from collections import deque
+from contextlib import closing
+
+dq = deque(maxlen=5)  # maxlen以上の場合は先端が切り捨てられる
+with closing(asyncio.get_event_loop()) as loop:
+    loop.run_until_complete(do_loop())
+```
+
+### 得るところなし
+
+個人的にはということだし。asyncioについてという目で見た場合の話。
+
+- [Python3.6の新機能 - Qiita](http://qiita.com/ksato9700/items/ed839a6db6a671fd31e6)
+- [Python3.0からPython3.5での変更点 - Qiita](http://qiita.com/CS_Toku/items/32028e65a8bfa97266d6)
+- [Python3.5のasync/awaitを使ってスクレイピング - Qiita](http://qiita.com/yasunori/items/03229bfa161e6dc2ea61)
+- [Python3.5から導入されるasyncとawaitでコルーチンを扱う - Qiita](http://qiita.com/Lspeciosum/items/98e05c7495369ab9d102)
+- [Python3.5で実装されたasync/awaitを使って軽量スレッドの性能ベンチマーク - Qiita](http://qiita.com/haminiku/items/0aaf87e9a52ed41b60a7)
+
 
 # python anaconda のこと
 
