@@ -1,4 +1,8 @@
-# python
+# python tornado + connexion = non blocking?
+
+## まず tornadoの入門しないとダメ
+
+- [Tornado Web Server — Tornado 4.4.2 documentation](http://www.tornadoweb.org/en/stable/)
 
 # python 文字列リテラル
 
