@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
+
+
 def f(x, y, z):
     """f :: x + y"""
     # dummy computation
