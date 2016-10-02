@@ -29,20 +29,17 @@ def main():
 
 
 if __name__ == "__main__":
-    import sys
-    import contextlib
-    from io import StringIO
-    import autopep8
-
-    @contextlib.contextmanager
-    def wrap_stdout():
+    def wrap_by(fn, *args, **kwargs):
         try:
-            original = sys.stdout
-            out = sys.stdout = StringIO()
-            yield out
+            import sys
+            from io import StringIO
+            sys.stdout, original = StringIO(), sys.stdout
+            result = fn(*args, **kwargs)
         finally:
+            print(sys.stdout.getvalue())
             sys.stdout = original
-    with wrap_stdout() as out:
-        code = main()
-        print(autopep8.fix_code(code))
-    print(out.getvalue())
+        return result
+
+    import autopep8
+    code = wrap_by(main)
+    print(autopep8.fix_code(code))
