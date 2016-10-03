@@ -498,7 +498,7 @@ func pattern2(si *StateInitializer) {
 	ws.yID = "yId@"
 	ws.zID = "zId@"
 
-	// pattern 1
+	// pattern 2
 	if _, err := si.initTaskB1(ws); err != nil {
 		panic(err)
 	}

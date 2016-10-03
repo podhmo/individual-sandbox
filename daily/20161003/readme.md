@@ -7,3 +7,7 @@
 
 依存性自体は直接methodとして手書きになるのではないか？
 いっその事routerを定義すれば楽になるんだろうか？
+
+# go reflectionがよくわかっていない。
+
+むずかしい。 example_dynamic
