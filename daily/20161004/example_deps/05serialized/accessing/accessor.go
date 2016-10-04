@@ -30,6 +30,7 @@ type ExternalServiceAccessor interface {
 	CreateSkeletonByURL(url string, params map[string]string) (SkeletonResponse, error)
 	GetStatus(basePath string, jobID JobID) (StatusResponse, error)
 	GetStatusByURL(url string) (StatusResponse, error)
+	BuildGetStatusURL(basePath string, jobID JobID) string
 }
 
 // DummyAccessor is x
@@ -52,7 +53,7 @@ func (d *DummyAccessor) CreateSkeletonByURL(url string, params map[string]string
 
 // GetStatus is x
 func (d *DummyAccessor) GetStatus(basePath string, jobID JobID) (StatusResponse, error) {
-	url := path.Join(basePath, "status", string(jobID))
+	url := d.BuildGetStatusURL(basePath, jobID)
 	return d.GetStatusByURL(url)
 }
 
@@ -61,4 +62,9 @@ func (d *DummyAccessor) GetStatusByURL(url string) (StatusResponse, error) {
 	log.Printf("Get: %s", url)
 	var response StatusResponse // TODO implement
 	return response, nil
+}
+
+// BuildGetStatusURL is x
+func (d *DummyAccessor) BuildGetStatusURL(basePath string, jobID JobID) string {
+	return path.Join(basePath, "status", string(jobID))
 }

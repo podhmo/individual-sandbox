@@ -6,3 +6,8 @@
 - foo/xxx.go
 
 main.goの中で `.foo` でimport
+
+# go 依存したタスクの協調的な操作(昨日の続き)
+
+- [昨日の作業](../20161003/example_objectid/) の続き
+

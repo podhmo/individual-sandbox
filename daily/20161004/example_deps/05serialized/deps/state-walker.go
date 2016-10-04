@@ -5,7 +5,6 @@ import (
 	"../idgen"
 	"fmt"
 	"log"
-	"path"
 	"reflect"
 )
 
@@ -71,7 +70,7 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 		Status:        Waiting,
 		Params:        params,
 		EndNode:       spec.EndNode,
-		StatusAPIPath: Endpoint(path.Join(spec.BasePath, "status", string(jobID))),
+		StatusAPIPath: Endpoint(sw.accessor.BuildGetStatusURL(spec.BasePath, jobID)),
 	}
 	ws.States[serviceName] = state
 	return jobID, be.Error()
