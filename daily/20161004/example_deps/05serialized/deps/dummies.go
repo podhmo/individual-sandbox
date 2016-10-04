@@ -1,14 +1,17 @@
 package deps
 
+import (
+	"../accessing"
+	"../idgen"
+)
 
 // NewDummyStateWalker is x
 func NewDummyStateWalker(settings *ServiceSettings) *StateWalker {
-	dummyAccessor := DummyAccessor{}
+	dummyAccessor := accessing.DummyAccessor{}
 	sw := StateWalker{
 		Settings: settings,
-		gen:      NewOnMemoryObjectIDGenerator(),
+		gen:      idgen.NewOnMemoryObjectIDGenerator(),
 		accessor: &dummyAccessor,
 	}
 	return &sw
 }
-

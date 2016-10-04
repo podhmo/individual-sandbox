@@ -1,6 +1,8 @@
 package deps
 
 import (
+	"../accessing"
+	"../idgen"
 	"fmt"
 	"log"
 	"path"
@@ -9,8 +11,8 @@ import (
 
 // StateWalker is x
 type StateWalker struct {
-	gen      ObjectIDGenerator
-	accessor ExternalServiceAccessor
+	gen      idgen.ObjectIDGenerator
+	accessor accessing.ExternalServiceAccessor
 	Settings *ServiceSettings
 }
 
@@ -22,7 +24,7 @@ func (sw *StateWalker) GetSpec(key string) (ServiceSpec, bool) {
 }
 
 // WalkSpec is x
-func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeState) (JobID, error) {
+func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeState) (accessing.JobID, error) {
 	state, ok := ws.States[serviceName]
 	if ok {
 		return state.JobID, nil
@@ -56,7 +58,7 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 		params[name] = string(jobID)
 	}
 
-	jobID := JobID(sw.gen.ObjectID(serviceName))
+	jobID := accessing.JobID(sw.gen.ObjectID(serviceName))
 
 	// post data to external service
 	response, err := sw.accessor.CreateSkeleton(spec.BasePath, jobID, params)

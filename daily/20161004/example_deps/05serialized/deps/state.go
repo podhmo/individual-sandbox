@@ -1,10 +1,11 @@
 package deps
 
+import (
+	"../accessing"
+)
+
 // Status is x
 type Status int
-
-// JobID is x
-type JobID ObjectID
 
 const (
 	Waiting Status = iota
@@ -17,7 +18,7 @@ const (
 
 // State is x
 type State struct {
-	JobID         JobID
+	JobID         accessing.JobID
 	Params        map[string]string // xxx
 	Status        Status
 	EndNode       bool

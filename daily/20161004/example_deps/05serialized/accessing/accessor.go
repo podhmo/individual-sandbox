@@ -1,9 +1,13 @@
-package deps
+package accessing
 
 import (
+	"../idgen"
 	"log"
 	"path"
 )
+
+// JobID is x
+type JobID idgen.ObjectID
 
 /**
 
