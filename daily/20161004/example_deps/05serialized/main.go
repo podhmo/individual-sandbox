@@ -23,6 +23,13 @@ func main() {
 		panic(err)
 	}
 	log.Printf("%#v\n", ws)
+	log.Println("check sentinel status")
+
+	alldone, err := sw.FetchSentinelStatus(ws)
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("alldone=%s %#v\n", alldone, ws)
 }
 
 // Settings is x

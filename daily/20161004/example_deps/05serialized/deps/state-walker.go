@@ -3,6 +3,7 @@ package deps
 import (
 	"../accessing"
 	"../idgen"
+	"../status"
 	"fmt"
 	"log"
 	"reflect"
@@ -67,10 +68,10 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 	}
 	state = State{
 		JobID:         jobID,
-		Status:        Waiting,
+		Status:        status.Waiting,
 		Params:        params,
 		EndNode:       spec.EndNode,
-		StatusAPIPath: Endpoint(sw.accessor.BuildGetStatusURL(spec.BasePath, jobID)),
+		StatusAPIPath: sw.accessor.BuildGetStatusURL(spec.BasePath, jobID),
 	}
 	ws.States[serviceName] = state
 	return jobID, be.Error()
@@ -92,4 +93,24 @@ func (sw *StateWalker) WalkByNames(ws *WholeState, required []string) error {
 	}
 	ws.sentinel = NewSentinelFromStates(ws.States)
 	return be.Error()
+}
+
+// FetchSentinelStatus is x
+func (sw *StateWalker) FetchSentinelStatus(ws *WholeState) (bool, error) {
+	alldone := true
+	for _, endpoint := range ws.sentinel.endpoints {
+		state, ok := ws.States[endpoint.Service]
+		if !ok {
+			log.Printf("check status %s is not found by service", endpoint.Service)
+		}
+		response, err := sw.accessor.GetStatusByURL(endpoint.URL)
+		if err != nil {
+			return false, err
+		}
+		if response.Status != status.Done {
+			alldone = false
+		}
+		state.Status = response.Status
+	}
+	return alldone, nil
 }

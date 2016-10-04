@@ -2,6 +2,7 @@ package accessing
 
 import (
 	"../idgen"
+	"../status"
 	"log"
 	"path"
 )
@@ -22,7 +23,9 @@ API examples
 type SkeletonResponse interface{}
 
 // StatusResponse is x
-type StatusResponse interface{}
+type StatusResponse struct {
+	Status status.Status
+}
 
 // ExternalServiceAccessor is a manager that accessing external service (e.g. taskA0)
 type ExternalServiceAccessor interface {
@@ -60,7 +63,7 @@ func (d *DummyAccessor) GetStatus(basePath string, jobID JobID) (StatusResponse,
 // GetStatusByURL is x
 func (d *DummyAccessor) GetStatusByURL(url string) (StatusResponse, error) {
 	log.Printf("Get: %s", url)
-	var response StatusResponse // TODO implement
+	response := StatusResponse{Status: status.Done}
 	return response, nil
 }
 
