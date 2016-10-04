@@ -1,0 +1,3 @@
+default:
+	go run *.go
+

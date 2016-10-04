@@ -93,9 +93,9 @@ type TaskB4ID ObjectID
 
 // Status is x
 type Status int
+
 // Endpoint is x
 type Endpoint string
-
 
 const (
 	Waiting Status = iota
@@ -108,17 +108,17 @@ const (
 
 // State is x
 type State struct {
-	JobID   ObjectID
-	Params  map[string]string // xxx
-	Status  Status
-	EndNode bool
-    StatusAPIPath Endpoint
+	JobID         ObjectID
+	Params        map[string]string // xxx
+	Status        Status
+	EndNode       bool
+	StatusAPIPath Endpoint
 }
 
 // WholeState is x
 type WholeState struct {
-	states  map[string]State
-    sentinel *Sentinel
+	states   map[string]State
+	sentinel *Sentinel
 	targetID TargetID
 	xID      XID
 	yID      YID
@@ -151,11 +151,11 @@ func (si *StateInitializer) initTaskA0(ws *WholeState) (TaskA0ID, error) {
 	params := make(map[string]string)
 	params["targetId"] = string(ws.targetID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska0/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska0/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA0ID(jobID), nil
@@ -176,11 +176,11 @@ func (si *StateInitializer) initTaskB0(ws *WholeState) (TaskB0ID, error) {
 	jobID := si.gen.ObjectID("taskB0")
 	params["taskA0Id"] = string(taskA0ID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: true,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb0/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       true,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb0/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskB0ID(jobID), nil
@@ -206,11 +206,11 @@ func (si *StateInitializer) initTaskA1(ws *WholeState) (TaskA1ID, error) {
 	params["targetId"] = string(targetID)
 	params["xId"] = string(xID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska1/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska1/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA1ID(jobID), nil
@@ -231,11 +231,11 @@ func (si *StateInitializer) initTaskB1(ws *WholeState) (TaskB1ID, error) {
 	params := make(map[string]string)
 	params["taskA1Id"] = string(taskA1ID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: true,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb1/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       true,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb1/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskB1ID(jobID), nil
@@ -256,11 +256,11 @@ func (si *StateInitializer) initTaskA2(ws *WholeState) (TaskA2ID, error) {
 	params := make(map[string]string)
 	params["yId"] = string(yID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska2/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska2/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA2ID(jobID), nil
@@ -281,11 +281,11 @@ func (si *StateInitializer) initTaskB2(ws *WholeState) (TaskB2ID, error) {
 	params := make(map[string]string)
 	params["taskA2Id"] = string(taskA2ID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: true,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb2/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       true,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb2/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskB2ID(jobID), nil
@@ -316,11 +316,11 @@ func (si *StateInitializer) initTaskA3(ws *WholeState) (TaskA3ID, error) {
 	params["yId"] = string(yID)
 	params["zId"] = string(zID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: true,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska3/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       true,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska3/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA3ID(jobID), nil
@@ -340,11 +340,11 @@ func (si *StateInitializer) initTaskA4(ws *WholeState) (TaskA4ID, error) {
 	params := make(map[string]string)
 	params["xId"] = string(xID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska4/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska4/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA4ID(jobID), nil
@@ -364,11 +364,11 @@ func (si *StateInitializer) initTaskA5(ws *WholeState) (TaskA5ID, error) {
 	params := make(map[string]string)
 	params["yId"] = string(yID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska5/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taska5/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskA5ID(jobID), nil
@@ -395,11 +395,11 @@ func (si *StateInitializer) initTaskB3(ws *WholeState) (TaskB3ID, error) {
 	params["taskA5ID"] = string(taskA5ID)
 
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: true,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb3/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       true,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb3/status/%s", jobID)),
 	}
 	ws.states[k] = state
 	return TaskB3ID(jobID), nil
@@ -431,38 +431,37 @@ func (si *StateInitializer) initTaskB4(ws *WholeState) (TaskB4ID, error) {
 	params["taskA1ID"] = string(taskA1ID)
 	params["taskA2ID"] = string(taskA2ID)
 	state = State{
-		JobID:   jobID,
-		Status:  Waiting,
-		Params:  params,
-		EndNode: false,
-        StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb4/status/%s", jobID)),
+		JobID:         jobID,
+		Status:        Waiting,
+		Params:        params,
+		EndNode:       false,
+		StatusAPIPath: Endpoint(fmt.Sprintf("/api/taskb4/status/%s", jobID)),
 	}
 	ws.states["taskB4"] = state
 	return TaskB4ID(jobID), nil
 }
 
-
 // Sentinel is x
 type Sentinel struct {
-    endpoints []Endpoint
+	endpoints []Endpoint
 }
 
 // NewSentinel is x
-func NewSentinel() *Sentinel{
-    endpoints := []Endpoint{}
-    sentinel := Sentinel{endpoints: endpoints}
-    return &sentinel
+func NewSentinel() *Sentinel {
+	endpoints := []Endpoint{}
+	sentinel := Sentinel{endpoints: endpoints}
+	return &sentinel
 }
 
 // NewSentinelFromStates is x
 func NewSentinelFromStates(states map[string]State) *Sentinel {
-    sentinel := NewSentinel()
-    for _, s := range states {
-        if s.EndNode {
-            sentinel.endpoints = append(sentinel.endpoints, s.StatusAPIPath)
-        }
-    }
-    return sentinel
+	sentinel := NewSentinel()
+	for _, s := range states {
+		if s.EndNode {
+			sentinel.endpoints = append(sentinel.endpoints, s.StatusAPIPath)
+		}
+	}
+	return sentinel
 }
 
 func pattern1(si *StateInitializer) {
@@ -484,10 +483,10 @@ func pattern1(si *StateInitializer) {
 		panic(err)
 	}
 
-    sentinel := NewSentinelFromStates(ws.states)
-    fmt.Println("----------------------------------------")
+	sentinel := NewSentinelFromStates(ws.states)
+	fmt.Println("----------------------------------------")
 	fmt.Printf("%v\n", ws)
-    fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------")
 	fmt.Printf("sentinel %v\n", sentinel)
 }
 func pattern2(si *StateInitializer) {
@@ -509,10 +508,10 @@ func pattern2(si *StateInitializer) {
 		panic(err)
 	}
 
-    sentinel := NewSentinelFromStates(ws.states)
-    fmt.Println("----------------------------------------")
+	sentinel := NewSentinelFromStates(ws.states)
+	fmt.Println("----------------------------------------")
 	fmt.Printf("%v\n", ws)
-    fmt.Println("----------------------------------------")
+	fmt.Println("----------------------------------------")
 	fmt.Printf("sentinel %v\n", sentinel)
 }
 
@@ -520,23 +519,23 @@ func main() {
 	gen := NewOnMemoryObjectIDGenerator()
 	si := StateInitializer{gen: gen}
 
-    var wg sync.WaitGroup
-    wg.Add(4)
-    go func(){
-        pattern1(&si)
-        wg.Done()
-    }()
-    go func(){
-        pattern2(&si)
-        wg.Done()
-    }()
-    go func(){
-        pattern2(&si)
-        wg.Done()
-    }()
-    go func(){
-        pattern2(&si)
-        wg.Done()
-    }()
-    wg.Wait()
+	var wg sync.WaitGroup
+	wg.Add(4)
+	go func() {
+		pattern1(&si)
+		wg.Done()
+	}()
+	go func() {
+		pattern2(&si)
+		wg.Done()
+	}()
+	go func() {
+		pattern2(&si)
+		wg.Done()
+	}()
+	go func() {
+		pattern2(&si)
+		wg.Done()
+	}()
+	wg.Wait()
 }

@@ -139,7 +139,7 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 	if ok {
 		return state.JobID, nil
 	}
-    be := newBufError()
+	be := newBufError()
 	v := reflect.ValueOf(ws.Analysis).Elem()
 
 	params := make(map[string]string)
@@ -158,7 +158,7 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 	for _, name := range spec.ServiceDependencies {
 		spec, ok := sw.GetSpec(name)
 		if !ok {
-            be.WriteString(fmt.Sprintf("%s -> service %s is not found.\n", serviceName, name))
+			be.WriteString(fmt.Sprintf("%s -> service %s is not found.\n", serviceName, name))
 			continue
 		}
 		jobID, err := sw.WalkSpec(name, spec, ws)
@@ -182,7 +182,7 @@ func (sw *StateWalker) WalkSpec(serviceName string, spec ServiceSpec, ws *WholeS
 
 // WalkByNames is x
 func (sw *StateWalker) WalkByNames(ws *WholeState, required []string) error {
-    be := newBufError()
+	be := newBufError()
 	for _, name := range required {
 		spec, ok := sw.GetSpec(name)
 		if !ok {
@@ -199,22 +199,23 @@ func (sw *StateWalker) WalkByNames(ws *WholeState, required []string) error {
 }
 
 type bufError struct {
-    buf bytes.Buffer
+	buf bytes.Buffer
 }
+
 func (be *bufError) WriteString(s string) {
-    be.buf.WriteString(s)
+	be.buf.WriteString(s)
 }
 func (be *bufError) Error() error {
 	msg := be.buf.String()
 	if len(msg) > 0 {
 		return fmt.Errorf(msg)
 	}
-    return nil
+	return nil
 }
 func newBufError() *bufError {
 	var buf bytes.Buffer
-    be := bufError{buf: buf}
-    return &be
+	be := bufError{buf: buf}
+	return &be
 }
 
 func main() {
