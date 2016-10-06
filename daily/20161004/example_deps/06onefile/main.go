@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"path"
@@ -352,7 +353,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("alldone=%b %#v\n", alldone, ws)
+	log.Printf("alldone=%t %#v\n", alldone, ws)
+
+	buf, err := json.Marshal(Settings)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf(string(buf))
 }
 
 // Settings is x
