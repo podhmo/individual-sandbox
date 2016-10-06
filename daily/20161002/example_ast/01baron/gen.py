@@ -22,7 +22,6 @@ def update_funs(t0, t1):
 def main():
     with open("./funs.py") as rf:
         t0 = RedBaron(rf.read())
-
     with open("./newfuns.py") as rf:
         t1 = RedBaron(rf.read())
     return update_funs(t0, t1).dumps()
