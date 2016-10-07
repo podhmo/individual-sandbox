@@ -1,4 +1,22 @@
-# python additionalProperty trueなdictのもの
+# go go-mockを無理やり動かす
+
+後で例を書きたい。
+
+# go goimports使う
+
+```
+go get golang.org/x/tools/cmd/goimports
+```
+
+## emacs の設定
+
+```lisp
+(with-eval-after-load 'go-mode
+  (setq gofmt-command (if (executable-find "goimports") "goimports" "gofmt")))
+```
+# python additionalProperties trueなdictのもの
+
+jsonschemaはdefaultでtrue。ただし型の変換が無い。
 
 # go go-mockの使い方
 
