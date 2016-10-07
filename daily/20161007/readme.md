@@ -1,3 +1,25 @@
+# python additionalProperty trueなdictのもの
+
+# go go-mockの使い方
+
+```
+go get github.com/golang/mock/gomock
+go get github.com/golang/mock/mockgen
+
+mockgen -source=foo.go [other options]
+# or
+mockgen database/sql/driver Conn,Driver
+```
+
+go generateで使う方法がわかっていない。謎。
+
+## 循環のimportを避けて使う方法
+
+- package名を別の物にすることは可能
+- .でimport
+
+
+
 # go go-githubの仕組みを調べる
 
 - gists.go
