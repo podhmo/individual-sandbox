@@ -30,11 +30,11 @@ async def fetch(request):
 
 
 class RecQueue:
-    def __init__(self, cont):
+    def __init__(self, q):
         self.sc = 0
         self.rc = 0
         self.ec = 0
-        self.cont = cont
+        self.q = q
 
     def add(self, coro):
         self.sc += 1
@@ -46,25 +46,27 @@ class RecQueue:
     def done_callback(self, fut):
         self.ec += 1
         self.rc -= 1
-        coros = self.cont(fut.result())
-        if coros is None:
-            return
-
-        if not isinstance(coros, (list, tuple)):
-            coros = [coros]
-        for coro in coros:
-            self.add(coro)
+        self.q.put_nowait(fut.result())
 
     async def join(self):
         while not (self.sc == self.ec and self.rc == 0):
             await asyncio.sleep(0.2)
 
+
 async def do_loop(requests):
     dispatcher = lib.LimitterDispatcher(lambda request: request.domain, limit_count=2)
-    rq = RecQueue(lambda response: [dispatcher.dispatch(fetch, r) for r in response.get_links()])
+    q = asyncio.Queue()
+    rq = RecQueue(q)
     for request in requests:
         rq.add(dispatcher.dispatch(fetch, request))
+
     await rq.join()
+    while not q.empty():
+        response = await q.get()
+        for request in response.get_links():
+            rq.add(dispatcher.dispatch(fetch, request))
+        await rq.join()
+    print("yay", rq.ec)
 
 
 if __name__ == "__main__":
