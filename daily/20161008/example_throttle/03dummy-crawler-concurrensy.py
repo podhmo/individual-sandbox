@@ -22,7 +22,7 @@ class MockRequest:
 
 
 async def fetch(request):
-    d = 0.2 * random.random()
+    d = 0.2 # * random.random()
     logger.info("r start: %s args=%s, cost=%s", request.domain, request.args, d)
     await asyncio.sleep(d)
     logger.info("r end  : %s arg=%s", request.domain, request.args)
@@ -84,7 +84,7 @@ class Crawler:
 
 
 class Consumer:
-    def __init__(self, domain, limit=2):
+    def __init__(self, domain, limit=3):
         self.domain = domain
         self.semaphore = asyncio.Semaphore(limit)
 
@@ -135,10 +135,10 @@ if __name__ == "__main__":
 
     R = MockRequest
     requests = [
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
         R("http://sample.y.net/", 1),
         R("http://sample.y.net/", 2),
         R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
+        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
         R("http://sample.y.net/", 12),
         R("http://example.x.com/", 2),
         R("http://sample.y.net/", 3),
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     ]
     inq = asyncio.Queue()
     outq = asyncio.Queue()
-    crawler = Crawler(concurrency=12)
+    crawler = Crawler(concurrency=4)
 
     # # ticker
     # asyncio.ensure_future(tick(1))
