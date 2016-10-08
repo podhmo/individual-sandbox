@@ -43,10 +43,20 @@ class RecQueue:
         fut.add_done_callback(self.done_callback)
         return fut
 
+    async def get(self):
+        return await self.q.get()
+
+    def empty(self):
+        return self.q.empty()
+
     def done_callback(self, fut):
         self.ec += 1
         self.rc -= 1
-        self.q.put_nowait(fut.result())
+        try:
+            self.q.put_nowait(fut.result())
+        except Exception:
+            # retry ?
+            pass
 
     async def join(self):
         while not (self.sc == self.ec and self.rc == 0):
@@ -55,14 +65,13 @@ class RecQueue:
 
 async def do_loop(requests):
     dispatcher = lib.LimitterDispatcher(lambda request: request.domain, limit_count=2)
-    q = asyncio.Queue()
-    rq = RecQueue(q)
+    rq = RecQueue(asyncio.Queue())
     for request in requests:
         rq.add(dispatcher.dispatch(fetch, request))
 
     await rq.join()
-    while not q.empty():
-        response = await q.get()
+    while not rq.empty():
+        response = await rq.get()
         for request in response.get_links():
             rq.add(dispatcher.dispatch(fetch, request))
         await rq.join()
