@@ -39,3 +39,8 @@ requests = [
     R("http://otameshi.z.jp/", 1),
     R("http://example.x.com/", 3),
 ]
+
+
+def size(request):
+    return 1 + sum(map(size, request.get_links()))
+print(sum(map(size, requests)))

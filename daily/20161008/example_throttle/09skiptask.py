@@ -17,6 +17,7 @@ async def do_loop(requests):
         for request in response.get_links():
             rq.add(cacher(lambda request: dispatcher.dispatch(lib.mock_fetch, request), request))
         await rq.join()
+    print(vars(rq.q))
     print("yay", rq.ec)
 
 
