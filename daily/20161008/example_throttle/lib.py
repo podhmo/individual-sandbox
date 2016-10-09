@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 async def mock_fetch(request):
-    d = 0.2 * random.random()
+    d = 0.2 # * random.random()
     logger.info("R start: %s args=%s, cost=%s", request.domain, request.args, d)
     await asyncio.sleep(d)
     logger.info("R end  : %s arg=%s", request.domain, request.args)
@@ -210,3 +210,8 @@ class RecQueue:
         while not (self.sc == self.ec and self.rc == 0):
             await asyncio.sleep(0.2)
 
+    def empty(self):
+        return self.q.empty()
+
+    async def get(self):
+        return await self.q.get()

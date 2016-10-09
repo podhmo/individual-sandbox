@@ -10,7 +10,8 @@ def limited_fetch():
     dispatcher = lib.LimitterDispatcher(lambda request: request.domain, limit_count=3)
 
     def coro_fn(request):
-        return cacher(lambda request: dispatcher.dispatch(lib.mock_fetch, request), request)
+        return dispatcher.dispatch(lib.mock_fetch, request)
+        # return cacher(lambda request: dispatcher.dispatch(lib.mock_fetch, request), request)
     return coro_fn
 
 
