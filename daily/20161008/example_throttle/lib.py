@@ -1,9 +1,19 @@
 import time
 import asyncio
 import logging
+import random
 
 
 logger = logging.getLogger(__name__)
+
+
+async def mock_fetch(request):
+    d = 0.2 * random.random()
+    logger.info("R start: %s args=%s, cost=%s", request.domain, request.args, d)
+    await asyncio.sleep(d)
+    logger.info("R end  : %s arg=%s", request.domain, request.args)
+    response = request  # this is dummy, so...
+    return response
 
 
 class Cacher:
@@ -175,3 +185,28 @@ class Supervisor:
     def _dec_count(self, fut):
         self._running_futures -= 1
         self.end_count += 1
+
+
+class RecQueue:
+    def __init__(self, q):
+        self.sc = 0
+        self.rc = 0
+        self.ec = 0
+        self.q = q
+
+    def add(self, coro):
+        self.sc += 1
+        self.rc += 1
+        fut = asyncio.ensure_future(coro)
+        fut.add_done_callback(self.done_callback)
+        return fut
+
+    def done_callback(self, fut):
+        self.ec += 1
+        self.rc -= 1
+        self.q.put_nowait(fut.result())
+
+    async def join(self):
+        while not (self.sc == self.ec and self.rc == 0):
+            await asyncio.sleep(0.2)
+

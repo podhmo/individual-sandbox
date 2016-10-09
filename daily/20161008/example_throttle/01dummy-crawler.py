@@ -1,24 +1,9 @@
 import time
-import random
 import asyncio
 import logging
 
-
+import lib
 logger = logging.getLogger(__name__)
-
-
-class Request:
-    def __init__(self, domain, *args):
-        self.domain = domain
-        self.args = args
-        logger.info("r init: %s arg=%s", self.domain, self.args)
-
-
-async def fetch(request):
-    d = 1 * random.random()
-    logger.info("r start: %s args=%s, cost=%s", request.domain, request.args, d)
-    await asyncio.sleep(d)
-    logger.info("r end  : %s arg=%s", request.domain, request.args)
 
 
 class Dispatcher:
@@ -67,20 +52,10 @@ class Consumer:
 
 async def do_loop():
     dispatcher = Dispatcher()
-    requests = [
-        Request("x", 1),
-        Request("y", 1),
-        Request("y", 2),
-        Request("y", 11),
-        Request("y", 12),
-        Request("x", 2),
-        Request("y", 3),
-        Request("z", 1),
-        Request("x", 3),
-    ]
+    from mock_mini_requests import requests
     futs = []
     for request in requests:
-        fut = dispatcher.dispatch(request, fn=fetch)
+        fut = dispatcher.dispatch(request, fn=lib.mock_fetch)
         futs.append(fut)
 
     # まじめに再帰的に処理をするならasyncio.Queueなどが必要

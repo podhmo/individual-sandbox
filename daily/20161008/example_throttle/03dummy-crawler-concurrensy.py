@@ -1,32 +1,9 @@
 import time
-import random
 import asyncio
 import logging
 
-
+import lib
 logger = logging.getLogger(__name__)
-
-
-class MockRequest:
-    def __init__(self, domain, *args):
-        self.domain = domain
-        self.args = args
-        self.links = []
-
-    def add_link(self, request):
-        self.links.append(request)
-        return self
-
-    def get_links(self):
-        return self.links
-
-
-async def fetch(request):
-    d = 0.2 # * random.random()
-    logger.info("r start: %s args=%s, cost=%s", request.domain, request.args, d)
-    await asyncio.sleep(d)
-    logger.info("r end  : %s arg=%s", request.domain, request.args)
-    return request.get_links()
 
 
 async def tick(d):
@@ -113,7 +90,7 @@ class Consumer:
 
 
 async def do_loop(requests, inq, outq, crawler):
-    outq.put_nowait([crawler.crawl(req, fn=fetch) for req in requests])
+    outq.put_nowait([crawler.crawl(req, fn=lib.mock_fetch) for req in requests])
     while crawler.is_running():
         if not outq.empty():
             futs = await outq.get()
@@ -123,8 +100,8 @@ async def do_loop(requests, inq, outq, crawler):
                     inq.put_nowait(fut.result())
                 outq.put_nowait(not_finished)
         if not inq.empty():
-            returned_requests = await inq.get()
-            futs = [crawler.crawl(req, fn=fetch) for req in returned_requests]
+            returned_requests = (await inq.get()).get_links()
+            futs = [crawler.crawl(req, fn=lib.mock_fetch) for req in returned_requests]
             if futs:
                 outq.put_nowait(futs)
 
@@ -133,52 +110,13 @@ if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
     loop = asyncio.get_event_loop()
 
-    R = MockRequest
-    requests = [
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-    ]
     inq = asyncio.Queue()
     outq = asyncio.Queue()
     crawler = Crawler(concurrency=4)
 
     # # ticker
     # asyncio.ensure_future(tick(1))
-
+    from mock_long_requests import requests
     loop.run_until_complete(do_loop(requests, inq, outq, crawler))
     crawler.on_finished()
     loop.close()

@@ -2,46 +2,22 @@ import time
 import aiohttp
 import asyncio
 import logging
-from html.parser import HTMLParser
-from urllib.parse import urljoin, urldefrag, urlparse
-
 
 import lib
+import spiderlib
 logger = logging.getLogger(__name__)
-
-
-def remove_fragment(url):
-    pure_url, frag = urldefrag(url)
-    return pure_url
-
-
-class URLSeeker(HTMLParser):
-    def __init__(self):
-        HTMLParser.__init__(self)
-        self.urls = []
-
-    def handle_starttag(self, tag, attrs):
-        href = dict(attrs).get('href')
-        if href and tag == 'a':
-            self.urls.append(href)
-
-
-def get_links(html):
-    url_seeker = URLSeeker()
-    url_seeker.feed(html)
-    return url_seeker.urls
 
 
 async def do_loop(loop):
     cacher = lib.Cacher(lambda url: url)
-    dispatcher = lib.LimitterDispatcher(lambda url: urlparse(url).netloc, limit_count=2)
+    dispatcher = lib.LimitterDispatcher(lambda url: spiderlib.urlparse(url).netloc, limit_count=2)
 
     async with aiohttp.ClientSession(loop=loop) as session:
         async def fetch(url):
             with aiohttp.Timeout(10, loop=session.loop):
                 async with session.get(url) as response:
                     text = await response.text()
-                    urls = [urljoin(url, remove_fragment(new_url)) for new_url in get_links(text)]
+                    urls = [spiderlib.urljoin(url, spiderlib.remove_fragment(new_url)) for new_url in spiderlib.get_links(text)]
                     return url, urls
 
         async def consume(supervisor, pipe, i):

@@ -1,8 +1,8 @@
 import time
-import random
 import asyncio
 import logging
 
+import lib
 
 logger = logging.getLogger(__name__)
 
@@ -130,54 +130,9 @@ class Looping:
         self.end_count += 1
 
 
-class Pipe:
-    def __init__(self, inq, outq):
-        self.inq = inq
-        self.outq = outq
-
-    def reversed_pipe(self):
-        return self.__class__(self.outq, self.inq)
-
-    def empty(self):
-        return self.inq.empty() and self.outq.empty()
-
-    async def read(self):
-        return await self.inq.get()
-
-    def read_nowait(self):
-        return self.inq.get_nowait()
-
-    def write_nowait(self, data):
-        return self.outq.put_nowait(data)
-
-    async def write(self, data):
-        return await self.outq.put(data)
-
-
 if __name__ == "__main__":
     logging.basicConfig(format="%(asctime)s %(message)s", level=logging.DEBUG)
     loop = asyncio.get_event_loop()
-
-    class MockRequest:
-        def __init__(self, domain, *args):
-            self.domain = domain
-            self.args = args
-            self.links = []
-
-        def add_link(self, request):
-            self.links.append(request)
-            return self
-
-        def get_links(self):
-            return self.links
-
-    async def fetch(request):
-        d = 0.2 * random.random()
-        logger.info("R start: %s args=%s, cost=%s", request.domain, request.args, d)
-        await asyncio.sleep(d)
-        logger.info("R end  : %s arg=%s", request.domain, request.args)
-        response = request  # this is dummy, so...
-        return response
 
     def limittable_fetcher(same_origin_limit):
         dispatcher = Dispatcher(limit_count=same_origin_limit)
@@ -201,7 +156,7 @@ if __name__ == "__main__":
 
     async def consume(looping, pipe, i, request):
         logger.info("run consume: (%s)", i)
-        response = await looping.run_task(request.domain, fetch, request)
+        response = await looping.run_task(request.domain, lib.mock_fetch, request)
         pipe.write_nowait(response)
 
     async def provide(looping, pipe, i):
@@ -210,49 +165,11 @@ if __name__ == "__main__":
         for link in response.get_links():
             pipe.write_nowait(link)
 
-    pipe = Pipe(asyncio.Queue(), asyncio.Queue())
+    pipe = lib.Pipe(asyncio.Queue(), asyncio.Queue())
     fetcher = limittable_fetcher(same_origin_limit=3)
     looping = Looping(pipe, fetcher, provide, consume, concurrency=8)
 
-    R = MockRequest
-    requests = [
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-        R("http://example.x.com/", 1).add_link(R("http://example.x.com/y", 1)).add_link(R("http://example.x.com/y", 2)).add_link(R("http://example.x.com/y", 3)),
-        R("http://sample.y.net/", 1),
-        R("http://sample.y.net/", 2),
-        R("http://sample.y.net/", 11).add_link(R("http://sample.y.net/z", 1)).add_link(R("http://sample.y.net/z", 2)).add_link(R("http://sample.y.net/z", 3)),
-        R("http://sample.y.net/", 12),
-        R("http://example.x.com/", 2),
-        R("http://sample.y.net/", 3),
-        R("http://otameshi.z.jp/", 1),
-        R("http://example.x.com/", 3),
-    ]
+    from mock_long_requests import requests
 
     loop.run_until_complete(looping.run_loop(requests))
     loop.close()
