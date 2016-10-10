@@ -1,3 +1,36 @@
+# python asyncio
+
+他の並行制御(selector, AsyncQueue)
+
+asyncqueue
+
+```python
+async def do_loop():
+    aq = AsyncQueue(2)
+    nums = list(range(5))
+    while nums or not aq.empty():
+        if nums and not aq.full():
+            uid = nums.pop()
+            await aq.put(do_task(uid))
+        else:
+            uid = await aq.get()
+            logger.info("gotcha %s", uid)
+```
+
+selector
+
+```python
+async def do_loop2():
+    aq = AsyncQueue(2)
+    selector = Selector(aq)
+    for uid in range(5):
+        logger.info("insert %s", uid)
+        result = await selector.put_untill_success(do_task, uid)
+        logger.info("gotcha %s", result)
+    while not aq.empty():
+        logger.info("gotcha %s", await aq.get())
+```
+
 # python PyYAML でscannerの受理するsymbolを変更する
 
 ちょっと難しそう。このあたりのmethodがあるので `"@foo: key"` とか無理みたい。
