@@ -1,3 +1,43 @@
+# python PyYAML でscannerの受理するsymbolを変更する
+
+ちょっと難しそう。このあたりのmethodがあるので `"@foo: key"` とか無理みたい。
+無難なのは `"$foo: key"` とかか。
+
+# python pythonのyaml loadでjsonと互換性がある感じに読み込む
+
+keyがintをjsonは許さない。
+
+```
+Python 3.5.2 (default, Sep 19 2016, 02:49:52)
+[GCC 4.2.1 Compatible Apple LLVM 7.3.0 (clang-703.0.31)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import json
+>>> json.dumps({100: 200})
+'{"100": 200}'
+```
+
+```python
+# scanner.py
+    def check_plain(self):
+
+        # A plain scalar may start with any non-space character except:
+        #   '-', '?', ':', ',', '[', ']', '{', '}',
+        #   '#', '&', '*', '!', '|', '>', '\'', '\"',
+        #   '%', '@', '`'.
+        #
+        # It may also start with
+        #   '-', '?', ':'
+        # if it is followed by a non-space character.
+        #
+        # Note that we limit the last rule to the block context (except the
+        # '-' character) because we want the flow context to be space
+        # independent.
+        ch = self.peek()
+        return ch not in '\0 \t\r\n\x85\u2028\u2029-?:,[]{}#&*!|>\'\"%@`'  \
+                or (self.peek(1) not in '\0 \t\r\n\x85\u2028\u2029'
+                        and (ch == '-' or (not self.flow_level and ch in '?:')))
+```
+
 # python logging 常に特定の引数を付加したい
 
 例えば asctime(現在時刻) の代わりに経過時刻にしたい。
