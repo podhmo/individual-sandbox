@@ -57,8 +57,7 @@ class Selector:
         else:
             return (item, await self.aq.get())
 
-    async def put_untill_success(self, coro_fn, item):
-        task = coro_fn(item)
+    async def put_untill_success(self, task):
         result_list = []
         while True:
             task, result = await self.select(task)
@@ -73,7 +72,7 @@ async def do_loop2():
     selector = Selector(aq)
     for uid in range(5):
         logger.info("insert %s", uid)
-        result = await selector.put_untill_success(do_task, uid)
+        result = await selector.put_untill_success(do_task(uid))
         logger.info("gotcha %s", result)
     while not aq.empty():
         logger.info("gotcha %s", await aq.get())
