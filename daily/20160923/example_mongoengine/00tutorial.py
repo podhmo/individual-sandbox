@@ -26,9 +26,13 @@ db.drop_database('test')
 post = Post(author="Mike",
             text="My first blog post",
             tags=["mongodb", "python", "pymongo"])
-
 post.save()
 print("insert id: {}".format(post.id))
+print("----------------------------------------")
+print("to mongo", post.to_mongo())
+print("to json", post.to_mongo().to_dict())
+print(str(post.to_mongo().to_dict()["_id"]))
+print("----------------------------------------")
 
 # bulk insert
 r = Post.objects.insert([
