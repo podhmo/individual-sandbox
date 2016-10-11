@@ -25,7 +25,7 @@ async def do_loop2():
     selector = Selector(aq)
     for uid in range(5):
         logger.info("insert %s", uid)
-        result = await selector.put_untill_success(do_task, uid)
+        result = await selector.put_untill_success(do_task(uid))
         logger.info("gotcha %s", result)
     while not aq.empty():
         logger.info("gotcha %s", await aq.get())
