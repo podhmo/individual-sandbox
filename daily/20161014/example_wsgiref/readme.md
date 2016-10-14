@@ -5,6 +5,8 @@
 hello worldを返すだけ `ab -n 1000 -c 6 http://localhost:8000/` でやってる。
 
 ```
+werkzeug (python3.5):
+	Requests per second:    1281.76 [#/sec] (mean)
 waitress:
     Requests per second:    1322.11 [#/sec] (mean)
 gunicorn worker=2 (python3.5):
@@ -23,6 +25,64 @@ wsgiref python3.5
 	Requests per second:    1259.98 [#/sec] (mean)
 wsgiref python2.7
 	Requests per second:    601.48 [#/sec] (mean)
+```
+
+# werkzeug (python3.5)
+
+```
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Werkzeug/0.11.11
+Server Hostname:        localhost
+Server Port:            8000
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      6
+Time taken for tests:   0.780 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      150000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    1281.76 [#/sec] (mean)
+Time per request:       4.681 [ms] (mean)
+Time per request:       0.780 [ms] (mean, across all concurrent requests)
+Transfer rate:          187.76 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    4   0.6      4       9
+Waiting:        1    4   0.6      4       9
+Total:          2    5   0.6      5       9
+
+Percentage of the requests served within a certain time (ms)
+  50%      5
+  66%      5
+  75%      5
+  80%      5
+  90%      5
+  95%      6
+  98%      6
+  99%      7
+ 100%      9 (longest request)
 ```
 
 # waitress (python3.5)
