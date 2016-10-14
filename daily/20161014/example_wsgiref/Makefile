@@ -1,3 +1,9 @@
+waitress:
+	waitress-serve --port 8000 hello_wsgi:application 2>/dev/null
+gunicorn:
+	gunicorn 05hello:application
+uwsgi:
+	uwsgi --http :8000 --wsgi-file 05hello.py 2>/dev/null
 aio:
 	python 02*.py 2> /dev/null
 py3:
