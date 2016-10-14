@@ -1,3 +1,119 @@
+# uvloop + aiohttp (python3.5)
+
+```
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Python/3.5
+Server Hostname:        localhost
+Server Port:            8000
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      6
+Time taken for tests:   1.050 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      162000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    952.67 [#/sec] (mean)
+Time per request:       6.298 [ms] (mean)
+Time per request:       1.050 [ms] (mean, across all concurrent requests)
+Transfer rate:          150.71 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       2
+Processing:     2    6   1.6      6      17
+Waiting:        2    5   1.5      5      16
+Total:          3    6   1.6      6      18
+
+Percentage of the requests served within a certain time (ms)
+  50%      6
+  66%      6
+  75%      7
+  80%      7
+  90%      8
+  95%      9
+  98%     11
+  99%     12
+ 100%     18 (longest request)
+```
+
+# aiohttp (python3.5)
+
+```
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Python/3.5
+Server Hostname:        localhost
+Server Port:            8000
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      6
+Time taken for tests:   1.513 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      162000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    660.85 [#/sec] (mean)
+Time per request:       9.079 [ms] (mean)
+Time per request:       1.513 [ms] (mean, across all concurrent requests)
+Transfer rate:          104.55 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       0
+Processing:     3    9   1.3      8      15
+Waiting:        2    8   1.2      8      14
+Total:          3    9   1.3      9      15
+
+Percentage of the requests served within a certain time (ms)
+  50%      9
+  66%      9
+  75%      9
+  80%     10
+  90%     11
+  95%     11
+  98%     13
+  99%     15
+ 100%     15 (longest request)
+```
+
 # python3.5
 
 ```

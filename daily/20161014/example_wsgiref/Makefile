@@ -1,3 +1,5 @@
+aio:
+	python 02*.py 2> /dev/null
 py3:
 	python3.5 00hello.py 2> /dev/null
 py2:
