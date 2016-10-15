@@ -1,3 +1,42 @@
+# go sliceのcastは無理という話。
+
+以下が無理。
+
+```go
+func doPrint(xs []interface{}) {
+	for _, x := range xs {
+		log.Printf("%[1]T: %#[1]v", x)
+	}
+}
+
+func main(){
+	xs := []int{1, 2, 3, 4, 5}
+	// compile error. expected []interface{} but []int
+	doPrint(xs)
+}
+```
+
+こう書くのが無難そう。
+
+```go
+func main() {
+	xs := []int{1, 2, 3, 4, 5}
+	ys := make([]interface{}, len(xs))
+	for i, x := range xs {
+		ys[i] = x
+	}
+	doPrint(ys)
+}
+```
+
+# python asyncio + rpc + shell的なinterfaceみたいなことをしてみたくなった
+
+crawlerの管理にshellみたいなものがあると良いのではというような気持ち。
+
+zeromqは最終的にサポートするとしてそれ以外を先にやりたいみたいな感じもある。
+
+- [aio-libs/aiozmq](https://github.com/aio-libs/aiozmq)
+
 # python collections.deque が便利
 
 ```python
@@ -19,7 +58,6 @@ deque([1, 2, 3], maxlen=3)
 deque([2, 3, 4], maxlen=3)
 deque([3, 4, 5], maxlen=3)
 ```
-
 
 # shell du またディスク容量が
 
