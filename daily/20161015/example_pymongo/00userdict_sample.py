@@ -22,3 +22,5 @@ post = Post(
 
 post_id = db.posts.insert_one(post).inserted_id
 print("insert id: {}".format(post_id))
+
+print(db.posts.find()[0])
