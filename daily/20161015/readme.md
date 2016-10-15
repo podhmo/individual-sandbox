@@ -1,3 +1,17 @@
+# python pymongo + 制限されたdict
+
+前にやったpymongoのやつは [この辺](../20160921/example_pymongo)。
+
+
+# head less browserを色々弄るのは何が良いのかという話
+
+pythonで書くのもどうなんだという感じがする。
+
+- selenium?
+- [Splinter — Splinter 0.7.4 documentation](http://splinter.readthedocs.io/en/latest/index.html)
+- [sclevine/agouti: A WebDriver client and acceptance testing library for Go](https://github.com/sclevine/agouti)
+- [headzoo/surf: Stateful programmatic web browsing in Go.](https://github.com/headzoo/surf)
+
 # go sliceのcastは無理という話。
 
 以下が無理。
