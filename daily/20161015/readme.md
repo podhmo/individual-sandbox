@@ -1,3 +1,34 @@
+# python collections.deque が便利
+
+```python
+
+from collections import deque
+
+dq = deque(maxlen=3)
+
+for i in range(6):
+    dq.append(i)
+    print(dq)
+```
+
+```
+deque([0], maxlen=3)
+deque([0, 1], maxlen=3)
+deque([0, 1, 2], maxlen=3)
+deque([1, 2, 3], maxlen=3)
+deque([2, 3, 4], maxlen=3)
+deque([3, 4, 5], maxlen=3)
+```
+
+
+# shell du またディスク容量が
+
+[過去に書いていた](../20160924/readme.md)
+
+```
+sudo du -h / > /tmp/mem.txt && cat /tmp/mem.txt | grep -P '^ *([\d\.]+G|\d{3,}M)' | gsort -h
+```
+
 # git gitのrepository内の巨大なファイルを探す
 
 現在のrevisionでサイズの大きなもの順に10件表示
