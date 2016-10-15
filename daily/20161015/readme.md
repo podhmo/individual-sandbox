@@ -2,6 +2,7 @@
 
 前にやったpymongoのやつは [この辺](../20160921/example_pymongo)。
 
+dictを制限した状態で使えないか考えてみる。
 
 # head less browserを色々弄るのは何が良いのかという話
 
