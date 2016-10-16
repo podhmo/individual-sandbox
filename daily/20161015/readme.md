@@ -4,6 +4,23 @@
 
 dictを制限した状態で使えないか考えてみる。
 
+## 進捗1
+
+- kanagataを作った
+
+## 進捗2
+
+collections.UserListが使えないことがわかった。
+詳しくは[ここ](./example_pymongo/03about_extend_encoder.md)
+
+まじめにC拡張いじらないとダメ。
+
+## 進捗3
+
+- [mongodb/mongo-python-driver: PyMongo - the Python driver for MongoDB](https://github.com/mongodb/mongo-python-driver)
+
+forkしてcollections.Sequenceを特別扱いするようにした。
+
 # head less browserを色々弄るのは何が良いのかという話
 
 pythonで書くのもどうなんだという感じがする。
