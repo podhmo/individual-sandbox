@@ -1,3 +1,7 @@
+# jwt jwtの便利なサイト
+
+- [JSON Web Tokens - jwt.io](https://jwt.io/)
+
 # http statusのリダイレクトのやつ
 
 明示的にresource参照してほしい場合には 303(See Other)を使うべき。
@@ -7,6 +11,14 @@
 # golang pretty printer的なやつ
 
 - [davecgh/go-spew: Implements a deep pretty printer for Go data structures to aid in debugging](https://github.com/davecgh/go-spew)
+
+```
+go get -u github.com/davecgh/go-spew/spew
+```
+
+```go
+spew.Dump(myVar1, myVar2, ...)
+```
 
 # go http関係のテストの復習
 
