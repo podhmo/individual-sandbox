@@ -37,3 +37,18 @@ sampleHandler.ServeHTTP(response, request)
 
 - [How to test http calls in go using httptest - Stack Overflow](http://stackoverflow.com/questions/16154999/how-to-test-http-calls-in-go-using-httptest)
 - [Testing Your (HTTP) Handlers in Go · go, web, go](https://elithrar.github.io/article/testing-http-handlers-go/)
+
+# go `err != err` を防ぐ方法
+
+ひどい。 `err != err` は常に偽。
+
+```go
+func f() (X, error) {
+	x, err := g()
+    if err != err {
+		return nil, err
+	}
+    do_something(x)
+    return x, nil
+}
+```
