@@ -28,7 +28,8 @@ NewRecorder
 ```go
 response := httptest.NewRecorder()
 request, _ := http.NewRequestuest("GET", uri, nil)
-http.DefaultServeMux.ServeHTTP(response, request)
+// http.DefaultServeMux.ServeHTTP(response, request)
+sampleHandler.ServeHTTP(response, request)
 // response.Bodyを見る
 ```
 
