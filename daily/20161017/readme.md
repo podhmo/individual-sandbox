@@ -1,3 +1,9 @@
+# http statusのリダイレクトのやつ
+
+明示的にresource参照してほしい場合には 303(See Other)を使うべき。
+
+- [302 Found / 303 See Other / 307 Temporary Redirect](https://gist.github.com/doloopwhile/e808ddafe76f0dcefeee)
+
 # golang pretty printer的なやつ
 
 - [davecgh/go-spew: Implements a deep pretty printer for Go data structures to aid in debugging](https://github.com/davecgh/go-spew)
