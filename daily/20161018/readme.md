@@ -1,3 +1,10 @@
+# go `err != err` を倒したい
+
+以下ではダメ。
+
+- go vet
+- golint
+
 # go panic
 
 `panic: reflect.Value.SetFloat using unaddressable value`
