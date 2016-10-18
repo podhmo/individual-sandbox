@@ -1,4 +1,6 @@
-# go `panic: reflect.Value.SetFloat using unaddressable value`
+# go panic
+
+`panic: reflect.Value.SetFloat using unaddressable value`
 
 ```go
 var x float64 = 3.4
@@ -15,7 +17,9 @@ $ git diff <branch1> <branch2> [file]
 $ git diff <branch1>:[file] <branch2>:[file]
 ```
 
-# jwt python go jwtあたりのサンプルでgoで生成されたshared libraryをpythonから使う方法を
+# jwt python go のshared libraryをpythonで
+
+jwtあたりのサンプルでgoで生成されたshared libraryをpythonから使う方法をやりたい
 
 3パターンくらい
 
