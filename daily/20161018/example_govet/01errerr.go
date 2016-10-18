@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"log"
+	"os"
 )
 
 func returnError() (interface{}, error) {
@@ -15,6 +16,7 @@ func main() {
 	// too bad!!
 	if err != err {
 		log.Println("hmm:", err)
+		os.Exit(0)
 	}
 
 	log.Println("don't call", x)

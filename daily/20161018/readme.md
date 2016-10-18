@@ -5,6 +5,8 @@
 - go vet
 - golint
 
+- [example_govet](./example_govet)
+
 # go panic
 
 `panic: reflect.Value.SetFloat using unaddressable value`
@@ -15,7 +17,8 @@ v := reflect.ValueOf(x)
 v.SetFloat(7.1) // Error: will panic.
 ```
 
-[example_reflection](./example_reflection)
+- [example_reflection](./example_reflection)
+- mgoのOne()で取り出す時などでこのようなことになる。 [example_fetch](./example_fetch)
 
 # git 異なるbranch間でdiffを取る
 
@@ -51,6 +54,5 @@ git grep <pattern> -- '!*.html'
 # goole auth
 
 - [Using OAuth 2.0 to Access Google APIs  |  Google Identity Platform  |  Google Developers](https://developers.google.com/identity/protocols/OAuth2)
-- [Using OAuth 2.0 for Web Server Applications  |  Google Identity Platform  |  Google Developers](
-https://developers.google.com/identity/protocols/OAuth2WebServer)
+- [Using OAuth 2.0 for Web Server Applications  |  Google Identity Platform  |  Google Developers](https://developers.google.com/identity/protocols/OAuth2WebServer)
 - [The correct use of the state parameter in OAuth 2 | Thread Safe](http://www.thread-safe.com/2014/05/the-correct-use-of-state-parameter-in.html)
