@@ -1,0 +1,42 @@
+package models
+file ./person.go
+types.Config.Check got package models (".")
+*ast.File
+*ast.Ident
+*ast.GenDecl
+*ast.TypeSpec
+*ast.Ident : ..PersonGender
+*ast.Ident : string
+*ast.GenDecl
+*ast.ValueSpec
+*ast.Ident : ..PersonGender
+*ast.CallExpr : ..PersonGender
+*ast.Ident : ..PersonGender
+*ast.BasicLit : ..PersonGender
+*ast.ValueSpec
+*ast.Ident : ..PersonGender
+*ast.CallExpr : ..PersonGender
+*ast.Ident : ..PersonGender
+*ast.BasicLit : ..PersonGender
+*ast.ValueSpec
+*ast.Ident : ..PersonGender
+*ast.CallExpr : ..PersonGender
+*ast.Ident : ..PersonGender
+*ast.BasicLit : ..PersonGender
+*ast.GenDecl
+*ast.TypeSpec
+*ast.Ident : ..Person
+*ast.StructType : struct{Name string "json:\"name\""; Age int "json:\"age\""; Gender ..PersonGender "json:\"gender\""}
+*ast.FieldList
+*ast.Field
+*ast.Ident : string
+*ast.Ident : string
+*ast.BasicLit
+*ast.Field
+*ast.Ident : int
+*ast.Ident : int
+*ast.BasicLit
+*ast.Field
+*ast.Ident : ..PersonGender
+*ast.Ident : ..PersonGender
+*ast.BasicLit

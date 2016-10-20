@@ -1,0 +1,5 @@
+T  string   PersonGender
+V  <nil>   [PersonGenderFemale]   [0xc42007a1c0]
+V  <nil>   [PersonGendermale]   [0xc42007a200]
+V  <nil>   [PersonGenderUnknown]   [0xc42007a240]
+T  &{281 0xc4200762d0 false}   Person
