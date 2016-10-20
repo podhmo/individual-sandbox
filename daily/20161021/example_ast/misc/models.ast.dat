@@ -1,0 +1,249 @@
+     0  *ast.File {
+     1  .  Package: ./person.go:1:1
+     2  .  Name: *ast.Ident {
+     3  .  .  NamePos: ./person.go:1:9
+     4  .  .  Name: "models"
+     5  .  }
+     6  .  Decls: []ast.Decl (len = 3) {
+     7  .  .  0: *ast.GenDecl {
+     8  .  .  .  TokPos: ./person.go:4:1
+     9  .  .  .  Tok: type
+    10  .  .  .  Lparen: -
+    11  .  .  .  Specs: []ast.Spec (len = 1) {
+    12  .  .  .  .  0: *ast.TypeSpec {
+    13  .  .  .  .  .  Name: *ast.Ident {
+    14  .  .  .  .  .  .  NamePos: ./person.go:4:6
+    15  .  .  .  .  .  .  Name: "PersonGender"
+    16  .  .  .  .  .  .  Obj: *ast.Object {
+    17  .  .  .  .  .  .  .  Kind: type
+    18  .  .  .  .  .  .  .  Name: "PersonGender"
+    19  .  .  .  .  .  .  .  Decl: *(obj @ 12)
+    20  .  .  .  .  .  .  }
+    21  .  .  .  .  .  }
+    22  .  .  .  .  .  Type: *ast.Ident {
+    23  .  .  .  .  .  .  NamePos: ./person.go:4:19
+    24  .  .  .  .  .  .  Name: "string"
+    25  .  .  .  .  .  }
+    26  .  .  .  .  }
+    27  .  .  .  }
+    28  .  .  .  Rparen: -
+    29  .  .  }
+    30  .  .  1: *ast.GenDecl {
+    31  .  .  .  TokPos: ./person.go:7:1
+    32  .  .  .  Tok: const
+    33  .  .  .  Lparen: ./person.go:7:7
+    34  .  .  .  Specs: []ast.Spec (len = 3) {
+    35  .  .  .  .  0: *ast.ValueSpec {
+    36  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    37  .  .  .  .  .  .  0: *ast.Ident {
+    38  .  .  .  .  .  .  .  NamePos: ./person.go:8:2
+    39  .  .  .  .  .  .  .  Name: "PersonGenderFemale"
+    40  .  .  .  .  .  .  .  Obj: *ast.Object {
+    41  .  .  .  .  .  .  .  .  Kind: const
+    42  .  .  .  .  .  .  .  .  Name: "PersonGenderFemale"
+    43  .  .  .  .  .  .  .  .  Decl: *(obj @ 35)
+    44  .  .  .  .  .  .  .  .  Data: 0
+    45  .  .  .  .  .  .  .  }
+    46  .  .  .  .  .  .  }
+    47  .  .  .  .  .  }
+    48  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+    49  .  .  .  .  .  .  0: *ast.CallExpr {
+    50  .  .  .  .  .  .  .  Fun: *ast.Ident {
+    51  .  .  .  .  .  .  .  .  NamePos: ./person.go:8:24
+    52  .  .  .  .  .  .  .  .  Name: "PersonGender"
+    53  .  .  .  .  .  .  .  .  Obj: *(obj @ 16)
+    54  .  .  .  .  .  .  .  }
+    55  .  .  .  .  .  .  .  Lparen: ./person.go:8:36
+    56  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    57  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    58  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:8:37
+    59  .  .  .  .  .  .  .  .  .  Kind: STRING
+    60  .  .  .  .  .  .  .  .  .  Value: "\"female\""
+    61  .  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  .  Ellipsis: -
+    64  .  .  .  .  .  .  .  Rparen: ./person.go:8:45
+    65  .  .  .  .  .  .  }
+    66  .  .  .  .  .  }
+    67  .  .  .  .  }
+    68  .  .  .  .  1: *ast.ValueSpec {
+    69  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    70  .  .  .  .  .  .  0: *ast.Ident {
+    71  .  .  .  .  .  .  .  NamePos: ./person.go:9:2
+    72  .  .  .  .  .  .  .  Name: "PersonGendermale"
+    73  .  .  .  .  .  .  .  Obj: *ast.Object {
+    74  .  .  .  .  .  .  .  .  Kind: const
+    75  .  .  .  .  .  .  .  .  Name: "PersonGendermale"
+    76  .  .  .  .  .  .  .  .  Decl: *(obj @ 68)
+    77  .  .  .  .  .  .  .  .  Data: 1
+    78  .  .  .  .  .  .  .  }
+    79  .  .  .  .  .  .  }
+    80  .  .  .  .  .  }
+    81  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+    82  .  .  .  .  .  .  0: *ast.CallExpr {
+    83  .  .  .  .  .  .  .  Fun: *ast.Ident {
+    84  .  .  .  .  .  .  .  .  NamePos: ./person.go:9:24
+    85  .  .  .  .  .  .  .  .  Name: "PersonGender"
+    86  .  .  .  .  .  .  .  .  Obj: *(obj @ 16)
+    87  .  .  .  .  .  .  .  }
+    88  .  .  .  .  .  .  .  Lparen: ./person.go:9:36
+    89  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    90  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    91  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:9:37
+    92  .  .  .  .  .  .  .  .  .  Kind: STRING
+    93  .  .  .  .  .  .  .  .  .  Value: "\"male\""
+    94  .  .  .  .  .  .  .  .  }
+    95  .  .  .  .  .  .  .  }
+    96  .  .  .  .  .  .  .  Ellipsis: -
+    97  .  .  .  .  .  .  .  Rparen: ./person.go:9:43
+    98  .  .  .  .  .  .  }
+    99  .  .  .  .  .  }
+   100  .  .  .  .  }
+   101  .  .  .  .  2: *ast.ValueSpec {
+   102  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   103  .  .  .  .  .  .  0: *ast.Ident {
+   104  .  .  .  .  .  .  .  NamePos: ./person.go:10:2
+   105  .  .  .  .  .  .  .  Name: "PersonGenderUnknown"
+   106  .  .  .  .  .  .  .  Obj: *ast.Object {
+   107  .  .  .  .  .  .  .  .  Kind: const
+   108  .  .  .  .  .  .  .  .  Name: "PersonGenderUnknown"
+   109  .  .  .  .  .  .  .  .  Decl: *(obj @ 101)
+   110  .  .  .  .  .  .  .  .  Data: 2
+   111  .  .  .  .  .  .  .  }
+   112  .  .  .  .  .  .  }
+   113  .  .  .  .  .  }
+   114  .  .  .  .  .  Values: []ast.Expr (len = 1) {
+   115  .  .  .  .  .  .  0: *ast.CallExpr {
+   116  .  .  .  .  .  .  .  Fun: *ast.Ident {
+   117  .  .  .  .  .  .  .  .  NamePos: ./person.go:10:24
+   118  .  .  .  .  .  .  .  .  Name: "PersonGender"
+   119  .  .  .  .  .  .  .  .  Obj: *(obj @ 16)
+   120  .  .  .  .  .  .  .  }
+   121  .  .  .  .  .  .  .  Lparen: ./person.go:10:36
+   122  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+   123  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+   124  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:10:37
+   125  .  .  .  .  .  .  .  .  .  Kind: STRING
+   126  .  .  .  .  .  .  .  .  .  Value: "\"unknown\""
+   127  .  .  .  .  .  .  .  .  }
+   128  .  .  .  .  .  .  .  }
+   129  .  .  .  .  .  .  .  Ellipsis: -
+   130  .  .  .  .  .  .  .  Rparen: ./person.go:10:46
+   131  .  .  .  .  .  .  }
+   132  .  .  .  .  .  }
+   133  .  .  .  .  }
+   134  .  .  .  }
+   135  .  .  .  Rparen: ./person.go:11:1
+   136  .  .  }
+   137  .  .  2: *ast.GenDecl {
+   138  .  .  .  TokPos: ./person.go:14:1
+   139  .  .  .  Tok: type
+   140  .  .  .  Lparen: -
+   141  .  .  .  Specs: []ast.Spec (len = 1) {
+   142  .  .  .  .  0: *ast.TypeSpec {
+   143  .  .  .  .  .  Name: *ast.Ident {
+   144  .  .  .  .  .  .  NamePos: ./person.go:14:6
+   145  .  .  .  .  .  .  Name: "Person"
+   146  .  .  .  .  .  .  Obj: *ast.Object {
+   147  .  .  .  .  .  .  .  Kind: type
+   148  .  .  .  .  .  .  .  Name: "Person"
+   149  .  .  .  .  .  .  .  Decl: *(obj @ 142)
+   150  .  .  .  .  .  .  }
+   151  .  .  .  .  .  }
+   152  .  .  .  .  .  Type: *ast.StructType {
+   153  .  .  .  .  .  .  Struct: ./person.go:14:13
+   154  .  .  .  .  .  .  Fields: *ast.FieldList {
+   155  .  .  .  .  .  .  .  Opening: ./person.go:14:20
+   156  .  .  .  .  .  .  .  List: []*ast.Field (len = 3) {
+   157  .  .  .  .  .  .  .  .  0: *ast.Field {
+   158  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   159  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   160  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:15:2
+   161  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+   162  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   163  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   164  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+   165  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 157)
+   166  .  .  .  .  .  .  .  .  .  .  .  }
+   167  .  .  .  .  .  .  .  .  .  .  }
+   168  .  .  .  .  .  .  .  .  .  }
+   169  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   170  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:15:9
+   171  .  .  .  .  .  .  .  .  .  .  Name: "string"
+   172  .  .  .  .  .  .  .  .  .  }
+   173  .  .  .  .  .  .  .  .  .  Tag: *ast.BasicLit {
+   174  .  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:15:22
+   175  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+   176  .  .  .  .  .  .  .  .  .  .  Value: "`json:\"name\"`"
+   177  .  .  .  .  .  .  .  .  .  }
+   178  .  .  .  .  .  .  .  .  }
+   179  .  .  .  .  .  .  .  .  1: *ast.Field {
+   180  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   181  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   182  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:16:2
+   183  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   184  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   185  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   186  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   187  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 179)
+   188  .  .  .  .  .  .  .  .  .  .  .  }
+   189  .  .  .  .  .  .  .  .  .  .  }
+   190  .  .  .  .  .  .  .  .  .  }
+   191  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   192  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:16:9
+   193  .  .  .  .  .  .  .  .  .  .  Name: "int"
+   194  .  .  .  .  .  .  .  .  .  }
+   195  .  .  .  .  .  .  .  .  .  Tag: *ast.BasicLit {
+   196  .  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:16:22
+   197  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+   198  .  .  .  .  .  .  .  .  .  .  Value: "`json:\"age\"`"
+   199  .  .  .  .  .  .  .  .  .  }
+   200  .  .  .  .  .  .  .  .  }
+   201  .  .  .  .  .  .  .  .  2: *ast.Field {
+   202  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   203  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   204  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:17:2
+   205  .  .  .  .  .  .  .  .  .  .  .  Name: "Gender"
+   206  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   207  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   208  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Gender"
+   209  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 201)
+   210  .  .  .  .  .  .  .  .  .  .  .  }
+   211  .  .  .  .  .  .  .  .  .  .  }
+   212  .  .  .  .  .  .  .  .  .  }
+   213  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   214  .  .  .  .  .  .  .  .  .  .  NamePos: ./person.go:17:9
+   215  .  .  .  .  .  .  .  .  .  .  Name: "PersonGender"
+   216  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 16)
+   217  .  .  .  .  .  .  .  .  .  }
+   218  .  .  .  .  .  .  .  .  .  Tag: *ast.BasicLit {
+   219  .  .  .  .  .  .  .  .  .  .  ValuePos: ./person.go:17:22
+   220  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+   221  .  .  .  .  .  .  .  .  .  .  Value: "`json:\"gender\"`"
+   222  .  .  .  .  .  .  .  .  .  }
+   223  .  .  .  .  .  .  .  .  }
+   224  .  .  .  .  .  .  .  }
+   225  .  .  .  .  .  .  .  Closing: ./person.go:18:1
+   226  .  .  .  .  .  .  }
+   227  .  .  .  .  .  .  Incomplete: false
+   228  .  .  .  .  .  }
+   229  .  .  .  .  }
+   230  .  .  .  }
+   231  .  .  .  Rparen: -
+   232  .  .  }
+   233  .  }
+   234  .  Scope: *ast.Scope {
+   235  .  .  Objects: map[string]*ast.Object (len = 5) {
+   236  .  .  .  "PersonGender": *(obj @ 16)
+   237  .  .  .  "PersonGenderFemale": *(obj @ 40)
+   238  .  .  .  "PersonGendermale": *(obj @ 73)
+   239  .  .  .  "PersonGenderUnknown": *(obj @ 106)
+   240  .  .  .  "Person": *(obj @ 146)
+   241  .  .  }
+   242  .  }
+   243  .  Unresolved: []*ast.Ident (len = 3) {
+   244  .  .  0: *(obj @ 22)
+   245  .  .  1: *(obj @ 169)
+   246  .  .  2: *(obj @ 191)
+   247  .  }
+   248  }
