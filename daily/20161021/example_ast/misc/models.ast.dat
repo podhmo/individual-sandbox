@@ -225,7 +225,7 @@
    224  .  .  .  .  .  .  .  }
    225  .  .  .  .  .  .  .  Closing: ./person.go:18:1
    226  .  .  .  .  .  .  }
-   227  .  .  .  .  .  .  Incomplete: false
+   227  .  .  .  .  .  .  In<complete: false
    228  .  .  .  .  .  }
    229  .  .  .  .  }
    230  .  .  .  }

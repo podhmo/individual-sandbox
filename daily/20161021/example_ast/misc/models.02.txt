@@ -1,5 +1,36 @@
-T  string   PersonGender
-V  <nil>   [PersonGenderFemale]   [0xc42007a1c0]
-V  <nil>   [PersonGendermale]   [0xc42007a200]
-V  <nil>   [PersonGenderUnknown]   [0xc42007a240]
-T  &{281 0xc4200762d0 false}   Person
+file:  ./group.go
+	T  &{28 0xc4200102d0 false}   Group
+-----
+	name: Group
+	kind: type
+	data: <nil>
+	typespec: &{<nil> Group 0xc42000a2e0 <nil>}
+----------------------------------------
+file:  ./person.go
+	T  string   PersonGender
+	V  <nil>   [PersonGenderFemale]   [0xc42000e3c0]
+	V  <nil>   [PersonGendermale]   [0xc42000e400]
+	V  <nil>   [PersonGenderUnknown]   [0xc42000e440]
+	T  &{364 0xc4200104e0 false}   Person
+-----
+	name: PersonGendermale
+	kind: const
+	data: 1
+	valuespec: &{<nil> [PersonGendermale] <nil> [0xc42000e400] <nil>}
+	name: PersonGenderUnknown
+	kind: const
+	data: 2
+	valuespec: &{<nil> [PersonGenderUnknown] <nil> [0xc42000e440] <nil>}
+	name: Person
+	kind: type
+	data: <nil>
+	typespec: &{<nil> Person 0xc42000a7c0 <nil>}
+	name: PersonGender
+	kind: type
+	data: <nil>
+	typespec: &{<nil> PersonGender string <nil>}
+	name: PersonGenderFemale
+	kind: const
+	data: 0
+	valuespec: &{<nil> [PersonGenderFemale] <nil> [0xc42000e3c0] <nil>}
+----------------------------------------

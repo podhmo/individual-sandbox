@@ -26,9 +26,11 @@ func main() {
 
 	for _, pkg := range pkgs {
 		for fname, f := range pkg.Files {
-            _ = fname
-			// showScope(f.Scope)
+			fmt.Println("file: ", fname)
 			showAST(f)
+			fmt.Println("-----")
+			showScope(f.Scope)
+			fmt.Println("----------------------------------------")
 		}
 	}
 }
@@ -72,9 +74,9 @@ func (v *Visitor) Visit(node ast.Node) ast.Visitor {
 	if node != nil {
 		switch node := node.(type) {
 		case *ast.TypeSpec:
-			fmt.Println("T ", node.Type, " ", node.Name)
+			fmt.Println("\tT ", node.Type, " ", node.Name)
 		case *ast.ValueSpec:
-			fmt.Println("V ", node.Type, " ", node.Names, " ", node.Values)
+			fmt.Println("\tV ", node.Type, " ", node.Names, " ", node.Values)
 		}
 	}
 	return v
