@@ -5,10 +5,10 @@ type PersonGender string
 
 // PersonGender : constants
 const (
-	PersonGenderFemale  = PersonGender("female")
-	PersonGendermale    = PersonGender("male")
-	PersonGenderUnknown = PersonGender("unknown")
+	PersonGenderFemale = PersonGender("female")
+	PersonGendermale   = PersonGender("male")
 )
+const PersonGenderUnknown = PersonGender("unknown")
 
 // Person : person model
 type Person struct {

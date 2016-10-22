@@ -7,6 +7,8 @@ import (
 	"go/token"
 	"log"
 	"os"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 func main() {
@@ -52,7 +54,7 @@ func showScope(scope *ast.Scope) {
 		default:
 			fmt.Println("noop")
 		}
-		// spew.Dump(ob)
+		spew.Dump(ob)
 	}
 }
 
