@@ -1,0 +1,178 @@
+{
+  "module": {
+    "models": {
+      "file": {
+        "./group.go": {
+          "alias": {
+            "N": {
+              "candidates": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "2"
+                }
+              ],
+              "original": {
+                "kind": "primitive",
+                "value": "int"
+              }
+            },
+            "archiveFormat": {
+              "candidates": [
+                {
+                  "value": "\"tarball\""
+                },
+                {
+                  "value": "\"zipball\""
+                }
+              ],
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            }
+          },
+          "struct": {
+            "Group": {
+              "Fields": {
+                "Name": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"name\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "./person.go": {
+          "alias": {
+            "PersonGender": {
+              "candidates": [
+                {
+                  "value": "\"female\""
+                },
+                {
+                  "value": "\"male\""
+                },
+                {
+                  "value": "\"unknown\""
+                }
+              ],
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            }
+          },
+          "struct": {
+            "Person": {
+              "Fields": {
+                "Age": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"age\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "Gender": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"gender\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "PersonGender"
+                  }
+                },
+                "Group": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"-\"`"
+                  ],
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Group"
+                    }
+                  }
+                },
+                "GroupId": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"groupId,omitempty\"`"
+                  ],
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                },
+                "Id": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"id\" bson:\"_id\"`"
+                  ],
+                  "type": {
+                    "kind": "selector",
+                    "value": "bson.ObjectId"
+                  }
+                },
+                "Modify": {
+                  "embed": false,
+                  "tags": [],
+                  "type": {
+                    "args": [
+                      {
+                        "kind": "pointer",
+                        "value": {
+                          "kind": "primitive",
+                          "value": "Person"
+                        }
+                      }
+                    ],
+                    "kind": "func",
+                    "results": [
+                      {
+                        "kind": "pointer",
+                        "value": {
+                          "kind": "primitive",
+                          "value": "Person"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "value": "error"
+                      }
+                    ]
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "tags": [
+                    "`json:\"name\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

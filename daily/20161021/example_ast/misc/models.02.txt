@@ -1,6 +1,78 @@
 file:  ./group.go
 	T  &{28 0xc42007a540 false}   Group
+	T  string   archiveFormat
+	V  archiveFormat   [Tarball]   [0xc42008a3e0]
+	V  archiveFormat   [Zipball]   [0xc42008a440]
+	T  int   N
+	V  N   [one]   [0xc42008a520]
+	V  N   [two]   [0xc42008a580]
 -----
+	name: N
+	kind: type
+	data: <nil>
+	typespec: &{<nil> N int <nil>}
+(*ast.Object)(0xc4200a4820)({
+ Kind: (ast.ObjKind) type,
+ Name: (string) (len=1) "N",
+ Decl: (*ast.TypeSpec)(0xc42007a6c0)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Name: (*ast.Ident)(0xc42008a480)(N),
+  Type: (*ast.Ident)(0xc42008a4a0)(int),
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (interface {}) <nil>,
+ Type: (interface {}) <nil>
+})
+	name: one
+	kind: const
+	data: 0
+	valuespec: &{<nil> [one] N [0xc42008a520] <nil>}
+(*ast.Object)(0xc4200a48c0)({
+ Kind: (ast.ObjKind) const,
+ Name: (string) (len=3) "one",
+ Decl: (*ast.ValueSpec)(0xc4200a4870)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Names: ([]*ast.Ident) (len=1 cap=1) {
+   (*ast.Ident)(0xc42008a4e0)(one)
+  },
+  Type: (*ast.Ident)(0xc42008a500)(N),
+  Values: ([]ast.Expr) (len=1 cap=1) {
+   (*ast.BasicLit)(0xc42008a520)({
+    ValuePos: (token.Pos) 407,
+    Kind: (token.Token) INT,
+    Value: (string) (len=1) "1"
+   })
+  },
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (int) 0,
+ Type: (interface {}) <nil>
+})
+	name: two
+	kind: const
+	data: 1
+	valuespec: &{<nil> [two] N [0xc42008a580] <nil>}
+(*ast.Object)(0xc4200a4960)({
+ Kind: (ast.ObjKind) const,
+ Name: (string) (len=3) "two",
+ Decl: (*ast.ValueSpec)(0xc4200a4910)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Names: ([]*ast.Ident) (len=1 cap=1) {
+   (*ast.Ident)(0xc42008a540)(two)
+  },
+  Type: (*ast.Ident)(0xc42008a560)(N),
+  Values: ([]ast.Expr) (len=1 cap=1) {
+   (*ast.BasicLit)(0xc42008a580)({
+    ValuePos: (token.Pos) 418,
+    Kind: (token.Token) INT,
+    Value: (string) (len=1) "2"
+   })
+  },
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (int) 1,
+ Type: (interface {}) <nil>
+})
 	name: Group
 	kind: type
 	data: <nil>
@@ -39,56 +111,40 @@ file:  ./group.go
  Data: (interface {}) <nil>,
  Type: (interface {}) <nil>
 })
-----------------------------------------
-file:  ./person.go
-	T  string   PersonGender
-	V  <nil>   [PersonGenderFemale]   [0xc42007e400]
-	V  <nil>   [PersonGendermale]   [0xc42007e440]
-	V  <nil>   [PersonGenderUnknown]   [0xc42007e4c0]
-	T  &{367 0xc42007a750 false}   Person
------
-	name: PersonGender
+	name: archiveFormat
 	kind: type
 	data: <nil>
-	typespec: &{<nil> PersonGender string <nil>}
-(*ast.Object)(0xc4200a4730)({
+	typespec: &{<nil> archiveFormat string <nil>}
+(*ast.Object)(0xc4200a4690)({
  Kind: (ast.ObjKind) type,
- Name: (string) (len=12) "PersonGender",
- Decl: (*ast.TypeSpec)(0xc42007a6f0)({
+ Name: (string) (len=13) "archiveFormat",
+ Decl: (*ast.TypeSpec)(0xc42007a660)({
   Doc: (*ast.CommentGroup)(<nil>),
-  Name: (*ast.Ident)(0xc42008a400)(PersonGender),
-  Type: (*ast.Ident)(0xc42008a420)(string),
+  Name: (*ast.Ident)(0xc42008a360)(archiveFormat),
+  Type: (*ast.Ident)(0xc42008a380)(string),
   Comment: (*ast.CommentGroup)(<nil>)
  }),
  Data: (interface {}) <nil>,
  Type: (interface {}) <nil>
 })
-	name: PersonGenderFemale
+	name: Tarball
 	kind: const
 	data: 0
-	valuespec: &{<nil> [PersonGenderFemale] <nil> [0xc42007e400] <nil>}
-(*ast.Object)(0xc4200a47d0)({
+	valuespec: &{<nil> [Tarball] archiveFormat [0xc42008a3e0] <nil>}
+(*ast.Object)(0xc4200a4730)({
  Kind: (ast.ObjKind) const,
- Name: (string) (len=18) "PersonGenderFemale",
- Decl: (*ast.ValueSpec)(0xc4200a4780)({
+ Name: (string) (len=7) "Tarball",
+ Decl: (*ast.ValueSpec)(0xc4200a46e0)({
   Doc: (*ast.CommentGroup)(<nil>),
   Names: ([]*ast.Ident) (len=1 cap=1) {
-   (*ast.Ident)(0xc42008a480)(PersonGenderFemale)
+   (*ast.Ident)(0xc42008a3a0)(Tarball)
   },
-  Type: (ast.Expr) <nil>,
+  Type: (*ast.Ident)(0xc42008a3c0)(archiveFormat),
   Values: ([]ast.Expr) (len=1 cap=1) {
-   (*ast.CallExpr)(0xc42007e400)({
-    Fun: (*ast.Ident)(0xc42008a4a0)(PersonGender),
-    Lparen: (token.Pos) 221,
-    Args: ([]ast.Expr) (len=1 cap=1) {
-     (*ast.BasicLit)(0xc42008a4c0)({
-      ValuePos: (token.Pos) 222,
-      Kind: (token.Token) STRING,
-      Value: (string) (len=8) "\"female\""
-     })
-    },
-    Ellipsis: (token.Pos) 0,
-    Rparen: (token.Pos) 230
+   (*ast.BasicLit)(0xc42008a3e0)({
+    ValuePos: (token.Pos) 281,
+    Kind: (token.Token) STRING,
+    Value: (string) (len=9) "\"tarball\""
    })
   },
   Comment: (*ast.CommentGroup)(<nil>)
@@ -96,32 +152,65 @@ file:  ./person.go
  Data: (int) 0,
  Type: (interface {}) <nil>
 })
+	name: Zipball
+	kind: const
+	data: 1
+	valuespec: &{<nil> [Zipball] archiveFormat [0xc42008a440] <nil>}
+(*ast.Object)(0xc4200a47d0)({
+ Kind: (ast.ObjKind) const,
+ Name: (string) (len=7) "Zipball",
+ Decl: (*ast.ValueSpec)(0xc4200a4780)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Names: ([]*ast.Ident) (len=1 cap=1) {
+   (*ast.Ident)(0xc42008a400)(Zipball)
+  },
+  Type: (*ast.Ident)(0xc42008a420)(archiveFormat),
+  Values: ([]ast.Expr) (len=1 cap=1) {
+   (*ast.BasicLit)(0xc42008a440)({
+    ValuePos: (token.Pos) 365,
+    Kind: (token.Token) STRING,
+    Value: (string) (len=9) "\"zipball\""
+   })
+  },
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (int) 1,
+ Type: (interface {}) <nil>
+})
+----------------------------------------
+file:  ./person.go
+	T  string   PersonGender
+	V  <nil>   [PersonGenderFemale]   [0xc42007e5c0]
+	V  <nil>   [PersonGendermale]   [0xc42007e600]
+	V  <nil>   [PersonGenderUnknown]   [0xc42007e6c0]
+	T  &{805 0xc42007a8a0 false}   Person
+-----
 	name: PersonGendermale
 	kind: const
 	data: 1
-	valuespec: &{<nil> [PersonGendermale] <nil> [0xc42007e440] <nil>}
-(*ast.Object)(0xc4200a4870)({
+	valuespec: &{<nil> [PersonGendermale] <nil> [0xc42007e600] <nil>}
+(*ast.Object)(0xc4200a4be0)({
  Kind: (ast.ObjKind) const,
  Name: (string) (len=16) "PersonGendermale",
- Decl: (*ast.ValueSpec)(0xc4200a4820)({
+ Decl: (*ast.ValueSpec)(0xc4200a4b90)({
   Doc: (*ast.CommentGroup)(<nil>),
   Names: ([]*ast.Ident) (len=1 cap=1) {
-   (*ast.Ident)(0xc42008a4e0)(PersonGendermale)
+   (*ast.Ident)(0xc42008a7a0)(PersonGendermale)
   },
   Type: (ast.Expr) <nil>,
   Values: ([]ast.Expr) (len=1 cap=1) {
-   (*ast.CallExpr)(0xc42007e440)({
-    Fun: (*ast.Ident)(0xc42008a500)(PersonGender),
-    Lparen: (token.Pos) 266,
+   (*ast.CallExpr)(0xc42007e600)({
+    Fun: (*ast.Ident)(0xc42008a7c0)(PersonGender),
+    Lparen: (token.Pos) 704,
     Args: ([]ast.Expr) (len=1 cap=1) {
-     (*ast.BasicLit)(0xc42008a520)({
-      ValuePos: (token.Pos) 267,
+     (*ast.BasicLit)(0xc42008a7e0)({
+      ValuePos: (token.Pos) 705,
       Kind: (token.Token) STRING,
       Value: (string) (len=6) "\"male\""
      })
     },
     Ellipsis: (token.Pos) 0,
-    Rparen: (token.Pos) 273
+    Rparen: (token.Pos) 711
    })
   },
   Comment: (*ast.CommentGroup)(<nil>)
@@ -132,29 +221,29 @@ file:  ./person.go
 	name: PersonGenderUnknown
 	kind: const
 	data: 0
-	valuespec: &{<nil> [PersonGenderUnknown] <nil> [0xc42007e4c0] <nil>}
-(*ast.Object)(0xc4200a4910)({
+	valuespec: &{<nil> [PersonGenderUnknown] <nil> [0xc42007e6c0] <nil>}
+(*ast.Object)(0xc4200a4c80)({
  Kind: (ast.ObjKind) const,
  Name: (string) (len=19) "PersonGenderUnknown",
- Decl: (*ast.ValueSpec)(0xc4200a48c0)({
+ Decl: (*ast.ValueSpec)(0xc4200a4c30)({
   Doc: (*ast.CommentGroup)(<nil>),
   Names: ([]*ast.Ident) (len=1 cap=1) {
-   (*ast.Ident)(0xc42008a5a0)(PersonGenderUnknown)
+   (*ast.Ident)(0xc42008a840)(PersonGenderUnknown)
   },
   Type: (ast.Expr) <nil>,
   Values: ([]ast.Expr) (len=1 cap=1) {
-   (*ast.CallExpr)(0xc42007e4c0)({
-    Fun: (*ast.Ident)(0xc42008a5c0)(PersonGender),
-    Lparen: (token.Pos) 317,
+   (*ast.CallExpr)(0xc42007e6c0)({
+    Fun: (*ast.Ident)(0xc42008a860)(PersonGender),
+    Lparen: (token.Pos) 755,
     Args: ([]ast.Expr) (len=1 cap=1) {
-     (*ast.BasicLit)(0xc42008a5e0)({
-      ValuePos: (token.Pos) 318,
+     (*ast.BasicLit)(0xc42008a880)({
+      ValuePos: (token.Pos) 756,
       Kind: (token.Token) STRING,
       Value: (string) (len=9) "\"unknown\""
      })
     },
     Ellipsis: (token.Pos) 0,
-    Rparen: (token.Pos) 327
+    Rparen: (token.Pos) 765
    })
   },
   Comment: (*ast.CommentGroup)(<nil>)
@@ -165,65 +254,214 @@ file:  ./person.go
 	name: Person
 	kind: type
 	data: <nil>
-	typespec: &{<nil> Person 0xc42008a7a0 <nil>}
-(*ast.Object)(0xc4200a4960)({
+	typespec: &{<nil> Person 0xc42008ad40 <nil>}
+(*ast.Object)(0xc4200a4cd0)({
  Kind: (ast.ObjKind) type,
  Name: (string) (len=6) "Person",
- Decl: (*ast.TypeSpec)(0xc42007a720)({
+ Decl: (*ast.TypeSpec)(0xc42007a7e0)({
   Doc: (*ast.CommentGroup)(<nil>),
-  Name: (*ast.Ident)(0xc42008a620)(Person),
-  Type: (*ast.StructType)(0xc42008a7a0)({
-   Struct: (token.Pos) 367,
-   Fields: (*ast.FieldList)(0xc42007a750)({
-    Opening: (token.Pos) 374,
-    List: ([]*ast.Field) (len=3 cap=4) {
-     (*ast.Field)(0xc42007e580)({
+  Name: (*ast.Ident)(0xc42008a8c0)(Person),
+  Type: (*ast.StructType)(0xc42008ad40)({
+   Struct: (token.Pos) 805,
+   Fields: (*ast.FieldList)(0xc42007a8a0)({
+    Opening: (token.Pos) 812,
+    List: ([]*ast.Field) (len=7 cap=8) {
+     (*ast.Field)(0xc42007e740)({
       Doc: (*ast.CommentGroup)(<nil>),
       Names: ([]*ast.Ident) (len=1 cap=1) {
-       (*ast.Ident)(0xc42008a640)(Name)
+       (*ast.Ident)(0xc42008a8e0)(Id)
       },
-      Type: (*ast.Ident)(0xc42008a660)(string),
-      Tag: (*ast.BasicLit)(0xc42008a680)({
-       ValuePos: (token.Pos) 397,
+      Type: (*ast.SelectorExpr)(0xc42008a960)({
+       X: (*ast.Ident)(0xc42008a900)(bson),
+       Sel: (*ast.Ident)(0xc42008a940)(ObjectId)
+      }),
+      Tag: (*ast.BasicLit)(0xc42008a980)({
+       ValuePos: (token.Pos) 837,
+       Kind: (token.Token) STRING,
+       Value: (string) (len=22) "`json:\"id\" bson:\"_id\"`"
+      }),
+      Comment: (*ast.CommentGroup)(<nil>)
+     }),
+     (*ast.Field)(0xc42007e780)({
+      Doc: (*ast.CommentGroup)(<nil>),
+      Names: ([]*ast.Ident) (len=1 cap=1) {
+       (*ast.Ident)(0xc42008a9a0)(Name)
+      },
+      Type: (*ast.Ident)(0xc42008a9c0)(string),
+      Tag: (*ast.BasicLit)(0xc42008a9e0)({
+       ValuePos: (token.Pos) 883,
        Kind: (token.Token) STRING,
        Value: (string) (len=13) "`json:\"name\"`"
       }),
       Comment: (*ast.CommentGroup)(<nil>)
      }),
-     (*ast.Field)(0xc42007e5c0)({
+     (*ast.Field)(0xc42007e7c0)({
       Doc: (*ast.CommentGroup)(<nil>),
       Names: ([]*ast.Ident) (len=1 cap=1) {
-       (*ast.Ident)(0xc42008a6a0)(Age)
+       (*ast.Ident)(0xc42008aa20)(Age)
       },
-      Type: (*ast.Ident)(0xc42008a6c0)(int),
-      Tag: (*ast.BasicLit)(0xc42008a6e0)({
-       ValuePos: (token.Pos) 432,
+      Type: (*ast.Ident)(0xc42008aa40)(int),
+      Tag: (*ast.BasicLit)(0xc42008aa60)({
+       ValuePos: (token.Pos) 920,
        Kind: (token.Token) STRING,
        Value: (string) (len=12) "`json:\"age\"`"
       }),
       Comment: (*ast.CommentGroup)(<nil>)
      }),
-     (*ast.Field)(0xc42007e600)({
+     (*ast.Field)(0xc42007e800)({
       Doc: (*ast.CommentGroup)(<nil>),
       Names: ([]*ast.Ident) (len=1 cap=1) {
-       (*ast.Ident)(0xc42008a720)(Gender)
+       (*ast.Ident)(0xc42008aaa0)(Gender)
       },
-      Type: (*ast.Ident)(0xc42008a740)(PersonGender),
-      Tag: (*ast.BasicLit)(0xc42008a760)({
-       ValuePos: (token.Pos) 466,
+      Type: (*ast.Ident)(0xc42008aac0)(PersonGender),
+      Tag: (*ast.BasicLit)(0xc42008aae0)({
+       ValuePos: (token.Pos) 956,
        Kind: (token.Token) STRING,
        Value: (string) (len=15) "`json:\"gender\"`"
       }),
       Comment: (*ast.CommentGroup)(<nil>)
+     }),
+     (*ast.Field)(0xc42007e880)({
+      Doc: (*ast.CommentGroup)(<nil>),
+      Names: ([]*ast.Ident) (len=1 cap=1) {
+       (*ast.Ident)(0xc42008ab00)(GroupId)
+      },
+      Type: (*ast.StarExpr)(0xc42008ab60)({
+       Star: (token.Pos) 981,
+       X: (*ast.Ident)(0xc42008ab40)(string)
+      }),
+      Tag: (*ast.BasicLit)(0xc42008ab80)({
+       ValuePos: (token.Pos) 995,
+       Kind: (token.Token) STRING,
+       Value: (string) (len=26) "`json:\"groupId,omitempty\"`"
+      }),
+      Comment: (*ast.CommentGroup)(<nil>)
+     }),
+     (*ast.Field)(0xc42007e900)({
+      Doc: (*ast.CommentGroup)(<nil>),
+      Names: ([]*ast.Ident) (len=1 cap=1) {
+       (*ast.Ident)(0xc42008aba0)(Group)
+      },
+      Type: (*ast.StarExpr)(0xc42008abe0)({
+       Star: (token.Pos) 1031,
+       X: (*ast.Ident)(0xc42008abc0)(Group)
+      }),
+      Tag: (*ast.BasicLit)(0xc42008ac00)({
+       ValuePos: (token.Pos) 1038,
+       Kind: (token.Token) STRING,
+       Value: (string) (len=10) "`json:\"-\"`"
+      }),
+      Comment: (*ast.CommentGroup)(<nil>)
+     }),
+     (*ast.Field)(0xc42007ea00)({
+      Doc: (*ast.CommentGroup)(<nil>),
+      Names: ([]*ast.Ident) (len=1 cap=1) {
+       (*ast.Ident)(0xc42008ac20)(Modify)
+      },
+      Type: (*ast.FuncType)(0xc42008ad20)({
+       Func: (token.Pos) 1057,
+       Params: (*ast.FieldList)(0xc42007a840)({
+        Opening: (token.Pos) 1061,
+        List: ([]*ast.Field) (len=1 cap=1) {
+         (*ast.Field)(0xc42007e940)({
+          Doc: (*ast.CommentGroup)(<nil>),
+          Names: ([]*ast.Ident) (len=1 cap=1) {
+           (*ast.Ident)(0xc42008ac40)(other)
+          },
+          Type: (*ast.StarExpr)(0xc42008ac80)({
+           Star: (token.Pos) 1068,
+           X: (*ast.Ident)(0xc42008ac60)(Person)
+          }),
+          Tag: (*ast.BasicLit)(<nil>),
+          Comment: (*ast.CommentGroup)(<nil>)
+         })
+        },
+        Closing: (token.Pos) 1075
+       }),
+       Results: (*ast.FieldList)(0xc42007a870)({
+        Opening: (token.Pos) 1077,
+        List: ([]*ast.Field) (len=2 cap=2) {
+         (*ast.Field)(0xc42007e980)({
+          Doc: (*ast.CommentGroup)(<nil>),
+          Names: ([]*ast.Ident) <nil>,
+          Type: (*ast.StarExpr)(0xc42008acc0)({
+           Star: (token.Pos) 1078,
+           X: (*ast.Ident)(0xc42008aca0)(Person)
+          }),
+          Tag: (*ast.BasicLit)(<nil>),
+          Comment: (*ast.CommentGroup)(<nil>)
+         }),
+         (*ast.Field)(0xc42007e9c0)({
+          Doc: (*ast.CommentGroup)(<nil>),
+          Names: ([]*ast.Ident) <nil>,
+          Type: (*ast.Ident)(0xc42008ace0)(error),
+          Tag: (*ast.BasicLit)(<nil>),
+          Comment: (*ast.CommentGroup)(<nil>)
+         })
+        },
+        Closing: (token.Pos) 1092
+       })
+      }),
+      Tag: (*ast.BasicLit)(<nil>),
+      Comment: (*ast.CommentGroup)(<nil>)
      })
     },
-    Closing: (token.Pos) 482
+    Closing: (token.Pos) 1094
    }),
    Incomplete: (bool) false
   }),
   Comment: (*ast.CommentGroup)(<nil>)
  }),
  Data: (interface {}) <nil>,
+ Type: (interface {}) <nil>
+})
+	name: PersonGender
+	kind: type
+	data: <nil>
+	typespec: &{<nil> PersonGender string <nil>}
+(*ast.Object)(0xc4200a4aa0)({
+ Kind: (ast.ObjKind) type,
+ Name: (string) (len=12) "PersonGender",
+ Decl: (*ast.TypeSpec)(0xc42007a7b0)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Name: (*ast.Ident)(0xc42008a6a0)(PersonGender),
+  Type: (*ast.Ident)(0xc42008a6c0)(string),
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (interface {}) <nil>,
+ Type: (interface {}) <nil>
+})
+	name: PersonGenderFemale
+	kind: const
+	data: 0
+	valuespec: &{<nil> [PersonGenderFemale] <nil> [0xc42007e5c0] <nil>}
+(*ast.Object)(0xc4200a4b40)({
+ Kind: (ast.ObjKind) const,
+ Name: (string) (len=18) "PersonGenderFemale",
+ Decl: (*ast.ValueSpec)(0xc4200a4af0)({
+  Doc: (*ast.CommentGroup)(<nil>),
+  Names: ([]*ast.Ident) (len=1 cap=1) {
+   (*ast.Ident)(0xc42008a740)(PersonGenderFemale)
+  },
+  Type: (ast.Expr) <nil>,
+  Values: ([]ast.Expr) (len=1 cap=1) {
+   (*ast.CallExpr)(0xc42007e5c0)({
+    Fun: (*ast.Ident)(0xc42008a760)(PersonGender),
+    Lparen: (token.Pos) 659,
+    Args: ([]ast.Expr) (len=1 cap=1) {
+     (*ast.BasicLit)(0xc42008a780)({
+      ValuePos: (token.Pos) 660,
+      Kind: (token.Token) STRING,
+      Value: (string) (len=8) "\"female\""
+     })
+    },
+    Ellipsis: (token.Pos) 0,
+    Rparen: (token.Pos) 668
+   })
+  },
+  Comment: (*ast.CommentGroup)(<nil>)
+ }),
+ Data: (int) 0,
  Type: (interface {}) <nil>
 })
 ----------------------------------------

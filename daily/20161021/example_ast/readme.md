@@ -22,5 +22,6 @@ $ go get -v github.com/davecgh/go-spew/spew
 gotype --ast $GOPATH/src/github.com/`whoami`/models | sed "s@$GOPATH/src/github.com/`whoami`/models@.@g" > misc/models.ast.dat
 go run 01gotypeexample/main.go $GOPATH/src/github.com/`whoami`/models | sed "s@$GOPATH/src/github.com/`whoami`/models@.@g" > misc/models.node.dat
 go run 02*/main.go $GOPATH/src/github.com/`whoami`/models | sed "s@$GOPATH/src/github.com/`whoami`/models@.@g" > misc/models.02.txt
+go run 03*/main.go --target $GOPATH/src/github.com/`whoami`/models | jq . -S | sed "s@$GOPATH/src/github.com/`whoami`/models@.@g" > misc/models.03.txt
 ```
 

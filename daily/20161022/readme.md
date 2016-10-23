@@ -1,3 +1,7 @@
+# golang astをvisitorで殴る
+
+- [example_ast](../20161021/example_ast)
+
 # golang input <-> outputのmodelの変換について
 
 apiのresponse用のpresentation modelと内部のmodelがあったとして、その間のデータの変換がだるい。

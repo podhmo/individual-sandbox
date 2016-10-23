@@ -9,6 +9,8 @@ import (
 	"go/token"
 	"log"
 	"os"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 // TODO: extract struct information
@@ -81,7 +83,7 @@ type World struct {
 	Modules map[string]*Module `json:"module"`
 }
 type Module struct {
-	Name  string             `json:"name"`
+	Name  string             `json:"-"`
 	Files map[string]*Result `json:"file"`
 }
 
@@ -103,18 +105,18 @@ const (
 )
 
 type Result struct {
-	Name            string                        `json:"name"`
-	NewTypeMap      map[string]*NewTypeDefinition `json:"newtype"`
-	StructMap       map[string]*StructDefinition  `json:"struct"`
-	MaybeNewTypeses []*NewTypeValue               `json:"-"`
+	Name          string                       `json:"-"`
+	AliasMap      map[string]*AliasDefinition  `json:"alias"`
+	StructMap     map[string]*StructDefinition `json:"struct"`
+	MaybeAliasses []*AliasValue                `json:"-"`
 }
 
 func NewResult(name string) *Result {
 	return &Result{
-		Name:            name,
-		StructMap:       make(map[string]*StructDefinition),
-		NewTypeMap:      make(map[string]*NewTypeDefinition),
-		MaybeNewTypeses: []*NewTypeValue{},
+		Name:          name,
+		StructMap:     make(map[string]*StructDefinition),
+		AliasMap:      make(map[string]*AliasDefinition),
+		MaybeAliasses: []*AliasValue{},
 	}
 }
 
@@ -126,28 +128,152 @@ func (r *Result) AddStruct(ob *ast.Object) (*StructDefinition, error) {
 	item.rawDef = ob
 	item.Name = ob.Name
 	r.StructMap[ob.Name] = item
-	return item, nil
+	fields, err := findFields(ob.Decl.(ast.Node))
+	item.Fields = fields
+	return item, err
 }
 
-func (r *Result) AddNewType(ob *ast.Object) (*NewTypeDefinition, error) {
-	item, exists := r.NewTypeMap[ob.Name]
+type nameVisitor struct{ Found string }
+
+func (v *nameVisitor) Visit(node ast.Node) ast.Visitor {
+	switch node := node.(type) {
+	case *ast.Ident:
+		v.Found = node.Name
+	}
+	return v
+}
+
+func findName(node ast.Node) string {
+	namevisitor := &nameVisitor{Found: ""}
+	ast.Walk(namevisitor, node)
+	return namevisitor.Found
+}
+
+type Field struct {
+	Name  string   `json:"-"`
+	Tags  []string `json:"tags"`
+	Type  Type     `json:"type"`
+	Embed bool     `json:"embed"`
+}
+
+type Type interface{}
+type fieldsVisitor struct {
+	Found map[string]*Field
+}
+
+func (v *fieldsVisitor) Visit(node ast.Node) ast.Visitor {
+	structNode := node.(*ast.TypeSpec).Type.(*ast.StructType)
+	if structNode.Incomplete {
+		panic(fmt.Sprintf("%s is incomplete struct definition", node.(*ast.TypeSpec).Name.Name))
+	}
+	for _, field := range structNode.Fields.List {
+		if err := v.visitField(field); err != nil {
+			panic(err)
+		}
+	}
+	return nil
+}
+
+func (v *fieldsVisitor) visitField(node *ast.Field) error {
+	if len(node.Names) > 1 {
+		return fmt.Errorf("%s has more than one length", node.Names)
+	}
+	typ := findType(node.Type)
+	tags := []string{}
+	if node.Tag != nil {
+		tags = append(tags, node.Tag.Value)
+	}
+	var embed bool
+	var name string
+	if len(node.Names) == 0 {
+		embed = true
+		name = findName(node.Type)
+	} else {
+		embed = false
+		name = node.Names[0].Name
+	}
+
+	v.Found[name] = &Field{
+		Name:  name,
+		Embed: embed,
+		Tags:  tags,
+		Type:  typ,
+	}
+	return nil
+}
+
+func findType(node ast.Node) Type {
+	m := make(map[string]Type)
+	switch node := node.(type) {
+	case *ast.Ident:
+		m["kind"] = "primitive"
+		m["value"] = node.Name
+	case *ast.ArrayType:
+		m["kind"] = "array"
+		m["value"] = findType(node.Elt)
+	case *ast.MapType:
+		m["kind"] = "map"
+		m["key"] = findType(node.Key)
+		m["value"] = findType(node.Value)
+	case *ast.InterfaceType:
+		m["kind"] = "interface"
+		m["methods"] = findType(node.Methods)
+	case *ast.StarExpr:
+		m["kind"] = "pointer"
+		m["value"] = findType(node.X)
+	case *ast.SelectorExpr:
+		m["kind"] = "selector"
+		m["value"] = fmt.Sprintf("%s.%s", node.X.(*ast.Ident).Name, node.Sel)
+	case *ast.FuncType:
+		m["kind"] = "func"
+		m["args"] = findType(node.Params)
+		m["results"] = findType(node.Results)
+	case *ast.TypeSpec:
+		return findType(node.Type)
+	case *ast.FieldList:
+		args := make([]Type, len(node.List))
+		for i, arg := range node.List {
+			args[i] = findType(arg.Type)
+		}
+		return args
+	default:
+		spew.Dump(node)
+		panic(node)
+	}
+	return m
+}
+
+func findFields(val ast.Node) (map[string]*Field, error) {
+	v := &fieldsVisitor{Found: make(map[string]*Field)}
+	ast.Walk(v, val)
+	if v.Found == nil {
+		return nil, fmt.Errorf("fields is not found")
+	}
+	return v.Found, nil
+}
+
+func (r *Result) AddAlias(ob *ast.Object) (*AliasDefinition, error) {
+	item, exists := r.AliasMap[ob.Name]
 	if !exists {
-		item = &NewTypeDefinition{}
+		item = &AliasDefinition{}
 	}
 	item.rawDef = ob
 	item.Name = ob.Name
-	r.NewTypeMap[ob.Name] = item
+	if ob.Decl != nil {
+		item.Original = findType(ob.Decl.(*ast.TypeSpec))
+	}
+	r.AliasMap[ob.Name] = item
 	if !exists {
-		newGuesses := make([]*NewTypeValue, 0, len(r.MaybeNewTypeses))
-		for _, value := range r.MaybeNewTypeses {
+		newGuesses := make([]*AliasValue, 0, len(r.MaybeAliasses))
+		for _, value := range r.MaybeAliasses {
 			// xxx:
 			if ob.Name == value.TypeName {
-				r.AddNewTypeValue(value.rawDef)
+				r.AddAliasValue(value.rawDef)
 			} else {
 				newGuesses = append(newGuesses, value)
 			}
 		}
-		r.MaybeNewTypeses = newGuesses
+		r.MaybeAliasses = newGuesses
 	}
 	return item, nil
 }
@@ -168,9 +294,6 @@ func (v *callexprVisitor) Visit(node ast.Node) ast.Visitor {
 func findCallExpr(val ast.Node) (*ast.CallExpr, error) {
 	v := &callexprVisitor{}
 	ast.Walk(v, val)
-	if v.Found == nil {
-		return nil, fmt.Errorf("callExpr is not found")
-	}
 	return v.Found, nil
 }
 
@@ -205,13 +328,13 @@ func findValueType(val ast.Node) (*ast.CallExpr, error) {
 	return v.Found, nil
 }
 
-func (r *Result) AddNewTypeValue(ob *ast.Object) (*NewTypeDefinition, error) {
+func (r *Result) AddAliasValue(ob *ast.Object) (*AliasDefinition, error) {
 	spec := ob.Decl.(*ast.ValueSpec)
 	values := spec.Values
 	if len(values) != 1 {
 		return nil, fmt.Errorf("hmm:%v", values) // xxx;
 	}
-	var value *NewTypeValue
+	var value *AliasValue
 	switch node := spec.Type.(type) {
 	case *ast.Ident:
 		typeName := node.Name
@@ -223,7 +346,7 @@ func (r *Result) AddNewTypeValue(ob *ast.Object) (*NewTypeDefinition, error) {
 			if lit == nil {
 				return nil, fmt.Errorf("not found: %s", ob.Name)
 			}
-			value = &NewTypeValue{TypeName: typeName, Name: ob.Name, Value: lit.Value, rawDef: ob}
+			value = &AliasValue{TypeName: typeName, Name: ob.Name, Value: lit.Value, rawDef: ob}
 			break
 		}
 	case nil:
@@ -234,30 +357,34 @@ func (r *Result) AddNewTypeValue(ob *ast.Object) (*NewTypeDefinition, error) {
 				return nil, err // xxx;
 			}
 			if f == nil {
-				return nil, fmt.Errorf("not found: %s", ob.Name)
+				if _, ok := v.(*ast.BasicLit); ok {
+					return nil, nil
+				}
+				fmt.Fprintf(os.Stderr, "const %s is complex definition. skip..\n", ob.Name)
+				return nil, nil
 			}
 			lit, err := findBasicLit(f)
 			if err != nil {
 				return nil, err // xxx;
 			}
 			if lit == nil {
-				return nil, fmt.Errorf("not found: %s", ob.Name)
+				return nil, fmt.Errorf("not found@@: %s", ob.Name)
 			}
 			fident := f.Fun.(*ast.Ident)
-			value = &NewTypeValue{TypeName: fident.Name, Name: ob.Name, Value: lit.Value, rawDef: ob}
+			value = &AliasValue{TypeName: fident.Name, Name: ob.Name, Value: lit.Value, rawDef: ob}
 			break
 		}
 	}
 	// fident.Obj is same as type def?
-	if _, ok := r.NewTypeMap[value.TypeName]; !ok {
-		r.MaybeNewTypeses = append(r.MaybeNewTypeses, value)
+	if _, ok := r.AliasMap[value.TypeName]; !ok {
+		r.MaybeAliasses = append(r.MaybeAliasses, value)
 		return nil, nil
 	}
 
-	item, exists := r.NewTypeMap[value.TypeName]
+	item, exists := r.AliasMap[value.TypeName]
 	if !exists {
-		item = &NewTypeDefinition{}
-		r.NewTypeMap[ob.Name] = item
+		item = &AliasDefinition{}
+		r.AliasMap[ob.Name] = item
 	}
 	item.Candidates = append(item.Candidates, value)
 	item.rawCandidates = append(item.rawCandidates, ob)
@@ -265,20 +392,22 @@ func (r *Result) AddNewTypeValue(ob *ast.Object) (*NewTypeDefinition, error) {
 }
 
 type StructDefinition struct {
-	Name   string `json:"name"`
+	Name   string `json:"-"`
 	rawDef *ast.Object
+	Fields map[string]*Field
 }
 
-type NewTypeDefinition struct {
-	Name          string          `json:"name"`
-	Candidates    []*NewTypeValue `json:"candidates"`
+type AliasDefinition struct {
+	Name          string        `json:"-"`
+	Original      Type          `json:"original"`
+	Candidates    []*AliasValue `json:"candidates"`
 	rawDef        *ast.Object
 	rawCandidates []*ast.Object
 }
 
-type NewTypeValue struct {
+type AliasValue struct {
 	TypeName string      `json:"-"`
-	Name     string      `json:"name"`
+	Name     string      `json:"-"`
 	Value    interface{} `json:"value"`
 	rawDef   *ast.Object
 }
@@ -294,23 +423,23 @@ func CollectResult(name string, scope *ast.Scope) (*Result, error) {
 				return r, err
 			}
 		}
-		if isNewTypeDefinition(ob) {
+		if isAliasDefinition(ob) {
 			anyFound = true
-			_, err := r.AddNewType(ob)
+			_, err := r.AddAlias(ob)
 			if err != nil {
 				return r, err
 			}
 
 		}
-		if isNewTypeValueDefinition(ob) {
+		if isAliasValueDefinition(ob) {
 			anyFound = true
-			_, err := r.AddNewTypeValue(ob)
+			_, err := r.AddAliasValue(ob)
 			if err != nil {
 				return r, err
 			}
 		}
 		if !anyFound {
-			fmt.Println(ob.Name)
+			// fmt.Println(ob.Name)
 		}
 	}
 	return r, nil
@@ -333,7 +462,7 @@ func isStructDefinition(ob *ast.Object) bool {
 	return true
 }
 
-func isNewTypeDefinition(ob *ast.Object) bool {
+func isAliasDefinition(ob *ast.Object) bool {
 	if ob.Kind != ast.Typ {
 		return false
 	}
@@ -349,7 +478,7 @@ func isNewTypeDefinition(ob *ast.Object) bool {
 	return true
 }
 
-func isNewTypeValueDefinition(ob *ast.Object) bool {
+func isAliasValueDefinition(ob *ast.Object) bool {
 	if ob.Kind != ast.Con {
 		return false
 	}
