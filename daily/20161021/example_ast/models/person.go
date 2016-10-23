@@ -25,13 +25,3 @@ type Person struct {
 	Group  *Group `json:"-"`
 	Modify func(other *Person) (*Person, error)
 }
-
-/*
-struct {
-  comment: "",
-  fields:  {
-    <name>: <item>
-  }
-}
-<item> : {type, tags} | {struct, tags}
-*/
