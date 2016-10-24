@@ -1,0 +1,53 @@
+{
+  "module": {
+    "model": {
+      "file": {
+        "model/model.go": {
+          "alias": {},
+          "name": "model/model.go",
+          "struct": {
+            "Page": {
+              "fields": {
+                "Path": {
+                  "embed": false,
+                  "name": "Path",
+                  "tags": [
+                    "`bson:\"path\" json:\"path\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "PathHash": {
+                  "embed": false,
+                  "name": "PathHash",
+                  "tags": [
+                    "`bson:\"pathHash\" json:\"pathHash\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Title": {
+                  "embed": false,
+                  "name": "Title",
+                  "tags": [
+                    "`bson:\"title\" json:\"title\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "Page"
+            }
+          }
+        }
+      },
+      "name": "model"
+    }
+  }
+}

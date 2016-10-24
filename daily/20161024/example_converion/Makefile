@@ -7,18 +7,18 @@ install:
 	go get -u -v github.com/podhmo/go-structjson/cmd/go-structjson
 
 json:
-	go-structjson --target model/model.go | jq . -S > dist/model.json
-	go-structjson --target def/def.go | jq . -S > dist/def.json
+	go-structjson --target model/model.go | jq . -S > output/model.json
+	go-structjson --target def/def.go | jq . -S > output/def.json
 
 convert:
-	python convert.py --src dist/model.json --dst dist/def.json > convert/convert.go
+	python convert.py --src output/model.json --dst output/def.json > convert/convert.go
 	gofmt -w convert/convert.go
 
 run:
 	go run main.go
 
 clean:
-	rm -rf dist
+	rm -rf output
 	rm -rf convert
 	rm -f ${PKG}
 

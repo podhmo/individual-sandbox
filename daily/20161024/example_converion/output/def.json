@@ -1,0 +1,48 @@
+{
+  "module": {
+    "def": {
+      "file": {
+        "def/def.go": {
+          "alias": {},
+          "name": "def/def.go",
+          "struct": {
+            "Page": {
+              "fields": {
+                "Path": {
+                  "embed": false,
+                  "name": "Path",
+                  "tags": [
+                    "`json:\"path,omitempty\"`"
+                  ],
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                },
+                "Title": {
+                  "embed": false,
+                  "name": "Title",
+                  "tags": [
+                    "`json:\"title,omitempty\"`"
+                  ],
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                }
+              },
+              "name": "Page"
+            }
+          }
+        }
+      },
+      "name": "def"
+    }
+  }
+}
