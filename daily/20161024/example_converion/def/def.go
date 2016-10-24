@@ -1,7 +1,9 @@
 package def
 
-
 type Page struct {
+	/* path
+	 */
+	ID *string `json:"id,omitempty"`
 
 	/* path
 	 */

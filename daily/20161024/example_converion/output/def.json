@@ -8,6 +8,20 @@
           "struct": {
             "Page": {
               "fields": {
+                "ID": {
+                  "embed": false,
+                  "name": "ID",
+                  "tags": [
+                    "`json:\"id,omitempty\"`"
+                  ],
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                },
                 "Path": {
                   "embed": false,
                   "name": "Path",

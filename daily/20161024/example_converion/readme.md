@@ -5,6 +5,7 @@ model packageのstructからdef packageのstructへの変換を生成
 不足していること
 
 - 適切にtypeを変換
+- 何らかの変換処理を間に挟む。(e.g. bson.ObjectIdをstringにするために.Hex()を呼ぶ)
 - packageのimport(fullpathを渡せるようにする)
 - tagを見て分岐
 - ネストした属性のサポート

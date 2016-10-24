@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	page := &model.Page{Path: "/index", Title: "index page", PathHash: "#"}
+	page := &model.Page{Id: "1", Path: "/index", Title: "index page", PathHash: "#"}
 	defPage, err := convert.ConvertFromPage(page)
 	if err != nil {
 		panic(err)

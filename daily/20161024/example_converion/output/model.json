@@ -8,6 +8,17 @@
           "struct": {
             "Page": {
               "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": [
+                    "`bson:\"_id\" json:\"id\"`"
+                  ],
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
                 "Path": {
                   "embed": false,
                   "name": "Path",
