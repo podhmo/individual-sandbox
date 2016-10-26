@@ -2,9 +2,9 @@ import argparse
 import copy
 import json
 import logging
-from collections import ChainMap, deque
+import itertools
+from collections import ChainMap
 from prestring.go import GoModule
-from collections import defaultdict
 
 
 logger = logging.getLogger(__name__)
@@ -303,57 +303,39 @@ class TypeConvertor(object):
 
 class TypeMappingResolver(object):
     def __init__(self, items):
-        self.conv_map = defaultdict(list)
+        self.rev_map = {}
         for k, v in items:
-            self.conv_map[k].append(v)
-            self.conv_map[v].append(k)
+            self.rev_map[v] = k
 
-    def resolve(self, src, dst):
-        if src == dst:
-            return []
-        return self.tick_src([src], [dst], set(), deque(), deque())
-
-    def on_finish(self, src_hist, dst_hist):
-        src_hist.extend(reversed(dst_hist))
-        path = src_hist
+    def on_finish(self, path):
         coerce_path = []
         for i in range(len(path) - 1):
             coerce_path.append(["coerce", path[i], path[i + 1]])
         return coerce_path
 
-    def tick_src(self, src_hist, dst_hist, arrived, src_q, dst_q):
-        if src_hist[-1] == dst_hist[-1]:
-            return self.on_finish(src_hist, dst_hist[:-1])
-        if src_hist[-1] not in arrived:
-            arrived.add(src_hist[-1])
-            if src_hist[-1] in self.conv_map:
-                for item in self.conv_map[src_hist[-1]]:
-                    src_q.append(([*src_hist, item], dst_hist))
-        if dst_q:
-            src_hist, dst_hist = dst_q.pop()
-            return self.tick_dst(src_hist, dst_hist, arrived, src_q, dst_q)
-        elif src_q:
-            src_hist, dst_hist = src_q.pop()
-            return self.tick_src(src_hist, dst_hist, arrived, src_q, dst_q)
-        else:
-            return None
+    def resolve(self, src, dst):
+        if src == dst:
+            return self.on_finish([])
+        src_dependecies = self.get_dependenies(src)
+        dst_dependecies = self.get_dependenies(dst)
 
-    def tick_dst(self, src_hist, dst_hist, arrived, src_q, dst_q):
-        if src_hist[-1] == dst_hist[-1]:
-            return self.on_finish(src_hist, dst_hist[:-1])
-        if dst_hist[-1] not in arrived:
-            arrived.add(dst_hist[-1])
-            if dst_hist[-1] in self.conv_map:
-                for item in self.conv_map[dst_hist[-1]]:
-                    dst_q.append(([*dst_hist, item], dst_hist))
-        if src_q:
-            src_hist, dst_hist = src_q.pop()
-            return self.tick_src(src_hist, dst_hist, arrived, src_q, dst_q)
-        elif dst_q:
-            src_hist, dst_hist = dst_q.pop()
-            return self.tick_dst(src_hist, dst_hist, arrived, src_q, dst_q)
-        else:
-            return None
+        if src_dependecies[-1] != dst_dependecies[-1]:
+            raise ValueError("mapping is not found. ({} -> {})".format(src, dst))
+
+        popped = []
+        while src_dependecies and dst_dependecies:
+            if src_dependecies[-1] != dst_dependecies[-1]:
+                break
+            popped.append(src_dependecies.pop())
+            dst_dependecies.pop()
+        return self.on_finish(list(itertools.chain(src_dependecies, [popped[-1]], reversed(dst_dependecies))))
+
+    def get_dependenies(self, v):
+        rpath = [v]
+        while v in self.rev_map:
+            v = self.rev_map[v]
+            rpath.append(v)
+        return rpath
 
 
 class MiniCodeGenerator(object):
