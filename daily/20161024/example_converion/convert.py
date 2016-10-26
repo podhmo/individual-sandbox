@@ -2,8 +2,9 @@ import argparse
 import copy
 import json
 import logging
-from collections import ChainMap
+from collections import ChainMap, deque
 from prestring.go import GoModule
+from collections import defaultdict
 
 
 logger = logging.getLogger(__name__)
@@ -300,13 +301,70 @@ class TypeConvertor(object):
         return value
 
 
-class TypeConverCodeResolver(object):
+class TypeMappingResolver(object):
+    def __init__(self, items):
+        self.conv_map = defaultdict(list)
+        for k, v in items:
+            self.conv_map[k].append(v)
+            self.conv_map[v].append(k)
+
+    def resolve(self, src, dst):
+        if src == dst:
+            return []
+        return self.tick_src([src], [dst], set(), deque(), deque())
+
+    def on_finish(self, src_hist, dst_hist):
+        src_hist.extend(reversed(dst_hist))
+        path = src_hist
+        coerce_path = []
+        for i in range(len(path) - 1):
+            coerce_path.append(["coerce", path[i], path[i + 1]])
+        return coerce_path
+
+    def tick_src(self, src_hist, dst_hist, arrived, src_q, dst_q):
+        if src_hist[-1] == dst_hist[-1]:
+            return self.on_finish(src_hist, dst_hist[:-1])
+        if src_hist[-1] not in arrived:
+            arrived.add(src_hist[-1])
+            if src_hist[-1] in self.conv_map:
+                for item in self.conv_map[src_hist[-1]]:
+                    src_q.append(([*src_hist, item], dst_hist))
+        if dst_q:
+            src_hist, dst_hist = dst_q.pop()
+            return self.tick_dst(src_hist, dst_hist, arrived, src_q, dst_q)
+        elif src_q:
+            src_hist, dst_hist = src_q.pop()
+            return self.tick_src(src_hist, dst_hist, arrived, src_q, dst_q)
+        else:
+            return None
+
+    def tick_dst(self, src_hist, dst_hist, arrived, src_q, dst_q):
+        if src_hist[-1] == dst_hist[-1]:
+            return self.on_finish(src_hist, dst_hist[:-1])
+        if dst_hist[-1] not in arrived:
+            arrived.add(dst_hist[-1])
+            if dst_hist[-1] in self.conv_map:
+                for item in self.conv_map[dst_hist[-1]]:
+                    dst_q.append(([*dst_hist, item], dst_hist))
+        if src_q:
+            src_hist, dst_hist = src_q.pop()
+            return self.tick_src(src_hist, dst_hist, arrived, src_q, dst_q)
+        elif dst_q:
+            src_hist, dst_hist = dst_q.pop()
+            return self.tick_dst(src_hist, dst_hist, arrived, src_q, dst_q)
+        else:
+            return None
+
+
+class MiniCodeGenerator(object):
     # generating mini language
     # [deref] -> *x
     # [ref] -> &x
     # [coerce, x, y] -> finding alias {original: x} and name is y, -> y(x)
 
-    def __init__(self, optimizer=None):
+    def __init__(self, coerce_map=None, optimizer=None):
+        self.coerce_map = coerce_map or {}
+        self.rev_map = {v: k for k, v in self.coerce_map.items()}
         self.optimizer = optimizer or self._default_optimize
 
     def _default_optimize(self, code):
@@ -318,13 +376,17 @@ class TypeConverCodeResolver(object):
                 optimized.append(x)
         return optimized
 
-    def resolve(self, src_path, dst_path):
-        code = self._resolve(src_path, dst_path)
+    def gencode(self, src_path, dst_path):
+        code = self._gencode(src_path, dst_path)
         code = self.optimizer(code)
         return code
 
-    def _resolve(self, src_path, dst_path):
+    def _gencode(self, src_path, dst_path):
         code = []
+        # detect type convertion
+        # detect pointer level
+        # deref
+        # ref
         if src_path[0] != dst_path[0]:
             code.append(["coerce", src_path[0], dst_path[0]])
         for typ in src_path[1:]:
@@ -340,6 +402,10 @@ class TypeConverCodeResolver(object):
         return code
 
 
+def detect_pointer_level(path):
+    return len(path) - 1  # xxx
+
+
 def sandbox(writer, reader, src_world, dst_world):
     print(src_world["model"]["Page"])
     print(dst_world["def"]["Page"])
@@ -349,13 +415,13 @@ def sandbox(writer, reader, src_world, dst_world):
     print(dst_world["def"]["Page"].dump(writer))
     print("----------------------------------------")
     # print("----------------------------------------")
-    # print(resolver.resolve(src_path=["string"], dst_path=["string"]))
-    # print(resolver.resolve(src_path=["string", "pointer"], dst_path=["string"]))
-    # print(resolver.resolve(src_path=["string"], dst_path=["string", "pointer"]))
-    # print(resolver.resolve(src_path=["string", "pointer"], dst_path=["string", "pointer"]))
-    # print(resolver.resolve(src_path=["string", "pointer", "pointer"], dst_path=["string", "pointer"]))
-    # print(resolver.resolve(src_path=["string", "pointer", "pointer"], dst_path=["string"]))
-    # print(resolver.resolve(src_path=["string", "pointer"], dst_path=["X", "pointer"]))
+    # print(gencoder.gencode(src_path=["string"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer", "pointer"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer", "pointer"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["X", "pointer"]))
 
 
 def main():
@@ -374,8 +440,8 @@ def main():
         dst_world = reader.read_world(json.load(rf))
         dst_world.normalize()
     # sandbox(writer, reader, src_world, dst_world)
-    resolver = TypeConverCodeResolver()
-    convertor = TypeConvertor(resolver, src_world, dst_world)
+    gencoder = MiniCodeGenerator()
+    convertor = TypeConvertor(gencoder, src_world, dst_world)
 
     m = GoModule()
     m.package("convert")

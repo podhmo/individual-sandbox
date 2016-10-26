@@ -26,5 +26,8 @@ setup:
 	mkdir -p `dirname ${PKG}`
 	ln -s `pwd` ${PKG}
 
+test:
+	PYTHONPATH=. python -m unittest discover tests
+
 
 .PHONY: json convert default setup clean run
