@@ -1,0 +1,10 @@
+elastic:
+  build: .
+  dockerfile: "$PWD/dockerfile/elastic"
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
+  volumes:
+    - "$PWD/config/elastic:/usr/share/elasticsearch/config"
+    - "$PWD/data/elastic:/usr/share/elasticsearch/data"
