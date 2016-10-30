@@ -24,9 +24,12 @@ decoded: {'some': 'payload'}
 # python simpleなuser auth
 
 passwordをhash化して保持しておこうという話。
-salt付きでhash化するのは当然なのだけれど。
+salt付きでhash化するのは当然なのだけれど。stretchもある程度やっておいた方が良いらしい。
 
-# python jwt auth
-
+- [example_auth](./example_auth)
 
 # python bottle proxy2 oauth auth
+
+たぶん python-social-authが一番楽そうな感じ？
+
+- [omab/python-social-auth: Social auth made simple](https://github.com/omab/python-social-auth)
