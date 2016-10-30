@@ -33,3 +33,10 @@ salt付きでhash化するのは当然なのだけれど。stretchもある程�
 たぶん python-social-authが一番楽そうな感じ？
 
 - [omab/python-social-auth: Social auth made simple](https://github.com/omab/python-social-auth)
+
+## python-social-authで個人的なbackendsを作成する方法
+
+以下を実装する必要がありそう。真面目にやる場合には。通常の用途では既に定義済みなのでこれを使えば良い。
+
+- strategy
+- backend
