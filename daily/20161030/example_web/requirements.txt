@@ -1,0 +1,3 @@
+bottle
+pyjwt
+python-social-auth
