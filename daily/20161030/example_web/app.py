@@ -32,13 +32,16 @@ def auth_required(view_fn):
     @wraps(view_fn)
     def wrap(*args, **kwargs):
         auth_header = request.get_header("Authorization")
+        if auth_header is None:
+            response.status = 401
+            return json_response({"message": "unauthorized"})
         if not auth_header.startswith("Bearer "):
-            response.set_status(401)
+            response.status = 401
             return json_response({"message": "unauthorized"})
         token = auth_header[len("Bearer "):]
         user = app.jwt_auth.decode(token)
         if user is None:
-            response.set_status(401)
+            response.status = 401
             return json_response({"message": "unauthorized"})
         request.user = user
         return view_fn(*args, **kwargs)
@@ -65,7 +68,7 @@ def token():
         if user["name"] == data["name"]:
             found_user = user
     if found_user is None:
-        response.set_status(404)
+        response.status = 404
         return json_response({"message": "not found"})
     return json_response({"token": app.jwt_auth.encode(user)})
 
