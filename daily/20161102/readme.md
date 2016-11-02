@@ -2,3 +2,14 @@
 
 調べる。
 
+# python string.title()がひどい。
+
+```
+>>> "fooBar".title()
+'Foobar'
+>>> "FooBar".title()
+'Foobar'
+```
+
+ひどい。"FooBar"が欲しかった。
+
