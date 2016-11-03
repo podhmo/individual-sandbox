@@ -2,10 +2,10 @@ import argparse
 import copy
 import json
 import logging
-from collections import ChainMap, deque, defaultdict
+from collections import ChainMap, deque, defaultdict, namedtuple
 from prestring.go import GoModule
 
-
+Action = namedtuple("Action", "action, src, dst")
 logger = logging.getLogger(__name__)
 
 
@@ -263,8 +263,8 @@ def write_covert_function(convertor, src, dst, writer):
 
 
 class TypeConvertor(object):
-    def __init__(self, resolver, src_world, dst_world):
-        self.resolver = resolver
+    def __init__(self, codegen, src_world, dst_world):
+        self.codegen = codegen
         self.src_world = src_world
         self.dst_world = dst_world
 
@@ -278,17 +278,16 @@ class TypeConvertor(object):
             r.extend(self.get_type_path(value["value"]))
             return r
 
-    def get_coerce(self, src_type, dst_type, src, dst):
-        # primitive -> y
-        # x -> primitive
-        # x -> y => x -> primitive -> y
-        # TODO: implementation
-        return dst_type
+    def get_coerce(self, src_type, dst_type):
+        if isinstance(dst_type, (list, tuple)):
+            "({})".format("".join("*" if x == "pointer" else x for x in dst_type))
+        else:
+            return dst_type
 
     def convert(self, src, dst, name):
-        src_path = list(reversed(self.get_type_path(src["type"])))
-        dst_path = list(reversed(self.get_type_path(dst["type"])))
-        code = self.resolver.resolve(src_path, dst_path)
+        src_path = list(self.get_type_path(src["type"]))
+        dst_path = list(self.get_type_path(dst["type"]))
+        code = self.codegen.gencode(src_path, dst_path)
         value = name
         for op in code:
             if op[0] == "deref":
@@ -296,7 +295,7 @@ class TypeConvertor(object):
             elif op[0] == "ref":
                 value = "&({})".format(value)
             elif op[0] == "coerce":
-                value = "{}({})".format(self.get_coerce(op[1], op[2], src, dst), value)
+                value = "{}({})".format(self.get_coerce(op[1], op[2]), value)
         return value
 
 
@@ -304,6 +303,9 @@ class TypeMappingResolver(object):
     def __init__(self, items):
         self.primitive_map = defaultdict(list)
         self.detail_map = defaultdict(list)
+        self.add(items)
+
+    def add(self, items):
         for k, v in items:
             k = self._wrap_value(k)
             v = self._wrap_value(v)
@@ -354,7 +356,7 @@ class TypeMappingResolver(object):
             if coerce_path and coerce_path[-1][1] == next_ and coerce_path[-1][2] == prev:
                 coerce_path.pop()
                 continue
-            coerce_path.append(["coerce", prev, next_])
+            coerce_path.append(Action(action="coerce", src=prev, dst=next_))
         return coerce_path
 
     def tick_src(self, src_hist, dst_hist, arrived, src_q, dst_q):
@@ -426,9 +428,8 @@ class MiniCodeGenerator(object):
     # [ref] -> &x
     # [coerce, x, y] -> finding alias {original: x} and name is y, -> y(x)
 
-    def __init__(self, coerce_map=None, optimizer=None):
-        self.coerce_map = coerce_map or {}
-        self.rev_map = {v: k for k, v in self.coerce_map.items()}
+    def __init__(self, resolver, optimizer=None):
+        self.resolver = resolver
         self.optimizer = optimizer or self._default_optimize
 
     def _default_optimize(self, code):
@@ -447,22 +448,34 @@ class MiniCodeGenerator(object):
 
     def _gencode(self, src_path, dst_path):
         code = []
-        # detect type convertion
-        # detect pointer level
-        # deref
-        # ref
-        if src_path[0] != dst_path[0]:
-            code.append(["coerce", src_path[0], dst_path[0]])
-        for typ in src_path[1:]:
-            if typ == "pointer":
-                code.append(["deref"])
+        mapping_path = self.resolver.resolve(src_path, dst_path)
+
+        def get_primitive(v):
+            if isinstance(v, (list, tuple)):
+                return v[-1]
             else:
-                raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
-        for typ in dst_path[1:]:
-            if typ == "pointer":
-                code.append(["ref"])
+                return v
+
+        for action in mapping_path:
+            if get_primitive(action.src) == get_primitive(action.dst):
+                if isinstance(action.src, (list, tuple)):
+                    itr = reversed(action.src)
+                    next(itr)
+                    for typ in itr:
+                        if typ == "pointer":
+                            code.append(("deref", ))
+                        else:
+                            raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
+                if isinstance(action.dst, (list, tuple)):
+                    itr = reversed(action.dst)
+                    next(itr)
+                    for typ in itr:
+                        if typ == "pointer":
+                            code.append(("ref", ))
+                        else:
+                            raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
             else:
-                raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
+                code.append(action)
         return code
 
 
@@ -504,7 +517,7 @@ def main():
         dst_world = reader.read_world(json.load(rf))
         dst_world.normalize()
     # sandbox(writer, reader, src_world, dst_world)
-    gencoder = MiniCodeGenerator()
+    gencoder = MiniCodeGenerator(TypeMappingResolver([]))
     convertor = TypeConvertor(gencoder, src_world, dst_world)
 
     m = GoModule()

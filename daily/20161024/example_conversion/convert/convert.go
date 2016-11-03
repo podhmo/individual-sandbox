@@ -7,8 +7,8 @@ import (
 
 func ConvertFromPage(src *model.Page) (*def.Page, error) {
 	dst := &def.Page{}
-	dst.ID = &(src.Id)
 	dst.Title = &(src.Title)
 	dst.Path = &(src.Path)
+	dst.ID = &(src.Id)
 	return dst, nil
 }
