@@ -251,13 +251,13 @@ def write_covert_function(convertor, src, dst, writer):
     m = writer.prestring_module()
     src_arg = 'src *{}.{}'.format(src.package_name, src.name)
     dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
-    with m.func('ConvertFrom{}'.format(dst.name), src_arg, return_="({}, error)".format(dst_arg)):
+    with m.func('ConvertFrom{}{}'.format(src.package_name.title(), dst.name), src_arg, return_="({}, error)".format(dst_arg)):
         m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
-        for name, field in dst.fields():
+        for name, field in sorted(dst.fields()):
             if name in src:
-                m.stmt("dst.{} = {}".format(field["name"], convertor.convert(src[name], field, name="src.{}".format(src[name]["name"]))))  # xxx
+                m.stmt("dst.{} = {}".format(field["name"], convertor.convert(m, src[name], field, dst, name="src.{}".format(src[name]["name"]))))  # xxx
             else:
-                m.comment("FIXME: {} is not found".format(name))
+                m.comment("FIXME: {} is not found".format(field["name"]))
         m.return_("dst, nil")
     return m
 
@@ -267,6 +267,21 @@ class TypeConvertor(object):
         self.codegen = codegen
         self.src_world = src_world
         self.dst_world = dst_world
+        self.i = 0
+        items = []
+        for _, module in self.src_world.modules.items():
+            for _, file in module.files.items():
+                for _, alias in file.aliases.items():
+                    # todo: recursive
+                    data = alias.data
+                    items.append((data["original"]["value"], "{}.{}".format(data["name"])))
+        for _, module in self.dst_world.modules.items():
+            for _, file in module.files.items():
+                for _, alias in file.aliases.items():
+                    # todo: recursive
+                    data = alias.data
+                    items.append((data["original"]["value"], data["name"]))
+        self.codegen.resolver.add(items)
 
     def get_type_path(self, value):
         if value["kind"] == "primitive":
@@ -284,18 +299,31 @@ class TypeConvertor(object):
         else:
             return dst_type
 
-    def convert(self, src, dst, name):
+    def convert(self, m, src, dst, dst_struct, name):
         src_path = list(self.get_type_path(src["type"]))
         dst_path = list(self.get_type_path(dst["type"]))
         code = self.codegen.gencode(src_path, dst_path)
         value = name
+        is_cast = False
         for op in code:
+            if is_cast:
+                tmp = "tmp{}".format(self.i)
+                self.i += 1
+                m.stmt("{} := {}".format(tmp, value))
+                value = tmp
+                is_cast = False
+
             if op[0] == "deref":
                 value = "*({})".format(value)
             elif op[0] == "ref":
                 value = "&({})".format(value)
+                is_cast = True
             elif op[0] == "coerce":
-                value = "{}({})".format(self.get_coerce(op[1], op[2]), value)
+                if op[2][-1][0].islower():
+                    value = "{}({})".format(self.get_coerce(op[1], op[2]), value)
+                else:
+                    value = "{}.{}({})".format(dst_struct.package_name, self.get_coerce(op[1], op[2]), value)
+                is_cast = True
         return value
 
 
@@ -449,6 +477,8 @@ class MiniCodeGenerator(object):
     def _gencode(self, src_path, dst_path):
         code = []
         mapping_path = self.resolver.resolve(src_path, dst_path)
+        if mapping_path is None:
+            raise ValueError("mapping not found {!r} -> {!r}".format(src_path, dst_path))
 
         def get_primitive(v):
             if isinstance(v, (list, tuple)):
@@ -528,7 +558,7 @@ def main():
     m.sep()
     print(m)
     print(write_covert_function(convertor, src_world["model"]["Page"], dst_world["def"]["Page"], writer))
-
+    print(write_covert_function(convertor, dst_world["def"]["Page"], src_world["model"]["Page"], writer))
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

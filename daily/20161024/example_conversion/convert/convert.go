@@ -5,10 +5,19 @@ import (
 	"github.com/podhmo/hmm/model"
 )
 
-func ConvertFromPage(src *model.Page) (*def.Page, error) {
+func ConvertFromModelPage(src *model.Page) (*def.Page, error) {
 	dst := &def.Page{}
-	dst.Title = &(src.Title)
+	tmp0 := def.ID(src.Id)
+	dst.ID = &(tmp0)
 	dst.Path = &(src.Path)
-	dst.ID = &(src.Id)
+	dst.Title = &(src.Title)
+	return dst, nil
+}
+func ConvertFromDefPage(src *def.Page) (*model.Page, error) {
+	dst := &model.Page{}
+	dst.Id = string(*(src.ID))
+	dst.Path = *(src.Path)
+	// FIXME: PathHash is not found
+	dst.Title = *(src.Title)
 	return dst, nil
 }

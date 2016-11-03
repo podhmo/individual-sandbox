@@ -3,7 +3,16 @@
     "def": {
       "file": {
         "def/def.go": {
-          "alias": {},
+          "alias": {
+            "ID": {
+              "candidates": null,
+              "name": "ID",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            }
+          },
           "name": "def/def.go",
           "struct": {
             "Page": {
@@ -18,7 +27,7 @@
                     "kind": "pointer",
                     "value": {
                       "kind": "primitive",
-                      "value": "string"
+                      "value": "ID"
                     }
                   }
                 },

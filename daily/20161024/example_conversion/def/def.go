@@ -1,9 +1,13 @@
 package def
 
+// ID is id
+type ID string
+
+// Page is page
 type Page struct {
 	/* path
 	 */
-	ID *string `json:"id,omitempty"`
+	ID *ID `json:"id,omitempty"`
 
 	/* path
 	 */
