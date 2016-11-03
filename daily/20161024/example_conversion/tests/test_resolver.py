@@ -132,3 +132,46 @@ class Tests(unittest.TestCase):
             ['coerce', ('pointer', 'string'), 'PX']
         ]
         self.assertEqual(expected, actual)
+
+    def test_pointer_pointer_string_to_px(self):
+        target = self._makeOne([
+            (["pointer", "string"], "PX"), ("string", "Y")
+        ])
+        actual = target.resolve(src=("pointer", "pointer", "string"), dst="PX")
+        expected = [
+            ['coerce', ('pointer', 'pointer', 'string'), ('pointer', 'string')],
+            ['coerce', ('pointer', 'string'), 'PX']
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_pointer_pointer_string_to_Y(self):
+        target = self._makeOne([
+            (["pointer", "string"], "PX"), ("string", "Y")
+        ])
+        actual = target.resolve(src=("pointer", "pointer", "pointer", "string"), dst="Y")
+        expected = [
+            ['coerce', ('pointer', 'pointer', 'pointer', 'string'), ('pointer', 'string')],
+            ['coerce', ('pointer', 'string'), 'string'],
+            ['coerce', 'string', 'Y']
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_string_to_pointer_pointer_string(self):
+        target = self._makeOne([
+        ])
+        actual = target.resolve(src="string", dst=("pointer", "pointer", "pointer", "string"))
+        expected = [
+            ['coerce', 'string', ('pointer', 'pointer', 'pointer', 'string')]
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_x_to_pointer_pointer_string(self):
+        target = self._makeOne([
+            ("string", "X")
+        ])
+        actual = target.resolve(src="X", dst=("pointer", "pointer", "pointer", "string"))
+        expected = [
+            ['coerce', 'X', 'string'],
+            ['coerce', 'string', ('pointer', 'pointer', 'pointer', 'string')]
+        ]
+        self.assertEqual(expected, actual)

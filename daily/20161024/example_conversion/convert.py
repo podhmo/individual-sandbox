@@ -336,7 +336,12 @@ class TypeMappingResolver(object):
             return []
         src = self._wrap_value(src)
         dst = self._wrap_value(dst)
-        return self.tick_src([src], [dst], set(), deque(), deque())
+        if src[-1:] == dst[-1:]:
+            return self.on_finish([src], [dst])
+        else:
+            # print("detail_map=", self.detail_map)
+            # print("primitive_map=", self.primitive_map)
+            return self.tick_src([src], [dst], set(), deque(), deque())
 
     def on_finish(self, src_hist, dst_hist):
         src_hist.extend(reversed(dst_hist))
@@ -345,26 +350,35 @@ class TypeMappingResolver(object):
         for i in range(len(path) - 1):
             if path[i] == path[i + 1]:
                 continue
-            coerce_path.append(["coerce", self._unwrap_value(path[i]), self._unwrap_value(path[i + 1])])
+            prev, next_ = self._unwrap_value(path[i]), self._unwrap_value(path[i + 1])
+            if coerce_path and coerce_path[-1][1] == next_ and coerce_path[-1][2] == prev:
+                coerce_path.pop()
+                continue
+            coerce_path.append(["coerce", prev, next_])
         return coerce_path
 
     def tick_src(self, src_hist, dst_hist, arrived, src_q, dst_q):
         # print("@S", "src_hist=", src_hist, "dst_hist=", dst_hist, "arrived=", arrived, "src_q=", src_q, "dst_q=", dst_q)
-        if src_hist[-1] == dst_hist[-1]:
-            return self.on_finish(src_hist, dst_hist[:-1])
+        if src_hist[-1][-1] == dst_hist[-1][-1]:
+            if src_hist[-1] == dst_hist[-1]:
+                return self.on_finish(src_hist, dst_hist[:-1])
+            else:
+                return self.on_finish(src_hist, dst_hist)
         if src_hist[-1] not in arrived:
             arrived.add(src_hist[-1])
             if src_hist[-1] in self.detail_map:
                 for item in self.detail_map[src_hist[-1]]:
                     src_q.append(([*src_hist, item], dst_hist))
-            if self._has_detail(src_hist):
-                k = src_hist[-1][-1:]
+
+            for i in range(1, len(src_hist[-1])):
+                k = src_hist[-1][i:]
                 if k in self.detail_map:
                     for item in self.detail_map[k]:
                         src_q.append(([*src_hist, k, item], dst_hist))
-                if k in self.primitive_map:
-                    for items in self.primitive_map[k]:
-                        src_q.append(([*src_hist, *items], dst_hist))
+            k = src_hist[-1][-1:]
+            if k in self.primitive_map:
+                for items in self.primitive_map[k]:
+                    src_q.append(([*src_hist, *items], dst_hist))
         if dst_q:
             src_hist, dst_hist = dst_q.pop()
             return self.tick_dst(src_hist, dst_hist, arrived, src_q, dst_q)
@@ -376,21 +390,26 @@ class TypeMappingResolver(object):
 
     def tick_dst(self, src_hist, dst_hist, arrived, src_q, dst_q):
         # print("@D", "src_hist=", src_hist, "dst_hist=", dst_hist, "arrived=", arrived, "src_q=", src_q, "dst_q=", dst_q)
-        if src_hist[-1] == dst_hist[-1]:
-            return self.on_finish(src_hist, dst_hist[:-1])
+        if src_hist[-1][-1] == dst_hist[-1][-1]:
+            if src_hist[-1] == dst_hist[-1]:
+                return self.on_finish(src_hist, dst_hist[:-1])
+            else:
+                return self.on_finish(src_hist, dst_hist)
         if dst_hist[-1] not in arrived:
             arrived.add(dst_hist[-1])
             if dst_hist[-1] in self.detail_map:
                 for item in self.detail_map[dst_hist[-1]]:
                     dst_q.append((src_hist, [*dst_hist, item]))
-            if self._has_detail(dst_hist):
-                k = dst_hist[-1][-1:]
+
+            for i in range(1, len(dst_hist[-1])):
+                k = dst_hist[-1][i:]
                 if k in self.detail_map:
                     for item in self.detail_map[k]:
                         dst_q.append((src_hist, [*dst_hist, k, item]))
-                if k in self.primitive_map:
-                    for items in self.primitive_map[k]:
-                        dst_q.append((src_hist, [*dst_hist, *items]))
+            k = dst_hist[-1][-1:]
+            if k in self.primitive_map:
+                for items in self.primitive_map[k]:
+                    dst_q.append((src_hist, [*dst_hist, *items]))
         if src_q:
             src_hist, dst_hist = src_q.pop()
             return self.tick_src(src_hist, dst_hist, arrived, src_q, dst_q)
