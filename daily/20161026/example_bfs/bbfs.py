@@ -22,7 +22,6 @@ class BidirectionalBFS(object):
             coerce_path.append(["coerce", path[i], path[i + 1]])
         return coerce_path
 
-
     def tick_src(self, src_hist, dst_hist, arrived, src_q, dst_q):
         if src_hist[-1] == dst_hist[-1]:
             return self.on_finish(src_hist, dst_hist[:-1])

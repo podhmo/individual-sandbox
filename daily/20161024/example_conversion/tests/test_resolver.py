@@ -104,3 +104,31 @@ class Tests(unittest.TestCase):
         ]
         self.assertEqual(expected, actual)
 
+    # with type cast
+    def test_px_to_y(self):
+        # PX (string* -> PX) => Y (string -> Y)
+        # (cast string*) -> deref -> (cast Y)
+        target = self._makeOne([
+            (["pointer", "string"], "PX"), ("string", "Y")
+        ])
+        actual = target.resolve(src="PX", dst="Y")
+        expected = [
+            ['coerce', 'PX', ('pointer', 'string')],
+            ['coerce', ('pointer', 'string'), 'string'],
+            ['coerce', 'string', 'Y']
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_y_to_px(self):
+        # Y (string -> Y) => PX (string* -> PX)
+        # (cast string) -> ref -> (cast PX)
+        target = self._makeOne([
+            (["pointer", "string"], "PX"), ("string", "Y")
+        ])
+        actual = target.resolve(src="Y", dst="PX")
+        expected = [
+            ['coerce', 'Y', 'string'],
+            ['coerce', 'string', ('pointer', 'string')],
+            ['coerce', ('pointer', 'string'), 'PX']
+        ]
+        self.assertEqual(expected, actual)
