@@ -1,18 +1,23 @@
 import json
 
 
-class ClassRepository:
-    def __init__(self):
+class ClassProvider:
+    def __init__(self, base):
+        self.base = base
         self.cache = {}
 
-    def create(self, name, base, *args, **kwargs):
+    def create_class(self, name):
+        return type(name, (self.base,), {})
+
+    def __call__(self, name, *args, **kwargs):
         cls = self.cache.get(name)
         if cls is None:
-            cls = self.cache[name] = self.create_class(base, name)
+            cls = self.cache[name] = self.create_class(name)
         return cls(*args, **kwargs)
 
-    def create_class(self, base, name):
-        return type(name, (base, ), {})
+    @property
+    def __class__(self):
+        return self.base
 
 
 class OpenStructBase(object):
@@ -28,8 +33,11 @@ class OpenStructBase(object):
     def __repr__(self):
         return "<{} data={!r}>".format(self.__class__.__name__, self.__dict__)
 
-    def json(self):
+    def as_json(self):
         return json.dumps({self.__class__.__name__: self.__dict__}, indent=2, ensure_ascii=False)
+
+    def as_dict(self):
+        return dict(self.__dict__)
 
     def update(self, _data=None, **kwargs):
         if _data is not None:
@@ -57,7 +65,7 @@ class ReadonlyBase(object):
         return "<{}(readonly) data={!r}>".format(self.__class__.__name__, self.ob.__dict__)
 
     def __getattr__(self, k):
-        return getattr(self.inner, k)
+        return getattr(self.ob, k)
 
     def __setattr__(self, k, v):
         raise AttributeError("readonly")
@@ -69,22 +77,13 @@ class ReadonlyBase(object):
         return self.__class__(self.ob.copy())
 
 
-_cache0 = ClassRepository()
-_cache1 = ClassRepository()
-# todo: abcで継承関係など付加?
-
-
-def Readonly(name, *args, **kwargs):
-    return _cache0.create(name, ReadonlyBase, *args, **kwargs)
-
-
-def OpenStruct(name, *args, **kwargs):
-    return _cache1.create(name, OpenStructBase, *args, **kwargs)
+OpenStruct = ClassProvider(OpenStructBase)
+Readonly = ClassProvider(ReadonlyBase)
 
 
 def _test():
     obj = OpenStruct(
-        'SukinaTabemono',
+        'Sukina Tabemono',
         kudamono=r'ringo',
         yasai=r'naganegi',
         okashi=r'kaki no tane')
@@ -96,9 +95,14 @@ def _test():
         print(e)
     obj2 = obj.as_readonly().copy().as_writable()
     obj2.kudamono = r'kaki'
-    print(obj.json())
-    print(obj2.json())
+    print(obj.as_json())
+    print(obj2.as_json())
 
+    print(isinstance(obj, OpenStruct.__class__))  # おしい
+    print(isinstance(OpenStruct, OpenStructBase))
+    print(isinstance(obj, OpenStructBase))
+
+    print(OpenStruct.cache.get("Sukina Tabemono"))
 
 if __name__ == '__main__':
     _test()
