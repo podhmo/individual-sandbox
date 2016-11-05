@@ -1,0 +1,116 @@
+(*ast.File)(0xc42009a300)({
+ Doc: (*ast.CommentGroup)(<nil>),
+ Package: (token.Pos) 1,
+ Name: (*ast.Ident)(0xc42006a260)(main),
+ Decls: ([]ast.Decl) (len=2 cap=2) {
+  (*ast.GenDecl)(0xc42008e3c0)({
+   Doc: (*ast.CommentGroup)(<nil>),
+   TokPos: (token.Pos) 15,
+   Tok: (token.Token) import,
+   Lparen: (token.Pos) 22,
+   Specs: ([]ast.Spec) (len=1 cap=1) {
+    (*ast.ImportSpec)(0xc420072540)({
+     Doc: (*ast.CommentGroup)(<nil>),
+     Name: (*ast.Ident)(<nil>),
+     Path: (*ast.BasicLit)(0xc42006a2c0)({
+      ValuePos: (token.Pos) 25,
+      Kind: (token.Token) STRING,
+      Value: (string) (len=22) "\"gopkg.in/mgo.v2/bson\""
+     }),
+     Comment: (*ast.CommentGroup)(<nil>),
+     EndPos: (token.Pos) 0
+    })
+   },
+   Rparen: (token.Pos) 48
+  }),
+  (*ast.GenDecl)(0xc42008e4c0)({
+   Doc: (*ast.CommentGroup)(<nil>),
+   TokPos: (token.Pos) 76,
+   Tok: (token.Token) type,
+   Lparen: (token.Pos) 0,
+   Specs: ([]ast.Spec) (len=1 cap=1) {
+    (*ast.TypeSpec)(0xc420072570)({
+     Doc: (*ast.CommentGroup)(<nil>),
+     Name: (*ast.Ident)(0xc42006a300)(Person),
+     Type: (*ast.StructType)(0xc42006a520)({
+      Struct: (token.Pos) 88,
+      Fields: (*ast.FieldList)(0xc4200725a0)({
+       Opening: (token.Pos) 95,
+       List: ([]*ast.Field) (len=3 cap=4) {
+        (*ast.Field)(0xc42008e400)({
+         Doc: (*ast.CommentGroup)(<nil>),
+         Names: ([]*ast.Ident) (len=1 cap=1) {
+          (*ast.Ident)(0xc42006a320)(ID)
+         },
+         Type: (*ast.SelectorExpr)(0xc42006a3a0)({
+          X: (*ast.Ident)(0xc42006a340)(bson),
+          Sel: (*ast.Ident)(0xc42006a380)(ObjectId)
+         }),
+         Tag: (*ast.BasicLit)(0xc42006a3c0)({
+          ValuePos: (token.Pos) 117,
+          Kind: (token.Token) STRING,
+          Value: (string) (len=22) "`json:\"id\" bson:\"_id\"`"
+         }),
+         Comment: (*ast.CommentGroup)(<nil>)
+        }),
+        (*ast.Field)(0xc42008e440)({
+         Doc: (*ast.CommentGroup)(<nil>),
+         Names: ([]*ast.Ident) (len=1 cap=1) {
+          (*ast.Ident)(0xc42006a3e0)(Name)
+         },
+         Type: (*ast.Ident)(0xc42006a420)(string),
+         Tag: (*ast.BasicLit)(0xc42006a440)({
+          ValuePos: (token.Pos) 160,
+          Kind: (token.Token) STRING,
+          Value: (string) (len=25) "`json:\"name\" bson:\"name\"`"
+         }),
+         Comment: (*ast.CommentGroup)(<nil>)
+        }),
+        (*ast.Field)(0xc42008e480)({
+         Doc: (*ast.CommentGroup)(<nil>),
+         Names: ([]*ast.Ident) (len=1 cap=1) {
+          (*ast.Ident)(0xc42006a460)(Age)
+         },
+         Type: (*ast.Ident)(0xc42006a4a0)(int),
+         Tag: (*ast.BasicLit)(0xc42006a4c0)({
+          ValuePos: (token.Pos) 206,
+          Kind: (token.Token) STRING,
+          Value: (string) (len=23) "`json:\"age\" bson:\"age\"`"
+         }),
+         Comment: (*ast.CommentGroup)(<nil>)
+        })
+       },
+       Closing: (token.Pos) 230
+      }),
+      Incomplete: (bool) false
+     }),
+     Comment: (*ast.CommentGroup)(<nil>)
+    })
+   },
+   Rparen: (token.Pos) 0
+  })
+ },
+ Scope: (*ast.Scope)(0xc4200704d0)(scope 0xc4200704d0 {
+	type Person
+}
+),
+ Imports: ([]*ast.ImportSpec) (len=1 cap=1) {
+  (*ast.ImportSpec)(0xc420072540)({
+   Doc: (*ast.CommentGroup)(<nil>),
+   Name: (*ast.Ident)(<nil>),
+   Path: (*ast.BasicLit)(0xc42006a2c0)({
+    ValuePos: (token.Pos) 25,
+    Kind: (token.Token) STRING,
+    Value: (string) (len=22) "\"gopkg.in/mgo.v2/bson\""
+   }),
+   Comment: (*ast.CommentGroup)(<nil>),
+   EndPos: (token.Pos) 0
+  })
+ },
+ Unresolved: ([]*ast.Ident) (len=3 cap=4) {
+  (*ast.Ident)(0xc42006a340)(bson),
+  (*ast.Ident)(0xc42006a420)(string),
+  (*ast.Ident)(0xc42006a4a0)(int)
+ },
+ Comments: ([]*ast.CommentGroup) <nil>
+})

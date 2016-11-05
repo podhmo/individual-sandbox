@@ -1,0 +1,4 @@
+# どうやってimportされたpackageの情報取るのだっけ？
+
+たしかparserでparseしたときにImportsという属性にアクセスできるようになるはず。
+
