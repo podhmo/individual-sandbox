@@ -1,10 +1,26 @@
+# golang pkg/errorsを見るようにする方法
+
+こういうinterfaceを使って良い感じにできないか。普通のエラーが返る場合にはコンパイルエラーにする感じに。
+ところが話はそう単純ではなく。 `Wrap()` などは単に型としてはerrorを返してしまうのでcastしないとダメ。
+
+```go
+type causer interface {
+	Cause() error
+}
+
+type causerError interface {
+	error
+	causer
+}
+```
+
 # golang 簡単なhttptestのsample
 
 - [example_server](./example_server)
 
 もう少ししたいこと
 
-- GET以外のrequest
+- :done: GET以外のrequest
 - 複数のrequestのchain
 
 更にしたいこと
