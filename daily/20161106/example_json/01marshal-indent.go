@@ -1,0 +1,21 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// Person :
+type Person struct {
+	Name string
+	Age  int
+}
+
+func main() {
+	person := &Person{Name: "foo", Age: 20}
+	b, err := json.MarshalIndent(person, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(b))
+}
