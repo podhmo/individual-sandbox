@@ -1,3 +1,8 @@
+# golang JSONのencoder/decoder使っていきたい
+
+- https://golang.org/pkg/encoding/json/#example_Decoder
+- https://golang.org/pkg/encoding/json/#Decoder
+
 # golang JSONのpretty print
 
 marshalする時に[json.MarshalIndent](https://golang.org/pkg/encoding/json/#MarshalIndent) の方を使えば良い。
