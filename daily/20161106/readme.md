@@ -1,3 +1,16 @@
+# golang 簡単なhttptestのsample
+
+- [example_server](./example_server)
+
+もう少ししたいこと
+
+- GET以外のrequest
+- 複数のrequestのchain
+
+更にしたいこと
+
+- http以外のprotocol話すやつのmock
+
 # golang JSONのencoder/decoder使っていきたい
 
 - https://golang.org/pkg/encoding/json/#example_Decoder
