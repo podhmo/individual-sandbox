@@ -27,3 +27,21 @@ ModifyWith(nowgen,
     }, true)
 fmt.Println("after clear", nowgen.Now())
 ```
+
+# golang keyの範囲を制限したdict
+
+構造体作れば良いだけですね。。
+
+```go
+/*
+{
+  "foo": "Foo",
+  "bar": "Bar",
+}
+*/
+
+type O struct {
+	Foo string `json:"foo"`
+	Bar string `json:"bar"`
+}
+```
