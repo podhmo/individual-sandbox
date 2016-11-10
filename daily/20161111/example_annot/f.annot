@@ -1,0 +1,99 @@
+"f.ml" 1 0 8 "f.ml" 1 0 9
+type(
+  int -> int
+)
+ident(
+  def f "f.ml" 1 0 0 "f.ml" 1 0 -1
+)
+"f.ml" 1 0 11 "f.ml" 1 0 12
+ident(
+  def x "f.ml" 1 0 16 "f.ml" 1 0 51
+)
+"f.ml" 1 0 10 "f.ml" 1 0 13
+type(
+  int
+)
+"f.ml" 1 0 19 "f.ml" 1 0 20
+type(
+  int
+)
+ident(
+  int_ref x "f.ml" 1 0 10 "f.ml" 1 0 13
+)
+"f.ml" 1 0 21 "f.ml" 1 0 23
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( == )
+)
+"f.ml" 1 0 24 "f.ml" 1 0 25
+type(
+  int
+)
+"f.ml" 1 0 19 "f.ml" 1 0 25
+type(
+  bool
+)
+"f.ml" 1 0 31 "f.ml" 1 0 32
+type(
+  int
+)
+"f.ml" 1 0 38 "f.ml" 1 0 39
+type(
+  int
+)
+ident(
+  int_ref x "f.ml" 1 0 10 "f.ml" 1 0 13
+)
+"f.ml" 1 0 40 "f.ml" 1 0 41
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( * )
+)
+"f.ml" 1 0 42 "f.ml" 1 0 43
+type(
+  int -> int
+)
+ident(
+  int_ref f "f.ml" 1 0 8 "f.ml" 1 0 9
+)
+"f.ml" 1 0 45 "f.ml" 1 0 46
+type(
+  int
+)
+ident(
+  int_ref x "f.ml" 1 0 10 "f.ml" 1 0 13
+)
+"f.ml" 1 0 47 "f.ml" 1 0 48
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( - )
+)
+"f.ml" 1 0 49 "f.ml" 1 0 50
+type(
+  int
+)
+"f.ml" 1 0 44 "f.ml" 1 0 51
+type(
+  int
+)
+"f.ml" 1 0 42 "f.ml" 1 0 51
+call(
+  stack
+)
+type(
+  int
+)
+"f.ml" 1 0 38 "f.ml" 1 0 51
+type(
+  int
+)
+"f.ml" 1 0 16 "f.ml" 1 0 51
+type(
+  int
+)

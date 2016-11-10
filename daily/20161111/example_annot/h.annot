@@ -1,0 +1,160 @@
+"h.ml" 2 25 33 "h.ml" 2 25 36
+type(
+  int -> bool
+)
+ident(
+  def odd "h.ml" 2 25 25 "h.ml" 1 0 -1
+)
+"h.ml" 2 25 37 "h.ml" 2 25 38
+type(
+  int
+)
+ident(
+  def x "h.ml" 3 41 43 "h.ml" 3 41 81
+)
+"h.ml" 3 41 46 "h.ml" 3 41 47
+type(
+  int
+)
+ident(
+  int_ref x "h.ml" 2 25 37 "h.ml" 2 25 38
+)
+"h.ml" 3 41 48 "h.ml" 3 41 50
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( <= )
+)
+"h.ml" 3 41 51 "h.ml" 3 41 52
+type(
+  int
+)
+"h.ml" 3 41 46 "h.ml" 3 41 52
+type(
+  bool
+)
+"h.ml" 3 41 58 "h.ml" 3 41 63
+type(
+  bool
+)
+"h.ml" 3 41 69 "h.ml" 3 41 73
+type(
+  int -> bool
+)
+ident(
+  int_ref even "h.ml" 4 82 86 "h.ml" 4 82 90
+)
+"h.ml" 3 41 75 "h.ml" 3 41 76
+type(
+  int
+)
+ident(
+  int_ref x "h.ml" 2 25 37 "h.ml" 2 25 38
+)
+"h.ml" 3 41 77 "h.ml" 3 41 78
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( - )
+)
+"h.ml" 3 41 79 "h.ml" 3 41 80
+type(
+  int
+)
+"h.ml" 3 41 74 "h.ml" 3 41 81
+type(
+  int
+)
+"h.ml" 3 41 69 "h.ml" 3 41 81
+call(
+  tail
+)
+type(
+  bool
+)
+"h.ml" 3 41 43 "h.ml" 3 41 81
+type(
+  bool
+)
+"h.ml" 4 82 86 "h.ml" 4 82 90
+type(
+  int -> bool
+)
+ident(
+  def even "h.ml" 2 25 25 "h.ml" 1 0 -1
+)
+"h.ml" 4 82 91 "h.ml" 4 82 92
+type(
+  int
+)
+ident(
+  def x "h.ml" 5 95 97 "h.ml" 5 95 133
+)
+"h.ml" 5 95 100 "h.ml" 5 95 101
+type(
+  int
+)
+ident(
+  int_ref x "h.ml" 4 82 91 "h.ml" 4 82 92
+)
+"h.ml" 5 95 102 "h.ml" 5 95 104
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( <= )
+)
+"h.ml" 5 95 105 "h.ml" 5 95 106
+type(
+  int
+)
+"h.ml" 5 95 100 "h.ml" 5 95 106
+type(
+  bool
+)
+"h.ml" 5 95 112 "h.ml" 5 95 116
+type(
+  bool
+)
+"h.ml" 5 95 122 "h.ml" 5 95 125
+type(
+  int -> bool
+)
+ident(
+  int_ref odd "h.ml" 2 25 33 "h.ml" 2 25 36
+)
+"h.ml" 5 95 127 "h.ml" 5 95 128
+type(
+  int
+)
+ident(
+  int_ref x "h.ml" 4 82 91 "h.ml" 4 82 92
+)
+"h.ml" 5 95 129 "h.ml" 5 95 130
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( - )
+)
+"h.ml" 5 95 131 "h.ml" 5 95 132
+type(
+  int
+)
+"h.ml" 5 95 126 "h.ml" 5 95 133
+type(
+  int
+)
+"h.ml" 5 95 122 "h.ml" 5 95 133
+call(
+  tail
+)
+type(
+  bool
+)
+"h.ml" 5 95 97 "h.ml" 5 95 133
+type(
+  bool
+)

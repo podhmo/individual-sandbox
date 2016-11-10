@@ -1,0 +1,115 @@
+"g.ml" 1 0 8 "g.ml" 1 0 9
+type(
+  int -> int -> int
+)
+ident(
+  def g "g.ml" 1 0 0 "g.ml" 1 0 -1
+)
+"g.ml" 1 0 10 "g.ml" 1 0 11
+type(
+  int
+)
+ident(
+  def x "g.ml" 1 0 12 "g.ml" 1 0 55
+)
+"g.ml" 1 0 12 "g.ml" 1 0 13
+type(
+  int
+)
+ident(
+  def r "g.ml" 1 0 16 "g.ml" 1 0 55
+)
+"g.ml" 1 0 19 "g.ml" 1 0 20
+type(
+  int
+)
+ident(
+  int_ref x "g.ml" 1 0 10 "g.ml" 1 0 11
+)
+"g.ml" 1 0 21 "g.ml" 1 0 23
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( == )
+)
+"g.ml" 1 0 24 "g.ml" 1 0 25
+type(
+  int
+)
+"g.ml" 1 0 19 "g.ml" 1 0 25
+type(
+  bool
+)
+"g.ml" 1 0 31 "g.ml" 1 0 32
+type(
+  int
+)
+ident(
+  int_ref r "g.ml" 1 0 12 "g.ml" 1 0 13
+)
+"g.ml" 1 0 38 "g.ml" 1 0 39
+type(
+  int -> int -> int
+)
+ident(
+  int_ref g "g.ml" 1 0 8 "g.ml" 1 0 9
+)
+"g.ml" 1 0 41 "g.ml" 1 0 42
+type(
+  int
+)
+ident(
+  int_ref x "g.ml" 1 0 10 "g.ml" 1 0 11
+)
+"g.ml" 1 0 43 "g.ml" 1 0 44
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( - )
+)
+"g.ml" 1 0 45 "g.ml" 1 0 46
+type(
+  int
+)
+"g.ml" 1 0 40 "g.ml" 1 0 47
+type(
+  int
+)
+"g.ml" 1 0 49 "g.ml" 1 0 50
+type(
+  int
+)
+ident(
+  int_ref r "g.ml" 1 0 12 "g.ml" 1 0 13
+)
+"g.ml" 1 0 51 "g.ml" 1 0 52
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( * )
+)
+"g.ml" 1 0 53 "g.ml" 1 0 54
+type(
+  int
+)
+ident(
+  int_ref x "g.ml" 1 0 10 "g.ml" 1 0 11
+)
+"g.ml" 1 0 48 "g.ml" 1 0 55
+type(
+  int
+)
+"g.ml" 1 0 38 "g.ml" 1 0 55
+call(
+  tail
+)
+type(
+  int
+)
+"g.ml" 1 0 16 "g.ml" 1 0 55
+type(
+  int
+)
