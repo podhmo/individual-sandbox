@@ -1,10 +1,1782 @@
 {
   "module": {
+    "bson": {
+      "file": {
+        "GOPATH/src/gopkg.in/mgo.v2/bson/bson.go": {
+          "alias": {
+            "MongoTimestamp": {
+              "candidates": null,
+              "name": "MongoTimestamp",
+              "original": {
+                "kind": "primitive",
+                "value": "int64"
+              }
+            },
+            "ObjectId": {
+              "candidates": null,
+              "name": "ObjectId",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            },
+            "Symbol": {
+              "candidates": null,
+              "name": "Symbol",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            },
+            "externalPanic": {
+              "candidates": null,
+              "name": "externalPanic",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            },
+            "orderKey": {
+              "candidates": null,
+              "name": "orderKey",
+              "original": {
+                "kind": "primitive",
+                "value": "int64"
+              }
+            }
+          },
+          "import": {
+            "reflect": {
+              "fullname": "reflect",
+              "name": "reflect"
+            }
+          },
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/bson.go",
+          "struct": {
+            "Binary": {
+              "fields": {
+                "Data": {
+                  "embed": false,
+                  "name": "Data",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "byte"
+                    }
+                  }
+                },
+                "Kind": {
+                  "embed": false,
+                  "name": "Kind",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "byte"
+                  }
+                }
+              },
+              "name": "Binary"
+            },
+            "DBPointer": {
+              "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "ObjectId"
+                  }
+                },
+                "Namespace": {
+                  "embed": false,
+                  "name": "Namespace",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "DBPointer"
+            },
+            "DocElem": {
+              "fields": {
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Value": {
+                  "embed": false,
+                  "name": "Value",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "DocElem"
+            },
+            "JavaScript": {
+              "fields": {
+                "Code": {
+                  "embed": false,
+                  "name": "Code",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Scope": {
+                  "embed": false,
+                  "name": "Scope",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "JavaScript"
+            },
+            "Raw": {
+              "fields": {
+                "Data": {
+                  "embed": false,
+                  "name": "Data",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "byte"
+                    }
+                  }
+                },
+                "Kind": {
+                  "embed": false,
+                  "name": "Kind",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "byte"
+                  }
+                }
+              },
+              "name": "Raw"
+            },
+            "RawDocElem": {
+              "fields": {
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Value": {
+                  "embed": false,
+                  "name": "Value",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "Raw"
+                  }
+                }
+              },
+              "name": "RawDocElem"
+            },
+            "RegEx": {
+              "fields": {
+                "Options": {
+                  "embed": false,
+                  "name": "Options",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Pattern": {
+                  "embed": false,
+                  "name": "Pattern",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "RegEx"
+            },
+            "TypeError": {
+              "fields": {
+                "Kind": {
+                  "embed": false,
+                  "name": "Kind",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "byte"
+                  }
+                },
+                "Type": {
+                  "embed": false,
+                  "name": "Type",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "reflect",
+                    "value": "Type"
+                  }
+                }
+              },
+              "name": "TypeError"
+            },
+            "fieldInfo": {
+              "fields": {
+                "Inline": {
+                  "embed": false,
+                  "name": "Inline",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "int"
+                    }
+                  }
+                },
+                "Key": {
+                  "embed": false,
+                  "name": "Key",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "MinSize": {
+                  "embed": false,
+                  "name": "MinSize",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "bool"
+                  }
+                },
+                "Num": {
+                  "embed": false,
+                  "name": "Num",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "OmitEmpty": {
+                  "embed": false,
+                  "name": "OmitEmpty",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "bool"
+                  }
+                }
+              },
+              "name": "fieldInfo"
+            },
+            "structInfo": {
+              "fields": {
+                "FieldsList": {
+                  "embed": false,
+                  "name": "FieldsList",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "fieldInfo"
+                    }
+                  }
+                },
+                "FieldsMap": {
+                  "embed": false,
+                  "name": "FieldsMap",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "fieldInfo"
+                    }
+                  }
+                },
+                "InlineMap": {
+                  "embed": false,
+                  "name": "InlineMap",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "Zero": {
+                  "embed": false,
+                  "name": "Zero",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "reflect",
+                    "value": "Value"
+                  }
+                }
+              },
+              "name": "structInfo"
+            },
+            "undefined": {
+              "fields": {},
+              "name": "undefined"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/decimal.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decimal.go",
+          "struct": {
+            "Decimal128": {
+              "fields": {
+                "h": {
+                  "embed": false,
+                  "name": "h",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "uint64"
+                  }
+                },
+                "l": {
+                  "embed": false,
+                  "name": "l",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "uint64"
+                  }
+                }
+              },
+              "name": "Decimal128"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/decode.go": {
+          "alias": {},
+          "import": {
+            "reflect": {
+              "fullname": "reflect",
+              "name": "reflect"
+            }
+          },
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decode.go",
+          "struct": {
+            "decoder": {
+              "fields": {
+                "docType": {
+                  "embed": false,
+                  "name": "docType",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "reflect",
+                    "value": "Type"
+                  }
+                },
+                "i": {
+                  "embed": false,
+                  "name": "i",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "in": {
+                  "embed": false,
+                  "name": "in",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "byte"
+                    }
+                  }
+                }
+              },
+              "name": "decoder"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/encode.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/encode.go",
+          "struct": {
+            "encoder": {
+              "fields": {
+                "out": {
+                  "embed": false,
+                  "name": "out",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "byte"
+                    }
+                  }
+                }
+              },
+              "name": "encoder"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/json.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/json.go",
+          "struct": {}
+        }
+      },
+      "fullname": "gopkg.in/mgo.v2/bson",
+      "name": "bson"
+    },
+    "bson_test": {
+      "file": {
+        "GOPATH/src/gopkg.in/mgo.v2/bson/bson_test.go": {
+          "alias": {
+            "MyBool": {
+              "candidates": null,
+              "name": "MyBool",
+              "original": {
+                "kind": "primitive",
+                "value": "bool"
+              }
+            },
+            "MyString": {
+              "candidates": null,
+              "name": "MyString",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            },
+            "getterSetterInt": {
+              "candidates": null,
+              "name": "getterSetterInt",
+              "original": {
+                "kind": "primitive",
+                "value": "int"
+              }
+            },
+            "intGetter": {
+              "candidates": null,
+              "name": "intGetter",
+              "original": {
+                "kind": "primitive",
+                "value": "int64"
+              }
+            }
+          },
+          "import": {
+            "bson": {
+              "fullname": "gopkg.in/mgo.v2/bson",
+              "name": "bson"
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time"
+            }
+          },
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/bson_test.go",
+          "struct": {
+            "BenchRawT": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "B": {
+                  "embed": false,
+                  "name": "B",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "C": {
+                  "embed": false,
+                  "name": "C",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "M"
+                  }
+                },
+                "D": {
+                  "embed": false,
+                  "name": "D",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "float64"
+                    }
+                  }
+                }
+              },
+              "name": "BenchRawT"
+            },
+            "BenchT": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "B": {
+                  "embed": false,
+                  "name": "B",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "C": {
+                  "embed": false,
+                  "name": "C",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "D": {
+                  "embed": false,
+                  "name": "D",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "E": {
+                  "embed": false,
+                  "name": "E",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "F": {
+                  "embed": false,
+                  "name": "F",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "BenchT"
+            },
+            "S": {
+              "fields": {},
+              "name": "S"
+            },
+            "condBool": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "bool"
+                  }
+                }
+              },
+              "name": "condBool"
+            },
+            "condFloat": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "float64"
+                  }
+                }
+              },
+              "name": "condFloat"
+            },
+            "condIface": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "condIface"
+            },
+            "condInt": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                }
+              },
+              "name": "condInt"
+            },
+            "condMap": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "int"
+                    }
+                  }
+                }
+              },
+              "name": "condMap"
+            },
+            "condPtr": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "bool"
+                    }
+                  }
+                }
+              },
+              "name": "condPtr"
+            },
+            "condRaw": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "Raw"
+                  }
+                }
+              },
+              "name": "condRaw"
+            },
+            "condSlice": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                }
+              },
+              "name": "condSlice"
+            },
+            "condStr": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "condStr"
+            },
+            "condStrNS": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {
+                    "a": [
+                      "A"
+                    ],
+                    "b": [
+                      "B"
+                    ],
+                    "bson": [
+                      "",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "condStrNS"
+            },
+            "condStruct": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "fields": [
+                      {
+                        "kind": "array",
+                        "value": {
+                          "kind": "primitive",
+                          "value": "int"
+                        }
+                      }
+                    ],
+                    "kind": "struct"
+                  }
+                }
+              },
+              "name": "condStruct"
+            },
+            "condTime": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "time",
+                    "value": "Time"
+                  }
+                }
+              },
+              "name": "condTime"
+            },
+            "condUInt": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "uint"
+                  }
+                }
+              },
+              "name": "condUInt"
+            },
+            "crossTypeItem": {
+              "fields": {
+                "obj1": {
+                  "embed": false,
+                  "name": "obj1",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                },
+                "obj2": {
+                  "embed": false,
+                  "name": "obj2",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "crossTypeItem"
+            },
+            "dOnIface": {
+              "fields": {
+                "D": {
+                  "embed": false,
+                  "name": "D",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "dOnIface"
+            },
+            "docWithGetterField": {
+              "fields": {
+                "Field": {
+                  "embed": false,
+                  "name": "Field",
+                  "tags": {},
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "typeWithGetter"
+                    }
+                  }
+                }
+              },
+              "name": "docWithGetterField"
+            },
+            "ignoreField": {
+              "fields": {
+                "After": {
+                  "embed": false,
+                  "name": "After",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Before": {
+                  "embed": false,
+                  "name": "Before",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Ignore": {
+                  "embed": false,
+                  "name": "Ignore",
+                  "tags": {
+                    "bson": [
+                      "-"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "ignoreField"
+            },
+            "inlineBadKeyMap": {
+              "fields": {
+                "M": {
+                  "embed": false,
+                  "name": "M",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "int"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "int"
+                    }
+                  }
+                }
+              },
+              "name": "inlineBadKeyMap"
+            },
+            "inlineCantPtr": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "fields": [
+                        {
+                          "kind": "primitive",
+                          "value": "int"
+                        }
+                      ],
+                      "kind": "struct"
+                    }
+                  }
+                }
+              },
+              "name": "inlineCantPtr"
+            },
+            "inlineDupMap": {
+              "fields": {
+                "M1": {
+                  "embed": false,
+                  "name": "M1",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "interface",
+                      "methods": []
+                    }
+                  }
+                },
+                "M2": {
+                  "embed": false,
+                  "name": "M2",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "interface",
+                      "methods": []
+                    }
+                  }
+                }
+              },
+              "name": "inlineDupMap"
+            },
+            "inlineDupName": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "fields": [
+                      {
+                        "kind": "primitive",
+                        "value": "int"
+                      }
+                    ],
+                    "kind": "struct"
+                  }
+                }
+              },
+              "name": "inlineDupName"
+            },
+            "inlineInt": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "fields": [
+                      {
+                        "kind": "primitive",
+                        "value": "int"
+                      }
+                    ],
+                    "kind": "struct"
+                  }
+                }
+              },
+              "name": "inlineInt"
+            },
+            "inlineMap": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "M": {
+                  "embed": false,
+                  "name": "M",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "interface",
+                      "methods": []
+                    }
+                  }
+                }
+              },
+              "name": "inlineMap"
+            },
+            "inlineMapInt": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "M": {
+                  "embed": false,
+                  "name": "M",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "int"
+                    }
+                  }
+                }
+              },
+              "name": "inlineMapInt"
+            },
+            "inlineMapMyM": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                },
+                "M": {
+                  "embed": false,
+                  "name": "M",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "MyM"
+                  }
+                }
+              },
+              "name": "inlineMapMyM"
+            },
+            "inlineUnexported": {
+              "fields": {
+                "M": {
+                  "embed": false,
+                  "name": "M",
+                  "tags": {},
+                  "type": {
+                    "key": {
+                      "kind": "primitive",
+                      "value": "string"
+                    },
+                    "kind": "map",
+                    "value": {
+                      "kind": "interface",
+                      "methods": []
+                    }
+                  }
+                },
+                "unexported": {
+                  "embed": true,
+                  "name": "unexported",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "unexported"
+                  }
+                }
+              },
+              "name": "inlineUnexported"
+            },
+            "jsonType": {
+              "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                }
+              },
+              "name": "jsonType"
+            },
+            "namedCondStr": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "namedCondStr"
+            },
+            "objectIdParts": {
+              "fields": {
+                "counter": {
+                  "embed": false,
+                  "name": "counter",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int32"
+                  }
+                },
+                "id": {
+                  "embed": false,
+                  "name": "id",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                },
+                "machine": {
+                  "embed": false,
+                  "name": "machine",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "byte"
+                    }
+                  }
+                },
+                "pid": {
+                  "embed": false,
+                  "name": "pid",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "uint16"
+                  }
+                },
+                "timestamp": {
+                  "embed": false,
+                  "name": "timestamp",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int64"
+                  }
+                }
+              },
+              "name": "objectIdParts"
+            },
+            "ptrSetterDoc": {
+              "fields": {
+                "Field": {
+                  "embed": false,
+                  "name": "Field",
+                  "tags": {},
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "setterType"
+                    }
+                  }
+                }
+              },
+              "name": "ptrSetterDoc"
+            },
+            "setterType": {
+              "fields": {
+                "received": {
+                  "embed": false,
+                  "name": "received",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "setterType"
+            },
+            "shortIface": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "shortIface"
+            },
+            "shortInt": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int64"
+                  }
+                }
+              },
+              "name": "shortInt"
+            },
+            "shortNonEmptyInt": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int64"
+                  }
+                }
+              },
+              "name": "shortNonEmptyInt"
+            },
+            "shortPtr": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "int64"
+                    }
+                  }
+                }
+              },
+              "name": "shortPtr"
+            },
+            "shortUint": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "uint64"
+                  }
+                }
+              },
+              "name": "shortUint"
+            },
+            "specSample1": {
+              "fields": {
+                "Hello": {
+                  "embed": false,
+                  "name": "Hello",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "specSample1"
+            },
+            "specSample2": {
+              "fields": {
+                "BSON": {
+                  "embed": false,
+                  "name": "BSON",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "interface",
+                      "methods": []
+                    }
+                  }
+                }
+              },
+              "name": "specSample2"
+            },
+            "specTest": {
+              "fields": {
+                "Description": {
+                  "embed": false,
+                  "name": "Description",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Documents": {
+                  "embed": false,
+                  "name": "Documents",
+                  "tags": {},
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "fields": [
+                        {
+                          "key": {
+                            "kind": "primitive",
+                            "value": "string"
+                          },
+                          "kind": "map",
+                          "value": {
+                            "kind": "interface",
+                            "methods": []
+                          }
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "bool"
+                        },
+                        {
+                          "kind": "interface",
+                          "methods": []
+                        }
+                      ],
+                      "kind": "struct"
+                    }
+                  }
+                }
+              },
+              "name": "specTest"
+            },
+            "structWithDupKeys": {
+              "fields": {
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "byte"
+                  }
+                },
+                "Other": {
+                  "embed": false,
+                  "name": "Other",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "byte"
+                  }
+                }
+              },
+              "name": "structWithDupKeys"
+            },
+            "testItemType": {
+              "fields": {
+                "data": {
+                  "embed": false,
+                  "name": "data",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "obj": {
+                  "embed": false,
+                  "name": "obj",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "testItemType"
+            },
+            "typeWithGetter": {
+              "fields": {
+                "err": {
+                  "embed": false,
+                  "name": "err",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "error"
+                  }
+                },
+                "result": {
+                  "embed": false,
+                  "name": "result",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "typeWithGetter"
+            },
+            "typeWithIntGetter": {
+              "fields": {
+                "V": {
+                  "embed": false,
+                  "name": "V",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "intGetter"
+                  }
+                }
+              },
+              "name": "typeWithIntGetter"
+            },
+            "unexported": {
+              "fields": {
+                "A": {
+                  "embed": false,
+                  "name": "A",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "int"
+                  }
+                }
+              },
+              "name": "unexported"
+            },
+            "unmarshalErrorType": {
+              "fields": {
+                "data": {
+                  "embed": false,
+                  "name": "data",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "error": {
+                  "embed": false,
+                  "name": "error",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "obj": {
+                  "embed": false,
+                  "name": "obj",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                }
+              },
+              "name": "unmarshalErrorType"
+            },
+            "unmarshalRawErrorType": {
+              "fields": {
+                "error": {
+                  "embed": false,
+                  "name": "error",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "obj": {
+                  "embed": false,
+                  "name": "obj",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                },
+                "raw": {
+                  "embed": false,
+                  "name": "raw",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "Raw"
+                  }
+                }
+              },
+              "name": "unmarshalRawErrorType"
+            },
+            "valSetterDoc": {
+              "fields": {
+                "Field": {
+                  "embed": false,
+                  "name": "Field",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "setterType"
+                  }
+                }
+              },
+              "name": "valSetterDoc"
+            },
+            "xmlType": {
+              "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {},
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                }
+              },
+              "name": "xmlType"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/decimal_test.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decimal_test.go",
+          "struct": {
+            "decimalTests": {
+              "fields": {
+                "ParseErrors": {
+                  "embed": false,
+                  "name": "ParseErrors",
+                  "tags": {
+                    "json": [
+                      "parseErrors"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "fields": [
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        }
+                      ],
+                      "kind": "struct"
+                    }
+                  }
+                },
+                "Valid": {
+                  "embed": false,
+                  "name": "Valid",
+                  "tags": {
+                    "json": [
+                      "valid"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "fields": [
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "string"
+                        },
+                        {
+                          "kind": "primitive",
+                          "value": "bool"
+                        }
+                      ],
+                      "kind": "struct"
+                    }
+                  }
+                }
+              },
+              "name": "decimalTests"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/json_test.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/json_test.go",
+          "struct": {
+            "jsonTest": {
+              "fields": {
+                "a": {
+                  "embed": false,
+                  "name": "a",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                },
+                "b": {
+                  "embed": false,
+                  "name": "b",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "c": {
+                  "embed": false,
+                  "name": "c",
+                  "tags": {},
+                  "type": {
+                    "kind": "interface",
+                    "methods": []
+                  }
+                },
+                "e": {
+                  "embed": false,
+                  "name": "e",
+                  "tags": {},
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "jsonTest"
+            }
+          }
+        },
+        "GOPATH/src/gopkg.in/mgo.v2/bson/specdata_test.go": {
+          "alias": {},
+          "import": {},
+          "name": "GOPATH/src/gopkg.in/mgo.v2/bson/specdata_test.go",
+          "struct": {}
+        }
+      },
+      "fullname": "gopkg.in/mgo.v2/bson",
+      "name": "bson_test"
+    },
     "model": {
       "file": {
         "./model/model.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            "bson": {
+              "fullname": "gopkg.in/mgo.v2/bson",
+              "name": "bson"
+            }
+          },
           "name": "./model/model.go",
           "struct": {
             "Page": {
@@ -21,8 +1793,9 @@
                     ]
                   },
                   "type": {
-                    "kind": "primitive",
-                    "value": "string"
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
                   }
                 },
                 "Path": {
