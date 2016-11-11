@@ -2,7 +2,7 @@
   "module": {
     "def": {
       "file": {
-        "def/def.go": {
+        "./def/def.go": {
           "alias": {
             "ID": {
               "candidates": null,
@@ -13,16 +13,20 @@
               }
             }
           },
-          "name": "def/def.go",
+          "import": {},
+          "name": "./def/def.go",
           "struct": {
             "Page": {
               "fields": {
                 "ID": {
                   "embed": false,
                   "name": "ID",
-                  "tags": [
-                    "`json:\"id,omitempty\"`"
-                  ],
+                  "tags": {
+                    "json": [
+                      "id",
+                      "omitempty"
+                    ]
+                  },
                   "type": {
                     "kind": "pointer",
                     "value": {
@@ -34,9 +38,12 @@
                 "Path": {
                   "embed": false,
                   "name": "Path",
-                  "tags": [
-                    "`json:\"path,omitempty\"`"
-                  ],
+                  "tags": {
+                    "json": [
+                      "path",
+                      "omitempty"
+                    ]
+                  },
                   "type": {
                     "kind": "pointer",
                     "value": {
@@ -48,9 +55,12 @@
                 "Title": {
                   "embed": false,
                   "name": "Title",
-                  "tags": [
-                    "`json:\"title,omitempty\"`"
-                  ],
+                  "tags": {
+                    "json": [
+                      "title",
+                      "omitempty"
+                    ]
+                  },
                   "type": {
                     "kind": "pointer",
                     "value": {
@@ -65,6 +75,7 @@
           }
         }
       },
+      "fullname": "github.com/podhmo/hmm/def",
       "name": "def"
     }
   }

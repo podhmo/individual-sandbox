@@ -17,7 +17,7 @@ class Reader(object):
         return world
 
     def read_module(self, data, parent=None):
-        module = Module(data["name"], parent=parent, reader=self)
+        module = Module(data["name"], data["fullname"], parent=parent, reader=self)
         for name, file in data["file"].items():
             module.read_file(name, file)
         return module
@@ -126,8 +126,9 @@ class World(object):
 
 
 class Module(object):
-    def __init__(self, name, parent=None, reader=None):
+    def __init__(self, name, fullname, parent=None, reader=None):
         self.name = name
+        self.fullname = fullname
         self.parent = parent
         self.reader = reader
         self.files = {}
@@ -552,8 +553,8 @@ def main():
     m = GoModule()
     m.package("convert")
     with m.import_group() as im:
-        im.import_("github.com/podhmo/hmm/{}".format(src_world["model"].package_name))
-        im.import_("github.com/podhmo/hmm/{}".format(dst_world["def"].package_name))
+        im.import_(src_world["model"].fullname)
+        im.import_(dst_world["def"].fullname)
     m.sep()
     print(m)
     print(write_covert_function(convertor, src_world["model"]["Page"], dst_world["def"]["Page"], writer))

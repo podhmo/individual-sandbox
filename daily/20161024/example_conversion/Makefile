@@ -10,6 +10,10 @@ json:
 	go-structjson --target model/model.go | jq . -S > output/model.json
 	go-structjson --target def/def.go | jq . -S > output/def.json
 
+masking:
+	gsed -i "s@`pwd`@.@g" output/*.json
+	gsed -i "s@`echo $$GOPATH`@GOPATH@g" output/*.json
+
 convert:
 	python convert.py --src output/model.json --dst output/def.json > convert/convert.go
 	gofmt -w convert/convert.go
