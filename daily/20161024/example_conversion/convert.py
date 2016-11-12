@@ -6,11 +6,28 @@ import argparse
 import copy
 import json
 import logging
-from collections import ChainMap, deque, defaultdict, namedtuple
+from collections import ChainMap, deque, defaultdict, namedtuple, OrderedDict
 from prestring.go import GoModule
 
 Action = namedtuple("Action", "action, src, dst")
 logger = logging.getLogger(__name__)
+
+
+# stolen from pyramid
+class reify(object):
+    def __init__(self, wrapped):
+        self.wrapped = wrapped
+        try:
+            self.__doc__ = wrapped.__doc__
+        except:
+            pass
+
+    def __get__(self, inst, objtype=None):
+        if inst is None:
+            return self
+        val = self.wrapped(inst)
+        setattr(inst, self.wrapped.__name__, val)
+        return val
 
 
 class Reader(object):
@@ -36,18 +53,24 @@ class Reader(object):
 
     def read_struct(self, data, parent=None):
         struct = Struct(data["name"], data, parent=parent, reader=self)
+        for name, field in data["fields"].items():
+            struct.read_field(name, field)
         return struct
 
     def read_alias(self, data, parent=None):
         alias = Alias(data["name"], data, parent=parent, reader=self)
         return alias
 
+    def read_field(self, data, parent=None):
+        field = Field(data["name"], data, parent=parent, reader=self)
+        return field
+
 
 class World(object):
     def __init__(self, parent=None, reader=None):
         self.parent = parent
         self.reader = reader
-        self.modules = {}
+        self.modules = OrderedDict()
         self.modules_by_fullname = {}
 
     def read_module(self, name, module):
@@ -68,7 +91,7 @@ class Module(object):
         self.fullname = fullname
         self.parent = parent
         self.reader = reader
-        self.files = {}
+        self.files = OrderedDict()
         self.reset()
 
     @property
@@ -109,8 +132,8 @@ class File(object):
         self.imports = imports
         self.parent = parent
         self.reader = reader
-        self.aliases = {}
-        self.structs = {}
+        self.aliases = OrderedDict()
+        self.structs = OrderedDict()
         self.members = {}
 
     @property
@@ -149,6 +172,26 @@ class Alias(object):
             return None
         return self.parent.package_name
 
+    @property
+    def src_name(self):
+        return self.data["original"]["value"]
+
+    @reify
+    def src_fullname(self):
+        if "prefix" not in self.data["original"]:
+            return self.src_name
+        module = self.parent.parent
+        prefix = self.data["original"]["prefix"]
+        if module.name == prefix:
+            full_prefix = module.fullname
+        else:
+            full_prefix = self.parent.imports[prefix]["fullname"]
+        return "{}.{}".format(full_prefix, self.src_name)
+
+    @reify
+    def fullname(self):
+        return self.parent.parent.with_fullname(self.data["name"])
+
     def dump(self, writer):
         return writer.write_alias(self)
 
@@ -161,8 +204,8 @@ class Struct(object):
         self.name = name
         self.parent = parent
         self.reader = reader
-        self.rawdata = data
         self.data = data
+        self.fields = OrderedDict()
 
     @property
     def package_name(self):
@@ -174,24 +217,54 @@ class Struct(object):
     def fullname(self):
         return self.parent.parent.with_fullname(self.name)
 
+    def read_field(self, name, field):
+        field = self.reader.read_field(field, self)
+        self.fields[name.lower()] = field
+
     def dump(self, writer):
         return writer.write_struct(self)
 
     def __getitem__(self, name):
-        return self.data["fields"][name]
+        return self.fields[name]
 
     def __contains__(self, name):
-        return name in self.data["fields"]
-
-    def fields(self):
-        # todo: field class
-        return self.data["fields"].items()
+        return name in self.fields
 
     def normalize(self):
-        self.rawdata = copy.deepcopy(self.rawdata)
-        data = self.data["fields"]
-        for k in list(data.keys()):
-            data[k.lower()] = data.pop(k)
+        pass
+        # self.rawdata = copy.deepcopy(self.rawdata)
+        # data = self.data["fields"]
+        # for k in list(data.keys()):
+        #     data[k.lower()] = data.pop(k)
+
+
+class Field(object):
+    def __init__(self, name, data, parent=None, reader=None):
+        self.name = name
+        self.data = data
+        self.parent = parent
+        self.reader = reader
+
+    @property
+    def type(self):
+        return self.data["type"]
+
+    @reify
+    def type_path(self):
+        return tuple(get_type_path(self.type, self.parent))
+
+    @reify
+    def prefix(self):
+        return self.prefix_and_name
+
+    def find_module(self, name):
+        file = self.parent.parent
+        module = file.parent
+        if module.name == name:
+            fullname = module.fullname
+        else:
+            fullname = file.imports[name]["fullname"]
+        return module.parent.modules_by_fullname[fullname]
 
 
 class ConvertWriter(object):
@@ -228,22 +301,23 @@ class ConvertWriter(object):
         dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
             self.m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
-            for name, field in sorted(dst.fields()):
+            for name, field in sorted(dst.fields.items()):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
 
     def write_code_convert(self, src, dst, name, field, cont, retry=False):
         try:
             if name in src:
-                value = "src.{}".format(src[name]["name"])
-                convert = self.convertor.convert(self.m, src[name], field, src, dst, name=value)
-                self.m.stmt("dst.{} = {}".format(field["name"], convert))  # xxx
+                src_field = src[name]
+                value = "src.{}".format(src_field.name)
+                convert = self.convertor.convert(self.m, src_field, field, name=value)
+                self.m.stmt("dst.{} = {}".format(field.name, convert))  # xxx
             else:
                 try:
-                    score, nearlest = min([(editdistance.eval(name, f["name"]), f["name"]) for _, f in src.fields()])
-                    self.m.comment("FIXME: {} is not found. (maybe {}?)".format(field["name"], nearlest))
+                    score, nearlest = min([(editdistance.eval(name, f.name), f.name) for f in src.fields.values()])
+                    self.m.comment("FIXME: {} is not found. (maybe {}?)".format(field.name, nearlest))
                 except ValueError:
-                    self.m.comment("FIXME: {} is not found.".format(field["name"]))
+                    self.m.comment("FIXME: {} is not found.".format(field.name))
         except GencodeMappingNotFound as e:
             # print("@", e, file=sys.stderr)
             if retry:
@@ -257,8 +331,8 @@ class ConvertWriter(object):
                     return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
             # xxx:
-            dep_src_type_list = tuple(get_type_path(src[name]["type"], src))
-            dep_dst_type_list = tuple(get_type_path(field["type"], dst))
+            dep_src_type_list = src[name].type_path
+            dep_dst_type_list = field.type_path
             src_prefix, src_name = dep_src_type_list[-1].rsplit(".", 1)
             dst_prefix, dst_name = dep_dst_type_list[-1].rsplit(".", 1)
             dep_src = src.parent.parent.parent.modules_by_fullname[src_prefix][src_name]
@@ -328,14 +402,7 @@ class TypeConvertor(object):
             for _, module in world.modules.items():
                 for _, file in module.files.items():
                     for _, alias in file.aliases.items():
-                        data = alias.data
-                        src_name = data["original"]["value"]
-                        if "prefix" in data["original"]:
-                            # xxx:
-                            src_fullname = "{}.{}".format(file.imports[data["original"]["prefix"]]["fullname"], src_name)
-                            items.append((src_fullname, module.with_fullname(data["name"])))
-                        else:
-                            items.append((src_name, module.with_fullname(data["name"])))
+                        items.append((alias.src_fullname, alias.fullname))
         self.codegen.resolver.add_relation_list(items)
         self.override_map = {}
 
@@ -349,27 +416,19 @@ class TypeConvertor(object):
         self.codegen.resolver.add_relation(src_type, dst_type)
         self.override_map[(src_type, dst_type)] = on_write
 
-    def get_new_prefix_on_selector(self, prefix, src_struct, dst_struct):
-        dst_module = dst_struct.parent.parent
-        if dst_module.name == prefix:
-            fullname = dst_module.fullname
-        else:
-            fullname = dst_struct.parent.imports[prefix]["fullname"]
-        module = dst_module.parent.modules_by_fullname[fullname]
-        # writing import clause if needed
-        return self.import_writer.import_(module)
-
-    def coerce(self, m, value, src_type, dst_type, src_struct, dst_struct):
+    def coerce(self, m, value, src_type, dst_type, src_field, dst_field):
         pair = (src_type, dst_type)
         if pair in self.override_map:
-            return self.override_map[pair](self, m, value, src_type, dst_type, src_struct, dst_struct)
+            return self.override_map[pair](self, m, value, src_type, dst_type, src_field, dst_field)
 
         if isinstance(dst_type, (list, tuple)):
+            # xxx:
             return "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
         elif "/" in dst_type:
             prefix_and_name = dst_type.rsplit("/", 1)[-1]
             prefix, name = prefix_and_name.rsplit(".")
-            new_prefix = self.get_new_prefix_on_selector(prefix, src_struct, dst_struct)
+            # writing import clause if needed
+            new_prefix = self.import_writer.import_(dst_field.find_module(prefix))
             return "{}.{}({})".format(new_prefix, name, value)
         else:
             return "{}({})".format(dst_type, value)
@@ -378,9 +437,9 @@ class TypeConvertor(object):
         self.i += 1
         return "tmp{}".format(self.i)
 
-    def convert(self, m, src, dst, src_struct, dst_struct, name):
-        src_path = list(get_type_path(src["type"], src_struct))
-        dst_path = list(get_type_path(dst["type"], dst_struct))
+    def convert(self, m, src_field, dst_field, name):
+        src_path = src_field.type_path
+        dst_path = dst_field.type_path
         code = self.codegen.gencode(src_path, dst_path)
         value = name
         is_cast = False
@@ -398,7 +457,7 @@ class TypeConvertor(object):
                 value = "&({})".format(value)
                 is_cast = True
             elif op[0] == "coerce":
-                value = self.coerce(m, value, op[1], op[2], src_struct, dst_struct)
+                value = self.coerce(m, value, op[1], op[2], src_field, dst_field)
                 is_cast = True
             else:
                 m.comment("hmm {}".format(op[0]))
@@ -613,10 +672,10 @@ def main():
     reader = Reader()
 
     with open(args.src) as rf:
-        src_world = reader.read_world(json.load(rf))
+        src_world = reader.read_world(json.load(rf, object_pairs_hook=OrderedDict))
         src_world.normalize()
     with open(args.dst) as rf:
-        dst_world = reader.read_world(json.load(rf))
+        dst_world = reader.read_world(json.load(rf, object_pairs_hook=OrderedDict))
         dst_world.normalize()
     gencoder = MiniCodeGenerator(TypeMappingResolver([]))
 
@@ -648,6 +707,10 @@ def main():
         for file in module.files.values():
             for struct in file.structs.values():
                 for module in src_world.modules.values():
+                    # if struct.name != "FacebookPage":
+                    #     continue
+                    # if struct.name != "EnduserTopic":
+                    #     continue
                     if struct.name in module:
                         print("@", struct.name, file=sys.stderr)
                         cw.write(module[struct.name], struct)
