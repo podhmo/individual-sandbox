@@ -1,0 +1,17 @@
+# -*- coding:utf-8 -*-
+def sandbox(writer, reader, src_world, dst_world):
+    print(src_world["model"]["Page"])
+    print(dst_world["def"]["Page"])
+    print(src_world["model"]["Page"].package_name)
+    print(dst_world["def"]["Page"].package_name)
+    print(src_world["model"]["Page"].dump(writer))
+    print(dst_world["def"]["Page"].dump(writer))
+    print("----------------------------------------")
+    # print("----------------------------------------")
+    # print(gencoder.gencode(src_path=["string"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer", "pointer"], dst_path=["string", "pointer"]))
+    # print(gencoder.gencode(src_path=["string", "pointer", "pointer"], dst_path=["string"]))
+    # print(gencoder.gencode(src_path=["string", "pointer"], dst_path=["X", "pointer"]))
