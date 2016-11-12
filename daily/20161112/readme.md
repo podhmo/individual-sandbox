@@ -32,3 +32,13 @@ for k in d.keys():
 >>> editdistance.eval("aaab","aaaa")
 1
 ```
+
+# python max by 的な処理がしたい時
+
+```
+>>> d = {1: 2, 2: -10}
+>>> max(d.items(), key=lambda x: x[1])
+(1, 2)
+>>> max(d.items(), key=lambda x: abs(x[1]))
+(2, -10)
+```
