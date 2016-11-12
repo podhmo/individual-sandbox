@@ -8,3 +8,11 @@ type Page struct {
 	PathHash string        `bson:"pathHash" json:"pathHash"`
 	Title    string        `bson:"title" json:"title"`
 }
+
+type User struct {
+	Id      bson.ObjectId `bson:"_id" json:"id"`
+	Name    string        `bson:"name" json:"name"`
+	GroupID string        `bson:"groupId" json:"groupId"`
+
+	Group *Group `bson:"-" json:"group"`
+}
