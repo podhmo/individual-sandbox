@@ -98,7 +98,7 @@ class Module(object):
     def package_name(self):
         return self.name
 
-    def with_fullname(self, name):
+    def fulladdress(self, name):
         return "{}.{}".format(self.fullname, name)
 
     def read_file(self, name, file):
@@ -124,6 +124,10 @@ class Module(object):
 
     def __contains__(self, name):
         return name in self.members
+
+    @property
+    def world(self):
+        return self.parent
 
 
 class File(object):
@@ -158,6 +162,14 @@ class File(object):
     def dump(self, writer):
         return writer.write_file(self)
 
+    @property
+    def world(self):
+        return self.parent.parent
+
+    @property
+    def module(self):
+        return self.parent
+
 
 class Alias(object):
     def __init__(self, name, data, parent=None, reader=None):
@@ -180,7 +192,7 @@ class Alias(object):
     def src_fullname(self):
         if "prefix" not in self.data["original"]:
             return self.src_name
-        module = self.parent.parent
+        module = self.module
         prefix = self.data["original"]["prefix"]
         if module.name == prefix:
             full_prefix = module.fullname
@@ -190,13 +202,25 @@ class Alias(object):
 
     @reify
     def fullname(self):
-        return self.parent.parent.with_fullname(self.data["name"])
+        return self.module.fulladdress(self.data["name"])
 
     def dump(self, writer):
         return writer.write_alias(self)
 
     def normalize(self):
         pass
+
+    @property
+    def world(self):
+        return self.parent.parent.parent
+
+    @property
+    def module(self):
+        return self.parent.parent
+
+    @property
+    def file(self):
+        return self.parent
 
 
 class Struct(object):
@@ -215,7 +239,7 @@ class Struct(object):
 
     @property
     def fullname(self):
-        return self.parent.parent.with_fullname(self.name)
+        return self.module.fulladdress(self.name)
 
     def read_field(self, name, field):
         field = self.reader.read_field(field, self)
@@ -232,10 +256,18 @@ class Struct(object):
 
     def normalize(self):
         pass
-        # self.rawdata = copy.deepcopy(self.rawdata)
-        # data = self.data["fields"]
-        # for k in list(data.keys()):
-        #     data[k.lower()] = data.pop(k)
+
+    @property
+    def world(self):
+        return self.parent.parent.parent
+
+    @property
+    def module(self):
+        return self.parent.parent
+
+    @property
+    def file(self):
+        return self.parent
 
 
 class Field(object):
@@ -254,17 +286,36 @@ class Field(object):
         return tuple(get_type_path(self.type, self.parent))
 
     @reify
-    def prefix(self):
-        return self.prefix_and_name
+    def definition(self):
+        if "." not in self.type_path[-1]:
+            return self.type
+        prefix, name = self.type_path[-1].rsplit(".", 1)
+        return self.world.modules_by_fullname[prefix][name]
 
     def find_module(self, name):
-        file = self.parent.parent
+        file = self.file
         module = file.parent
         if module.name == name:
             fullname = module.fullname
         else:
             fullname = file.imports[name]["fullname"]
         return module.parent.modules_by_fullname[fullname]
+
+    @property
+    def world(self):
+        return self.parent.parent.parent.parent
+
+    @property
+    def module(self):
+        return self.parent.parent.parent
+
+    @property
+    def file(self):
+        return self.parent.parent
+
+    @property
+    def struct(self):
+        return self.parent
 
 
 class ConvertWriter(object):
@@ -275,17 +326,17 @@ class ConvertWriter(object):
     def get_function_name(self, src, dst):
         return 'ConvertFrom{}{}'.format(src.package_name.title(), dst.name)
 
-    def write(self, src, dst):
+    def write_function(self, src, dst):
         fnname = self.get_function_name(src, dst)
         src_type_list = tuple(["pointer", src.fullname])
         dst_type_list = tuple(["pointer", dst.fullname])
         cont = []
-        self._register(fnname, src, dst, src_type_list, dst_type_list)
-        self._write(fnname, src, dst, cont)
+        self.register(fnname, src, dst, src_type_list, dst_type_list)
+        self.write(fnname, src, dst, cont)
         for fn in cont:
             fn()
 
-    def _register(self, fnname, src, dst, src_type_list, dst_type_list):
+    def register(self, fnname, src, dst, src_type_list, dst_type_list):
         override = self.convertor.as_override
 
         @override(src_type_list, dst_type_list)
@@ -296,7 +347,7 @@ class ConvertWriter(object):
                 m.return_("nil, err")
             return tmp
 
-    def _write(self, fnname, src, dst, cont):
+    def write(self, fnname, src, dst, cont):
         src_arg = 'src *{}.{}'.format(src.package_name, src.name)
         dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
@@ -322,25 +373,22 @@ class ConvertWriter(object):
             # print("@", e, file=sys.stderr)
             if retry:
                 raise
+            return self._fallback(e, src, dst, name, field, cont)
 
-            if e.src[-1].endswith(("32", "64")) or e.dst[-1].endswith(("32", "64")):
-                primitive_src = e.src[-1].replace("32", "").replace("64", "")
-                primitive_dst = e.src[-1].replace("32", "").replace("64", "")
-                if primitive_src == primitive_dst:
-                    self.convertor.codegen.resolver.add_relation(e.src[-1], e.dst[-1])
-                    return self.write_code_convert(src, dst, name, field, cont, retry=True)
+    def _fallback(self, e, src, dst, name, field, cont):
+        if e.src_path[-1].endswith(("32", "64")) or e.dst_path[-1].endswith(("32", "64")):
+            primitive_src = e.src_path[-1].replace("32", "").replace("64", "")
+            primitive_dst = e.dst_path[-1].replace("32", "").replace("64", "")
+            if primitive_src == primitive_dst:
+                self.convertor.codegen.resolver.add_relation(e.src_path[-1], e.dst_path[-1])
+                return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
-            # xxx:
-            dep_src_type_list = src[name].type_path
-            dep_dst_type_list = field.type_path
-            src_prefix, src_name = dep_src_type_list[-1].rsplit(".", 1)
-            dst_prefix, dst_name = dep_dst_type_list[-1].rsplit(".", 1)
-            dep_src = src.parent.parent.parent.modules_by_fullname[src_prefix][src_name]
-            dep_dst = dst.parent.parent.parent.modules_by_fullname[dst_prefix][dst_name]
-            fnname = self.get_function_name(dep_src, dep_dst)
-            self._register(fnname, dep_src, dep_dst, dep_src_type_list, dep_dst_type_list)
-            cont.append(lambda: self._write(fnname, dep_src, dep_dst, cont))
-            return self.write_code_convert(src, dst, name, field, cont, retry=True)
+        dep_src = src[name].definition
+        dep_dst = field.definition
+        fnname = self.get_function_name(dep_src, dep_dst)
+        self.register(fnname, dep_src, dep_dst, src[name].type_path, field.type_path)
+        cont.append(lambda: self.write(fnname, dep_src, dep_dst, cont))
+        return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 
 class ImportWriter(object):
@@ -376,7 +424,7 @@ class ImportWriter(object):
 
 def get_type_path(value, struct):
     if value["kind"] == "primitive":
-        module = struct.parent.parent
+        module = struct.module
         if value["value"] not in module:
             return [value["value"]]
         else:
@@ -593,8 +641,8 @@ class TypeMappingResolver(object):
 class GencodeMappingNotFound(ValueError):
     def __init__(self, msg, src, dst):
         super().__init__(msg)
-        self.src = src
-        self.dst = dst
+        self.src_path = src
+        self.dst_path = dst
 
 
 class MiniCodeGenerator(object):
@@ -687,17 +735,16 @@ def main():
         iw.import_(src_world["model"])
         iw.import_(dst_world["def"])
 
-    @convertor.as_override("string", src_world["bson"].with_fullname("ObjectId"))
+    @convertor.as_override("string", src_world["bson"].fulladdress("ObjectId"))
     def string_to_object_id(convertor, m, value, *args):
-        module = src_world["bson"]
-        new_prefix = convertor.import_writer.import_(module)
+        new_prefix = convertor.import_writer.import_(src_world["bson"])
         return "{}.ObjectIdHex({})".format(new_prefix, value)
 
-    @convertor.as_override(src_world["bson"].with_fullname("ObjectId"), "string")
+    @convertor.as_override(src_world["bson"].fulladdress("ObjectId"), "string")
     def object_id_to_string(convertor, m, value, *args):
         return "{}.Hex()".format(value)
 
-    @convertor.as_override(src_world["model"].with_fullname("Date"), "time.Time")
+    @convertor.as_override(src_world["model"].fulladdress("Date"), "time.Time")
     def model_date_to_time(convertor, m, value, *args):
         return "{}.Time()".format(value)
 
@@ -713,17 +760,17 @@ def main():
                     #     continue
                     if struct.name in module:
                         print("@", struct.name, file=sys.stderr)
-                        cw.write(module[struct.name], struct)
+                        cw.write_function(module[struct.name], struct)
                     elif struct.name.startswith("Enduser") and struct.name[len("Enduser"):] in module:
                         print("<", struct.name, file=sys.stderr)
-                        cw.write(module[struct.name[len("Enduser"):]], struct)
+                        cw.write_function(module[struct.name[len("Enduser"):]], struct)
                     elif struct.name.startswith("Tuner") and struct.name[len("Tuner"):] in module:
                         print(">", struct.name, file=sys.stderr)
-                        cw.write(module[struct.name[len("Tuner"):]], struct)
+                        cw.write_function(module[struct.name[len("Tuner"):]], struct)
 
-    # cw.write(src_world["model"]["Page"], dst_world["def"]["Page"])
-    # # cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
-    # cw.write(src_world["model"]["User"], dst_world["def"]["User"])
+    # cw.write_function(src_world["model"]["Page"], dst_world["def"]["Page"])
+    # # cw.write_function(dst_world["def"]["Page"], src_world["model"]["Page"])
+    # cw.write_function(src_world["model"]["User"], dst_world["def"]["User"])
 
     print(m)
 
