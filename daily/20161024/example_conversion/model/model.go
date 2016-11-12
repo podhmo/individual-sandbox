@@ -14,5 +14,5 @@ type User struct {
 	Name    string        `bson:"name" json:"name"`
 	GroupID string        `bson:"groupId" json:"groupId"`
 
-	Group *Group `bson:"-" json:"group"`
+	// Group *Group `bson:"-" json:"group"`
 }

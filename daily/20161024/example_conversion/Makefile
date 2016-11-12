@@ -7,8 +7,8 @@ install:
 	go get -u -v github.com/podhmo/go-structjson/cmd/go-structjson
 
 json:
-	go-structjson --target model/model.go | jq . -S > output/model.json
-	go-structjson --target def/def.go | jq . -S > output/def.json
+	go-structjson --target model | jq . -S > output/model.json
+	go-structjson --target def | jq . -S > output/def.json
 
 masking:
 	gsed -i "s@`pwd`@.@g" output/*.json

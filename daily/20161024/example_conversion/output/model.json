@@ -1769,6 +1769,56 @@
     },
     "model": {
       "file": {
+        "./model/group.go": {
+          "alias": {},
+          "import": {
+            "bson": {
+              "fullname": "gopkg.in/mgo.v2/bson",
+              "name": "bson"
+            }
+          },
+          "name": "./model/group.go",
+          "struct": {
+            "Group": {
+              "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {
+                    "bson": [
+                      "_id"
+                    ],
+                    "json": [
+                      "id"
+                    ]
+                  },
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "bson": [
+                      "name"
+                    ],
+                    "json": [
+                      "name"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "Group"
+            }
+          }
+        },
         "./model/model.go": {
           "alias": {},
           "import": {
@@ -1848,6 +1898,60 @@
                 }
               },
               "name": "Page"
+            },
+            "User": {
+              "fields": {
+                "GroupID": {
+                  "embed": false,
+                  "name": "GroupID",
+                  "tags": {
+                    "bson": [
+                      "groupId"
+                    ],
+                    "json": [
+                      "groupId"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {
+                    "bson": [
+                      "_id"
+                    ],
+                    "json": [
+                      "id"
+                    ]
+                  },
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "bson": [
+                      "name"
+                    ],
+                    "json": [
+                      "name"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "User"
             }
           }
         }

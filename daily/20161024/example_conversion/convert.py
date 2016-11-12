@@ -1,4 +1,5 @@
 import sys
+import contextlib
 import argparse
 import copy
 import json
@@ -141,6 +142,9 @@ class Module(object):
     def package_name(self):
         return self.name
 
+    def with_fullname(self, name):
+        return "{}.{}".format(self.fullname, name)
+
     def read_file(self, name, file):
         self.files[name] = self.reader.read_file(file, parent=self)
 
@@ -252,18 +256,43 @@ class Struct(object):
             data[k.lower()] = data.pop(k)
 
 
-def write_covert_function(m, convertor, src, dst):
-    src_arg = 'src *{}.{}'.format(src.package_name, src.name)
-    dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
-    with m.func('ConvertFrom{}{}'.format(src.package_name.title(), dst.name), src_arg, return_="({}, error)".format(dst_arg)):
-        m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
-        for name, field in sorted(dst.fields()):
+class ConvertWriter(object):
+    def __init__(self, m, convertor):
+        self.m = m
+        self.convertor = convertor
+
+    def get_function_name(self, src, dst):
+        return 'ConvertFrom{}{}'.format(src.package_name.title(), dst.name)
+
+    def write(self, src, dst):
+        cont = []
+        with self.write_code_funcion_definition(src, dst, cont):
+            self.m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
+            for name, field in sorted(dst.fields()):
+                self.write_code_convert(src, dst, name, field, cont)
+            self.m.return_("dst, nil")
+
+    @contextlib.contextmanager
+    def write_code_funcion_definition(self, src, dst, cont):
+        src_arg = 'src *{}.{}'.format(src.package_name, src.name)
+        dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
+        fnname = self.get_function_name(src, dst)
+        with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
+            yield
+
+    def write_code_convert(self, src, dst, name, field, cont, retry=False):
+        try:
             if name in src:
-                m.stmt("dst.{} = {}".format(field["name"], convertor.convert(m, src[name], field, src, dst, name="src.{}".format(src[name]["name"]))))  # xxx
+                value = "src.{}".format(src[name]["name"])
+                convert = self.convertor.convert(self.m, src[name], field, src, dst, name=value)
+                self.m.stmt("dst.{} = {}".format(field["name"], convert))  # xxx
             else:
-                m.comment("FIXME: {} is not found".format(field["name"]))
-        m.return_("dst, nil")
-    return m
+                self.m.comment("FIXME: {} is not found".format(field["name"]))
+        except ValueError:
+            if retry:
+                raise
+            print("hoi", src, dst, name, field, file=sys.stderr)
+            return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 
 class ImportWriter(object):
@@ -305,19 +334,24 @@ class TypeConvertor(object):
         self.dst_world = dst_world
         self.i = 0
         items = []
-        for _, module in self.src_world.modules.items():
-            for _, file in module.files.items():
-                for _, alias in file.aliases.items():
-                    # todo: recursive
-                    data = alias.data
-                    items.append((data["original"]["value"], "{}.{}".format(file.parent.fullname, data["name"])))
-        for _, module in self.dst_world.modules.items():
-            for _, file in module.files.items():
-                for _, alias in file.aliases.items():
-                    # todo: recursive
-                    data = alias.data
-                    items.append((data["original"]["value"], "{}.{}".format(file.parent.fullname, data["name"])))
-        self.codegen.resolver.add(items)
+        for world in [src_world, dst_world]:
+            for _, module in world.modules.items():
+                for _, file in module.files.items():
+                    for _, alias in file.aliases.items():
+                        data = alias.data
+                        items.append((data["original"]["value"], "{}.{}".format(file.parent.fullname, data["name"])))
+        self.codegen.resolver.add_relation_list(items)
+        self.override_map = {}
+
+    def as_override(self, src_type, dst_type):
+        def decorator(on_write):
+            self.override(src_type, dst_type, on_write)
+            return on_write
+        return decorator
+
+    def override(self, src_type, dst_type, on_write):
+        self.codegen.resolver.add_relation(src_type, dst_type)
+        self.override_map[(src_type, dst_type)] = on_write
 
     def get_type_path(self, value, struct):
         if value["kind"] == "primitive":
@@ -344,15 +378,12 @@ class TypeConvertor(object):
         # writing import clause if needed
         return self.import_writer.import_(module)
 
-    def coerce(self, src_type, dst_type, src_struct, dst_struct, value):
+    def coerce(self, value, src_type, dst_type, src_struct, dst_struct):
         if isinstance(dst_type, (list, tuple)):
-            "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
-        elif src_type == "string" and dst_type == "gopkg.in/mgo.v2/bson.ObjectId":
-            module = dst_struct.parent.parent.parent.modules_by_fullname["gopkg.in/mgo.v2/bson"]
-            new_prefix = self.import_writer.import_(module)
-            return "{}.ObjectIdHex({})".format(new_prefix, value)
-        elif src_type == "gopkg.in/mgo.v2/bson.ObjectId" and dst_type == "string":
-            return "{}.Hex()".format(value)
+            return "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
+        pair = (src_type, dst_type)
+        if pair in self.override_map:
+            return self.override_map[pair](self, value, src_type, dst_type, src_struct, dst_struct)
         elif "/" in dst_type:
             prefix_and_name = dst_type.rsplit("/", 1)[-1]
             prefix, name = prefix_and_name.rsplit(".")
@@ -381,7 +412,7 @@ class TypeConvertor(object):
                 value = "&({})".format(value)
                 is_cast = True
             elif op[0] == "coerce":
-                value = self.coerce(op[1], op[2], src_struct, dst_struct, value)
+                value = self.coerce(value, op[1], op[2], src_struct, dst_struct)
                 is_cast = True
         return value
 
@@ -390,14 +421,17 @@ class TypeMappingResolver(object):
     def __init__(self, items):
         self.primitive_map = defaultdict(list)
         self.detail_map = defaultdict(list)
-        self.add(items)
+        self.add_relation_list(items)
 
-    def add(self, items):
-        for k, v in items:
-            k = self._wrap_value(k)
-            v = self._wrap_value(v)
-            self._add_value(k, v)
-            self._add_value(v, k)
+    def add_relation_list(self, relations):
+        for k, v in relations:
+            self.add_relation(k, v)
+
+    def add_relation(self, k, v):
+        k = self._wrap_value(k)
+        v = self._wrap_value(v)
+        self._add_value(k, v)
+        self._add_value(v, k)
 
     def _has_detail(self, wv):
         return len(wv) > 1
@@ -581,20 +615,33 @@ def main():
     with open(args.dst) as rf:
         dst_world = reader.read_world(json.load(rf))
         dst_world.normalize()
-    # sandbox(writer, reader, src_world, dst_world)
     gencoder = MiniCodeGenerator(TypeMappingResolver([]))
 
     m = GoModule()
     m.package("convert")
     with m.import_group() as im:
-        import_writer = ImportWriter(im)
-        convertor = TypeConvertor(import_writer, gencoder, src_world, dst_world)
-        import_writer.import_(src_world["model"])
-        import_writer.import_(dst_world["def"])
+        iw = ImportWriter(im)
+        convertor = TypeConvertor(iw, gencoder, src_world, dst_world)
+        iw.import_(src_world["model"])
+        iw.import_(dst_world["def"])
+
+    @convertor.as_override("string", src_world["bson"].with_fullname("ObjectId"))
+    def string_to_object_id(convertor, value, *args):
+        module = src_world["bson"]
+        new_prefix = convertor.import_writer.import_(module)
+        return "{}.ObjectIdHex({})".format(new_prefix, value)
+
+    @convertor.as_override(src_world["bson"].with_fullname("ObjectId"), "string")
+    def object_id_to_string(convertor, value, *args):
+        return "{}.Hex()".format(value)
+
     m.sep()
-    write_covert_function(m, convertor, src_world["model"]["Page"], dst_world["def"]["Page"])
-    write_covert_function(m, convertor, dst_world["def"]["Page"], src_world["model"]["Page"])
+    cw = ConvertWriter(m, convertor)
+    cw.write(src_world["model"]["Page"], dst_world["def"]["Page"])
+    cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
+    cw.write(src_world["model"]["User"], dst_world["def"]["User"])
     print(m)
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

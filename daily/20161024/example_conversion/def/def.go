@@ -5,7 +5,7 @@ type ID string
 
 // Page is page
 type Page struct {
-	/* path
+	/* id
 	 */
 	ID *ID `json:"id,omitempty"`
 
@@ -16,4 +16,30 @@ type Page struct {
 	/* title
 	 */
 	Title *string `json:"title,omitempty"`
+}
+
+// User is user
+type User struct {
+	/* id
+	 */
+	ID *ID `json:"id,omitempty"`
+
+	/* name
+	 */
+	Name *string `json:"name,omitempty"`
+
+	/* group
+	 */
+	Group *Group `json:"group,omitempty"`
+}
+
+// Group is group
+type Group struct {
+	/* id
+	 */
+	ID *ID `json:"id,omitempty"`
+
+	/* name
+	 */
+	Name *string `json:"name,omitempty"`
 }

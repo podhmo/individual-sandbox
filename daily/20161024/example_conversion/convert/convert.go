@@ -25,3 +25,13 @@ func ConvertFromDefPage(src *def.Page) (*model.Page, error) {
 	dst.Title = *(src.Title)
 	return dst, nil
 }
+
+func ConvertFromModelUser(src *model.User) (*def.User, error) {
+	dst := &def.User{}
+	// FIXME: Group is not found
+	tmp3 := src.Id.Hex()
+	tmp4 := def.ID(tmp3)
+	dst.ID = &(tmp4)
+	dst.Name = &(src.Name)
+	return dst, nil
+}

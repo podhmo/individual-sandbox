@@ -16,6 +16,45 @@
           "import": {},
           "name": "./def/def.go",
           "struct": {
+            "Group": {
+              "fields": {
+                "ID": {
+                  "embed": false,
+                  "name": "ID",
+                  "tags": {
+                    "json": [
+                      "id",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "ID"
+                    }
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "json": [
+                      "name",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                }
+              },
+              "name": "Group"
+            },
             "Page": {
               "fields": {
                 "ID": {
@@ -71,6 +110,62 @@
                 }
               },
               "name": "Page"
+            },
+            "User": {
+              "fields": {
+                "Group": {
+                  "embed": false,
+                  "name": "Group",
+                  "tags": {
+                    "json": [
+                      "group",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Group"
+                    }
+                  }
+                },
+                "ID": {
+                  "embed": false,
+                  "name": "ID",
+                  "tags": {
+                    "json": [
+                      "id",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "ID"
+                    }
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "json": [
+                      "name",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                }
+              },
+              "name": "User"
             }
           }
         }
