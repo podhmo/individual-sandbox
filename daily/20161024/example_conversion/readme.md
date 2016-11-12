@@ -25,11 +25,23 @@ $ make setup
 ```sh
 $ make default # json + convert
 make default
-go-structjson --target model/model.go | jq . -S > output/model.json
-go-structjson --target def/def.go | jq . -S > output/def.json
+go-structjson --target model | jq . -S > output/model.json
+go-structjson --target def | jq . -S > output/def.json
 python convert.py --src output/model.json --dst output/def.json > convert/convert.go
 gofmt -w convert/convert.go
 $ make run
 go run main.go
-{"path":"/index","title":"index page"}
+{
+  "id": "5826a1e2c54d2d9886f1b224",
+  "path": "/index",
+  "title": "index page"
+}
+{
+  "id": "5826a1e2c54d2d9886f1b225",
+  "name": "Foo",
+  "group": {
+    "id": "5826a1e2c54d2d9886f1b226",
+    "name": "G"
+  }
+}
 ```

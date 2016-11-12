@@ -10,14 +10,40 @@ import (
 )
 
 func main() {
-	page := &model.Page{Id: bson.NewObjectId(), Path: "/index", Title: "index page", PathHash: "#"}
-	defPage, err := convert.ConvertFromModelPage(page)
-	if err != nil {
-		panic(err)
+	{
+		page := &model.Page{
+			Id:       bson.NewObjectId(),
+			Path:     "/index",
+			Title:    "index page",
+			PathHash: "#",
+		}
+		defPage, err := convert.ConvertFromModelPage(page)
+		if err != nil {
+			panic(err)
+		}
+		b, err := json.MarshalIndent(defPage, "", "  ")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(b))
 	}
-	b, err := json.Marshal(defPage)
-	if err != nil {
-		panic(err)
+	{
+		user := &model.User{
+			Id:   bson.NewObjectId(),
+			Name: "Foo",
+			Group: &model.Group{
+				Id:   bson.NewObjectId(),
+				Name: "G",
+			},
+		}
+		defUser, err := convert.ConvertFromModelUser(user)
+		if err != nil {
+			panic(err)
+		}
+		b, err := json.MarshalIndent(defUser, "", "  ")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(b))
 	}
-	fmt.Println(string(b))
 }

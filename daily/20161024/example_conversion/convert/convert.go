@@ -3,35 +3,37 @@ package convert
 import (
 	def "github.com/podhmo/hmm/def"
 	model "github.com/podhmo/hmm/model"
-	bson "gopkg.in/mgo.v2/bson"
 )
 
 func ConvertFromModelPage(src *model.Page) (*def.Page, error) {
 	dst := &def.Page{}
-	tmp0 := src.Id.Hex()
-	tmp1 := def.ID(tmp0)
-	dst.ID = &(tmp1)
+	tmp1 := src.Id.Hex()
+	tmp2 := def.ID(tmp1)
+	dst.ID = &(tmp2)
 	dst.Path = &(src.Path)
 	dst.Title = &(src.Title)
 	return dst, nil
 }
 
-func ConvertFromDefPage(src *def.Page) (*model.Page, error) {
-	dst := &model.Page{}
-	tmp2 := string(*(src.ID))
-	dst.Id = bson.ObjectIdHex(tmp2)
-	dst.Path = *(src.Path)
-	// FIXME: PathHash is not found
-	dst.Title = *(src.Title)
+func ConvertFromModelUser(src *model.User) (*def.User, error) {
+	dst := &def.User{}
+	tmp3, err := ConvertFromModelGroup(src.Group)
+	if err != nil {
+		return nil, err
+	}
+	dst.Group = tmp3
+	tmp4 := src.Id.Hex()
+	tmp5 := def.ID(tmp4)
+	dst.ID = &(tmp5)
+	dst.Name = &(src.Name)
 	return dst, nil
 }
 
-func ConvertFromModelUser(src *model.User) (*def.User, error) {
-	dst := &def.User{}
-	// FIXME: Group is not found
-	tmp3 := src.Id.Hex()
-	tmp4 := def.ID(tmp3)
-	dst.ID = &(tmp4)
+func ConvertFromModelGroup(src *model.Group) (*def.Group, error) {
+	dst := &def.Group{}
+	tmp6 := src.Id.Hex()
+	tmp7 := def.ID(tmp6)
+	dst.ID = &(tmp7)
 	dst.Name = &(src.Name)
 	return dst, nil
 }

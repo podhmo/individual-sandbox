@@ -1901,6 +1901,25 @@
             },
             "User": {
               "fields": {
+                "Group": {
+                  "embed": false,
+                  "name": "Group",
+                  "tags": {
+                    "bson": [
+                      "-"
+                    ],
+                    "json": [
+                      "group"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Group"
+                    }
+                  }
+                },
                 "GroupID": {
                   "embed": false,
                   "name": "GroupID",

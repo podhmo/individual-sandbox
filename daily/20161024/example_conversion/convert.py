@@ -41,75 +41,6 @@ class Reader(object):
         return alias
 
 
-class GOWriter(object):
-    prestring_module = GoModule
-
-    def write_file(self, file, m=None):
-        m = m or self.prestring_module()
-        self.write_packagename(file, m=m)
-        for struct in file.structs.values():
-            self.write_struct(struct, m=m)
-        for alias in file.aliases.values():
-            self.write_alias(alias, m=m)
-        return m
-
-    def write_packagename(self, file, m=None):
-        m = m or self.prestring_module()
-        package_name = file.package_name
-        if package_name is not None:
-            m.package(package_name)
-        return m
-
-    def write_struct(self, struct, m=None):
-        m = m or self.prestring_module()
-        struct = struct.data
-        self.write_comment(struct, m=m)
-        with m.type_(struct["name"], "struct"):
-            for field in sorted(struct["fields"].values(), key=lambda f: f["name"]):
-                self.write_comment(field, m=m)
-                if field["embed"]:
-                    m.stmt(as_type(field["type"]))
-                else:
-                    m.stmt("{} {}".format(field["name"], as_type(field["type"])))
-                if "tags" in field:
-                    m.insert_after("  ")
-                    for tag in field["tags"]:
-                        m.insert_after(tag)
-        return m
-
-    def write_alias(self, alias, m=None):
-        m = m or self.prestring_module()
-        alias = alias.data
-        m.type_alias(alias["name"], alias["original"]["value"])
-        with m.const_group() as const:
-            for c in alias.get("candidates", []):
-                self.write_comment(c, m=const) or const.comment("{} : a member of {}".format(c["name"], alias["name"]))
-                const("{} {} = {}".format(c["name"], alias["name"], c["value"]))
-        return m
-
-    def write_comment(self, target, m=None):
-        m = m or self.prestring_module()
-        if "comment" in target:
-            m.comment(target["comment"])
-            return m
-        else:
-            return None
-
-
-def as_type(type_dict):
-    kind = type_dict.get("kind", "primitive")
-    if kind == "primitive":
-        return type_dict["value"]
-    elif kind == "pointer":
-        return "*{}".format(as_type(type_dict["value"]))
-    elif kind == "selector":
-        return "{}".format(as_type(type_dict["value"]))
-    elif kind == "array":
-        return "[]{}".format(as_type(type_dict["value"]))
-    else:
-        raise ValueError("unknown type: {}".format(type_dict))
-
-
 class World(object):
     def __init__(self, parent=None, reader=None):
         self.parent = parent
@@ -237,6 +168,10 @@ class Struct(object):
             return None
         return self.parent.package_name
 
+    @property
+    def fullname(self):
+        return self.parent.parent.with_fullname(self.name)
+
     def dump(self, writer):
         return writer.write_struct(self)
 
@@ -247,6 +182,7 @@ class Struct(object):
         return name in self.data["fields"]
 
     def fields(self):
+        # todo: field class
         return self.data["fields"].items()
 
     def normalize(self):
@@ -256,6 +192,7 @@ class Struct(object):
             data[k.lower()] = data.pop(k)
 
 
+# TODO: register?
 class ConvertWriter(object):
     def __init__(self, m, convertor):
         self.m = m
@@ -271,6 +208,8 @@ class ConvertWriter(object):
             for name, field in sorted(dst.fields()):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
+        for fn in cont:
+            fn()
 
     @contextlib.contextmanager
     def write_code_funcion_definition(self, src, dst, cont):
@@ -291,7 +230,27 @@ class ConvertWriter(object):
         except ValueError:
             if retry:
                 raise
-            print("hoi", src, dst, name, field, file=sys.stderr)
+
+            # xxx:
+            dep_src_type_list = tuple(self.convertor.get_type_path(src[name]["type"], src))
+            dep_dst_type_list = tuple(self.convertor.get_type_path(field["type"], dst))
+            src_prefix, src_name = dep_src_type_list[-1].rsplit(".", 1)
+            dst_prefix, dst_name = dep_dst_type_list[-1].rsplit(".", 1)
+            dep_src = src.parent.parent.parent.modules_by_fullname[src_prefix][src_name]
+            dep_dst = dst.parent.parent.parent.modules_by_fullname[dst_prefix][dst_name]
+
+            fnname = self.get_function_name(dep_src, dep_dst)
+            override = self.convertor.as_override
+
+            @override(dep_src_type_list, dep_dst_type_list)
+            def subconvert(convertor, m, value, *args):
+                tmp = convertor.tmp_name()
+                m.stmt("{}, err := {}({})".format(tmp, fnname, value))
+                with m.if_("err != nil"):
+                    m.return_("nil, err")
+                return tmp
+
+            cont.append(lambda: self.write(dep_src, dep_dst))
             return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 
@@ -378,12 +337,14 @@ class TypeConvertor(object):
         # writing import clause if needed
         return self.import_writer.import_(module)
 
-    def coerce(self, value, src_type, dst_type, src_struct, dst_struct):
-        if isinstance(dst_type, (list, tuple)):
-            return "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
+    def coerce(self, m, value, src_type, dst_type, src_struct, dst_struct):
         pair = (src_type, dst_type)
         if pair in self.override_map:
-            return self.override_map[pair](self, value, src_type, dst_type, src_struct, dst_struct)
+            return self.override_map[pair](self, m, value, src_type, dst_type, src_struct, dst_struct)
+
+        if isinstance(dst_type, (list, tuple)):
+            # xxx:
+            return "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
         elif "/" in dst_type:
             prefix_and_name = dst_type.rsplit("/", 1)[-1]
             prefix, name = prefix_and_name.rsplit(".")
@@ -391,6 +352,10 @@ class TypeConvertor(object):
             return "{}.{}({})".format(new_prefix, name, value)
         else:
             return "{}({})".format(dst_type, value)
+
+    def tmp_name(self):
+        self.i += 1
+        return "tmp{}".format(self.i)
 
     def convert(self, m, src, dst, src_struct, dst_struct, name):
         src_path = list(self.get_type_path(src["type"], src_struct))
@@ -400,8 +365,7 @@ class TypeConvertor(object):
         is_cast = False
         for op in code:
             if is_cast:
-                tmp = "tmp{}".format(self.i)
-                self.i += 1
+                tmp = self.tmp_name()
                 m.stmt("{} := {}".format(tmp, value))
                 value = tmp
                 is_cast = False
@@ -412,7 +376,7 @@ class TypeConvertor(object):
                 value = "&({})".format(value)
                 is_cast = True
             elif op[0] == "coerce":
-                value = self.coerce(value, op[1], op[2], src_struct, dst_struct)
+                value = self.coerce(m, value, op[1], op[2], src_struct, dst_struct)
                 is_cast = True
         return value
 
@@ -626,19 +590,19 @@ def main():
         iw.import_(dst_world["def"])
 
     @convertor.as_override("string", src_world["bson"].with_fullname("ObjectId"))
-    def string_to_object_id(convertor, value, *args):
+    def string_to_object_id(convertor, m, value, *args):
         module = src_world["bson"]
         new_prefix = convertor.import_writer.import_(module)
         return "{}.ObjectIdHex({})".format(new_prefix, value)
 
     @convertor.as_override(src_world["bson"].with_fullname("ObjectId"), "string")
-    def object_id_to_string(convertor, value, *args):
+    def object_id_to_string(convertor, m, value, *args):
         return "{}.Hex()".format(value)
 
     m.sep()
     cw = ConvertWriter(m, convertor)
     cw.write(src_world["model"]["Page"], dst_world["def"]["Page"])
-    cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
+    # cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
     cw.write(src_world["model"]["User"], dst_world["def"]["User"])
     print(m)
 
