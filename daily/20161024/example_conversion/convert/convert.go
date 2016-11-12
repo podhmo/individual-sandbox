@@ -40,3 +40,12 @@ func ConvertFromModelGroup(src *model.Group) (*def.Group, error) {
 	dst.Name = &(src.Name)
 	return dst, nil
 }
+
+func ConvertFromModelGroup(src *model.Group) (*def.Group, error) {
+	dst := &def.Group{}
+	tmp10 := src.Id.Hex()
+	tmp11 := def.ID(tmp10)
+	dst.ID = &(tmp11)
+	dst.Name = &(src.Name)
+	return dst, nil
+}

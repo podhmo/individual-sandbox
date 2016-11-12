@@ -165,3 +165,58 @@ class Tests(unittest.TestCase):
             ('coerce', 'string', ('pointer', 'pointer', 'pointer', 'string'))
         ]
         self.assertEqual(expected, actual)
+
+    def test_string_to_pointer_def_email(self):
+        target = self._makeOne([
+            ("string", "strfmt.Email"),
+            ("strfmt.Email", "def.Email"),
+        ])
+        actual = target.resolve(src="string", dst=("pointer", "strfmt.Email"))
+        expected = [
+            ('coerce', 'string', 'strfmt.Email'),
+            ('coerce', 'strfmt.Email', ('pointer', 'strfmt.Email'))
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_array_to_array(self):
+        target = self._makeOne([
+            ("string", "X"),
+        ])
+        actual = target.resolve(src=("array", "string"), dst=("array", "X"))
+        from convert import Action
+        expected = [
+            Action(action='coerce', src=('array', 'string'), dst='string'),
+            Action(action='coerce', src='string', dst='X'),
+            Action(action='coerce', src='X', dst=('array', 'X'))
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_array_to_pointer_array(self):
+        target = self._makeOne([
+            ("string", "X"),
+            ("string", "Y"),
+        ])
+        actual = target.resolve(src=("array", "X"), dst=("array", "pointer", "Y"))
+        from convert import Action
+        expected = [
+            Action(action='coerce', src=('array', 'X'), dst='X'),
+            Action(action='coerce', src='X', dst='string'),
+            Action(action='coerce', src='string', dst='Y'),
+            Action(action='coerce', src='Y', dst=('array', 'pointer', 'Y'))
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_array_to_array_pointer(self):
+        target = self._makeOne([
+            ("string", "X"),
+            ("string", "Y"),
+        ])
+        actual = target.resolve(src=("array", "pointer", "X"), dst=("pointer", "array", "Y"))
+        from convert import Action
+        expected = [
+            Action(action='coerce', src=('array', 'pointer', 'X'), dst='X'),
+            Action(action='coerce', src='X', dst='string'),
+            Action(action='coerce', src='string', dst='Y'),
+            Action(action='coerce', src='Y', dst=('pointer', 'array', 'Y'))
+        ]
+        self.assertEqual(expected, actual)

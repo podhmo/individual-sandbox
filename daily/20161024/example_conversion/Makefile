@@ -6,6 +6,9 @@ default: json convert
 install:
 	go get -u -v github.com/podhmo/go-structjson/cmd/go-structjson
 
+sync:
+	cp ${GOPATH}/src/github.com/podhmo/sandbox/convert/convert.py .
+
 json:
 	go-structjson --target model | jq . -S > output/model.json
 	go-structjson --target def | jq . -S > output/def.json

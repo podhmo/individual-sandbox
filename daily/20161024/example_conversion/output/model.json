@@ -46,9 +46,85 @@
             }
           },
           "import": {
+            "atomic": {
+              "fullname": "sync/atomic",
+              "name": "atomic",
+              "needparse": false
+            },
+            "binary": {
+              "fullname": "encoding/binary",
+              "name": "binary",
+              "needparse": false
+            },
+            "bytes": {
+              "fullname": "bytes",
+              "name": "bytes",
+              "needparse": false
+            },
+            "errors": {
+              "fullname": "errors",
+              "name": "errors",
+              "needparse": false
+            },
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "hex": {
+              "fullname": "encoding/hex",
+              "name": "hex",
+              "needparse": false
+            },
+            "io": {
+              "fullname": "io",
+              "name": "io",
+              "needparse": false
+            },
+            "json": {
+              "fullname": "encoding/json",
+              "name": "json",
+              "needparse": false
+            },
+            "md5": {
+              "fullname": "crypto/md5",
+              "name": "md5",
+              "needparse": false
+            },
+            "os": {
+              "fullname": "os",
+              "name": "os",
+              "needparse": false
+            },
+            "rand": {
+              "fullname": "crypto/rand",
+              "name": "rand",
+              "needparse": false
+            },
             "reflect": {
               "fullname": "reflect",
-              "name": "reflect"
+              "name": "reflect",
+              "needparse": true
+            },
+            "runtime": {
+              "fullname": "runtime",
+              "name": "runtime",
+              "needparse": false
+            },
+            "strings": {
+              "fullname": "strings",
+              "name": "strings",
+              "needparse": false
+            },
+            "sync": {
+              "fullname": "sync",
+              "name": "sync",
+              "needparse": false
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time",
+              "needparse": false
             }
           },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/bson.go",
@@ -357,7 +433,23 @@
         },
         "GOPATH/src/gopkg.in/mgo.v2/bson/decimal.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "strconv": {
+              "fullname": "strconv",
+              "name": "strconv",
+              "needparse": false
+            },
+            "strings": {
+              "fullname": "strings",
+              "name": "strings",
+              "needparse": false
+            }
+          },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decimal.go",
           "struct": {
             "Decimal128": {
@@ -388,9 +480,40 @@
         "GOPATH/src/gopkg.in/mgo.v2/bson/decode.go": {
           "alias": {},
           "import": {
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "math": {
+              "fullname": "math",
+              "name": "math",
+              "needparse": false
+            },
             "reflect": {
               "fullname": "reflect",
-              "name": "reflect"
+              "name": "reflect",
+              "needparse": true
+            },
+            "strconv": {
+              "fullname": "strconv",
+              "name": "strconv",
+              "needparse": false
+            },
+            "sync": {
+              "fullname": "sync",
+              "name": "sync",
+              "needparse": false
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time",
+              "needparse": false
+            },
+            "url": {
+              "fullname": "net/url",
+              "name": "url",
+              "needparse": false
             }
           },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decode.go",
@@ -435,7 +558,43 @@
         },
         "GOPATH/src/gopkg.in/mgo.v2/bson/encode.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "json": {
+              "fullname": "encoding/json",
+              "name": "json",
+              "needparse": false
+            },
+            "math": {
+              "fullname": "math",
+              "name": "math",
+              "needparse": false
+            },
+            "reflect": {
+              "fullname": "reflect",
+              "name": "reflect",
+              "needparse": false
+            },
+            "strconv": {
+              "fullname": "strconv",
+              "name": "strconv",
+              "needparse": false
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time",
+              "needparse": false
+            },
+            "url": {
+              "fullname": "net/url",
+              "name": "url",
+              "needparse": false
+            }
+          },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/encode.go",
           "struct": {
             "encoder": {
@@ -459,7 +618,38 @@
         },
         "GOPATH/src/gopkg.in/mgo.v2/bson/json.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            "base64": {
+              "fullname": "encoding/base64",
+              "name": "base64",
+              "needparse": false
+            },
+            "bytes": {
+              "fullname": "bytes",
+              "name": "bytes",
+              "needparse": false
+            },
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "json": {
+              "fullname": "gopkg.in/mgo.v2/internal/json",
+              "name": "json",
+              "needparse": false
+            },
+            "strconv": {
+              "fullname": "strconv",
+              "name": "strconv",
+              "needparse": false
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time",
+              "needparse": false
+            }
+          },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/json.go",
           "struct": {}
         }
@@ -487,6 +677,15 @@
                 "value": "string"
               }
             },
+            "getterSetterD": {
+              "candidates": null,
+              "name": "getterSetterD",
+              "original": {
+                "kind": "selector",
+                "prefix": "bson",
+                "value": "D"
+              }
+            },
             "getterSetterInt": {
               "candidates": null,
               "name": "getterSetterInt",
@@ -505,13 +704,70 @@
             }
           },
           "import": {
+            ".": {
+              "fullname": "gopkg.in/check.v1",
+              "name": ".",
+              "needparse": false
+            },
+            "binary": {
+              "fullname": "encoding/binary",
+              "name": "binary",
+              "needparse": false
+            },
             "bson": {
               "fullname": "gopkg.in/mgo.v2/bson",
-              "name": "bson"
+              "name": "bson",
+              "needparse": true
+            },
+            "errors": {
+              "fullname": "errors",
+              "name": "errors",
+              "needparse": false
+            },
+            "hex": {
+              "fullname": "encoding/hex",
+              "name": "hex",
+              "needparse": false
+            },
+            "json": {
+              "fullname": "encoding/json",
+              "name": "json",
+              "needparse": false
+            },
+            "reflect": {
+              "fullname": "reflect",
+              "name": "reflect",
+              "needparse": false
+            },
+            "strings": {
+              "fullname": "strings",
+              "name": "strings",
+              "needparse": false
+            },
+            "testing": {
+              "fullname": "testing",
+              "name": "testing",
+              "needparse": false
             },
             "time": {
               "fullname": "time",
-              "name": "time"
+              "name": "time",
+              "needparse": true
+            },
+            "url": {
+              "fullname": "net/url",
+              "name": "url",
+              "needparse": false
+            },
+            "xml": {
+              "fullname": "encoding/xml",
+              "name": "xml",
+              "needparse": false
+            },
+            "yaml.v2": {
+              "fullname": "gopkg.in/yaml.v2",
+              "name": "yaml.v2",
+              "needparse": false
             }
           },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/bson_test.go",
@@ -1633,7 +1889,43 @@
         },
         "GOPATH/src/gopkg.in/mgo.v2/bson/decimal_test.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            ".": {
+              "fullname": "gopkg.in/check.v1",
+              "name": ".",
+              "needparse": false
+            },
+            "bson": {
+              "fullname": "gopkg.in/mgo.v2/bson",
+              "name": "bson",
+              "needparse": false
+            },
+            "fmt": {
+              "fullname": "fmt",
+              "name": "fmt",
+              "needparse": false
+            },
+            "hex": {
+              "fullname": "encoding/hex",
+              "name": "hex",
+              "needparse": false
+            },
+            "json": {
+              "fullname": "encoding/json",
+              "name": "json",
+              "needparse": false
+            },
+            "regexp": {
+              "fullname": "regexp",
+              "name": "regexp",
+              "needparse": false
+            },
+            "strings": {
+              "fullname": "strings",
+              "name": "strings",
+              "needparse": false
+            }
+          },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/decimal_test.go",
           "struct": {
             "decimalTests": {
@@ -1711,7 +2003,33 @@
         },
         "GOPATH/src/gopkg.in/mgo.v2/bson/json_test.go": {
           "alias": {},
-          "import": {},
+          "import": {
+            ".": {
+              "fullname": "gopkg.in/check.v1",
+              "name": ".",
+              "needparse": false
+            },
+            "bson": {
+              "fullname": "gopkg.in/mgo.v2/bson",
+              "name": "bson",
+              "needparse": false
+            },
+            "reflect": {
+              "fullname": "reflect",
+              "name": "reflect",
+              "needparse": false
+            },
+            "strings": {
+              "fullname": "strings",
+              "name": "strings",
+              "needparse": false
+            },
+            "time": {
+              "fullname": "time",
+              "name": "time",
+              "needparse": false
+            }
+          },
           "name": "GOPATH/src/gopkg.in/mgo.v2/bson/json_test.go",
           "struct": {
             "jsonTest": {
@@ -1774,7 +2092,8 @@
           "import": {
             "bson": {
               "fullname": "gopkg.in/mgo.v2/bson",
-              "name": "bson"
+              "name": "bson",
+              "needparse": true
             }
           },
           "name": "./model/group.go",
@@ -1842,7 +2161,8 @@
           "import": {
             "bson": {
               "fullname": "gopkg.in/mgo.v2/bson",
-              "name": "bson"
+              "name": "bson",
+              "needparse": true
             }
           },
           "name": "./model/model.go",

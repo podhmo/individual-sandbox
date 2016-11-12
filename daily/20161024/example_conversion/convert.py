@@ -1,3 +1,5 @@
+# need: editdistance, prestring(go branch)
+import editdistance
 import sys
 import contextlib
 import argparse
@@ -204,8 +206,11 @@ class ConvertWriter(object):
         fnname = self.get_function_name(src, dst)
         src_type_list = tuple(["pointer", src.fullname])
         dst_type_list = tuple(["pointer", dst.fullname])
+        cont = []
         self._register(fnname, src, dst, src_type_list, dst_type_list)
-        return self._write(fnname, src, dst)
+        self._write(fnname, src, dst, cont)
+        for fn in cont:
+            fn()
 
     def _register(self, fnname, src, dst, src_type_list, dst_type_list):
         override = self.convertor.as_override
@@ -218,8 +223,7 @@ class ConvertWriter(object):
                 m.return_("nil, err")
             return tmp
 
-    def _write(self, fnname, src, dst):
-        cont = []
+    def _write(self, fnname, src, dst, cont):
         src_arg = 'src *{}.{}'.format(src.package_name, src.name)
         dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
@@ -227,8 +231,6 @@ class ConvertWriter(object):
             for name, field in sorted(dst.fields()):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
-        for fn in cont:
-            fn()
 
     def write_code_convert(self, src, dst, name, field, cont, retry=False):
         try:
@@ -237,21 +239,33 @@ class ConvertWriter(object):
                 convert = self.convertor.convert(self.m, src[name], field, src, dst, name=value)
                 self.m.stmt("dst.{} = {}".format(field["name"], convert))  # xxx
             else:
-                self.m.comment("FIXME: {} is not found".format(field["name"]))
-        except ValueError:
+                try:
+                    score, nearlest = min([(editdistance.eval(name, f["name"]), f["name"]) for _, f in src.fields()])
+                    self.m.comment("FIXME: {} is not found. (maybe {}?)".format(field["name"], nearlest))
+                except ValueError:
+                    self.m.comment("FIXME: {} is not found.".format(field["name"]))
+        except GencodeMappingNotFound as e:
+            # print("@", e, file=sys.stderr)
             if retry:
                 raise
 
+            if e.src[-1].endswith(("32", "64")) or e.dst[-1].endswith(("32", "64")):
+                primitive_src = e.src[-1].replace("32", "").replace("64", "")
+                primitive_dst = e.src[-1].replace("32", "").replace("64", "")
+                if primitive_src == primitive_dst:
+                    self.convertor.codegen.resolver.add_relation(e.src[-1], e.dst[-1])
+                    return self.write_code_convert(src, dst, name, field, cont, retry=True)
+
             # xxx:
-            dep_src_type_list = tuple(self.convertor.get_type_path(src[name]["type"], src))
-            dep_dst_type_list = tuple(self.convertor.get_type_path(field["type"], dst))
+            dep_src_type_list = tuple(get_type_path(src[name]["type"], src))
+            dep_dst_type_list = tuple(get_type_path(field["type"], dst))
             src_prefix, src_name = dep_src_type_list[-1].rsplit(".", 1)
             dst_prefix, dst_name = dep_dst_type_list[-1].rsplit(".", 1)
             dep_src = src.parent.parent.parent.modules_by_fullname[src_prefix][src_name]
             dep_dst = dst.parent.parent.parent.modules_by_fullname[dst_prefix][dst_name]
             fnname = self.get_function_name(dep_src, dep_dst)
             self._register(fnname, dep_src, dep_dst, dep_src_type_list, dep_dst_type_list)
-            cont.append(lambda: self._write(fnname, dep_src, dep_dst))
+            cont.append(lambda: self._write(fnname, dep_src, dep_dst, cont))
             return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 
@@ -286,6 +300,22 @@ class ImportWriter(object):
         return prefix
 
 
+def get_type_path(value, struct):
+    if value["kind"] == "primitive":
+        module = struct.parent.parent
+        if value["value"] not in module:
+            return [value["value"]]
+        else:
+            return ["{}.{}".format(module.fullname, value["value"])]
+    elif value["kind"] == "selector":
+        prefix = struct.parent.imports[value["prefix"]]["fullname"]
+        return ["{}.{}".format(prefix, value["value"])]
+    else:
+        r = [value["kind"]]
+        r.extend(get_type_path(value["value"], struct))
+        return r
+
+
 class TypeConvertor(object):
     def __init__(self, import_writer, codegen, src_world, dst_world):
         self.import_writer = import_writer
@@ -294,12 +324,18 @@ class TypeConvertor(object):
         self.dst_world = dst_world
         self.i = 0
         items = []
-        for world in [src_world, dst_world]:
+        for world, other_world in [(src_world, dst_world), (dst_world, src_world)]:
             for _, module in world.modules.items():
                 for _, file in module.files.items():
                     for _, alias in file.aliases.items():
                         data = alias.data
-                        items.append((data["original"]["value"], "{}.{}".format(file.parent.fullname, data["name"])))
+                        src_name = data["original"]["value"]
+                        if "prefix" in data["original"]:
+                            # xxx:
+                            src_fullname = "{}.{}".format(file.imports[data["original"]["prefix"]]["fullname"], src_name)
+                            items.append((src_fullname, module.with_fullname(data["name"])))
+                        else:
+                            items.append((src_name, module.with_fullname(data["name"])))
         self.codegen.resolver.add_relation_list(items)
         self.override_map = {}
 
@@ -313,22 +349,7 @@ class TypeConvertor(object):
         self.codegen.resolver.add_relation(src_type, dst_type)
         self.override_map[(src_type, dst_type)] = on_write
 
-    def get_type_path(self, value, struct):
-        if value["kind"] == "primitive":
-            module = struct.parent.parent
-            if value["value"] not in module:
-                return [value["value"]]
-            else:
-                return ["{}.{}".format(module.fullname, value["value"])]
-        elif value["kind"] == "selector":
-            prefix = struct.parent.imports[value["prefix"]]["fullname"]
-            return ["{}.{}".format(prefix, value["value"])]
-        else:
-            r = [value["kind"]]
-            r.extend(self.get_type_path(value["value"], struct))
-            return r
-
-    def get_new_prefix_on_selector(self, prefix, dst_struct):
+    def get_new_prefix_on_selector(self, prefix, src_struct, dst_struct):
         dst_module = dst_struct.parent.parent
         if dst_module.name == prefix:
             fullname = dst_module.fullname
@@ -344,12 +365,11 @@ class TypeConvertor(object):
             return self.override_map[pair](self, m, value, src_type, dst_type, src_struct, dst_struct)
 
         if isinstance(dst_type, (list, tuple)):
-            # xxx:
             return "({})({})".format("".join("*" if x == "pointer" else x for x in dst_type), value)
         elif "/" in dst_type:
             prefix_and_name = dst_type.rsplit("/", 1)[-1]
             prefix, name = prefix_and_name.rsplit(".")
-            new_prefix = self.get_new_prefix_on_selector(prefix, dst_struct)
+            new_prefix = self.get_new_prefix_on_selector(prefix, src_struct, dst_struct)
             return "{}.{}({})".format(new_prefix, name, value)
         else:
             return "{}({})".format(dst_type, value)
@@ -359,11 +379,12 @@ class TypeConvertor(object):
         return "tmp{}".format(self.i)
 
     def convert(self, m, src, dst, src_struct, dst_struct, name):
-        src_path = list(self.get_type_path(src["type"], src_struct))
-        dst_path = list(self.get_type_path(dst["type"], dst_struct))
+        src_path = list(get_type_path(src["type"], src_struct))
+        dst_path = list(get_type_path(dst["type"], dst_struct))
         code = self.codegen.gencode(src_path, dst_path)
         value = name
         is_cast = False
+        # print("##", code, file=sys.stderr)
         for op in code:
             if is_cast:
                 tmp = self.tmp_name()
@@ -379,6 +400,9 @@ class TypeConvertor(object):
             elif op[0] == "coerce":
                 value = self.coerce(m, value, op[1], op[2], src_struct, dst_struct)
                 is_cast = True
+            else:
+                m.comment("hmm {}".format(op[0]))
+                # raise Exception(op[0])
         return value
 
 
@@ -507,6 +531,13 @@ class TypeMappingResolver(object):
             return None
 
 
+class GencodeMappingNotFound(ValueError):
+    def __init__(self, msg, src, dst):
+        super().__init__(msg)
+        self.src = src
+        self.dst = dst
+
+
 class MiniCodeGenerator(object):
     # generating mini language
     # [deref] -> *x
@@ -522,6 +553,8 @@ class MiniCodeGenerator(object):
         for x in code:
             if x[0] == "ref" and optimized and optimized[-1][0] == "deref":
                 optimized.pop()
+            if x[0] == "iterate" and optimized and optimized[-1][0] == "deiterate":
+                optimized.pop()
             else:
                 optimized.append(x)
         return optimized
@@ -535,7 +568,8 @@ class MiniCodeGenerator(object):
         code = []
         mapping_path = self.resolver.resolve(src_path, dst_path)
         if mapping_path is None:
-            raise ValueError("mapping not found {!r} -> {!r}".format(src_path, dst_path))
+            msg = "mapping not found {!r} -> {!r}".format(src_path, dst_path)
+            raise GencodeMappingNotFound(msg, src_path, dst_path)
 
         def get_primitive(v):
             if isinstance(v, (list, tuple)):
@@ -551,6 +585,8 @@ class MiniCodeGenerator(object):
                     for typ in itr:
                         if typ == "pointer":
                             code.append(("deref", ))
+                        elif typ == "array":
+                            code.append(("deiterate", ))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
                 if isinstance(action.dst, (list, tuple)):
@@ -559,6 +595,8 @@ class MiniCodeGenerator(object):
                     for typ in itr:
                         if typ == "pointer":
                             code.append(("ref", ))
+                        elif typ == "array":
+                            code.append(("iterate", ))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
             else:
@@ -600,11 +638,30 @@ def main():
     def object_id_to_string(convertor, m, value, *args):
         return "{}.Hex()".format(value)
 
+    @convertor.as_override(src_world["model"].with_fullname("Date"), "time.Time")
+    def model_date_to_time(convertor, m, value, *args):
+        return "{}.Time()".format(value)
+
     m.sep()
     cw = ConvertWriter(m, convertor)
-    cw.write(src_world["model"]["Page"], dst_world["def"]["Page"])
-    # cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
-    cw.write(src_world["model"]["User"], dst_world["def"]["User"])
+    for module in dst_world.modules.values():
+        for file in module.files.values():
+            for struct in file.structs.values():
+                for module in src_world.modules.values():
+                    if struct.name in module:
+                        print("@", struct.name, file=sys.stderr)
+                        cw.write(module[struct.name], struct)
+                    elif struct.name.startswith("Enduser") and struct.name[len("Enduser"):] in module:
+                        print("<", struct.name, file=sys.stderr)
+                        cw.write(module[struct.name[len("Enduser"):]], struct)
+                    elif struct.name.startswith("Tuner") and struct.name[len("Tuner"):] in module:
+                        print(">", struct.name, file=sys.stderr)
+                        cw.write(module[struct.name[len("Tuner"):]], struct)
+
+    # cw.write(src_world["model"]["Page"], dst_world["def"]["Page"])
+    # # cw.write(dst_world["def"]["Page"], src_world["model"]["Page"])
+    # cw.write(src_world["model"]["User"], dst_world["def"]["User"])
+
     print(m)
 
 
