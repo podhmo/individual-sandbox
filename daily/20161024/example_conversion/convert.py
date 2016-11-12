@@ -188,11 +188,10 @@ class Struct(object):
     def normalize(self):
         self.rawdata = copy.deepcopy(self.rawdata)
         data = self.data["fields"]
-        for k in data.keys():
+        for k in list(data.keys()):
             data[k.lower()] = data.pop(k)
 
 
-# TODO: register?
 class ConvertWriter(object):
     def __init__(self, m, convertor):
         self.m = m
@@ -202,22 +201,34 @@ class ConvertWriter(object):
         return 'ConvertFrom{}{}'.format(src.package_name.title(), dst.name)
 
     def write(self, src, dst):
+        fnname = self.get_function_name(src, dst)
+        src_type_list = tuple(["pointer", src.fullname])
+        dst_type_list = tuple(["pointer", dst.fullname])
+        self._register(fnname, src, dst, src_type_list, dst_type_list)
+        return self._write(fnname, src, dst)
+
+    def _register(self, fnname, src, dst, src_type_list, dst_type_list):
+        override = self.convertor.as_override
+
+        @override(src_type_list, dst_type_list)
+        def subconvert(convertor, m, value, *args):
+            tmp = convertor.tmp_name()
+            m.stmt("{}, err := {}({})".format(tmp, fnname, value))
+            with m.if_("err != nil"):
+                m.return_("nil, err")
+            return tmp
+
+    def _write(self, fnname, src, dst):
         cont = []
-        with self.write_code_funcion_definition(src, dst, cont):
+        src_arg = 'src *{}.{}'.format(src.package_name, src.name)
+        dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
+        with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
             self.m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
             for name, field in sorted(dst.fields()):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
         for fn in cont:
             fn()
-
-    @contextlib.contextmanager
-    def write_code_funcion_definition(self, src, dst, cont):
-        src_arg = 'src *{}.{}'.format(src.package_name, src.name)
-        dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
-        fnname = self.get_function_name(src, dst)
-        with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
-            yield
 
     def write_code_convert(self, src, dst, name, field, cont, retry=False):
         try:
@@ -238,19 +249,9 @@ class ConvertWriter(object):
             dst_prefix, dst_name = dep_dst_type_list[-1].rsplit(".", 1)
             dep_src = src.parent.parent.parent.modules_by_fullname[src_prefix][src_name]
             dep_dst = dst.parent.parent.parent.modules_by_fullname[dst_prefix][dst_name]
-
             fnname = self.get_function_name(dep_src, dep_dst)
-            override = self.convertor.as_override
-
-            @override(dep_src_type_list, dep_dst_type_list)
-            def subconvert(convertor, m, value, *args):
-                tmp = convertor.tmp_name()
-                m.stmt("{}, err := {}({})".format(tmp, fnname, value))
-                with m.if_("err != nil"):
-                    m.return_("nil, err")
-                return tmp
-
-            cont.append(lambda: self.write(dep_src, dep_dst))
+            self._register(fnname, dep_src, dep_dst, dep_src_type_list, dep_dst_type_list)
+            cont.append(lambda: self._write(fnname, dep_src, dep_dst))
             return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 

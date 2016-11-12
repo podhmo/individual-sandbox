@@ -29,8 +29,9 @@ func main() {
 	}
 	{
 		user := &model.User{
-			Id:   bson.NewObjectId(),
-			Name: "Foo",
+			Id:     bson.NewObjectId(),
+			Name:   "Foo",
+			Gender: model.GenderFemale,
 			Group: &model.Group{
 				Id:   bson.NewObjectId(),
 				Name: "G",

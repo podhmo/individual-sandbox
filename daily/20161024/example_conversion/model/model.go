@@ -9,9 +9,17 @@ type Page struct {
 	Title    string        `bson:"title" json:"title"`
 }
 
+type Gender string
+
+const (
+	GenderFemale = Gender("xx")
+	GenderMALE   = Gender("xy")
+)
+
 type User struct {
 	Id      bson.ObjectId `bson:"_id" json:"id"`
 	Name    string        `bson:"name" json:"name"`
+	Gender  Gender        `bson:"gender" json:"gender"`
 	GroupID string        `bson:"groupId" json:"groupId"`
 
 	Group *Group `bson:"-" json:"group"`

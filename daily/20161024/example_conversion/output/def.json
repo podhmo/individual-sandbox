@@ -4,6 +4,23 @@
       "file": {
         "./def/def.go": {
           "alias": {
+            "Gender": {
+              "candidates": [
+                {
+                  "name": "GenderFemale",
+                  "value": "\"xx\""
+                },
+                {
+                  "name": "GenderMALE",
+                  "value": "\"xy\""
+                }
+              ],
+              "name": "Gender",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            },
             "ID": {
               "candidates": null,
               "name": "ID",
@@ -113,6 +130,23 @@
             },
             "User": {
               "fields": {
+                "Gender": {
+                  "embed": false,
+                  "name": "Gender",
+                  "tags": {
+                    "json": [
+                      "gender",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Gender"
+                    }
+                  }
+                },
                 "Group": {
                   "embed": false,
                   "name": "Group",

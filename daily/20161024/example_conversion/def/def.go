@@ -3,6 +3,14 @@ package def
 // ID is id
 type ID string
 
+// Gender is gender
+type Gender string
+
+const (
+	GenderFemale = Gender("xx")
+	GenderMALE   = Gender("xy")
+)
+
 // Page is page
 type Page struct {
 	/* id
@@ -27,6 +35,10 @@ type User struct {
 	/* name
 	 */
 	Name *string `json:"name,omitempty"`
+
+	/* gender
+	 */
+	Gender *Gender `json:"gender,omitempty"`
 
 	/* group
 	 */

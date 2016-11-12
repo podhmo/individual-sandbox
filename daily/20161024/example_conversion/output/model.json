@@ -1820,7 +1820,25 @@
           }
         },
         "./model/model.go": {
-          "alias": {},
+          "alias": {
+            "Gender": {
+              "candidates": [
+                {
+                  "name": "GenderFemale",
+                  "value": "\"xx\""
+                },
+                {
+                  "name": "GenderMALE",
+                  "value": "\"xy\""
+                }
+              ],
+              "name": "Gender",
+              "original": {
+                "kind": "primitive",
+                "value": "string"
+              }
+            }
+          },
           "import": {
             "bson": {
               "fullname": "gopkg.in/mgo.v2/bson",
@@ -1901,6 +1919,22 @@
             },
             "User": {
               "fields": {
+                "Gender": {
+                  "embed": false,
+                  "name": "Gender",
+                  "tags": {
+                    "bson": [
+                      "gender"
+                    ],
+                    "json": [
+                      "gender"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "Gender"
+                  }
+                },
                 "Group": {
                   "embed": false,
                   "name": "Group",
