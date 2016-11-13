@@ -45,6 +45,13 @@ type User struct {
 	Group *Group `json:"group,omitempty"`
 }
 
+// Skill is skill
+type Skill struct {
+	/* name
+	 */
+	Name *string `json:"name,omitempty"`
+}
+
 // Group is group
 type Group struct {
 	/* id

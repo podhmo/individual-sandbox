@@ -1,7 +1,6 @@
 # need: editdistance, prestring(go branch)
 import editdistance
 import sys
-import contextlib
 import argparse
 import copy
 import json
@@ -772,7 +771,7 @@ class MiniCodeGenerator(object):
                         elif typ == "array":
                             code.append(("array",))
                         else:
-                            raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
+                            raise ValueError("not implemented: typ={}, path={}".format(typ, action.src))
                 if isinstance(action.dst, (list, tuple)):
                     itr = reversed(action.dst)
                     next(itr)
@@ -782,11 +781,11 @@ class MiniCodeGenerator(object):
                         elif typ == "array":
                             code.append(("dearray",))
                         else:
-                            raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
+                            raise ValueError("not implemented: typ={}, path={}".format(typ, action.dst))
             else:
                 # todo: coerce
                 code.append(Action(action=action[0], src=_unwrap_value(action[1]), dst=_unwrap_value(action[2])))
-        # print("##", mapping_path, "\n", code, file=sys.stderr)
+        print("##", mapping_path, "\n", code, file=sys.stderr)
         return code
 
 
