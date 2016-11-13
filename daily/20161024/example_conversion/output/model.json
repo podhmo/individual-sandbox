@@ -2258,6 +2258,66 @@
               },
               "name": "Skill"
             },
+            "Team": {
+              "fields": {
+                "Id": {
+                  "embed": false,
+                  "name": "Id",
+                  "tags": {
+                    "bson": [
+                      "_id"
+                    ],
+                    "json": [
+                      "id"
+                    ]
+                  },
+                  "type": {
+                    "kind": "selector",
+                    "prefix": "bson",
+                    "value": "ObjectId"
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "bson": [
+                      "name"
+                    ],
+                    "json": [
+                      "name"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                },
+                "Users": {
+                  "embed": false,
+                  "name": "Users",
+                  "tags": {
+                    "bson": [
+                      "users"
+                    ],
+                    "json": [
+                      "users"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "pointer",
+                      "value": {
+                        "kind": "primitive",
+                        "value": "User"
+                      }
+                    }
+                  }
+                }
+              },
+              "name": "Team"
+            },
             "User": {
               "fields": {
                 "Gender": {

@@ -150,6 +150,62 @@
               },
               "name": "Skill"
             },
+            "Team": {
+              "fields": {
+                "ID": {
+                  "embed": false,
+                  "name": "ID",
+                  "tags": {
+                    "json": [
+                      "id",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "ID"
+                    }
+                  }
+                },
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "json": [
+                      "name",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "pointer",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "string"
+                    }
+                  }
+                },
+                "Users": {
+                  "embed": false,
+                  "name": "Users",
+                  "tags": {
+                    "json": [
+                      "users",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "User"
+                    }
+                  }
+                }
+              },
+              "name": "Team"
+            },
             "User": {
               "fields": {
                 "Gender": {

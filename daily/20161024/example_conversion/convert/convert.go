@@ -5,7 +5,8 @@ import (
 	model "github.com/podhmo/hmm/model"
 )
 
-func ConvertFromModelGroup(src *model.Group) (*def.Group, error) {
+// FromModelGroupToDefGroup : converts model.Group -> def.Group
+func FromModelGroupToDefGroup(src *model.Group) (*def.Group, error) {
 	if src == nil {
 		return nil, nil
 	}
@@ -17,7 +18,8 @@ func ConvertFromModelGroup(src *model.Group) (*def.Group, error) {
 	return dst, nil
 }
 
-func ConvertFromModelPage(src *model.Page) (*def.Page, error) {
+// FromModelPageToDefPage : converts model.Page -> def.Page
+func FromModelPageToDefPage(src *model.Page) (*def.Page, error) {
 	if src == nil {
 		return nil, nil
 	}
@@ -30,7 +32,8 @@ func ConvertFromModelPage(src *model.Page) (*def.Page, error) {
 	return dst, nil
 }
 
-func ConvertFromModelSkill(src *model.Skill) (*def.Skill, error) {
+// FromModelSkillToDefSkill : converts model.Skill -> def.Skill
+func FromModelSkillToDefSkill(src *model.Skill) (*def.Skill, error) {
 	if src == nil {
 		return nil, nil
 	}
@@ -39,63 +42,98 @@ func ConvertFromModelSkill(src *model.Skill) (*def.Skill, error) {
 	return dst, nil
 }
 
-func ConvertFromModelUser(src *model.User) (*def.User, error) {
+// FromModelTeamToDefTeam : converts model.Team -> def.Team
+func FromModelTeamToDefTeam(src *model.Team) (*def.Team, error) {
+	if src == nil {
+		return nil, nil
+	}
+	dst := &def.Team{}
+	tmp5 := src.Id.Hex()
+	tmp6 := def.ID(tmp5)
+	dst.ID = &(tmp6)
+	dst.Name = &(src.Name)
+	tmp7, err := FromModelUserRefManyToDefUserMany(src.Users)
+	if err != nil {
+		return nil, err
+	}
+	dst.Users = tmp7
+	return dst, nil
+}
+
+// FromModelUserToDefUser : converts model.User -> def.User
+func FromModelUserToDefUser(src *model.User) (*def.User, error) {
 	if src == nil {
 		return nil, nil
 	}
 	dst := &def.User{}
-	tmp5 := string(src.Gender)
-	tmp6 := def.Gender(tmp5)
-	dst.Gender = &(tmp6)
-	tmp7, err := ConvertFromModelGroup(src.Group)
+	tmp8 := string(src.Gender)
+	tmp9 := def.Gender(tmp8)
+	dst.Gender = &(tmp9)
+	tmp10, err := FromModelGroupToDefGroup(src.Group)
 	if err != nil {
 		return nil, err
 	}
-	dst.Group = tmp7
-	tmp8 := src.Id.Hex()
-	tmp9 := def.ID(tmp8)
-	dst.ID = &(tmp9)
+	dst.Group = tmp10
+	tmp11 := src.Id.Hex()
+	tmp12 := def.ID(tmp11)
+	dst.ID = &(tmp12)
 	dst.Name = &(src.Name)
-	tmp10, err := ConvertFromModelSkillMany(src.Skills)
+	tmp13, err := FromModelSkillManyToDefSkillMany(src.Skills)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills = tmp10
-	tmp11, err := ConvertFromModelSkillMany(src.Skills2)
+	dst.Skills = tmp13
+	tmp14, err := FromModelSkillManyToDefSkillMany(src.Skills2)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills2 = tmp11
-	tmp12, err := ConvertFromModelSkillRefMany(src.Skills3)
+	dst.Skills2 = tmp14
+	tmp15, err := FromModelSkillRefManyToDefSkillRefMany(src.Skills3)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills3 = tmp12
+	dst.Skills3 = tmp15
 	return dst, nil
 }
 
-func ConvertFromModelSkillMany(src []model.Skill) ([]def.Skill, error) {
+// FromModelUserRefManyToDefUserMany : converts []*model.User -> []def.User
+func FromModelUserRefManyToDefUserMany(src []*model.User) ([]def.User, error) {
+	dst := make([]def.User, len(src))
+	for i, x := range src {
+		tmp16, err := FromModelUserToDefUser(x)
+		if err != nil {
+			return nil, err
+		}
+		tmp17 := tmp16
+		dst[i] = *(tmp17)
+	}
+	return dst, nil
+}
+
+// FromModelSkillManyToDefSkillMany : converts []model.Skill -> []def.Skill
+func FromModelSkillManyToDefSkillMany(src []model.Skill) ([]def.Skill, error) {
 	dst := make([]def.Skill, len(src))
 	for i, x := range src {
-		tmp13 := &(x)
-		tmp14, err := ConvertFromModelSkill(tmp13)
+		tmp18 := &(x)
+		tmp19, err := FromModelSkillToDefSkill(tmp18)
 		if err != nil {
 			return nil, err
 		}
-		tmp15 := tmp14
-		dst[i] = *(tmp15)
+		tmp20 := tmp19
+		dst[i] = *(tmp20)
 	}
 	return dst, nil
 }
 
-func ConvertFromModelSkillRefMany(src []*model.Skill) ([]*def.Skill, error) {
+// FromModelSkillRefManyToDefSkillRefMany : converts []*model.Skill -> []*def.Skill
+func FromModelSkillRefManyToDefSkillRefMany(src []*model.Skill) ([]*def.Skill, error) {
 	dst := make([]*def.Skill, len(src))
 	for i, x := range src {
-		tmp16, err := ConvertFromModelSkill(x)
+		tmp21, err := FromModelSkillToDefSkill(x)
 		if err != nil {
 			return nil, err
 		}
-		dst[i] = tmp16
+		dst[i] = tmp21
 	}
 	return dst, nil
 }

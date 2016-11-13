@@ -17,7 +17,7 @@ func main() {
 			Title:    "index page",
 			PathHash: "#",
 		}
-		defPage, err := convert.ConvertFromModelPage(page)
+		defPage, err := convert.FromModelPageToDefPage(page)
 		if err != nil {
 			panic(err)
 		}
@@ -43,7 +43,7 @@ func main() {
 				{Name: "x"}, {Name: "y"}, {Name: "z"},
 			},
 		}
-		defUser, err := convert.ConvertFromModelUser(user)
+		defUser, err := convert.FromModelUserToDefUser(user)
 		if err != nil {
 			panic(err)
 		}

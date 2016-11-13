@@ -23,8 +23,14 @@ type User struct {
 	GroupID string        `bson:"groupId" json:"groupId"`
 	Skills  []Skill       `bson:"skills" json:"skills"`
 	Skills2 []Skill       `bson:"skills2" json:"skills2"`
-	Skills3 []*Skill       `bson:"skills3" json:"skills3"`
+	Skills3 []*Skill      `bson:"skills3" json:"skills3"`
 	Group   *Group        `bson:"-" json:"group"`
+}
+
+type Team struct {
+	Id    bson.ObjectId `bson:"_id" json:"id"`
+	Name  string        `bson:"name" json:"name"`
+	Users []*User       `bson:"users" json:"users"`
 }
 
 type Skill struct {
