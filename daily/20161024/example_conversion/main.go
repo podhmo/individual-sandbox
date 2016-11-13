@@ -39,6 +39,9 @@ func main() {
 			Skills: []model.Skill{
 				{Name: "a"}, {Name: "b"}, {Name: "c"},
 			},
+			Skills2: []model.Skill{
+				{Name: "x"}, {Name: "y"}, {Name: "z"},
+			},
 		}
 		defUser, err := convert.ConvertFromModelUser(user)
 		if err != nil {

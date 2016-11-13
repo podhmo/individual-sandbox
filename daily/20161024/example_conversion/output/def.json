@@ -7,12 +7,12 @@
             "Gender": {
               "candidates": [
                 {
-                  "name": "GenderMALE",
-                  "value": "\"xy\""
-                },
-                {
                   "name": "GenderFemale",
                   "value": "\"xx\""
+                },
+                {
+                  "name": "GenderMALE",
+                  "value": "\"xy\""
                 }
               ],
               "name": "Gender",
@@ -226,6 +226,23 @@
                   "tags": {
                     "json": [
                       "skills",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Skill"
+                    }
+                  }
+                },
+                "Skills2": {
+                  "embed": false,
+                  "name": "Skills2",
+                  "tags": {
+                    "json": [
+                      "skills2",
                       "omitempty"
                     ]
                   },

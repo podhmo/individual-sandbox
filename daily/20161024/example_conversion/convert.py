@@ -380,6 +380,8 @@ class ConvertWriter(object):
         src_arg = 'src *{}.{}'.format(src.package_name, src.name)
         dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
+            with self.m.if_("src == nil"):
+                self.m.return_("nil, nil")
             self.m.stmt("dst := &{}.{}{{}}".format(dst.package_name, dst.name))
             for name, field in sorted(dst.fields.items()):
                 self.write_code_convert(src, dst, name, field, cont)
