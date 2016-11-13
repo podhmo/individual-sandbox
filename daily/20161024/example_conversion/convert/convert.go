@@ -66,33 +66,32 @@ func FromModelUserToDefUser(src *model.User) (*def.User, error) {
 		return nil, nil
 	}
 	dst := &def.User{}
-	tmp8 := string(src.Gender)
-	tmp9 := def.Gender(tmp8)
-	dst.Gender = &(tmp9)
-	tmp10, err := FromModelGroupToDefGroup(src.Group)
+	tmp8 := def.Gender(src.Gender)
+	dst.Gender = &(tmp8)
+	tmp9, err := FromModelGroupToDefGroup(src.Group)
 	if err != nil {
 		return nil, err
 	}
-	dst.Group = tmp10
-	tmp11 := src.Id.Hex()
-	tmp12 := def.ID(tmp11)
-	dst.ID = &(tmp12)
+	dst.Group = tmp9
+	tmp10 := src.Id.Hex()
+	tmp11 := def.ID(tmp10)
+	dst.ID = &(tmp11)
 	dst.Name = &(src.Name)
-	tmp13, err := FromModelSkillManyToDefSkillMany(src.Skills)
+	tmp12, err := FromModelSkillManyToDefSkillMany(src.Skills)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills = tmp13
-	tmp14, err := FromModelSkillManyToDefSkillMany(src.Skills2)
+	dst.Skills = tmp12
+	tmp13, err := FromModelSkillManyToDefSkillMany(src.Skills2)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills2 = tmp14
-	tmp15, err := FromModelSkillRefManyToDefSkillRefMany(src.Skills3)
+	dst.Skills2 = tmp13
+	tmp14, err := FromModelSkillRefManyToDefSkillRefMany(src.Skills3)
 	if err != nil {
 		return nil, err
 	}
-	dst.Skills3 = tmp15
+	dst.Skills3 = tmp14
 	return dst, nil
 }
 
@@ -100,12 +99,15 @@ func FromModelUserToDefUser(src *model.User) (*def.User, error) {
 func FromModelUserRefManyToDefUserMany(src []*model.User) ([]def.User, error) {
 	dst := make([]def.User, len(src))
 	for i, x := range src {
-		tmp16, err := FromModelUserToDefUser(x)
+		tmp15, err := FromModelUserToDefUser(x)
 		if err != nil {
 			return nil, err
 		}
-		tmp17 := tmp16
-		dst[i] = *(tmp17)
+		tmp16 := tmp15
+		if tmp16 != nil {
+			tmp17 := *(tmp16)
+			dst[i] = tmp17
+		}
 	}
 	return dst, nil
 }
@@ -120,7 +122,10 @@ func FromModelSkillManyToDefSkillMany(src []model.Skill) ([]def.Skill, error) {
 			return nil, err
 		}
 		tmp20 := tmp19
-		dst[i] = *(tmp20)
+		if tmp20 != nil {
+			tmp21 := *(tmp20)
+			dst[i] = tmp21
+		}
 	}
 	return dst, nil
 }
@@ -129,11 +134,11 @@ func FromModelSkillManyToDefSkillMany(src []model.Skill) ([]def.Skill, error) {
 func FromModelSkillRefManyToDefSkillRefMany(src []*model.Skill) ([]*def.Skill, error) {
 	dst := make([]*def.Skill, len(src))
 	for i, x := range src {
-		tmp21, err := FromModelSkillToDefSkill(x)
+		tmp22, err := FromModelSkillToDefSkill(x)
 		if err != nil {
 			return nil, err
 		}
-		dst[i] = tmp21
+		dst[i] = tmp22
 	}
 	return dst, nil
 }

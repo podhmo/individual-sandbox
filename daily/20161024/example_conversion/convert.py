@@ -378,8 +378,8 @@ class ManyConvertWriter(object):
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
             self.m.stmt("dst := make({}, len(src))".format(dst_field.type_expr))
             with self.m.for_("i, x := range src"):
-                convert = self.convertor.convert_from_code(self.m, inner, src_field, dst_field, name="x")
-                self.m.stmt("dst[i] = {}".format(convert))
+                m, convert = self.convertor.convert_from_code(self.m, inner, src_field, dst_field, name="x")
+                m.stmt("dst[i] = {}".format(convert))
             self.m.return_("dst, nil")
 
     def register(self, fnname, src_type_list, dst_type_list):
@@ -425,7 +425,7 @@ class ConvertWriter(object):
         override = self.convertor.as_override
 
         @override(src_type_list, dst_type_list, skip_resolve_register=skip_resolve_register)
-        def subconvert(convertor, m, value, *args, fnname=fnname):
+        def subconvert(convertor, m, value, *args):
             tmp = convertor.gensym()
             m.stmt("{}, err := {}({})".format(tmp, fnname, value))
             with m.if_("err != nil"):
@@ -437,8 +437,8 @@ class ConvertWriter(object):
             if name in src:
                 src_field = src[name]
                 value = "src.{}".format(src_field.name)
-                convert = self.convertor.convert(self.m, src_field, field, name=value)
-                self.m.stmt("dst.{} = {}".format(field.name, convert))  # xxx
+                m, convert = self.convertor.convert(self.m, src_field, field, name=value)
+                m.stmt("dst.{} = {}".format(field.name, convert))  # xxx
             else:
                 try:
                     score, nearlest = min([(editdistance.eval(name, f.name), f.name) for f in src.fields.values()])
@@ -588,7 +588,20 @@ class TypeConvertor(object):
         value = name
         is_cast = False
         # print("##", name, code, file=sys.stderr)
-        for op in code:
+
+        # optimization: x -> y; y -> z => z(x)
+        coerce_buf = []
+
+        def consume_buf(value):
+            if not coerce_buf:
+                return value
+            value = self.coerce(m, value, *coerce_buf[-1])
+            tmp = self.gensym()
+            m.stmt("{} := {}".format(tmp, value))
+            coerce_buf.clear()
+            return tmp
+
+        for i, op in enumerate(code):
             if is_cast:
                 tmp = self.gensym()
                 m.stmt("{} := {}".format(tmp, value))
@@ -596,21 +609,34 @@ class TypeConvertor(object):
                 is_cast = False
 
             if op[0] == "deref":
-                value = "*({})".format(value)
+                value = consume_buf(value)
+                with m.if_("{} != nil".format(value)):
+                    value = "*({})".format(value)
+                    tmp = self.gensym()
+                    m.stmt("{} := {}".format(tmp, value))
+                    return self.convert_from_code(m.submodule(newline=False), code[i + 1:], src_field, dst_field, tmp)
             elif op[0] == "ref":
+                value = consume_buf(value)
                 value = "&({})".format(value)
                 is_cast = True
             elif op[0] == "coerce":
+                pair = (op[1], op[2])
+                if pair not in self.override_map:
+                    coerce_buf.append((op[1], op[2], src_field, dst_field))
+                    continue
+                value = consume_buf(value)
                 value = self.coerce(m, value, op[1], op[2], src_field, dst_field)
                 is_cast = True
             elif op[0] == "iterate":
+                value = consume_buf(value)
                 # todo: deep nested
                 value = self.iterate(m, value, op[1:], src_field, dst_field)
                 is_cast = True
             else:
+                value = consume_buf(value)
                 m.comment("hmm {}".format(op[0]))
                 # raise Exception(op[0])
-        return value
+        return m, consume_buf(value)
 
 
 def _wrap_value(v):
