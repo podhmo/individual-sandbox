@@ -2237,6 +2237,27 @@
               },
               "name": "Page"
             },
+            "Skill": {
+              "fields": {
+                "Name": {
+                  "embed": false,
+                  "name": "Name",
+                  "tags": {
+                    "bson": [
+                      "name"
+                    ],
+                    "json": [
+                      "name"
+                    ]
+                  },
+                  "type": {
+                    "kind": "primitive",
+                    "value": "string"
+                  }
+                }
+              },
+              "name": "Skill"
+            },
             "User": {
               "fields": {
                 "Gender": {
@@ -2321,6 +2342,25 @@
                   "type": {
                     "kind": "primitive",
                     "value": "string"
+                  }
+                },
+                "Skills": {
+                  "embed": false,
+                  "name": "Skills",
+                  "tags": {
+                    "bson": [
+                      "skills"
+                    ],
+                    "json": [
+                      "skills"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "primitive",
+                      "value": "Skill"
+                    }
                   }
                 }
               },

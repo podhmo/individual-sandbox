@@ -36,6 +36,9 @@ func main() {
 				Id:   bson.NewObjectId(),
 				Name: "G",
 			},
+			Skills: []model.Skill{
+				{Name: "a"}, {Name: "b"}, {Name: "c"},
+			},
 		}
 		defUser, err := convert.ConvertFromModelUser(user)
 		if err != nil {

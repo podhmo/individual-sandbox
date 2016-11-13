@@ -43,6 +43,10 @@ type User struct {
 	/* group
 	 */
 	Group *Group `json:"group,omitempty"`
+
+	/* skills
+	 */
+	Skills []Skill `json:"skills,omitempty"`
 }
 
 // Skill is skill

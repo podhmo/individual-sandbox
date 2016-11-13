@@ -21,8 +21,8 @@ type User struct {
 	Name    string        `bson:"name" json:"name"`
 	Gender  Gender        `bson:"gender" json:"gender"`
 	GroupID string        `bson:"groupId" json:"groupId"`
-	Skills  []*Skill      `bson:"skills" json:"skills"`
-
+	Skills  []Skill       `bson:"skills" json:"skills"`
+	// Skills2  []*Skill       `bson:"skills2" json:"skills2"`
 	Group *Group `bson:"-" json:"group"`
 }
 
