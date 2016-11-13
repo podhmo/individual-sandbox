@@ -16,28 +16,28 @@ class Tests(unittest.TestCase):
         # string => X (string -> X)
         target = self._makeOne([("string", "X")])
         actual = target.resolve(src="string", dst="X")
-        expected = [("coerce", "string", "X")]
+        expected = [("coerce", ("string", ), ("X", ))]
         self.assertEqual(expected, actual)
 
     def test_x_to_string(self):
         # X (string -> X) => string
         target = self._makeOne([("string", "X")])
         actual = target.resolve(src="X", dst="string")
-        expected = [("coerce", "X", "string")]
+        expected = [("coerce", ("X",), ("string",))]
         self.assertEqual(expected, actual)
 
     def test_x_to_y(self):
         # X (string -> X) => Y (string -> Y)
         target = self._makeOne([("string", "X"), ("string", "Y")])
         actual = target.resolve(src="X", dst="Y")
-        expected = [("coerce", "X", "string"), ("coerce", "string", "Y")]
+        expected = [("coerce", ("X",), ("string",)), ("coerce", ("string",), ("Y",))]
         self.assertEqual(expected, actual)
 
     def test_string_to_y(self):
         # string => Y (string -> X; X => Y)
         target = self._makeOne([("string", "X"), ("X", "Y")])
         actual = target.resolve(src="string", dst="Y")
-        expected = [("coerce", "string", "X"), ("coerce", "X", "Y")]
+        expected = [("coerce", ("string",), ("X",)), ("coerce", ("X",), ("Y",))]
         self.assertEqual(expected, actual)
 
     def test_x2_to_y1(self):
@@ -62,11 +62,11 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="X2", dst="Y1")
         expected = [
-            ('coerce', 'X2', 'X1'),
-            ('coerce', 'X1', 'X0'),
-            ('coerce', 'X0', 'string'),
-            ('coerce', 'string', 'Y0'),
-            ('coerce', 'Y0', 'Y1')
+            ("coerce", ("X2",), ("X1",)),
+            ("coerce", ("X1",), ("X0",)),
+            ("coerce", ("X0",), ("string",)),
+            ("coerce", ("string",), ("Y0",)),
+            ("coerce", ("Y0",), ("Y1",))
         ]
         self.assertEqual(expected, actual)
 
@@ -77,8 +77,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="X", dst="Y1")
         expected = [
-            ('coerce', 'X', 'Y'),
-            ('coerce', 'Y', 'Y1'),
+            ("coerce", ("X",), ("Y",)),
+            ("coerce", ("Y",), ("Y1",)),
         ]
         self.assertEqual(expected, actual)
 
@@ -89,8 +89,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="X", dst="Y1")
         expected = [
-            ('coerce', 'X', 'Y'),
-            ('coerce', 'Y', 'Y1'),
+            ("coerce", ("X",), ("Y",)),
+            ("coerce", ("Y",), ("Y1",)),
         ]
         self.assertEqual(expected, actual)
 
@@ -103,9 +103,9 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="PX", dst="Y")
         expected = [
-            ('coerce', 'PX', ('pointer', 'string')),
-            ('coerce', ('pointer', 'string'), 'string'),
-            ('coerce', 'string', 'Y')
+            ("coerce", ("PX", ), ("pointer", "string")),
+            ("coerce", ("pointer", "string"), ("string", )),
+            ("coerce", ("string",), ("Y",))
         ]
         self.assertEqual(expected, actual)
 
@@ -117,9 +117,9 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="Y", dst="PX")
         expected = [
-            ('coerce', 'Y', 'string'),
-            ('coerce', 'string', ('pointer', 'string')),
-            ('coerce', ('pointer', 'string'), 'PX')
+            ("coerce", ("Y", ), ("string", )),
+            ("coerce", ("string", ), ("pointer", "string")),
+            ("coerce", ("pointer", "string"), ("PX", ))
         ]
         self.assertEqual(expected, actual)
 
@@ -129,8 +129,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src=("pointer", "pointer", "string"), dst="PX")
         expected = [
-            ('coerce', ('pointer', 'pointer', 'string'), ('pointer', 'string')),
-            ('coerce', ('pointer', 'string'), 'PX')
+            ("coerce", ("pointer", "pointer", "string"), ("pointer", "string")),
+            ("coerce", ("pointer", "string"), ("PX",))
         ]
         self.assertEqual(expected, actual)
 
@@ -140,8 +140,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src=("pointer", "pointer", "pointer", "string"), dst="Y")
         expected = [
-            ('coerce', ('pointer', 'pointer', 'pointer', 'string'), 'string'),
-            ('coerce', 'string', 'Y')
+            ("coerce", ("pointer", "pointer", "pointer", "string"), ("string",)),
+            ("coerce", ("string",), ("Y",))
         ]
         self.assertEqual(expected, actual)
 
@@ -151,7 +151,7 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="string", dst=("pointer", "pointer", "pointer", "string"))
         expected = [
-            ('coerce', 'string', ('pointer', 'pointer', 'pointer', 'string'))
+            ("coerce", ("string", ), ("pointer", "pointer", "pointer", "string"))
         ]
         self.assertEqual(expected, actual)
 
@@ -161,8 +161,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="X", dst=("pointer", "pointer", "pointer", "string"))
         expected = [
-            ('coerce', 'X', 'string'),
-            ('coerce', 'string', ('pointer', 'pointer', 'pointer', 'string'))
+            ("coerce", ("X",), ("string",)),
+            ("coerce", ("string", ), ("pointer", "pointer", "pointer", "string"))
         ]
         self.assertEqual(expected, actual)
 
@@ -173,8 +173,8 @@ class Tests(unittest.TestCase):
         ])
         actual = target.resolve(src="string", dst=("pointer", "strfmt.Email"))
         expected = [
-            ('coerce', 'string', 'strfmt.Email'),
-            ('coerce', 'strfmt.Email', ('pointer', 'strfmt.Email'))
+            ("coerce", ("string", ), ("strfmt.Email", )),
+            ("coerce", ("strfmt.Email", ), ("pointer", "strfmt.Email"))
         ]
         self.assertEqual(expected, actual)
 
@@ -185,9 +185,9 @@ class Tests(unittest.TestCase):
         actual = target.resolve(src=("array", "string"), dst=("array", "X"))
         from convert import Action
         expected = [
-            Action(action='coerce', src=('array', 'string'), dst='string'),
-            Action(action='coerce', src='string', dst='X'),
-            Action(action='coerce', src='X', dst=('array', 'X'))
+            Action(action="coerce", src=("array", "string"), dst=("string", )),
+            Action(action="coerce", src=("string", ), dst=("X", )),
+            Action(action="coerce", src=("X", ), dst=("array", "X"))
         ]
         self.assertEqual(expected, actual)
 
@@ -199,10 +199,10 @@ class Tests(unittest.TestCase):
         actual = target.resolve(src=("array", "X"), dst=("array", "pointer", "Y"))
         from convert import Action
         expected = [
-            Action(action='coerce', src=('array', 'X'), dst='X'),
-            Action(action='coerce', src='X', dst='string'),
-            Action(action='coerce', src='string', dst='Y'),
-            Action(action='coerce', src='Y', dst=('array', 'pointer', 'Y'))
+            Action(action="coerce", src=("array", "X"), dst=("X", )),
+            Action(action="coerce", src=("X", ), dst=("string", )),
+            Action(action="coerce", src=("string", ), dst=("Y", )),
+            Action(action="coerce", src=("Y", ), dst=("array", "pointer", "Y"))
         ]
         self.assertEqual(expected, actual)
 
@@ -214,9 +214,9 @@ class Tests(unittest.TestCase):
         actual = target.resolve(src=("array", "pointer", "X"), dst=("pointer", "array", "Y"))
         from convert import Action
         expected = [
-            Action(action='coerce', src=('array', 'pointer', 'X'), dst='X'),
-            Action(action='coerce', src='X', dst='string'),
-            Action(action='coerce', src='string', dst='Y'),
-            Action(action='coerce', src='Y', dst=('pointer', 'array', 'Y'))
+            Action(action="coerce", src=("array", "pointer", "X"), dst=("X", )),
+            Action(action="coerce", src=("X", ), dst=("string", )),
+            Action(action="coerce", src=("string", ), dst=("Y", )),
+            Action(action="coerce", src=("Y", ), dst=("pointer", "array", "Y"))
         ]
         self.assertEqual(expected, actual)

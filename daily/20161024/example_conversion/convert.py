@@ -283,7 +283,22 @@ class Field(object):
 
     @reify
     def type_path(self):
-        return tuple(get_type_path(self.type, self.parent))
+        return tuple(self.get_type_path(self.type, self.parent))
+
+    def get_type_path(self, value, struct):
+        if value["kind"] == "primitive":
+            module = struct.module
+            if value["value"] not in module:
+                return [value["value"]]
+            else:
+                return ["{}.{}".format(module.fullname, value["value"])]
+        elif value["kind"] == "selector":
+            prefix = struct.parent.imports[value["prefix"]]["fullname"]
+            return ["{}.{}".format(prefix, value["value"])]
+        else:
+            r = [value["kind"]]
+            r.extend(self.get_type_path(value["value"], struct))
+            return r
 
     @reify
     def definition(self):
@@ -422,22 +437,6 @@ class ImportWriter(object):
         return prefix
 
 
-def get_type_path(value, struct):
-    if value["kind"] == "primitive":
-        module = struct.module
-        if value["value"] not in module:
-            return [value["value"]]
-        else:
-            return ["{}.{}".format(module.fullname, value["value"])]
-    elif value["kind"] == "selector":
-        prefix = struct.parent.imports[value["prefix"]]["fullname"]
-        return ["{}.{}".format(prefix, value["value"])]
-    else:
-        r = [value["kind"]]
-        r.extend(get_type_path(value["value"], struct))
-        return r
-
-
 class TypeConvertor(object):
     def __init__(self, import_writer, codegen, src_world, dst_world):
         self.import_writer = import_writer
@@ -513,6 +512,24 @@ class TypeConvertor(object):
         return value
 
 
+def _wrap_value(v):
+    if isinstance(v, (tuple, list)):
+        return tuple(v)
+    else:
+        return (v,)
+
+
+def _unwrap_value(v):
+    if not _has_detail(v):
+        return v[0]
+    else:
+        return v
+
+
+def _has_detail(wv):
+    return len(wv) > 1
+
+
 class TypeMappingResolver(object):
     def __init__(self, items):
         self.primitive_map = defaultdict(list)
@@ -524,37 +541,22 @@ class TypeMappingResolver(object):
             self.add_relation(k, v)
 
     def add_relation(self, k, v):
-        k = self._wrap_value(k)
-        v = self._wrap_value(v)
+        k = _wrap_value(k)
+        v = _wrap_value(v)
         self._add_value(k, v)
         self._add_value(v, k)
 
-    def _has_detail(self, wv):
-        return len(wv) > 1
-
     def _add_value(self, k, v):
         self.detail_map[k].append(v)
-        if self._has_detail(k):
+        if _has_detail(k):
             self.primitive_map[k[-1:]].append((k, v))
             self.primitive_map[v[-1:]].append((v, k))
-
-    def _wrap_value(self, v):
-        if isinstance(v, (tuple, list)):
-            return tuple(v)
-        else:
-            return (v,)
-
-    def _unwrap_value(self, v):
-        if not self._has_detail(v):
-            return v[0]
-        else:
-            return v
 
     def resolve(self, src, dst):
         if src == dst:
             return []
-        src = self._wrap_value(src)
-        dst = self._wrap_value(dst)
+        src = _wrap_value(src)
+        dst = _wrap_value(dst)
         if src[-1:] == dst[-1:]:
             return self.on_finish([src], [dst])
         else:
@@ -569,7 +571,7 @@ class TypeMappingResolver(object):
         for i in range(len(path) - 1):
             if path[i] == path[i + 1]:
                 continue
-            prev, next_ = self._unwrap_value(path[i]), self._unwrap_value(path[i + 1])
+            prev, next_ = path[i], path[i + 1]
             if coerce_path and coerce_path[-1][1] == next_ and coerce_path[-1][2] == prev:
                 coerce_path.pop()
                 continue
@@ -645,38 +647,113 @@ class GencodeMappingNotFound(ValueError):
         self.dst_path = dst
 
 
+class MiniCodeNormalizer(object):
+    def pre_gencode(self, mapping_path):
+        # normalize mapping_path
+        # e.g. (coerce (array x) (array y))
+        #         -> (coerce (array x) x), (coerce x y), (coerce y (array y))
+        # e.g. (coerce (array array x) (array array y))
+        #         -> (coerce (array array x) (array x)), (coerce (array x) x), (coerce x y)(coerce y (array y)), (coerce (array y) (array array y))
+        # normalized = []
+        # for action in mapping_path:
+        #     if action.action == "coerce":
+        #         if "array" in action.src:
+        #             # (p array p x) -> (coerce (p array p x) (array p x)) (coerce (array p x) (pointer x))
+        #             pre_array, post_array = [], []
+        unfolded = []
+        for action in mapping_path:
+            if action[0] != "coerce":
+                unfolded.append(action)
+                continue
+
+            # src transform
+            src = action[1]
+            i = 0
+            sub_indices = [0]
+            src_tmp = []
+            for x in src:
+                i += 1
+                if x == "array":
+                    if src[sub_indices[-1]] == "array":
+                        src_tmp.append(Action(action="coerce", src=src[sub_indices[-1]:], dst=src[i:]))
+                    else:
+                        src_tmp.append(Action(action="coerce", src=src[sub_indices[-1]:], dst=src[i - 1:]))
+                        src_tmp.append(Action(action="coerce", src=src[i - 1:], dst=src[i:]))
+                    sub_indices.append(i)
+
+            if len(sub_indices) == 1:
+                unfolded.append(action)
+                continue
+            last_src = src[sub_indices[-1]:]
+
+            # dst transform
+            dst = action[2]
+            dst_tmp = []
+            i = 0
+            sub_indices = [0]
+            for x in dst:
+                i += 1
+                if x == "array":
+                    if dst[sub_indices[-1]] == "array":
+                        dst_tmp.append(Action(action="coerce", dst=dst[sub_indices[-1]:], src=dst[i:]))
+                    else:
+                        dst_tmp.append(Action(action="coerce", dst=dst[sub_indices[-1]:], src=dst[i - 1:]))
+                        dst_tmp.append(Action(action="coerce", dst=dst[i - 1:], src=dst[i:]))
+                    sub_indices.append(i)
+
+            # if len(sub_indices) == 1:
+            #     raise ValueError("invalid operation {}".format(action))
+
+            first_dst = dst[sub_indices[-1]:]
+            unfolded.extend(src_tmp)
+            unfolded.append(Action(action="coerce", src=last_src, dst=first_dst))
+            unfolded.extend(reversed(dst_tmp))
+        return unfolded
+
+    def post_gencode(self, unfolded_code):
+        code = []
+        for ac in unfolded_code:
+            if ac[0] == "ref" and code and code[-1][0] == "deref":
+                code.pop()
+            elif ac[0] == "dearray" and code and code[-1][0] == "array":
+                code.pop()
+            else:
+                code.append(ac)
+        stack = [[]]
+        for ac in code:
+            if ac[0] == "array":
+                stack.append(["iterate"])
+            elif ac[0] == "dearray":
+                sub_code = stack.pop()
+                stack[-1].append(tuple(sub_code))
+            else:
+                stack[-1].append(ac)
+        assert len(stack) == 1
+        return stack[0]
+
+
 class MiniCodeGenerator(object):
     # generating mini language
     # [deref] -> *x
     # [ref] -> &x
     # [coerce, x, y] -> finding alias {original: x} and name is y, -> y(x)
 
-    def __init__(self, resolver, optimizer=None):
+    def __init__(self, resolver, normalizer=MiniCodeNormalizer()):
         self.resolver = resolver
-        self.optimizer = optimizer or self._default_optimize
-
-    def _default_optimize(self, code):
-        optimized = []
-        for x in code:
-            if x[0] == "ref" and optimized and optimized[-1][0] == "deref":
-                optimized.pop()
-            if x[0] == "iterate" and optimized and optimized[-1][0] == "deiterate":
-                optimized.pop()
-            else:
-                optimized.append(x)
-        return optimized
+        self.normalizer = normalizer
 
     def gencode(self, src_path, dst_path):
-        code = self._gencode(src_path, dst_path)
-        code = self.optimizer(code)
-        return code
-
-    def _gencode(self, src_path, dst_path):
-        code = []
         mapping_path = self.resolver.resolve(src_path, dst_path)
         if mapping_path is None:
             msg = "mapping not found {!r} -> {!r}".format(src_path, dst_path)
             raise GencodeMappingNotFound(msg, src_path, dst_path)
+        pre_gencode = self.normalizer.pre_gencode(mapping_path)
+        code = self._gencode(pre_gencode)
+        post_gencode = self.normalizer.post_gencode(code)
+        return post_gencode
+
+    def _gencode(self, mapping_path):
+        code = []
 
         def get_primitive(v):
             if isinstance(v, (list, tuple)):
@@ -693,7 +770,7 @@ class MiniCodeGenerator(object):
                         if typ == "pointer":
                             code.append(("deref", ))
                         elif typ == "array":
-                            code.append(("deiterate", ))
+                            code.append(("array",))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
                 if isinstance(action.dst, (list, tuple)):
@@ -703,11 +780,13 @@ class MiniCodeGenerator(object):
                         if typ == "pointer":
                             code.append(("ref", ))
                         elif typ == "array":
-                            code.append(("iterate", ))
+                            code.append(("dearray",))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, src_path[1:]))
             else:
-                code.append(action)
+                # todo: coerce
+                code.append(Action(action=action[0], src=_unwrap_value(action[1]), dst=_unwrap_value(action[2])))
+        # print("##", mapping_path, "\n", code, file=sys.stderr)
         return code
 
 

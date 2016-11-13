@@ -72,3 +72,26 @@ class Tests(unittest.TestCase):
         actual = target.gencode("PX", "Y")
         expected = [('coerce', 'PX', ('pointer', 'string')), ('deref',), ('coerce', 'string', 'Y')]
         self.assertEqual(expected, actual)
+
+    def test_array(self):
+        target = self._makeOne([("string", "X"), ("string", "Y")])
+        actual = target.gencode(("array", "X"), ("array", "pointer", "Y"))
+        from convert import Action
+        expected = [
+            ('iterate',
+             Action(action='coerce', src='X', dst='string'),
+             Action(action='coerce', src='string', dst='Y'), ('ref',)),
+        ]
+        self.assertEqual(expected, actual)
+
+    def test_array_array(self):
+        target = self._makeOne([("string", "X"), ("string", "Y")])
+        actual = target.gencode(("array", "array", "X"), ("array", "array", "pointer", "Y"))
+        from convert import Action
+        expected = [
+            ('iterate',
+             ('iterate',
+              Action(action='coerce', src='X', dst='string'),
+              Action(action='coerce', src='string', dst='Y'), ('ref',)))
+        ]
+        self.assertEqual(expected, actual)

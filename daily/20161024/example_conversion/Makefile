@@ -8,6 +8,7 @@ install:
 
 sync:
 	cp ${GOPATH}/src/github.com/podhmo/sandbox/convert/convert.py .
+	cp -r ${GOPATH}/src/github.com/podhmo/sandbox/convert/tests/* tests/
 
 json:
 	go-structjson --target model | jq . -S > output/model.json
