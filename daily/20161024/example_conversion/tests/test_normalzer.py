@@ -70,3 +70,11 @@ class PreGencodeTests(unittest.TestCase):
             ("coerce", ("array", "y", ), ("array", "array", "y")),
         ]
         self.assertEqual(expected, actual)
+
+    def test_guessing_pointer_arary(self):
+        # correct: ("coerce", ("array", "pointer", "x"), ("array", "pointer", "y"))
+        path = [
+            ('coerce', ('array', 'pointer', 'X'), ('array', 'X')),
+            ('coerce', ('array', 'X'), ('array', 'Y')),
+            ('coerce', ('array', 'Y'), ('array', 'pointer', 'Y')),
+        ]

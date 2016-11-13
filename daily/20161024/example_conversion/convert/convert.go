@@ -66,19 +66,36 @@ func ConvertFromModelUser(src *model.User) (*def.User, error) {
 		return nil, err
 	}
 	dst.Skills2 = tmp11
+	tmp12, err := ConvertFromModelSkillRefMany(src.Skills3)
+	if err != nil {
+		return nil, err
+	}
+	dst.Skills3 = tmp12
 	return dst, nil
 }
 
 func ConvertFromModelSkillMany(src []model.Skill) ([]def.Skill, error) {
 	dst := make([]def.Skill, len(src))
 	for i, x := range src {
-		tmp12 := &(x)
-		tmp13, err := ConvertFromModelSkill(tmp12)
+		tmp13 := &(x)
+		tmp14, err := ConvertFromModelSkill(tmp13)
 		if err != nil {
 			return nil, err
 		}
-		tmp14 := tmp13
-		dst[i] = *(tmp14)
+		tmp15 := tmp14
+		dst[i] = *(tmp15)
+	}
+	return dst, nil
+}
+
+func ConvertFromModelSkillRefMany(src []*model.Skill) ([]*def.Skill, error) {
+	dst := make([]*def.Skill, len(src))
+	for i, x := range src {
+		tmp16, err := ConvertFromModelSkill(x)
+		if err != nil {
+			return nil, err
+		}
+		dst[i] = tmp16
 	}
 	return dst, nil
 }

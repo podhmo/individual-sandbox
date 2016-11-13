@@ -50,6 +50,9 @@ type User struct {
 	/* skills2
 	 */
 	Skills2 []Skill `json:"skills2,omitempty"`
+	/* skills3
+	 */
+	Skills3 []*Skill `json:"skills3,omitempty"`
 }
 
 // Skill is skill

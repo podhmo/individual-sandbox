@@ -280,6 +280,34 @@ class Field(object):
         return self.data["type"]
 
     @reify
+    def type_expr(self):
+        r = []
+        for x in self.type_path:
+            if x == "pointer":
+                r.append("*")
+            elif x == "array":
+                r.append("[]")
+            elif "/" in x:
+                r.append(x.rsplit("/", 1)[-1])
+            else:
+                r.append(x)
+        return "".join(r)
+
+    @reify
+    def suffix(self):
+        r = []
+        for x in self.type_path:
+            if x == "pointer":
+                r.append("Ref")
+            elif x == "array":
+                r.append("Many")
+            elif "." in x:
+                r.append(x.rsplit(".", 1)[-1].title())
+            else:
+                r.append(x)
+        return "".join(reversed(r))
+
+    @reify
     def type_path(self):
         return tuple(self.get_type_path(self.type, self.parent))
 
@@ -337,24 +365,23 @@ class ManyConvertWriter(object):
         self.m = self.writer.m
         self.convertor = self.writer.convertor
 
-    def get_function_name(self, src, dst):
+    def get_function_name(self, src_field, dst_field):
         # src is array field?
-        # to struct name..
-        fnname = self.writer.get_function_name(src, dst)
-        return "{}Many".format(fnname)
+        src = src_field.definition
+        return 'ConvertFrom{}{}'.format(src.package_name.title(), dst_field.suffix)
 
-    def write(self, fnname, src, dst, inner, cont):
-        src_arg = 'src []{}.{}'.format(src.package_name, src.name)
-        dst_arg = '[]{}.{}'.format(dst.package_name, dst.name)
+    def write_many(self, fnname, src_field, dst_field, inner, cont):
+        src_arg = 'src {}'.format(src_field.type_expr)
+        dst_arg = '{}'.format(dst_field.type_expr)
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
-            self.m.stmt("dst := make([]{}.{}, len(src))".format(dst.package_name, dst.name))
+            self.m.stmt("dst := make({}, len(src))".format(dst_field.type_expr))
             with self.m.for_("i, x := range src"):
-                convert = self.convertor.convert_from_code(self.m, inner, src, dst, name="x")
+                convert = self.convertor.convert_from_code(self.m, inner, src_field, dst_field, name="x")
                 self.m.stmt("dst[i] = {}".format(convert))
             self.m.return_("dst, nil")
 
     def register(self, fnname, src_type_list, dst_type_list):
-        return self.writer.register(fnname, src_type_list, dst_type_list)
+        return self.writer.register(fnname, src_type_list, dst_type_list, skip_resolve_register=True)
 
 
 class ConvertWriter(object):
@@ -387,10 +414,10 @@ class ConvertWriter(object):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
 
-    def register(self, fnname, src_type_list, dst_type_list):
+    def register(self, fnname, src_type_list, dst_type_list, skip_resolve_register=False):
         override = self.convertor.as_override
 
-        @override(src_type_list, dst_type_list)
+        @override(src_type_list, dst_type_list, skip_resolve_register=skip_resolve_register)
         def subconvert(convertor, m, value, *args):
             tmp = convertor.gensym()
             m.stmt("{}, err := {}({})".format(tmp, fnname, value))
@@ -416,7 +443,6 @@ class ConvertWriter(object):
                 raise
             return self._fallback_for_many(e, src, dst, name, field, cont)
         except GencodeMappingNotFound as e:
-            # print("@", e, file=sys.stderr)
             if retry:
                 raise
             return self._fallback(e, src, dst, name, field, cont)
@@ -443,11 +469,10 @@ class ConvertWriter(object):
             if primitive_src == primitive_dst:
                 self.convertor.codegen.resolver.add_relation(e.src_path[-1], e.dst_path[-1])
 
-        dep_src = src[name].definition
-        dep_dst = field.definition
-        fnname = self.many.get_function_name(dep_src, dep_dst)
+        fnname = self.many.get_function_name(src[name], field)
         self.many.register(fnname, src[name].type_path, field.type_path)
-        cont.append(lambda: self.many.write(fnname, dep_src, dep_dst, e.inner, cont))
+
+        cont.append(lambda: self.many.write_many(fnname, src[name], field, e.inner, cont))
         return self.write_code_convert(src, dst, name, field, cont, retry=True)
 
 
@@ -498,14 +523,15 @@ class TypeConvertor(object):
         self.codegen.resolver.add_relation_list(items)
         self.override_map = {}
 
-    def as_override(self, src_type, dst_type):
+    def as_override(self, src_type, dst_type, skip_resolve_register=False):
         def decorator(on_write):
-            self.override(src_type, dst_type, on_write)
+            self.override(src_type, dst_type, on_write, skip_resolve_register=skip_resolve_register)
             return on_write
         return decorator
 
-    def override(self, src_type, dst_type, on_write):
-        self.codegen.resolver.add_relation(src_type, dst_type)
+    def override(self, src_type, dst_type, on_write, skip_resolve_register=False):
+        if not skip_resolve_register:
+            self.codegen.resolver.add_relation(src_type, dst_type)
         self.override_map[(src_type, dst_type)] = on_write
 
     def coerce(self, m, value, src_type, dst_type, src_field, dst_field):
@@ -540,14 +566,14 @@ class TypeConvertor(object):
     def convert(self, m, src_field, dst_field, name):
         src_path = src_field.type_path
         dst_path = dst_field.type_path
-        print(">>", src_path, dst_path, file=sys.stderr)
+        # print(">>", src_path, dst_path, file=sys.stderr)
         code = self.codegen.gencode(src_path, dst_path)
         return self.convert_from_code(m, code, src_field, dst_field, name)
 
     def convert_from_code(self, m, code, src_field, dst_field, name):
         value = name
         is_cast = False
-        print("##", code, file=sys.stderr)
+        # print("##", name, code, file=sys.stderr)
         for op in code:
             if is_cast:
                 tmp = self.gensym()
@@ -775,22 +801,33 @@ class MiniCodeNormalizer(object):
             unfolded.extend(src_tmp)
             unfolded.append(Action(action="coerce", src=last_src, dst=first_dst))
             unfolded.extend(reversed(dst_tmp))
-        return unfolded
 
-    def post_gencode(self, unfolded_code):
+        r = []
+        for ac in unfolded:
+            if ac[1] == ac[2]:
+                continue
+            r.append(ac)
+        return r
+
+    def simplify(self, unfolded_code):
         code = []
         for ac in unfolded_code:
             if ac[0] == "ref" and code and code[-1][0] == "deref":
                 code.pop()
-            elif ac[0] == "dearray" and code and code[-1][0] == "array":
+            elif ac[0] == "array" and code and code[-1][0] == "dearray":
                 code.pop()
             else:
                 code.append(ac)
+        return code
+
+    def post_gencode(self, unfolded_code):
+        code = self.simplify(unfolded_code)
+
         stack = [[]]
         for ac in code:
-            if ac[0] == "array":
+            if ac[0] == "dearray":
                 stack.append(["iterate"])
-            elif ac[0] == "dearray":
+            elif ac[0] == "array":
                 sub_code = stack.pop()
                 stack[-1].append(tuple(sub_code))
             else:
@@ -831,13 +868,11 @@ class MiniCodeGenerator(object):
         for action in mapping_path:
             if get_primitive(action.src) == get_primitive(action.dst):
                 if isinstance(action.src, (list, tuple)):
-                    itr = reversed(action.src)
-                    next(itr)
-                    for typ in itr:
+                    for typ in action.src[:-1]:
                         if typ == "pointer":
                             code.append(("deref", ))
                         elif typ == "array":
-                            code.append(("array",))
+                            code.append(("dearray",))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, action.src))
                 if isinstance(action.dst, (list, tuple)):
@@ -847,13 +882,13 @@ class MiniCodeGenerator(object):
                         if typ == "pointer":
                             code.append(("ref", ))
                         elif typ == "array":
-                            code.append(("dearray",))
+                            code.append(("array",))
                         else:
                             raise ValueError("not implemented: typ={}, path={}".format(typ, action.dst))
             else:
                 # todo: coerce
                 code.append(Action(action=action[0], src=_unwrap_value(action[1]), dst=_unwrap_value(action[2])))
-        # print("##", mapping_path, "\n", code, file=sys.stderr)
+        # print("@@", code, file=sys.stderr)
         return code
 
 
@@ -900,10 +935,6 @@ def main():
         for file in module.files.values():
             for struct in file.structs.values():
                 for module in src_world.modules.values():
-                    # if struct.name != "FacebookPage":
-                    #     continue
-                    # if struct.name != "EnduserTopic":
-                    #     continue
                     if struct.name in module:
                         print("@", struct.name, file=sys.stderr)
                         cw.write_function(module[struct.name], struct)

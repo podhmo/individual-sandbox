@@ -253,6 +253,26 @@
                       "value": "Skill"
                     }
                   }
+                },
+                "Skills3": {
+                  "embed": false,
+                  "name": "Skills3",
+                  "tags": {
+                    "json": [
+                      "skills3",
+                      "omitempty"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "pointer",
+                      "value": {
+                        "kind": "primitive",
+                        "value": "Skill"
+                      }
+                    }
+                  }
                 }
               },
               "name": "User"

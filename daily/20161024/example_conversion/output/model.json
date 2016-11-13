@@ -2143,12 +2143,12 @@
             "Gender": {
               "candidates": [
                 {
-                  "name": "GenderMALE",
-                  "value": "\"xy\""
-                },
-                {
                   "name": "GenderFemale",
                   "value": "\"xx\""
+                },
+                {
+                  "name": "GenderMALE",
+                  "value": "\"xy\""
                 }
               ],
               "name": "Gender",
@@ -2379,6 +2379,28 @@
                     "value": {
                       "kind": "primitive",
                       "value": "Skill"
+                    }
+                  }
+                },
+                "Skills3": {
+                  "embed": false,
+                  "name": "Skills3",
+                  "tags": {
+                    "bson": [
+                      "skills3"
+                    ],
+                    "json": [
+                      "skills3"
+                    ]
+                  },
+                  "type": {
+                    "kind": "array",
+                    "value": {
+                      "kind": "pointer",
+                      "value": {
+                        "kind": "primitive",
+                        "value": "Skill"
+                      }
                     }
                   }
                 }
