@@ -368,11 +368,13 @@ class ManyConvertWriter(object):
     def get_function_name(self, src_field, dst_field):
         # src is array field?
         src = src_field.definition
-        return 'ConvertFrom{}{}'.format(src.package_name.title(), dst_field.suffix)
+        dst = dst_field.definition
+        return 'From{}{}To{}{}'.format(src.package_name.title(), src_field.suffix, dst.package_name.title(), dst_field.suffix)
 
     def write_many(self, fnname, src_field, dst_field, inner, cont):
         src_arg = 'src {}'.format(src_field.type_expr)
         dst_arg = '{}'.format(dst_field.type_expr)
+        self.m.comment("{} : converts {} -> {}".format(fnname, src_field.type_expr, dst_field.type_expr))
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
             self.m.stmt("dst := make({}, len(src))".format(dst_field.type_expr))
             with self.m.for_("i, x := range src"):
@@ -389,9 +391,10 @@ class ConvertWriter(object):
         self.m = m
         self.convertor = convertor
         self.many = ManyConvertWriter(self)
+        self.used = set()
 
     def get_function_name(self, src, dst):
-        return 'ConvertFrom{}{}'.format(src.package_name.title(), dst.name)
+        return 'From{}{}To{}{}'.format(src.package_name.title(), src.name, dst.package_name.title(), dst.name)
 
     def write_function(self, src, dst):
         fnname = self.get_function_name(src, dst)
@@ -404,8 +407,11 @@ class ConvertWriter(object):
             fn()
 
     def write(self, fnname, src, dst, cont):
+        if fnname in self.used:
+            return
         src_arg = 'src *{}.{}'.format(src.package_name, src.name)
         dst_arg = '*{}.{}'.format(dst.package_name, dst.name)
+        self.m.comment("{} : converts {}.{} -> {}.{}".format(fnname, src.package_name, src.name, dst.package_name, dst.name))
         with self.m.func(fnname, src_arg, return_="({}, error)".format(dst_arg)):
             with self.m.if_("src == nil"):
                 self.m.return_("nil, nil")
@@ -413,19 +419,20 @@ class ConvertWriter(object):
             for name, field in sorted(dst.fields.items()):
                 self.write_code_convert(src, dst, name, field, cont)
             self.m.return_("dst, nil")
+        self.used.add(fnname)
 
     def register(self, fnname, src_type_list, dst_type_list, skip_resolve_register=False):
         override = self.convertor.as_override
 
         @override(src_type_list, dst_type_list, skip_resolve_register=skip_resolve_register)
-        def subconvert(convertor, m, value, *args):
+        def subconvert(convertor, m, value, *args, fnname=fnname):
             tmp = convertor.gensym()
             m.stmt("{}, err := {}({})".format(tmp, fnname, value))
             with m.if_("err != nil"):
                 m.return_("nil, err")
             return tmp
 
-    def write_code_convert(self, src, dst, name, field, cont, retry=False):
+    def write_code_convert(self, src, dst, name, field, cont, retry=None):
         try:
             if name in src:
                 src_field = src[name]
@@ -439,11 +446,11 @@ class ConvertWriter(object):
                 except ValueError:
                     self.m.comment("FIXME: {} is not found.".format(field.name))
         except GencodeMappingManyNotFound as e:
-            if retry:
+            if retry and isinstance(retry, e.__class__):
                 raise
             return self._fallback_for_many(e, src, dst, name, field, cont)
         except GencodeMappingNotFound as e:
-            if retry:
+            if retry and isinstance(retry, e.__class__):
                 raise
             return self._fallback(e, src, dst, name, field, cont)
 
@@ -453,14 +460,15 @@ class ConvertWriter(object):
             primitive_dst = e.dst_path[-1].replace("32", "").replace("64", "")
             if primitive_src == primitive_dst:
                 self.convertor.codegen.resolver.add_relation(e.src_path[-1], e.dst_path[-1])
-                return self.write_code_convert(src, dst, name, field, cont, retry=True)
+                return self.write_code_convert(src, dst, name, field, cont, retry=e)
 
         dep_src = src[name].definition
         dep_dst = field.definition
         fnname = self.get_function_name(dep_src, dep_dst)
-        self.register(fnname, src[name].type_path, field.type_path)
+        # if array? don't registe raw type expression, such as `array pinter X`
+        self.register(fnname, tuple(["pointer", dep_src.fullname]), tuple(["pointer", dep_dst.fullname]))
         cont.append(lambda: self.write(fnname, dep_src, dep_dst, cont))
-        return self.write_code_convert(src, dst, name, field, cont, retry=True)
+        return self.write_code_convert(src, dst, name, field, cont, retry=e)
 
     def _fallback_for_many(self, e, src, dst, name, field, cont):
         if e.src_path[-1].endswith(("32", "64")) or e.dst_path[-1].endswith(("32", "64")):
@@ -471,9 +479,8 @@ class ConvertWriter(object):
 
         fnname = self.many.get_function_name(src[name], field)
         self.many.register(fnname, src[name].type_path, field.type_path)
-
         cont.append(lambda: self.many.write_many(fnname, src[name], field, e.inner, cont))
-        return self.write_code_convert(src, dst, name, field, cont, retry=True)
+        return self.write_code_convert(src, dst, name, field, cont, retry=e)
 
 
 class ImportWriter(object):
@@ -505,6 +512,13 @@ class ImportWriter(object):
         self.used.add(module.fullname)
         self.im.import_(module.fullname, as_=prefix)
         return prefix
+
+
+# import collections
+# class LoggingMap(collections.UserDict):
+#     def __setitem__(self, k, v):
+#         print("logging:", k, v, file=sys.stderr)
+#         super().__setitem__(k, v)
 
 
 class TypeConvertor(object):
@@ -551,13 +565,14 @@ class TypeConvertor(object):
         else:
             return "{}({})".format(dst_type, value)
 
-    def iterate(self, m, value, args, src_field, dst_field):
+    def iterate(self, m, value, code, src_field, dst_field):
         src_type = src_field.type_path
         dst_type = dst_field.type_path
         pair = (src_type, dst_type)
-        if pair not in self.override_map:
-            raise GencodeMappingManyNotFound("retry for iteration %s -> %s".format(src_type, dst_type), src_type, dst_type, args)
-        return self.override_map[pair](self, m, value, src_type, dst_type, src_field, dst_field, args)
+        if pair in self.override_map:
+            return self.override_map[pair](self, m, value, src_type, dst_type, src_field, dst_field, code)
+        else:
+            raise GencodeMappingManyNotFound("retry for iteration {} -> {}".format(src_type, dst_type), src_type, dst_type, code)
 
     def gensym(self):
         self.i += 1
@@ -566,7 +581,6 @@ class TypeConvertor(object):
     def convert(self, m, src_field, dst_field, name):
         src_path = src_field.type_path
         dst_path = dst_field.type_path
-        # print(">>", src_path, dst_path, file=sys.stderr)
         code = self.codegen.gencode(src_path, dst_path)
         return self.convert_from_code(m, code, src_field, dst_field, name)
 
@@ -888,7 +902,6 @@ class MiniCodeGenerator(object):
             else:
                 # todo: coerce
                 code.append(Action(action=action[0], src=_unwrap_value(action[1]), dst=_unwrap_value(action[2])))
-        # print("@@", code, file=sys.stderr)
         return code
 
 
