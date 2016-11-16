@@ -968,6 +968,10 @@ def main():
     def model_date_to_time(convertor, m, value, *args):
         return "{}.Time()".format(value)
 
+    @convertor.as_override(src_world["bson"].fulladdress("ObjectId"), ("pointer", dst_world["def"].fulladdress("ID")))
+    def object_id_to_id(convertor, m, value, *args):
+        return "ConvertID({})".format(value)
+
     m.sep()
     cw = ConvertWriter(m, convertor)
     for module in dst_world.modules.values():
