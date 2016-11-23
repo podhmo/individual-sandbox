@@ -1,3 +1,18 @@
+# arch linux
+
+- https://www.archlinux.org/download/
+- https://wiki.archlinux.org/index.php/Installation_guide
+
+
+# apt sources.list change (en -> jp)
+
+```
+sudo sed -i.bak -e "s%http://us.archive.ubuntu.com/ubuntu/%http://ftp.iij.ad.jp/pub/linux/ubuntu/archive/%g" /etc/apt/sources.list
+```
+
+see: http://qiita.com/fkshom/items/53de3a9b9278cd524099
+
+
 # golangで特定の条件を達した時に `go install` や `go build` がruntimeエラーを起こす
 
 https://gist.github.com/podhmo/67605e2119a50dcf61bfd5e9f4e12206
