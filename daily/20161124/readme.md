@@ -43,3 +43,28 @@ type keys struct {
 	Type KeyType
 }
 ```
+
+# golang 値の配列からpointerの配列へのコピー
+
+まじめにスコープを考えてみると当たり前といえば当たり前だけれど。
+
+まちがい
+
+```go
+xs := []int{1, 2, 3}
+ys := make([]*int, len(xs))
+for i, x := range xs {
+    ys[i] = &x
+}
+```
+
+ただしい
+
+```go
+xs := []int{1, 2, 3}
+ys := make([]*int, len(xs))
+for i, x := range xs {
+    x := x
+    ys[i] = &x
+}
+```
