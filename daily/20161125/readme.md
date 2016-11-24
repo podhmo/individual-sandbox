@@ -24,8 +24,13 @@ emacs
 - デフォルトのフォントが見やすくない
 - C-;に謎の機能がついている(fcitxと干渉)
 - 数字などの変換が半角優先になっていない
-- emacsのキーバインドで文字の変換候補の選択ができない(至るところで)
+- emacsのキーバインドで文字の変換候補の選択ができない
 - デフォルトでは不要な入力モードが存在してしまう(e.g. カタカナ入力など)
+
+環境全体の話
+
+- 至るところでemacsのキーバインドで移動したい
+- virtual desktopがない？(多分設定で有効にしないとダメ)
 
 (virtualboxの問題)
 
@@ -48,7 +53,13 @@ bashの設定ファイルは持っていたほうが良い気がしてきた
 # ubuntuのこと
 
 - エディタのデフォルトがnano
-- dpkg-reconfigureで何を入力すれば良いのか忘れてしまっている(packageや設定名を思い出せなくなっている)
+- dpkg-reconfigureやupdate-alternativesで何を入力すれば良いのか忘れてしまっている
+- 至るところでemacs key bindingがつかいたい
+
+## emacs key binding
+
+UbuntuのキーバインドをEmacs風にする - Qiita
+http://qiita.com/wamei/items/a83680a3ad9b2f8f8dcc
 
 ## デフォルトのエディタの変更
 
@@ -57,5 +68,5 @@ update-alternatives --get-selections | grep -i editor
 sudo update-alternatives --list editor
 sudo update-alternatives --config editor
 ```
-    
+
 
