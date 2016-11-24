@@ -68,3 +68,31 @@ for i, x := range xs {
     ys[i] = &x
 }
 ```
+
+# python dictのkey,valueの文字列の先頭の大文字を小文字にしたい
+
+はい
+
+```python
+import json
+import sys
+
+
+def untitle(s):
+    if not s:
+        return s
+    return "{}{}".format(s[0].lower(), s[1:])
+
+
+def rec(d):
+    if isinstance(d, dict):
+        return {untitle(k): rec(v) for k, v in d.items()}
+    elif isinstance(d, (list, tuple)):
+        return [rec(x) for x in d]
+    elif hasattr(d, "title"):
+        return untitle(d)
+    else:
+        return d
+
+json.dump(rec(json.load(sys.stdin)), sys.stdout, indent=2, ensure_ascii=False)
+```
