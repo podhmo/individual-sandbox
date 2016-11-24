@@ -11,3 +11,9 @@ requirements
 
 copy.js
 https://gist.github.com/podhmo/893357200a8cfa78514705a1521c3989
+
+# golang objectをkeyにしたmap
+
+golangは値を比較するので大丈夫。
+
+
