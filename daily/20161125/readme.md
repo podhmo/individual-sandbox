@@ -1,3 +1,7 @@
+# golang 時間のmock
+
+良いものがほしい
+
 # ubuntu ntp 時刻があっていない場合
 
 ```
