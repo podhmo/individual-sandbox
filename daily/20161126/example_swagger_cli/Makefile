@@ -10,3 +10,7 @@ one:
 two:
 	${SWAGGER} bundle --dereference --outfile ./02multifile/swagger.json ./02multifile/src/main.yaml
 	${SWAGGER} validate ./02multifile/swagger.json
+
+three:
+	${SWAGGER} bundle --outfile ./03multifile/swagger.json ./03multifile/src/main.yaml
+	${SWAGGER} validate ./03multifile/swagger.json
