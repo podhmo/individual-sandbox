@@ -13,3 +13,5 @@ info:
 paths:
   /persons:
     $ref: "./api_person.yaml#/paths/api_person"
+  /persons2:
+    $ref: "./api_person2.yaml#/paths/api_person2"
