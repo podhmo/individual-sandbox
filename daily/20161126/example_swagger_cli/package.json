@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "swagger-cli": "^1.0.0-beta.2"
+    "swagger-cli": "^1.0.0-beta.2",
+    "swagger-parser": "^4.0.0-beta.2"
   }
 }

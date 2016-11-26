@@ -1,4 +1,4 @@
-SWAGGER = ./node_modules/.bin/swagger
+SWAGGER = node_modules/.bin/swagger
 
 
 zero:
@@ -12,7 +12,7 @@ two:
 	${SWAGGER} validate ./02multifile/swagger.json
 
 three:
-	${SWAGGER} bundle --outfile ./03multifile/swagger.json ./03multifile/src/main.yaml
+	(cd ./03multifile/src/ ../../${SWAGGER} bundle --outfile ../swagger.json --format 2 main.yaml)
 	${SWAGGER} validate ./03multifile/swagger.json
 
 four:

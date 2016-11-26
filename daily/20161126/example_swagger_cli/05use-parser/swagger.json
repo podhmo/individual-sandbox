@@ -1,0 +1,81 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.0",
+    "title": "<enter your title>"
+  },
+  "paths": {
+    "/persons": {
+      "paths": {
+        "api_person": {
+          "get": {
+            "description": "Gets `Person` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+            "parameters": [
+              {
+                "name": "size",
+                "in": "query",
+                "description": "Size of array",
+                "required": true,
+                "type": "number",
+                "format": "double"
+              }
+            ],
+            "responses": {
+              "200": {
+                "responses": {
+                  "Normal": {
+                    "description": "Successful response",
+                    "schema": {
+                      "title": "ArrayOfPersons",
+                      "type": "array",
+                      "items": {
+                        "definitions": {
+                          "Person": {
+                            "title": "Person",
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "single": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/persons2": {
+      "paths": {
+        "api_person2": {
+          "get": {
+            "description": "Gets `Person` objects.\nOptional query param of **size** determines\nsize of returned array\n",
+            "parameters": [
+              {
+                "name": "size",
+                "in": "query",
+                "description": "Size of array",
+                "required": true,
+                "type": "number",
+                "format": "double"
+              }
+            ],
+            "responses": {
+              "200": {
+                "$ref": "#/paths/~1persons/paths/api_person/get/responses/200/responses/Normal"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
