@@ -14,3 +14,7 @@ two:
 three:
 	${SWAGGER} bundle --outfile ./03multifile/swagger.json ./03multifile/src/main.yaml
 	${SWAGGER} validate ./03multifile/swagger.json
+
+four:
+	swagger-bundler bundle ./04bundler/src/main.yaml > ./04bundler/swagger.yaml
+	${SWAGGER} validate ./04bundler/swagger.yaml
