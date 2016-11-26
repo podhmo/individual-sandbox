@@ -1,0 +1,9 @@
+definitions:
+  Person:
+    title: Person
+    type: object
+    properties:
+      name:
+        type: string
+      single:
+        type: boolean

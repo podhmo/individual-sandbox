@@ -1,0 +1,11 @@
+x-bundler-concat:
+  - ./definitions.yaml
+
+responses:
+  Normal:
+    description: Successful response
+    schema:
+      title: ArrayOfPersons
+      type: array
+      items:
+        $ref: "#/definitions/Person"

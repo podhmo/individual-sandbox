@@ -1,0 +1,8 @@
+responses:
+  Normal:
+    description: Successful response
+    schema:
+      title: ArrayOfPersons
+      type: array
+      items:
+        $ref: "definitions.yaml#/definitions/Person"
