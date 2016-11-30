@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
-# see: https://github.com/mholt/json-to-go/blob/master/json-to-go.js
+# see: https://mholt.github.io/json-to-go/
+# original: https://github.com/mholt/json-to-go/blob/master/json-to-go.js
 import re
 import json
 from functools import partial
