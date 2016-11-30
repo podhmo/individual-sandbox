@@ -1,0 +1,7 @@
+{
+  "name" : "foo",
+  "skills": [
+    {"name": "magic"},
+    {"name": "magik", "sugoi": "yabai"}
+  ]
+}
