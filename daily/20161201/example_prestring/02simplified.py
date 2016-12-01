@@ -9,6 +9,7 @@ from prestring.go import goname as to_goname
 
 
 def json_to_go(json_string, name, m=None, rx=re.compile("\.0", re.M)):
+    m = m or GoModule()
     data = json.loads(rx.sub(".1", json_string))
     s = detect_struct_info(data, name)
     return emit_code(s, name, m=m)
@@ -87,10 +88,9 @@ def is_omitempty_struct_info(subinfo, sinfo):
     return subinfo["freq"] < sinfo["freq"]
 
 
-def emit_code(sinfo, name, m=None):
+def emit_code(sinfo, name, m):
     def _emit_code(sinfo, name, m, parent=None):
-        typ = sinfo.get("type")
-        if typ == "struct":
+        if sinfo.get("type") == "struct":
             with m.block("{} struct".format(name)):
                 for name, subinfo in sorted(sinfo["children"].items()):
                     _emit_code(subinfo, name, m, parent=sinfo)
@@ -102,10 +102,6 @@ def emit_code(sinfo, name, m=None):
             m.insert_after('  `json:"{},omitempty"`'.format(sinfo["jsonname"]))
         else:
             m.insert_after('  `json:"{}"`'.format(sinfo["jsonname"]))
-
-    m = m or GoModule()
-    if sinfo.get("type") != "struct":
-        raise ValueError("hmm")
 
     with m.type_(name, to_type_struct_info(sinfo)):
         for name, subinfo in sorted(sinfo["children"].items()):
