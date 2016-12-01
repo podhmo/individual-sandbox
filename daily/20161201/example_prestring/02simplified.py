@@ -95,10 +95,7 @@ def emit_code(sinfo, name, m=None):
                 for name, subinfo in sorted(sinfo["children"].items()):
                     _emit_code(subinfo, name, m, parent=sinfo)
         else:
-            if is_omitempty_struct_info(sinfo, parent):
-                m.stmt('{} {}'.format(name, to_type_struct_info(sinfo)))
-            else:
-                m.stmt('{} {}'.format(name, to_type_struct_info(sinfo)))
+            m.stmt('{} {}'.format(name, to_type_struct_info(sinfo)))
 
         # append tag
         if is_omitempty_struct_info(sinfo, parent):
