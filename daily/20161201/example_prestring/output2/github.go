@@ -1,39 +1,49 @@
 package autogen
 
+/* structure
+Github
+	Organization
+	Owner
+	Parent
+		Owner
+		Permissions
+	Permissions
+	Source
+*/
 type Github struct {
-	CloneURL         string      `json:"clone_url"`
-	CreatedAt        time.Time   `json:"created_at"`
-	DefaultBranch    string      `json:"default_branch"`
-	Description      string      `json:"description"`
-	Fork             int         `json:"fork"`
-	ForksCount       int         `json:"forks_count"`
-	FullName         string      `json:"full_name"`
-	GitURL           string      `json:"git_url"`
-	HTMLURL          string      `json:"html_url"`
-	HasDownloads     int         `json:"has_downloads"`
-	HasIssues        int         `json:"has_issues"`
-	HasWiki          int         `json:"has_wiki"`
-	Homepage         string      `json:"homepage"`
-	ID               int         `json:"id"`
-	Language         interface{} `json:"language"`
-	MirrorURL        string      `json:"mirror_url"`
-	Name             string      `json:"name"`
-	OpenIssuesCount  int         `json:"open_issues_count"`
-	Organization     Owner       `json:"organization"`
-	Owner            Owner       `json:"owner"`
-	Parent           Source      `json:"parent"`
-	Permissions      Permissions `json:"permissions"`
-	Private          int         `json:"private"`
-	PushedAt         time.Time   `json:"pushed_at"`
-	SSHURL           string      `json:"ssh_url"`
-	Size             int         `json:"size"`
-	Source           Source      `json:"source"`
-	StargazersCount  int         `json:"stargazers_count"`
-	SubscribersCount int         `json:"subscribers_count"`
-	SvnURL           string      `json:"svn_url"`
-	URL              string      `json:"url"`
-	UpdatedAt        time.Time   `json:"updated_at"`
-	WatchersCount    int         `json:"watchers_count"`
+	CloneURL         string       `json:"clone_url"`
+	CreatedAt        time.Time    `json:"created_at"`
+	DefaultBranch    string       `json:"default_branch"`
+	Description      string       `json:"description"`
+	Fork             int          `json:"fork"`
+	ForksCount       int          `json:"forks_count"`
+	FullName         string       `json:"full_name"`
+	GitURL           string       `json:"git_url"`
+	HTMLURL          string       `json:"html_url"`
+	HasDownloads     int          `json:"has_downloads"`
+	HasIssues        int          `json:"has_issues"`
+	HasWiki          int          `json:"has_wiki"`
+	Homepage         string       `json:"homepage"`
+	ID               int          `json:"id"`
+	Language         interface{}  `json:"language"`
+	MirrorURL        string       `json:"mirror_url"`
+	Name             string       `json:"name"`
+	OpenIssuesCount  int          `json:"open_issues_count"`
+	Organization     Organization `json:"organization"`
+	Owner            Organization `json:"owner"`
+	Parent           Parent       `json:"parent"`
+	Permissions      Permissions  `json:"permissions"`
+	Private          int          `json:"private"`
+	PushedAt         time.Time    `json:"pushed_at"`
+	SSHURL           string       `json:"ssh_url"`
+	Size             int          `json:"size"`
+	Source           Parent       `json:"source"`
+	StargazersCount  int          `json:"stargazers_count"`
+	SubscribersCount int          `json:"subscribers_count"`
+	SvnURL           string       `json:"svn_url"`
+	URL              string       `json:"url"`
+	UpdatedAt        time.Time    `json:"updated_at"`
+	WatchersCount    int          `json:"watchers_count"`
 }
 
 type Organization struct {
@@ -57,35 +67,35 @@ type Organization struct {
 }
 
 type Parent struct {
-	CloneURL        string      `json:"clone_url"`
-	CreatedAt       time.Time   `json:"created_at"`
-	DefaultBranch   string      `json:"default_branch"`
-	Description     string      `json:"description"`
-	Fork            int         `json:"fork"`
-	ForksCount      int         `json:"forks_count"`
-	FullName        string      `json:"full_name"`
-	GitURL          string      `json:"git_url"`
-	HTMLURL         string      `json:"html_url"`
-	HasDownloads    int         `json:"has_downloads"`
-	HasIssues       int         `json:"has_issues"`
-	HasWiki         int         `json:"has_wiki"`
-	Homepage        string      `json:"homepage"`
-	ID              int         `json:"id"`
-	Language        interface{} `json:"language"`
-	MirrorURL       string      `json:"mirror_url"`
-	Name            string      `json:"name"`
-	OpenIssuesCount int         `json:"open_issues_count"`
-	Owner           Owner       `json:"owner"`
-	Permissions     Permissions `json:"permissions"`
-	Private         int         `json:"private"`
-	PushedAt        time.Time   `json:"pushed_at"`
-	SSHURL          string      `json:"ssh_url"`
-	Size            int         `json:"size"`
-	StargazersCount int         `json:"stargazers_count"`
-	SvnURL          string      `json:"svn_url"`
-	URL             string      `json:"url"`
-	UpdatedAt       time.Time   `json:"updated_at"`
-	WatchersCount   int         `json:"watchers_count"`
+	CloneURL        string       `json:"clone_url"`
+	CreatedAt       time.Time    `json:"created_at"`
+	DefaultBranch   string       `json:"default_branch"`
+	Description     string       `json:"description"`
+	Fork            int          `json:"fork"`
+	ForksCount      int          `json:"forks_count"`
+	FullName        string       `json:"full_name"`
+	GitURL          string       `json:"git_url"`
+	HTMLURL         string       `json:"html_url"`
+	HasDownloads    int          `json:"has_downloads"`
+	HasIssues       int          `json:"has_issues"`
+	HasWiki         int          `json:"has_wiki"`
+	Homepage        string       `json:"homepage"`
+	ID              int          `json:"id"`
+	Language        interface{}  `json:"language"`
+	MirrorURL       string       `json:"mirror_url"`
+	Name            string       `json:"name"`
+	OpenIssuesCount int          `json:"open_issues_count"`
+	Owner           Organization `json:"owner"`
+	Permissions     Permissions  `json:"permissions"`
+	Private         int          `json:"private"`
+	PushedAt        time.Time    `json:"pushed_at"`
+	SSHURL          string       `json:"ssh_url"`
+	Size            int          `json:"size"`
+	StargazersCount int          `json:"stargazers_count"`
+	SvnURL          string       `json:"svn_url"`
+	URL             string       `json:"url"`
+	UpdatedAt       time.Time    `json:"updated_at"`
+	WatchersCount   int          `json:"watchers_count"`
 }
 
 type Permissions struct {

@@ -1,0 +1,39 @@
+{
+  "total": 100,
+  "left": {
+    "total": 75,
+    "left": {
+      "total": 25,
+      "left": {
+        "total": 20
+      },
+      "right": {
+        "total": 5
+      }
+    },
+    "right": {
+      "total": 50,
+      "left": {
+        "total": 25
+      },
+      "right": {
+        "total": 25
+      }
+    }
+  },
+  "right": {
+    "total": 25,
+    "left": {
+      "total": 20,
+      "left": {
+        "total": 10
+      },
+      "right": {
+        "total": 10
+      }
+    },
+    "right": {
+      "total": 5
+    }
+  }
+}

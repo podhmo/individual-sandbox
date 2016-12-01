@@ -1,0 +1,18 @@
+{
+  "title": "It's a first day",
+  "author": "foo",
+  "content": {
+    "abbrev": "Today! this is ...",
+    "body": "Today! this is .... ....."
+  },
+  "ctime": "2000-01-01T00:00:00Z",
+  "comments": [
+    {
+      "author": "anonymous",
+      "content": {
+        "body": "xxx"
+      },
+      "ctime": "2000-01-01T00:00:00Z"
+    }
+  ]
+}

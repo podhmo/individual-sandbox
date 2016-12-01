@@ -1,5 +1,9 @@
 package autogen
 
+/* structure
+Person
+	Skills
+*/
 type Person struct {
 	Name   string `json:"name"`
 	Skills Skills `json:"skills"`

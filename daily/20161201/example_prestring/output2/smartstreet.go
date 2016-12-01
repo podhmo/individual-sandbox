@@ -1,5 +1,11 @@
 package autogen
 
+/* structure
+Smartstreet
+	Analysis
+	Components
+	Metadata
+*/
 type Smartstreet []struct {
 	Analysis             Analysis   `json:"analysis"`
 	CandidateIndex       int        `json:"candidate_index"`
