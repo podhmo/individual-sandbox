@@ -1,3 +1,8 @@
+# key remap
+
+Linux向けの最強のキーリマッパーを作った - k0kubun's blog
+http://k0kubun.hatenablog.com/entry/xkremap
+
 # xmodmap setxkdbmap wayland
 
 知りたかったのはこれっぽい
