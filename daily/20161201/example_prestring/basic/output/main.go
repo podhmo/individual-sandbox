@@ -18,4 +18,10 @@ func main() {
 		fmt.Println(len(cross5(xs, ys, zs, as, bs)))
 		fmt.Println(cross5(xs, ys, zs, as, bs))
 	}
+	{
+		for i := 1; i < 20; i++ {
+			x, _ := Fizzbuzz(i)
+			fmt.Printf("%s ", x)
+		}
+	}
 }
