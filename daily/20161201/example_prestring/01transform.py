@@ -8,6 +8,7 @@ from collections import namedtuple
 from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from prestring.go import GoModule
+from prestring.go import goname as to_goname
 
 
 def json_to_go(json_string, name, m=None, rx=re.compile("\.0", re.M)):
@@ -92,13 +93,12 @@ class Detector:
 
         self.state = defaultdict(make_state)
         self.type_resolver = TypeResolver()
-        self.formatter = NameFormatter()
 
     def make_state(self, name, typ):
         return {"name": name, "freq": 0, "type": typ, "children": {}}
 
     def detect(self, d, name):
-        goname = self.formatter.format(name)
+        goname = to_goname(name)
         self._detect(d, self.state[goname], name)
         return self.state[goname]
 
@@ -115,7 +115,7 @@ class Detector:
         s["jsonname"] = name
         s["freq"] += 1
         for k, v in d.items():
-            goname = self.formatter.format(k)
+            goname = to_goname(k)
             self._detect(v, s["children"][goname], k)
 
     def _detect_list(self, xs, s, name):
@@ -128,60 +128,6 @@ class Detector:
         s["jsonname"] = name
         s["freq"] += 1
         s["type"] = self.type_resolver.select(s["type"], typ)
-
-
-class NameFormatter:
-    def __init__(self):
-        self.numbers = {
-            '0': "Zero_", '1': "One_", '2': "Two_", '3': "Three_",
-            '4': "Four_", '5': "Five_", '6': "Six_", '7': "Seven_",
-            '8': "Eight_", '9': "Nine_"
-        }
-
-    def format(self, s,
-               num_rx=re.compile("\d{2,}"),
-               exclude_rx=re.compile("[^a-z0-9]", re.IGNORECASE | re.MULTILINE)):
-        if not s:
-            return ""
-        elif num_rx.match(s):
-            return self.format("Num" + s)
-        elif s[0] in self.numbers:
-            return self.format(self.numbers[s[0]] + s[1:])
-        else:
-            return exclude_rx.sub("", self.proper_acronym(s))
-
-    def titlize(self, s):
-        if not s:
-            return s
-        return s[0].upper() + s[1:]
-
-    def proper_acronym(self, s,
-                       rx=re.compile("(?P<sep>^|[^a-zA-Z])(?P<frag>[a-z]+)", re.M),
-                       rx2=re.compile("(?P<sep>[A-Z])(?P<frag>[a-z]+)", re.M)):
-        # https://github.com/golang/lint/blob/39d15d55e9777df34cdffde4f406ab27fd2e60c0/lint.go#L695-L731
-        common_initialisms = [
-            "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP",
-            "HTTPS", "ID", "IP", "JSON", "LHS", "QPS", "RAM", "RHS", "RPC", "SLA",
-            "SMTP", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "UID", "UUID", "URI",
-            "URL", "UTF8", "VM", "XML", "XSRF", "XSS"
-        ]
-
-        def repl(m):
-            d = m.groupdict()
-            if d["frag"].upper() in common_initialisms:
-                return d["sep"] + d["frag"].upper()
-            else:
-                return d["sep"] + self.titlize(d["frag"])
-
-        def repl2(m):
-            d = m.groupdict()
-            merged = d["sep"] + d["frag"]
-            if merged.upper() in common_initialisms:
-                return merged.upper()
-            else:
-                return merged
-
-        return rx2.sub(repl2, rx.sub(repl, s))
 
 
 class ValueFormatter:  # TODO: rename
