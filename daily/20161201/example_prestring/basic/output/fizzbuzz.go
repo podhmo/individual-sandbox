@@ -7,203 +7,203 @@ import (
 func Fizzbuzz(v int) (string, error) {
 	if v == 1  {
 		return "1", nil
-	}else if v == 2  {
+	} else if v == 2  {
 		return "2", nil
-	}else if v == 3  {
+	} else if v == 3  {
 		return "fizz", nil
-	}else if v == 4  {
+	} else if v == 4  {
 		return "4", nil
-	}else if v == 5  {
+	} else if v == 5  {
 		return "buzz", nil
-	}else if v == 6  {
+	} else if v == 6  {
 		return "fizz", nil
-	}else if v == 7  {
+	} else if v == 7  {
 		return "7", nil
-	}else if v == 8  {
+	} else if v == 8  {
 		return "8", nil
-	}else if v == 9  {
+	} else if v == 9  {
 		return "fizz", nil
-	}else if v == 10  {
+	} else if v == 10  {
 		return "buzz", nil
-	}else if v == 11  {
+	} else if v == 11  {
 		return "11", nil
-	}else if v == 12  {
+	} else if v == 12  {
 		return "fizz", nil
-	}else if v == 13  {
+	} else if v == 13  {
 		return "13", nil
-	}else if v == 14  {
+	} else if v == 14  {
 		return "14", nil
-	}else if v == 15  {
+	} else if v == 15  {
 		return "fizzbuzz", nil
-	}else if v == 16  {
+	} else if v == 16  {
 		return "16", nil
-	}else if v == 17  {
+	} else if v == 17  {
 		return "17", nil
-	}else if v == 18  {
+	} else if v == 18  {
 		return "fizz", nil
-	}else if v == 19  {
+	} else if v == 19  {
 		return "19", nil
-	}else if v == 20  {
+	} else if v == 20  {
 		return "buzz", nil
-	}else if v == 21  {
+	} else if v == 21  {
 		return "fizz", nil
-	}else if v == 22  {
+	} else if v == 22  {
 		return "22", nil
-	}else if v == 23  {
+	} else if v == 23  {
 		return "23", nil
-	}else if v == 24  {
+	} else if v == 24  {
 		return "fizz", nil
-	}else if v == 25  {
+	} else if v == 25  {
 		return "buzz", nil
-	}else if v == 26  {
+	} else if v == 26  {
 		return "26", nil
-	}else if v == 27  {
+	} else if v == 27  {
 		return "fizz", nil
-	}else if v == 28  {
+	} else if v == 28  {
 		return "28", nil
-	}else if v == 29  {
+	} else if v == 29  {
 		return "29", nil
-	}else if v == 30  {
+	} else if v == 30  {
 		return "fizzbuzz", nil
-	}else if v == 31  {
+	} else if v == 31  {
 		return "31", nil
-	}else if v == 32  {
+	} else if v == 32  {
 		return "32", nil
-	}else if v == 33  {
+	} else if v == 33  {
 		return "fizz", nil
-	}else if v == 34  {
+	} else if v == 34  {
 		return "34", nil
-	}else if v == 35  {
+	} else if v == 35  {
 		return "buzz", nil
-	}else if v == 36  {
+	} else if v == 36  {
 		return "fizz", nil
-	}else if v == 37  {
+	} else if v == 37  {
 		return "37", nil
-	}else if v == 38  {
+	} else if v == 38  {
 		return "38", nil
-	}else if v == 39  {
+	} else if v == 39  {
 		return "fizz", nil
-	}else if v == 40  {
+	} else if v == 40  {
 		return "buzz", nil
-	}else if v == 41  {
+	} else if v == 41  {
 		return "41", nil
-	}else if v == 42  {
+	} else if v == 42  {
 		return "fizz", nil
-	}else if v == 43  {
+	} else if v == 43  {
 		return "43", nil
-	}else if v == 44  {
+	} else if v == 44  {
 		return "44", nil
-	}else if v == 45  {
+	} else if v == 45  {
 		return "fizzbuzz", nil
-	}else if v == 46  {
+	} else if v == 46  {
 		return "46", nil
-	}else if v == 47  {
+	} else if v == 47  {
 		return "47", nil
-	}else if v == 48  {
+	} else if v == 48  {
 		return "fizz", nil
-	}else if v == 49  {
+	} else if v == 49  {
 		return "49", nil
-	}else if v == 50  {
+	} else if v == 50  {
 		return "buzz", nil
-	}else if v == 51  {
+	} else if v == 51  {
 		return "fizz", nil
-	}else if v == 52  {
+	} else if v == 52  {
 		return "52", nil
-	}else if v == 53  {
+	} else if v == 53  {
 		return "53", nil
-	}else if v == 54  {
+	} else if v == 54  {
 		return "fizz", nil
-	}else if v == 55  {
+	} else if v == 55  {
 		return "buzz", nil
-	}else if v == 56  {
+	} else if v == 56  {
 		return "56", nil
-	}else if v == 57  {
+	} else if v == 57  {
 		return "fizz", nil
-	}else if v == 58  {
+	} else if v == 58  {
 		return "58", nil
-	}else if v == 59  {
+	} else if v == 59  {
 		return "59", nil
-	}else if v == 60  {
+	} else if v == 60  {
 		return "fizzbuzz", nil
-	}else if v == 61  {
+	} else if v == 61  {
 		return "61", nil
-	}else if v == 62  {
+	} else if v == 62  {
 		return "62", nil
-	}else if v == 63  {
+	} else if v == 63  {
 		return "fizz", nil
-	}else if v == 64  {
+	} else if v == 64  {
 		return "64", nil
-	}else if v == 65  {
+	} else if v == 65  {
 		return "buzz", nil
-	}else if v == 66  {
+	} else if v == 66  {
 		return "fizz", nil
-	}else if v == 67  {
+	} else if v == 67  {
 		return "67", nil
-	}else if v == 68  {
+	} else if v == 68  {
 		return "68", nil
-	}else if v == 69  {
+	} else if v == 69  {
 		return "fizz", nil
-	}else if v == 70  {
+	} else if v == 70  {
 		return "buzz", nil
-	}else if v == 71  {
+	} else if v == 71  {
 		return "71", nil
-	}else if v == 72  {
+	} else if v == 72  {
 		return "fizz", nil
-	}else if v == 73  {
+	} else if v == 73  {
 		return "73", nil
-	}else if v == 74  {
+	} else if v == 74  {
 		return "74", nil
-	}else if v == 75  {
+	} else if v == 75  {
 		return "fizzbuzz", nil
-	}else if v == 76  {
+	} else if v == 76  {
 		return "76", nil
-	}else if v == 77  {
+	} else if v == 77  {
 		return "77", nil
-	}else if v == 78  {
+	} else if v == 78  {
 		return "fizz", nil
-	}else if v == 79  {
+	} else if v == 79  {
 		return "79", nil
-	}else if v == 80  {
+	} else if v == 80  {
 		return "buzz", nil
-	}else if v == 81  {
+	} else if v == 81  {
 		return "fizz", nil
-	}else if v == 82  {
+	} else if v == 82  {
 		return "82", nil
-	}else if v == 83  {
+	} else if v == 83  {
 		return "83", nil
-	}else if v == 84  {
+	} else if v == 84  {
 		return "fizz", nil
-	}else if v == 85  {
+	} else if v == 85  {
 		return "buzz", nil
-	}else if v == 86  {
+	} else if v == 86  {
 		return "86", nil
-	}else if v == 87  {
+	} else if v == 87  {
 		return "fizz", nil
-	}else if v == 88  {
+	} else if v == 88  {
 		return "88", nil
-	}else if v == 89  {
+	} else if v == 89  {
 		return "89", nil
-	}else if v == 90  {
+	} else if v == 90  {
 		return "fizzbuzz", nil
-	}else if v == 91  {
+	} else if v == 91  {
 		return "91", nil
-	}else if v == 92  {
+	} else if v == 92  {
 		return "92", nil
-	}else if v == 93  {
+	} else if v == 93  {
 		return "fizz", nil
-	}else if v == 94  {
+	} else if v == 94  {
 		return "94", nil
-	}else if v == 95  {
+	} else if v == 95  {
 		return "buzz", nil
-	}else if v == 96  {
+	} else if v == 96  {
 		return "fizz", nil
-	}else if v == 97  {
+	} else if v == 97  {
 		return "97", nil
-	}else if v == 98  {
+	} else if v == 98  {
 		return "98", nil
-	}else if v == 99  {
+	} else if v == 99  {
 		return "fizz", nil
-	}else if v == 100  {
+	} else if v == 100  {
 		return "buzz", nil
 	} else  {
 		return "", fmt.Errorf("unsupported value: %q", v)

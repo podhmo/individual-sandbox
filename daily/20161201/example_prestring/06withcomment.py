@@ -6,7 +6,7 @@ import re
 import json
 from collections import defaultdict, deque
 from prestring.go import GoModule
-from prestring import LazyFormat, PreString
+from prestring import LazyFormat, PreString, NameStore
 from prestring.go import goname as to_goname
 
 
@@ -148,36 +148,6 @@ def emit_code(sinfo, name, m=None, score_map={"Parent": -1, "": -1}):
     for typename in typename_map.values():
         typename.body = list(reversed(sorted(typename.body, key=lambda x: score_map.get(x, 0))))[0]
     return m
-
-
-class NameStore(object):
-    def __init__(self):
-        self.c = defaultdict(int)
-        self.value_map = {}  # (src_type, dst_type) => (name, i)
-
-    def __contains__(self, value):
-        return value in self.value_map
-
-    def __setitem__(self, value, name):
-        if value not in self.value_map:
-            self.value_map[value] = self.get_name(value, name)
-            self.c[name] += 1
-
-    def __getitem__(self, value):
-        return self.value_map[value]
-
-    def get_name(self, value, name):
-        try:
-            return self[value]
-        except KeyError:
-            i = self.c[name]
-            return self.new_name(name, i)
-
-    def new_name(self, name, i):
-        if i == 0:
-            return name
-        else:
-            return "{}Dup{}".format(name, i)
 
 
 if __name__ == "__main__":
