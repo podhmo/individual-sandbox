@@ -1,4 +1,4 @@
-# emacs shell-commandの実行を非同期化する
+# emacs golang gorimports をgitでmodifiedなファイル実行したい
 
 現在のプロジェクトしたにある変更済みのファイルに対して `goimports` を実行したい。
 
