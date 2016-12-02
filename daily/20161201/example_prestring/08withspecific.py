@@ -181,8 +181,9 @@ def emit_code(sinfo, name, m=None, score_map={"Parent": -1, "": -1}):
     m = m or GoModule()
     with m.import_group() as im:
         cw = CommentWriter(m, name, sinfo)
-        writer = StructWriter(m, cw, im, score_map=score_map)
-        writer.write(name, sinfo)
+    writer = StructWriter(m, cw, im, score_map=score_map)
+    writer.write(name, sinfo)
+    im.clear_ifempty()
     return m
 
 
