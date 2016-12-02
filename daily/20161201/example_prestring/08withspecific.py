@@ -139,10 +139,15 @@ class StructWriter(object):
             self.m.stmt('{} {}'.format(name, typ))
 
         # append tag
-        if is_omitempty_struct_info(sinfo, parent):
-            self.m.insert_after(' `json:"{},omitempty"`'.format(sinfo["jsonname"]))
+        if "example" in sinfo:
+            example = ' example:"{}"'.format(sinfo["example"])
         else:
-            self.m.insert_after(' `json:"{}"`'.format(sinfo["jsonname"]))
+            example = ''
+        if is_omitempty_struct_info(sinfo, parent):
+            omitempty = '.omitempty'
+        else:
+            omitempty = ''
+        self.m.insert_after(' `json:"{name}{omitempty}"{example}`'.format(name=sinfo["jsonname"], omitempty=omitempty, example=example))
 
     def write_struct(self, name, signature, sinfo, parent=None):
         if signature in self.defined:

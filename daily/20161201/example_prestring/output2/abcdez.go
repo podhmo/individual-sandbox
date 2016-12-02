@@ -129,5 +129,5 @@ type X struct {
 }
 
 type Y struct {
-	Z string `json:"z"`
+	Z string `json:"z" example:"*"`
 }

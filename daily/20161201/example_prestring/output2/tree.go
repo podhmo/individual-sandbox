@@ -8,5 +8,5 @@ Tree
 type Tree struct {
 	Left  Left `json:"left"`
 	Right Left `json:"right"`
-	Total int  `json:"total"`
+	Total int  `json:"total" example:"100"`
 }
