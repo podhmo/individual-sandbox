@@ -2,7 +2,7 @@ package autogen
 
 /* structure
 Person
-	Skills
+    Skills
 */
 type Person struct {
 	Name   string `json:"name"`

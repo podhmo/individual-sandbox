@@ -2,11 +2,11 @@ package autogen
 
 /* structure
 Tree
-	Left
-	Right
+    Left
+    Right
 */
 type Tree struct {
-	Left  Tree `json:"left"`
-	Right Tree `json:"right"`
+	Left  Left `json:"left"`
+	Right Left `json:"right"`
 	Total int  `json:"total"`
 }

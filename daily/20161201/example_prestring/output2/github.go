@@ -1,14 +1,18 @@
 package autogen
 
+import (
+	"time"
+)
+
 /* structure
 Github
-	Organization
-	Owner
-	Parent
-		Owner
-		Permissions
-	Permissions
-	Source
+    Organization
+    Owner
+    Parent
+        Owner
+        Permissions
+    Permissions
+    Source
 */
 type Github struct {
 	CloneURL         string       `json:"clone_url"`

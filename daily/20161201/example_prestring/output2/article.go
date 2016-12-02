@@ -1,10 +1,14 @@
 package autogen
 
+import (
+	"time"
+)
+
 /* structure
 Article
-	Comments
-		Content
-	Content
+    Comments
+        Content
+    Content
 */
 type Article struct {
 	Author   string    `json:"author"`
