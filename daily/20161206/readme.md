@@ -12,3 +12,5 @@ bson.M{'_id': personID, "name": "foo"}
 ```
 
 
+# golang delayなど色々するやつ
+
