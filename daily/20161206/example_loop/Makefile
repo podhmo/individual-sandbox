@@ -9,3 +9,5 @@ two:
 	go run 02*/main.go
 three:
 	go run 03*/main.go
+four:
+	go run 04*/main.go
