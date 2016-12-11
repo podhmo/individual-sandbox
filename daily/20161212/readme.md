@@ -1,3 +1,27 @@
+# python pathlib使ったことがなかった。
+
+```
+>>> from pathlib import Path
+>>> Path("foo/bar.txt")
+PosixPath('foo/bar.txt')
+>>> Path("foo/bar.txt") / "x"
+PosixPath('foo/bar.txt/x')
+>>> (Path("foo/bar.txt") / "x").as_uri()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/pathlib.py", line 713, in as_uri
+    raise ValueError("relative path can't be expressed as a file URI")
+ValueError: relative path can't be expressed as a file URI
+>>> (Path("/foo/bar.txt") / "x").as_uri()
+'file:///foo/bar.txt/x'
+>>> (Path("/foo/bar.txt") / "x").as_posix()
+'/foo/bar.txt/x'
+```
+
+- [11.1. pathlib — オブジェクト指向のファイルシステムパス — Python 3.5.2 ドキュメント](http://docs.python.jp/3/library/pathlib.html)
+
+しかし欲しいものはなかった。自分自身の位置を登録してそこからの相対位置をopenしていきたい感じ。
+
 # python json-reference json-pointerのライブラリについて調べる
 
 - [gazpachoking/jsonref: Automatically dereferences JSON references within a JSON document.](https://github.com/gazpachoking/jsonref)
