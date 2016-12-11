@@ -21,4 +21,3 @@ setxkbmap -print
 
 prestringでできることをまとめたいところではある。
 https://mholt.github.io/json-to-go/ これ真似しようかな。
-
