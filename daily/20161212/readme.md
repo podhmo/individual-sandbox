@@ -36,6 +36,8 @@ git clone --depth 1 git@github.com:gazpachoking/jsonref.git
 - 外部resourceの参照が使えるか調べる
 - 使いやすさ
 
+結論からいうと、jsonrefだけで良い。
+
 # json-reference json-pointer について調べる
 
 そもそもどれがどういうものか整理できていない。
