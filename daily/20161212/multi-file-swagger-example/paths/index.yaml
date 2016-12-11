@@ -1,0 +1,4 @@
+/bar:
+  $ref: ./bar/bar.yaml
+/foo:
+  $ref: ./foo.yaml
