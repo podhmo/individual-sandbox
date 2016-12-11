@@ -3,4 +3,4 @@ get:
     200:
       description: OK
       schema:
-        $ref: '../../definitions/index.yaml#/definitions/User'
+        $ref: ../../definitions/index.yaml#/definitions/User

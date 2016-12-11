@@ -2,6 +2,12 @@
 
 - [mohsen1/multi-file-swagger-example: Multi-file Swagger example](https://github.com/mohsen1/multi-file-swagger-example)
 
+惜しいところまでは行くのだけれど。
+
+- refsを参照した後のrefの中身が書き換わらない。
+- スクリプトの実行位置を適切に調整しないとエラーになる。
+
+
 # python pathlib使ったことがなかった。
 
 ```
