@@ -1,0 +1,4 @@
+{
+  "greeting": "./greeting.json",
+  "end-greeting": "../evening/index.json"
+}

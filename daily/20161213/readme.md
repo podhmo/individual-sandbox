@@ -1,3 +1,9 @@
+# python ファイルの参照の取得を再帰的に行いたい感じ
+
+相対pathとかを参照したい気持ち [example_recopen](./example_recopen)
+
+
+
 # bash こういうの楽にやりたい
 
 ```bash

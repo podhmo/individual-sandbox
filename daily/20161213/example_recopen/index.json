@@ -1,0 +1,4 @@
+{
+  "morning": "./morning/index.json",
+  "evening": "./evening/index.json"
+}
