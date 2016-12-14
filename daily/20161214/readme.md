@@ -1,3 +1,11 @@
+# mongo findAndModify
+
+```
+db.ys.findAndModify({query: {}, sort:{id: 1, c: 1}, update:{$inc: {c: 1}}, upsert: true})
+```
+
+こういうのでloopできるし。存在しないfirldは0として扱ってくれる。
+
 # python flaskの簡単なテスト
 
 ```python
