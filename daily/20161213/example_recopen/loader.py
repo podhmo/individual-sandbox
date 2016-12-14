@@ -1,14 +1,14 @@
 import os.path
 
 
-class RecursiveFileResolver(object):
+class RecursivePathResolver(object):
     def __init__(self, path, history=None, registry=None):
         self.registry = registry or {}
         self.history = history or []
         self.path = path
 
     def __repr__(self):
-        return "<Resolver file={!r} at {}>".format(self.path, hex(id(self)))
+        return "<Resolver path={!r} at {}>".format(self.path, hex(id(self)))
 
     def resolve_path(self, path):
         dirname = os.path.dirname(os.path.abspath(self.path))
@@ -67,5 +67,5 @@ if __name__ == "__main__":
     parser.add_argument("--conf", required=False)
     args = parser.parse_args()
 
-    resolver = RecursiveFileResolver(args.conf or "./index.json")
+    resolver = RecursivePathResolver(args.conf or "./index.json")
     main(resolver)
