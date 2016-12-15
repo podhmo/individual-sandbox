@@ -1,3 +1,35 @@
+# python mock objectに対するmockもやっぱりpatch経由のほうが見やすい気がした
+
+objectのメソッドに対するmockの話。
+
+```python
+class Foo(object):
+    def hello(self, v):
+        raise Exception("foo")
+```
+
+に対して、objectに対してmockをかける時には以下のように書ける
+
+```python
+foo = Foo()
+foo.hello = mock.Mock()
+foo.hello.return_value = "yup"
+
+assert foo.hello("bar") == "yup"
+foo.hello.assert_called_once_with("bar")
+```
+
+ただ、patch経由でかけたほうが見やすい気がする。
+
+```python
+foo = Foo()
+with mock.patch.object(foo, "hello") as hello:
+    hello.return_value = "yup"
+
+    assert foo.hello("bar") == "yup"
+    hello.assert_called_once_with("bar")
+```
+
 # python marshmallow
 
 以下のことをまとめておきたい感じ
