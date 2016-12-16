@@ -1,4 +1,6 @@
-type: object
-properties:
-  name:
-    type: string
+definitions:
+  User:
+    type: object
+    properties:
+      name:
+        type: string
