@@ -1,0 +1,10 @@
+definitions:
+  user:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+  xUser:
+    $ref: "#/definitions/user"
