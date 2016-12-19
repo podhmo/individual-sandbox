@@ -1,0 +1,8 @@
+rgb:
+  definitions:
+    color:
+      type: string
+      enum:
+        - R
+        - G
+        - B

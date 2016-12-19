@@ -1,0 +1,31 @@
+definitions:
+  name:
+    type: string
+    description: name of something
+  xColor:
+    type: string
+    enum:
+      - C
+      - M
+      - Y
+      - K
+  xgroup:
+    type: object
+    properties:
+      name:
+        $ref: "#/definitions/name"
+      color:
+        $ref: "#/definitions/xColor"
+  yColor:
+    type: string
+    enum:
+      - R
+      - G
+      - B
+  yGroup:
+    type: object
+    properties:
+      name:
+        $ref: "#/definitions/name"
+      color:
+        $ref: "#/definitions/yColor"

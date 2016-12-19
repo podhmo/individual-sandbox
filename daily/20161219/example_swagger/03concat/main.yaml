@@ -1,0 +1,32 @@
+# こういうのは参照先が見えなくなるので避けたい
+# cmyk:
+#   $concat-file: "./cmyk.yaml"
+# rgb:
+#   $concat-file: "./rgb.yaml"
+
+cmyk:
+  definitions:
+    $inject: "./cmyk.yaml#/definitions/color"
+rgb:
+  definitions:
+    $inject: "./rgb.yaml#/definitions/color"
+
+x:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "./primitive.yaml#/definitions/name"
+        color:
+          $inject: "#/cmyk/definitions/color"
+
+y:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "./primitive.yaml#/definitions/name"
+        color:
+          $inject: "#/rgb/definitions/color"

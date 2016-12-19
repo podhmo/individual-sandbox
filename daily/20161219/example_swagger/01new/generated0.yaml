@@ -1,0 +1,41 @@
+definitions:
+  name:
+    type: string
+    description: name of something
+
+cmyk:
+    color:
+      type: string
+      enum:
+        - C
+        - M
+        - Y
+        - K
+
+rgb:
+    color:
+      type: string
+      enum:
+        - R
+        - G
+        - B
+
+x:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "#/definitions/name"
+        color:
+          $ref: "#/cmyk/definitions/color"
+
+y:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "#/definitions/name"
+        color:
+          $ref: "#/rgb/definitions/color"

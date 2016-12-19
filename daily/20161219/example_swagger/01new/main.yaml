@@ -1,0 +1,19 @@
+x:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "./primitive.yaml#/definitions/name"
+        color:
+          $ref: "./cmyk.yaml#/cmyk/definitions/color"
+
+y:
+  definitions:
+    group:
+      type: object
+      properties:
+        name:
+          $ref: "./primitive.yaml#/definitions/name"
+        color:
+          $ref: "./rgb.yaml#/rgb/definitions/color"

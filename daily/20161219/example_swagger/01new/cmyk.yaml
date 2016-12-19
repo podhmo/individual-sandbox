@@ -1,0 +1,9 @@
+cmyk:
+  definitions:
+    color:
+      type: string
+      enum:
+        - C
+        - M
+        - Y
+        - K
