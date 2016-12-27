@@ -47,30 +47,30 @@ def set_graceful_stop_manager(manager):
     return previous
 
 
-def inner_loop():
-    i = 0
-
-    while True:
-        m = get_graceful_stop_manager()
-        x = random.random()
-        print(x)
-
-        def on_stop(*args, **kwargs):
-            print("stop on", i, x)
-
-        with m.attach(on_stop):
-            time.sleep(0.5)
-            i += 1
-
-
-def loop():
-    def on_stop_parent(*args, **kwargs):
-        print("stop parent")
-
-    m = get_graceful_stop_manager()
-    with m.attach(on_stop_parent):
-        inner_loop()
-
-
 if __name__ == "__main__":
+    # sample
+
+    def inner_loop():
+        i = 0
+
+        while True:
+            m = get_graceful_stop_manager()
+            x = random.random()
+            print(x)
+
+            def on_stop(*args, **kwargs):
+                print("stop on", i, x)
+
+            with m.attach(on_stop):
+                time.sleep(0.5)
+                i += 1
+
+    def loop():
+        def on_stop_parent(*args, **kwargs):
+            print("stop parent")
+
+        m = get_graceful_stop_manager()
+        with m.attach(on_stop_parent):
+            inner_loop()
+
     loop()
