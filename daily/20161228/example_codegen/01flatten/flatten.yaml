@@ -1,0 +1,41 @@
+definitions:
+  person:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      age:
+        type: integer
+      skills:
+        $ref: '#/definitions/personSkills'
+      relations:
+        $ref: '#/definitions/personRelations'
+  personRelations:
+    type: array
+    items:
+      $ref: '#/definitions/personRelationsItem'
+  personRelationsItem:
+    type: object
+    properties:
+      direction:
+        type: string
+        enum:
+        - following
+        - followed
+        - bidirectional
+      personId:
+        type: string
+  personSkills:
+    type: array
+    items:
+      $ref: '#/definitions/personSkillsItem'
+  personSkillsItem:
+    type: object
+    properties:
+      name:
+        type: string

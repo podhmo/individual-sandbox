@@ -1,0 +1,33 @@
+definitions:
+  person:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      age:
+        type: integer
+      skills:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+      relations:
+        type: array
+        items:
+          type: object
+          properties:
+            direction:
+              type: string
+              enum:
+                - following
+                - followed
+                - bidirectional
+            personId:
+              type: string
