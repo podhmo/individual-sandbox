@@ -12,6 +12,7 @@ security:
   - oauth2: [uid]
 paths:
   /pets:
+    x-pyramid-route-name: pets
     get:
       tags: [Pets]
       operationId: app.views.get_pets
@@ -34,6 +35,7 @@ paths:
             items:
               $ref: '#/definitions/Pet'
   /pets/{pet_id}:
+    x-pyramid-route-name: pet
     get:
       tags: [Pets]
       operationId: app.views.get_pet

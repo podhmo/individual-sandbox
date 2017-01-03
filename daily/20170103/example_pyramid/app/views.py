@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 PETS = {}
 
 
-@view_config(renderer='json', request_method='GET', route_name='app_views')
+@view_config(renderer='json', request_method='GET', route_name='pets')
 def get_pets(context, request):
     """
     Get all pets
@@ -26,7 +26,7 @@ def get_pets(context, request):
     return [pet for pet in PETS.values() if not animal_type or pet['animal_type'] == animal_type][:limit]
 
 
-@view_config(renderer='json', request_method='GET', route_name='app_views1')
+@view_config(renderer='json', request_method='GET', route_name='pet')
 def get_pet(context, request):
     """
     Get a single pet
@@ -41,7 +41,7 @@ def get_pet(context, request):
     return PETS[pet_id]
 
 
-@view_config(renderer='json', request_method='PUT', route_name='app_views1')
+@view_config(renderer='json', request_method='PUT', route_name='pet')
 def put_pet(context, request):
     """
     Create or update a pet
@@ -109,7 +109,7 @@ def put_pet(context, request):
         return httpexceptions.HTTPCreated()
 
 
-@view_config(renderer='json', request_method='DELETE', route_name='app_views1')
+@view_config(renderer='json', request_method='DELETE', route_name='pet')
 def delete_pet(context, request):
     """
     Remove a pet
