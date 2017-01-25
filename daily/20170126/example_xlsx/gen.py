@@ -76,7 +76,7 @@ def generate_write_workbook(funcname, workbook, m=None):
                 m.return_('err')
 
             writefunc = sheet.get('func') or 'Write{sheetname}'.format(sheetname=go.titlize(sheetname))
-            args = [sheetname]
+            args = ['sheet{i}'.format(i=i)]
             m.stmt('// todo: arguments')
             with m.if_('err := {writefunc}({args}); err != nil'.format(writefunc=writefunc, args=', '.join(args))):
                 m.return_('err')
@@ -158,4 +158,3 @@ if __name__ == '__main__':
         workbook = loading.load(rf)
         outname = os.path.basename(os.path.splitext(args.file)[0] + '.xlsx')
         print(generate_all(outname, workbook))
-
