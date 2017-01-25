@@ -1,0 +1,10 @@
+[
+  {
+    "attributes": [["sheet", "*xlsx.Sheet"]],
+    "sheet": [
+      [["const", 1], ["const", 2], ["const", 3], ["const", 4], ["const", 5]],
+      [["accessf", "1 * 1"], ["accessf", "2 * 2"], ["accessf", "3 * 3"], ["accessf", "4 * 4"], ["accessf", "5 * 5"]]
+    ],
+    "func": "WriteXS"
+  }
+]
