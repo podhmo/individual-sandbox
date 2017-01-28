@@ -40,7 +40,7 @@ def __init__(self, debuglevel=None):
     self._debuglevel = debuglevel or self.__class__._debuglevel
 
 AbstractHTTPHandler.__init__ = __init__
-AbstractHTTPHandler._debuglevel = 1
+AbstractHTTPHandler._debuglevel = 1  # debug printを有効にしない設定なら0にするべき
 ```
 
 理由は、 `urllib.request.AbstractHTTPHandler` の定義が以下の様になってしまっているため。常にhttp_classに0が渡されてしまう形になってしまう。そしてそのdefault値を強制的に変更することができない。
