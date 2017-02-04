@@ -1,0 +1,29 @@
+Type: request
+ReceivedAt: 2017-02-04 20:47:19.704806646 +0900 JST
+Session: 1
+From: 127.0.0.1:50684
+
+GET /api/v1/search?q=go HTTP/1.1
+Host: qiita.com
+User-Agent: Go-http-client/1.1
+
+Type: response
+ReceivedAt: 2017-02-04 20:47:19.79870657 +0900 JST
+Session: 1
+From: 54.248.113.128:80
+
+HTTP/1.1 301 Moved Permanently
+Content-Length: 102
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Type: text/html; charset=utf-8
+Date: Sat, 04 Feb 2017 11:47:20 GMT
+Location: https://qiita.com/api/v1/search?q=go
+Server: nginx
+Vary: Origin
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Request-Id: 6c5f9f7c-1f0f-47de-8e2a-59a23e29117f
+X-Runtime: 0.032015
+X-Xss-Protection: 1; mode=block
+
