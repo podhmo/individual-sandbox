@@ -40,7 +40,7 @@ class PetsInput(object):
                 ])
 
 
-class PetsPetIdInput(object):
+class PetInput(object):
     class Get(object):
         """Get a single pet"""
 
@@ -78,7 +78,7 @@ class PetsOutput(object):
             super().__init__(*args, **kwargs)
 
 
-class PetsPetIdOutput(object):
+class PetOutput(object):
     class Get200(Pet):
         """Return pet"""
         pass

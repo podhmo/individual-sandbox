@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 PETS = {}
 
 
-@view_config(renderer='json', request_method='GET', route_name='app_views')
+@view_config(renderer='json', request_method='GET', route_name='pets')
 def get_pets(context, request):
     """
     Get all pets
@@ -39,7 +39,7 @@ def get_pet(context, request):
 
         * 'pet_id'  Pet's Unique identifier  `{"type": "string", "required": true, "pattern": "^[a-zA-Z0-9-]+$"}`
     """
-    matchdict, err = schema.PetsPetIdInput.Get.Path().load(request.matchdict)
+    matchdict, err = schema.PetInput.Get.Path().load(request.matchdict)
     if err:
         raise httpexceptions.HTTPNotFound(err)
     if matchdict["pet_id"] not in PETS:
@@ -100,10 +100,10 @@ def put_pet(context, request):
         }
     ```
     """
-    matchdict, err = schema.PetsPetIdInput.Put.Path().load(request.matchdict)
+    matchdict, err = schema.PetInput.Put.Path().load(request.matchdict)
     if err:
         raise httpexceptions.HTTPNotFound(err)
-    body, err = schema.PetsPetIdInput.Put.Body().load(request.json_body)
+    body, err = schema.PetInput.Put.Body().load(request.json_body)
     if err:
         raise httpexceptions.HTTPBadReuest(err)
 
@@ -130,7 +130,7 @@ def delete_pet(context, request):
 
         * 'pet_id'  Pet's Unique identifier  `{"type": "string", "required": true, "pattern": "^[a-zA-Z0-9-]+$"}`
     """
-    matchdict, err = schema.PetsPetIdInput.Put.Path().load(request.matchdict)
+    matchdict, err = schema.PetInput.Put.Path().load(request.matchdict)
     if err:
         raise httpexceptions.HTTPNotFound(err)
     if matchdict["pet_id"] in PETS:
