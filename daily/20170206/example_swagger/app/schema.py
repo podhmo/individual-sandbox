@@ -29,8 +29,6 @@ class PetsInput(object):
             limit = fields.Integer(missing=lambda: 100, validate=[Range(min=0, max=None, exclusive_min=False, exclusive_max=False)])
 
 
-
-
 class PetsPetIdInput(object):
     class Get(object):
         """Get a single pet"""

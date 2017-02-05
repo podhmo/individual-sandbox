@@ -1,3 +1,9 @@
+run:
+	PYTHONPATH=. python app/__init__.py
+
+test:
+	bash test.sh
+
 default: route schema
 
 route:

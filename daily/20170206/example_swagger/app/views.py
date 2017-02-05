@@ -1,6 +1,15 @@
+import logging
+import datetime
+from pyramid import httpexceptions
+from . import schema
 from pyramid.view import (
     view_config
 )
+logger = logging.getLogger(__name__)
+
+
+# our memory-only pet storage
+PETS = {}
 
 
 @view_config(renderer='json', request_method='GET', route_name='app_views')
@@ -13,7 +22,12 @@ def get_pets(context, request):
         * 'animal_type'  -  `{"type": "string", "pattern": "^[a-zA-Z0-9]*$"}`
         * 'limit'  -  `{"type": "integer", "minimum": 0, "default": 100}`
     """
-    return {}
+    params, err = schema.PetsInput.Get.Query().load(request.GET)
+    if err:
+        raise httpexceptions.HTTPNotFound(err)
+    animal_type = params["animal_type"]
+    limit = params["limit"]
+    return [pet for pet in PETS.values() if not animal_type or pet['animal_type'] == animal_type][:limit]
 
 
 @view_config(renderer='json', request_method='GET', route_name='app_views1')
@@ -25,7 +39,12 @@ def get_pet(context, request):
 
         * 'pet_id'  Pet's Unique identifier  `{"type": "string", "required": true, "pattern": "^[a-zA-Z0-9-]+$"}`
     """
-    return {}
+    matchdict, err = schema.PetsPetIdInput.Get.Path().load(request.matchdict)
+    if err:
+        raise httpexceptions.HTTPNotFound(err)
+    if matchdict["pet_id"] not in PETS:
+        raise httpexceptions.HTTPNotFound()
+    return PETS[matchdict["pet_id"]]
 
 
 @view_config(renderer='json', request_method='PUT', route_name='app_views1')
@@ -81,7 +100,25 @@ def put_pet(context, request):
         }
     ```
     """
-    return {}
+    matchdict, err = schema.PetsPetIdInput.Put.Path().load(request.matchdict)
+    if err:
+        raise httpexceptions.HTTPNotFound(err)
+    body, err = schema.PetsPetIdInput.Put.Body().load(request.json_body)
+    if err:
+        raise httpexceptions.HTTPBadReuest(err)
+
+    exists = matchdict["pet_id"] in PETS
+    body['id'] = matchdict["pet_id"]
+
+    if exists:
+        logger.info('Updating pet %s..', body["id"])
+        PETS[body["id"]].update(body)
+        return httpexceptions.HTTPOk()
+    else:
+        logger.info('Creating pet %s..', body["id"])
+        body['created'] = datetime.datetime.utcnow()  # with schema?
+        PETS[body["id"]] = body
+        return httpexceptions.HTTPCreated()
 
 
 @view_config(renderer='json', request_method='DELETE', route_name='app_views1')
@@ -93,4 +130,12 @@ def delete_pet(context, request):
 
         * 'pet_id'  Pet's Unique identifier  `{"type": "string", "required": true, "pattern": "^[a-zA-Z0-9-]+$"}`
     """
-    return {}
+    matchdict, err = schema.PetsPetIdInput.Put.Path().load(request.matchdict)
+    if err:
+        raise httpexceptions.HTTPNotFound(err)
+    if matchdict["pet_id"] in PETS:
+        logger.info('Deleting pet %s..', matchdict["pet_id"])
+        del PETS[matchdict["pet_id"]]
+        raise httpexceptions.HTTPNoContent()
+    else:
+        raise httpexceptions.HTTPNotFound()
