@@ -8,8 +8,6 @@ import (
 	"regexp"
 	"strings"
 
-	"io/ioutil"
-
 	"github.com/elazarl/goproxy"
 )
 
@@ -23,30 +21,10 @@ func main() {
 	proxy := goproxy.NewProxyHttpServer()
 	proxy.Verbose = true
 
-	var caCert, caKey []byte
-	{
-		fname := strings.Replace("~/vboxshare/venvs/my/proxy2/ca.crt", "~", os.Getenv("HOME"), 1)
-		f, err := os.Open(fname)
-		if err != nil {
-			log.Fatal(err)
-		}
-		caCert, err = ioutil.ReadAll(f)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	{
-		fname := strings.Replace("~/vboxshare/venvs/my/proxy2/ca.key", "~", os.Getenv("HOME"), 1)
-		f, err := os.Open(fname)
-		if err != nil {
-			log.Fatal(err)
-		}
-		caKey, err = ioutil.ReadAll(f)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	ca, err := tls.X509KeyPair(caCert, caKey)
+	ca, err := tls.LoadX509KeyPair(
+		strings.Replace("~/vboxshare/venvs/my/proxy2/ca.crt", "~", os.Getenv("HOME"), 1),
+		strings.Replace("~/vboxshare/venvs/my/proxy2/ca.key", "~", os.Getenv("HOME"), 1),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,6 +32,7 @@ func main() {
 		Action:    goproxy.ConnectMitm,
 		TLSConfig: goproxy.TLSConfigFromCA(&ca),
 	}
+
 	proxy.OnRequest(goproxy.ReqHostMatches(regexp.MustCompile("^.*$"))).
 		HandleConnect(goproxy.FuncHttpsHandler(func(host string, ctx *goproxy.ProxyCtx) (*goproxy.ConnectAction, string) {
 			return mitmConnect, host

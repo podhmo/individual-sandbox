@@ -15,7 +15,8 @@ type Result struct {
 }
 
 func get() error {
-	resp, err := http.Get("https://qiita.com/api/v1/search?q=go")
+	// resp, err := http.Get("https://qiita.com/api/v1/search?q=go")
+	resp, err := http.Get("https://api.github.com/users/podhmo")
 	if err != nil {
 		return err
 	}
