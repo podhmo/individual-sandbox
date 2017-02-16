@@ -34,6 +34,27 @@ Server: WSGIServer/0.2 CPython/3.5.2
 A server error occurred.  Please contact the administrator.
 ```
 
+調べてみたところ、 pyramid.tweensのexcview_tweenのところで処理されている事がわかった。
+単にエラーをログで出したい場合には [pyramid_exclog](https://github.com/Pylons/pyramid_exclog) を使うのが良さそう。
+
+内部的にはこういうことしている。
+
+```python
+config.add_tween('pyramid_exclog.exclog_tween_factory', under=EXCVIEW)
+```
+
+以下の様にするとむりやり上書きできる。
+
+```python
+def exc_view(request):
+    tbio = io.StringIO()
+    traceback.print_exception(*request.exc_info, file=tbio)
+    return {"message": str(request.exception), "traceback": tbio.getvalue()}
+
+config.add_view(view=exc_view, context=Exception, renderer="json")
+```
+
+
 # python abc abcどこまでやってくれたっけ？
 
 
