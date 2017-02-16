@@ -1,3 +1,39 @@
+# pyramid pyramidのこと復習
+
+hello worldとか試したい。１回きりで終わらせたい場合には `handle_request()` を使うと便利。
+
+```python
+server = make_server('0.0.0.0', 8080, app)
+# server.serve_forever()
+server.handle_request()
+```
+
+## Acceptをつけるとjsonを返す。
+
+```bash
+$ make server &
+$ make json404
+{
+    "code": "404 Not Found",
+    "message": "The resource could not be found.\n\n\n/404\n\n",
+    "title": "Not Found"
+}
+```
+
+## エラーのときにはapplication/jsonになってくれない。
+
+```bash
+$ make server &
+$ make json500
+HTTP/1.0 500 Internal Server Error
+Content-Length: 59
+Content-Type: text/plain
+Date: Thu, 16 Feb 2017 14:26:13 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+
+A server error occurred.  Please contact the administrator.
+```
+
 # python abc abcどこまでやってくれたっけ？
 
 
