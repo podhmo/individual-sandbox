@@ -1,3 +1,24 @@
+# python abc abcどこまでやってくれたっけ？
+
+
+```python
+import abc
+
+
+class Base(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def foo(self):
+        pass
+
+
+class A(Base):
+    pass
+
+a = A()  # error
+```
+
+一応、インスタンス生成時にチェックはしてくれるみたい。
+
 # python pyramid rest api
 
 この辺知らなかった
