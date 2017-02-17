@@ -1,3 +1,11 @@
+# linux 現在動いているprocessのcwdを調べる
+
+```
+# pid調べる
+$ ps aux | grep <command>
+$ ls -l /proc/<pid>/cwd
+```
+
 # docker 動いているcontainerに入る
 
 ```
