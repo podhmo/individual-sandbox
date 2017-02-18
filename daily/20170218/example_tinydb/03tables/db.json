@@ -1,0 +1,1 @@
+{"_default": {}, "groups": {"1": {"name": "A", "members": [1, 2, 3]}, "2": {"name": "B", "members": [3]}, "3": {"name": "C"}}, "people": {"3": {"name": "boo"}, "2": {"name": "bar"}, "1": {"name": "foo"}}}
