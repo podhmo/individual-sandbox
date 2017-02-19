@@ -19,3 +19,5 @@ def return_500(request):
 if __name__ == '__main__':
     from toybox.simpleapi import run
     run(port=8080)
+    # from toybox.shortcuts import cont_proutes
+    # run(cont=cont_proutes)

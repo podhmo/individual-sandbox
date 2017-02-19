@@ -1,3 +1,25 @@
+# pyramid 小さいproutes
+
+こんな感じで作れる
+
+```python
+from pyramid.config import Configurator
+from pyramid.scripts.proutes import get_route_data
+
+
+config = Configurator()
+
+# add route and add view
+
+config.commit()
+mapper = config.get_routes_mapper()
+routes = mapper.get_routes(include_static=True)
+for route in routes:
+    route_data = get_route_data(route, config.registry)
+    for name, pattern, view, method in route_data:
+        print(name, pattern, view, method)
+```
+
 # pyramid 1ファイルであれこれしたくなった。
 
 bottleとかに負けるのなんか悔しいし。
