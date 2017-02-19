@@ -18,6 +18,9 @@ def return_500(request):
 
 if __name__ == '__main__':
     from toybox.simpleapi import run
-    run(port=8080)
-    # from toybox.shortcuts import cont_proutes
-    # run(cont=cont_proutes)
+    # import logging
+    # logging.basicConfig(level=logging.DEBUG)
+    # run.handle_request(port=8080)
+    run.proutes()
+    # run.ptweens()
+    # run.pshell()
