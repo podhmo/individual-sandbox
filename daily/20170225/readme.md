@@ -124,6 +124,7 @@ required:
   - y
 ```
 
+ちなみにこれが大丈夫なのは、swagger editorやswagger公式の方だけで。go-swaggerはそもそも対応していない。
 
 # go-swaggerのことをまとめる
 
@@ -134,7 +135,7 @@ required:
 - responseはomitemptyでtype=nullがない部分でnullが変えることはない。(変に迂回して保存されない限り。slicesについても大丈夫なはず)
 - schemaのtypeに配列が渡された場合には先頭だけを関知する。( `type:["string","null"]` ではなくx-nullable:trueを変わりに使う)
 - configure_<appname>.goでhandler設定する。(ただし次回移行新しいものが生成されないのでなんか使いづらい)
-
+- go-swaggerではまともにallOfが動かないと思ったほうが良い。
 
 ## responseは自動でvalidateしてくれない
 
@@ -260,3 +261,4 @@ func (o *errorResponse) WriteResponse(rw http.ResponseWriter, producer runtime.P
 - $refのformatを認識しない
 
 [bugの例](https://gist.github.com/podhmo/9126fbb4de7119e9ab5ff7d90aaaed79)
+[bugの例2](https://gist.github.com/podhmo/4df73990ac9f3794a8cc396bec2c948c)

@@ -1,0 +1,85 @@
+{
+  "definitions": {
+    "person": {
+      "description": "original (no. 1)",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "mix": {
+      "required": [
+        "name"
+      ],
+      "description": "no. 2",
+      "properties": {
+        "age": {
+          "type": "integer"
+        }
+      }
+    },
+    "person2": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/person"
+        },
+        {
+          "$ref": "#/definitions/mix"
+        }
+      ]
+    },
+    "person3": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/person"
+        },
+        {
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "description": "no. 3"
+        },
+        {
+          "properties": {
+            "age": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "person4": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/person"
+        }
+      ],
+      "description": "no. 4",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "age": {
+          "type": "integer"
+        }
+      }
+    },
+    "person5": {
+      "description": "no. 5",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}
