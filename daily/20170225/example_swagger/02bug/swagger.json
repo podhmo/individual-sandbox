@@ -1,0 +1,71 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "info": {
+    "title": "02bug",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/hello": {
+      "post": {
+        "description": "hello",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/dateText"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/dateText"
+            }
+          }
+        }
+      }
+    },
+    "/ok": {
+      "post": {
+        "description": "hello",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/dateText"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "dateText": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}

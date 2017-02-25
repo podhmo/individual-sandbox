@@ -1,0 +1,27 @@
+definitions:
+  status:
+    type: string
+    enum:
+      - hungry
+      - angry
+      - weakly
+      - sleepy
+      - soso
+      - happy
+  person:
+    type: object
+    properties:
+      status:
+        $ref: "#/definitions/status"
+      name:
+        type: string
+      nickname:
+        type: string
+      age:
+        type: integer
+      father:
+        $ref: "#/definitions/person"
+      mother:
+        $ref: "#/definitions/person"
+    required:
+      - name
