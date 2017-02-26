@@ -1,0 +1,16 @@
+definitions:
+  mydate:
+    description: this is mydate
+    type: string
+    format: date
+  data:
+    required:
+      - account_id
+      - access_token
+    properties:
+      account_id:
+        type: integer
+        format: int64
+      access_token:
+        type: string
+        maxLength: 64
