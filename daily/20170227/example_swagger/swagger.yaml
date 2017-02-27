@@ -1,0 +1,9 @@
+definitions:
+  ob:
+    type: object
+    properties:
+      exclude:
+        $ref: "#/definitions/exclude"
+
+  exclude:
+    type: boolean
