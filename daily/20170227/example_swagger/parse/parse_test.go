@@ -7,6 +7,8 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/foo/bee/models"
 	"github.com/go-openapi/swag"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestParse(t *testing.T) {
@@ -15,6 +17,29 @@ func TestParse(t *testing.T) {
 		t.Fatal(err)
 	}
 	spew.Dump(ob)
+}
+
+func TestParseRaw(t *testing.T) {
+	t.Run("True", func(t *testing.T) {
+		r, err := swag.ConvertBool(`True`)
+		require.NoError(t, err)
+		assert.Equal(t, true, r)
+	})
+	t.Run("False", func(t *testing.T) {
+		r, err := swag.ConvertBool(`False`)
+		require.NoError(t, err)
+		assert.Equal(t, false, r)
+	})
+	t.Run("true", func(t *testing.T) {
+		r, err := swag.ConvertBool(`true`)
+		require.NoError(t, err)
+		assert.Equal(t, true, r)
+	})
+	t.Run("false", func(t *testing.T) {
+		r, err := swag.ConvertBool(`false`)
+		require.NoError(t, err)
+		assert.Equal(t, false, r)
+	})
 }
 
 func TestDump(t *testing.T) {
