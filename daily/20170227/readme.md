@@ -1,3 +1,19 @@
+# python pep487のこと
+
+参考
+
+- https://docs.python.org/3/whatsnew/3.6.html#pep-487-simpler-customization-of-class-creation
+- https://github.com/tecki/metaclasses
+- https://www.python.org/dev/peps/pep-0487/
+
+出来る範囲はmetaclassの__init__でできることまで
+
+- __new__ classを生成するhook
+- __init__ class 生成後のhook
+- __call__ instance生成時のhook -> abcで使われている。使われていない。typobject.c見るとPyBaseObject_Typeのobject_new。PyType_Type
+
+objectの__new__はimmutable objectのあれこれ。
+
 # golang emacs flycheck中のerrcheckとunconvertでCPUを使い尽くす
 
 外したい。
