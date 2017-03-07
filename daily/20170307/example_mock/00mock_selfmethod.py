@@ -38,6 +38,12 @@ ma2 = handmade_inheritance_mock(A, ["f"])
 ma2.g.return_value = ["*mock2*"]
 print("return", ma2.f())
 
+print("mock A3----------------------------------------")
+with mock.patch.object(A, "g", spec_set=A) as mg:
+    mg.return_value = ["*mock3*"]
+    a = A()
+    print("return", a.f())
+
 # A----------------------------------------
 # f <__main__.A object at 0x10c634a58>
 # g <__main__.A object at 0x10c634a58>
