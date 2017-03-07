@@ -1,0 +1,15 @@
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        $ref: "#/definitions/name"
+      age:
+        type: integer
+    required:
+      - name
+
+
+  name:
+    type: string
+    minLength: 5

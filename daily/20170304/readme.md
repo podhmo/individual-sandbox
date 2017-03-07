@@ -1,3 +1,10 @@
+# python timeit
+
+timeitはgcをdisableにしたりしてくれるので良い。
+あと `python -m timeit` わりと便利？
+
+# python serialization libraryのbenchmark
+
 # python そういえば、`__init__()` を迂回してオブジェクト生成したい場合もあるかも。
 
 ```python

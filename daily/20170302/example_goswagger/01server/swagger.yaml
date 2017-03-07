@@ -1,0 +1,41 @@
+consumes:
+- application/json
+info:
+  title: 01server
+  version: 0.1.0
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
+
+paths:
+  /person:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/person"
+      description: create person
+      responses:
+        201:
+          description: created
+          schema:
+            $ref: "#/definitions/person"
+
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        $ref: "#/definitions/name"
+      age:
+        type: integer
+    required:
+      - name
+
+
+  name:
+    type: string
+    minLength: 1
