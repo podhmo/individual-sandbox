@@ -11,6 +11,7 @@ from dictknife import Or
 
 logger = logging.getLogger(__name__)
 GlobalRef = namedtuple("GlobalRef", "path, q")
+Store = namedtuple("Store", "ctx_cache, gref_cache")
 
 
 class Context(object):
@@ -33,39 +34,51 @@ class Context(object):
             return self.loader(rf)
 
 
-class Migrator(object):
-    def __init__(self):
-        self.ctx_cache = OrderedDict()
-        self.gref_cache = {}
-
-    @reify
-    def accessor(self):
-        return Accessor()
-
+class Loader(object):
     @reify
     def import_walker(self):
         return LooseDictWalkingIterator([Or(["x-bundler-concat", "x-bundler-compose"])], handler=DataHandler())
+
+    def load(self, path):
+        ctx_cache = OrderedDict()
+        ctx = Context(path, yaml.load, ctx_cache)
+        self._load(ctx)
+        return ctx_cache
+
+    def _load(self, ctx):
+        for q, relative_list in self.import_walker.iterate(ctx.data):
+            for relative in relative_list:
+                path = ctx.resolve_path(relative)
+                if path not in ctx.cache:
+                    self._load(ctx.load(path))
+
+
+class Migrator(object):
+    @reify
+    def accessor(self):
+        return Accessor()
 
     @reify
     def ref_walker(self):
         return LooseDictWalkingIterator(["$ref"])
 
     def migrate(self, path, prefix=""):
-        self.load(path)
-        for gpath, ctx in self.ctx_cache.items():
+        ctx_cache = Loader().load(path)
+        store = Store(ctx_cache=ctx_cache, gref_cache={})
+        for gpath, ctx in store.ctx_cache.items():
             for path, d in self.ref_walker.iterate(ctx.data):
                 try:
-                    gref = self.lookup_global_ref(d["$ref"])
+                    gref = self.lookup_global_ref(store, d["$ref"])
                 except ValueError:
                     if not prefix:
                         raise
                     xs = d.split("/")
                     xs[-1] = xs[-1].replace(prefix, "")
                     try:
-                        gref = self.lookup_global_ref(xs.join("/"))
+                        gref = self.lookup_global_ref(store, xs.join("/"))
                     except ValueError:
                         xs[-1][0] = xs[-1][0].lower()
-                        gref = self.lookup_global_ref(xs.join("/"))
+                        gref = self.lookup_global_ref(store, xs.join("/"))
                 if gref.path == ctx.path:
                     continue
 
@@ -75,29 +88,17 @@ class Migrator(object):
                 d["$ref"] = lref
                 print("gsed -i 's@{}@{}@' {}".format(d["$ref"], lref, ctx.path))
 
-    def lookup_global_ref(self, q):
-        if q in self.gref_cache:
-            return self.gref_cache[q]
+    def lookup_global_ref(self, store, q):
+        if q in store.gref_cache:
+            return store.gref_cache[q]
         # #/foo/bar -> ["foo", "bar"]
         path = q[2:].split("/")
-        for gpath, ctx in self.ctx_cache.items():
+        for gpath, ctx in store.ctx_cache.items():
             c = self.accessor.maybe_access_container(ctx.data, path)
             if c is not None:
-                gref = self.gref_cache[q] = GlobalRef(path=ctx.path, q=q)
+                gref = store.gref_cache[q] = GlobalRef(path=ctx.path, q=q)
                 return gref
         raise ValueError("not found {}".format(q))
-
-    def load(self, path):
-        ctx = Context(path, yaml.load, self.ctx_cache)
-        self._load(ctx)
-        return self.ctx_cache
-
-    def _load(self, ctx):
-        for q, relative_list in self.import_walker.iterate(ctx.data):
-            for relative in relative_list:
-                path = ctx.resolve_path(relative)
-                if path not in ctx.cache:
-                    self._load(ctx.load(path))
 
 
 if __name__ == "__main__":
