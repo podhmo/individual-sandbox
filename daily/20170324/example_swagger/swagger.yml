@@ -1,0 +1,14 @@
+consumes:
+- application/json
+info:
+  title: Example Swagger
+  version: 0.1.0
+paths:
+  /hello/{name}:
+    $ref: "./foo.yaml#/paths/~1hello~1{name}"
+
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"

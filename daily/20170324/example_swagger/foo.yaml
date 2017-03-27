@@ -1,0 +1,15 @@
+paths:
+  /hello/{name}:
+    get:
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+      operationId: hello
+      description: greeting message
+      responses:
+        200:
+          schema:
+            type: string
+          description: ok
