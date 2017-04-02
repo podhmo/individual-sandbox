@@ -1,0 +1,7 @@
+{
+  "definitions": {
+    "person": {
+      "$ref": "./models/person.json#/definitions/person"
+    }
+  }
+}

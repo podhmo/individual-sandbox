@@ -1,0 +1,14 @@
+{
+  "definitions": {
+    "person": {
+      "properties": {
+        "name": {
+          "$ref": "../primitives/name.json"
+        },
+        "age": {
+          "$ref": "../primitives/age.json"
+        }
+      }
+    }
+  }
+}
