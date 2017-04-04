@@ -3,6 +3,7 @@ from lib2to3 import pytree
 from yapf.yapflib import split_penalty as s
 from yapf.yapflib import pytree_unwrapper as w
 from yapf.yapflib import style
+import yapf
 
 
 def monkey_patch(cls):
@@ -67,10 +68,5 @@ def Visit_import_as_names(self, node):
     self.DefaultNodeVisit(node)
 
 
-def main():
-    import yapf
-    yapf.run_main()
-
-
 if __name__ == "__main__":
-    main()
+    yapf.run_main()

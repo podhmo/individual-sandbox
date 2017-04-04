@@ -1,6 +1,34 @@
 
 ## memo
 
+## 今のyapfの実装の問題
+
+以下の様な形式のimportを壊さずreformatしてくれない
+
+```python
+from foo import (
+    x,
+    y,
+    z,
+)
+from foo import (
+    x,
+)
+from foo import (  # NOQA
+    x,
+    y,
+)
+```
+
+monkey patchした yyapf.py ではどうにかなる。
+
+```bash
+yapf src.py
+python bin/yyapf.py src.py
+```
+
+## 設定の意味
+
 style.yapf
 
 ```
