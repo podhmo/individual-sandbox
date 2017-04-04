@@ -1,0 +1,7 @@
+[style]
+based_on_style = pep8
+# column_limit = 160
+dedent_closing_brackets=true
+spaces_around_power_operator = true
+split_penalty_import_names = 100000
+split_arguments_when_comma_terminated = true
