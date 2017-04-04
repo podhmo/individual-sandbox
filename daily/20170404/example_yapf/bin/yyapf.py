@@ -1,8 +1,6 @@
 from lib2to3.pgen2 import token
 from lib2to3 import pytree
-from yapf.yapflib import split_penalty as s
 from yapf.yapflib import pytree_unwrapper as w
-from yapf.yapflib import style
 import yapf
 
 
@@ -13,7 +11,7 @@ def monkey_patch(cls):
     return _monkey_patch
 
 
-@monkey_patch(s._SplitPenaltyAssigner)
+@monkey_patch(w.PyTreeUnwrapper)
 def Visit_import_from(self, node):
     """
     このようにimportが出力されてほしい
@@ -33,7 +31,6 @@ def Visit_import_from(self, node):
     このために 以下の設定を追加してこのAssignerを使う。
     - dedent_closing_brackets=true
     """
-    self.DefaultNodeVisit(node)
     for around_last in reversed(node.children):
         if around_last.type != token.COMMENT:
             break
@@ -48,11 +45,11 @@ def Visit_import_from(self, node):
             parent.set_child(-2, as_names)
             as_names.append_child(last_symbol)
             as_names.append_child(pytree.Leaf(token.COMMA, ","))
-        else:
-            if not hasattr(as_names.children[-1], "value") or as_names.children[-1].value != ",":
-                # `from foo import (x, y)` to `from foo import (x, y,)`
-                as_names.children.append(pytree.Leaf(token.COMMA, ","))
-        s._SetSplitPenalty(as_names.children[-1], style.Get('SPLIT_PENALTY_IMPORT_NAMES'))
+        elif not hasattr(as_names.children[-1], "value") or as_names.children[-1].value != ",":
+            # `from foo import (x, y)` to `from foo import (x, y,)`
+            as_names.children.append(pytree.Leaf(token.COMMA, ","))
+
+    self.DefaultNodeVisit(node)
 
 
 @monkey_patch(w.PyTreeUnwrapper)
