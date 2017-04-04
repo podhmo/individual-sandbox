@@ -24,16 +24,13 @@ def Visit_import_from(self, node):
     from foo import (
         x,
     )
-
-    このために 以下の設定を追加してこのAssignerを使う。
-    - split_arguments_when_comma_terminated
-    - split_penalty_import_names
-
-    memo: 以下には未対応(NOQAを付けてpyflakesのlinterを無効にするコメント付きのもの)
     from foo import (  # NOQA
         x,
         y,
     )
+
+    このために 以下の設定を追加してこのAssignerを使う。
+    - dedent_closing_brackets=true
     """
     self.DefaultNodeVisit(node)
     for around_last in reversed(node.children):
