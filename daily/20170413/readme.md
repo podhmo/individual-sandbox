@@ -62,7 +62,7 @@ items:
   foo: bar
 ```
 
-これはキーワード引数として扱えば良いのか。
+これはキーワード引数として扱えば良いのか。上の話は全部取りやめ。キーワード引数として扱うのが良さそう。
 
 ```yaml
 $foo:
@@ -70,7 +70,7 @@ $foo:
 x: y
 ```
 
-この場合は、xはキーワード引数として扱われてほしい。
+この場合は、外側のxはキーワード引数として扱われてほしい。
 
 ## 結局
 
@@ -89,7 +89,7 @@ $call:
 が以下の様な呼び出しになり
 
 ```python
-suffix(d, sep="+")
+suffix(d, suffix="+")
 ```
 
 こういう出力。
@@ -145,4 +145,126 @@ $chain:
 body:
   - $suffix: {suffix: +}
   - $suffix: {suffix: +}
+```
+
+## もう少しだけ欲張って
+
+もう少し欲張った機能
+
+- config読めるようにしたい
+- というか、load用の機能として以下があるかもしれない
+
+  - dataとしてload(変数束縛, configとしてload)
+  - yamlとしてload(文字データ)
+  - codeとしてload(import)
+
+- moduleを読み込めるようにすると楽そう
+- yaml上でjinja2
+
+### moduleを読み込めるように
+
+```bash
+$ toylang foo.py data.yaml
+```
+
+foo.py
+
+```python
+def suffix(d, suffix="+"):
+    return {k+suffix:v for k,v in d.items()}
+```
+
+chainとかするためにevalatorが欲しい？
+
+```python
+@with_evalator
+def chain(d, evalator, body=None):
+    return evalator.eval()
+```
+
+あ。chainに渡す式は評価されるとまずそう。$$とかでquote出来るようにするか。
+
+.も許可すると良いのでは？例えば以下の様に書いたものがある場合。
+
+```python
+import f
+```
+
+こういう感じで呼べる。
+
+```yaml
+$f.something:
+  hai
+```
+
+importなどの対応をするときなどにもたぶん楽。
+
+
+### yaml上でjinja2
+
+こんな感じに書きたい
+
+```yaml
+$define-template:
+  body: |
+    items:
+    {% for i in nums %}
+      - {{prefix|default("no")}}.{{i}}
+    {% endfor %}
+  name: person.jinja2
+
+listing:
+  $template:
+  template: person.jinja2
+  nums: [1,2,3]
+```
+
+結果はこうなるイメージ。
+
+```yaml
+listing:
+  items:
+    - no.1
+    - no.2
+    - no.3
+```
+
+### 本当はこう書きたい
+
+同じ引数２個書きたくない。本当はこう書きたい。第一引数は必ずdictみたいな条件を緩和しないとダメ？
+
+```yaml
+listing:
+  $template: person.jinja2
+  nums: [1,2,3]
+```
+
+xamlとおんなじ感じで。何か特権的なbodyを許可しても良いかも？
+
+```yaml
+$chain:
+  person:
+    name: foo
+    age: 20
+body:
+  - $$suffix: {suffix: +}
+  - $$suffix: {suffix: +}
+
+# こう書ける？
+
+$chain:
+  person:
+    name: foo
+    age: 20
+body:
+  - $$suffix: +
+  - $$suffix: +
+```
+
+これはどうやって書けば良いんだろうな？こう？
+
+```python
+@default_option("suffix")
+def suffix(d, suffix="+"):
+    ...
 ```
