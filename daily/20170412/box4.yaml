@@ -1,0 +1,7 @@
+definitions:
+  Box4:
+    properties:
+      box:
+        type: object
+        additionalProperties:
+          type: string

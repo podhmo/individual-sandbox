@@ -1,0 +1,24 @@
+definitions:
+  Box:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      $ref: "#/definitions/value"
+  Box2:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      $ref: "#/definitions/x"
+  x:
+    $ref: "#/definitions/y"
+  y:
+    allOf:
+      - $ref: "#/definitions/Box"
+    properties:
+      date:
+        type: string
+        format: date
+  value:
+    type: integer

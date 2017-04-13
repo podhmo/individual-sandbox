@@ -1,0 +1,27 @@
+definitions:
+  Box:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      $ref: "#/definitions/value"
+  Box2:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      $ref: "#/definitions/Box"
+  Box3:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      type: string
+  Box4:
+    properties:
+      box:
+        type: object
+        additionalProperties:
+          type: string
+  value:
+    type: integer
