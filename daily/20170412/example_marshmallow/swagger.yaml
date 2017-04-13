@@ -1,0 +1,9 @@
+definitions:
+  Box:
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      $ref: "#/definitions/value"
+  value:
+    type: integer
