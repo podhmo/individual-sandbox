@@ -46,6 +46,8 @@ items:
 items:
   - x
   - y
+  - x
+  - y
 ```
 
 に。
@@ -89,7 +91,7 @@ $call:
 が以下の様な呼び出しになり
 
 ```python
-suffix(d, suffix="+")
+suffix({"person": {"name": "foo"}}, suffix="+")
 ```
 
 こういう出力。
