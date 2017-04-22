@@ -1,0 +1,2 @@
+default:
+	zenmai main.yaml

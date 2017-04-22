@@ -1,0 +1,10 @@
+$let:
+  template-section:
+    $jinja2_template: |
+      section:
+        before: <before text>
+        body: {{body}}
+        after: <after text>
+body:
+  - $template-section: {body: body1}
+  - $template-section: {body: body2}

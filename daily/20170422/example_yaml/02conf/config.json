@@ -1,0 +1,6 @@
+{
+  "environment": "dev",
+  "cluster_app": "checker",
+  "cpu": 2,
+  "conf": "./conf/dev.json"
+}

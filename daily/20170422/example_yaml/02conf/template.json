@@ -1,0 +1,70 @@
+{
+  "family": "{{environment}}-checker",
+  "containerDefinitions": [
+    {
+      "environment": [
+        {
+          "name": "SERVICE_NAME",
+          "value": "{{environment}}"
+        },
+        {
+          "name": "SERVICE_TAGS",
+          "value": "analysis"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "{{environment}}"
+        },
+        {
+          "name": "CLUSTER_NAME",
+          "value": "{{cluster_app}}"
+        },
+        {
+          "name": "SERVICE_GROUP",
+          "value": "analysis"
+        },
+        {
+          "name": "TEMPLATE_GROUP",
+          "value": "back"
+        },
+        {
+          "name": "DESIRED_COUNT",
+          "value": "1"
+        },
+        {
+          "name": "MINIMUM_HEALTHY_PERCENT",
+          "value": "50"
+        },
+        {
+          "name": "MAXIMUM_PERCENT",
+          "value": "200"
+        }
+      ],
+      "name": "{{environment}}-checker",
+      "image": "quay.io/me/mine:{{environment}}{% if environment == 'production' %}-production{% endif %}",
+      "logConfiguration": {
+        "logDriver": "syslog",
+        "options": {
+          "tag": "docker/{{environment}}/checker/{% raw %}{{.ID}}{% endraw %}"
+        }
+      },
+      "cpu": {{cpu}},
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "containerPort": 8002,
+          "protocol": "tcp"
+        }
+      ],
+      "memoryReservation": {{ checker_memory|default(64) }},
+      "entryPoint": [
+        "./checker"
+      ],
+      "command": [
+        "-c",
+        "{{conf}}"
+      ],
+      "essential": true
+    }
+  ]
+}
