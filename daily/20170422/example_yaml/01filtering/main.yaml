@@ -1,0 +1,10 @@
+code:
+  $import: ./additional.py
+  as: my
+definitions:
+  $let:
+    nums: {$load: ./nums.yaml#/definitions/nums0}
+  odds:
+      $my.odds: {$my.get: nums}
+  even:
+      $my.evens: {$my.get: nums}

@@ -1,0 +1,2 @@
+definitions:
+  nums: {$load: ./nums.yaml#/definitions/nums0}

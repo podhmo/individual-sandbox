@@ -1,0 +1,9 @@
+definitions:
+  $let:
+    nums: {$load: ./nums.yaml#/definitions/nums0}
+  odds:
+      $dynamic: |
+        [n for n in nums if n % 2 == 1]
+  even:
+      $dynamic: |
+        [n for n in nums if n % 2 == 0]
