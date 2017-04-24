@@ -1,0 +1,7 @@
+{
+  "apps": {
+    "foo": "staging-foo/api/v1",
+    "bar": "staging-bar/api/v1",
+    "boo": "staging-boo/api/v1"
+  }
+}

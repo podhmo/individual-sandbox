@@ -1,0 +1,7 @@
+{
+  "apps": {
+    "foo": "dev-foo/api/v1",
+    "bar": "dev-bar/api/v1",
+    "boo": "dev-boo/api/v1"
+  }
+}

@@ -1,0 +1,11 @@
+version:
+  dev:
+    prefix: dev
+  staging:
+    prefix: staging
+infra:
+  local:
+    host: localhost
+  cloud:
+    host: example.com
+

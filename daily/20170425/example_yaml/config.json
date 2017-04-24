@@ -1,0 +1,8 @@
+{
+  "dev": {
+    "prefix": "dev"
+  },
+  "staging": {
+    "prefix": "staging"
+  }
+}

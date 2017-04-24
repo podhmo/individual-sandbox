@@ -1,0 +1,3 @@
+foo: "{prefix}-foo/api/v1"
+bar: "{prefix}-bar/api/v1"
+boo: "{prefix}-boo/api/v1"

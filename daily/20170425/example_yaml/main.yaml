@@ -1,0 +1,3 @@
+apps:
+  $format: {$load: ./apps.yaml}
+  prefix: {$get: "data#/prefix"}
