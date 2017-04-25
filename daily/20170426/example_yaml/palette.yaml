@@ -1,0 +1,9 @@
+db:
+  port: 27000
+api:
+  one:
+    port: 8000
+  two:
+    port: 8001
+  three:
+    port: 8002

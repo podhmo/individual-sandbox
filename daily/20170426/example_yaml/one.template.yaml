@@ -1,0 +1,13 @@
+$let:
+  _: {$from: "./resolver.py", import: get_resolver}
+  resolver: {$get_resolver: {$get: "data#/stage"}, data: {$get: data}}
+body:
+  addr: {$format: ":{port}", port: {$load: "./palette.yaml#/api/one/port"}}
+  loggging:
+    level: {$get: "data#/logLevel"}
+    debug: {$get: "data#/debug"}
+  db:
+    url: {$resolver.resolve_db_url: db, port: {$load: "./palette.yaml#/db/port"}}
+  endpoints:
+    two: {$resolver.resolve_api_url: two, port: {$load: "./palette.yaml#/api/two/port"}}
+    three: {$resolver.resolve_api_url: three, port: {$load: "./palette.yaml#/api/three/port"}}

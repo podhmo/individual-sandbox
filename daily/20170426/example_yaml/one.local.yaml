@@ -1,0 +1,9 @@
+addr: :8000
+loggging:
+  level: debug
+  debug: true
+db:
+  url: http://localhost:27000/one
+endpoints:
+  two: http://localhost:8001/api/v1
+  three: http://localhost:8002/api/v1

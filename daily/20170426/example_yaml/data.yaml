@@ -1,0 +1,26 @@
+local:
+  stage: local
+  logLevel: debug
+  debug: true
+  host: localhost
+  prefix: app-local-
+dev:
+  stage: dev
+  logLevel: debug
+  debug: false
+  host: dev.me.jp
+  prefix: app-
+production:
+  stage: production
+  logLevel: info
+  debug: false
+  host: me.jp
+  prefix: app-
+
+services:
+  one:
+    me: one
+  two:
+    me: two
+  three:
+    me: three

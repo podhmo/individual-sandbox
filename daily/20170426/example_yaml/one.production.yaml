@@ -1,0 +1,9 @@
+addr: :8000
+loggging:
+  level: info
+  debug: false
+db:
+  url: http://app-db.me.jp/one
+endpoints:
+  two: http://app-two.me.jp/api/v1
+  three: http://app-three.me.jp/api/v1
