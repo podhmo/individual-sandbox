@@ -2,7 +2,7 @@ $let:
   _: {$from: "./resolver.py", import: get_resolver}
   resolver: {$get_resolver: {$get: "data#/stage"}, data: {$get: data}}
 body:
-  addr: {$format: ":{port}", port: {$load: "./palette.yaml#/api/one/port"}}
+  addr: {$format: ":{port}", port: {$load: {$format: "./palette.yaml#/api/{me}/port", me: {$get: "data#/me"}}}}
   loggging:
     level: {$get: "data#/logLevel"}
     debug: {$get: "data#/debug"}
