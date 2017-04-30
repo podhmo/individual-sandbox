@@ -1,0 +1,13 @@
+staging:
+  $inherit: './production.yaml'
+testing:
+  $inherit: '#/staging'
+  phpSettings:
+    display_startup_errors: true
+    display_errors: true
+development:
+  $inherit: '#/staging'
+  resources:
+    frontController:
+      params:
+        displayExceptions: true

@@ -1,0 +1,55 @@
+{
+  "production":{
+    "phpSettings":{
+      "display_startup_errors": false,
+      "display_errors": false
+    },
+    "includePaths":{
+      "library": "APPLICATION_PATH/../library"
+    },
+    "bootstrap":{
+      "path": "APPLICATION_PATH/Bootstrap.php",
+      "class": "Bootstrap"
+    },
+    "appnamespace": "Application",
+    "resources":{
+      "frontController":{
+        "controllerDirectory": "APPLICATION_PATH/controllers",
+        "moduleDirectory": "APPLICATION_PATH/modules",
+        "params":{
+          "displayExceptions": false
+        }
+      },
+      "modules":[],
+      "db":{
+        "adapter": "pdo_sqlite",
+        "params":{
+          "dbname": "APPLICATION_PATH/../data/db/application.db"
+        }
+      },
+      "layout":{
+        "layoutPath": "APPLICATION_PATH/layouts/scripts/"
+      }
+    }
+  },
+  "staging":{
+    "_extends": "production"
+  },
+  "testing":{
+    "_extends": "staging",
+    "phpSettings":{
+      "display_startup_errors": true,
+      "display_errors": true
+    }
+  },
+  "development":{
+    "_extends": "staging",
+    "resources":{
+      "frontController":{
+        "params":{
+          "displayExceptions": true
+        }
+      }
+    }
+  }
+}
