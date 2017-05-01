@@ -1,0 +1,7 @@
+services:
+  I:
+    port: 8000
+  J:
+    port: 8001
+  K:
+    port: 8002

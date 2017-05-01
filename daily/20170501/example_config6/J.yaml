@@ -1,0 +1,3 @@
+port: {$load: "./palette.yaml#/services/J/port"}
+services:
+  K: {endpoint: {$resolver.resolve_endpoint: K, port: {$load: "./palette.yaml#/services/K/port"}}}

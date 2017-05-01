@@ -1,0 +1,10 @@
+app:
+  local:
+    env: local
+    host: localhost
+  dev:
+    env: dev
+    host: dev-api.me.com
+  production:
+    env: production
+    host: api.me.com

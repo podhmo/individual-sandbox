@@ -1,0 +1,10 @@
+# need: data
+$let:
+  _: {$from: ./resolve.py, import: get_resolver}
+  resolver: {$get_resolver: {$get: "data#/host"}, data: {$get: data}}
+body:
+  $format:
+    I.{data[env]}.yaml: {$load: ./I.yaml, resolver: {$get: resolver}, data: {$get: data}}
+    J.{data[env]}.yaml: {$load: ./J.yaml, resolver: {$get: resolver}, data: {$get: data}}
+    K.{data[env]}.yaml: {$load: ./K.yaml, resolver: {$get: resolver}, data: {$get: data}}
+  data: {$get: data}
