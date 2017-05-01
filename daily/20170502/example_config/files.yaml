@@ -1,0 +1,8 @@
+# need: data, services
+readme.md:
+  $readme-template:
+    title: {$get: "services#/name"}
+    description: {$get: "services#/description"}
+conf.json:
+  debug: {$get: "data#/debug"}
+  dependencies: {$get: "services#/dependencies"}
