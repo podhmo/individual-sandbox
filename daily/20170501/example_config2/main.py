@@ -1,4 +1,4 @@
-from zenmai import load
+from zenmai.loader import load
 from dictknife import pp
 
 
