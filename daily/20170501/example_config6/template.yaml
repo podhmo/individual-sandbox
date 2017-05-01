@@ -4,7 +4,7 @@ $let:
   resolver: {$get_resolver: {$get: "data#/host"}, data: {$get: data}}
 body:
   $format:
-    I.{data[env]}.yaml: {$load: ./src/I.yaml, resolver: {$get: resolver}, data: {$get: data}}
-    J.{data[env]}.yaml: {$load: ./src/J.yaml, resolver: {$get: resolver}, data: {$get: data}}
-    K.{data[env]}.yaml: {$load: ./src/K.yaml, resolver: {$get: resolver}, data: {$get: data}}
+    I.{data[env]}.yaml: {$load: ./src/I.yaml, resolver: {$get: resolver}}
+    J.{data[env]}.yaml: {$load: ./src/J.yaml, resolver: {$get: resolver}}
+    K.{data[env]}.yaml: {$load: ./src/K.yaml, resolver: {$get: resolver}}
   data: {$get: data}
