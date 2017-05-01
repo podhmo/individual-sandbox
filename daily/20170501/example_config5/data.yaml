@@ -1,0 +1,6 @@
+dev:
+  env: dev
+  debug: true
+production:
+  env: production
+  debug: false

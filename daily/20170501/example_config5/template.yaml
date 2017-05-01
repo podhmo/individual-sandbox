@@ -1,0 +1,8 @@
+$format:
+  conf/{data[env]}/I.yaml:
+    debug: {$get: "data#/debug"}
+  conf/{data[env]}/J.yaml:
+    debug: {$get: "data#/debug"}
+  conf/{data[env]}/K.yaml:
+    debug: {$get: "data#/debug"}
+data: {$get: data}

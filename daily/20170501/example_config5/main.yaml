@@ -1,0 +1,4 @@
+- $load: ./template.yaml
+  data: {$get: "data#/dev"}
+- $load: ./template.yaml
+  data: {$get: "data#/production"}
