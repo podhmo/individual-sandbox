@@ -1,0 +1,7 @@
+definitions:
+  skill:
+    properties:
+      name:
+        type: string
+      description:
+        type: string

@@ -1,0 +1,13 @@
+definitions:
+  myperson:
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+  myskill:
+    properties:
+      name:
+        type: string
+      description:
+        type: string

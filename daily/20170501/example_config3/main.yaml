@@ -1,0 +1,5 @@
+definitions:
+  myperson:
+    $ref: "./person.yaml#/definitions/person"
+  myskill:
+    $ref: "./skill.yaml#/definitions/skill"
