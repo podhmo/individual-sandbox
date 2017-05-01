@@ -1,0 +1,6 @@
+port: 8000
+services:
+  J:
+    endpoint: J.api.me.com/api/v1
+  K:
+    endpoint: K.api.me.com/api/v1

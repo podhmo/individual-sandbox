@@ -1,0 +1,6 @@
+port: 8000
+services:
+  J:
+    endpoint: http://localhost:8001/api/v1
+  K:
+    endpoint: http://localhost:8002/api/v1
