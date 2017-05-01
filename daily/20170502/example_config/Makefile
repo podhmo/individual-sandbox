@@ -1,2 +1,2 @@
 default:
-	zenmai template.yaml --data "data.yaml#/settings/dev" | nejimaki --position=output
+	zenmai template2.yaml --data "data.yaml#/settings/dev" | nejimaki --position=output

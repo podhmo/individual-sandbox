@@ -1,0 +1,13 @@
+$let:
+  readme-template: {$jinja2_templatefile: ./readme.md.jinja2, format: raw}
+  template:
+    $jinja2_template: |
+      {% for name in names %}
+      ./{{name}}:
+        $load: files.yaml
+        readme-template: {$get: readme-template}
+        services: {$load: "./services.yaml#/{{name}}"}
+      {% endfor %}
+./conf:
+  $template: {names: [I, J, K]}
+

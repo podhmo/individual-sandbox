@@ -1,18 +1,7 @@
-services:
-  I:
-    name: I
-    description: I service
-    dependencies: [J, K]
-  J:
-    name: J
-    description: J service
-    dependencies: [K]
-  K:
-    name: K
-    description: K service
-    dependencies: []
 settings:
   dev:
+    name: dev
     debug: true
   production:
+    name: production
     debug: false
