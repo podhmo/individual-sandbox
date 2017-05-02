@@ -1,7 +1,11 @@
 import copy
+import logging
 from dictknife import loading
 from collections import OrderedDict
 from prestring import NameStore, Module
+
+
+logger = logging.getLogger(__name__)
 
 
 def resolve_type(val):
@@ -27,9 +31,7 @@ class NameResolver:
 
 
 def make_signature(info):
-    if info.get("type2") == "array":
-        return frozenset(["*a*", *[(k, v["type"], v.get("type2")) for k, v in info["children"].items()]])
-    elif info["type"] == "object":
+    if info.get("type2") == "array" or info["type"] == "object":
         return frozenset((k, v["type"], v.get("type2")) for k, v in info["children"].items())
     else:
         return frozenset((info["type"], info.get("type2")))
@@ -57,7 +59,6 @@ class Detector:
                 path.append(k)
                 self._detect(v, s["children"][k], k, path=path)
                 path.pop()
-            s["ref"] = "#/{}".format("/".join(path))
         elif isinstance(d, (list, tuple)):
             s["type2"] = "array"
             s["freq2"] += 1
@@ -65,7 +66,6 @@ class Detector:
                 path.append(str(i))
                 self._detect(x, s, name, path=path)  # xxx
                 path.pop()
-            s["ref"] = "#/{}".format("/".join(path))
         else:
             if d is None:
                 s["type2"] = "null"
@@ -75,7 +75,9 @@ class Detector:
                 s["freq"] += 1
                 s["type"] = typ
                 s["values"].append(d)
-            s["ref"] = "#/{}".format("/".join(path))
+        ref = "#/{}".format("/".join(path))
+        logger.debug("ref %s", ref)
+        s["ref"] = ref
 
 
 class Emitter:
@@ -87,36 +89,34 @@ class Emitter:
         self.cw = CommentWriter()
         self.annotations = annotations  # Dict[string, Dict]
 
-    def resolve_name(self, info):
+    def resolve_name(self, info, fromarray=False):
         name = self.annotations.get(info["ref"]) or info["name"]
-        signature = info["signature"]
+        if fromarray:
+            name = "{}Item".format(name)
+        signature = (fromarray, info["signature"])
         self.ns[signature] = name
         return self.ns[signature]
 
-    def make_schema(self, info, parent=None):
+    def make_schema(self, info, parent=None, fromarray=False):
         info["signature"] = make_signature(info)  # xxx:
-        if info.get("type2") == "array":
+        if not fromarray and info.get("type2") == "array":
             return self.make_array_schema(info, parent=parent)
         elif info.get("type") == "object":
-            return self.make_object_schema(info, parent=parent)
+            return self.make_object_schema(info, parent=parent, fromarray=fromarray)
         else:
             return self.make_primitive_schema(info)
 
     def make_array_schema(self, info, parent):
         self.cw.write(info["name"] + "[]", info, parent=parent)
-
-        item_info = copy.deepcopy(info)
-        item_info.pop("type2")
-        item_info["name"] = "{}Item".format(item_info["name"])
-
         d = OrderedDict(type="array")
-        d["items"] = self.make_schema(item_info, parent=info)
+        d["items"] = self.make_schema(info, parent=info, fromarray=True)
         schema_name = self.resolve_name(info)
         self.definitions[schema_name] = d
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
-    def make_object_schema(self, info, parent):
-        self.cw.write(info["name"], info, parent=parent)
+    def make_object_schema(self, info, parent, fromarray=False):
+        if not fromarray:
+            self.cw.write(info["name"], info, parent=parent)
 
         d = OrderedDict(type="object")
         d["properties"] = OrderedDict()
@@ -127,10 +127,9 @@ class Emitter:
         if required:
             d["required"] = required
 
-        # todo: conflict check
         if info.get("type2") == "null":
             d["x-nullable"] = True
-        schema_name = self.resolve_name(info)
+        schema_name = self.resolve_name(info, fromarray=fromarray)
         self.definitions[schema_name] = d
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
@@ -165,12 +164,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", type=str, default="top")
     parser.add_argument("--annotations", type=argparse.FileType('r'), default=None)
-    parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
     parser.add_argument("--show-minimap", action="store_true")
+    parser.add_argument("--logging", default="INFO", choices=list(logging._nameToLevel.keys()))
+    parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
     parser.add_argument("src", type=argparse.FileType('r'))
 
     args = parser.parse_args()
 
+    logging.basicConfig(level=args.logging)
     annotations = {}
     if args.annotations:
         annotations = loading.load(args.annotations)
