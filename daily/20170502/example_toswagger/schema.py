@@ -13,13 +13,13 @@ class ArrayItem(Schema):
 
 
 class Object(Schema):
-    array = fields.List(fields.Nested('ArrayItem'))
-    key = fields.String()
+    array = fields.List(fields.Nested('ArrayItem'), required=True)
+    key = fields.String(required=True)
 
 
 class Top(Schema):
-    content = fields.String()
-    json = fields.List(fields.String())
-    object = fields.Nested('Object')
-    paragraph = fields.String()
-    yaml = fields.List(fields.String())
+    content = fields.String(required=True)
+    json = fields.List(fields.String(), required=True)
+    object = fields.Nested('Object', required=True)
+    paragraph = fields.String(required=True)
+    yaml = fields.List(fields.String(), required=True)

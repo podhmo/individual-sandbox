@@ -23,6 +23,9 @@ definitions:
         $ref: '#/definitions/array'
       key:
         type: string
+    required:
+    - key
+    - array
     type: object
   top:
     properties:
@@ -36,6 +39,12 @@ definitions:
         type: string
       yaml:
         $ref: '#/definitions/yaml'
+    required:
+    - content
+    - object
+    - paragraph
+    - yaml
+    - json
     type: object
   yaml:
     items:

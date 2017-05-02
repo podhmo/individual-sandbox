@@ -22,7 +22,7 @@ def resolve_type(val):
 
 class Detector:
     def make_info(self):
-        return {"freq": 0, "type": "any", "children": defaultdict(self.make_info)}
+        return {"freq": 0, "freq2": 0, "type": "any", "children": defaultdict(self.make_info)}
 
     def detect(self, d, name):
         s = defaultdict(self.make_info)
@@ -38,6 +38,7 @@ class Detector:
                 self._detect(v, s["children"][k], k)
         elif isinstance(d, (list, tuple)):
             s["type2"] = "array"
+            s["freq2"] += 1
             for x in d:
                 self._detect(x, s, name)  # xxx
         else:
@@ -76,6 +77,10 @@ class Emitter:
         props = d["properties"]
         for name, value in info["children"].items():
             props[name] = self.make_schema(value)
+        required = [name for name, f in info["children"].items() if (f.get("freq2") or f["freq"]) == info["freq"]]
+        if required:
+            d["required"] = required
+
         # todo: conflict check
         self.definitions[info["name"]] = d
         if info.get("type2") == "null":
