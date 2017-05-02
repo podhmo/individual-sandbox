@@ -48,20 +48,16 @@ definitions:
         $ref: '#/definitions/object'
       paragraph:
         type: string
-        example: 'Blank lines denote
-
+        example: |
+          Blank lines denote
           paragraph breaks
-
-          '
       content:
         type: string
-        example: 'Or we
-
+        example: |-
+          Or we
           can auto
-
           convert line breaks
-
-          to save space'
+          to save space
     required:
     - json
     - yaml
