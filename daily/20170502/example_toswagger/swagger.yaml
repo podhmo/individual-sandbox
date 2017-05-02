@@ -4,7 +4,6 @@
 #   * yaml[]
 #   * object
 #     * array[]
-#       * arrayItem
 definitions:
   json:
     type: array

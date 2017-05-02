@@ -1,4 +1,3 @@
-import copy
 import logging
 from dictknife import loading
 from collections import OrderedDict
@@ -56,7 +55,7 @@ class Detector:
             for k, v in d.items():
                 if k not in s["children"]:
                     s["children"][k] = self.make_info()
-                path.append(k)
+                path.append(str(k))
                 self._detect(v, s["children"][k], k, path=path)
                 path.pop()
         elif isinstance(d, (list, tuple)):
@@ -166,6 +165,7 @@ if __name__ == "__main__":
     parser.add_argument("--annotations", type=argparse.FileType('r'), default=None)
     parser.add_argument("--show-minimap", action="store_true")
     parser.add_argument("--logging", default="INFO", choices=list(logging._nameToLevel.keys()))
+    parser.add_argument("--emit", default="schema", choices=["schema", "info"])
     parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
     parser.add_argument("src", type=argparse.FileType('r'))
 
@@ -182,13 +182,15 @@ if __name__ == "__main__":
     loading.setup()
     data = loading.load(args.src)
     info = detector.detect(data, args.name)
-    # from dictknife import pp
-    # pp(info)
-    m = Module(indent="  ")
-    m.stmt(args.name)
-    emitter.emit(info, m)
-    if args.show_minimap:
-        print("# minimap ###")
-        print("# *", end="")
-        print("\n# ".join(str(m).split("\n")))
-    loading.dumpfile(emitter.doc, filename=args.dst)
+
+    if args.emit == "info":
+        loading.dumpfile(info, filename=args.dst)
+    else:
+        m = Module(indent="  ")
+        m.stmt(args.name)
+        emitter.emit(info, m)
+        if args.show_minimap:
+            print("# minimap ###")
+            print("# *", end="")
+            print("\n# ".join(str(m).split("\n")))
+        loading.dumpfile(emitter.doc, filename=args.dst)
