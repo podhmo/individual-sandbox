@@ -1,72 +1,405 @@
 definitions:
-  bridge:
+  logger:
+    type: object
+    properties:
+      logLevel:
+        type: string
+        example: debug
+    required:
+    - logLevel
+  db:
     type: object
     properties:
       name:
         type: string
-        example: Homebridge
-      username:
+        example: ai-analyst-dev-rook
+      url:
         type: string
-        example: CC:22:3D:E3:CE:30
+        example: ai-analyst-dev-rook:ThuprasWAmuzaHe4@rook-mongo01.local.dev.wacul-ai.com:27017,rook-mongo02.local.dev.wacul-ai.com:27017
+    required:
+    - name
+    - url
+  elasticsearch:
+    type: object
+    properties:
+      url:
+        type: string
+        example: http://rook-elasticsearch.local.dev.wacul-ai.com:9200
+      indexPrefix:
+        type: string
+        example: rook-ai-analyst
+    required:
+    - url
+    - indexPrefix
+  officialApp:
+    type: object
+    properties:
+      clientId:
+        type: string
+        example: '1722771071320999'
+      clientSecret:
+        type: string
+        example: 8abaca0de74a2c73d92e81dea40f6d89
+    required:
+    - clientId
+    - clientSecret
+  location:
+    type: object
+    properties:
+      root:
+        type: string
+        example: https://rook.dev.wacul-ai.com
+      analyst:
+        type: string
+        example: https://rook.dev.wacul-ai.com/analyst
+      tuner:
+        type: string
+        example: https://rook-tuner.dev.wacul-ai.com
+    required:
+    - root
+    - analyst
+    - tuner
+  allowedOrigins:
+    type: array
+    items:
+      type: string
+      example: wacul-ai.com
+  cors:
+    type: object
+    properties:
+      allowedOrigins:
+        $ref: '#/definitions/allowedOrigins'
+    required:
+    - allowedOrigins
+  applicationConf:
+    type: object
+    properties:
+      db:
+        $ref: '#/definitions/db'
+      elasticsearch:
+        $ref: '#/definitions/elasticsearch'
+      officialApp:
+        $ref: '#/definitions/officialApp'
+      location:
+        $ref: '#/definitions/location'
+      cors:
+        $ref: '#/definitions/cors'
+      authSecretKey:
+        type: string
+        example: ONRhfKsUOHoF8iVd
+      exchangeSecret:
+        type: string
+        example: sqEfTpW85aButDfK
+      enduserListenAddr:
+        type: string
+        example: :8000
+      tunerListenAddr:
+        type: string
+        example: :8001
+      analysisListenAddr:
+        type: string
+        example: :8002
+      apidocListenAddr:
+        type: string
+        example: :8003
+      htmlMailImageBaseUrl:
+        type: string
+        example: https://s3.amazonaws.com/ai-analyst-rook-static/html-mail/v1
+      defaultAssignedTunerEmail:
+        type: string
+        example: pt_tuner@wacul.co.jp
+    required:
+    - db
+    - elasticsearch
+    - officialApp
+    - location
+    - cors
+    - authSecretKey
+    - exchangeSecret
+    - enduserListenAddr
+    - tunerListenAddr
+    - analysisListenAddr
+    - apidocListenAddr
+    - htmlMailImageBaseUrl
+    - defaultAssignedTunerEmail
+  mailgun:
+    type: object
+    properties:
+      domain:
+        type: string
+        example: wacul-ai.com
+      privateKey:
+        type: string
+        example: key-c8a74c79321557bd6b8efcf7ceb4ae1b
+      publicKey:
+        type: string
+        example: pubkey-b38019ddfcb0b6fa51e08a722d5ad6a1
+    required:
+    - domain
+    - privateKey
+    - publicKey
+  url2png:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        example: PDE8EA0F7568AFB
+      secretKey:
+        type: string
+        example: S_2243A44A89665
+    required:
+    - apiKey
+    - secretKey
+  aws:
+    type: object
+    properties:
+      s3Bucket:
+        type: string
+        example: ai-analyst-rook-static
+    required:
+    - s3Bucket
+  graphite:
+    type: object
+    properties:
+      host:
+        type: string
+        example: sensu.local.dev.wacul-ai.com
       port:
         type: integer
-        example: 51826
-      pin:
-        type: string
-        example: 031-45-154
+        example: 2003
     required:
-    - name
-    - username
+    - host
     - port
-    - pin
-  accessoriesItem:
+  bigQuery:
     type: object
     properties:
-      accessory:
+      serviceAccountEmail:
         type: string
-        example: WeMo
-      name:
+        example: 318438594107-9bfotrfbo66jrgajalu3444ng6ilaim2@developer.gserviceaccount.com
+      projectId:
         type: string
-        example: Coffee Maker
+        example: ai-analyst-dev
+      privateKey:
+        type: string
+        example: |
+          -----BEGIN PRIVATE KEY-----
+          MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCT63VZ2zNVRUWU
+          nBT4azdWO0CYd1p9DczcKpSbp+DJ8uJNzHfwGOj6NtjXiu0Szs1qa1a3sJ4rfZ0j
+          pA/CnMyUi9gkbt87lHASlpJ5CP7R2RoLITEEHGdYXSrtf3urMeX+bU3MHwXAtnAa
+          k21sif7Vp7yLV/b9swlYFGzolKJmijUcrpZp2mZK3IR+F9Sh0oGYN3m0DN3LPUK1
+          u551xj8CebY6zGCP4q0HBKQGvQ2eenncarG5gO/9xfq3aoj1RA4ZO5cAdTqhSey/
+          d+ZItzn5kPOPdQ9qRikUA+SnCQ2sbO03GbwxGH+35Pkqua+rzabtK2VajCF0ABmR
+          R7/UyzkzAgMBAAECggEAfOw5621IaRdbsCoxO6uwzE62Ow1xinOBM99yKhMZsPRD
+          U1j/YfJnsAlqEH7vwRaOPPXyAqhSrIAlmdgQx1cNH9cK75oDRZoTHF+1zCpgqnEj
+          oYqijso+LU5h1rn3g5lcmAdP0LfSb/Kjso4Xt7bDVUWX4kaj/ZaaqZx2beY5UUbW
+          60qN2ngE8DpoLgONlVYrJa+JAQqU2H4vTCvRy/ciyJYjCC3SxUuX9pqKkICWCdz+
+          3Tuu6hx88mubSFk9S0VEhpVhJ6UgDwWdYe5a8wt1E1xAjEpJ1uY1hxo/lm/9BjZd
+          CwA/CEe22A6hqjEKsZ0znryqJ6/1JGOEDIauzdhAwQKBgQDDQy8ZtZ+/x/COgc2b
+          1CKlU509ZwHgrSkiJi8KPmEnqsRu3kr+Qvxe+XwNRaaLWzumWovC2XgRbt+YrXsC
+          CdI1LAWdFWNJnYBHEzSCc7vb/qOTUiae6W/KOKvXFudUAx4J7sVHly5Do4AsiYab
+          hsI7u0oEkAe3Oi3fxOWsmXmfqwKBgQDB7lxGMerD7VMfCZyqLJlOKVs+y8JOv6wA
+          /KeB63ZEGR1UsKBEaBqVTxvCiEZgw6qJTrjR8xfzvz2lFkq/mtLQC/gqSz8yUrSq
+          PqnwBufBX6jinUbvyRWDTEacy6bcnkjJMIzM7FMj3N10py5uSdNH1ui4Cm3Iw9Yl
+          X3kOfjRkmQKBgF6U736zlGLwNVzCEVc3BWUxwEua1rT/C5qoBkce+i6dsDLH6GmL
+          BvX2QRmosEh2c8lbuLE0Z82B+DrbZWcSXMk2vq1dS8+/xAAplFjQOKISkSduNpjp
+          GCZLFynDxV/Tdrx29QZ9e4J180Mfhp1VREZsrSjSn3ooa0ol9N6LJPerAoGBAJiA
+          KG/KsSKBbevqUxg/Gg8s1mP7N0FV2JyuEctIrie+2CHRAzbH5p+jJeFD6JQPSfvP
+          u+bdkuhKat93ODCUP1L7FpursHaSMx/tRxVJWNXns5cAtte4+QHW6XBDdWPn1LTh
+          SNecv4RkGoGxNgHkbBECHt8a1FocJjodacTL2ceBAoGAbf//sqdy0n5ELEYPNSZk
+          t2DZFd5XZ2T89G2xDGWUMUfl6+ml+ColtExqqmvGVErNQJ7wIvtf8LC72kE6UWF7
+          MXpk4oqdCLyNIlLyZ49KoOQwCqabwd8KYu1U/zKIVZptWsYERhMFCAJlIZLn9nka
+          i+Bou5DwamZsQdpTufdb/ac=
+          -----END PRIVATE KEY-----
     required:
-    - accessory
-    - name
-  accessories:
-    type: array
-    items:
-      $ref: '#/definitions/accessoriesItem'
-  platformsItem:
+    - serviceAccountEmail
+    - projectId
+    - privateKey
+  channels:
     type: object
     properties:
-      platform:
+      lead:
         type: string
-        example: PhilipsHue
-      name:
+        example: ai-lead-notif-rook
+      connect:
         type: string
-        example: Hue
+        example: ai-connect-rook
+      requestReport:
+        type: string
+        example: z_request-report-rook
+      infoChange:
+        type: string
+        example: ai-infochange-rook
+      commentReply:
+        type: string
+        example: comment-reply-rook
+      delay:
+        type: string
+        example: ai-delay-rook
+      batchMonitoring:
+        type: string
+        example: batch-monitoring-rook
     required:
-    - platform
-    - name
-  platforms:
-    type: array
-    items:
-      $ref: '#/definitions/platformsItem'
+    - lead
+    - connect
+    - requestReport
+    - infoChange
+    - commentReply
+    - delay
+    - batchMonitoring
+  slack:
+    type: object
+    properties:
+      token:
+        type: string
+        example: xoxp-2153044966-76207470135-132127315170-68df03f951adb7ea518d6a1cc0fa26c9
+      channels:
+        $ref: '#/definitions/channels'
+    required:
+    - token
+    - channels
+  thirdpartyConf:
+    type: object
+    properties:
+      mailgun:
+        $ref: '#/definitions/mailgun'
+      googleApi:
+        $ref: '#/definitions/officialApp'
+      imgixAccount:
+        type: string
+        example: sure-dev
+      imgixToken:
+        type: string
+        example: eLAMAuFR
+      url2png:
+        $ref: '#/definitions/url2png'
+      aws:
+        $ref: '#/definitions/aws'
+      graphite:
+        $ref: '#/definitions/graphite'
+      bigQuery:
+        $ref: '#/definitions/bigQuery'
+      facebookApi:
+        $ref: '#/definitions/officialApp'
+      slack:
+        $ref: '#/definitions/slack'
+    required:
+    - mailgun
+    - googleApi
+    - imgixAccount
+    - imgixToken
+    - url2png
+    - aws
+    - graphite
+    - bigQuery
+    - facebookApi
+    - slack
+  proxyServiceConf:
+    type: object
+    properties:
+      gaProxyBase:
+        type: string
+        example: http://master-ga-proxy.dev.wacul-ai.com
+      gaReportingProxyBase:
+        type: string
+        example: http://master-ga-reporting-proxy.dev.wacul-ai.com
+      searchConsoleProxyBase:
+        type: string
+        example: http://master-search-console-proxy.dev.wacul-ai.com
+      facebookProxyBase:
+        type: string
+        example: http://master-facebook-proxy.dev.wacul-ai.com
+    required:
+    - gaProxyBase
+    - gaReportingProxyBase
+    - searchConsoleProxyBase
+    - facebookProxyBase
+  otherServiceConf:
+    type: object
+    properties:
+      searchConsoleEventServerBase:
+        type: string
+        example: http://rook-search-console-observer.dev.wacul-ai.com/
+      facebookEventServerBase:
+        type: string
+        example: http://rook-facebook-observer.dev.wacul-ai.com/
+      socialMediaEventServerBase:
+        type: string
+        example: http://rook-social-media-observer.dev.wacul-ai.com/
+    required:
+    - searchConsoleEventServerBase
+    - facebookEventServerBase
+    - socialMediaEventServerBase
+  analysisJob:
+    type: object
+    properties:
+      endpoint:
+        type: string
+        example: http://rook-cvr-bad-through-contents-proposal.dev.wacul-ai.com/api/v1
+    required:
+    - endpoint
+  analysisServiceConf:
+    type: object
+    properties:
+      landingContentConversionsReport:
+        $ref: '#/definitions/analysisJob'
+      dominantContentFormInducingReport:
+        $ref: '#/definitions/analysisJob'
+      landingContentInducingReport:
+        $ref: '#/definitions/analysisJob'
+      monthlyReferringSourceConversionsReport:
+        $ref: '#/definitions/analysisJob'
+      weeklyReferringSourceConversionsReport:
+        $ref: '#/definitions/analysisJob'
+      throughContentConversionsReport:
+        $ref: '#/definitions/analysisJob'
+      organicSearchMetricsReport:
+        $ref: '#/definitions/analysisJob'
+      cvrGoodCampaignLandingContentsProposal:
+        $ref: '#/definitions/analysisJob'
+      cvrFormInducibleContentsProposal:
+        $ref: '#/definitions/analysisJob'
+      attractDominantKeywordsProposal:
+        $ref: '#/definitions/analysisJob'
+      cvrGoodThroughContentsProposal:
+        $ref: '#/definitions/analysisJob'
+      cvrBadThroughContentsProposal:
+        $ref: '#/definitions/analysisJob'
+    required:
+    - landingContentConversionsReport
+    - dominantContentFormInducingReport
+    - landingContentInducingReport
+    - monthlyReferringSourceConversionsReport
+    - weeklyReferringSourceConversionsReport
+    - throughContentConversionsReport
+    - organicSearchMetricsReport
+    - cvrGoodCampaignLandingContentsProposal
+    - cvrFormInducibleContentsProposal
+    - attractDominantKeywordsProposal
+    - cvrGoodThroughContentsProposal
+    - cvrBadThroughContentsProposal
   conf:
     type: object
     properties:
-      bridge:
-        $ref: '#/definitions/bridge'
-      description:
-        type: string
-        example: This is an example configuration file with one fake accessory and
-          one fake platform. You can use this as a template for creating your own
-          configuration file containing devices you actually own.
-      accessories:
-        $ref: '#/definitions/accessories'
-      platforms:
-        $ref: '#/definitions/platforms'
+      logger:
+        $ref: '#/definitions/logger'
+      debug:
+        type: boolean
+        example: true
+      applicationConf:
+        $ref: '#/definitions/applicationConf'
+      thirdpartyConf:
+        $ref: '#/definitions/thirdpartyConf'
+      proxyServiceConf:
+        $ref: '#/definitions/proxyServiceConf'
+      otherServiceConf:
+        $ref: '#/definitions/otherServiceConf'
+      analysisServiceConf:
+        $ref: '#/definitions/analysisServiceConf'
     required:
-    - bridge
-    - description
-    - accessories
-    - platforms
+    - logger
+    - debug
+    - applicationConf
+    - thirdpartyConf
+    - proxyServiceConf
+    - otherServiceConf
+    - analysisServiceConf

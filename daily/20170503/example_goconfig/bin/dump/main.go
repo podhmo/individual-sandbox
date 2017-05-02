@@ -9,13 +9,6 @@ import (
 	jsref "github.com/lestrrat/go-jsref"
 )
 
-// T :
-type T struct {
-	Type       string
-	Properties map[string]T
-	Required   []string
-}
-
 func run(filename string, jsptr string) error {
 	f, err := os.Open(filename)
 	if err != nil {
@@ -39,7 +32,7 @@ func run(filename string, jsptr string) error {
 }
 
 func main() {
-    // go run <this> ./swagger.json "#/definitions/bridge"
+	// go run <this> ./swagger.json "#/definitions/bridge"
 	if len(os.Args) <= 2 {
 		os.Exit(1)
 	}
