@@ -1,13 +1,7 @@
 import copy
 from dictknife import loading
 from collections import OrderedDict
-from prestring import NameStore
-
-"""
-- conflict check
-- deduplication
-- annotation schema name
-"""
+from prestring import NameStore, Module
 
 
 def resolve_type(val):
@@ -88,7 +82,9 @@ class Emitter:
     def __init__(self, annotations):
         self.doc = OrderedDict(definitions=OrderedDict())
         self.definitions = self.doc["definitions"]
+
         self.ns = NameStore()
+        self.cw = CommentWriter()
         self.annotations = annotations  # Dict[string, Dict]
 
     def resolve_name(self, info):
@@ -97,32 +93,36 @@ class Emitter:
         self.ns[signature] = name
         return self.ns[signature]
 
-    def make_schema(self, info):
+    def make_schema(self, info, parent=None):
         info["signature"] = make_signature(info)  # xxx:
         if info.get("type2") == "array":
-            return self.make_array_schema(info)
+            return self.make_array_schema(info, parent=parent)
         elif info.get("type") == "object":
-            return self.make_object_schema(info)
+            return self.make_object_schema(info, parent=parent)
         else:
             return self.make_primitive_schema(info)
 
-    def make_array_schema(self, info):
+    def make_array_schema(self, info, parent):
+        self.cw.write(info["name"] + "[]", info, parent=parent)
+
         item_info = copy.deepcopy(info)
         item_info.pop("type2")
         item_info["name"] = "{}Item".format(item_info["name"])
 
         d = OrderedDict(type="array")
-        d["items"] = self.make_schema(item_info)
+        d["items"] = self.make_schema(item_info, parent=info)
         schema_name = self.resolve_name(info)
         self.definitions[schema_name] = d
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
-    def make_object_schema(self, info):
+    def make_object_schema(self, info, parent):
+        self.cw.write(info["name"], info, parent=parent)
+
         d = OrderedDict(type="object")
         d["properties"] = OrderedDict()
         props = d["properties"]
         for name, value in info["children"].items():
-            props[name] = self.make_schema(value)
+            props[name] = self.make_schema(value, parent=info)
         required = [name for name, f in info["children"].items() if (f.get("freq2") or f["freq"]) == info["freq"]]
         if required:
             d["required"] = required
@@ -142,8 +142,22 @@ class Emitter:
             d["x-nullable"] = True
         return d
 
-    def emit(self, root):
+    def emit(self, root, m):
+        self.cw.cm_map[root["name"]] = m
         return self.make_schema(root)
+
+
+class CommentWriter(object):
+    def __init__(self):
+        self.cm_map = {}
+
+    def write(self, name, info, parent=None):
+        if parent is None:
+            return
+        cm = self.cm_map[parent["name"]]
+        with cm.scope():
+            cm.stmt("* {}".format(name))
+            self.cm_map[info["name"]] = cm.submodule(newline=False)
 
 
 if __name__ == "__main__":
@@ -152,6 +166,7 @@ if __name__ == "__main__":
     parser.add_argument("--name", type=str, default="top")
     parser.add_argument("--annotations", type=argparse.FileType('r'), default=None)
     parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
+    parser.add_argument("--show-minimap", action="store_true")
     parser.add_argument("src", type=argparse.FileType('r'))
 
     args = parser.parse_args()
@@ -168,5 +183,11 @@ if __name__ == "__main__":
     info = detector.detect(data, args.name)
     # from dictknife import pp
     # pp(info)
-    emitter.emit(info)
+    m = Module(indent="  ")
+    m.stmt(args.name)
+    emitter.emit(info, m)
+    if args.show_minimap:
+        print("# minimap ###")
+        print("# *", end="")
+        print("\n# ".join(str(m).split("\n")))
     loading.dumpfile(emitter.doc, filename=args.dst)
