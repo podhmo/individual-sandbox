@@ -1,6 +1,7 @@
 import copy
 from dictknife import loading
 from collections import OrderedDict
+from prestring import NameStore
 
 """
 - conflict check
@@ -24,6 +25,20 @@ def resolve_type(val):
         return "array"
     else:
         raise ValueError("unsupported for {!r}".format(val))
+
+
+class NameResolver:
+    def __init__(self):
+        self.ns = NameStore()
+
+
+def make_signature(info):
+    if info["type"] == "object":
+        return frozenset((k, v["type"], v.get("type2")) for k, v in info["children"].items())
+    elif info.get("type2") == "array":
+        return frozenset(["*a*", *[(k, v["type"], v.get("type2")) for k, v in info["children"].items()]])
+    else:
+        return frozenset((info["type"], info.get("type2")))
 
 
 class Detector:
@@ -65,8 +80,14 @@ class Emitter:
     def __init__(self):
         self.doc = OrderedDict(definitions=OrderedDict())
         self.definitions = self.doc["definitions"]
+        self.ns = NameStore()
+
+    def resolve_name(self, name, signature):
+        self.ns[signature] = name
+        return self.ns[signature]
 
     def make_schema(self, info):
+        info["signature"] = make_signature(info)  # xxx:
         if info.get("type2") == "array":
             return self.make_array_schema(info)
         elif info.get("type") == "object":
@@ -80,8 +101,9 @@ class Emitter:
         item_info["name"] = "{}Item".format(item_info["name"])
         d = OrderedDict(type="array")
         d["items"] = self.make_schema(item_info)
-        self.definitions[info["name"]] = d
-        return {"$ref": "#/definitions/{name}".format(name=info["name"])}
+        schema_name = self.resolve_name(info["name"], info["signature"])
+        self.definitions[schema_name] = d
+        return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
     def make_object_schema(self, info):
         d = OrderedDict(type="object")
@@ -94,10 +116,11 @@ class Emitter:
             d["required"] = required
 
         # todo: conflict check
-        self.definitions[info["name"]] = d
         if info.get("type2") == "null":
             d["x-nullable"] = True
-        return {"$ref": "#/definitions/{name}".format(name=info["name"])}
+        schema_name = self.resolve_name(info["name"], info["signature"])
+        self.definitions[schema_name] = d
+        return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
     def make_primitive_schema(self, info):
         d = OrderedDict(type=info["type"])

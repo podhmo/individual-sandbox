@@ -1,0 +1,68 @@
+definitions:
+  sin:
+    type: object
+    properties:
+      name:
+        type: string
+        example: hmm
+    required:
+    - name
+  ob:
+    type: object
+    properties:
+      name:
+        type: string
+        example: foo
+      age:
+        type: integer
+        example: 20
+      sin:
+        $ref: '#/definitions/sin'
+    required:
+    - name
+    - age
+    - sin
+  sinDup1:
+    type: object
+    properties:
+      angle:
+        type: integer
+        example: 90
+      value:
+        type: number
+        example: 1.0
+    required:
+    - angle
+    - value
+  cos:
+    type: object
+    properties:
+      angle:
+        type: integer
+        example: 90
+      value:
+        type: integer
+        example: 0
+    required:
+    - angle
+    - value
+  math:
+    type: object
+    properties:
+      sin:
+        $ref: '#/definitions/sinDup1'
+      cos:
+        $ref: '#/definitions/cos'
+    required:
+    - sin
+    - cos
+  top:
+    type: object
+    properties:
+      ob:
+        $ref: '#/definitions/ob'
+      math:
+        $ref: '#/definitions/math'
+    required:
+    - ob
+    - math

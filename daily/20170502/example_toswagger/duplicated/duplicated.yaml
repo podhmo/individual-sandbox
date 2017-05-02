@@ -1,0 +1,12 @@
+ob:
+  name: foo
+  age: 20
+  sin:
+    name: hmm
+math:
+  sin:
+    angle: 90
+    value: 1.0
+  cos:
+    angle: 90
+    value: 0
