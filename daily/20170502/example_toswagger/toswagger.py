@@ -1,6 +1,6 @@
 import copy
 from dictknife import loading
-from collections import defaultdict
+from collections import OrderedDict
 
 
 def resolve_type(val):
@@ -22,10 +22,11 @@ def resolve_type(val):
 
 class Detector:
     def make_info(self):
-        return {"freq": 0, "freq2": 0, "type": "any", "children": defaultdict(self.make_info)}
+        return {"freq": 0, "freq2": 0, "type": "any", "children": OrderedDict()}
 
     def detect(self, d, name):
-        s = defaultdict(self.make_info)
+        s = OrderedDict()
+        s[name] = self.make_info()
         self._detect(d, s[name], name)
         return s[name]
 
@@ -35,6 +36,8 @@ class Detector:
             s["name"] = name
             s["freq"] += 1
             for k, v in d.items():
+                if k not in s["children"]:
+                    s["children"][k] = self.make_info()
                 self._detect(v, s["children"][k], k)
         elif isinstance(d, (list, tuple)):
             s["type2"] = "array"
@@ -53,7 +56,7 @@ class Detector:
 
 class Emitter:
     def __init__(self):
-        self.doc = {"definitions": {}}
+        self.doc = OrderedDict(definitions=OrderedDict())
         self.definitions = self.doc["definitions"]
 
     def make_schema(self, info):
@@ -68,12 +71,14 @@ class Emitter:
         item_info = copy.deepcopy(info)
         item_info.pop("type2")
         item_info["name"] = "{}Item".format(item_info["name"])
-        d = {"type": "array", "items": self.make_schema(item_info)}
+        d = OrderedDict(type="array")
+        d["items"] = self.make_schema(item_info)
         self.definitions[info["name"]] = d
         return {"$ref": "#/definitions/{name}".format(name=info["name"])}
 
     def make_object_schema(self, info):
-        d = {"type": "object", "properties": {}}
+        d = OrderedDict(type="object")
+        d["properties"] = OrderedDict()
         props = d["properties"]
         for name, value in info["children"].items():
             props[name] = self.make_schema(value)

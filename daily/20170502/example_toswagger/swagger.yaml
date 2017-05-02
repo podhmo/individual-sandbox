@@ -1,52 +1,52 @@
 definitions:
-  array:
-    items:
-      $ref: '#/definitions/arrayItem'
+  json:
     type: array
+    items:
+      type: string
+  yaml:
+    type: array
+    items:
+      type: string
   arrayItem:
+    type: object
     properties:
+      null_value:
+        type: any
+        x-nullable: true
       boolean:
         type: boolean
       integer:
         type: integer
-      null_value:
-        type: any
-        x-nullable: true
-    type: object
-  json:
-    items:
-      type: string
+  array:
     type: array
+    items:
+      $ref: '#/definitions/arrayItem'
   object:
+    type: object
     properties:
-      array:
-        $ref: '#/definitions/array'
       key:
         type: string
+      array:
+        $ref: '#/definitions/array'
     required:
     - key
     - array
-    type: object
   top:
+    type: object
     properties:
-      content:
-        type: string
       json:
         $ref: '#/definitions/json'
+      yaml:
+        $ref: '#/definitions/yaml'
       object:
         $ref: '#/definitions/object'
       paragraph:
         type: string
-      yaml:
-        $ref: '#/definitions/yaml'
+      content:
+        type: string
     required:
-    - content
+    - json
+    - yaml
     - object
     - paragraph
-    - yaml
-    - json
-    type: object
-  yaml:
-    items:
-      type: string
-    type: array
+    - content

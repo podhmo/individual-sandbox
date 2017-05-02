@@ -7,19 +7,19 @@ from marshmallow import (
 
 
 class ArrayItem(Schema):
+    null_value = fields.Field(allow_none=True)
     boolean = fields.Boolean()
     integer = fields.Integer()
-    null_value = fields.Field(allow_none=True)
 
 
 class Object(Schema):
-    array = fields.List(fields.Nested('ArrayItem'), required=True)
     key = fields.String(required=True)
+    array = fields.List(fields.Nested('ArrayItem'), required=True)
 
 
 class Top(Schema):
-    content = fields.String(required=True)
     json = fields.List(fields.String(), required=True)
+    yaml = fields.List(fields.String(), required=True)
     object = fields.Nested('Object', required=True)
     paragraph = fields.String(required=True)
-    yaml = fields.List(fields.String(), required=True)
+    content = fields.String(required=True)
