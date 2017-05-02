@@ -1,0 +1,137 @@
+{
+  "children": {
+    "math": {
+      "children": {
+        "cos": {
+          "children": {
+            "angle": {
+              "children": {},
+              "freq": 1,
+              "freq2": 0,
+              "name": "angle",
+              "ref": "#/top/math/cos/angle",
+              "type": "integer",
+              "values": [
+                90
+              ]
+            },
+            "value": {
+              "children": {},
+              "freq": 1,
+              "freq2": 0,
+              "name": "value",
+              "ref": "#/top/math/cos/value",
+              "type": "integer",
+              "values": [
+                0
+              ]
+            }
+          },
+          "freq": 1,
+          "freq2": 0,
+          "name": "cos",
+          "ref": "#/top/math/cos",
+          "type": "object",
+          "values": []
+        },
+        "sin": {
+          "children": {
+            "angle": {
+              "children": {},
+              "freq": 1,
+              "freq2": 0,
+              "name": "angle",
+              "ref": "#/top/math/sin/angle",
+              "type": "integer",
+              "values": [
+                90
+              ]
+            },
+            "value": {
+              "children": {},
+              "freq": 1,
+              "freq2": 0,
+              "name": "value",
+              "ref": "#/top/math/sin/value",
+              "type": "number",
+              "values": [
+                1.0
+              ]
+            }
+          },
+          "freq": 1,
+          "freq2": 0,
+          "name": "sin",
+          "ref": "#/top/math/sin",
+          "type": "object",
+          "values": []
+        }
+      },
+      "freq": 1,
+      "freq2": 0,
+      "name": "math",
+      "ref": "#/top/math",
+      "type": "object",
+      "values": []
+    },
+    "ob": {
+      "children": {
+        "age": {
+          "children": {},
+          "freq": 1,
+          "freq2": 0,
+          "name": "age",
+          "ref": "#/top/ob/age",
+          "type": "integer",
+          "values": [
+            20
+          ]
+        },
+        "name": {
+          "children": {},
+          "freq": 1,
+          "freq2": 0,
+          "name": "name",
+          "ref": "#/top/ob/name",
+          "type": "string",
+          "values": [
+            "foo"
+          ]
+        },
+        "sin": {
+          "children": {
+            "name": {
+              "children": {},
+              "freq": 1,
+              "freq2": 0,
+              "name": "name",
+              "ref": "#/top/ob/sin/name",
+              "type": "string",
+              "values": [
+                "hmm"
+              ]
+            }
+          },
+          "freq": 1,
+          "freq2": 0,
+          "name": "sin",
+          "ref": "#/top/ob/sin",
+          "type": "object",
+          "values": []
+        }
+      },
+      "freq": 1,
+      "freq2": 0,
+      "name": "ob",
+      "ref": "#/top/ob",
+      "type": "object",
+      "values": []
+    }
+  },
+  "freq": 1,
+  "freq2": 0,
+  "name": "top",
+  "ref": "#/top",
+  "type": "object",
+  "values": []
+}

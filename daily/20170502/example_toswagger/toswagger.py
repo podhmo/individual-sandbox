@@ -85,12 +85,15 @@ class Detector:
 
 
 class Emitter:
-    def __init__(self):
+    def __init__(self, annotations):
         self.doc = OrderedDict(definitions=OrderedDict())
         self.definitions = self.doc["definitions"]
         self.ns = NameStore()
+        self.annotations = annotations  # Dict[string, Dict]
 
-    def resolve_name(self, name, signature):
+    def resolve_name(self, info):
+        name = self.annotations.get(info["ref"]) or info["name"]
+        signature = info["signature"]
         self.ns[signature] = name
         return self.ns[signature]
 
@@ -110,7 +113,7 @@ class Emitter:
 
         d = OrderedDict(type="array")
         d["items"] = self.make_schema(item_info)
-        schema_name = self.resolve_name(info["name"], info["signature"])
+        schema_name = self.resolve_name(info)
         self.definitions[schema_name] = d
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
@@ -127,7 +130,7 @@ class Emitter:
         # todo: conflict check
         if info.get("type2") == "null":
             d["x-nullable"] = True
-        schema_name = self.resolve_name(info["name"], info["signature"])
+        schema_name = self.resolve_name(info)
         self.definitions[schema_name] = d
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
@@ -147,15 +150,23 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", type=str, default="top")
-    parser.add_argument("src", type=argparse.FileType('r'))
+    parser.add_argument("--annotations", type=argparse.FileType('r'), default=None)
     parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
+    parser.add_argument("src", type=argparse.FileType('r'))
 
     args = parser.parse_args()
+
+    annotations = {}
+    if args.annotations:
+        annotations = loading.load(args.annotations)
+
     detector = Detector()
-    emitter = Emitter()
+    emitter = Emitter(annotations)
 
     loading.setup()
     data = loading.load(args.src)
     info = detector.detect(data, args.name)
+    # from dictknife import pp
+    # pp(info)
     emitter.emit(info)
     loading.dumpfile(emitter.doc, filename=args.dst)
