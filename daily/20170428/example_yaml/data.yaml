@@ -1,0 +1,9 @@
+local:
+  usedb: true
+  usemail: false
+  me: foo
+dev:
+  usedb: true
+  usemail: true
+  me: foo
+

@@ -1,0 +1,7 @@
+db:
+  $when: {$get: "data#/usedb"}
+  body: localhost:27000/foo
+mail:
+  $when: {$get: "data#/usemail"}
+  body:
+    {$format: "http://{me}@bar.ne.jp", me: {$get: "data#/me"}}

@@ -1,0 +1,8 @@
+definitions:
+  color:
+    type: string
+    enum:
+      - red
+      - blue
+      - yellow
+      - green

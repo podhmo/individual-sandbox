@@ -1,0 +1,2 @@
+db: localhost:27000/foo
+mail: http://foo@bar.ne.jp
