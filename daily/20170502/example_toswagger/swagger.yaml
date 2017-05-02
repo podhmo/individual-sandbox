@@ -3,10 +3,12 @@ definitions:
     type: array
     items:
       type: string
+      example: rigid
   yaml:
     type: array
     items:
       type: string
+      example: slim and flexible
   arrayItem:
     type: object
     properties:
@@ -15,8 +17,10 @@ definitions:
         x-nullable: true
       boolean:
         type: boolean
+        example: true
       integer:
         type: integer
+        example: 1
   array:
     type: array
     items:
@@ -26,6 +30,7 @@ definitions:
     properties:
       key:
         type: string
+        example: value
       array:
         $ref: '#/definitions/array'
     required:
@@ -42,8 +47,20 @@ definitions:
         $ref: '#/definitions/object'
       paragraph:
         type: string
+        example: 'Blank lines denote
+
+          paragraph breaks
+
+          '
       content:
         type: string
+        example: 'Or we
+
+          can auto
+
+          convert line breaks
+
+          to save space'
     required:
     - json
     - yaml

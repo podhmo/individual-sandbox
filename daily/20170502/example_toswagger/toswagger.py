@@ -2,6 +2,12 @@ import copy
 from dictknife import loading
 from collections import OrderedDict
 
+"""
+- conflict check
+- deduplication
+- annotation schema name
+"""
+
 
 def resolve_type(val):
     if isinstance(val, str):
@@ -22,7 +28,7 @@ def resolve_type(val):
 
 class Detector:
     def make_info(self):
-        return {"freq": 0, "freq2": 0, "type": "any", "children": OrderedDict()}
+        return {"freq": 0, "freq2": 0, "type": "any", "children": OrderedDict(), "values": []}
 
     def detect(self, d, name):
         s = OrderedDict()
@@ -52,6 +58,7 @@ class Detector:
                 s["name"] = name
                 s["freq"] += 1
                 s["type"] = typ
+                s["values"].append(d)
 
 
 class Emitter:
@@ -93,7 +100,9 @@ class Emitter:
         return {"$ref": "#/definitions/{name}".format(name=info["name"])}
 
     def make_primitive_schema(self, info):
-        d = {"type": info["type"]}
+        d = OrderedDict(type=info["type"])
+        if info["values"]:
+            d["example"] = info["values"][0]
         if info.get("type2") == "null":
             d["x-nullable"] = True
         return d
