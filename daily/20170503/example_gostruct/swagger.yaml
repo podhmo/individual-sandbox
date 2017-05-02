@@ -1,0 +1,72 @@
+definitions:
+  bridge:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Homebridge
+      username:
+        type: string
+        example: CC:22:3D:E3:CE:30
+      port:
+        type: integer
+        example: 51826
+      pin:
+        type: string
+        example: 031-45-154
+    required:
+    - name
+    - username
+    - port
+    - pin
+  accessoriesItem:
+    type: object
+    properties:
+      accessory:
+        type: string
+        example: WeMo
+      name:
+        type: string
+        example: Coffee Maker
+    required:
+    - accessory
+    - name
+  accessories:
+    type: array
+    items:
+      $ref: '#/definitions/accessoriesItem'
+  platformsItem:
+    type: object
+    properties:
+      platform:
+        type: string
+        example: PhilipsHue
+      name:
+        type: string
+        example: Hue
+    required:
+    - platform
+    - name
+  platforms:
+    type: array
+    items:
+      $ref: '#/definitions/platformsItem'
+  conf:
+    type: object
+    properties:
+      bridge:
+        $ref: '#/definitions/bridge'
+      description:
+        type: string
+        example: This is an example configuration file with one fake accessory and
+          one fake platform. You can use this as a template for creating your own
+          configuration file containing devices you actually own.
+      accessories:
+        $ref: '#/definitions/accessories'
+      platforms:
+        $ref: '#/definitions/platforms'
+    required:
+    - bridge
+    - description
+    - accessories
+    - platforms
