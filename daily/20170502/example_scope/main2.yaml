@@ -1,0 +1,5 @@
+# main2.yaml
+$let:
+  name: foo
+body:
+  {$load: sub2.yaml,  title: {$get: name}}

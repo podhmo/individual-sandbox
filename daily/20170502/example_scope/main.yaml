@@ -1,0 +1,4 @@
+$let:
+  foo: bar
+body:
+  $load_with_dynamicscope: ./sub.yaml

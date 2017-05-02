@@ -1,0 +1,12 @@
+{
+  "$let": {
+    "foo": "bar",
+    "_": {
+      "$import": "./patch.py"
+    }
+  },
+  "body": {
+    "$load": "./sub.json",
+    "foo": "@foo"
+  }
+}

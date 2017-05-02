@@ -1,0 +1,16 @@
+$let:
+  readme-template: {$jinja2_templatefile: ./readme.md.jinja2, format: raw}
+  _: {$import: patch.py}
+./conf:
+  ./I:
+    $load: files.yaml
+    readme-template: "@readme-template"
+    services: {$load: "./services.yaml#/I"}
+  ./J:
+    $load: files.yaml
+    readme-template: "@readme-template"
+    services: {$load: "services.yaml#/J"}
+  ./K:
+    $load: files.yaml
+    readme-template: "@readme-template"
+    services: {$load: "services.yaml#/K"}

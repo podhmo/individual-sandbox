@@ -1,0 +1,6 @@
+{
+  "name": "sub",
+  "description": {
+    "$get": "foo"
+  }
+}

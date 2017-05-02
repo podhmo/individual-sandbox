@@ -1,0 +1,3 @@
+bool:
+  ok: {$bool: 1}
+  ng: {$bool: 0}

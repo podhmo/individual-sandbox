@@ -1,0 +1,10 @@
+# need: data, services
+$format:
+  readme.md:
+    $readme-template:
+      title: "@services#/name"
+      description: "@services#/description"
+  conf.{data[name]}.json:
+    debug: "@data#/debug"
+    dependencies: "@services#/dependencies"
+data: "@data"

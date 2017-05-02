@@ -1,0 +1,5 @@
+$let:
+  ob: {$load: ./ob.yaml}
+body:
+  title: "@ob#/name"
+  age: "@ob#/age"

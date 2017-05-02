@@ -1,0 +1,7 @@
+settings:
+  dev:
+    name: dev
+    debug: true
+  production:
+    name: production
+    debug: false
