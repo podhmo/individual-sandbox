@@ -1,0 +1,72 @@
+{
+  "children": {
+    "content": {
+      "children": {},
+      "freq": 1,
+      "name": "content",
+      "type": "string"
+    },
+    "json": {
+      "children": {},
+      "freq": 2,
+      "name": "json",
+      "type": "string",
+      "type2": "array"
+    },
+    "object": {
+      "children": {
+        "array": {
+          "children": {
+            "boolean": {
+              "children": {},
+              "freq": 1,
+              "name": "boolean",
+              "type": "integer"
+            },
+            "integer": {
+              "children": {},
+              "freq": 1,
+              "name": "integer",
+              "type": "integer"
+            },
+            "null_value": {
+              "children": {},
+              "freq": 1,
+              "name": "null_value",
+              "type": "any"
+            }
+          },
+          "freq": 3,
+          "name": "array",
+          "type": "object",
+          "type2": "array"
+        },
+        "key": {
+          "children": {},
+          "freq": 1,
+          "name": "key",
+          "type": "string"
+        }
+      },
+      "freq": 1,
+      "name": "object",
+      "type": "object"
+    },
+    "paragraph": {
+      "children": {},
+      "freq": 1,
+      "name": "paragraph",
+      "type": "string"
+    },
+    "yaml": {
+      "children": {},
+      "freq": 2,
+      "name": "yaml",
+      "type": "string",
+      "type2": "array"
+    }
+  },
+  "freq": 1,
+  "name": "*root*",
+  "type": "object"
+}
