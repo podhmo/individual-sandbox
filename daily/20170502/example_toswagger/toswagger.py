@@ -33,10 +33,10 @@ class NameResolver:
 
 
 def make_signature(info):
-    if info["type"] == "object":
-        return frozenset((k, v["type"], v.get("type2")) for k, v in info["children"].items())
-    elif info.get("type2") == "array":
+    if info.get("type2") == "array":
         return frozenset(["*a*", *[(k, v["type"], v.get("type2")) for k, v in info["children"].items()]])
+    elif info["type"] == "object":
+        return frozenset((k, v["type"], v.get("type2")) for k, v in info["children"].items())
     else:
         return frozenset((info["type"], info.get("type2")))
 
@@ -48,10 +48,11 @@ class Detector:
     def detect(self, d, name):
         s = OrderedDict()
         s[name] = self.make_info()
-        self._detect(d, s[name], name)
+        path = [name]
+        self._detect(d, s[name], name, path=path)
         return s[name]
 
-    def _detect(self, d, s, name):
+    def _detect(self, d, s, name, path):
         if hasattr(d, "keys"):
             s["type"] = "object"
             s["name"] = name
@@ -59,12 +60,18 @@ class Detector:
             for k, v in d.items():
                 if k not in s["children"]:
                     s["children"][k] = self.make_info()
-                self._detect(v, s["children"][k], k)
+                path.append(k)
+                self._detect(v, s["children"][k], k, path=path)
+                path.pop()
+            s["ref"] = "#/{}".format("/".join(path))
         elif isinstance(d, (list, tuple)):
             s["type2"] = "array"
             s["freq2"] += 1
-            for x in d:
-                self._detect(x, s, name)  # xxx
+            for i, x in enumerate(d):
+                path.append(str(i))
+                self._detect(x, s, name, path=path)  # xxx
+                path.pop()
+            s["ref"] = "#/{}".format("/".join(path))
         else:
             if d is None:
                 s["type2"] = "null"
@@ -74,6 +81,7 @@ class Detector:
                 s["freq"] += 1
                 s["type"] = typ
                 s["values"].append(d)
+            s["ref"] = "#/{}".format("/".join(path))
 
 
 class Emitter:
@@ -99,6 +107,7 @@ class Emitter:
         item_info = copy.deepcopy(info)
         item_info.pop("type2")
         item_info["name"] = "{}Item".format(item_info["name"])
+
         d = OrderedDict(type="array")
         d["items"] = self.make_schema(item_info)
         schema_name = self.resolve_name(info["name"], info["signature"])

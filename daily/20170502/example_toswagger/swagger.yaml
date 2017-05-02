@@ -3,11 +3,6 @@ definitions:
     type: array
     items:
       type: string
-      example: rigid
-  yaml:
-    type: array
-    items:
-      type: string
       example: slim and flexible
   arrayItem:
     type: object
@@ -42,7 +37,7 @@ definitions:
       json:
         $ref: '#/definitions/json'
       yaml:
-        $ref: '#/definitions/yaml'
+        $ref: '#/definitions/json'
       object:
         $ref: '#/definitions/object'
       paragraph:
