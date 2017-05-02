@@ -1,0 +1,43 @@
+definitions:
+  array:
+    items:
+      $ref: '#/definitions/arrayItem'
+    type: array
+  arrayItem:
+    properties:
+      boolean:
+        type: boolean
+      integer:
+        type: integer
+      null_value:
+        type: any
+        x-nullable: true
+    type: object
+  json:
+    items:
+      type: string
+    type: array
+  object:
+    properties:
+      array:
+        $ref: '#/definitions/array'
+      key:
+        type: string
+    type: object
+  top:
+    properties:
+      content:
+        type: string
+      json:
+        $ref: '#/definitions/json'
+      object:
+        $ref: '#/definitions/object'
+      paragraph:
+        type: string
+      yaml:
+        $ref: '#/definitions/yaml'
+    type: object
+  yaml:
+    items:
+      type: string
+    type: array
