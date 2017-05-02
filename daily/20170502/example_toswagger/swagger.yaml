@@ -1,3 +1,10 @@
+# minimap ###
+# *top
+#   * json[]
+#   * yaml[]
+#   * object
+#     * array[]
+#       * arrayItem
 definitions:
   json:
     type: array

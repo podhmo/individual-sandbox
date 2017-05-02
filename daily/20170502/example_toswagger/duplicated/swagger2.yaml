@@ -1,3 +1,10 @@
+# minimap ###
+# *top
+#   * ob
+#     * sin
+#   * math
+#     * sin
+#     * cos
 definitions:
   onesSin:
     type: object
