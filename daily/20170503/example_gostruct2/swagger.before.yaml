@@ -1,0 +1,79 @@
+definitions:
+  systemLog:
+    type: object
+    properties:
+      destination:
+        type: string
+        example: file
+      path:
+        type: string
+        example: /var/log/mongodb/mongod.log
+      logAppend:
+        type: boolean
+        example: true
+    required:
+    - destination
+    - path
+    - logAppend
+  journal:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        example: true
+    required:
+    - enabled
+  storage:
+    type: object
+    properties:
+      journal:
+        $ref: '#/definitions/journal'
+    required:
+    - journal
+  processManagement:
+    type: object
+    properties:
+      fork:
+        type: boolean
+        example: true
+    required:
+    - fork
+  net:
+    type: object
+    properties:
+      bindIp:
+        type: string
+        example: 127.0.0.1
+      port:
+        type: integer
+        example: 27017
+    required:
+    - bindIp
+    - port
+  setParameter:
+    type: object
+    properties:
+      enableLocalhostAuthBypass:
+        type: boolean
+        example: false
+    required:
+    - enableLocalhostAuthBypass
+  conf:
+    type: object
+    properties:
+      systemLog:
+        $ref: '#/definitions/systemLog'
+      storage:
+        $ref: '#/definitions/storage'
+      processManagement:
+        $ref: '#/definitions/processManagement'
+      net:
+        $ref: '#/definitions/net'
+      setParameter:
+        $ref: '#/definitions/setParameter'
+    required:
+    - systemLog
+    - storage
+    - processManagement
+    - net
+    - setParameter

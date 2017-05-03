@@ -1,0 +1,80 @@
+definitions:
+  LogSetting:
+    type: object
+    properties:
+      destination:
+        type: string
+        example: file
+      path:
+        type: string
+        example: /var/log/mongodb/mongod.log
+      logAppend:
+        type: boolean
+        example: true
+    required:
+    - destination
+    - path
+    - logAppend
+  journal:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        example: true
+    required:
+    - enabled
+  StorageSetting:
+    type: object
+    properties:
+      journal:
+        $ref: '#/definitions/journal'
+    required:
+    - journal
+  ProcessSetting:
+    type: object
+    properties:
+      fork:
+        type: boolean
+        example: true
+    required:
+    - fork
+  NetSetting:
+    type: object
+    properties:
+      bindIp:
+        type: string
+        example: 127.0.0.1
+      port:
+        type: integer
+        example: 27017
+    required:
+    - bindIp
+    - port
+  setParameter:
+    type: object
+    properties:
+      enableLocalhostAuthBypass:
+        type: boolean
+        example: false
+    required:
+    - enableLocalhostAuthBypass
+  conf:
+    type: object
+    properties:
+      systemLog:
+        $ref: '#/definitions/LogSetting'
+      storage:
+        $ref: '#/definitions/StorageSetting'
+      processManagement:
+        $ref: '#/definitions/ProcessSetting'
+      net:
+        $ref: '#/definitions/NetSetting'
+      setParameter:
+        $ref: '#/definitions/setParameter'
+    required:
+    - systemLog
+    - storage
+    - processManagement
+    - net
+    - setParameter
+    description: my config file

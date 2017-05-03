@@ -1,0 +1,10 @@
+"#/conf":
+  description: my config file
+"#/conf/systemLog":
+  name: LogSetting
+"#/conf/processManagement":
+  name: ProcessSetting
+"#/conf/net":
+  name: NetSetting
+"#/conf/storage":
+  name: StorageSetting
