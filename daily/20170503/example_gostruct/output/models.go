@@ -2,7 +2,7 @@ package main
 
 // Conf :
 type Conf struct {
-	Bridge      Bridge      `json:"bridge" bson:"bridge"`
+	Bridge      *Bridge     `json:"bridge" bson:"bridge"`
 	Description string      `json:"description" bson:"description"`
 	Platforms   Platforms   `json:"platforms" bson:"platforms"`
 	Accessories Accessories `json:"accessories" bson:"accessories"`
@@ -10,10 +10,10 @@ type Conf struct {
 
 // Bridge :
 type Bridge struct {
-	Port     int64  `json:"port" bson:"port"`
-	Pin      string `json:"pin" bson:"pin"`
 	Name     string `json:"name" bson:"name"`
+	Port     int64  `json:"port" bson:"port"`
 	Username string `json:"username" bson:"username"`
+	Pin      string `json:"pin" bson:"pin"`
 }
 
 // Platforms :
@@ -21,8 +21,8 @@ type Platforms []PlatformsItem
 
 // PlatformsItem :
 type PlatformsItem struct {
-	Platform string `json:"platform" bson:"platform"`
 	Name     string `json:"name" bson:"name"`
+	Platform string `json:"platform" bson:"platform"`
 }
 
 // Accessories :
@@ -30,6 +30,6 @@ type Accessories []AccessoriesItem
 
 // AccessoriesItem :
 type AccessoriesItem struct {
-	Accessory string `json:"accessory" bson:"accessory"`
 	Name      string `json:"name" bson:"name"`
+	Accessory string `json:"accessory" bson:"accessory"`
 }

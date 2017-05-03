@@ -21,6 +21,7 @@ class Emitter:
         self.doc = doc
         self.m = m or go.Module()
         self.defined = {}  # ref -> name, todo: conflict
+        self.nullable = {}  # ref
         self.type_mapping = mapping or self.DEFAULT_MAPPING
 
     def resolve_type(self, prop):
@@ -51,8 +52,12 @@ class Emitter:
                     m.comment("{} :{}".format(go.goname(name), prop.get("description", "")))
                 if "$ref" in prop:
                     typename = self.emit_ref(prop["$ref"])
+                    if self.nullable[prop["$ref"]]:
+                        typename = "*{}".format(typename)
                 else:
                     typename = self.resolve_type(prop)
+                    if prop.get("x-nullable", False):
+                        typename = "*{}".format(typename)
                 m.stmt('{} {}{}`'.format(go.goname(name), typename, self.resolve_tag(name)))
         return structname
 
@@ -74,10 +79,14 @@ class Emitter:
             return self.defined[ref]
 
         d = access_by_json_pointer(self.doc, ref[1:])
+        self.nullable[ref] = self.is_nullable(d)
         name = ref.rsplit("/", 1)[-1]
         typename = self.defined[ref] = PreString("")
         typename.append(self.emit(d, name=name))
         return typename
+
+    def is_nullable(self, d):
+        return d.get("x-nullable", False)
 
 
 def main():
