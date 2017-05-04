@@ -84,12 +84,7 @@ def stringable(cls):  # why not using inheritance?
     return cls
 
 
-def typeable(cls):
-    if hasattr(cls, "_typeable"):
-        return cls
-    # marked
-    cls._typeable = True
-
+class Typeaable:
     def value(self, name):
         return Value(name, type=self, repository=self.repository)
 
@@ -102,35 +97,24 @@ def typeable(cls):
             name = typename.replace(self.name, name)
         return name
 
-    cls.value = value
-    cls.__call__ = value
-    cls.typename = typename
-    return cls
+    __call__ = value
 
 
-def valueable(cls):
-    if hasattr(cls, "_valueable"):
-        return cls
-    # marked
-    cls._valueable = True
-
+class Valueable:
+    @reify
     def ref(self):
         return Ref(self, repository=self.repository)
 
+    @reify
     def pointer(self):
         return Pointer(self, repository=self.repository)
 
+    @reify
     def slice(self):
         return Slice(self, repository=self.repository)
 
     def as_argument(self, file):
         return "{} {}".format(self.name, self.typename(file))
-
-    cls.ref = reify(ref)
-    cls.pointer = reify(pointer)
-    cls.slice = reify(slice)
-    cls.as_argument = as_argument
-    return cls
 
 
 @stringable
@@ -184,8 +168,7 @@ class File:
 
 
 @stringable
-@typeable
-class Enum:
+class Enum(Typeaable):
     def __init__(self, name, type, file, comment=None):
         self.name = name
         self.type = type
@@ -235,8 +218,7 @@ class ImportedPackage:
 
 
 @stringable
-@typeable
-class Type:
+class Type(Typeaable):
     def __init__(self, name, package):
         self.name = name
         self.package = package
@@ -260,8 +242,7 @@ class Function:
 
 
 @stringable
-@valueable
-class Value:
+class Value(Valueable):
     """
     func f(<x int>)
     func f(<x foo.bar>)
@@ -293,8 +274,7 @@ class Value:
 
 
 @stringable
-@valueable
-class Ref(object):
+class Ref(Valueable):
     def __init__(self, v):
         self.v = v
 
@@ -317,8 +297,7 @@ class Ref(object):
 
 
 @stringable
-@valueable
-class Pointer(object):
+class Pointer(Valueable):
     def __init__(self, v):
         self.v = v
 
@@ -341,8 +320,7 @@ class Pointer(object):
 
 
 @stringable
-@valueable
-class Slice(object):
+class Slice(Valueable):
     def __init__(self, v):
         self.v = v
 
