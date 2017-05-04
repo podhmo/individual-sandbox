@@ -1,17 +1,12 @@
 package main
 
-// Conf :my config file
+// Conf :
 type Conf struct {
-	ProcessManagement ProcessSetting `json:"processManagement" bson:"processManagement"`
-	SetParameter      SetParameter   `json:"setParameter" bson:"setParameter"`
-	SystemLog         LogSetting     `json:"systemLog" bson:"systemLog"`
-	Storage           StorageSetting `json:"storage" bson:"storage"`
-	Net               NetSetting     `json:"net" bson:"net"`
-}
-
-// ProcessSetting :
-type ProcessSetting struct {
-	Fork bool `json:"fork" bson:"fork"`
+	SetParameter      SetParameter      `json:"setParameter" bson:"setParameter"`
+	Net               Net               `json:"net" bson:"net"`
+	ProcessManagement ProcessManagement `json:"processManagement" bson:"processManagement"`
+	SystemLog         SystemLog         `json:"systemLog" bson:"systemLog"`
+	Storage           Storage           `json:"storage" bson:"storage"`
 }
 
 // SetParameter :
@@ -19,25 +14,30 @@ type SetParameter struct {
 	EnableLocalhostAuthBypass bool `json:"enableLocalhostAuthBypass" bson:"enableLocalhostAuthBypass"`
 }
 
-// LogSetting :
-type LogSetting struct {
-	LogAppend   bool   `json:"logAppend" bson:"logAppend"`
-	Destination string `json:"destination" bson:"destination"`
-	Path        string `json:"path" bson:"path"`
+// Net :
+type Net struct {
+	BindIP string `json:"bindIp" bson:"bindIp"`
+	Port   int64  `json:"port" bson:"port"`
 }
 
-// StorageSetting :
-type StorageSetting struct {
+// ProcessManagement :
+type ProcessManagement struct {
+	Fork bool `json:"fork" bson:"fork"`
+}
+
+// SystemLog :
+type SystemLog struct {
+	LogAppend   bool   `json:"logAppend" bson:"logAppend"`
+	Path        string `json:"path" bson:"path"`
+	Destination string `json:"destination" bson:"destination"`
+}
+
+// Storage :
+type Storage struct {
 	Journal Journal `json:"journal" bson:"journal"`
 }
 
 // Journal :
 type Journal struct {
 	Enabled bool `json:"enabled" bson:"enabled"`
-}
-
-// NetSetting :
-type NetSetting struct {
-	BindIP string `json:"bindIp" bson:"bindIp"`
-	Port   int64  `json:"port" bson:"port"`
 }

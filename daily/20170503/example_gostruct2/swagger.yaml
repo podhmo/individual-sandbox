@@ -1,5 +1,5 @@
 definitions:
-  LogSetting:
+  systemLog:
     type: object
     properties:
       destination:
@@ -23,14 +23,14 @@ definitions:
         example: true
     required:
     - enabled
-  StorageSetting:
+  storage:
     type: object
     properties:
       journal:
         $ref: '#/definitions/journal'
     required:
     - journal
-  ProcessSetting:
+  processManagement:
     type: object
     properties:
       fork:
@@ -38,7 +38,7 @@ definitions:
         example: true
     required:
     - fork
-  NetSetting:
+  net:
     type: object
     properties:
       bindIp:
@@ -62,13 +62,13 @@ definitions:
     type: object
     properties:
       systemLog:
-        $ref: '#/definitions/LogSetting'
+        $ref: '#/definitions/systemLog'
       storage:
-        $ref: '#/definitions/StorageSetting'
+        $ref: '#/definitions/storage'
       processManagement:
-        $ref: '#/definitions/ProcessSetting'
+        $ref: '#/definitions/processManagement'
       net:
-        $ref: '#/definitions/NetSetting'
+        $ref: '#/definitions/net'
       setParameter:
         $ref: '#/definitions/setParameter'
     required:
@@ -77,4 +77,3 @@ definitions:
     - processManagement
     - net
     - setParameter
-    description: my config file
