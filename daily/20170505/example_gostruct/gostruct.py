@@ -18,45 +18,6 @@ class reify(object):
         return val
 
 
-class Stringer:
-    def string(self, value):
-        return value.string()
-
-
-class VerboseStringer:
-    def string(self, value):
-        if hasattr(value, "verbose"):
-            return value.verbose()
-        else:
-            return "<{value.__class__.__module__}.{value.__class__.__name__}: {!r}>".format(
-                value.string(), value=value
-            )
-
-
-class FullnameStringer:
-    def string(self, value):
-        return value.fullname
-
-
-class Repository:
-    # todo: writer
-    def __init__(self, stringer):
-        self.stringer = stringer
-        self.builtins = self.make_builtins()
-
-    def __getattr__(self, name):
-        return getattr(self.builtins, name)
-
-    def make_builtins(self):
-        b = Package("*builtins*", name="*builtins*", virtual=True, repository=self)
-        b.int = b.type("int")
-        b.string = b.type("string")
-        return b
-
-    def package(self, fullname, name=None):
-        return Package(fullname, name=name, repository=self)
-
-
 def nameof(fullname, name=None):
     return name or fullname.split("/", -1)[-1]
 
@@ -76,8 +37,13 @@ def stringable(cls):  # why not using inheritance?
     def __str__(self):
         return self.repository.stringer.string(self)
 
+    def new_instance(self, cls, *args, **kwargs):
+        kwargs["repository"] = self.repository
+        return cls(*args, **kwargs)
+
     cls.__str__ = __str__
     cls.__init__ = init
+    cls.new_instance = new_instance
 
     if not hasattr(cls, "string"):
         raise NotImplementedError("string() method is not found")
@@ -85,11 +51,13 @@ def stringable(cls):  # why not using inheritance?
 
 
 class Typeaable:
+    # self.name
+    # self.package
     def value(self, name):
-        return Value(name, type=self, repository=self.repository)
+        return self.new_instance(Value, name, type=self)
 
     def typename(self, file, typename=None):
-        if file.package.fullname == self.package.fullname:
+        if self.package.virtual or file.package.fullname == self.package.fullname:
             name = self.name
         else:
             name = "{}.{}".format(self.package.name, self.name)
@@ -101,19 +69,20 @@ class Typeaable:
 
 
 class Valueable:
+    # self.name
     @reify
     def ref(self):
-        return Ref(self, repository=self.repository)
+        return self.new_instance(Ref, self)
 
     @reify
     def pointer(self):
-        return Pointer(self, repository=self.repository)
+        return self.new_instance(Pointer, self)
 
     @reify
     def slice(self):
-        return Slice(self, repository=self.repository)
+        return self.new_instance(Slice, self)
 
-    def as_argument(self, file):
+    def withtype(self, file):
         return "{} {}".format(self.name, self.typename(file))
 
 
@@ -134,13 +103,13 @@ class Package:
         return os.path.join(os.getenv("GOPATH"), "src", self.fullname)
 
     def import_(self, fullname, name=None):
-        return ImportedPackage(fullname, name, repository=self.repository)
+        return self.new_instance(ImportedPackage, fullname, name)
 
     def file(self, name):
-        return File(name, package=self, repository=self.repository)
+        return self.new_instance(File, name, package=self)
 
     def type(self, name):
-        return Type(name, package=self, repository=self.repository)
+        return self.new_instance(Type, name, package=self)
 
 
 @stringable
@@ -149,6 +118,8 @@ class File:
         self.name = name
         self.package = package
         self.imported = OrderedDict()
+        self.functions = OrderedDict()
+        self.enums = OrderedDict()
 
     def string(self):
         return self.filepath
@@ -164,7 +135,14 @@ class File:
         return v
 
     def enum(self, name, type, comment=None):
-        return Enum(name, file=self, type=type, comment=comment, repository=self.repository)
+        enum = self.new_instance(Enum, name, file=self, type=type, comment=comment)
+        self.enums[name] = enum
+        return enum
+
+    def func(self, name, comment=None):
+        function = self.new_instance(Function, name, file=self, comment=comment)
+        self.functions[name] = function
+        return function
 
 
 @stringable
@@ -233,12 +211,123 @@ class Type(Typeaable):
         return "{}.{}".format(self.package.fullname, self.name)
 
 
-class Function:
-    def __init__(self, name, file, args, returns=None):
+@stringable
+class Function(Valueable):
+    def __init__(self, name, file, args=None, returns=None, body=None, comment=None):
         self.name = name
         self.file = file
+        self._args = args
+        self._returns = returns
+        self._body = body
+        self.comment = comment
+
+    def __getattr__(self, name):
+        for e in self._args or []:
+            if e.name == name:
+                return e
+        for e in self._returns or []:
+            if e.name == name:
+                return e
+        raise AttributeError(name)
+
+    def __call__(self, fn):
+        return fn
+
+    def args(self, *args):
+        args = self.new_instance(Args, args, function=self)
+        return self.new_instance(
+            self.__class__,
+            name=self.name,
+            file=self.file,
+            args=args,
+            returns=self._returns,
+            body=self._body,
+            comment=self.comment,
+        )
+
+    def returns(self, *args):
+        returns = self.new_instance(Returns, args, function=self)
+        return self.new_instance(
+            self.__class__,
+            name=self.name,
+            file=self.file,
+            args=self._args,
+            returns=returns,
+            body=self._body,
+            comment=self.comment,
+        )
+
+    def body(self, fn):
+        return self.new_instance(
+            self.__class__,
+            name=self.name,
+            file=self.file,
+            args=self._args,
+            returns=self._returns,
+            body=fn,
+            comment=self.comment,
+        )
+
+    # todo: writer
+    def __call__(self, m):
+        m.append(self.string())
+        m.stmt(" {")
+        with m.scope():
+            self._body(m)
+        m.stmt("}")
+
+    def string(self):
+        args = "" if self._args is None else self._args.withtype(self.file)
+        returns = "" if self._returns is None else " {}".format(self._returns.withtype(self.file))
+        return "func {}({}) {}".format(self.name, self._args, self._returns)
+
+    def typename(self, file):
+        args = "" if self._args is None else self._args.typename(file)
+        returns = "" if self._returns is None else " {}".format(self._returns.typename(file))
+        return "func({}){}".format(args, returns)
+
+
+@stringable
+class Args:
+    def __init__(self, args, function):
         self.args = args
-        self.returns = returns
+        self.function = function
+
+    def __iter__(self):
+        return iter(self.args)
+
+    def string(self):
+        return self.withtype(self.function.file)
+
+    def typename(self, file):
+        return ", ".join([e.typename(file) for e in self.args])
+
+    def withtype(self, file):
+        return ", ".join([e.withtype(file) for e in self.args])
+
+
+@stringable
+class Returns:
+    def __init__(self, args, function):
+        self.args = args
+        self.function = function
+
+    def __iter__(self):
+        return iter(self.args)
+
+    def string(self):
+        return self.withtype(self.function.file)
+
+    def typename(self, file):
+        if not self.args:
+            return ""
+        elif len(self.args) == 1:
+            return self.args[0].typename(file)
+        else:
+            return "({})".format(", ".join([e.typename(file) for e in self.args]))
+
+    def withtype(self, file):
+        return self.typename(file)  # xxx
 
 
 @stringable
@@ -335,9 +424,53 @@ class Slice(Valueable):
     def typename(self, file):
         return "[]{}".format(self.v.typename(file))
 
-    def as_argument(self, file, typename=None):
-        return self.v.as_argument(file=file, typename=typename or self.typename(file))
+    def withtype(self, file, typename=None):
+        return self.v.withtype(file=file, typename=typename or self.typename(file))
 
 
-def get_repository(stringer=Stringer()):
-    return Repository(stringer)
+class Stringer:
+    def string(self, value):
+        return value.string()
+
+
+class VerboseStringer:
+    def string(self, value):
+        if hasattr(value, "verbose"):
+            return value.verbose()
+        else:
+            return "<{value.__class__.__module__}.{value.__class__.__name__}: {!r}>".format(
+                value.string(), value=value
+            )
+
+
+class FullnameStringer:
+    def string(self, value):
+        return value.fullname
+
+
+class Writer:
+    pass
+
+
+def get_repository(stringer=Stringer(), writer=Writer()):
+    return Repository(stringer, writer)
+
+
+class Repository:
+    # todo: writer
+    def __init__(self, stringer, writer):
+        self.stringer = stringer
+        self.writer = writer
+        self.builtins = self.make_builtins()
+
+    def __getattr__(self, name):
+        return getattr(self.builtins, name)
+
+    def make_builtins(self):
+        b = Package("*builtins*", name="*builtins*", virtual=True, repository=self)
+        b.int = b.type("int")
+        b.string = b.type("string")
+        return b
+
+    def package(self, fullname, name=None):
+        return Package(fullname, name=name, repository=self)
