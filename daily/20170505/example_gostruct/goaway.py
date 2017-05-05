@@ -1,5 +1,10 @@
 import os.path
-from collections import OrderedDict
+from collections import (
+    OrderedDict,
+    defaultdict,
+)
+from prestring import LazyFormat
+from prestring.go import GoModule
 
 
 class reify(object):
@@ -92,9 +97,18 @@ class Package:
         self.fullname = fullname
         self.name = nameof(fullname, name)
         self.virtual = virtual
+        self.files = OrderedDict()
 
     def string(self):
         return "package {}".format(self.name)
+
+    def verbose(self):
+        return self.string()
+
+    def __getattr__(self, name):
+        v = self.symbol(name)
+        setattr(self, name, v)
+        return v
 
     @property
     def filepath(self):
@@ -103,13 +117,19 @@ class Package:
         return os.path.join(os.getenv("GOPATH"), "src", self.fullname)
 
     def import_(self, fullname, name=None):
-        return self.new_instance(ImportedPackage, fullname, name)
+        return self.new_instance(ImportedPackage, fullname, name, package=self)
 
     def file(self, name):
-        return self.new_instance(File, name, package=self)
+        if name not in self.files:
+            file = self.new_instance(File, name, package=self)
+            self.files[name] = file
+        return self.files[name]
 
     def type(self, name):
         return self.new_instance(Type, name, package=self)
+
+    def symbol(self, name):
+        return self.new_instance(Symbol, name, package=self)
 
 
 @stringable
@@ -125,13 +145,13 @@ class File:
         return self.filepath
 
     @property
-    def filepath(self):
+    def fullname(self):
         return os.path.join(self.package.filepath, self.name)
 
-    def import_(self, fullname, name=None):
+    def import_(self, fullname, as_=None):
         if fullname in self.imported:
             return self.imported[fullname]
-        v = self.imported[fullname] = self.package.import_(fullname, name=name)
+        v = self.imported[fullname] = self.package.import_(fullname, name=as_)
         return v
 
     def enum(self, name, type, comment=None):
@@ -184,15 +204,29 @@ class Enum(Typeaable):
 
 @stringable
 class ImportedPackage:
-    def __init__(self, fullname, name=None):
+    def __init__(self, fullname, name=None, package=None):
         self.fullname = fullname
         self.name = nameof(fullname, name)
+        self.as_ = name
+        self.package = package
+        self.virtual = False
 
     def string(self):
         return self.fullname
 
+    def verbose(self):
+        return self.string()
+
     def type(self, name):
         return Type(name, package=self)
+
+    def __getattr__(self, name):
+        v = self.symbol(name)
+        setattr(self, name, v)
+        return v
+
+    def symbol(self, name):
+        return self.new_instance(Symbol, name, package=self)
 
 
 @stringable
@@ -212,6 +246,23 @@ class Type(Typeaable):
 
 
 @stringable
+class Symbol(Type):
+    def __init__(self, name, package):
+        self.name = name
+        self.package = package
+
+    def __call__(self, *args):
+        return LazyFormat("{}({})", self.string(), ", ".join([_encode(e) for e in args]))
+
+
+def _encode(v):
+    if isinstance(v, (str, bytes)):
+        return '"{}"'.format(v)
+    else:
+        return str(v)
+
+
+@stringable
 class Function(Valueable):
     def __init__(self, name, file, args=None, returns=None, body=None, comment=None):
         self.name = name
@@ -224,62 +275,39 @@ class Function(Valueable):
     def __getattr__(self, name):
         for e in self._args or []:
             if e.name == name:
+                setattr(self, name, e)
                 return e
         for e in self._returns or []:
             if e.name == name:
+                setattr(self, name, e)
                 return e
         raise AttributeError(name)
 
-    def __call__(self, fn):
-        return fn
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, tb):
+        return None
 
     def args(self, *args):
-        args = self.new_instance(Args, args, function=self)
-        return self.new_instance(
-            self.__class__,
-            name=self.name,
-            file=self.file,
-            args=args,
-            returns=self._returns,
-            body=self._body,
-            comment=self.comment,
-        )
+        self._args = self.new_instance(Args, args, function=self)  # xxx
+        return self
 
     def returns(self, *args):
-        returns = self.new_instance(Returns, args, function=self)
-        return self.new_instance(
-            self.__class__,
-            name=self.name,
-            file=self.file,
-            args=self._args,
-            returns=returns,
-            body=self._body,
-            comment=self.comment,
-        )
+        self._returns = self.new_instance(Returns, args, function=self)  # xxx
+        return self
 
     def body(self, fn):
-        return self.new_instance(
-            self.__class__,
-            name=self.name,
-            file=self.file,
-            args=self._args,
-            returns=self._returns,
-            body=fn,
-            comment=self.comment,
-        )
+        self._body = fn  # xxx
+        return self
 
-    # todo: writer
-    def __call__(self, m):
-        m.append(self.string())
-        m.stmt(" {")
-        with m.scope():
-            self._body(m)
-        m.stmt("}")
+    def __call__(self, *args):
+        return LazyFormat("{}({})", self.name, ", ".join([_encode(e) for e in args]))
 
     def string(self):
         args = "" if self._args is None else self._args.withtype(self.file)
         returns = "" if self._returns is None else " {}".format(self._returns.withtype(self.file))
-        return "func {}({}) {}".format(self.name, self._args, self._returns)
+        return "func {}({}) {}".format(self.name, args, returns)
 
     def typename(self, file):
         args = "" if self._args is None else self._args.typename(file)
@@ -332,12 +360,6 @@ class Returns:
 
 @stringable
 class Value(Valueable):
-    """
-    func f(<x int>)
-    func f(<x foo.bar>)
-    x += 1
-    """
-
     def __init__(self, name, type):
         self.name = name
         self.type = type
@@ -449,10 +471,54 @@ class FullnameStringer:
 
 
 class Writer:
-    pass
+    def __init__(self, module_factory=GoModule):
+        self.modules = defaultdict(module_factory)  # module is prestring's module
+
+    def create_import_function(self, im, file):
+        def import_(fullname, as_=None):
+            im(fullname, as_=as_)
+            return file.import_(fullname, as_=as_)
+
+        return import_
+
+    def _write_import_part(self, file, m):
+        with m.import_group() as im:
+            m.import_ = self.create_import_function(im, file)
+            for ipackage in file.imported.values():
+                im(ipackage.fullname, as_=ipackage.as_)
+
+    def _write_function_part(self, file, m):
+        for func in file.functions.values():
+            m.append(str(func))
+            m.stmt(" {")
+            with m.scope():
+                func._body(m)
+            m.stmt("}")
+            m.sep()
+
+    def write_file(self, file, m=None):
+        m = m or self.modules[file.fullname]
+        m.stmt(str(file.package))
+        m.sep()
+        self._write_import_part(file, m)
+        self._write_function_part(file, m)
+        return m
 
 
-def get_repository(stringer=Stringer(), writer=Writer()):
+class LazyString(object):
+    def __init__(self, v):
+        self.v = v
+
+    def __getattr__(self, name):
+        return getattr(self.v, name)
+
+    def __str__(self):
+        return str(self)
+
+
+def get_repository(stringer=None, writer=None):
+    stringer = stringer or Stringer()
+    writer = writer or Writer()
     return Repository(stringer, writer)
 
 
@@ -462,6 +528,7 @@ class Repository:
         self.stringer = stringer
         self.writer = writer
         self.builtins = self.make_builtins()
+        self.packages = OrderedDict()
 
     def __getattr__(self, name):
         return getattr(self.builtins, name)
@@ -473,4 +540,7 @@ class Repository:
         return b
 
     def package(self, fullname, name=None):
-        return Package(fullname, name=name, repository=self)
+        if fullname not in self.packages:
+            package = Package(fullname, name=name, repository=self)
+            self.packages[fullname] = package
+        return self.packages[fullname]

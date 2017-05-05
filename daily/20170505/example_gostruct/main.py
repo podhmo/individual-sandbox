@@ -1,20 +1,34 @@
 # todo:
 # - struct definition
-# - function definition (method definition)
+# - method definition
 # - writer
 
-import gostruct
-from prestring.go import GoModule
-r = gostruct.get_repository()
+import goaway
+r = goaway.get_repository()
 f = r.package("main").file("hello.go")
+fmt = f.import_("fmt")
+
+with f.func("hello") as hello:
+
+    @hello.body
+    def body(m):
+        m.stmt(fmt.Println("hello world"))
 
 
-hello = f.func("hello")
-@hello.body
-def hello(m):
-    # m.import_("fmt")  # xxx
-    m.stmt('fmt.Println("hello world")')
+with f.func("add").args(r.int("x"), r.int("y")).returns(r.int) as add:
 
-m = GoModule()
-m.stmt(f.package)
+    @add.body
+    def _(m):
+        m.return_("{} + {}".format(add.x, add.y))
+
+
+with f.func("main") as main:
+
+    @main.body
+    def body(m):
+        m.stmt(hello())
+        m.stmt(fmt.Println(1, "+", 2, add(1, 2)))
+
+
+m = r.writer.write_file(f)
 print(m)

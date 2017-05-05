@@ -1,8 +1,8 @@
-import gostruct
+import goaway
 from prestring.go import Module
 
-r = gostruct.get_repository(gostruct.VerboseStringer())
-r = gostruct.get_repository()
+r = goaway.get_repository(goaway.VerboseStringer())
+r = goaway.get_repository()
 models = r.package("github.com/foo/models")
 foo_file = models.file("foo.go")
 database = foo_file.import_("github.com/foo/database")
@@ -55,3 +55,6 @@ add(m)
 print("-")
 print(m)
 
+
+fmt = r.package("fmt")
+print(fmt.Println("hello %d %d", add.x, 10))
