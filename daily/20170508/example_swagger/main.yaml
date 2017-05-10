@@ -1,0 +1,3 @@
+paths:
+  /api/foo:
+    $ref: "./api_foo.yaml"

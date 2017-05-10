@@ -1,0 +1,9 @@
+get:
+  operationId: getFoo
+  responses:
+    200:
+      description: ok
+      schema:
+        properties:
+          message:
+            type: string
