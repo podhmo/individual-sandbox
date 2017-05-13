@@ -3,9 +3,15 @@ import sys
 from dictknife import loading, deepmerge
 
 
+def _load_template(filename, encoding="utf-8"):
+    with open(filename) as rf:
+        return rf.read()  # python3.x only
+
+
 def run(template_path, data):
     env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(["."]), undefined=jinja2.StrictUndefined
+        loader=jinja2.FunctionLoader(_load_template),
+        undefined=jinja2.StrictUndefined,
     )
     t = env.get_or_select_template(template_path)
     return t.render(**data)
