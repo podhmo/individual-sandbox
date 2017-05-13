@@ -1,0 +1,24 @@
+definitions:
+  info:
+    x-go-type: "github.com/podhmo/person.Info"
+    type: object
+    properties:
+      description:
+        type: string
+  person:
+    description: ヒト
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+      father:
+        $ref: "#/definitions/person"
+      mother:
+        $ref: "#/definitions/person"
+      info:
+        $ref: "#/definitions/info"
+      info2:
+        x-go-pointer: true
+        $ref: "#/definitions/info"

@@ -1,0 +1,17 @@
+suit.go:
+  cardsuit:
+    type: string
+    description: 記号
+    enum:
+      spadeds:
+        value: ♠
+        description: スペード
+      hearts:
+        value: ♥
+        description: ハート
+      diamonds:
+        value: ♦
+        description: ダイヤ
+      clubs:
+        value: ♣
+        description: クラブ

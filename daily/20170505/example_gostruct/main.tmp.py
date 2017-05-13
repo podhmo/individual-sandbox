@@ -1,7 +1,6 @@
 import goaway
 from prestring.go import Module
 
-r = goaway.get_repository(goaway.VerboseStringer())
 r = goaway.get_repository()
 models = r.package("github.com/foo/models")
 foo_file = models.file("foo.go")
@@ -35,26 +34,23 @@ print(r.int("n").slice)
 print(r.int("n").slice.pointer)
 print(status2("s2").pointer.withtype(foo_file))
 
-print(foo_file.func("hello").args(r.int("x"), r.int("y")).returns(r.int).typename(foo_file))
-print(foo_file.func("hello").args(r.int("x"), r.int("y")).typename(foo_file))
+print(foo_file.func("hello", args=(r.int("x"), r.int("y")), returns=(r.int)).typename(foo_file))
+print(foo_file.func("hello", args=(r.int("x"), r.int("y"))).typename(foo_file))
 print(foo_file.func("hello").typename(foo_file))
 
-hello = foo_file.func("hello").args(r.int("x"), r.int("y")).returns(r.int)
-@hello.body
+@foo_file.func("hello", args=(r.int("x"), r.int("y")), returns=(r.int))
 def hello_body(m):
     m.stmt("fmt.Println('hai')")
 
-add = foo_file.func("add").args(r.int("x"), r.int("y")).returns(r.int)
-@add.body
+
+@foo_file.func("add", args=(r.int("x"), r.int("y")), returns=(r.int))
 def add(m):
-    print("hoi")
     m.return_("{} + {}".format(add.x, add.y))
 
 m = Module()
-add(m)
+add.write(m)
 print("-")
 print(m)
-
 
 fmt = r.package("fmt")
 print(fmt.Println("hello %d %d", add.x, 10))

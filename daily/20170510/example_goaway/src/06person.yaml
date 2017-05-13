@@ -1,0 +1,25 @@
+definitions:
+  gender:
+    type: string
+    enum:
+      - notKnown
+      - male
+      - female
+      - notApplicable
+  people:
+    type: array
+    items:
+      $ref: "#/definitions/person"
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+      gender:
+        $ref: "#/definitions/gender"
+      father:
+        $ref: "#/definitions/person"
+      mother:
+        $ref: "#/definitions/person"

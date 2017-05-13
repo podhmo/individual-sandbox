@@ -1,0 +1,20 @@
+definitions:
+  people:
+    type: array
+    items:
+      $ref: "#/definitions/person"
+  person:
+    description: ヒト
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+  group:
+    type: object
+    properties:
+      name:
+        type: string
+      members:
+        $ref: "#/definitions/people"

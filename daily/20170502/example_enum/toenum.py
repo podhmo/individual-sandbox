@@ -15,7 +15,9 @@ def emit_enum(name, schema, m):
     m.sep()
     with m.const_group() as cm:
         for e in schema["enum"]:
-            itemname = '{}{}{}'.format(typename, go.goname(e), "Reversed" if e.startswith("-") else "")
+            itemname = '{}{}{}'.format(
+                typename, go.goname(e), "Reversed" if e.startswith("-") else ""
+            )
             cm('// {} :'.format(itemname))
             cm('{} = "{}"'.format(itemname, e))
 

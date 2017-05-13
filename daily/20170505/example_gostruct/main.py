@@ -1,34 +1,26 @@
-# todo:
-# - struct definition
-# - method definition
-# - writer
-
 import goaway
+
 r = goaway.get_repository()
-f = r.package("main").file("hello.go")
+f = r.package("main").file("main.go")
 fmt = f.import_("fmt")
 
-with f.func("hello") as hello:
 
-    @hello.body
-    def body(m):
-        m.stmt(fmt.Println("hello world"))
-
-
-with f.func("add").args(r.int("x"), r.int("y")).returns(r.int) as add:
-
-    @add.body
-    def _(m):
-        m.return_("{} + {}".format(add.x, add.y))
+@f.func("hello")
+def hello(m):
+    m.stmt(fmt.Println("hello world"))
 
 
-with f.func("main") as main:
-
-    @main.body
-    def body(m):
-        m.stmt(hello())
-        m.stmt(fmt.Println(1, "+", 2, add(1, 2)))
+@f.func("add", args=(r.int("x"), r.int("y")), returns=r.int)
+def add(m):
+    m.return_("{} + {}".format(add.x, add.y))
 
 
-m = r.writer.write_file(f)
-print(m)
+@f.func("main")
+def main(m):
+    m.stmt(hello())
+    m.stmt(fmt.Printf("1 + 1 = %d\n", add(1, 2)))
+
+
+if __name__ == "__main__":
+    m = r.writer.write_file(f)
+    print(m)
