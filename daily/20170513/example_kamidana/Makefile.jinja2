@@ -1,0 +1,4 @@
+{% for name in apps.keys() %}{% if name is x %}
+gen{{name|prefix}}:
+	swagger2go {{name|swagger_path}} --package github.com/podhmo/foo --ref="{{name|swagger_ref}}" --file {{name|model_path}}
+{% endif %}{% endfor %}

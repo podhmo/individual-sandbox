@@ -1,0 +1,4 @@
+$inherit: ./base.toml
+nginx:
+  hostname: localhost
+

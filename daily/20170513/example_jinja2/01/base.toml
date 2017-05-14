@@ -1,0 +1,3 @@
+[nginx]
+webroot = "/var/www/project"
+logs = "/var/log/nginx/"

@@ -1,0 +1,9 @@
+apps:
+  fooAppX:
+    port: 8000
+  barAppX:
+    port: 8001
+  booAppX:
+    port: 8002
+  beeAppY:
+    port: 8003
