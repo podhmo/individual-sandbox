@@ -1,0 +1,7 @@
+kamidana Makefile.jinja2 --data apps.yaml --additionals=additionals.py
+genFoo:
+	swagger2go swagger/foo_app_x.yaml --package github.com/podhmo/foo --ref="#/definitions/fooAppData" --file ${GOPATH}/src/github.com/podhmo/model/gen_x_foo.go
+genBar:
+	swagger2go swagger/bar_app_x.yaml --package github.com/podhmo/foo --ref="#/definitions/barAppData" --file ${GOPATH}/src/github.com/podhmo/model/gen_x_bar.go
+genBoo:
+	swagger2go swagger/boo_app_x.yaml --package github.com/podhmo/foo --ref="#/definitions/booAppData" --file ${GOPATH}/src/github.com/podhmo/model/gen_x_boo.go
