@@ -1,0 +1,7 @@
+echo: {% for i in range(n) %}echo{{i}} {% endfor %}
+
+{% for i in range(n) %}
+echo{{i}}:
+	sleep 1
+	echo {{i}}
+{% endfor %}
