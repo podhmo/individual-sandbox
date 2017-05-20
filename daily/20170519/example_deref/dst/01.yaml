@@ -1,0 +1,7 @@
+properties:
+  name:
+    type: string
+    description: 名前
+  age:
+    type: integer
+    maximum: 100

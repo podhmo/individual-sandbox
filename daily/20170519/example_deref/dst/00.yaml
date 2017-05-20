@@ -1,0 +1,33 @@
+definitions:
+  people:
+    items:
+      properties:
+        name:
+          type: string
+          description: 名前
+        age:
+          type: integer
+          maximum: 100
+  person:
+    properties:
+      name:
+        type: string
+        description: 名前
+      age:
+        type: integer
+        maximum: 100
+  name:
+    type: string
+    description: 名前
+  age:
+    type: integer
+    maximum: 100
+paths:
+  /hello/name:
+    get:
+      operationId: hello
+      responses:
+        200:
+          description: ok
+          schema:
+            type: object

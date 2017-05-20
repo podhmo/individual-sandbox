@@ -1,0 +1,7 @@
+definitions:
+  AGE:
+    type: integer
+    maximum: 100
+  NAME:
+    type: string
+    description: 名前

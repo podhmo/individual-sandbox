@@ -1,0 +1,16 @@
+definitions:
+  people:
+    items:
+      $ref: "#/definitions/person"
+  person:
+    properties:
+      name:
+        $ref: "#/definitions/name"
+      age:
+        $ref: "#/definitions/age"
+  name:
+    type: string
+    description: 名前
+  age:
+    type: integer
+    maximum: 100

@@ -1,0 +1,9 @@
+paths:
+  /hello/name:
+    get:
+      operationId: hello
+      responses:
+        200:
+          description: ok
+          schema:
+            type: object
