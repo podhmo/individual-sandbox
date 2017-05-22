@@ -1,0 +1,8 @@
+{
+  "person": {
+    "properties": {
+      "name": "foo",
+      "age": "20"
+    }
+  }
+}
