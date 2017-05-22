@@ -1,0 +1,6 @@
+.. code-block:: bash
+
+{% with cmd="ls | sort" %}
+  $ {{cmd}}
+  {{cmd|spawn|indent(2)}}
+{% endwith %}

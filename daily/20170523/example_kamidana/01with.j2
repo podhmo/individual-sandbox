@@ -1,0 +1,9 @@
+{% with message="hello world" %}
+{{message}}
+
+{{message|upcase}}
+
+{{"%s!!"|format(message)}}
+
+{{"-foo\n-bar"|indent(2, true)}}
+{% endwith %}
