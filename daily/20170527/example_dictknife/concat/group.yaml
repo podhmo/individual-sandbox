@@ -1,0 +1,7 @@
+definitions:
+  group:
+    type: object
+    properties:
+      members:
+        type: array
+        items: "#/definitions/person"
