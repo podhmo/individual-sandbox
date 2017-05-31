@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
+	"os/user"
 	"strings"
 )
 
@@ -29,6 +31,17 @@ func main() {
 	}
 	{
 		filename := strings.Replace("~/.bashrc", "~", os.Getenv("HOME"), 1)
+		fmt.Println(filename)
+		if err := cat(filename); err != nil {
+			fmt.Println("@@@", err)
+		}
+	}
+	{
+		u, err := user.Current()
+		if err != nil {
+			log.Fatal(err)
+		}
+		filename := strings.Replace("~/.bashrc", "~", u.HomeDir, 1)
 		fmt.Println(filename)
 		if err := cat(filename); err != nil {
 			fmt.Println("@@@", err)
