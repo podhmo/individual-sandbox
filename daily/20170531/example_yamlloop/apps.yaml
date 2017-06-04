@@ -1,0 +1,13 @@
+apps:
+  fooApp:
+    name: foo
+    use: true
+  barApp:
+    name: bar
+    use: true
+  booApp:
+    name: boo
+    use: true
+  beeApp:
+    name: bee
+    use: false
