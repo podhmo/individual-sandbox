@@ -3,16 +3,24 @@ import inspect
 import traceback
 
 
+def normalize(name):
+    for path in sys.path:
+        name = name.replace(path, "")
+    return name.lstrip("/").rsplit("/__init__.py", 1)[0].rsplit(".py", 1)[0].replace("/", ".")
+
+
 def hookwrap(fn, verbose):
     if getattr(fn, "wrapped", False):
         return fn
 
     def wrap(filename):
-        print("load", filename, file=sys.stderr)
         frame = inspect.currentframe().f_back
         while "importlib" in frame.f_code.co_filename:
             frame = frame.f_back
-        traceback.print_stack(frame, limit=1, file=sys.stderr)
+        where = frame.f_code.co_filename
+        print("load {} (where={})".format(normalize(filename), normalize(where)), file=sys.stderr)
+        if verbose:
+            traceback.print_stack(frame, limit=1, file=sys.stderr)
         return fn(filename)
 
     wrap.wrapped = True
