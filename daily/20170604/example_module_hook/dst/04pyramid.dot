@@ -1,0 +1,273 @@
+digraph g {
+    g0 [label="04pyramid"]
+    g1 [label="wsgiref.simple_server"]
+    g2 [label="pyramid.config"]
+    g3 [label="pyramid.config.views"]
+    g4 [label="pyramid.viewderivers"]
+    g5 [label="pyramid.static"]
+    g6 [label="pyramid.interfaces"]
+    g7 [label="zope.deprecation"]
+    g8 [label="pyramid.compat"]
+    g9 [label="zope.interface"]
+    g10 [label="email.message"]
+    g11 [label="email._encoded_words"]
+    g12 [label="email.iterators"]
+    g13 [label="email._policybase"]
+    g14 [label="email.utils"]
+    g15 [label="pyramid.authorization"]
+    g16 [label="pyramid.location"]
+    g17 [label="pyramid.security"]
+    g18 [label="urllib.request"]
+    g19 [label="urllib.error"]
+    g20 [label="wsgiref.handlers"]
+    g21 [label="wsgiref.util"]
+    g22 [label="wsgiref.headers"]
+    g23 [label="json"]
+    g24 [label="json.decoder"]
+    g25 [label="json.encoder"]
+    g26 [label="pyramid.config.tweens"]
+    g27 [label="pyramid.tweens"]
+    g28 [label="uuid"]
+    g29 [label="ctypes.util"]
+    g30 [label="ctypes"]
+    g31 [label="pyramid.httpexceptions"]
+    g32 [label="pyramid.response"]
+    g33 [label="pyramid.url"]
+    g34 [label="pyramid.traversal"]
+    g35 [label="pyramid.encode"]
+    g36 [label="repoze.lru"]
+    g37 [label="webob.headers"]
+    g38 [label="webob.multidict"]
+    g39 [label="pyramid.threadlocal"]
+    g40 [label="pyramid.registry"]
+    g41 [label="venusian"]
+    g42 [label="venusian.advice"]
+    g43 [label="venusian.compat"]
+    g44 [label="simplejson.decoder"]
+    g45 [label="simplejson.compat"]
+    g46 [label="webob"]
+    g47 [label="webob.response"]
+    g48 [label="webob.request"]
+    g49 [label="webob.datetime_utils"]
+    g50 [label="pyramid.config.rendering"]
+    g51 [label="pyramid.renderers"]
+    g52 [label="simplejson"]
+    g53 [label="simplejson.scanner"]
+    g54 [label="simplejson.encoder"]
+    g55 [label="html"]
+    g56 [label="html.entities"]
+    g57 [label="ctypes.macholib.dyld"]
+    g58 [label="ctypes.macholib.dylib"]
+    g59 [label="ctypes.macholib.framework"]
+    g60 [label="ctypes.macholib"]
+    g61 [label="webob.cookies"]
+    g62 [label="webob.cachecontrol"]
+    g63 [label="webob.etag"]
+    g64 [label="webob.descriptors"]
+    g65 [label="webob.acceptparse"]
+    g66 [label="plistlib"]
+    g67 [label="xml.parsers"]
+    g68 [label="xml.parsers.expat"]
+    g69 [label="pyramid.config.routes"]
+    g70 [label="pyramid.predicates"]
+    g71 [label="pyramid.urldispatch"]
+    g72 [label="webob.util"]
+    g73 [label="http.client"]
+    g74 [label="email.parser"]
+    g75 [label="pyramid.asset"]
+    g76 [label="pyramid.path"]
+    g77 [label="pkg_resources"]
+    g78 [label="pyramid.config.security"]
+    g79 [label="pyramid.events"]
+    g80 [label="pyramid.config.i18n"]
+    g81 [label="pyramid.config.testing"]
+    g82 [label="pyramid.router"]
+    g83 [label="pyramid.config.factories"]
+    g84 [label="pyramid.config.adapters"]
+    g85 [label="pyramid.exceptions"]
+    g86 [label="pyramid.settings"]
+    g87 [label="webob.exc"]
+    g88 [label="pyramid.config.zca"]
+    g89 [label="pyramid.config.settings"]
+    g90 [label="pyramid.config.assets"]
+    g91 [label="packaging.version"]
+    g92 [label="packaging._structures"]
+    g93 [label="http.cookies"]
+    g94 [label="pyramid.request"]
+    g95 [label="pyramid.view"]
+    g96 [label="pyramid.util"]
+    g97 [label="pyramid.i18n"]
+    g98 [label="email.feedparser"]
+    g99 [label="zope.deprecation.deprecation"]
+    g100 [label="email.header"]
+    g101 [label="ctypes._endian"]
+    g102 [label="packaging.requirements"]
+    g103 [label="packaging.markers"]
+    g104 [label="pyramid.config.util"]
+    g105 [label="urllib.parse"]
+    g106 [label="email.charset"]
+    g107 [label="email._parseaddr"]
+    g108 [label="translationstring"]
+    g109 [label="zope.interface.registry"]
+    g110 [label="zope.interface.adapter"]
+    g111 [label="http.server"]
+    g112 [label="packaging"]
+    g113 [label="packaging.__about__"]
+    g114 [label="packaging.specifiers"]
+    g115 [label="packaging._compat"]
+    g116 [label="zope.interface.interface"]
+    g117 [label="json.scanner"]
+    g118 [label="pyramid.session"]
+    g119 [label="webob.byterange"]
+    g120 [label="zope.interface.declarations"]
+    g121 [label="zope.interface._compat"]
+    g122 [label="zope.interface.advice"]
+    g123 [label="email.errors"]
+    g124 [label="zope.interface.ro"]
+    g125 [label="zope.interface.exceptions"]
+    g126 [label="zope.interface._zope_interface_coptimizations.cpython-35m-darwin.so"]
+    g127 [label="zope.interface.interfaces"]
+    g128 [label="urllib.response"]
+    g129 [label="simplejson._speedups.cpython-35m-darwin.so"]
+    g130 [label="webob.compat"]
+    g131 [label="translationstring.compat"]
+    g132 [label="email.encoders"]
+    g133 [label="email.base64mime"]
+    g134 [label="email.quoprimime"]
+    g135 [label="pyramid.decorator"]
+    g0 -> g1
+    g0 -> g2
+    g3 -> g4
+    g3 -> g5
+    g6 -> g7
+    g6 -> g8
+    g6 -> g9
+    g10 -> g11
+    g10 -> g12
+    g10 -> g13
+    g10 -> g14
+    g15 -> g16
+    g15 -> g17
+    g18 -> g19
+    g20 -> g21
+    g20 -> g22
+    g23 -> g24
+    g23 -> g25
+    g26 -> g27
+    g28 -> g29
+    g28 -> g30
+    g31 -> g32
+    g33 -> g34
+    g33 -> g35
+    g33 -> g36
+    g37 -> g38
+    g39 -> g40
+    g41 -> g42
+    g41 -> g43
+    g17 -> g39
+    g44 -> g45
+    g46 -> g47
+    g46 -> g48
+    g46 -> g49
+    g50 -> g51
+    g52 -> g53
+    g52 -> g54
+    g52 -> g44
+    g55 -> g56
+    g57 -> g58
+    g57 -> g59
+    g29 -> g60
+    g29 -> g57
+    g48 -> g52
+    g48 -> g61
+    g48 -> g62
+    g48 -> g63
+    g48 -> g64
+    g48 -> g65
+    g66 -> g67
+    g66 -> g68
+    g69 -> g70
+    g69 -> g71
+    g65 -> g37
+    g65 -> g72
+    g73 -> g74
+    g75 -> g76
+    g75 -> g77
+    g2 -> g78
+    g2 -> g3
+    g2 -> g6
+    g2 -> g15
+    g2 -> g26
+    g2 -> g79
+    g2 -> g80
+    g2 -> g41
+    g2 -> g46
+    g2 -> g50
+    g2 -> g81
+    g2 -> g69
+    g2 -> g82
+    g2 -> g75
+    g2 -> g83
+    g2 -> g84
+    g2 -> g85
+    g2 -> g86
+    g2 -> g87
+    g2 -> g88
+    g2 -> g89
+    g2 -> g90
+    g91 -> g92
+    g8 -> g93
+    g94 -> g95
+    g94 -> g33
+    g94 -> g96
+    g94 -> g97
+    g74 -> g98
+    g7 -> g99
+    g13 -> g100
+    g30 -> g101
+    g102 -> g103
+    g84 -> g104
+    g14 -> g105
+    g14 -> g106
+    g14 -> g107
+    g97 -> g108
+    g109 -> g110
+    g111 -> g55
+    g111 -> g73
+    g112 -> g113
+    g1 -> g111
+    g1 -> g20
+    g114 -> g115
+    g9 -> g116
+    g85 -> g31
+    g24 -> g117
+    g70 -> g118
+    g82 -> g94
+    g64 -> g119
+    g120 -> g121
+    g120 -> g122
+    g98 -> g123
+    g98 -> g10
+    g116 -> g124
+    g116 -> g125
+    g116 -> g126
+    g116 -> g120
+    g116 -> g127
+    g61 -> g23
+    g19 -> g128
+    g53 -> g129
+    g36 -> g28
+    g49 -> g130
+    g77 -> g66
+    g77 -> g112
+    g77 -> g114
+    g77 -> g91
+    g77 -> g102
+    g108 -> g131
+    g130 -> g18
+    g106 -> g132
+    g106 -> g133
+    g106 -> g134
+    g40 -> g135
+    g40 -> g109
+}

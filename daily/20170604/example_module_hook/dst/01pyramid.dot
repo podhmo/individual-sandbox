@@ -1,0 +1,33 @@
+digraph g {
+    g0 [label="webob.exc"]
+    g1 [label="paste"]
+    g2 [label="ctypes.util"]
+    g3 [label="ctypes.macholib"]
+    g4 [label="wsgiref.simple_server"]
+    g5 [label="http"]
+    g6 [label="plistlib"]
+    g7 [label="xml"]
+    g8 [label="xml.parsers"]
+    g9 [label="pyramid.url"]
+    g10 [label="repoze"]
+    g11 [label="email.utils"]
+    g12 [label="urllib"]
+    g13 [label="pyramid.interfaces"]
+    g14 [label="zope"]
+    g15 [label="01pyramid"]
+    g16 [label="pyramid"]
+    g17 [label="wsgiref"]
+    g18 [label="http.client"]
+    g19 [label="email"]
+    g0 -> g1
+    g2 -> g3
+    g4 -> g5
+    g6 -> g7
+    g6 -> g8
+    g9 -> g10
+    g11 -> g12
+    g13 -> g14
+    g15 -> g16
+    g15 -> g17
+    g18 -> g19
+}
