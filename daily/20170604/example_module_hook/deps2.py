@@ -30,20 +30,20 @@ class HookedLoaderFactory:
                 frame = get_caller(lv=2)
                 where = frame.f_code.co_filename
                 filename = module.__file__
-                hook(where, filename)
+                hook(where, filename, True)
 
-                # xxx:
-                i = 0
-                while True:
-                    i += 1
-                    filename = where
-                    frame = get_caller(frame, lv=2)
-                    if frame is None:
-                        break
-                    where = frame.f_code.co_filename
-                    if where == __file__:
-                        break
-                    hook(where, filename)
+                # # xxx:
+                # i = 0
+                # while True:
+                #     i += 1
+                #     filename = where
+                #     frame = get_caller(frame, lv=2)
+                #     if frame is None:
+                #         break
+                #     where = frame.f_code.co_filename
+                #     if where == __file__:
+                #         break
+                #     hook(where, filename, False)
                 return super().exec_module(module)
 
         self.cls_map[cls] = ExtLoader
@@ -104,7 +104,7 @@ class Dag:
             return
         self.nodes[src].add(dst)
 
-    def add(self, src, dst):
+    def add(self, src, dst, *args):
         src = normalize(src)
         dst = normalize(dst)
         return self._add(src, dst)
@@ -138,8 +138,8 @@ def normalize(name):
     return name.lstrip("/").rsplit("/__init__.py", 1)[0].rsplit(".py", 1)[0].replace("/", ".")
 
 
-def display(where, filename):
-    print("@@load {} (where={})".format(normalize(filename), normalize(where)))
+def display(where, filename, original):
+    print("@@load {} (where={}) {}".format(normalize(filename), normalize(where), original))
 
 
 def setup(verbose=False, hook=display):
