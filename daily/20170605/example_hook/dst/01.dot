@@ -1,0 +1,153 @@
+digraph g {
+    g0 [label="wsgiref.handlers"]
+    g1 [label="wsgiref.headers"]
+    g2 [label="wsgiref.util"]
+    g3 [label="uu"]
+    g4 [label="lib-dynload.binascii.cpython-35m-darwin.so"]
+    g5 [label="struct"]
+    g6 [label="lib-dynload._struct.cpython-35m-darwin.so"]
+    g7 [label="hashlib"]
+    g8 [label="lib-dynload._hashlib.cpython-35m-darwin.so"]
+    g9 [label="threading"]
+    g10 [label="traceback"]
+    g11 [label="html"]
+    g12 [label="html.entities"]
+    g13 [label="email.quoprimime"]
+    g14 [label="string"]
+    g15 [label="email.parser"]
+    g16 [label="email.feedparser"]
+    g17 [label="tarfile"]
+    g18 [label="lib-dynload.grp.cpython-35m-darwin.so"]
+    g19 [label="copy"]
+    g20 [label="shutil"]
+    g21 [label="lzma"]
+    g22 [label="bz2"]
+    g23 [label="fnmatch"]
+    g24 [label="http"]
+    g25 [label="enum"]
+    g26 [label="email.charset"]
+    g27 [label="email.encoders"]
+    g28 [label="email.base64mime"]
+    g29 [label="wsgiref.simple_server"]
+    g30 [label="platform"]
+    g31 [label="http.server"]
+    g32 [label="linecache"]
+    g33 [label="tokenize"]
+    g34 [label="subprocess"]
+    g35 [label="datetime"]
+    g36 [label="lib-dynload._datetime.cpython-35m-darwin.so"]
+    g37 [label="email.message"]
+    g38 [label="email.errors"]
+    g39 [label="token"]
+    g40 [label="mimetypes"]
+    g41 [label="http.client"]
+    g42 [label="argparse"]
+    g43 [label="socketserver"]
+    g44 [label="email._policybase"]
+    g45 [label="email.header"]
+    g46 [label="signal"]
+    g47 [label="lib-dynload._posixsubprocess.cpython-35m-darwin.so"]
+    g48 [label="email.utils"]
+    g49 [label="email._parseaddr"]
+    g50 [label="urllib"]
+    g51 [label="urllib.parse"]
+    g52 [label="random"]
+    g53 [label="socket"]
+    g54 [label="ssl"]
+    g55 [label="email"]
+    g56 [label="calendar"]
+    g57 [label="textwrap"]
+    g58 [label="ipaddress"]
+    g59 [label="lib-dynload._ssl.cpython-35m-darwin.so"]
+    g60 [label="base64"]
+    g61 [label="lib-dynload._bz2.cpython-35m-darwin.so"]
+    g62 [label="_compression"]
+    g63 [label="main"]
+    g64 [label="wsgiref"]
+    g65 [label="email.iterators"]
+    g66 [label="quopri"]
+    g67 [label="email._encoded_words"]
+    g68 [label="locale"]
+    g69 [label="lib-dynload.math.cpython-35m-darwin.so"]
+    g70 [label="lib-dynload._random.cpython-35m-darwin.so"]
+    g71 [label="gettext"]
+    g72 [label="lib-dynload._lzma.cpython-35m-darwin.so"]
+    g73 [label="lib-dynload._socket.cpython-35m-darwin.so"]
+    g74 [label="selectors"]
+    g75 [label="lib-dynload.select.cpython-35m-darwin.so"]
+    g0 -> g1
+    g0 -> g2
+    g3 -> g4
+    g5 -> g6
+    g7 -> g8
+    g9 -> g10
+    g11 -> g12
+    g13 -> g14
+    g15 -> g16
+    g17 -> g18
+    g17 -> g19
+    g20 -> g17
+    g20 -> g21
+    g20 -> g22
+    g20 -> g23
+    g24 -> g25
+    g26 -> g13
+    g26 -> g27
+    g26 -> g28
+    g29 -> g24
+    g29 -> g30
+    g29 -> g31
+    g29 -> g0
+    g32 -> g33
+    g30 -> g34
+    g35 -> g36
+    g16 -> g37
+    g16 -> g38
+    g33 -> g39
+    g31 -> g40
+    g31 -> g11
+    g31 -> g41
+    g31 -> g20
+    g31 -> g42
+    g31 -> g43
+    g44 -> g45
+    g34 -> g46
+    g34 -> g47
+    g48 -> g49
+    g48 -> g50
+    g48 -> g26
+    g48 -> g51
+    g48 -> g52
+    g48 -> g35
+    g48 -> g53
+    g41 -> g54
+    g41 -> g15
+    g41 -> g55
+    g49 -> g56
+    g54 -> g57
+    g54 -> g58
+    g54 -> g59
+    g60 -> g5
+    g22 -> g61
+    g22 -> g9
+    g22 -> g62
+    g63 -> g29
+    g63 -> g64
+    g37 -> g3
+    g37 -> g44
+    g37 -> g65
+    g37 -> g66
+    g37 -> g67
+    g37 -> g48
+    g56 -> g68
+    g28 -> g60
+    g52 -> g69
+    g52 -> g7
+    g52 -> g70
+    g10 -> g32
+    g42 -> g71
+    g21 -> g72
+    g53 -> g73
+    g53 -> g74
+    g74 -> g75
+}
