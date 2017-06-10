@@ -1,0 +1,7 @@
+export PWD = $(shell pwd)
+
+withC:
+	$(MAKE) -C sub
+
+withF:
+	$(MAKE) -f sub/Makefile

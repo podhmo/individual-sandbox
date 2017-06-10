@@ -1,0 +1,4 @@
+VALUE ?= :default:
+
+foo:
+	VALUE=${VALUE} $(MAKE) -f foo.mk

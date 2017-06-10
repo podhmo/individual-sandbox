@@ -1,0 +1,4 @@
+export VALUE ?= :default:
+
+foo:
+	$(MAKE) -f foo.mk
