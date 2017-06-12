@@ -6,3 +6,6 @@ value2:
 
 bar:
 	make -f bar.mk
+
+foo:
+	echo foo ${FOO} foo
