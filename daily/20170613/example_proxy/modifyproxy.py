@@ -48,6 +48,10 @@ def request(flow):
         if "channelGroupingCategoryMappings" not in setting:
             setting["channelGroupingCategoryMappings"] = []
         mappings = setting["channelGroupingCategoryMappings"]
-        mappings.extend(DEFAULTS)
+        for c in DEFAULTS:
+            if not any(c0["channelGrouping"] == c["channelGrouping"] for c0 in mappings):
+                mappings.append(c)
         flow.request.content = json.dumps(data).encode("utf-8")
-        ctx.log.info("@@after {} {}".format(flow.request.method, flow.request.path))
+        ctx.log.info(
+            "@@after {} {} {}".format(flow.request.method, flow.request.path, len(mappings))
+        )

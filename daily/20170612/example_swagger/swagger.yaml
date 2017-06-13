@@ -1,0 +1,21 @@
+definitions:
+  email:
+    type: string
+    pattern: ".+@.+"
+
+paths:
+  /users/{userId}/emails:
+    get:
+      description: emails
+      parameters:
+        - description: user id.
+          in: path
+          name: userId
+          type: string
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/email"
