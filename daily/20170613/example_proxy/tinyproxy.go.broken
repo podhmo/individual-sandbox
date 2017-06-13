@@ -1,0 +1,30 @@
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"strings"
+)
+
+func main() {
+	director := func(request *http.Request) {
+		request.URL.Scheme = "http"
+		request.URL.Host = ":8081"
+		path := request.URL.Path
+		if request.Method == "POST" && strings.HasPrefix(path, "/api/v1/sites") && strings.HasSuffix(path, "/tuning-workspaces") {
+			decoder := json.NewDecoder(request.Body)
+            // hmm.
+            decoder.Decode(v interface{})
+		}
+	}
+	rp := &httputil.ReverseProxy{Director: director}
+	server := http.Server{
+		Addr:    ":4444",
+		Handler: rp,
+	}
+	if err := server.ListenAndServe(); err != nil {
+		log.Fatal(err.Error())
+	}
+}
