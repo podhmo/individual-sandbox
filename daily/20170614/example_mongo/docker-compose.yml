@@ -1,0 +1,8 @@
+version: "3.0"
+services:
+  mongo:
+    image: mvertes/alpine-mongo
+    volumes:
+      - .data:/data/db
+    ports:
+      - "27017:27017"
