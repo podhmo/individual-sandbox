@@ -19,6 +19,16 @@ class UsersUserIdEmailsInput(object):
             userId = fields.String(description='user id.')
 
 
+
+
 class UsersUserIdEmailsOutput(object):
-    class Get200(PrimitiveValueSchema):
-        v = fields.String(validate=[Regexp(regex=re.compile('.+@.+'))])
+    class Email(PrimitiveValueSchema):
+        class schema_class(Schema):
+            value = fields.String(validate=[Regexp(regex=re.compile('.+@.+'))])
+
+
+    class Get200(Email):
+        """ok"""
+        def __init__(self, *args, **kwargs):
+            kwargs['many'] = True
+            super().__init__(*args, **kwargs)

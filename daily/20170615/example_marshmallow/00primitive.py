@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields
-from marshmallow import MarshalResult
+from marshmallow import MarshalResult, UnmarshalResult
 
 
 class PrimitiveValueSchema:
@@ -12,7 +12,11 @@ class PrimitiveValueSchema:
 
     def load(self, value):  # don't support many
         data = {self.key: value}
-        return self.schema.load(data)
+        r, errors = self.schema.load(data)
+        return UnmarshalResult(
+            data=r.get(self.key) or self.missing,
+            errors=errors.get(self.key) or errors,
+        )
 
     def dump(self, value):  # don't support many
         data = {self.key: value}
