@@ -1,0 +1,22 @@
+definitions:
+  email:
+    type: string
+    pattern: ".+@.+"
+    # this pattern is not good for email validation (this is example..)
+
+paths:
+  /users/{userId}/emails:
+    get:
+      description: emails
+      parameters:
+        - description: user id.
+          in: path
+          name: userId
+          type: string
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/email"
