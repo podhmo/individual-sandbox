@@ -1,5 +1,5 @@
 definitions:
-  configItem:
+  topItem:
     type: object
     properties:
       name:
@@ -14,7 +14,7 @@ definitions:
     required:
     - name
     - age
-  config:
+  top:
     type: array
     items:
-      $ref: '#/definitions/configItem'
+      $ref: '#/definitions/topItem'
