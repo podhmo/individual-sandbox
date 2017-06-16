@@ -1,0 +1,20 @@
+definitions:
+  configItem:
+    type: object
+    properties:
+      name:
+        type: string
+        example: foo
+      age:
+        type: integer
+        example: 20
+      nickname:
+        type: string
+        example: F
+    required:
+    - name
+    - age
+  config:
+    type: array
+    items:
+      $ref: '#/definitions/configItem'
