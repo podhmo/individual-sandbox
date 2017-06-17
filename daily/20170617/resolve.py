@@ -13,5 +13,5 @@ class Emitter(_Emitter):
     def make_primitive_schema(self, info):
         d = super().make_primitive_schema(info)
         if d.get("format") == "url":
-            d["x-go-type"] = "/net/url.URL"
+            d["x-go-type"] = "net/url.URL"
         return d

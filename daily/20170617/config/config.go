@@ -1,7 +1,7 @@
 package main
 
 import (
-	"/net/url"
+	"net/url"
 )
 
 // Config :

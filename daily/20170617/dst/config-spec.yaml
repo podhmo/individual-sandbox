@@ -6,7 +6,7 @@ definitions:
         type: string
         format: url
         example: http://foo.bar.jp/api
-        x-go-type: /net/url.URL
+        x-go-type: net/url.URL
       key:
         type: string
         example: hmm
