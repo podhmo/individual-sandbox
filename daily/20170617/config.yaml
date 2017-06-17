@@ -1,0 +1,4 @@
+appconf:
+  endpoint: http://foo.bar.jp/api
+  key: hmm
+  secret: hai

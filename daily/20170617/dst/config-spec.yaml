@@ -1,0 +1,24 @@
+definitions:
+  appconf:
+    type: object
+    properties:
+      endpoint:
+        type: string
+        example: http://foo.bar.jp/api
+      key:
+        type: string
+        example: hmm
+      secret:
+        type: string
+        example: hai
+    required:
+    - endpoint
+    - key
+    - secret
+  config:
+    type: object
+    properties:
+      appconf:
+        $ref: '#/definitions/appconf'
+    required:
+    - appconf
