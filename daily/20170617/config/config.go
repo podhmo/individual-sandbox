@@ -1,5 +1,9 @@
 package main
 
+import (
+	"/net/url"
+)
+
 // Config :
 type Config struct {
 	Appconf Appconf `json:"appconf"`
@@ -7,7 +11,7 @@ type Config struct {
 
 // Appconf :
 type Appconf struct {
-	Endpoint string `json:"endpoint"`
-	Key      string `json:"key"`
-	Secret   string `json:"secret"`
+	Endpoint url.URL `json:"endpoint"`
+	Key      string  `json:"key"`
+	Secret   string  `json:"secret"`
 }
