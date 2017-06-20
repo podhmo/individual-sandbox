@@ -1,0 +1,12 @@
+FILES = $(shell ls src/*.txt)
+default: $(foreach x,${FILES},do$(subst src/,,$x))
+
+define _genTask
+
+do$(subst src/,,$1): $1
+	echo $1; cat $1; sleep 1;
+endef
+
+$(foreach d,${FILES},$(eval $(call _genTask,$d)))
+
+

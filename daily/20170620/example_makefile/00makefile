@@ -1,0 +1,2 @@
+default:
+	for i in src/*; do echo $$i; cat $$i; sleep 1; done
