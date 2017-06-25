@@ -7,26 +7,27 @@ def get_client():
 
 
 def main():
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
     client = get_client()
     prepare.init(client)
     run(client)
 
 
 def run(client):
-    from lib import Resource
+    from lib import ResourceFactory
+    rf = ResourceFactory()
 
     db = client["test"]
-    qs = users = Resource(db.users)
-    qs = qs.bind_one(
-        "group",
-        Resource(db.groups).in_("_id", [u["group_id"] for u in users]),
-        "u.group_id==g._id",
-    )
-    qs = qs.bind_many(
-        "skills",
-        Resource(db.skills).in_("user_id", [u["_id"] for u in users]),
-        "u._id==s.user_id",
-    )
+    users = rf.mongo(db.users)
+    groups = rf.mongo(db.groups).in_("_id", [u["group_id"] for u in users])
+    skills = rf.mongo(db.skills).in_("user_id", [u["_id"] for u in users])
+
+    qs = users
+    qs = qs.bind_one("group", groups, "u.group_id==g._id")
+    qs = qs.bind_many("skills", skills, "u._id==s.user_id")
+
     import json
     for row in qs:
         print(json.dumps(row, indent=2, default=lambda x: dict(x) if hasattr(x, "get") else str(x)))
