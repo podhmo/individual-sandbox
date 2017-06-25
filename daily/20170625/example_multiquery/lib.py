@@ -1,3 +1,8 @@
+from collections import ChainMap, defaultdict
+import logging
+logger = logging.getLogger(__name__)
+
+
 class NameConflict(Exception):
     pass
 
@@ -18,89 +23,72 @@ class Resource:
         if name in self.q and "$in" in self.q[name]:
             return self
         q = self.q.copy()
-        q["name"] = {"$in": ids}
+        q[name] = {"$in": ids}
         return self.__class__(self.coll, q=q)
 
     def __iter__(self):
         if self.result is not None:
             return iter(self.result)
 
+        logger.debug("fetch %s %s", self.coll, self.q)
         self.result = []
-        append = self.result.append
-        for row in iter(self.coll):
-            append(row)
-            yield row
+
+        def iterate(append):
+            for row in iter(self.coll.find(self.q)):
+                append(row)
+                yield row
+
+        return iterate(self.result.append)
+
+    def bind_one(self, name, subresource, rel):
+        return bind_one(self, name, subresource, rel)
+
+    def bind_many(self, name, subresource, rel):
+        return bind_many(self, name, subresource, rel)
 
 
-class MultiResource:  # dict resource ?
-    def __init__(self, resources=None, relations=None):
-        self.resources = resources or {}
-        self.relations = relations or {}
+def bind_one(resource, name, subresource, rel):
+    key, subkey = [k.split(".", 1)[-1] for k in rel.split("==")]  # xxx
+    return BoundOneResource(resource, name, subresource, key=key, subkey=subkey)
 
-    def __getattr__(self, k):
-        try:
-            return self.resources[k]
-        except KeyError:
-            raise AttributeError(k)
 
-    def add(self, name, resource, force=False):
-        if not force and name in self.resources:
-            raise NameConflict("{} is already existed".format(name))
-        new = self.__class__(self.resources.copy(), self.relations.copy())
-        new.resources[name] = resource
-        return new
+def bind_many(resource, name, subresource, rel):
+    key, subkey = [k.split(".", 1)[-1] for k in rel.split("==")]  # xxx
+    return BoundManyResource(resource, name, subresource, key=key, subkey=subkey)
 
-    def remove(self, name):
-        new = self.__class__(self.resources.copy(), self.relations.copy())
-        new.resources.pop(name, None)
-        return new
 
-    def restrict(self):
-        
+class _BoundResource:
+    def __init__(self, resource, name, subresource, key, subkey):
+        self.resource = resource
+        self.name = name
+        self.subkey = subkey
+        self.key = key
+        self.subresource = subresource
 
-    @property
-    def satisfied(self):
-        try:
-            self.validate()
-            return True
-        except OrphanResourceIsFound:
-            return False
+    def bind_one(self, name, subresource, rel):
+        return bind_one(self, name, subresource, rel)
 
-    def validate(self):
-        for name, r in self.resources.items():
-            if not any(r in rel for rel in self.relations):
-                raise OrphanResourceIsFound("{}'s relation is not found".format(name))
+    def bind_many(self, name, subresource, rel):
+        return bind_many(self, name, subresource, rel)
 
+
+class BoundOneResource(_BoundResource):
     def __iter__(self):
-        self.validate()
-        for rel in self.relations:
-            rel.fetch()
+        gk = self.key
+        sk = self.subkey
+        name = self.name
+        mapping = {sr[sk]: sr for sr in self.subresource}
+        for r in self.resource:
+            yield ChainMap({name: mapping[r[gk]]}, r)
 
 
-class Relation:
-    def __init__(self, master, slave, master_k, slave_k):
-        self.mater = master
-        self.slave = slave
-        self.master_k = master_k
-        self.slave_k = slave_k
-
-    def fetch(self):
-        pass
-
-
-class ManyToOne(Relation):  # children to parent
-    """master is children, slave is parent"""
-    def fetch(self):
-        obs = self.master
-        subs = self.slave.in_(self.slave_k, [ob[self.master_k] for ob in obs])
-        return {sub[self.slave_k] for sub in subs}
-
-
-class OneToMany(Relation):  # parent to children
-    def fetch(self):
-        pass
-
-
-class Merger:
-    def __init__(self, structure):
-        self.structure = structure
+class BoundManyResource(_BoundResource):
+    def __iter__(self):
+        gk = self.key
+        sk = self.subkey
+        name = self.name
+        mapping = defaultdict(list)
+        for sr in self.subresource:
+            mapping[sr[sk]].append(sr)
+        for r in self.resource:
+            yield ChainMap({name: mapping[r[gk]]}, r)
