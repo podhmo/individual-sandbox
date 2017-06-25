@@ -13,13 +13,23 @@ def main():
 
 
 def run(client):
-    from lib import MultiResource, Resource
+    from lib import Resource
 
     db = client["test"]
-    mr = MultiResource(dict(u=Resource(db.users), g=Resource(db.groups), s=Resource(db.skills)))
-    mr = mr.restrict("g", lambda g: g.in_("_id", [u["group_id"] for u in mr.u])).many_to_one("u.group_id", "g._id")
-    mr = mr.restrict("s", lambda s: s.in_("user_id", [u["_id"] for u in mr.u])).one_to_many("u._id", "g.user_id")
-    print(list(mr))
+    qs = users = Resource(db.users)
+    qs = qs.bind_one(
+        "group",
+        Resource(db.groups).in_("_id", [u["group_id"] for u in users]),
+        "u.group_id==g._id",
+    )
+    qs = qs.bind_many(
+        "skills",
+        Resource(db.skills).in_("user_id", [u["_id"] for u in users]),
+        "u._id==s.user_id",
+    )
+    import json
+    for row in qs:
+        print(json.dumps(row, indent=2, default=lambda x: dict(x) if hasattr(x, "get") else str(x)))
 
 
 def run_by_hand(client):
