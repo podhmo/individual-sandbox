@@ -13,6 +13,16 @@ def main():
 
 
 def run(client):
+    from lib import MultiResource, Resource
+
+    db = client["test"]
+    mr = MultiResource(dict(u=Resource(db.users), g=Resource(db.groups), s=Resource(db.skills)))
+    mr = mr.restrict("g", lambda g: g.in_("_id", [u["group_id"] for u in mr.u])).many_to_one("u.group_id", "g._id")
+    mr = mr.restrict("s", lambda s: s.in_("user_id", [u["_id"] for u in mr.u])).one_to_many("u._id", "g.user_id")
+    print(list(mr))
+
+
+def run_by_hand(client):
     from collections import defaultdict
     from dictknife import pp
 
