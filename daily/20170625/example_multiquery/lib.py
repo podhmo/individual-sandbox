@@ -76,6 +76,12 @@ class _BoundResource:
         self.key = key
         self.subresource = subresource
 
+    @property
+    def original_resource(self):
+        if hasattr(self.resource, "original_resource"):
+            return self.resource.original_resource
+        return self.resource
+
     def bind_one(self, name, subresource, rel):
         return bind_one(self, name, subresource, rel)
 
@@ -88,7 +94,11 @@ class BoundOneResource(_BoundResource):
         gk = self.key
         sk = self.subkey
         name = self.name
-        mapping = {sr[sk]: sr for sr in self.subresource}
+        mapping = {
+            sr[sk]: sr
+            for sr in self.subresource.in_(sk,
+                                           [row[gk] for row in self.original_resource])
+        }
         for r in self.resource:
             yield ChainMap({name: mapping[r[gk]]}, r)
 
@@ -99,7 +109,7 @@ class BoundManyResource(_BoundResource):
         sk = self.subkey
         name = self.name
         mapping = defaultdict(list)
-        for sr in self.subresource:
+        for sr in self.subresource.in_(sk, [row[gk] for row in self.original_resource]):
             mapping[sr[sk]].append(sr)
         for r in self.resource:
             yield ChainMap({name: mapping[r[gk]]}, r)
