@@ -1,0 +1,8 @@
+do: {% for i in range(1, 4) %}do0{{i}} {% endfor %}
+
+{% for i in range(1, 4) %}
+do0{{i}}:
+	@echo start 0{{i}}
+	sleep 1
+	@echo end 0{{i}}
+{% endfor %}
