@@ -2,6 +2,19 @@ import mongomock
 import prepare
 
 
+def patch(Cursor):
+    # monkey patch
+    original = Cursor._refresh
+
+    def _refresh(self):
+        print("hmm")
+        return original(self)
+
+    _refresh.marked = True
+    if not getattr(Cursor._refresh, "marked", False):
+        Cursor._refresh = _refresh
+
+
 def get_client():
     return mongomock.MongoClient()
 
@@ -21,8 +34,7 @@ def run(client):
 
     db = client["test"]
     qs = (
-        rf.mongo(db.users)
-        .bind_one("group", rf.mongo(db.groups), "u.group_id==g._id")
+        rf.mongo(db.users).bind_one("group", rf.mongo(db.groups), "u.group_id==g._id")
         .bind_many("skills", rf.mongo(db.skills), "u._id==s.user_id")
     )
 

@@ -3,14 +3,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class NameConflict(Exception):
-    pass
-
-
-class OrphanResourceIsFound(Exception):
-    pass
-
-
 class Resource:
     def __init__(self, connection):
         self.result = None
