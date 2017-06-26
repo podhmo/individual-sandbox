@@ -1,0 +1,4 @@
+"message"	"event"
+"foo	bar"	"foo"
+"foo""b""ar"	"bar"
+"boo's something"	"boo"
