@@ -1,0 +1,4 @@
+[person]
+name = "foo"
+age = "boo"
+skills = [ "x", "y", "z",]

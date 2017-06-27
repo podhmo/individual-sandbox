@@ -1,0 +1,14 @@
+constraint:
+- branch: 2.x
+  name: github.com/Masterminds/semver
+- name: github.com/Masterminds/vcs
+  version: 1.11.0
+- branch: v2
+  name: github.com/go-yaml/yaml
+- branch: master
+  name: github.com/pelletier/go-toml
+- name: github.com/pkg/errors
+  version: 0.8.0
+xx:
+  yy:
+  - z: 1
