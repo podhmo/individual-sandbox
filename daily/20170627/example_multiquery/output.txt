@@ -1,0 +1,76 @@
+DEBUG:lib:fetch Collection(Database(mongomock.MongoClient('localhost', 27017), 'test'), 'users') {}
+DEBUG:lib:fetch Collection(Database(mongomock.MongoClient('localhost', 27017), 'test'), 'skills') {'user_id': {'$in': [ObjectId('59516b3ec54d2d8026aad26f'), ObjectId('59516b3ec54d2d8026aad270'), ObjectId('59516b3ec54d2d8026aad271'), ObjectId('59516b3ec54d2d8026aad272')]}}
+DEBUG:lib:fetch SELECT * from groups WHERE id IN (1, 1, 1, 2)
+{
+  "skills": [
+    {
+      "_id": "59516b3ec54d2d8026aad273",
+      "user_id": "59516b3ec54d2d8026aad26f",
+      "name": "X"
+    }
+  ],
+  "group_id": 1,
+  "group": {
+    "name": "A",
+    "id": 1
+  },
+  "name": "foo",
+  "_id": "59516b3ec54d2d8026aad26f"
+}
+{
+  "skills": [
+    {
+      "_id": "59516b3ec54d2d8026aad274",
+      "user_id": "59516b3ec54d2d8026aad270",
+      "name": "X"
+    },
+    {
+      "_id": "59516b3ec54d2d8026aad276",
+      "user_id": "59516b3ec54d2d8026aad270",
+      "name": "Y"
+    }
+  ],
+  "group_id": 1,
+  "group": {
+    "name": "A",
+    "id": 1
+  },
+  "name": "bar",
+  "_id": "59516b3ec54d2d8026aad270"
+}
+{
+  "skills": [
+    {
+      "_id": "59516b3ec54d2d8026aad275",
+      "user_id": "59516b3ec54d2d8026aad271",
+      "name": "X"
+    },
+    {
+      "_id": "59516b3ec54d2d8026aad277",
+      "user_id": "59516b3ec54d2d8026aad271",
+      "name": "Y"
+    },
+    {
+      "_id": "59516b3ec54d2d8026aad278",
+      "user_id": "59516b3ec54d2d8026aad271",
+      "name": "Z"
+    }
+  ],
+  "group_id": 1,
+  "group": {
+    "name": "A",
+    "id": 1
+  },
+  "name": "baz",
+  "_id": "59516b3ec54d2d8026aad271"
+}
+{
+  "skills": [],
+  "group_id": 2,
+  "group": {
+    "name": "B",
+    "id": 2
+  },
+  "name": "boo",
+  "_id": "59516b3ec54d2d8026aad272"
+}
