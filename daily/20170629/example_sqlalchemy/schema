@@ -1,0 +1,17 @@
+type Child {
+    dogs_collection: [Dog]
+    id: ID!
+    name: String
+}
+type Dog {
+    kinds: Kind
+    id: ID!
+    kind_id: Integer
+    dog: String
+    childs_collection: [Child]
+}
+type Kind {
+    id: ID!
+    name: String!
+    dogs_collection: [Dog]
+}

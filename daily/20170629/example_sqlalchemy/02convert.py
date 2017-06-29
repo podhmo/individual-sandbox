@@ -29,9 +29,10 @@ class Array:
 class GraphQLModule(Module):
     @contextlib.contextmanager
     def type_(self, name):
-        self.stmt("type {}", name)
+        self.stmt("type {} {{", name)
         with self.scope():
             yield
+        self.stmt("}")
 
     def field(self, name, typ, nullable=True):
         if nullable:
@@ -51,7 +52,6 @@ def emit(m, d):
                         m.field(k, Array(singular(v["table"])), nullable=v.get("nullable", True))
                     else:
                         m.field(k, singular(v["table"]), nullable=v.get("nullable", True))
-        m.stmt("")
 
 
 def main(src):
