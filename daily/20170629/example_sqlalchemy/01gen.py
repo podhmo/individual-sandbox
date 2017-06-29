@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-"""generate graphql's schema"""
 from collections import OrderedDict
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import create_engine

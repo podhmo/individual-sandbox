@@ -1,72 +1,72 @@
 {
   "dogs": {
     "kinds": {
-      "uselist": false,
       "direction": "MANYTOONE",
-      "type": "kinds",
+      "uselist": false,
       "relation": {
-        "to": "dogs.kind_id",
-        "from": "kinds.id"
-      }
-    },
-    "id": {
-      "nullable": false,
-      "type": "ID"
-    },
-    "kind_id": {
-      "nullable": true,
-      "type": "int"
-    },
-    "dog": {
-      "nullable": true,
-      "type": "str"
+        "from": "dogs.kind_id",
+        "to": "kinds.id"
+      },
+      "table": "kinds"
     },
     "childs_collection": {
-      "uselist": true,
       "direction": "MANYTOMANY",
-      "type": "childs",
+      "uselist": true,
       "relation": {
-        "to": "child_dogs.dog_id",
-        "from": "dogs.id"
-      }
+        "from": "child_dogs.dog_id",
+        "to": "dogs.id"
+      },
+      "table": "childs"
+    },
+    "id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "kind_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "dog": {
+      "type": "String",
+      "nullable": true
     }
   },
   "kinds": {
     "id": {
-      "nullable": false,
-      "type": "ID"
+      "type": "ID",
+      "nullable": false
     },
     "name": {
-      "nullable": false,
-      "type": "str"
+      "type": "String",
+      "nullable": false
     },
     "dogs_collection": {
-      "uselist": true,
       "direction": "ONETOMANY",
-      "type": "dogs",
+      "uselist": true,
       "relation": {
-        "to": "dogs.kind_id",
-        "from": "kinds.id"
-      }
+        "from": "dogs.kind_id",
+        "to": "kinds.id"
+      },
+      "table": "dogs"
     }
   },
   "childs": {
-    "dogs_collection": {
-      "uselist": true,
-      "direction": "MANYTOMANY",
-      "type": "dogs",
-      "relation": {
-        "to": "child_dogs.child_id",
-        "from": "childs.id"
-      }
-    },
     "id": {
-      "nullable": false,
-      "type": "ID"
+      "type": "ID",
+      "nullable": false
     },
     "name": {
-      "nullable": true,
-      "type": "str"
+      "type": "String",
+      "nullable": true
+    },
+    "dogs_collection": {
+      "direction": "MANYTOMANY",
+      "uselist": true,
+      "relation": {
+        "from": "child_dogs.child_id",
+        "to": "childs.id"
+      },
+      "table": "dogs"
     }
   }
 }
