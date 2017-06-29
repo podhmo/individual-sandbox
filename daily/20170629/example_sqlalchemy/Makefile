@@ -1,5 +1,8 @@
 run: dog.db
-	ptyhon 00run.py
+	python 00run.py
+
+gen:
+	python 01gen.py > gen.json01
 
 dog.db:
 	cat create.sql | sqlite3 -echo dog.db

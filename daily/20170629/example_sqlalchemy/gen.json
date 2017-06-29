@@ -1,0 +1,72 @@
+{
+  "dogs": {
+    "kinds": {
+      "uselist": false,
+      "direction": "MANYTOONE",
+      "type": "kinds",
+      "relation": {
+        "to": "dogs.kind_id",
+        "from": "kinds.id"
+      }
+    },
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "kind_id": {
+      "nullable": true,
+      "type": "int"
+    },
+    "dog": {
+      "nullable": true,
+      "type": "str"
+    },
+    "childs_collection": {
+      "uselist": true,
+      "direction": "MANYTOMANY",
+      "type": "childs",
+      "relation": {
+        "to": "child_dogs.dog_id",
+        "from": "dogs.id"
+      }
+    }
+  },
+  "kinds": {
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "name": {
+      "nullable": false,
+      "type": "str"
+    },
+    "dogs_collection": {
+      "uselist": true,
+      "direction": "ONETOMANY",
+      "type": "dogs",
+      "relation": {
+        "to": "dogs.kind_id",
+        "from": "kinds.id"
+      }
+    }
+  },
+  "childs": {
+    "dogs_collection": {
+      "uselist": true,
+      "direction": "MANYTOMANY",
+      "type": "dogs",
+      "relation": {
+        "to": "child_dogs.child_id",
+        "from": "childs.id"
+      }
+    },
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "name": {
+      "nullable": true,
+      "type": "str"
+    }
+  }
+}

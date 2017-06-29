@@ -1,0 +1,72 @@
+{
+  "dogs": {
+    "kinds": {
+      "uselist": false,
+      "table": "kinds",
+      "relation": {
+        "from": "dogs.kind_id",
+        "to": "kinds.id"
+      },
+      "direction": "MANYTOONE"
+    },
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "kind_id": {
+      "nullable": true,
+      "type": "Integer"
+    },
+    "dog": {
+      "nullable": true,
+      "type": "String"
+    },
+    "childs_collection": {
+      "uselist": true,
+      "table": "childs",
+      "relation": {
+        "from": "child_dogs.dog_id",
+        "to": "dogs.id"
+      },
+      "direction": "MANYTOMANY"
+    }
+  },
+  "kinds": {
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "name": {
+      "nullable": false,
+      "type": "String"
+    },
+    "dogs_collection": {
+      "uselist": true,
+      "table": "dogs",
+      "relation": {
+        "from": "dogs.kind_id",
+        "to": "kinds.id"
+      },
+      "direction": "ONETOMANY"
+    }
+  },
+  "childs": {
+    "dogs_collection": {
+      "uselist": true,
+      "table": "dogs",
+      "relation": {
+        "from": "child_dogs.child_id",
+        "to": "childs.id"
+      },
+      "direction": "MANYTOMANY"
+    },
+    "id": {
+      "nullable": false,
+      "type": "ID"
+    },
+    "name": {
+      "nullable": true,
+      "type": "String"
+    }
+  }
+}

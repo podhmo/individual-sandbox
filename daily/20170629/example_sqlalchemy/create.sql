@@ -1,17 +1,24 @@
-CREATE TABLE child (
+CREATE TABLE childs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
 );
 
-
-CREATE TABLE dog (
+CREATE TABLE kinds (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    dog TEXT
+    name TEXT NOT NULL
 );
 
-CREATE TABLE child_dog (
+
+CREATE TABLE dogs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    kind_id INTEGER,
+    dog TEXT,
+    FOREIGN KEY(kind_id) REFERENCES kinds(id)
+);
+
+CREATE TABLE child_dogs (
     child_id INTEGER,
     dog_id INTEGER,
-    FOREIGN KEY(child_id) REFERENCES child(id),
-    FOREIGN KEY(dog_id) REFERENCES dog(id)
+    FOREIGN KEY(child_id) REFERENCES childs(id),
+    FOREIGN KEY(dog_id) REFERENCES dogs(id)
 );
