@@ -12,3 +12,6 @@ print("----------------------------------------")
 print("pluralize", i.pluralize("dog"))
 
 print("singularize", i.singularize("dogs"))
+
+
+print(i.camelize(i.singularize("cats")))
