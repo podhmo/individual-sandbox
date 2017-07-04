@@ -1,0 +1,16 @@
+CREATE TABLE groups (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  group_id INTEGER,
+  name TEXT,
+  FOREIGN KEY(group_id) REFERENCES groups(id)
+);
+CREATE TABLE skills (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  name TEXT,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
