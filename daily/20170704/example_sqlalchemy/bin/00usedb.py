@@ -1,14 +1,14 @@
 import os
+import sqlalchemy as sa
 from handofcats import as_command
-from sqlalchemy import create_engine, MetaData
 
 
 @as_command
-def main(src, echo=False):
+def main(src="../src/groups.db", echo=False):
     if "://" not in src:
         src = "sqlite:///{}".format(os.path.join(os.getcwd(), src))
-    engine = create_engine(src, echo=echo)
-    metadata = MetaData(bind=engine)
+    engine = sa.create_engine(src, echo=echo)
+    metadata = sa.MetaData(bind=engine)
     metadata.reflect(engine)
     print("----------------------------------------")
 
