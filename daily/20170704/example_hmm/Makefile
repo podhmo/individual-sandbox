@@ -1,0 +1,2 @@
+default:
+	python perf.py
