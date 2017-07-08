@@ -1,0 +1,58 @@
+type Generation {
+    id: ID!
+    name: String!
+    region: Region
+    region_id: Integer
+    versiongroup_collection: [Versiongroup]
+}
+
+type Language {
+    id: ID!
+    iso3166: String!
+    iso639: String!
+    languagename_collection: [Languagename]
+    name: String!
+    official: bool!
+    order: Integer
+    versionname_collection: [Versionname]
+}
+
+type Languagename {
+    id: ID!
+    language: Language
+    language_id: Integer
+    local_language_id: Integer
+    name: String!
+}
+
+type Region {
+    generation_collection: [Generation]
+    id: ID!
+    name: String!
+}
+
+type Version {
+    id: ID!
+    name: String!
+    version_group_id: Integer
+    versiongroup: Versiongroup
+    versionname_collection: [Versionname]
+}
+
+type Versiongroup {
+    generation: Generation
+    generation_id: Integer
+    id: ID!
+    name: String!
+    order: Integer
+    version_collection: [Version]
+}
+
+type Versionname {
+    id: ID!
+    language: Language
+    language_id: Integer
+    name: String!
+    version: Version
+    version_id: Integer
+}

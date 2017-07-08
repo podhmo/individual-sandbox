@@ -1,0 +1,22 @@
+type Shared {
+    id: ID!
+    name: String!
+    xxx_collection: [Xxx]
+    yyy_collection: [Yyy]
+}
+
+type Xxx {
+    bad_shared_id: Integer
+    good_shared_id: Integer
+    id: ID!
+    name: String!
+    shared: Shared
+}
+
+type Yyy {
+    bad_shared_id: Integer
+    good_shared_id: Integer
+    id: ID!
+    name: String!
+    shared: Shared
+}

@@ -1,0 +1,22 @@
+type Shared {
+    id: ID!
+    name: String!
+}
+
+type Xxx {
+    bad_shared: Shared
+    bad_shared_id: Integer
+    good_shared: Shared
+    good_shared_id: Integer
+    id: ID!
+    name: String!
+}
+
+type Yyy {
+    bad_shared: Shared
+    bad_shared_id: Integer
+    good_shared: Shared
+    good_shared_id: Integer
+    id: ID!
+    name: String!
+}

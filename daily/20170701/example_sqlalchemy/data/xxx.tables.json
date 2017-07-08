@@ -1,0 +1,84 @@
+{
+  "shared": {
+    "id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    }
+  },
+  "xxx": {
+    "bad_shared": {
+      "table": "shared",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "shared.id",
+        "from": "xxx.bad_shared_id"
+      }
+    },
+    "bad_shared_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "good_shared": {
+      "table": "shared",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "shared.id",
+        "from": "xxx.good_shared_id"
+      }
+    },
+    "good_shared_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    }
+  },
+  "yyy": {
+    "bad_shared": {
+      "table": "shared",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "shared.id",
+        "from": "yyy.bad_shared_id"
+      }
+    },
+    "bad_shared_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "good_shared": {
+      "table": "shared",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "shared.id",
+        "from": "yyy.good_shared_id"
+      }
+    },
+    "good_shared_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    }
+  }
+}

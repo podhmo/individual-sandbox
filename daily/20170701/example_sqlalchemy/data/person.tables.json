@@ -1,0 +1,38 @@
+{
+  "person": {
+    "father_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "mother_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    },
+    "person": {
+      "table": "person",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "person.id",
+        "from": "person.mother_id"
+      }
+    },
+    "person_collection": {
+      "table": "person",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "person.id",
+        "from": "person.father_id"
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+type Person {
+    father_id: Integer
+    id: ID!
+    mother_id: Integer
+    name: String!
+    person: Person
+    person_collection: [Person]
+}
