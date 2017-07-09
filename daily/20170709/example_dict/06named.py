@@ -23,5 +23,7 @@ dratios = [x / y for x, y in zip(dicts, tuples)]
 nratios = [x / y for x, y in zip(nameds, tuples)]
 sdratios = [x / y for x, y in zip(sdicts, tuples)]
 sdratios2 = [x / y for x, y in zip(sdicts2, tuples)]
-plt.plot(ns, lratios, "r", ns, dratios, "g", ns, nratios, "b", ns, sdratios, "k", ns, sdratios2, "m")
+plt.plot(
+    ns, lratios, "r", ns, dratios, "g", ns, nratios, "b", ns, sdratios, "k", ns, sdratios2, "m"
+)
 plt.show()
