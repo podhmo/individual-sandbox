@@ -1,0 +1,21 @@
+POST /api/sessions?token=1eb30c9d12d500cd82f1d837d178d5bd88a96cf10c88f43f HTTP/1.1
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Host: localhost:8888
+Accept: application/json, */*
+User-Agent: HTTPie/0.9.9
+Content-Type: application/json
+Content-Length: 214
+
+{"kernel": {"connections": 0, "id": "eefedf63-9ea1-450b-a5fd-dba14b149b95", "execution_state": "starting", "last_activity": "2017-07-11T20:46:26.388106Z", "name": "python3"}, "notebook": {"path": "Untitled.ipynb"}}
+
+HTTP/1.1 201 Created
+Date: Tue, 11 Jul 2017 20:50:20 GMT
+Content-Type: application/json
+Set-Cookie: username-localhost-8888="2|1:0|10:1499806220|23:username-localhost-8888|44:OWIwZmEzM2I0MzI0NGQ0NWI2NDNjNTA1YzY5OTJjMDY=|641db8c79a95d322bf0eadf6ee45d88964c6ea7ca7d6f8f965a1bd271fba8794"; expires=Thu, 10 Aug 2017 20:50:20 GMT; HttpOnly; Path=/
+Content-Security-Policy: frame-ancestors 'self'; report-uri /api/security/csp-report; default-src 'none'
+Location: /api/sessions/a0dbef00-a3ce-4ab4-8297-63c7831d1eee
+Server: TornadoServer/4.5.1
+Content-Length: 334
+
+{"name": null, "notebook": {"path": "Untitled.ipynb", "name": null}, "type": "notebook", "path": "Untitled.ipynb", "id": "a0dbef00-a3ce-4ab4-8297-63c7831d1eee", "kernel": {"connections": 0, "id": "eefedf63-9ea1-450b-a5fd-dba14b149b95", "execution_state": "starting", "last_activity": "2017-07-11T20:46:28.428653Z", "name": "python3"}}
