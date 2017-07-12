@@ -13,5 +13,7 @@ script:
 notebook:
 	jupyter nbconvert --inplace ${OPTS} --execute --to notebook ${TARGET}
 
-hand:
-	TARGET=00random.ipynb jupyter nbconvert ${OPTS} --execute --to notebook ${TARGET} --output 00output
+00:
+	jupyter nbconvert ${OPTS} --execute --to notebook 00random.ipynb --output 00output
+01:
+	jupyter nbconvert ${OPTS} --execute --to notebook 01graph.ipynb
