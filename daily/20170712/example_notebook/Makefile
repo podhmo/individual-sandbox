@@ -17,3 +17,6 @@ notebook:
 	jupyter nbconvert ${OPTS} --execute --to notebook 00random.ipynb --output 00output
 01:
 	jupyter nbconvert ${OPTS} --execute --to notebook 01graph.ipynb
+02:
+	python 02graph.py > 02graph.ipynb
+	jupyter nbconvert ${OPTS} --execute --to notebook 02graph.ipynb
