@@ -1,0 +1,19 @@
+start 0 52665
+start 1 52666
+start 2 52667
+start 3 52668
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/threading.py", line 914, in _bootstrap_inner
+    self.run()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/threading.py", line 862, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/concurrent/futures/process.py", line 295, in _queue_management_worker
+    shutdown_worker()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/concurrent/futures/process.py", line 253, in shutdown_worker
+    call_queue.put_nowait(None)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/multiprocessing/queues.py", line 129, in put_nowait
+    return self.put(obj, False)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/multiprocessing/queues.py", line 83, in put
+    raise Full
+queue.Full

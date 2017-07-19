@@ -1,0 +1,5 @@
+Module(
+    FunctionDef 'hello' (
+      Return[ Str('hello') ]
+    )
+  )

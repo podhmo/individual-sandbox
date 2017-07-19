@@ -1,0 +1,19 @@
+file_input
+  funcdef
+    NAME(Leaf(NAME, 'def'))
+    NAME(Leaf(NAME, 'hello')) 
+    parameters
+      LPAR(Leaf(LPAR, '('))
+      RPAR(Leaf(RPAR, ')'))
+    COLON(Leaf(COLON, ':'))
+    suite
+      NEWLINE(Leaf(NEWLINE, '\n'))
+      INDENT(Leaf(INDENT, '    '))    # this is comment
+
+      simple_stmt
+        return_stmt
+          NAME(Leaf(NAME, 'return'))
+          STRING(Leaf(STRING, '"hello"')) 
+        NEWLINE(Leaf(NEWLINE, '\n'))
+      DEDENT(Leaf(DEDENT, ''))
+  ENDMARKER(Leaf(ENDMARKER, ''))
