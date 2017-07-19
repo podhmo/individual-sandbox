@@ -5,6 +5,11 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 def get(i):
     import os
     print(os.getpid())
+
+    def f():
+        print("hai")
+
+    return f
     import time
     time.sleep(10)
     return i * i
