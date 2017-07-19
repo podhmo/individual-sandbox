@@ -1,0 +1,4 @@
+&main.Output{
+  Code:   418,
+  Status: "418 I'M A TEAPOT",
+}

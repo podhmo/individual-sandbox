@@ -1,0 +1,19 @@
+{
+  "json": {
+    "hello": "world",
+  },
+  "origin":  "125.192.17.9",
+  "url":     "https://httpbin.org/post",
+  "args":    map[string]interface {}{},
+  "data":    "{\"hello\": \"world\"}",
+  "files":   map[string]interface {}{},
+  "form":    map[string]interface {}{},
+  "headers": {
+    "Accept-Encoding": "gzip",
+    "Connection":      "close",
+    "Content-Length":  "18",
+    "Content-Type":    "application/json",
+    "Host":            "httpbin.org",
+    "User-Agent":      "Go-http-client/1.1",
+  },
+}

@@ -1,0 +1,18 @@
+{
+  "args": {
+    "hello": "world",
+    "v":     []interface {}{
+      "1",
+      "2",
+    },
+  },
+  "headers": {
+    "Host":            "httpbin.org",
+    "User-Agent":      "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+    "Connection":      "close",
+  },
+  "method": "GET",
+  "origin": "125.192.17.9",
+  "url":    "https://httpbin.org/anything?hello=world&v=1&v=2",
+}

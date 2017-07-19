@@ -1,0 +1,13 @@
+{
+  "origin":  "125.192.17.9",
+  "url":     "https://httpbin.org/anything",
+  "args":    map[string]interface {}{},
+  "headers": {
+    "Authorization":   "Bearer token-token-token",
+    "Connection":      "close",
+    "Host":            "httpbin.org",
+    "User-Agent":      "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+  },
+  "method": "GET",
+}
