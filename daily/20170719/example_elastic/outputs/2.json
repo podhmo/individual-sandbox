@@ -1,0 +1,72 @@
+{
+  "took" : 4,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 3,
+    "max_score" : 0.830158,
+    "hits" : [
+      {
+        "_index" : "site-entry-search",
+        "_type" : "site-search",
+        "_id" : "1",
+        "_score" : 0.830158,
+        "_source" : {
+          "name" : "テストサイト",
+          "page" : {
+            "title" : "テストタイトル",
+            "description" : "テスト概要"
+          },
+          "gaKeywords" : [
+            "A",
+            "dog",
+            "test",
+            "犬の王国"
+          ]
+        }
+      },
+      {
+        "_index" : "site-entry-search",
+        "_type" : "site-search",
+        "_id" : "2",
+        "_score" : 0.830158,
+        "_source" : {
+          "name" : "てすとサイト",
+          "page" : {
+            "title" : "てすとタイトル",
+            "description" : "てすと概要"
+          },
+          "gaKeywords" : [
+            "A",
+            "cat",
+            "test",
+            "猫の王国"
+          ]
+        }
+      },
+      {
+        "_index" : "site-entry-search",
+        "_type" : "site-search",
+        "_id" : "3",
+        "_score" : 0.830158,
+        "_source" : {
+          "name" : "ﾃｽﾄサイト",
+          "page" : {
+            "title" : "ﾃｽﾄタイトル",
+            "description" : "ﾃｽﾄ概要"
+          },
+          "gaKeywords" : [
+            "A",
+            "bird",
+            "test",
+            "鳥の王国"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "てすとサイト",
+  "page": {
+    "title": "てすとタイトル",
+    "description": "てすと概要"
+  },
+  "gaKeywords": [
+    "A",
+    "cat",
+    "test",
+    "猫の王国"
+  ]
+}

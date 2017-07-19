@@ -1,0 +1,34 @@
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : 4.675513,
+    "hits" : [
+      {
+        "_index" : "site-entry-search",
+        "_type" : "site-search",
+        "_id" : "3",
+        "_score" : 4.675513,
+        "_source" : {
+          "name" : "ﾃｽﾄサイト",
+          "page" : {
+            "title" : "ﾃｽﾄタイトル",
+            "description" : "ﾃｽﾄ概要"
+          },
+          "gaKeywords" : [
+            "A",
+            "bird",
+            "test",
+            "鳥の王国"
+          ]
+        }
+      }
+    ]
+  }
+}

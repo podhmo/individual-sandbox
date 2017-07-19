@@ -1,0 +1,13 @@
+{
+  "name": "テストサイト",
+  "page": {
+    "title": "テストタイトル",
+    "description": "テスト概要"
+  },
+  "gaKeywords": [
+    "A",
+    "dog",
+    "test",
+    "犬の王国"
+  ]
+}

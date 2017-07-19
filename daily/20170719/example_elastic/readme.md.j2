@@ -1,0 +1,55 @@
+#[elasticsearch] elasticsearchでカタカナとひらがなを同列視して利用できるようにする
+
+normalizeが必要。
+
+## normalize
+
+- Unicodeで正規化
+- ひらがなをカタカナに変換
+
+unicodeで正規化すると半角全角の対応まではできる。pluginが必要。
+
+```bash
+$ elasticsearch-plugin install --batch analysis-icu
+```
+
+以下のようなmappingでindex作成。
+
+```json
+{{"mappings/site-entry-search.json"|readfile}}
+```
+
+## データの登録
+
+以下のことを調べたい
+
+- 半角/全角を無視して検索できるか
+- カタカナ/ひらがなを無視して検索できるか。
+- (1:nのデータの検索がうまくいくかどうか)
+
+1.jsonは正しい形
+2.jsonはひらがな
+3.jsonは半角
+
+{% for i in range(1, 4) %}
+{{i}}.json
+```json
+{{"data/{}.json".format(i)|readfile}}
+```
+{% endfor %}
+
+## 検索
+
+こんな感じ。
+
+{% for i in range(1, 5) %}
+queries/{{i}}.json
+```json
+{{"queries/{}.json".format(i)|readfile}}
+```
+outputs/{{i}}.json
+```json
+{{"outputs/{}.json".format(i)|readfile}}
+```
+{% endfor %}
+

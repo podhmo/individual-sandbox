@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  elasticsearch:
+    container_name: es
+    build:
+      context: .
+      dockerfile: "./Dockerfile"
+    volumes:
+      - "$PWD/.local"
+    ports:
+      - "19200:9200"
+      - "19300:9300"

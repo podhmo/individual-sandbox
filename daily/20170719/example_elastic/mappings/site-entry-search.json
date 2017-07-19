@@ -1,0 +1,128 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "1s",
+    "index.requests.cache.enable": true,
+    "analysis": {
+      "filter": {
+        "single_ascii_stop": {
+          "type": "stop",
+          "stopwords": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "hiragana_to_kana": {
+          "type": "icu_transform",
+          "id": "Hiragana-Katakana"
+        }
+      },
+      "analyzer": {
+        "my_ngram_analyzer": {
+          "tokenizer": "my_ngram_tokenizer",
+          "char_filter": [
+            "nfkc_normalizer"
+          ],
+          "filter": [
+            "single_ascii_stop",
+            "hiragana_to_kana"
+          ]
+        }
+      },
+      "tokenizer": {
+        "my_ngram_tokenizer": {
+          "type": "nGram",
+          "min_gram": "1",
+          "max_gram": "3"
+        }
+      },
+      "char_filter": {
+        "nfkc_normalizer": {
+          "type": "icu_normalizer",
+          "name": "nfkc",
+          "mode": "compose"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "site-search": {
+      "dynamic": false,
+      "_source": {
+        "enabled": true
+      },
+      "_all": {
+        "enabled": false
+      },
+      "properties": {
+        "id": {
+          "type": "keyword",
+          "index": true
+        },
+        "name": {
+          "type": "text",
+          "index": true,
+          "analyzer": "my_ngram_analyzer"
+        },
+        "page": {
+          "properties": {
+            "title": {
+              "type": "text",
+              "index": true,
+              "analyzer": "my_ngram_analyzer"
+            },
+            "description": {
+              "type": "text",
+              "index": true,
+              "analyzer": "my_ngram_analyzer"
+            }
+          }
+        },
+        "gaKeywords": {
+          "type": "text",
+          "index": true,
+          "analyzer": "my_ngram_analyzer"
+        },
+        "createdAt": {
+          "type": "date",
+          "index": false
+        }
+      }
+    }
+  }
+}
