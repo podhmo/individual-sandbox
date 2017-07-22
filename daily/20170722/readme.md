@@ -37,3 +37,24 @@ $ sudo nmcli dev wifi connect <essid> password <password>
 ```
 
 
+## python pytest pytestはしっかりとfinaly的な処理をしてる
+
+これが大丈夫
+
+```python
+import pytest
+
+
+@pytest.fixture
+def ob():
+    ob = object()
+    print("")
+    print("<<< before", id(ob))
+    yield ob
+    print(">>> after", id(ob)) # ここがしっかり呼ばれる
+
+
+def test_it(ob):
+    print("**test", id(ob), "**")
+    1 / 0
+```
