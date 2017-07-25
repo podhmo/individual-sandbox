@@ -1,0 +1,2 @@
+01broken.py:12: error: TypedDict "Movie" has no key 'ame'
+01broken.py:14: error: Unsupported operand types for + ("str" and "int")
