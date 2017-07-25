@@ -1,0 +1,10 @@
+# github.com/go-task/task
+
+default:
+  desc: |
+    generating output.txt with echo hello
+  cmds:
+    - echo "I am going to write a file named 'output.txt' now."
+    - echo "hello" > output.txt
+  generates:
+    - output.txt

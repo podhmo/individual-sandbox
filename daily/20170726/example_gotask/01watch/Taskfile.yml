@@ -1,0 +1,13 @@
+# github.com/go-task/task
+
+default:
+  silent: true
+  cmds:
+    - |
+      echo ========================================
+      echo changed
+      echo ----------------------------------------
+    - cat source.txt
+    - echo ========================================
+  sources:
+    - source.txt

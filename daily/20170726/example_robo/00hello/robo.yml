@@ -1,0 +1,21 @@
+hello:
+  command: |
+    echo hello
+
+hello2:
+  summary: multilines example
+  command: |
+    echo hello
+    echo hello
+
+hello3:
+  summary: with arguments examples
+  command: echo "Hello ${1:-there}"
+  examples:
+    - description: hello world
+      command: robo hello3 world
+
+hello4:
+  summary: with pipe examples
+  command: |
+    echo foo | sed 's/o/@/g'

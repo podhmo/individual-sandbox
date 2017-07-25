@@ -1,0 +1,2 @@
+default:
+	task -w

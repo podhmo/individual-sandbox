@@ -1,0 +1,10 @@
+# github.com/go-task/task
+
+foo:
+  desc: "*foo*"
+  cmds:
+    - echo foo
+bar:
+  desc: "*bar*"
+  cmds:
+    - echo foo
