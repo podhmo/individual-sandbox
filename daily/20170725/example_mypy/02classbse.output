@@ -1,0 +1,2 @@
+02classbse.py:20: error: TypedDict "Movie" has no key 'ame'
+02classbse.py:22: error: Unsupported operand types for + ("str" and "int")
