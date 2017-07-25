@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "00unicode_exception.py", line 21, in <module>
+    print(u"error is occured" + e.args[0].decode("utf-8"))
+AttributeError: A instance has no attribute 'decode'

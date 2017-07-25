@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "00unicode_exception.py", line 18, in <module>
+    f(A(u"あ"))
+  File "00unicode_exception.py", line 13, in f
+    raise Exception(a)
+Exception: <exception str() failed>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "00unicode_exception.py", line 21, in <module>
+    print(u"error is occured" + e.args[0].decode("utf-8"))
+AttributeError: 'A' object has no attribute 'decode'

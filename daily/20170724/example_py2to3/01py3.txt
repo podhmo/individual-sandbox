@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "01nested_exception.py", line 3, in f
+    g()
+  File "01nested_exception.py", line 9, in g
+    raise Exception("hmm")
+Exception: hmm
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "01nested_exception.py", line 11, in <module>
+    f()
+  File "01nested_exception.py", line 5, in f
+    raise Exception("oops")
+Exception: oops
