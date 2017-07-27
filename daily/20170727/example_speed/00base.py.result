@@ -1,0 +1,26 @@
+Timer unit: 1e-06 s
+
+Total time: 0.017194 s
+File: 00base.py
+Function: tfidf at line 5
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     5                                           @profile
+     6                                           def tfidf(word):
+     7         1         4730   4730.0     27.5      collection = nltk.TextCollection(word)
+     8         1            1      1.0      0.0      doc = []
+     9       277          190      0.7      1.1      for do in word:
+    10       276          349      1.3      2.0          wo = []
+    11      1580         1360      0.9      7.9          for term in set(do):
+    12      1304         5768      4.4     33.5              a = collection.tf_idf(term, do)
+    13      1304          974      0.7      5.7              if (a > 0):
+    14      1304         1232      0.9      7.2                  wo.append([term, a])
+    15       276         1022      3.7      5.9          wo.sort(key=lambda x: x[1])
+    16       276          242      0.9      1.4          wo.reverse()
+    17       276          684      2.5      4.0          slice1 = [i[0] for i in wo]
+    18       276          288      1.0      1.7          lists = slice1[:20]
+    19       276          353      1.3      2.1          doc.append(list(lists))
+    20                                           
+    21         1            1      1.0      0.0      return doc
+
