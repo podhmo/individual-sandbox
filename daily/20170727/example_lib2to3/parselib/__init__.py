@@ -112,14 +112,3 @@ class StrictPyTreeVisitor(PyTreeVisitor):
 def dump_tree(tree, stream=sys.stdout, tostring=dump_node_to_string):
     dumper = PyTreeDumper(target_stream=stream, tostring=tostring)
     dumper.visit(tree)
-
-
-def monkey_patch():
-    def repr_node(self):
-        return "%s(%s, %r)" % (self.__class__.__name__, node_name(self), self.children)
-
-    def repr_leaf(self):
-        return "%s(%r, %r)" % (self.__class__.__name__, node_name(self), self.value)
-
-    pytree.Node.__repr__ = repr_node
-    pytree.Leaf.__repr__ = repr_leaf
