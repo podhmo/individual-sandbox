@@ -37,10 +37,15 @@ def Dedent():
     return Leaf(token.DEDENT, "")
 
 
-def Def(name, args, *body):
+def Comment(comment):
+    return Leaf(token.COMMENT, comment)
+
+
+def Def(name, args, *body, prefix=""):
     return Node(
         syms.funcdef, [
-            Name("def"), maybe_name(name), Node(syms.parameters, [
+            Name("def", prefix=prefix), maybe_name(name),
+            Node(syms.parameters, [
                 LParen(),
                 args,
                 RParen(),

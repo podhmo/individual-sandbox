@@ -2,7 +2,9 @@ import parselib as p
 import buildlib as b
 
 code = """
+# toplevel comment
 def add(x, y, z=0):
+    # this is comment
     ans = x + y + z
     return ans
 """
@@ -10,9 +12,11 @@ def add(x, y, z=0):
 # todo: indentation
 
 t = b.File(
+    b.Comment("# toplevel comment\n"),
     b.Def(
         "add",
         b.Args("x", "y", z=b.Number(0)),
+        b.Comment("# toplevel comment\n"),
         b.Node(
             b.syms.simple_stmt, [
                 b.Node(
@@ -29,7 +33,8 @@ t = b.File(
                                 ]
                             )
                         )
-                    ]
+                    ],
+                    prefix="    "
                 ),
                 b.Newline(),
             ]
