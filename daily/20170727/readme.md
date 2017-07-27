@@ -1,3 +1,10 @@
+
+## python lib2to3の機能分からず
+
+lib2to3のpytreeとかは分かるのだけれど。fixerの使い方がよく分かっていない感じ。
+
+
+
 ## python line_profiler
 
 line profilerの使い方毎回忘れてしまう。
