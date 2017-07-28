@@ -1,12 +1,6 @@
 # -*- coding:utf-8 -*-
 import logging
-import contextlib
 logger = logging.getLogger(__name__)
-
-
-@contextlib.contextmanager
-def code():
-    yield
 
 
 """

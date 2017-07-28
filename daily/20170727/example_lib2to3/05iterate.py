@@ -1,7 +1,31 @@
 import sys
 from parselib import parse_from_file, StrictPyTreeVisitor
-import buildlib as b
+from lib2to3.pygram import python_symbols as syms
 from lib2to3.pgen2 import token
+
+
+def extract_inner_block(node):
+    found = None
+    for c in node.children:
+        if c.type == syms.suite:
+            found = c
+            break
+
+    indent_level = 0
+    indent = None
+    for line in found.children:
+        if line.type == token.INDENT:
+            indent_level += 1
+            indent = line
+            continue
+        if line.type == token.DEDENT:
+            indent_level -= 1
+            if indent_level <= 0:
+                break
+        if indent_level > 0:
+            line = line.clone()
+            line.prefix = line.prefix.replace(indent.value * indent_level, "")
+            yield line
 
 
 class Visitor(StrictPyTreeVisitor):
@@ -22,17 +46,11 @@ class Visitor(StrictPyTreeVisitor):
 
     def visit_with_stmt(self, node):
         if node.children[1].children[0].value == "code":
-            self.collector.collect(node, parser=Collector.parsers.CODE, new=True)
-            # to simple statement
-            # suite = node.children[3]
-            # reading = False
-            # stack = []
-            # for subnode in suite.children:
-            #     if 
-            #     if reading:
-            #     if subnode.type == b.symbols.simple_stmt:
-            #         reading = True
-            #         self.collector.collect(node, parser=Collector.parsers.CODE, new=True)
+            new = True
+            for line in extract_inner_block(node):
+                self.collector.collect(line, parser=Collector.parsers.CODE, new=new)
+                if new:
+                    new = False
         else:
             self.collector.collect(node, parser=Collector.parsers.CODE)
 
