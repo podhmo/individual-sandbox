@@ -97,16 +97,14 @@ class PyTreeDumper(PyTreeVisitor):
 
 class StrictPyTreeVisitor(PyTreeVisitor):
     def default_node_visit(self, node):
-        for child in node.children:
-            self.visit(child)
         method = 'visit_{0}'.format(node_name(node))
         if not hasattr(self, method):
-            raise NotImplemented(method)
+            raise NotImplementedError(method)
 
     def default_leaf_visit(self, node):
         method = 'visit_{0}'.format(node_name(node))
         if not hasattr(self, method):
-            raise NotImplemented(method)
+            raise NotImplementedError(method)
 
 
 def dump_tree(tree, stream=sys.stdout, tostring=dump_node_to_string):

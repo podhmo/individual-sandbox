@@ -1,4 +1,5 @@
-file_input [2 children]
+file_input [3 children]
+  COMMENT('# toplevel comment\n') [lineno=0, column=0, prefix='']
   funcdef[name='add'] [5 children]
     NAME('def') [lineno=0, column=0, prefix='']
     NAME('add') [lineno=0, column=0, prefix=' ']
@@ -14,13 +15,14 @@ file_input [2 children]
         NUMBER(0) [lineno=0, column=0, prefix='']
       RPAR(')') [lineno=0, column=0, prefix='']
     COLON(':') [lineno=0, column=0, prefix='']
-    suite [5 children]
+    suite [6 children]
       NEWLINE('\n') [lineno=0, column=0, prefix='']
       INDENT('    ') [lineno=0, column=0, prefix='']
+      COMMENT('# toplevel comment\n') [lineno=0, column=0, prefix='']
       simple_stmt [2 children]
         expr_stmt [1 children]
           atom [3 children]
-            NAME('ans') [lineno=0, column=0, prefix='']
+            NAME('ans') [lineno=0, column=0, prefix='    ']
             EQUAL('=') [lineno=0, column=0, prefix=' ']
             arith_expr [5 children]
               NAME('x') [lineno=0, column=0, prefix=' ']
@@ -36,7 +38,9 @@ file_input [2 children]
         NEWLINE('\n') [lineno=0, column=0, prefix='']
       DEDENT('') [lineno=0, column=0, prefix='']
   ENDMARKER('') [lineno=0, column=0, prefix='']
+# toplevel comment
 def add(x, y, z=0):
+    # toplevel comment
     ans = x + y + z
     return ans
 
