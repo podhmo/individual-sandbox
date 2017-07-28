@@ -29,9 +29,8 @@ def extract_inner_block(node):
 
 
 class Visitor(StrictPyTreeVisitor):
-    def __init__(self, gen):
-        self.gen = gen
-        self.collector = Collector(lambda c, v: self.gen.send((c, v)))
+    def __init__(self, consume, collector=None):
+        self.collector = collector or Collector(consume)
 
     def visit_file_input(self, node):
         # iterate only toplevel
@@ -42,17 +41,19 @@ class Visitor(StrictPyTreeVisitor):
         self.collector.collect(node)
 
     def visit_decorated(self, node):
-        self.collector.collect(node, parser=Collector.parsers.CODE)
+        self.collector.collect(node, event=self.collector.events.CODE)
+
+    visit_try_stmt = visit_if_stmt = visit_funcdef = visit_classdef = visit_decorated
 
     def visit_with_stmt(self, node):
         if node.children[1].children[0].value == "code":
             new = True
             for line in extract_inner_block(node):
-                self.collector.collect(line, parser=Collector.parsers.CODE, new=new)
+                self.collector.collect(line, event=self.collector.events.CODE, new=new)
                 if new:
                     new = False
         else:
-            self.collector.collect(node, parser=Collector.parsers.CODE)
+            self.collector.collect(node, event=self.collector.events.CODE)
 
     def visit_ENDMARKER(self, node):
         self.collector.consume()
@@ -62,86 +63,88 @@ def _surround_with(s, wrapper):
     return s.startswith(wrapper) and s.endswith(wrapper)
 
 
-class PyCellParser:
+class PyCellEvent:
     name = "python"
 
     def __init__(self, buf=None):
         self.buf = buf or []
 
-    def collect(self, stmt):
+    def add(self, stmt):
         self.buf.append(str(stmt))
 
     def markdown(self, val, file=sys.stdout):
         print("``` {}".format(self.name), file=file)
-        print("".join(val).rstrip(), file=file)
+        print("".join(val).strip(), file=file)
         print("```", file=file)
 
 
-class MarkdownCellParser:
+class MarkdownCellEvent:
     name = "markdown"
 
     def __init__(self, buf=None):
         self.buf = buf or []
 
-    def collect(self, stmt):
+    def add(self, stmt):
         self.buf.append(str(stmt))
 
     def markdown(self, val, file=sys.stdout):
         print("", file=file)
-        print("".join(val)[3:-4].rstrip(), file=file)
+        print("".join(val).strip("'").strip('"'), file=file)
         print("", file=file)
 
 
 class Collector:
-    class parsers:
-        MARKDOWN = MarkdownCellParser
-        CODE = PyCellParser
-        DEFAULT = PyCellParser
+    class events:
+        MARKDOWN = MarkdownCellEvent
+        CODE = PyCellEvent
+        DEFAULT = PyCellEvent
 
-    def __init__(self, cont, parser=None):
+    def __init__(self, cont, events=events):
         self.cont = cont
         self.prev = None
-        self.current = parser or self.parsers.DEFAULT()
+        self.events = events
+        self.current = self.events.DEFAULT()
 
-    def guess_parser(self, stmt):
+    def guess_event(self, stmt):
         node = stmt.children[0]
         if node.type == token.STRING and (
             _surround_with(node.value, "'''") or _surround_with(node.value, '"""')
         ):
-            return self.parsers.MARKDOWN
+            return self.events.MARKDOWN
         else:
-            return self.parsers.CODE
+            return self.events.CODE
 
     def consume(self):
         if self.current.buf and not getattr(self.current, "_used", False):
             self.current._used = True
             self.cont(self.current, self.current.buf)
 
-    def collect(self, stmt, parser=None, new=False):
-        parser, prev_parser = (parser or self.guess_parser(stmt)), self.prev
-        self.prev = parser
-        if parser == self.parsers.MARKDOWN:
+    def collect(self, stmt, event=None, new=False):
+        event, prev_event = (event or self.guess_event(stmt)), self.prev
+        self.prev = event
+        if event == self.events.MARKDOWN:
             self.consume()
-            self.current = parser()
-            self.current.collect(stmt)
-        elif new or prev_parser != parser:
+            self.current = event()
+            self.current.add(stmt)
+        elif new or prev_event != event:
             self.consume()
-            self.current = parser()
-            self.current.collect(stmt)
+            self.current = event()
+            self.current.add(stmt)
         else:
-            self.current.collect(stmt)
+            self.current.add(stmt)
 
 
-def consume():
-    while True:
-        p, val = yield
-        p.markdown(val)
+def iterate_cell_events(t):
+    r = []
+
+    def consume(p, buf):
+        r.append((p, buf))
+
+    v = Visitor(consume)
+    v.visit(t)
+    return iter(r)
 
 
-gen = consume()
-gen.send(None)
-v = Visitor(gen)
 t = parse_from_file("./src/sample.py")
-v.visit(t)
-# print(t.next_sibling)
-# print(dir(t))
+for p, buf in iterate_cell_events(t):
+    p.markdown(buf)

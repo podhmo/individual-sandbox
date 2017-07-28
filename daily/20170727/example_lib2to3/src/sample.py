@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
+
 import logging
 logger = logging.getLogger(__name__)
-
-
 """
 # section
 
@@ -17,15 +16,24 @@ with code():
     x = 10
     y = 20
     (x, y)
-
 """
 # section2
 
 this is markdown text2
 """
 
-x * x
-x * y
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def say(self, message):
+        return "{self.name}({self.age}): {message}".format(self=self, message=message)
+
+
+p = Person("foo", 20)
+p.say("hello")
 
 with code():
-    y * y
+    p.say("bye")
