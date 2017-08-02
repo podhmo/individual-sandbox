@@ -1,3 +1,17 @@
+## fcitx with gnome
+
+not supported yet?(https://wiki.archlinux.org/index.php/fcitx)
+
+using xorg session
+
+/etc/gdm/custom.conf
+
+```
+[daemon]
+# Uncoment the line below to force the login screen to use Xorg
+WaylandEnable=false
+```
+
 ## systemctl
 
 listing all services

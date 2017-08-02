@@ -41,7 +41,6 @@ pacman -Ss <name>
 ```
 
 searach local
-
 ```
 pacman -Qs <name>
 ```
