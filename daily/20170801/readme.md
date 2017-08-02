@@ -44,3 +44,60 @@ def render(filename):
         nb = nbformat.read(rf, as_version=4)
     return executenb(nb)
 ```
+
+## mongodb mondogbのsparse index
+
+```
+db.createCollection("entries");
+
+db.entries.insert([
+  {"_id": ObjectId(), "name": "foo"},
+  {"_id": ObjectId(), "name": "bar"},
+  {"_id": ObjectId(), "name": "boo"},
+]);
+
+// create sparse index
+db.entries.createIndex({"markedAt": 1}, {sparse: true});
+
+// markedAt 1 and other items don't have markedAt
+db.entries.updateOne({}, {$set: {"markedAt": ISODate()}})
+db.entries.find({markedAt: {$exists: true}}).explain("executionStats") // IXSCAN
+db.entries.find({markedAt: {$exists: false}}).explain("executionStats") // COLLSCAN
+
+// markedAt 1 and other items markedAt are null
+db.entries.updateMany({}, {$set: {"markedAt": null}});
+db.entries.updateOne({}, {$set: {"markedAt": ISODate()}})
+db.entries.find({markedAt: {$ne: null}}).explain("executionStats") // COLLSCAN
+
+
+// create dense index
+db.entries.dropIndex("markedAt_1");
+db.entries.createIndex({"markedAt": 1}); // IXSCAN
+
+
+// markedAt 1 and other items markedAt are null
+db.entries.find({markedAt: {$ne: null}}).explain("executionStats")
+
+// markedAt 1 and other items don't have markedAt
+db.entries.updateMany({}, {$unset: {"markedAt": 1}});
+db.entries.updateOne({}, {$set: {"markedAt": ISODate()}})
+db.entries.find({markedAt: {$exists: false}}).explain("executionStats") // COLLSCAN
+```
+
+## mongodb mongodbのexplain
+
+```
+db.<collection>.find(q).explain("executionStats")
+```
+
+- winningPlanが採用されたもの
+- (rejectedPlanが非採用)
+- 使われているindexはinpuStageがIXSCANの時のindexName
+- (IXSCAN=index scan, COLLSCAN=collection scan)
+- totalDocsExaminedはindexで絞り込まれたdocument数
+- nReturnedは返されたdocument数
+
+see also
+
+- https://docs.mongodb.com/manual/reference/explain-results/
+
