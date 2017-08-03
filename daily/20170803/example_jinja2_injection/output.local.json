@@ -1,0 +1,5 @@
+{
+  "before": hello,
+  "serviceConf": {"message": "yay, I am local."},
+  "after": world
+}
