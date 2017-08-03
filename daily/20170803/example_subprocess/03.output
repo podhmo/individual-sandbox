@@ -1,0 +1,6 @@
+@ Switch to inspect mode.
+@ puts('*hello*')
+@ *hello*
+@ nil
+timeout {'timeout': 1, 'stderr': None, 'cmd': ['irb'], 'output': None}
+@ 

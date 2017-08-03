@@ -1,0 +1,13 @@
+@ --Return--
+@ > <string>(1)<module>()->None
+@ (Pdb) hello
+timeout {'cmd': ['python', '-c', 'import pdb; pdb.set_trace()'], 'stderr': None, 'timeout': 1, 'output': None}
+@ (Pdb) 
+@ Traceback (most recent call last):
+@   File "<string>", line 1, in <module>
+@   File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/bdb.py", line 52, in trace_dispatch
+@     return self.dispatch_return(frame, arg)
+@   File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/bdb.py", line 96, in dispatch_return
+@     if self.quitting: raise BdbQuit
+@ bdb.BdbQuit
+1

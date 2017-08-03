@@ -1,0 +1,3 @@
+timeout {'timeout': 1, 'cmd': ['python'], 'stderr': None, 'output': None}
+@ hello
+0
