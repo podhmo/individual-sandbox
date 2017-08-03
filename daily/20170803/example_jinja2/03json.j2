@@ -1,0 +1,7 @@
+{% set xs = [1,2,3] %}
+{% set d = {} %}
+{% for x in xs %}
+{% do d.update({x: 1}) %}
+{% endfor %}
+
+output: {{d|tojson}}

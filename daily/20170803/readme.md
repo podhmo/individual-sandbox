@@ -1,3 +1,29 @@
+## mongo
+
+こういうのはだめ。
+
+```
+db.createCollection("xs");
+db.createCollection("ys");
+var xids = [ObjectId(), ObjectId()];
+db.xs.insert([
+  {_id: xids[0], name: "a"},
+  {_id: xids[1], name: "b"}
+])
+db.ys.insert([
+  {_id: ObjectId(), name: "i", rels: [{xId: xids[0]}, {xId: xids[1]}]},
+  {_id: ObjectId(), name: "j", rels: [{xId: xids[0]}, {xId: xids[1]}]},
+  {_id: ObjectId(), name: "k", rels: [{xId: xids[0]}, {xId: xids[1]}]},
+])
+db.ys.updateMany({"rels.xId": xids[0]}, {"$set": {"rels.xId": null}})
+db.xs.remove({_id: xids[0]})
+```
+
+
+## python subprocessのoutput
+
+何故かpythonだけ上手く行かない感じ。irbの方はしっかり返してくれるのだけれど。
+
 ## go setup go environment
 
 ```

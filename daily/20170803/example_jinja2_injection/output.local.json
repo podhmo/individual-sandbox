@@ -1,5 +1,5 @@
 {
-  "before": hello,
+  "before": "hello",
   "serviceConf": {"message": "yay, I am local."},
-  "after": world
+  "after": "world"
 }
