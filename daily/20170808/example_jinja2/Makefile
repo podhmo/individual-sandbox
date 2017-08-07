@@ -1,4 +1,4 @@
-default: 00 01 02 03 04
+default: 00 01 02 03
 
 00:
 	kamidana -a kamidana.additionals.reader 00rst.j2 > 00.rst
