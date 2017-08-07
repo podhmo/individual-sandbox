@@ -1,0 +1,9 @@
+{% set names = [] %}
+{% for row in colors %}
+{% do names.append(row["name"]) %}
+{% endfor %}
+{
+  "debug": true,
+  "colors": {{names|tojson}}
+}
+

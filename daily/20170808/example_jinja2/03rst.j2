@@ -1,0 +1,17 @@
+{{"./00.rst"|read_from_file}}
+
+template
+----------------------------------------
+
+00rst.j2
+
+.. code-block::
+
+  {{"./00rst.j2|read_from_file|indent(2)"}}
+
+source
+----------------------------------------
+
+.. code-block:: rst
+
+  {{"./00.rst"|read_from_file|indent(2)}}
