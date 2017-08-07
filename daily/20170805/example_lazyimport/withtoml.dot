@@ -1,0 +1,19 @@
+digraph g {
+    g0 [label="gettext"]
+    g1 [label="locale"]
+    g2 [label="struct"]
+    g3 [label="argparse"]
+    g4 [label="copy"]
+    g5 [label="textwrap"]
+    g6 [label="00lazy"]
+    g7 [label="toml"]
+    g8 [label="datetime"]
+    g0 -> g1
+    g0 -> g2
+    g3 -> g0
+    g3 -> g4
+    g3 -> g5
+    g6 -> g3
+    g6 -> g7
+    g7 -> g8
+}

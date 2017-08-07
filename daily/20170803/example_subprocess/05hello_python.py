@@ -9,7 +9,7 @@ def reader(p):
             print("@", line, end="")
 
 
-cmd = ["python"]
+cmd = ["python", "-i"]
 p = s.Popen(cmd, stdin=s.PIPE, stdout=s.PIPE, stderr=s.STDOUT, universal_newlines=True)
 th = threading.Thread(target=reader, args=(p, ), daemon=True)
 th.start()

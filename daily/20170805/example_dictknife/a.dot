@@ -1,0 +1,65 @@
+digraph g {
+    g0 [label="dictknife.walkers"]
+    g1 [label="dictknife.contexts"]
+    g2 [label="dictknife.operators"]
+    g3 [label="dictknife.loading"]
+    g4 [label="dictknife.loading.env"]
+    g5 [label="dictknife.loading.yaml"]
+    g6 [label="dictknife.loading.json"]
+    g7 [label="dictknife.loading.raw"]
+    g8 [label="dictknife.loading.toml"]
+    g9 [label="dictknife"]
+    g10 [label="dictknife.accessor"]
+    g11 [label="dictknife.deepmerge"]
+    g12 [label="dictknife.deepequal"]
+    g13 [label="dictknife.diff"]
+    g14 [label="dictknife.pp"]
+    g15 [label="~/vboxshare/venvs/my3/bin/dictknife"]
+    g16 [label="dictknife.commands"]
+    g17 [label="dictknife.commands.dictknife"]
+    g18 [label="dictknife.commandline"]
+    g19 [label="argparse"]
+    g20 [label="copy"]
+    g21 [label="dictknife.loading._lazyimport"]
+    g22 [label="json.decoder"]
+    g23 [label="json.scanner"]
+    g24 [label="gettext"]
+    g25 [label="locale"]
+    g26 [label="struct"]
+    g27 [label="dictknife.langhelpers"]
+    g28 [label="json"]
+    g29 [label="difflib"]
+    g30 [label="textwrap"]
+    g31 [label="json.encoder"]
+    g0 -> g1
+    g0 -> g2
+    g3 -> g4
+    g3 -> g5
+    g3 -> g6
+    g3 -> g7
+    g3 -> g8
+    g9 -> g0
+    g9 -> g10
+    g9 -> g11
+    g9 -> g12
+    g9 -> g13
+    g9 -> g14
+    g15 -> g16
+    g15 -> g17
+    g15 -> g9
+    g18 -> g19
+    g11 -> g20
+    g6 -> g21
+    g22 -> g23
+    g24 -> g25
+    g24 -> g26
+    g21 -> g27
+    g21 -> g28
+    g13 -> g29
+    g19 -> g30
+    g19 -> g24
+    g28 -> g31
+    g28 -> g22
+    g17 -> g18
+    g17 -> g3
+}
