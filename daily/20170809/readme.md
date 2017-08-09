@@ -1,3 +1,9 @@
+## linux suspend from command line
+
+```
+systemctl suspend
+```
+
 ## emacs with fcitx
 
 ```
