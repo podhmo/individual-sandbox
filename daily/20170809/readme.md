@@ -1,3 +1,43 @@
+## emacs with fcitx
+
+```
+LC_CTYPE=ja_JP.UTF-8 XMODIFIERS=@im=fcitx emacs&
+```
+
+## rust setup
+
+```
+curl -f https://sh.rustup.rs > ~/Downloads/rust.sh
+less ~/Downloads/rust.sh
+bash -x ~/Downloads/rust.sh
+rustup self update
+rustup default stable
+```
+
+see
+
+- https://wiki.archlinux.org/index.php/Rust
+
+## rust cargo-script
+
+```
+cargo install cargo-script
+```
+
+### run code (oneline)
+
+like a `python -c 'print("hai")'`
+
+```
+$ cargo script -e 'println!("hai")'
+```
+
+### run file
+
+```
+$ cargo script 00hello.rs
+```
+
 ## emacs emacsで画像を表示
 
 create-imageを使ってimage data的なものを作りそれをinsert-imageなどで表示する
@@ -9,8 +49,9 @@ create-imageを使ってimage data的なものを作りそれをinsert-imageな�
 ```lisp
 (insert-image (create-image "a.png"))
 ```
-
 #### data
+
+
 
 dataから直接作る事もできる
 
