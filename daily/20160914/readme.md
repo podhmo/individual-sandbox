@@ -72,7 +72,6 @@ rm -rf ~/Library/<app>
 ```
 cd ~/.vimperator
 mkdir plugin
-curl https://gist.githubusercontent.com/podhmo/893357200a8cfa78514705a1521c3989/raw/e1dd7482fc4b216b6698bce44f022e6685941de4/copy.js > plugin/copy.js
-```
+curl https://gist.githubusercontent.com/podhmo/893357200a8cfa78514705a1521c3989/raw/e1dd7482fc4b216b6698bce44f022e6685941de4/copy.js > plugin/copy.js```
 
 firefoxのところで `:loadplugins` を実行
