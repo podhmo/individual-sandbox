@@ -1,0 +1,24 @@
+definitions:
+  s:
+    type: object
+    properties:
+      person:
+        $ref: "#/definitions/person"
+      nperson:
+        $ref: "#/definitions/nperson"
+  nperson:
+    type: object
+    allOf:
+      - $ref: "#/definitions/person"
+      - x-nullable: true
+  nperson2:
+    type: [object,null]  # invalid as swagger spec
+    allOf:
+      - $ref: "#/definitions/person"
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
