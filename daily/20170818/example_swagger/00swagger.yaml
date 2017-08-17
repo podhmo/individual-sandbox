@@ -7,7 +7,6 @@ definitions:
       nperson:
         $ref: "#/definitions/nperson"
   nperson:
-    type: object
     allOf:
       - $ref: "#/definitions/person"
       - x-nullable: true

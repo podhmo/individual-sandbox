@@ -9,7 +9,7 @@ from swagger_marshmallow_codegen.schema import PrimitiveValueSchema
 
 class S(Schema):
     person = fields.Nested('Person')
-    nperson = fields.Nested('Nperson')
+    nperson = fields.Field('Nperson')
 
 
 class Person(Schema):
