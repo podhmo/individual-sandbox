@@ -1,0 +1,57 @@
+heap profile: 3: 304 [4: 82224] @ heap/2
+1: 208 [1: 208] @ 0x8632 0x56326 0x564cf 0x20d6 0x2084 0x2185 0x29ee4 0x53e71
+#	0x56325	runtime/pprof.lockProfiles+0xc5	/opt/local/lib/go/src/runtime/pprof/pprof.go:160
+#	0x564ce	runtime/pprof.Lookup+0x2e	/opt/local/lib/go/src/runtime/pprof/pprof.go:195
+#	0x20d5	main.g+0x35			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:16
+#	0x2083	main.f+0x43			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:11
+#	0x2184	main.main+0x54			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:27
+#	0x29ee3	runtime.main+0x1f3		/opt/local/lib/go/src/runtime/proc.go:183
+
+1: 48 [1: 48] @ 0x4bd78 0x51469 0x2cb70
+#	0x4bd77	runtime.deferproc.func1+0x57	/opt/local/lib/go/src/runtime/panic.go:92
+#	0x51468	runtime.systemstack+0x78	/opt/local/lib/go/src/runtime/asm_amd64.s:298
+#	0x2cb70	runtime.mstart+0x0		/opt/local/lib/go/src/runtime/proc.go:1079
+
+1: 48 [1: 48] @ 0x73eb 0x562d2 0x564cf 0x20d6 0x2084 0x2185 0x29ee4 0x53e71
+#	0x562d1	runtime/pprof.lockProfiles+0x71	/opt/local/lib/go/src/runtime/pprof/pprof.go:159
+#	0x564ce	runtime/pprof.Lookup+0x2e	/opt/local/lib/go/src/runtime/pprof/pprof.go:195
+#	0x20d5	main.g+0x35			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:16
+#	0x2083	main.f+0x43			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:11
+#	0x2184	main.main+0x54			$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:27
+#	0x29ee3	runtime.main+0x1f3		/opt/local/lib/go/src/runtime/proc.go:183
+
+0: 0 [0: 0] @ 0x5817a 0x568c1 0x2114 0x2084 0x2185 0x29ee4 0x53e71
+#	0x58179	runtime/pprof.writeHeap+0xb9		/opt/local/lib/go/src/runtime/pprof/pprof.go:470
+#	0x568c0	runtime/pprof.(*Profile).WriteTo+0x340	/opt/local/lib/go/src/runtime/pprof/pprof.go:298
+#	0x2113	main.g+0x73				$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:18
+#	0x2083	main.f+0x43				$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:11
+#	0x2184	main.main+0x54				$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:27
+#	0x29ee3	runtime.main+0x1f3			/opt/local/lib/go/src/runtime/proc.go:183
+
+0: 0 [1: 81920] @ 0x207f 0x2185 0x29ee4 0x53e71
+#	0x207e	main.f+0x3e		$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:10
+#	0x2184	main.main+0x54		$HOME/vboxshare/venvs/my3/sandbox/daily/20170823/example_mem/02prof/main.go:27
+#	0x29ee3	runtime.main+0x1f3	/opt/local/lib/go/src/runtime/proc.go:183
+
+
+# runtime.MemStats
+# Alloc = 81296
+# TotalAlloc = 176712
+# Sys = 4032760
+# Lookups = 3
+# Mallocs = 465
+# Frees = 104
+# HeapAlloc = 81296
+# HeapSys = 753664
+# HeapIdle = 450560
+# HeapInuse = 303104
+# HeapReleased = 0
+# HeapObjects = 361
+# Stack = 294912 / 294912
+# MSpan = 6240 / 16384
+# MCache = 4800 / 16384
+# BuckHashSys = 1453899
+# NextGC = 4194304
+# PauseNs = [186635 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 1
+# DebugGC = false
