@@ -1,0 +1,32 @@
+heap profile: 1: 8192 [1: 8192] @ heap/1048576
+1: 8192 [1: 8192] @ 0x13123d1 0x1259f44 0x125b380 0x125c742 0x1258ab2 0x1059c01
+#	0x13123d0	main.inc+0x250				$HOME/work/individual-sandbox/daily/20170824/example_mem/01mem/main.go:53
+#	0x1259f43	net/http.HandlerFunc.ServeHTTP+0x43	/opt/local/lib/go/src/net/http/server.go:1942
+#	0x125b37f	net/http.(*ServeMux).ServeHTTP+0x12f	/opt/local/lib/go/src/net/http/server.go:2238
+#	0x125c741	net/http.serverHandler.ServeHTTP+0x91	/opt/local/lib/go/src/net/http/server.go:2568
+#	0x1258ab1	net/http.(*conn).serve+0x611		/opt/local/lib/go/src/net/http/server.go:1825
+
+
+# runtime.MemStats
+# Alloc = 578328
+# TotalAlloc = 847744
+# Sys = 5179640
+# Lookups = 40
+# Mallocs = 6639
+# Frees = 1792
+# HeapAlloc = 578328
+# HeapSys = 1769472
+# HeapIdle = 606208
+# HeapInuse = 1163264
+# HeapReleased = 0
+# HeapObjects = 4847
+# Stack = 327680 / 327680
+# MSpan = 19608 / 32768
+# MCache = 4800 / 16384
+# BuckHashSys = 1442889
+# GCSys = 301056
+# OtherSys = 1289391
+# NextGC = 4194304
+# PauseNs = [456472 271606 315448 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 3
+# DebugGC = false
