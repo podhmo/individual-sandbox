@@ -1,16 +1,48 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 	"net/http"
 	_ "net/http/pprof"
+	"os"
 	"runtime"
-	"time"
+	"runtime/pprof"
 )
 
 // DefaultPort is default port for profiler.
 var DefaultPort = ":55555"
+var arr [][]int
+
+func peek(w http.ResponseWriter, r *http.Request) {
+	n := len(arr)
+	fmt.Println("peek", n)
+	fmt.Fprintf(w, `{"size": %d}`, n)
+}
+
+func gc(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("gc", len(arr))
+	fmt.Println("before")
+	pprof.Lookup("heap").WriteTo(os.Stdout, 1)
+	runtime.GC()
+	fmt.Println("----------------------------------------")
+	fmt.Println("after")
+	pprof.Lookup("heap").WriteTo(os.Stdout, 1)
+}
+
+func inc(w http.ResponseWriter, r *http.Request) {
+	n := len(arr)
+	fmt.Println("inc", n, "to", n+1)
+	arr = append(arr, make([]int, 1000000))
+	fmt.Fprintf(w, `{"size": %d}`, len(arr))
+}
+
+func clear(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("clear", len(arr))
+	arr = nil
+	fmt.Fprintf(w, `{"size": %d}`, len(arr))
+}
 
 func setup() {
 	runtime.SetBlockProfileRate(1)
@@ -29,7 +61,22 @@ func setup() {
 	}()
 }
 
+func run() {
+	http.HandleFunc("/inc", inc)
+	http.HandleFunc("/gc", gc)
+	http.HandleFunc("/clear", clear)
+	http.HandleFunc("/", peek)
+	log.Printf("start server: %s\n", ":8080")
+	http.ListenAndServe(":8080", nil)
+}
+
 func main() {
+	// oldRate := runtime.MemProfileRate
+	// runtime.MemProfileRate = 1
+	// defer func() {
+	// 	runtime.MemProfileRate = oldRate
+	// }()
+
 	setup()
-	time.Sleep(1 * time.Second)
+	run()
 }
