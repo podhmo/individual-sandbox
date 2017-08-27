@@ -3,3 +3,4 @@ jqfpy:
 
 jq:
 	python gen.py | jq --slurp '.[] | .n' | tee output.txt
+

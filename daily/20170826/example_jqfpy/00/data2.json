@@ -1,0 +1,82 @@
+{
+  "items": [
+    {
+      "item_id": 1,
+      "name": "すてきな雑貨",
+      "price": 2500
+    },
+    {
+      "item_id": 2,
+      "name": "格好いい置物",
+      "price": 4500
+    },
+    {
+      "item_id": 3,
+      "name": "間接照明",
+      "price": 3400
+    },
+    {
+      "item_id": 4,
+      "name": "小物入れ",
+      "price": 1200
+    }
+  ],
+  "items_old": [
+    {
+      "item_id": 1,
+      "name": "すてきな雑貨",
+      "price": 2500
+    },
+    {
+      "item_id": 5,
+      "name": "カエルの置物",
+      "price": 500
+    }
+  ],
+  "orders": [
+    {
+      "order_id": 1,
+      "user_id": 1
+    },
+    {
+      "order_id": 2,
+      "user_id": 2
+    },
+    {
+      "order_id": 3,
+      "user_id": 3
+    }
+  ],
+  "item_orders": [
+    {
+      "item_order_id": 1,
+      "item_id": 1,
+      "order_id": 1,
+      "number": 1
+    },
+    {
+      "item_order_id": 2,
+      "item_id": 4,
+      "order_id": 1,
+      "number": 2
+    },
+    {
+      "item_order_id": 3,
+      "item_id": 1,
+      "order_id": 3,
+      "number": 2
+    },
+    {
+      "item_order_id": 4,
+      "item_id": 2,
+      "order_id": 3,
+      "number": 1
+    },
+    {
+      "item_order_id": 5,
+      "item_id": 3,
+      "order_id": 3,
+      "number": 1
+    }
+  ]
+}
