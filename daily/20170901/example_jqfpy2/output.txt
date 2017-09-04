@@ -1,0 +1,40 @@
+# indent
+jqfpy 00data.json
+[
+  {
+    "name": "Ann",
+    "age": 20
+  },
+  {
+    "name": "Bob",
+    "age": 50
+  },
+  {
+    "name": "Unknown",
+    "age": 45
+  }
+]
+# [0]
+jqfpy 'get("0")' 00data.json
+{
+  "name": "Ann",
+  "age": 20
+}
+# age > 30
+jqfpy '[v for v in get() if int(v["age"]) > 30]' 00data.json
+[
+  {
+    "name": "Bob",
+    "age": 50
+  },
+  {
+    "name": "Unknown",
+    "age": 45
+  }
+]
+# age > 30 only name
+jqfpy --squash '[v["name"] for v in get() if int(v["age"]) > 30]' 00data.json
+"Bob"
+"Unknown"
+jqfpy 'len(get())' 00data.json
+3

@@ -1,0 +1,17 @@
+{
+    "status": 200,
+    "timestamp": 1382461861,
+    "value": {
+        "aaa": {
+            "value3": "v3",
+            "value4": 4
+        },
+        "bbb": {
+            "value3": "v3"
+        },      
+        "ddd": {
+            "value3": "v3",
+            "value4": 4
+        }
+    }
+}
