@@ -1,0 +1,16 @@
+{
+    "students": [
+        {"name": "John", "age": "19", "gender": "m", "from": "Tampa, FL", "cum_gpa": "3.83", "semesters": [
+            {"name": "201302", "gpa": "3.67", "grades": {"CSC101": "A", "MAT101": "A", "PSY101": "B"}},
+            {"name": "201401", "gpa": "4.00", "grades": {"CSC201": "A", "MAT201": "A", "HIS101": "A"}}
+        ]},
+        {"name": "Mary", "age": "20", "gender": "f", "from": "Chicago, IL", "cum_gpa": "3.50", "semesters": [
+            {"name": "201302", "gpa": "4.00", "grades": {"CSC101": "A", "MAT101": "A", "ECO101": "A"}},
+            {"name": "201401", "gpa": "3.00", "grades": {"CSC201": "B", "MAT201": "B", "HUM101": "B"}}
+        ]},
+        {"name": "Dan", "age": "20", "gender": "m", "from": "Seattle, WA", "cum_gpa": "3.33", "semesters": [
+            {"name": "201302", "gpa": "3.33", "grades": {"CHE101": "B", "MAT101": "A", "PSY101": "B"}},
+            {"name": "201401", "gpa": "3.33", "grades": {"CHE201": "A", "MAT201": "A", "HUM101": "C"}}
+        ]}
+    ]
+}

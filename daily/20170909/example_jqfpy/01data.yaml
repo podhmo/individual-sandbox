@@ -1,0 +1,11 @@
+person:
+  name: foo
+  age: 20
+  skills:
+    - x
+    - y
+    - z
+person:
+  name: bar
+  age: 10
+  skills: []
