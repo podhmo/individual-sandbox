@@ -1,0 +1,132 @@
+bash -x 01*.bash | jq --unbuffered .
++ set -eu
++ pids=()
++ pids[$!]=2698
++ pids[$!]=2699
++ wait 2698 2699
+++ jot 10 1
+++ jot 10 1
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "bar"}'
++ echo '{"msg": "foo"}'
++ sleep 0.2
++ sleep 0.2
+{
+  "msg": "bar"
+}
+{
+  "msg": "foo"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ sleep 0.2
++ echo '{"msg": "bar"}'
+{
+  "msg": "foo"
+}
++ sleep 0.2
+{
+  "msg": "bar"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ echo '{"msg": "bar"}'
+{
+  "msg": "foo"
+}
++ sleep 0.2
++ sleep 0.2
+{
+  "msg": "bar"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "bar"}'
++ sleep 0.2
++ echo '{"msg": "foo"}'
++ sleep 0.2
+{
+  "msg": "bar"
+}
+{
+  "msg": "foo"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ echo '{"msg": "bar"}'
++ sleep 0.2
+{
+  "msg": "foo"
+}
+{
+  "msg": "bar"
+}
++ sleep 0.2
++ for i in '`jot 10 1`'
++ echo '{"msg": "bar"}'
++ sleep 0.2
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ sleep 0.2
+{
+  "msg": "bar"
+}
+{
+  "msg": "foo"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ echo '{"msg": "bar"}'
++ sleep 0.2
+{
+  "msg": "foo"
+}
++ sleep 0.2
+{
+  "msg": "bar"
+}
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ sleep 0.2
++ for i in '`jot 10 1`'
+{
+  "msg": "foo"
+}
++ echo '{"msg": "bar"}'
++ sleep 0.2
+{
+  "msg": "bar"
+}
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ sleep 0.2
+{
+  "msg": "foo"
+}
++ for i in '`jot 10 1`'
++ echo '{"msg": "bar"}'
++ sleep 0.2
+{
+  "msg": "bar"
+}
++ for i in '`jot 10 1`'
++ for i in '`jot 10 1`'
++ echo '{"msg": "foo"}'
++ echo '{"msg": "bar"}'
++ sleep 0.2
++ sleep 0.2
+{
+  "msg": "foo"
+}
+{
+  "msg": "bar"
+}
++ echo '{"msg": "ok"}'
+{
+  "msg": "ok"
+}

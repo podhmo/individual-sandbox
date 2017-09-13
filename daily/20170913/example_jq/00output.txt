@@ -1,0 +1,65 @@
+bash -x 00*
++ set -eu
++ jq . --unbuffered /dev/fd/63 /dev/fd/62
+++ bash -c 'for i in `jot 10 1`; do echo "{\"name\": \"foo\"}"; sleep 0.2; done'
+++ bash -c 'for i in `jot 10 1`; do echo "{\"name\": \"bar\"}"; sleep 0.2; done'
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "foo"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
+{
+  "name": "bar"
+}
