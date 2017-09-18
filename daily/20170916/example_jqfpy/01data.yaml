@@ -1,0 +1,5 @@
+group:
+  members:
+    - name: foo
+    - name: bar
+    - name: boo
