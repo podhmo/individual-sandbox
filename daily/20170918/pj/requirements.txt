@@ -1,4 +1,5 @@
 pandas
 nbreversible
-
-
+xlrd
+html5lib
+bs4
