@@ -7,3 +7,4 @@ sample-data:
 	git clone git@github.com:practical-jupyter/sample-data.git
 clean:
 	rm -f *.md
+
