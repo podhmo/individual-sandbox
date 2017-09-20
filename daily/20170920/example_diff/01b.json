@@ -1,0 +1,7 @@
+{
+  "people": [
+    {"name": "boo"},
+    {"name": "bar"},
+    {"name": "foo"}
+  ]
+}

@@ -1,0 +1,18 @@
+--- 01a.json
++++ 01b.json
+@@ -1,13 +1,13 @@
+ {
+   "people": [
+     {
+-      "name": "foo"
++      "name": "boo"
+     },
+     {
+       "name": "bar"
+     },
+     {
+-      "name": "boo"
++      "name": "foo"
+     }
+   ]
+ }

@@ -1,0 +1,9 @@
+[
+  [[1]],
+  null,
+  10,
+  1.02,
+  [{"skills": ["x", "z", "y", "x"]}, {"skills": ["y", "x", "z"]}],
+  {"name": "foo", "nickname": "f"},
+  "hoi"
+]

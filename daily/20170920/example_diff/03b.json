@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2017-01-02",
+    "people": [
+      {"name": "bar", "skills": ["y", "z", "x"]},
+      {"name": "boo"},
+      {"name": "foo", "skills": ["a", "c", "b"]}
+    ]
+  },
+  {
+    "date": "2017-01-01",
+    "people": [
+      {"name": "bar", "skills": ["z", "y", "x"]},
+      {"name": "foo", "skills": ["c", "a", "b"]},
+      {"name": "boo"}
+    ]
+  }
+]

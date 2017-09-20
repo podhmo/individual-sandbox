@@ -1,0 +1,7 @@
+{
+  "people": [
+    {"name": "foo", "skills": ["a", "b", "c"]},
+    {"name": "bar", "skills": ["x", "y", "z"]},
+    {"name": "boo"}
+  ]
+}
