@@ -1,0 +1,11 @@
+jqfpy --slurp "L = get(); list(set(L[0]).difference(L[1]))" 00xs.json 00ys.json
+[
+  2,
+  4
+]
+jqfpy --slurp "L = get(); list(set(L[0]).difference(L[1]))" 00ys.json 00xs.json
+[
+  5,
+  7,
+  9
+]
