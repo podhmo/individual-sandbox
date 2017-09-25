@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  },
+  "mappings": {
+    "value" : {
+      "properties" : {
+        "name" : { "type" : "text" },
+        "value" : { "type" : "integer" }
+      }
+    }
+  }
+}
