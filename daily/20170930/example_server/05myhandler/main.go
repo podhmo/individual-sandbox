@@ -1,10 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"encoding/json"
 
 	"github.com/dimfeld/httptreemux"
 )
@@ -190,6 +189,7 @@ func helloHandler(registry *Registry, r *http.Request) (AppResponse, error) {
 	// 	fmt:    "hello(from %s): %s",
 	// 	args:   []interface{}{user.Name, id},
 	// }, nil
+
 	return &JSONResponse{
 		status: 200,
 		ob:     user,
