@@ -6,3 +6,6 @@ integration-test:
 
 unittest-test:
 	python -m unittest discover
+
+nose2:
+	nose2 --collect-only
