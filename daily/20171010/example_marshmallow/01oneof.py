@@ -1,0 +1,28 @@
+import marshmallow as ma
+
+
+class Item(ma.Schema):
+    name = ma.fields.String(required=True)
+    value = ma.fields.Integer(required=True)
+
+
+class Item2(ma.Schema):
+    name = ma.fields.String(required=True)
+    value = ma.fields.Number(required=True)
+
+
+class S(ma.Schema):
+    left = ma.fields.Nested(Item)
+    right = ma.fields.Nested(Item2)
+
+    @ma.validates_schema
+    def mutual(self, data):
+        items = [item for item in [data.get("left"), data.get("right")] if item]
+        if len(items) != 1:
+            raise ma.ValidationError("items0 or items1")
+
+
+print(S().load({}))
+print(S().load({"left": {"name": "foo", "value": 10}}))
+print(S().load({"right": {"name": "foo", "value": 10}}))
+print(S().load({"left": {"name": "foo", "value": 10}, "right": {"name": "foo", "value": 10}}))
