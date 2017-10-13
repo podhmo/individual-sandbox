@@ -1,0 +1,31 @@
+pmem(rss=74850304, vms=2541088768, pfaults=21897, pageins=599)
+Filename: 07dawg.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+     7   21.762 MiB    0.000 MiB   @profile
+     8                             def gen(cs, N, size):
+     9   26.203 MiB    4.441 MiB       words = numpy.random.choice(cs, [N, size])
+    10   71.383 MiB   45.180 MiB       t = dawg.BytesDAWG((str(word), b"".join(word)) for word in words)
+    11   71.383 MiB    0.000 MiB       return t
+
+
+Filename: 07dawg.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    14   21.680 MiB    0.000 MiB   @profile
+    15                             def main():
+    16   21.684 MiB    0.004 MiB       cs = numpy.array(list(str(string.printable)), dtype="|S1")
+    17   21.684 MiB    0.000 MiB       size = 50
+    18   21.684 MiB    0.000 MiB       N = 10000
+    19   21.762 MiB    0.078 MiB       x = dawg.BytesDAWG()
+    20   71.383 MiB   49.621 MiB       t = gen(cs, N, size)
+    21   71.383 MiB    0.000 MiB       import gc
+    22   71.383 MiB    0.000 MiB       gc.collect()
+    23   71.383 MiB    0.000 MiB       import time
+    24   71.383 MiB    0.000 MiB       time.sleep(1)
+    25   71.383 MiB    0.000 MiB       import psutil
+    26   71.391 MiB    0.008 MiB       print(psutil.Process().memory_info())
+
+

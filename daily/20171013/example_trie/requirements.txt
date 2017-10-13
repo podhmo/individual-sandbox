@@ -1,0 +1,6 @@
+pygtrie
+numpy
+psutil
+DAWG
+marisa-trie
+DAWG-Python

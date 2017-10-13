@@ -1,0 +1,32 @@
+pmem(rss=34021376, vms=2507079680, pfaults=9839, pageins=176)
+Filename: 04memory2.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+     6   21.512 MiB    0.000 MiB   @profile
+     7                             def gen(cs, N, size):
+     8   25.953 MiB    4.441 MiB       words = numpy.random.choice(cs, [N, size])
+     9   25.953 MiB    0.000 MiB       d = {}
+    10   32.441 MiB    6.488 MiB       for word in words:
+    11   32.441 MiB    0.000 MiB           d[str(word)] = str(word)
+    12   32.441 MiB    0.000 MiB       return d
+
+
+Filename: 04memory2.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    15   21.504 MiB    0.000 MiB   @profile
+    16                             def main():
+    17   21.512 MiB    0.008 MiB       cs = numpy.array(list(str(string.printable)), dtype="|S1")
+    18   21.512 MiB    0.000 MiB       size = 50
+    19   21.512 MiB    0.000 MiB       N = 10000
+    20   32.441 MiB   10.930 MiB       t = gen(cs, N, size)
+    21   32.445 MiB    0.004 MiB       import gc
+    22   32.445 MiB    0.000 MiB       gc.collect()
+    23   32.445 MiB    0.000 MiB       import time
+    24   32.445 MiB    0.000 MiB       time.sleep(1)
+    25   32.445 MiB    0.000 MiB       import psutil
+    26   32.453 MiB    0.008 MiB       print(psutil.Process().memory_info())
+
+
