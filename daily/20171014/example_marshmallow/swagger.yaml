@@ -1,0 +1,23 @@
+definitions:
+  Person:
+    type: object
+    required:
+      - name
+      - age
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+  Group:
+    type: object
+    required:
+      - name
+      - members
+    properties:
+      name:
+        type: string
+      members:
+        type: array
+        items:
+          $ref: "#/definitions/Person"
