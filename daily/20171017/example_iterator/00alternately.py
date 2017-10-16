@@ -1,4 +1,4 @@
-from itertools import cycle, islice, chain
+from itertools import cycle, islice, chain, zip_longest
 
 
 def rep(xs, n):
@@ -35,21 +35,23 @@ def roundrobin(*iterables):
 
 xs = list(range(5))
 itr0 = rep(xs, 3)
-itr1 = rep(xs, 3)
+itr1 = rep(xs, 4)
 
 for x in alternately(itr0, itr1):
     print(x)
 
+print("----------------------------------------")
 xs = list(range(5))
 itr0 = rep(xs, 3)
-itr1 = rep(xs, 3)
+itr1 = rep(xs, 4)
 
-for x in chain.from_iterable(zip(itr0, itr1)):
+for x in chain.from_iterable(zip_longest(itr0, itr1)):
     print(x)
 
+print("----------------------------------------")
 xs = list(range(5))
 itr0 = rep(xs, 3)
-itr1 = rep(xs, 3)
+itr1 = rep(xs, 4)
 
 for x in roundrobin(itr0, itr1):
     print(x)

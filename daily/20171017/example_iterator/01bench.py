@@ -66,12 +66,12 @@ print(r)
 r = timeit.timeit(
     """\
 xs = list(range(5))
-deque(chain.from_iterable(zip(*[rep(xs, 100) for i in range(100)])), maxlen=0)
+deque(chain.from_iterable(zip_longest(*[rep(xs, 100) for i in range(100)])), maxlen=0)
 """,
     number=N,
     setup="""\
 from collections import deque
-from itertools import chain
+from itertools import chain, zip_longest
 
 def rep(xs, n):
     for i in range(n):
@@ -86,4 +86,5 @@ print(r)
 # roundrobin
 # 1.3739034849859308
 # zip
-# 0.6385965410154313
+# 0.6299366969906259
+
