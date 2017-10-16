@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, post_load, pre_load
+from marshmallow import Schema, fields, post_load, pre_load, validates_schema, ValidationError
 
 
 class S(Schema):
@@ -17,3 +17,16 @@ class S(Schema):
 print(S().load({"NAME": "foo"}))
 print(S().load({"NAME": "foo", "AGE": "10"}))
 print(S(many=True).load([{"NAME": "foo", "AGE": "10"}, {"NAME": "foo", "AGE": "10"}]))
+
+
+class S2(S):
+    @validates_schema
+    def hmm(self, data):
+        raise ValidationError("hmm")
+
+
+class S3(Schema):
+    s = fields.Nested(S2, required=True)
+
+
+print(S2().load({}))

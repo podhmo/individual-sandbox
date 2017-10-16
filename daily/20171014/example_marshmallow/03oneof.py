@@ -6,12 +6,11 @@ definitions:
       - {$ref: "#/definitions/Group"}
 """
 
-from swagger_marshmallow_codegen.schema import ComposedSchema, OneOfStrategy
+from swagger_marshmallow_codegen.schema import OneOfSchema
 from schema import Person, Group
 
 
-class Target(ComposedSchema):
-    strategy = OneOfStrategy()
+class Target(OneOfSchema):
     schema_classes = (Person, Group)
 
 
@@ -27,3 +26,5 @@ print(Target().load({"name": "foo", "members": []}))
 print("----------------------------------------")
 print(t.dump({"name": "foo", "age": 10}))
 print(t.dump({"name": "foo", "members": []}))
+print(t.dump({"name": "foo", "age": 10, "members": []}))
+print("----------------------------------------")
