@@ -1,0 +1,91 @@
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 34, in main
+    tick()
+  File "00sig.py", line 27, in tick
+    ping()
+  File "00sig.py", line 13, in ping
+    os.kill(p, signal.SIGUSR1)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 36, in main
+    f(2)
+  File "00sig.py", line 43, in f
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 36, in main
+    f(2)
+  File "00sig.py", line 42, in f
+    g(i)
+  File "00sig.py", line 49, in g
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 36, in main
+    f(2)
+  File "00sig.py", line 43, in f
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 43, in f
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 42, in f
+    g(i)
+  File "00sig.py", line 49, in g
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 43, in f
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 42, in f
+    g(i)
+  File "00sig.py", line 49, in g
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 42, in f
+    g(i)
+  File "00sig.py", line 48, in g
+    h(i)
+  File "00sig.py", line 55, in h
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 42, in f
+    g(i)
+  File "00sig.py", line 49, in g
+    time.sleep(0.5)
+----------------------------------------
+  File "00sig.py", line 59, in <module>
+    main()
+  File "00sig.py", line 37, in main
+    f(3)
+  File "00sig.py", line 43, in f
+    time.sleep(0.5)
