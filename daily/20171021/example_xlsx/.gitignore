@@ -1,2 +1,4 @@
 *.xlsx
 *.csv
+*.prof
+*.lprof

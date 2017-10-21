@@ -7,6 +7,7 @@ workbook = xlsxwriter.Workbook('test.xlsx')
 worksheet = workbook.add_worksheet()
 
 xss = r.randint(1, 100000, size=(65535, 15))
+# xss = r.randint(1, 100000, size=(6553, 15))
 for i, xs in enumerate(xss):
     worksheet.write_row(i, 0, xs)
 workbook.close()

@@ -6,3 +6,14 @@ XLSFILE = test.xlsx
 
 01:
 	python 01*.py
+
+02:
+	time python 02*.py 00.csv 02.csv
+
+03:
+	time kernprof -l 03tocsv.py ${XLSFILE} 00.csv
+	python -m line_profiler 03*.lprof
+
+04:
+	time go run 04tocsv.go
+
