@@ -41,6 +41,7 @@ func (p *Pool) Go(f func() error) {
 
 func main() {
 	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
 	pool, ctx := WithContext(ctx, 4)
 	fmt.Println("tasks 10, concurrency 4")
 
@@ -56,8 +57,13 @@ func main() {
 			log.Printf("<- %3d\n", i)
 			return nil
 		})
+		if i == 6 {
+			fmt.Println("cancel")
+			cancel()
+		}
 	}
 	if err := pool.Wait(); err != nil {
 		log.Fatal(err)
 	}
+	cancel()
 }
