@@ -1,0 +1,36 @@
+========================================
+before allocated 41.03 MB
+function                      14438    +14438
+tuple                          5610     +5610
+dict                           4733     +4733
+cell                           3333     +3333
+weakref                        2380     +2380
+list                           2303     +2303
+wrapper_descriptor             2247     +2247
+getset_descriptor              1618     +1618
+builtin_function_or_method     1607     +1607
+type                           1400     +1400
+----------------------------------------
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 10000000 entries, 0 to 9999999
+Data columns (total 1 columns):
+foo    int64
+dtypes: int64(1)
+memory usage: 76.3 MB
+----------------------------------------
+========================================
+after allocated 193.03 MB
+dict                   4739        +6
+list                   2309        +6
+weakref                2382        +2
+slice                    58        +2
+BlockPlacement            3        +2
+IntBlock                  2        +2
+function              14439        +1
+cell                   3334        +1
+Series                    2        +1
+SingleBlockManager        2        +1
+========================================
+after delete variable 193.03 MB
+========================================
+after gc 192.83 MB

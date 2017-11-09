@@ -1,0 +1,18 @@
+========================================
+before allocated 20.64 MB
+function                       5331     +5331
+dict                           2142     +2142
+wrapper_descriptor             2018     +2018
+tuple                          1903     +1903
+weakref                        1304     +1304
+method_descriptor              1048     +1048
+builtin_function_or_method      978      +978
+getset_descriptor               845      +845
+list                            614      +614
+type                            550      +550
+========================================
+after allocated 96.99 MB
+========================================
+after delete variable 96.8 MB
+========================================
+after gc 96.78 MB

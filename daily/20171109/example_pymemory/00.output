@@ -1,4 +1,4 @@
-before allocated 8.88 MB
-after allocated 170.77 MB
-after delete variable 9.4 MB
-after gc 9.4 MB
+before allocated 8.86 MB
+after allocated 170.91 MB
+after delete variable 9.53 MB
+after gc 9.53 MB
