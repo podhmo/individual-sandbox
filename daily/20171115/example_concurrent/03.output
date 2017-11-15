@@ -1,0 +1,17 @@
+S
+before 0
+before 1
+before 2
+before 3
+before 4
+after 4
+catch: ok 4
+after 1
+catch: ok 1
+after 3
+catch: ok 3
+after 2
+catch: ok 2
+after 0
+catch: ok 0
+E

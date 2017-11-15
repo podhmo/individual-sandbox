@@ -1,0 +1,24 @@
+S
+before 0
+before 1
+after 0
+division by zero
+after 1
+division by zero
+hmm
+before 0
+before 1
+after 1
+after 0
+Traceback (most recent call last):
+  File "05error.py", line 26, in <module>
+    print(f.result())
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/concurrent/futures/_base.py", line 398, in result
+    return self.__get_result()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/concurrent/futures/_base.py", line 357, in __get_result
+    raise self._exception
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/concurrent/futures/thread.py", line 55, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "05error.py", line 10, in do_task
+    1 / 0
+ZeroDivisionError: division by zero

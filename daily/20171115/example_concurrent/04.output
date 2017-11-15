@@ -1,0 +1,17 @@
+S
+before 0
+before 1
+before 2
+before 3
+before 4
+yay <class 'concurrent.futures._base.TimeoutError'>
+yay <class 'concurrent.futures._base.TimeoutError'>
+yay <class 'concurrent.futures._base.TimeoutError'>
+yay <class 'concurrent.futures._base.TimeoutError'>
+yay <class 'concurrent.futures._base.TimeoutError'>
+after 0
+after 4
+after 3
+after 1
+after 2
+E
