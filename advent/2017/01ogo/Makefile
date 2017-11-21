@@ -3,3 +3,6 @@ build:
 
 run:
 	go/bin/go run 01*/main.go
+
+clone:
+	git clone --depth=1 git@github.com:golang/go.git
