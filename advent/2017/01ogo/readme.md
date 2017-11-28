@@ -70,3 +70,17 @@ GOROOT_BOOTSTRAP=$(go env | grep GOROOT | cut -d = -f 2) GOOS=linux GOARCH=amd64
 `compile/internal/gc/range.go` の `walkrange`
 これらの開始地点は、`compile/internal/gc/pgen.go` の `compile`
 さらに言えば、gc/main.goのMainの中でdcl.goのfunccompile越しに呼ばれてる。
+
+
+### rangeのとき
+
+
+- mapiternextが繰り返し呼ばれる
+- iterator(hiter)を作ったタイミングで雑に開始時のbucketを選択する
+- あとはそのbucketからじゅんじゅんに読んでく。
+
+randomになっているのは
+
+- map作成時にhash0を計算してる
+- iterator作成時にも開始地点のbucketを探すためにfaastrandしてる
+- (hashmap_fastの方もわすれずに)
