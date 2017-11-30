@@ -84,3 +84,34 @@ randomになっているのは
 - map作成時にhash0を計算してる
 - iterator作成時にも開始地点のbucketを探すためにfaastrandしてる
 - (hashmap_fastの方もわすれずに)
+
+### debug print
+
+以下のような
+
+```
+$ go run --gcflags="-m" <>
+```
+
+どういうふらぐがあるかはgo/src/cmd/compile/internal/gc/main.go
+
+### walk
+
+int64の時の最適化を省略した時ビルド時に以下の様なエラーが出る。
+
+```
+        STALE cmd/asm: stale dependency: runtime/internal/atomic
+        STALE cmd/cgo: stale dependency: runtime/internal/atomic
+        STALE cmd/compile: stale dependency: runtime/internal/atomic
+        STALE cmd/link: stale dependency: runtime/internal/atomic
+        STALE runtime/internal/sys: build ID mismatch
+```
+
+これは原因は`--no-clean`をつけたままbuildしているせい。
+
+
+### hash0,rをすべて固定値にしてもだめかも
+
+− そもそもkeyの値はpointerを元に計算されていそう
+- あと大きくしたりのヒューリスティックにも乱数が使われている（無効にできなくもないけれど）
+
