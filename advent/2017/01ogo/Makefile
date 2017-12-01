@@ -2,7 +2,7 @@ build:
 	(cd go/src/; GOROOT_BOOTSTRAP=`go env | grep GOROOT | cut -d = -f 2` bash -x make.bash --no-clean)
 
 build-with-clean:
-	(cd go/src/; GOROOT_BOOTSTRAP=`go env | grep GOROOT | cut -d = -f 2` bash -x make.bash)
+	(cd go/src/; GO_DISTFLAGS=-d GOROOT_BOOTSTRAP=`go env | grep GOROOT | cut -d = -f 2` bash -x make.bash)
 
 run:
 	go/bin/go run 01*/main.go
