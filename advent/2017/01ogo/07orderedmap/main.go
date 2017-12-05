@@ -21,19 +21,22 @@ type Omap struct {
 
 // New :
 func New() *Omap {
-	root := &link{}
 	return &Omap{
-		m:     map[int]int{},
-		start: root,
-		end:   root,
+		m: map[int]int{},
 	}
 }
 
 func (m *Omap) set(k int, v int) {
 	if _, ok := m.m[k]; !ok {
-		l := &link{key: k, prev: m.end}
-		m.end.next = l
-		m.end = l
+		if m.start == nil {
+			l := &link{key: k}
+			m.start = l
+			m.end = l
+		} else {
+			l := &link{key: k, prev: m.end}
+			m.end.next = l
+			m.end = l
+		}
 	}
 	m.m[k] = v
 }
@@ -48,8 +51,12 @@ func (m *Omap) unset(k int) {
 		// unlink (O(N))
 		for l := m.start; l != nil; l = l.next {
 			if l.key == k {
-				if l.next == nil {
+				if m.start == l && m.end == l {
+					m.start = nil
+					m.end = nil
+				} else if l.next == nil {
 					l.prev.next = nil
+					m.end = l.prev
 				} else if l.prev == nil {
 					m.start = l.next
 				} else {
@@ -65,11 +72,7 @@ func (m *Omap) unset(k int) {
 }
 
 func (m *Omap) iterate(fn func(int, int)) {
-	l := m.start
-	if l.next == nil {
-		return
-	}
-	for l := l.next; l != nil; l = l.next {
+	for l := m.start; l != nil; l = l.next {
 		fn(l.key, m.m[l.key])
 	}
 }
@@ -100,9 +103,19 @@ func main() {
 			fmt.Println("@", k, v)
 		})
 		fmt.Println("after")
+
+		// ordmap := map[int]int{}
+		// for i := 9; i >= 0; i-- {
+		// 	ordmap[i] = i
+		// }
+		// for k := range ordmap {
+		// 	m.unset(k)
+		// }
+
 		for i := 9; i >= 0; i-- {
 			m.unset(i)
 		}
+
 		// for i := 0; i < 10; i++ {
 		// 	m.unset(i)
 		// }

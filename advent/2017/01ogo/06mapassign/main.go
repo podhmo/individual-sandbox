@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-// go run --gcflags "-S" main.go
+// go run -
+-gcflags "-S" main.go
 
 func main() {
 	mm := map[int]int{1: 10}

@@ -124,4 +124,51 @@ hlinkという構造を別途作った。reflect.goの方も書き換えない�
 
 何か使いかたを誤っている。
 
+通常は？
 
+```
+hash := t.key.alg.hash(key, uintptr(h.hash0))
+b := (*bmap)(add(h.buckets, (hash&m)*uintptr(t.bucketsize)))
+for i := uintptr(0); i < bucketCnt; i++ {
+    k := add(unsafe.Pointer(b), dataOffset+i*uintptr(t.keysize))
+    if alg.equal(key, k) {
+    	v := add(unsafe.Pointer(b), dataOffset+bucketCnt*uintptr(t.keysize)+i*uintptr(t.valuesize))
+    }
+}
+```
+
+ようはbucketからの差分を取り出しているということはkeyを保存しようとしてもだめ。
+どうやってuniqueなidにしよう。。
+
+たとえば、uint32の場合はkeyの生成は
+
+```
+// t *maptype key uint64
+hash := t.key.alg.hash(noescape(unsafe.Pointer(&key)), uintptr(h.hash0))
+m := bucketMask(h.B)
+b = (*bmap)(add(h.buckets, (hash&m)*uintptr(t.bucketsize)))
+for i, k := uintptr(0), b.keys(); i < bucketCnt; i, k = i+1, add(k, 7) {
+	add(unsafe.Pointer(b), dataOffset+bucketCnt*8+i*uintptr(t.valuesize)
+}
+
+// t *maptype key uint32
+hash := t.key.alg.hash(noescape(unsafe.Pointer(&key)), uintptr(h.hash0))
+bucket := hash & bucketMask(h.B)
+b = (*bmap)(add(h.buckets, (bucket)*uintptr(t.bucketsize)))
+for i, k := uintptr(0), b.keys(); i < bucketCnt; i, k = i+1, add(k, 4) {
+    return add(unsafe.Pointer(b), dataOffset+bucketCnt*4+i*uintptr(t.valuesize))
+}
+```
+
+- どちらでもkeyはunsafe
+- access2は存在確認もする
+
+assignのときは？
+
+```
+hash := t.key.alg.hash(noescape(unsafe.Pointer(&key)), uintptr(h.hash0))
+bucket := hash & bucketMask(h.B)
+b := (*bmap)(unsafe.Pointer(uintptr(h.buckets) + bucket*uintptr(t.bucketsize)))
+var insertk unsafe.Pointer
+insertk = add(unsafe.Pointer(insertb), dataOffset+inserti*4)
+```

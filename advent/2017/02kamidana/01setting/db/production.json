@@ -1,0 +1,5 @@
+{
+  "db": {
+    "url": "production.<db host>"
+  }
+}

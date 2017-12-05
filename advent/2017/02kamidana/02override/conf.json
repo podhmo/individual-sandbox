@@ -1,0 +1,7 @@
+{
+  "fooapi": {
+    "endpoint": "https://foo.jp/api",
+    "password": "this is api password",
+    "username": "dev"
+  }
+}
