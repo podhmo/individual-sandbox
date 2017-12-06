@@ -2,70 +2,80 @@ from functools import partial
 from collections import defaultdict
 
 
-class Context:
+class _State:
     def __init__(self):
-        self.values = []
-        self.counter = defaultdict(int)
+        self.xs = []
+        self.c = defaultdict(int)
         self.i = 0
 
     def add(self, x):
-        if x not in self.counter:
-            self.values.append(x)
-        self.counter[x] += 1
+        x = tuple(x[:])
+        if x not in self.c:
+            self.xs.append(x)
+        self.c[x] += 1
 
     def __iter__(self):
-        return iter(self.values)
+        return iter(self.xs)
 
 
-class Shaper:
+class Traverser:
     def __init__(self, iterate=partial(sorted, key=str)):
         self.iterate = iterate
 
-    def shape(self, d):
-        r = Context()
-        self._shape(d, r, [])
-        return r
+    def traverse(self, d):
+        s = _State()
+        self._traverse(d, s, [])
+        return s
 
-    def _shape(self, d, r, path):
+    def _traverse(self, d, s, path):
         if hasattr(d, "keys"):
-            self._shape_dict(d, r, path)
+            self._traverse_dict(d, s, path)
         elif isinstance(d, (list, tuple)):
-            self._shape_list(d, r, path)
+            self._traverse_list(d, s, path)
         else:
-            self._shape_atom(d, r, path)
+            self._traverse_atom(d, s, path)
 
-    def _shape_dict(self, d, r, path):
-        self._emit(d, r, path)
+    def _traverse_dict(self, d, s, path):
+        s.add(path)
         for k in self.iterate(d.keys()):
             path.append(k)
-            self._shape(d[k], r, path)
+            self._traverse(d[k], s, path)
             path.pop()
 
-    def _shape_list(self, xs, r, path):
+    def _traverse_list(self, xs, s, path):
+        s.add(path)
         path.append("[]")
-        self._emit(xs, r, path)
         for x in xs:
-            self._shape(x, r, path)
+            self._traverse(x, s, path)
         path.pop()
 
-    def _shape_atom(self, v, r, path):
-        self._emit(v, r, path)
-
-    def _emit(self, v, r, path):
-        r.add(tuple(path[:]))
+    def _traverse_atom(self, v, s, path):
+        s.add(path)
 
 
-def visualize(ctx):
+def convert_pathlist_from_state(s, *, squash=False):
     r = []
-    for x in ctx.values:
-        if not x:
+    for path in s.xs:
+        if not path:
             continue
-        if ctx.counter[x[:-1]] - ctx.counter[x] <= 1:
-            r.append(".".join(x))
-        else:
-            r.append("?{}".format(".".join(x)))
+
+        pasent_fsequency = s.c[path[:-1]]
+        fsequency = s.c[path]
+        if len(path) > 2 and path[-2] == "[]":
+            pasent_fsequency -= 1
+
+        is_optional = pasent_fsequency - fsequency > 0
+        fmt = "{}"
+        if is_optional:
+            fmt = "?{}"
+
+        if squash and path[0] == "[]":
+            path = path[1:]
+            if not path:
+                continue
+        r.append(fmt.format("/".join(path)))
     return r
 
 
-def shape(d, shaper=Shaper(), visualize=visualize):
-    return visualize(shaper.shape(d))
+def shape(d, traverse=Traverser().traverse, aggregate=convert_pathlist_from_state, squash=False):
+    return aggregate(traverse(d), squash=squash)
