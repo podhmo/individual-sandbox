@@ -1,0 +1,6 @@
+[[people]]
+person = "foo"
+age = 20
+[[people]]
+person = "bar"
+age = 10

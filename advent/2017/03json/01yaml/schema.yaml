@@ -1,0 +1,3 @@
+/:
+  200: {description: ok response}
+  default: {description: default response}
