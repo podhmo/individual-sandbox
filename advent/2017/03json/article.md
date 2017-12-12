@@ -305,3 +305,6 @@ age = 10
 ```
 
 ### CSV(TSV)との比較
+
+
+### :warning: JSONとYAMLはkeyの衝突を許す、tomlはエラーになる。
