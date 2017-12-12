@@ -1,6 +1,6 @@
 #[python][json][yaml][toml][csv]pythonを使ってJSONと互換性のある(?)フォーマットを比べてみる
 
-この記事はwaculアドベントカレンダーのN日目の記事です。今回は元のアドベントカレンダーの趣旨に従った軽い話です。
+この記事は[waculアドベントカレンダー](https://qiita.com/advent-calendar/2017/wacul)の13日目の記事です。今回は元のアドベントカレンダーの趣旨に従った軽い話です。
 
 ## JSONと互換性のあるフォーマットって？
 
@@ -9,6 +9,22 @@
 JSONをserialization/serializationのためのフォーマットと見なしてみることにします。少なくともdict,list,float,int,str,boolの範囲では、ファイルに書き出して保存し、ファイルから読み込んで復元することができそうです。
 
 この記事では、python上のオブジェクトをファイルに書き出すことをserializationと呼び、逆にファイルからpythonオブジェクトとして読み込むことをdeserializationと呼ぶことにします(pythonの界隈では大抵の場合それぞれdumpとloadという関数を用意しておくことが一般的です)。
+
+serializationの例
+
+```python
+with open("data.json", "w") as wf:
+    json.dump(d, wf)
+```
+
+desrializationの例
+
+```python
+with open("data.json", "r") as rf:
+    d2 = json.load(rf)
+```
+
+### 元のobjectとdeserializeしたオブジェクトは同じもの
 
 
 例えば、以下のようなdictがあったとします。
@@ -19,8 +35,6 @@ d = {
     "age": 20,
 }
 ```
-
-### 元のobjectとdeserializeしたオブジェクトは同じもの
 
 この元のdictとdictをファイルに書き出した(serialization)した後にファイルから読み込んだ(deserialization)dictの値は同じになります。
 
@@ -57,7 +71,13 @@ toml
 
 pythonは標準ライブラリに[json](https://docs.python.org/3/library/json.html)モジュールを持っています。
 
-この種の常として、順序を保持したいだとか、インデントがどうこうとか、pretty printだとか、日本語(マルチバイト文字)の扱いなどについての知見について調べたいということがあったりするかもですが、今回の記事ではそれらについて一切触れません。他に良い記事があるので探してみてください。
+JSONモジュールについて触れる場合になされる説明は大抵の場合以下のようなものであることがほとんどですが今回の記事ではそれらについて一切触れません。他に良い記事があるので探してみてください。
+
+- 順序を保持したい
+- インデントがどうこう
+- pretty print
+- 日本語(マルチバイト文字)の扱い
+- 時刻の扱い
 
 ### JSONは当然listもdictも出力可能
 
@@ -110,7 +130,7 @@ data.json
 ```
 
 
-JSONはvalidなYAMLです。JSONファイルをYAMLとして読み込むことができます。
+JSONはvalidなYAMLです。
 
 ```python
 import yaml
@@ -165,7 +185,7 @@ yaml.dump([person], sys.stdout, default_flow_style=False)
 #   name: foo
 ```
 
-### YAMLにもコメントが存在
+### YAMLにはコメントが存在
 
 YAMLにはコメントが存在しています。コメントが書けるという話からJSONのところで[JSON5](http://json5.org/)などに触れれば良かったのでは？という話しがあるかもしれませんが触れませんでした(タイトルにfor humanと付いているものは基本的に苦手)。
 
@@ -234,7 +254,7 @@ schema.json
 {"/": {"200": {"description": "ok response"}, "default": {"description": "default response"}}}
 ```
 
-### JSONとTOMLの比較
+## JSONとTOMLの比較
 
 次はTOMLです。TOMLは「Tom's Obvious, Minimal Language」というわりとふざけた名前のミニ言語です。YAMLが複雑過ぎるということに対するカウンターカルチャーという感じで生まれました。生まれたらしいです。
 
@@ -365,9 +385,9 @@ d = toml.loads(s)
 
 許しません。
 
-### JSONとCSV(TSV)との比較
+## JSONとCSV(TSV)との比較
 
-今度は趣向を変えてCSVとの比較です。設定ファイルとしてのJSONとは異なるものの、特に複数の値を保持しておきたい場合などにはCSVなどが使われる事があります。APIのレスポンスとしてのJSONと似た位置ある場合があるかもしれません。
+今度は趣向を変えてCSVとの比較です。設定ファイルとしてのJSONとは異なるものの、特に複数の値を保持しておきたい場合などにはCSVなどが使われる事があります。APIのレスポンスとしてのJSONと似た位置にあると言えなくはないかもしれません。
 
 pythonの標準ライブラリに[csv](https://docs.python.org/3/library/csv.html)モジュールは存在しますが。残念ながらload,dumpの関数は持っていません。
 
@@ -393,7 +413,7 @@ print(L)
 
 ところで、python3.6からは通常のdictではなくcollections.OrderedDictが返ります。便利ですね。
 
-```
+```python
 # python3.6での結果
 [OrderedDict([('name', 'foo'), ('age', '20')]), OrderedDict([('name', 'bar'), ('age', '10')])]
 ```
@@ -406,7 +426,7 @@ CSVで格納できるフォーマットはlistだけです。ある意味一行�
 
 CSVには型の指定が存在しません。なので当然全てstrになります。
 
-```
+```python
 [{'name': 'foo', 'age': '20'}, {'name': 'bar', 'age': '10'}]
 ```
 
@@ -464,9 +484,9 @@ print(L["age"])
 
 ### CSVは全部文字列..ただし
 
-CSVは全部文字列と言ってましたが。先程のpandasというパッケージ、これは親切というかおせっかいというか気が効いているので良い感じにintっぽいものはint(floatっぽいものはfloat)など空気を読んでくれます。
+CSVは全部文字列と言ってましたが。先程のpandasというパッケージ、これはこのパッケージの親切というかおせっかいというか気が効いているというか、まぁこのパッケージを使うと良い感じにintっぽいものはint(floatっぽいものはfloat)など空気を読んでくれます。
 
-```
+```python
 L = pd.read_csv("with-comment.csv", comment="#")
 
 print(L["age"])
@@ -487,7 +507,7 @@ id,name,age
 0002,bar,10
 ```
 
-本当はidが文字列になってほしいのですが。。pandasもpandasの実装をしてくれた人もエスパーではないので。。
+本当はidが文字列になってほしいのですが、pandasもpandasの実装をしてくれた人もエスパーではないので。。
 
 ```python
 L = pd.read_csv("with-id.csv", comment="#")
@@ -498,7 +518,20 @@ print(L["id"])
 # Name: id, dtype: int64
 ```
 
-### (おまけ pickle)
+諦めてdtypeを指定しましょう。
+
+```
+L = pd.read_csv("with-id.csv", comment="#", dtype={"id": "object", "name": "object", "age": "int64"})
+print(L["id"])
+
+# Name: id, dtype: object
+# 0    foo
+# 1    bar
+```
+
+(このあとschemaさえ指定するのならという話からProtocol Buffersに行ったり、そもそもDBに保存したり、特定の形状を持つdictをもうちょっと小さくとかでDAWGみたいな話にも続けられそうですがこれでおしまい)
+
+## (おまけ pickle)
 
 python限定という話しであれば[pickle](https://docs.python.org/3/library/pickle.html)と言うものもありますね。
 
@@ -510,5 +543,3 @@ assert d == pickle.loads(pickle.dumps(d))
 
 pickleの良いところは、pythonの範囲で対応しているオブジェクトであればどのようなオブジェクトでもserializeが可能ということです。
 pickleの悪いところは、利用可能な言語がpythonのみに限られるということです。
-
-## おわりに
