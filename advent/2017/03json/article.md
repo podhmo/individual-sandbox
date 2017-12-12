@@ -6,9 +6,12 @@
 
 ### serialization/desrialization
 
-JSONをserialization/serializationのためのフォーマットと見なしてみることにします。少なくともdict,list,float,int,str,boolの範囲では、ファイルに書き出して保存し、ファイルから読み込んで復元することができそうです(pythonの界隈では大抵の場合それぞれload,dumpという関数を用意しておくことが一般的です)。
+JSONをserialization/serializationのためのフォーマットと見なしてみることにします。少なくともdict,list,float,int,str,boolの範囲では、ファイルに書き出して保存し、ファイルから読み込んで復元することができそうです。
 
-例えば、こういうdictがあった場合に、
+この記事では、python上のオブジェクトをファイルに書き出すことをserializationと呼び、逆にファイルからpythonオブジェクトとして読み込むことをdeserializationと呼ぶことにします(pythonの界隈では大抵の場合それぞれdumpとloadという関数を用意しておくことが一般的です)。
+
+
+例えば、以下のようなdictがあったとします。
 
 ```python
 d = {
@@ -17,8 +20,9 @@ d = {
 }
 ```
 
+### 元のobjectとdeserializeしたオブジェクトは同じもの
 
-元のdictとdictをファイルに書き出した(serialization)した後にファイルから読み込んだ(deserialization)dictの値は同じになります。
+この元のdictとdictをファイルに書き出した(serialization)した後にファイルから読み込んだ(deserialization)dictの値は同じになります。
 
 ```python
 import json
@@ -34,32 +38,11 @@ with open("data.json", "r") as rf:
 assert d == d2  # True
 ```
 
-
-
-JSONではlistもdictも出力できます。コメントは書けません。
-
-日本語を出力したい場合にasciiでescapeされてほしくない場合は`ensure_ascii=False`を付けてみてください。
-
-```python
-import json
-import sys
-
-d = {"name": "何か"}
-
-json.dump(d, sys.stdout)
-# {"name": "\u4f55\u304b"}
-
-json.dump(d, sys.stdout, ensure_ascii=False)
-# {"name": "何か"}
-```
-
-### 今回の話題
-
-今回のテーマはJSONモジュールをベースにして他のフォーマットでdictを保存してみた時に何か違いがあるか調べてみようという話しです。あんまり複雑な話しはしないです。
+このような振る舞いを持つモジュールのそれぞれを比べてみようというのがこの記事の趣旨です。
 
 ## 準備
 
-もし試すのであれば、以下のパッケージを使うので `pip install -r requirements.txt` とかしてインストールしておいて下さい。
+今回の記事で利用する外部パッケージです。もし手元でも試したいという人がいれば、以下のパッケージを使うので `pip install -r requirements.txt` などでインストールしておいて下さい。
 
 requirements.txt
 
@@ -68,9 +51,57 @@ PyYAML
 toml
 ```
 
-## YAMLとの比較
+## JSON
 
-まずはじめに比較するフォーマットはYAMLです。YAMLはJSONのスーパーセットなので実はJSONで保存されたファイルも全てvalidなYAMLファイルです。なのであまり意味は無いですが。JSONファイルをYAMLとして読み込むことができます。
+はじめは[JSON](https://www.json.org/)についてです。
+
+pythonは標準ライブラリに[json](https://docs.python.org/3/library/json.html)モジュールを持っています。
+
+この種の常として、順序を保持したいだとか、インデントがどうこうとか、pretty printだとか、日本語(マルチバイト文字)の扱いなどについての知見について調べたいということがあったりするかもですが、今回の記事ではそれらについて一切触れません。他に良い記事があるので探してみてください。
+
+### JSONは当然listもdictも出力可能
+
+JSONではlistもdictも出力できます。当たり前のことかもしれないですが。
+
+```python
+# dict
+person = {"name": "foo", "age": 20}
+print(json.dumps(person)) # {"age": 20, "name": "foo"}
+
+# list
+print(json.dumps([person])) # [{"age": 20, "name": "foo"}]
+```
+
+### JSONにはコメントは存在しない
+
+JSONには、通常は、コメントが存在しません(通常はコメントが存在しません)。
+
+```json
+// ここはコメント(ということはできない)
+{
+  "name": "foo",
+  "age": 20
+}
+```
+
+### JSONは重複したキーが有る場合には後のものが優先
+
+重複したキーをJSONファイルにエラーになりません。仕様には明記されていないですが。[路線図(rail load graph)](https://www.json.org/)を見る限り、objectの構造は`"<string>" ":" "<value>"`の繰り返しなので後勝ちになりそうです。実際、pythonでも重複したキーを保持したJSONを渡してもエラーにはなりません。
+
+```python
+s = """
+{
+    "name": "foo",
+    "age": 20,
+    "name": "bar"
+}
+"""
+print(json.loads(s))  # {'name': 'bar', 'age': 20}
+```
+
+## JSONとYAMLの比較
+
+はじめにJSONと比較するフォーマットは[YAML](http://yaml.org/)です。YAMLはJSONのスーパーセットなので実はJSONで保存されたファイルも全てvalidなYAMLファイルです。なのであまり意味は無いですが。JSONファイルをYAMLとして読み込むことができます。
 
 data.json
 
@@ -79,7 +110,7 @@ data.json
 ```
 
 
-JSONはvalidなYAMLです。
+JSONはvalidなYAMLです。JSONファイルをYAMLとして読み込むことができます。
 
 ```python
 import yaml
@@ -92,7 +123,9 @@ print(d)
 # {'age': 20, 'person': 'name'}
 ```
 
-YAMLをdumpするときには2つのスタイルが存在しています。flowスタイルとblockスタイルです(ここでflowスタイルという言葉がでてきたのでもう少しJSONとの関係について詳しくいうとJSONはvalidなflowスタイルのYAMLです)。PyYAMLでは `default_flow_style` というオプションを使ってどちらのスタイルで出力するかを決める事ができます。
+YAMLをserializeするときには2つのスタイルが存在しています。flowスタイルとblockスタイルです。ここでflowスタイルという言葉がでてきたのでもう少しJSONとの関係について詳しくいうとJSONはvalidなflowスタイルのYAMLです。
+
+PyYAMLでは `default_flow_style` というオプションを使ってどちらのスタイルで出力するかを決める事ができます。
 
 ```python
 import yaml
@@ -112,7 +145,29 @@ age: 20
 person: name
 ```
 
-yamlもlistでもdictでも出力できます(そしてコメントも書けます(コメントが書けるという話からJSON5などにも言及もするかというとしません))
+### YAMLも当然listもdictも出力可能
+
+YAMLもJSONと同様にlistもdictも出力できます。当たり前のことかもしれないですが。
+
+```python
+import yaml
+import sys
+
+# dict
+person = {"name": "foo", "age": 20}
+yaml.dump(person, sys.stdout, default_flow_style=False)
+# age: 20
+# name: foo
+
+# list
+yaml.dump([person], sys.stdout, default_flow_style=False)
+# - age: 20
+#   name: foo
+```
+
+### YAMLにもコメントが存在
+
+YAMLにはコメントが存在しています。コメントが書けるという話からJSONのところで[JSON5](http://json5.org/)などに触れれば良かったのでは？という話しがあるかもしれませんが触れませんでした(タイトルにfor humanと付いているものは基本的に苦手)。
 
 list.yaml
 
@@ -124,18 +179,7 @@ list.yaml
 
 コメント付きのyamlもふつうにloadできます。
 
-```python
-import yaml
-
-with open("list.yaml") as rf:
-    L = yaml.load(rf)
-
-
-print(L)
-# [{'age': 20, 'person': 'foo'}]
-```
-
-#### YAMLとJSONの互換性
+### YAMLとJSONの違いによって異なるオブジェクトと判断されることも
 
 YAMLとJSONの違いです。YAMLもJSONもそれぞれのフォーマット単体で使った場合にはdeserializeの結果が同じになりますが。YAMLとJSONを同時に使った場合に思わぬ差異が発生してしまう事があります。
 
@@ -190,10 +234,13 @@ schema.json
 {"/": {"200": {"description": "ok response"}, "default": {"description": "default response"}}}
 ```
 
-### TOMLとの比較
+### JSONとTOMLの比較
 
-次はTOMLです。TOMLは「Tom's Obvious, Minimal Language」というわりとふざけた名前のミニ言語です。YAMLが複雑過ぎるということに対するカウンターカルチャーという感じで生まれました。
+次はTOMLです。TOMLは「Tom's Obvious, Minimal Language」というわりとふざけた名前のミニ言語です。YAMLが複雑過ぎるということに対するカウンターカルチャーという感じで生まれました。生まれたらしいです。
 
+TOMLは主に設定ファイルなどに使われます。
+
+### TOMLもオブジェクトのキーはstr
 
 TOMLもJSONと同様にserialize/deserializeできます。serializeするときのキーの表現はJSONと同様です。strのみのようです。というよりpythonのtomlパッケージの場合にはわざわざstrに変換してくれることもなくぶっきらぼうにエラーを返します(ただしこれはTOML自体の仕様というよりも今利用しているpythonのライブラリの実装によるところだと思います)。
 
@@ -218,7 +265,7 @@ with open("schema.toml", "w") as wf:
 ```
 
 
-`200`を文字列に変えてdumpしてあげると以下の様な形で出力されます。
+`200`を文字列に変えてdumpしてあげると以下の様な形で出力されます。まぁ読みやすくはないですが。特に複雑にネストした構造のものなどはあんまり読みやすくならない事が多いです。
 
 schema.toml
 
@@ -230,7 +277,9 @@ description = "default response"
 description = "ok response"
 ```
 
-TOMLは主に設定ファイルなどに使われます。コメントもかけます。
+### TOMLにもコメントが存在
+
+TOMLはコメントもかけます。設定に使う分にはシンプルで良いです。
 
 data.toml
 
@@ -240,32 +289,23 @@ name = "foo"
 age = 20
 ```
 
-load.py
+### TOMLも当然listもdictも出力可能(?)
+
+JSONとTOMLには微妙に違いもあります。それはlistを扱うことができないことです。今まで当たり前ですがと前置きをしつこく繰り返してきたのはこのためです。TOMLには無理でした。
+
+正確にいうと`Dict[List]`のようなものは扱えますが`List[Dict]`のようなものを扱えません。
 
 ```python
 import toml
 
-with open("data.toml") as rf:
-    d = toml.load(rf)
-
-print(d)
-# {'name': 'foo', 'age': 20}
-```
-
-### TOMLとJSONの互換性
-
-TOMLもJSONと似たような形で利用することができさらにコメントも書けます。シンプルで良いですが微妙に違いもあります。それはリストを扱うことができないことです。正確にいうと`Dict[List]`のようなものは扱えますが`List[Dict]`のようなものを扱えません。
-
-```
-import toml
-
+# listを出力できません。
 L = [
     {
-        "person": "foo",
+        "name": "foo",
         "age": 20
     },
     {
-        "person": "bar",
+        "name": "bar",
         "age": 10
     },
 ]
@@ -276,7 +316,7 @@ with open("people.toml", "w") as wf:
 # TypeError: expected string or bytes-like object
 ```
 
-最も外側がdictであるならば大丈夫です。
+もっとも外側がdictであるならば大丈夫です。つまり`List[Dict]`のようなものは無理ですが `Dict[List]`のようなものは可能です。
 
 ```diff
 --- 03list.py	2017-12-11 22:18:38.000000000 +0900
@@ -296,15 +336,154 @@ people.toml
 
 ```toml
 [[people]]
-person = "foo"
+name = "foo"
 age = 20
 
 [[people]]
-person = "bar"
+name = "bar"
 age = 10
 ```
 
-### CSV(TSV)との比較
+設定ファイルとして使う分には十分だと思います。
 
+### TOMLは重複したキーを許さない
 
-### :warning: JSONとYAMLはkeyの衝突を許す、tomlはエラーになる。
+もう１つの違いは重複したキーの扱いです。TOMLは重複したキーの存在を許しません。これも設定ファイルとして使う分には良い振る舞いだと思います。
+
+```toml
+import toml
+
+s = """
+name = "foo"
+age = 20
+name = "bar"
+"""
+
+d = toml.loads(s)
+# toml.TomlDecodeError: Duplicate keys!
+```
+
+許しません。
+
+### JSONとCSV(TSV)との比較
+
+今度は趣向を変えてCSVとの比較です。設定ファイルとしてのJSONとは異なるものの、特に複数の値を保持しておきたい場合などにはCSVなどが使われる事があります。APIのレスポンスとしてのJSONと似た位置ある場合があるかもしれません。
+
+pythonの標準ライブラリに[csv](https://docs.python.org/3/library/csv.html)モジュールは存在しますが。残念ながらload,dumpの関数は持っていません。
+
+people.csv
+
+```csv
+name,age
+foo,20
+bar,10
+```
+
+header付きのものはDictReader,DictWriterで扱うのが一番取り回しがききやすいです。
+
+```python
+import csv
+
+with open("people.csv") as rf:
+    L = list(csv.DictReader(rf))
+
+print(L)
+# [{'name': 'foo', 'age': '20'}, {'name': 'bar', 'age': '10'}]
+```
+
+ところで、python3.6からは通常のdictではなくcollections.OrderedDictが返ります。便利ですね。
+
+```
+# python3.6での結果
+[OrderedDict([('name', 'foo'), ('age', '20')]), OrderedDict([('name', 'bar'), ('age', '10')])]
+```
+
+### CSVが許すのはlistだけ
+
+CSVで格納できるフォーマットはlistだけです。ある意味一行だけ取り出すということにしてdictを保存する事はできないわけではないですが。それをするくらいなら他のフォーマットで保存した方が良いと思います。
+
+### CSVで読み込んだものは全てstrに
+
+CSVには型の指定が存在しません。なので当然全てstrになります。
+
+```
+[{'name': 'foo', 'age': '20'}, {'name': 'bar', 'age': '10'}]
+```
+
+全部文字列です。
+
+### CSVにはコメントがありません
+
+CSVにはコメントがありません。残念。ただちょっとしたデータのハンドリングでたまにお世話になる[pandas](https://pandas.pydata.org/)というライブラリから読み込む場合にはコメントを指定することができます。
+
+例えば "#"をコメントとして扱った以下のようなcsvも
+
+```csv
+# これはコメント。CSVとしてはinvalid
+name,age
+foo,20
+bar,10
+```
+
+pandasからは読めます。親切ですね。
+
+```python
+import pandas as pd
+
+L = pd.read_csv("with-comment.csv", comment="#")
+print(L["age"])
+#   name  age
+# 0  foo   20
+# 1  bar   10
+```
+
+### CSVは全部文字列..ただし
+
+CSVは全部文字列と言ってましたが。先程のpandasというパッケージ、これは親切というかおせっかいというか気が効いているので良い感じにintっぽいものはint(floatっぽいものはfloat)など空気を読んでくれます。
+
+```
+L = pd.read_csv("with-comment.csv", comment="#")
+
+print(L["age"])
+# 0    20
+# 1    10
+# Name: age, dtype: int64
+print(L["age"].mean())
+# 15.0
+```
+
+これで完全に解決かというとそうでもなく例えばIDが"001"みたいなものの場合も数値として扱われたりします。
+
+with-id.csv
+
+```csv
+id,name,age
+0001,foo,20
+0002,bar,10
+```
+
+本当はidが文字列になってほしいのですが。。pandasもpandasの実装をしてくれた人もエスパーではないので。。
+
+```python
+L = pd.read_csv("with-id.csv", comment="#")
+print(L["id"])
+
+# 0    1
+# 1    2
+# Name: id, dtype: int64
+```
+
+### (おまけ pickle)
+
+python限定という話しであれば[pickle](https://docs.python.org/3/library/pickle.html)と言うものもありますね。
+
+```python
+import pickle
+d = {"name": "foo", "age": 20}
+assert d == pickle.loads(pickle.dumps(d))
+```
+
+pickleの良いところは、pythonの範囲で対応しているオブジェクトであればどのようなオブジェクトでもserializeが可能ということです。
+pickleの悪いところは、利用可能な言語がpythonのみに限られるということです。
+
+## おわりに
