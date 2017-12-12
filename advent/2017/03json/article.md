@@ -412,6 +412,31 @@ CSVには型の指定が存在しません。なので当然全てstrになり�
 
 全部文字列です。
 
+### CSVでもキーの重複は関知されない
+
+そもそもヘッダー無しのcsvは単に","で区切られただけのテキストですし。キーの重複も何も無いですね。一方ヘッダー付きのcsvの場合でも、キーの重複をcsvモジュールが教えてくれるということはありません。
+
+conflict.cs
+
+```csv
+name,age,name
+foo,20,bar
+bar,10,boo
+```
+
+JSONと同じように後のものが勝ちます。
+
+```python
+import csv
+
+with open("conflict.csv") as rf:
+    L = list(csv.DictReader(rf))
+
+print(L)
+[{'age': '20', 'name': 'bar'}, {'age': '10', 'name': 'boo'}]
+```
+
+
 ### CSVにはコメントがありません
 
 CSVにはコメントがありません。残念。ただちょっとしたデータのハンドリングでたまにお世話になる[pandas](https://pandas.pydata.org/)というライブラリから読み込む場合にはコメントを指定することができます。
