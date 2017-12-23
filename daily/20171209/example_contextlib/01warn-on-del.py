@@ -23,6 +23,7 @@ class ShouldEnter(contextlib.AbstractContextManager):
 def g(x):
     with ShouldEnter():
         pass
+    ShouldEnter()
 
 
 def f():
