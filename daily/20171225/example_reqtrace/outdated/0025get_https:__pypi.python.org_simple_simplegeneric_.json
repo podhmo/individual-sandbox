@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/simplegeneric/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for simplegeneric</title></head><body><h1>Links for simplegeneric</h1><a href=\"../../packages/2e/cc/6eb64b885a85d2675f981c2e2294c14b61791781d1c990bfe3d16345cb28/simplegeneric-0.5-py2.4.egg#md5=1911d4b62d2f1718c71a28851a379499\" rel=\"internal\">simplegeneric-0.5-py2.4.egg</a><br/>\n<a href=\"../../packages/3d/57/4d9c9e3ae9a255cd4e1106bb57e24056d3d0709fc01b2e3e345898e49d5b/simplegeneric-0.8.1.zip#md5=f9c1fab00fd981be588fc32759f474e3\" rel=\"internal\">simplegeneric-0.8.1.zip</a><br/>\n<a href=\"../../packages/89/15/41e21eaa84f5916af0832e0ae5d43107269d2417bdc5051058117f976abe/simplegeneric-0.5.zip#md5=cf186041539b84ac6da8d7b84529a765\" rel=\"internal\">simplegeneric-0.5.zip</a><br/>\n<a href=\"../../packages/9f/32/8282e43fe8e017479880d36a5b7ce5146fd1614cec9590cb67be0a70ad51/simplegeneric-0.8.zip#md5=eaa358a5f9517a8b475d03fbee3ec90f\" rel=\"internal\">simplegeneric-0.8.zip</a><br/>\n<a href=\"../../packages/a0/c9/d2467fed6ddb29f1ae571759acdfce8666eece3b590af8fcb0e380a8b3a0/simplegeneric-0.7.zip#md5=0543168a0f482c3f5a92d71482e5f99a\" rel=\"internal\">simplegeneric-0.7.zip</a><br/>\n<a href=\"../../packages/c1/e4/7edc11dc09e7114dc44d5a400efa2068b21b8d1a20cd0cc9862764f5b68d/simplegeneric-0.6-py2.4.egg#md5=a90b2e5129607160172b15f3d49045f2\" rel=\"internal\">simplegeneric-0.6-py2.4.egg</a><br/>\n<a href=\"../../packages/f6/50/9d44752c67e582a17fb445440248f2a810ec142269d2be581fd47d3b43cc/simplegeneric-0.6.zip#md5=0e8f5a8e623a0ae8ae203f19652d06b7\" rel=\"internal\">simplegeneric-0.6.zip</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "21220",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "664",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:17 GMT",
+      "Fastly-Debug-Digest": "e0f004564696956e3d02007549d51f1a399584b80a4af7863eafbce8a5162b30",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 10",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "799576",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2136-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.093407,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

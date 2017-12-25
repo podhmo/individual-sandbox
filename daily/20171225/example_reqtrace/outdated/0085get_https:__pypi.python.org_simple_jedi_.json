@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/jedi/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for jedi</title></head><body><h1>Links for jedi</h1><a href=\"../../packages/06/f0/1d2a8462b322a200323f6c1fbd18a3d4047d2ed89a39b2f7f9a2b994a271/jedi-0.10.0-py2.py3-none-any.whl#md5=0502bae0a2909472a51c395e09612fa0\" rel=\"internal\">jedi-0.10.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/08/8d/34b133dfa210b55e7efaa8b09c736a8f4383fcda0b6487fc43a1db3c7ee7/jedi-0.11.0.tar.gz#md5=a948c0903b03bf361c60742947f076a0\" rel=\"internal\">jedi-0.11.0.tar.gz</a><br/>\n<a href=\"../../packages/0e/da/fb440b4dabfcbebde9522213abf1b0a49ca0164ee75b8cb611cfe674dfda/jedi-0.6.0.tar.gz#md5=2e2d953bf8213e56478e5df886ea7c02\" rel=\"internal\">jedi-0.6.0.tar.gz</a><br/>\n<a href=\"../../packages/2f/5c/98060a13b4915b9db7c737cc1eacca396884bd7d8bb6a12e72cf37dd9e5b/jedi-0.10.1.tar.gz#md5=0e6e23b82fe1c8fe678285a1dd6e85fa\" rel=\"internal\">jedi-0.10.1.tar.gz</a><br/>\n<a href=\"../../packages/33/99/655efb8398112be833d0705ff7cabfb6e896ca78b7eeac8571c78c8ca049/jedi-0.8.1.tar.gz#md5=0e4b205e05290b00ebabe19f351cddf7\" rel=\"internal\">jedi-0.8.1.tar.gz</a><br/>\n<a href=\"../../packages/3a/37/629080b92b87bc65e3b1b4f5d539e22aa5dc45637eab0dd4b0cd8cf236c2/jedi-0.9.0.tar.gz#md5=2fee93d273622527ef8c97ac736e92bd\" rel=\"internal\">jedi-0.9.0.tar.gz</a><br/>\n<a href=\"../../packages/41/86/63615d366ddb093b0844b7b6af6e2c20563493e7202a7b667c1ceb55e2a1/jedi-0.8.1-final0.tar.gz#md5=e4db996421a640d50f559587e805412b\" rel=\"internal\">jedi-0.8.1-final0.tar.gz</a><br/>\n<a href=\"../../packages/4f/43/9b944b51e908c1e7af930dc4c68ce18be81562225eddcbee238ed1a83a88/jedi-0.5b5.tar.gz#md5=eaf183537b1fd2eb122b85c526dea729\" rel=\"internal\">jedi-0.5b5.tar.gz</a><br/>\n<a href=\"../../packages/50/ca/d71f5a427601c98eadabfd73104cacbec8cc230e8416158decf61a48b0c6/jedi-0.11.1-py2.py3-none-any.whl#md5=94b9e5518f5280ec3d595998173c1d19\" rel=\"internal\">jedi-0.11.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/57/e8/5d5317f031361c4fc9da7b1efee06066e3e35fb55c13b97355ddfb7c27b0/jedi-0.8.0-final0.tar.gz#md5=25ba4ee6160c2de751bd00c7a4f32bff\" rel=\"internal\">jedi-0.8.0-final0.tar.gz</a><br/>\n<a href=\"../../packages/7e/1e/ea5d5723ef19fb0b76895c4415e1cbf26bc24ee794094e077951e37779be/jedi-0.10.1-py2.py3-none-any.whl#md5=7ed25bb6bf298f65a650b76544989aa1\" rel=\"internal\">jedi-0.10.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/80/b9/4e9b0b999deeec8a91cb84e567380853a842e6c387c9d39b8fc9a49953fa/jedi-0.10.2.tar.gz#md5=b2b35b4b7e508ec3a54d94cdea1205d0\" rel=\"internal\">jedi-0.10.2.tar.gz</a><br/>\n<a href=\"../../packages/a0/08/3856da5dbe7d821a66a52f7f54ff6797fa656f4f76e1ba51cad0870553c1/jedi-0.7.0.tar.gz#md5=fb4a452b6baa09ce7ced445e58625d25\" rel=\"internal\">jedi-0.7.0.tar.gz</a><br/>\n<a href=\"../../packages/bd/04/789d25c1786e6d17f4a19847fd6536a1a491d48e8116db0b5c9c1fe5e821/jedi-0.10.2-py2.py3-none-any.whl#md5=d711d3e633fb91208caf9829c6648c93\" rel=\"internal\">jedi-0.10.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c4/59/e48a369168a84c8aef9127c227fc3b9f53bc9c528b24c2cda20487bc2deb/jedi-0.9.0-py2.py3-none-any.whl#md5=e9b14b854c2d4c2f8d9bdc4ad27a3d39\" rel=\"internal\">jedi-0.9.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/d2/41/430b325e411d564b1afc37bc7286c3549f4c415ada750a617fb1943c593d/jedi-0.11.1.tar.gz#md5=afa7a4c204c8766c09be8835f86bd204\" rel=\"internal\">jedi-0.11.1.tar.gz</a><br/>\n<a href=\"../../packages/e6/2d/24bd4607257f464bad07d959011969ed0d15e7587cd66931eea4b2822135/jedi-0.5b3.tar.gz#md5=bcf0e066a317faf2e8b79fe4659ec54e\" rel=\"internal\">jedi-0.5b3.tar.gz</a><br/>\n<a href=\"../../packages/e8/f4/5bcfb90718bd9205a41577def71bca76724b26dd9d277e08c259aa0d96c3/jedi-0.10.0-py2-none-any.whl#md5=c869b2cf52622dba44a7b2eb0e5cdd52\" rel=\"internal\">jedi-0.10.0-py2-none-any.whl</a><br/>\n<a href=\"../../packages/f6/7d/e8f2619e139a749fc98a4300663d55655931cfc7dfd2b8a625cfa94b28db/jedi-0.5b4.tar.gz#md5=1ce28453b1f11df973c00b5f5f9b3da2\" rel=\"internal\">jedi-0.5b4.tar.gz</a><br/>\n<a href=\"../../packages/fb/a8/25978660f20b05b982b54dde61bdd515bc2683f84c906ad7fb8eb1aca517/jedi-0.11.0-py2.py3-none-any.whl#md5=f083cd7f54f050e5272232a254bec3da\" rel=\"internal\">jedi-0.11.0-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "53479",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1593",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "dbc1e05b4ca8e9c0a69e8167841af1b2a3317d50298a04e12d62e01b59f78610",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "3, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3418062",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2144-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.020691,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/pastedeploy/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for pastedeploy</title></head><body><h1>Links for pastedeploy</h1><a href=\"../../packages/06/84/f8d157bb3d446af3d7843a2493985712318974421e3d96037637de45007e/PasteDeploy-1.3.1.tar.gz#md5=a14b360b4ddb0d3ca7aa9bad41d6c91c\" rel=\"internal\">PasteDeploy-1.3.1.tar.gz</a><br/>\n<a href=\"../../packages/0f/90/8e20cdae206c543ea10793cbf4136eb9a8b3f417e04e40a29d72d9922cbd/PasteDeploy-1.5.2.tar.gz#md5=352b7205c78c8de4987578d19431af3b\" rel=\"internal\">PasteDeploy-1.5.2.tar.gz</a><br/>\n<a href=\"../../packages/1a/5f/978b2f319bb0a7942db9b9c41b2ae96d6a5ef3aa1c2dba7f49092245863a/PasteDeploy-0.9.6-py2.4.egg#md5=6aaf93a10fcee9af12e084a99c98f7b4\" rel=\"internal\">PasteDeploy-0.9.6-py2.4.egg</a><br/>\n<a href=\"../../packages/2a/51/4b856b4c611a8ebd933873bacbba4e43e8003d0676462d3fccde93e45a2a/PasteDeploy-1.5.1.tar.gz#md5=8db55291282d2f3f0c2de4f20522e0d2\" rel=\"internal\">PasteDeploy-1.5.1.tar.gz</a><br/>\n<a href=\"../../packages/31/28/51201a54aeecbd02eff767d17050b302f6fd98fdfecb4e3f4c9301ba6ef8/PasteDeploy-1.5.2-py2.py3-none-any.whl#md5=1134e25af0d52190abd9f8d7c6867f9e\" rel=\"internal\">PasteDeploy-1.5.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/34/ae/6485b6c5c6326e803f2b9af577b339b0bda89c44d3fb193137ba442527b5/PasteDeploy-1.5.1-py2.py3-none-any.whl#md5=c0b9f6960f321a279fe0cbdd0904a27a\" rel=\"internal\">PasteDeploy-1.5.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/39/27/c08ce1e77721f4485e40dd040e48e6cf0bb2f33ca5104a81e3af290fa0a4/PasteDeploy-0.2.tar.gz#md5=7d771b0ad732fc47f4c1bbfef56ac880\" rel=\"internal\">PasteDeploy-0.2.tar.gz</a><br/>\n<a href=\"../../packages/4a/ca/d3ac198e69dfa6875efdef571dcf44144fe62fefb058427ea3289ca842d4/PasteDeploy-0.5-py2.4.egg#md5=156c2c9e99793d9a0f79df19cf2c3758\" rel=\"internal\">PasteDeploy-0.5-py2.4.egg</a><br/>\n<a href=\"../../packages/4b/f6/3e20ee255a1a83ee1cfaa9faff2752b71fccba8c3265c21f9fe5a51ae8c0/PasteDeploy-1.3.4.tar.gz#md5=eb4b3e2543d54401249c2cbd9f2d014f\" rel=\"internal\">PasteDeploy-1.3.4.tar.gz</a><br/>\n<a href=\"../../packages/4e/0d/6b6e5600ca2e62c12801070f76393c4a278ff3f4d253faeff1d7979dbc1d/PasteDeploy-0.4.tar.gz#md5=8b44cb47f87ebebffe4afd2e1a8bf258\" rel=\"internal\">PasteDeploy-0.4.tar.gz</a><br/>\n<a href=\"../../packages/59/82/29658a03e838c443f74d64d6801dadefb580fcd7e374e04c68aa6b145e22/PasteDeploy-0.4-py2.4.egg#md5=5d6c0dad0fbda7fa000eb29b3f5850b9\" rel=\"internal\">PasteDeploy-0.4-py2.4.egg</a><br/>\n<a href=\"../../packages/67/48/4dddf0e7d652d112f98ad6261fca73f8e2c694784f6d21430bfa7ed634fb/PasteDeploy-0.9.6.tar.gz#md5=28cd2c9793a93c6361e46a5094eb1bde\" rel=\"internal\">PasteDeploy-0.9.6.tar.gz</a><br/>\n<a href=\"../../packages/68/98/a5d0cc4d627b19d33fe49591ff33d8fe49b0ca05aa4f4b99867fb0027dfa/PasteDeploy-1.3.tar.gz#md5=69c49aa1320c2e0bb2188bc477862f02\" rel=\"internal\">PasteDeploy-1.3.tar.gz</a><br/>\n<a href=\"../../packages/68/ab/5b6d20f6e4c497bd48b5e620e274f19fb7accccd7eddc4e72159a01a357f/PasteDeploy-0.3-py2.3.egg#md5=b316bd2d70cd85fa734daa5874024ea8\" rel=\"internal\">PasteDeploy-0.3-py2.3.egg</a><br/>\n<a href=\"../../packages/76/2b/2ca60d3912fc39a59b853b5520dc08a7c5e550d48eeb0334c72a76764215/PasteDeploy-1.0.tar.gz#md5=b0811db173b4efe92e3e7080a818ec99\" rel=\"internal\">PasteDeploy-1.0.tar.gz</a><br/>\n<a href=\"../../packages/76/99/11a71c618d700eec2e229e00363bdf0c591684ac76427c25cd41a7bcf24d/PasteDeploy-0.5-py2.3.egg#md5=e4e94ddb33b32fe6be2756aae478f106\" rel=\"internal\">PasteDeploy-0.5-py2.3.egg</a><br/>\n<a href=\"../../packages/7f/86/203402e29250c242854261d258dc455ca0435d7aa3e8220662fa4f47b65e/PasteDeploy-0.3-py2.4.egg#md5=488a9bdb49dbeb7aaba5751f94c3d426\" rel=\"internal\">PasteDeploy-0.3-py2.4.egg</a><br/>\n<a href=\"../../packages/86/7f/c146173262047d9c09b6df20b52a66731f945c0e7d2eaafe240d81631ad3/PasteDeploy-0.5.tar.gz#md5=74f8bd5ec130686f7dfd1e27d127994b\" rel=\"internal\">PasteDeploy-0.5.tar.gz</a><br/>\n<a href=\"../../packages/88/a4/247aa56400c17b7eca0117792bbd0ec705811ee0e387f6be86a44ec1a7e7/PasteDeploy-0.4-py2.3.egg#md5=f8dcfa74b5dccd2ea06e6386270e1e13\" rel=\"internal\">PasteDeploy-0.4-py2.3.egg</a><br/>\n<a href=\"../../packages/9a/f4/8a124c8987c0a24989d1cde6d0607e3a110cad666d10120d83939e59532a/PasteDeploy-1.0-py2.4.egg#md5=5fa19fd8847c50a3d9f0014d20449646\" rel=\"internal\">PasteDeploy-1.0-py2.4.egg</a><br/>\n<a href=\"../../packages/a0/7f/964973235d5809feac26389e677370c4fb9278973c99b6c62b59e067702e/PasteDeploy-0.1.tar.gz#md5=89bf5d33c4d6d67285d0821126b3e5f5\" rel=\"internal\">PasteDeploy-0.1.tar.gz</a><br/>\n<a href=\"../../packages/a3/04/44a6a9e5c8fcc1103daffacb4844cda54989988444d1467929061615beba/PasteDeploy-1.1.tar.gz#md5=e4f16fe735db735c3fc0c6e168e72455\" rel=\"internal\">PasteDeploy-1.1.tar.gz</a><br/>\n<a href=\"../../packages/b0/a5/e83f581f1da123ae29b0386c3d4156d7e1a77d36af6415dff04aada44422/PasteDeploy-1.5.0.tar.gz#md5=f1a068a0b680493b6eaff3dd7690690f\" rel=\"internal\">PasteDeploy-1.5.0.tar.gz</a><br/>\n<a href=\"../../packages/be/91/e00496b90b22d3ca071d08b7619c5a7bf09c26e7a35044a8fb9229fc9717/PasteDeploy-0.9.6-py2.3.egg#md5=3aa9c78738e3d3180cd9dd6bac5918fd\" rel=\"internal\">PasteDeploy-0.9.6-py2.3.egg</a><br/>\n<a href=\"../../packages/be/c7/1ba235f5cb0002a5f94c6debd28042113b9fe1b0e7a35c668b33f09e78c9/PasteDeploy-1.1-py2.4.egg#md5=b3bc441f87dc5f7124c0e812bac6ef80\" rel=\"internal\">PasteDeploy-1.1-py2.4.egg</a><br/>\n<a href=\"../../packages/db/b2/db5334e6c0eb3452394205ada80ca9d87a3c6f4263a3f1f6610ac79b60ac/PasteDeploy-1.3.2.tar.gz#md5=877fcf3fa025a65147fbae87e1765b65\" rel=\"internal\">PasteDeploy-1.3.2.tar.gz</a><br/>\n<a href=\"../../packages/e4/16/d1398256a046af63913522d0c38d0293bd9e3cce44422315460bde3ff894/PasteDeploy-1.3.3.tar.gz#md5=0598aa8ab4184ea8087839b811f92284\" rel=\"internal\">PasteDeploy-1.3.3.tar.gz</a><br/>\n<a href=\"../../packages/ec/06/76bbcc4114325946fa74ae9d554292b0a8ee1c4cecfd0889bcf6b6cb3d3d/PasteDeploy-1.3.4dev.tar.gz#md5=d66529f9ac20f850b23d9985a57d0399\" rel=\"internal\">PasteDeploy-1.3.4dev.tar.gz</a><br/>\n<a href=\"../../packages/ef/e3/40546bb90b8bb34de1824aa17b187d5b0061001993b16836d582d949e846/PasteDeploy-0.3.tar.gz#md5=a9523a222b333a6d9cc46c73455d37ed\" rel=\"internal\">PasteDeploy-0.3.tar.gz</a><br/>\n<a href=\"../../packages/f3/94/c590be55db126286154c47171fed3fa770eb7539183650a0e5185a4d3996/PasteDeploy-1.3-py2.4.egg#md5=fe0671542f28e48258c898428e1c3fcf\" rel=\"internal\">PasteDeploy-1.3-py2.4.egg</a><br/>\n<a href=\"../../packages/fb/fc/0482f69b128c5028f0bd0fc1ddf886c4e7b92874339a64a114b33eb87914/PasteDeploy-1.3.1-py2.4.egg#md5=399800658790f4df6fb35011804506d2\" rel=\"internal\">PasteDeploy-1.3.1-py2.4.egg</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "63243",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2372",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:19 GMT",
+      "Fastly-Debug-Digest": "46db87a74e15102d0d83e3df2707bc96dce582c5ac3c461ec786347df6286bd2",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "1517101",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2123-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205979.194162,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/chardet/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for chardet</title></head><body><h1>Links for chardet</h1><a href=\"../../packages/11/da/101ef38e05881445c1dec36dbd0573f9561e357a2da9e2409656e4677ffa/chardet-1.1.tar.gz#md5=15838de570d0703baf191dcf831cf0de\" rel=\"internal\">chardet-1.1.tar.gz</a><br/>\n<a href=\"../../packages/13/29/9336841b1a5d9de9de808e1797ab04057bc17982bbab87dd14fc06aa4160/chardet-1.0.tar.gz#md5=1381eac6e12d79a90fd426a7bd748f0e\" rel=\"internal\">chardet-1.0.tar.gz</a><br/>\n<a href=\"../../packages/33/d9/43cd46d6b8cf2e393aeb60f338cfe0154cee7dd3de13a1752d3e4814aee2/chardet-3.0.0.tar.gz#md5=f99fb635c61fe37e14570becaa281c76\" rel=\"internal\">chardet-3.0.0.tar.gz</a><br/>\n<a href=\"../../packages/42/d1/c7e0023643df3c53ff72513f53f28bc1e948cb18a56f8a20aee289537ee9/chardet-3.0.1.tar.gz#md5=bf3ea9df23c79d134aea8ef65745da06\" rel=\"internal\">chardet-3.0.1.tar.gz</a><br/>\n<a href=\"../../packages/63/8b/44ea61e33bd7d38c1416b625c87a98aeb4ee9abdad3bff630c69b6b5ffc8/chardet-3.0.0-py2.py3-none-any.whl#md5=9dc57a0e5c79d0cc9f45d865c7d72f0d\" rel=\"internal\">chardet-3.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/63/b7/de3834dc5c84dec3b839690bd663a07613b166b0b7217e46687a1f7eced2/chardet-2.2.1-py2.py3-none-any.whl#md5=556de73cc5d2d14233b3512798423da1\" rel=\"internal\">chardet-2.2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/7d/87/4e3a3f38b2f5c578ce44f8dc2aa053217de9f0b6d737739b0ddac38ed237/chardet-2.3.0.tar.gz#md5=25274d664ccb5130adae08047416e1a8\" rel=\"internal\">chardet-2.3.0.tar.gz</a><br/>\n<a href=\"../../packages/7e/5c/605ca2daa5cf21c87690d8fe6ab05a6f2278c451f4ede6456dd26453f4bd/chardet-2.3.0-py2.py3-none-any.whl#md5=ed72df7ce6a2956ac3483e029d951fa2\" rel=\"internal\">chardet-2.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/86/e5/e5f97d77cda0622e875d83edfdbb2f81ba38165e7197f9d185ba2c799f77/chardet-2.2.1.tar.gz#md5=4a758402eaefd0331bdedc7ecb6f452c\" rel=\"internal\">chardet-2.2.1.tar.gz</a><br/>\n<a href=\"../../packages/8c/27/99f781a11e4daa5acadf97add6e5883ec5f8f9abbf279e790fd0ff371db7/chardet-3.0.3-py2.py3-none-any.whl#md5=9f33113c118ab9754ef4316aad359d6e\" rel=\"internal\">chardet-3.0.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/91/05/28f23094cdf1410fb03533f0d71e6b4aad3c504100e83b8cea6fc899552c/chardet-3.0.2.tar.gz#md5=96e364abdbde20b5f6dbbe2ad9d54d04\" rel=\"internal\">chardet-3.0.2.tar.gz</a><br/>\n<a href=\"../../packages/94/f1/f3237e3045c422c83968d3a2dfdefc7d4d687d84957e12810564b16ac5d5/chardet-1.0.1.tar.gz#md5=7c28b02bca7847c13bebedaf4df6c5a3\" rel=\"internal\">chardet-1.0.1.tar.gz</a><br/>\n<a href=\"../../packages/b8/74/54fdc2fcfdd46b6c486964b64c5bb7db9a3664033ab25cf11aab06dd2a5d/chardet-3.0.2-py2.py3-none-any.whl#md5=f18688841820b46ecc430aabdc274cde\" rel=\"internal\">chardet-3.0.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl#md5=0004b00caff7bb543a1d0d0bd0185a03\" rel=\"internal\">chardet-3.0.4-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/d4/bc/c1b877d19bc02610873a21cc3978260008c2839acac36772dd29c1f78316/chardet-1.0.1-py2.5.egg#md5=aa49cb7ef2793fc83e5b08abcf2dff79\" rel=\"internal\">chardet-1.0.1-py2.5.egg</a><br/>\n<a href=\"../../packages/de/e5/3226e65c6f4291bc3f7ec0a9329ed9949bf074d8663a037c58c78d275745/chardet-3.0.1-py2.py3-none-any.whl#md5=2ecd2aac7eebe48484afb917d2bdcce3\" rel=\"internal\">chardet-3.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ec/32/19eab081980cc61aa8d49c44930cf897c1dbce6888579743aed12140810a/chardet-1.0.1-py2.4.egg#md5=44e5cb181436c8b86f1a6fb492f9e409\" rel=\"internal\">chardet-1.0.1-py2.4.egg</a><br/>\n<a href=\"../../packages/f2/f1/2b5ab854299fe1ea312a9c10dda58421ea24af98a128ad1bff6b87c0c927/chardet-2.1.1.tar.gz#md5=295367fd210d20f3febda615a88e1ef0\" rel=\"internal\">chardet-2.1.1.tar.gz</a><br/>\n<a href=\"../../packages/fc/bb/a5768c230f9ddb03acc9ef3f0d4a3cf93462473795d18e9535498c8f929d/chardet-3.0.4.tar.gz#md5=7dd1ba7f9c77e32351b0a0cfacf4055c\" rel=\"internal\">chardet-3.0.4.tar.gz</a><br/>\n<a href=\"../../packages/fc/f9/3963ae8e196ceb4a09e0d7906f511fdf62a631f05d9288dc4905a93a1f52/chardet-3.0.3.tar.gz#md5=d92908d1b0b61dbbd63fb18d33c6493a\" rel=\"internal\">chardet-3.0.3.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "24495",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1585",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "568f922f80ccc553513abea8cc2a1965d25abe54233f395bdc67917d84cbd8d3",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 74",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2935541",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2133-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205982.716054,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

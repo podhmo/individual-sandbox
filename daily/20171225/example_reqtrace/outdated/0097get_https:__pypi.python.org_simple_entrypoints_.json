@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/entrypoints/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for entrypoints</title></head><body><h1>Links for entrypoints</h1><a data-requires-python=\"&gt;=2.7\" href=\"../../packages/27/e8/607697e6ab8a961fc0b141a97ea4ce72cd9c9e264adeb0669f6d194aa626/entrypoints-0.2.3.tar.gz#md5=0d3ad1b0130d91e3596ef3a59f25a56c\" rel=\"internal\">entrypoints-0.2.3.tar.gz</a><br/>\n<a data-requires-python=\"&gt;=2.7\" href=\"../../packages/31/af/4c6109fc91cd12b4d3fe63890f5ff2cde40f0d9eb7c2f4d8ec6f5bda73d3/entrypoints-0.2-py2.py3-none-any.whl#md5=5b581e94b002ebb686c937a449a9ed5d\" rel=\"internal\">entrypoints-0.2-py2.py3-none-any.whl</a><br/>\n<a data-requires-python=\"&gt;=2.7\" href=\"../../packages/4c/2e/dee591288e72200f9fda6c0e76738ad831ff8d13be77289700017b4a9671/entrypoints-0.1-py2.py3-none-any.whl#md5=15264cbf9cc9c412d080e570558bd799\" rel=\"internal\">entrypoints-0.1-py2.py3-none-any.whl</a><br/>\n<a data-requires-python=\"&gt;=2.7\" href=\"../../packages/a5/2d/26548d66d58f7775cb332fcf3f864987c05f5e3f800b0b22b9919dacf653/entrypoints-0.2.1-py2.py3-none-any.whl#md5=8a2de2f10c2dd4359aa0b19f56f0a219\" rel=\"internal\">entrypoints-0.2.1-py2.py3-none-any.whl</a><br/>\n<a data-requires-python=\"&gt;=2.7\" href=\"../../packages/cc/8b/4eefa9b47f1910b3d2081da67726b066e379b04ca897acfe9f92bac56147/entrypoints-0.2.3-py2.py3-none-any.whl#md5=c33be165b1307ff873212a9fbcb0c015\" rel=\"internal\">entrypoints-0.2.3-py2.py3-none-any.whl</a><br/>\n<a data-requires-python=\"&gt;=2.7\" href=\"../../packages/f8/ad/0e77a853c745a15981ab51fa9a0cb4eca7a7a007b4c1970106ee6ba01e0c/entrypoints-0.2.2-py2.py3-none-any.whl#md5=73bd7ce92c19b25dc5a20aff41be996a\" rel=\"internal\">entrypoints-0.2.2-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "10045",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "640",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "737e909f5434c36bb9f55da732534891c1a2a89bd11fe5398e36b5e98076472d",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2935072",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2134-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.373869,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

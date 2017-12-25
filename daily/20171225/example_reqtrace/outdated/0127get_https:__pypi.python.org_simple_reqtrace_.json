@@ -1,0 +1,39 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/reqtrace/"
+  },
+  "response": {
+    "body": "Not Found (reqtrace does not exist)\n\n",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Length": "37",
+      "Content-Type": "text/plain; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:26 GMT",
+      "Fastly-Debug-Digest": "fb8845051341513502148a6c72c93d2a0d593882cb8666556d2ea851fab18731",
+      "Server": "nginx/1.10.3",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "MISS, MISS",
+      "X-Cache-Hits": "0, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2135-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205986.343913,VS0,VE181",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 404
+  }
+}

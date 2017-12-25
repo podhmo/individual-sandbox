@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/parsimonious/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for parsimonious</title></head><body><h1>Links for parsimonious</h1><a href=\"../../packages/04/ed/0a1a92a97eb03ae37dc92718ce86402f107655bfc8cfa1f791df32163833/parsimonious-0.4.tar.gz#md5=2533787e4b05c2ec4971c27b4953ff87\" rel=\"internal\">parsimonious-0.4.tar.gz</a><br/>\n<a href=\"../../packages/11/db/06a1d0a41b4d236cd84fb27fced4479645b1fb6100501e03accde2804e51/parsimonious-0.7.0.tar.gz#md5=7fce85c276a07066337990c344b3ba85\" rel=\"internal\">parsimonious-0.7.0.tar.gz</a><br/>\n<a href=\"../../packages/15/eb/f1c3885a1fda8e75eab64cb7a9d755b502492b221a15a97bc15c5bec1fe8/parsimonious-0.2.tar.gz#md5=77a9383470627f9803c471a41799cc78\" rel=\"internal\">parsimonious-0.2.tar.gz</a><br/>\n<a href=\"../../packages/1c/69/9c5beb595ebafc91f703c1ce3f69708275ddf5ba1beeea87c38cc8535433/parsimonious-0.6.1.tar.gz#md5=0ff5dfa13fd62e682708f68665be5218\" rel=\"internal\">parsimonious-0.6.1.tar.gz</a><br/>\n<a href=\"../../packages/4a/89/32c55944cd30dff856f16859ee325b13c83c260d0c56c0eed511e8063c87/parsimonious-0.8.0.tar.gz#md5=e9b5af1a3ccc04a0f1321e1084b553be\" rel=\"internal\">parsimonious-0.8.0.tar.gz</a><br/>\n<a href=\"../../packages/4d/55/831dd0d5e552f2d7bc68f5cf5dbdc02d3f3cabf096a4dbb0bc43c870eae2/parsimonious-0.5.tar.gz#md5=09fde0f5d8a8c0e77173a82ee5d16f88\" rel=\"internal\">parsimonious-0.5.tar.gz</a><br/>\n<a href=\"../../packages/89/ab/72d5399c76e2428b3393b991603b7b542fd311e94773d415bb60baf7cf13/parsimonious-0.1.tar.gz#md5=0d20529608681e9014046ae805e0d495\" rel=\"internal\">parsimonious-0.1.tar.gz</a><br/>\n<a href=\"../../packages/ae/37/b58d4c02513b4831db14e9759d886075bcc95a2c4f13a68c28ddfca33268/parsimonious-0.6.2.tar.gz#md5=7a32835027927522be5ae2b523862a75\" rel=\"internal\">parsimonious-0.6.2.tar.gz</a><br/>\n<a href=\"../../packages/bc/25/f2268d92c24dea6315e0d6f9f2d18e5459c94069d5457c598e2ae0d5718d/parsimonious-0.3.tar.gz#md5=b9de92de3c5d7155aec9e8c15ba25ed5\" rel=\"internal\">parsimonious-0.3.tar.gz</a><br/>\n<a href=\"../../packages/cf/dc/2e6813aaefa826a08848b0667e92313942429e19e63349f14241b239e485/parsimonious-0.6.tar.gz#md5=0cb92a858670074864bf1819f952337c\" rel=\"internal\">parsimonious-0.6.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "6583",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "857",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:19 GMT",
+      "Fastly-Debug-Digest": "aa67f8ae1043a087fb0511dcb5d63ca5b466449f472fba743a2632668016a737",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3074199",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2120-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205979.212308,VS0,VE166",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

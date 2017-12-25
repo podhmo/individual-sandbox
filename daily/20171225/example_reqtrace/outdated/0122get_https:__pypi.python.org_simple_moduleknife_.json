@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/moduleknife/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for moduleknife</title></head><body><h1>Links for moduleknife</h1><a href=\"../../packages/15/29/99272332c4c2f648ee1211b5cf9013b75c8c878a539672929a780703a817/moduleknife-0.1.1.tar.gz#md5=f52b3b924e47950f05ffa2dd8ea74134\" rel=\"internal\">moduleknife-0.1.1.tar.gz</a><br/>\n<a href=\"../../packages/5d/49/9d81ad4935da12377a24de25fadadc974ef265e91fc712e2beecb8903984/moduleknife-0.1.0-py3-none-any.whl#md5=10a4dcd02b000787e8755294588e14a5\" rel=\"internal\">moduleknife-0.1.0-py3-none-any.whl</a><br/>\n<a href=\"../../packages/b4/09/66871290615998d18c0117a484aede7f4d06fafc02417d4f691c19a5d639/moduleknife-0.1.0.tar.gz#md5=de98e4e2cd39ddbf8a7246b44713fc1f\" rel=\"internal\">moduleknife-0.1.0.tar.gz</a><br/>\n<a href=\"../../packages/ca/e4/2a506e3d6e8507e0aa6829e5495c7e4da71efe0401df94d2c745257a4cfc/moduleknife-0.1.1-py3-none-any.whl#md5=c806ab4e0ba93745dd93f5c5994e446e\" rel=\"internal\">moduleknife-0.1.1-py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "56742",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "462",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:25 GMT",
+      "Fastly-Debug-Digest": "90f58dd187ea88c1390711a06fc34e9e895f657df728803226fb1b434f6fa487",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3238524",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2130-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205985.080486,VS0,VE169",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

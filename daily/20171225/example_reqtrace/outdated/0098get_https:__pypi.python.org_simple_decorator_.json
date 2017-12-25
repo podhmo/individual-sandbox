@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/decorator/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for decorator</title></head><body><h1>Links for decorator</h1><a href=\"../../packages/00/cc/dd79ea98a0ff5a01d714c37eddd99cd0a71557113f1511921d1ef9a083b8/decorator-4.0.11-py2.py3-none-any.whl#md5=0b3b4cad44b9ea580a7458c8f3e5e506\" rel=\"internal\">decorator-4.0.11-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/0c/6f/e81f4ef13afe85a89bb2e447b7d6635b5687f701f7d64b0a487330972993/decorator-4.1.0.tar.gz#md5=c1aada8dd540710490a97e6ec243e75b\" rel=\"internal\">decorator-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/13/8a/4eed41e338e8dcc13ca41c94b142d4d20c0de684ee5065523fee406ce76f/decorator-4.0.10.tar.gz#md5=434b57fdc3230c500716c5aff8896100\" rel=\"internal\">decorator-4.0.10.tar.gz</a><br/>\n<a href=\"../../packages/2f/77/c2710fc6e73a612bc154e24ca34252c11a3682a997039ad7c0a0bf56f9bb/decorator-4.0.3.tar.gz#md5=deb7b7fce8c7cba87a758b1c816a99a1\" rel=\"internal\">decorator-4.0.3.tar.gz</a><br/>\n<a href=\"../../packages/33/de/f87b10da4cebbea3f33386cc73e495a2a4a2ddfafaae8d58ac80b4d9494b/decorator-4.0.6-py2.py3-none-any.whl#md5=c83705ce9746668d89806d9cce7fdd72\" rel=\"internal\">decorator-4.0.6-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/34/2b/ab9649b98c1ac3e3f0a070ff76896eeaa1144cbe8bab02b4711738478526/decorator-4.0.1.tar.gz#md5=2613740b6d2c56c9dd3a20fd5f9bd2a7\" rel=\"internal\">decorator-4.0.1.tar.gz</a><br/>\n<a href=\"../../packages/35/3a/42566eb7a2cbac774399871af04e11d7ae3fc2579e7dae85213b8d1d1c57/decorator-3.4.2.tar.gz#md5=9e0536870d2b83ae27d58dbf22582f4d\" rel=\"internal\">decorator-3.4.2.tar.gz</a><br/>\n<a href=\"../../packages/48/22/58f948f7bc5de0b1aa1aaddb0d294b9333495009dda1fb08443dec5381a9/decorator-3.3.1.tar.gz#md5=a8fc62acd705f487a71bc406e19e0cc6\" rel=\"internal\">decorator-3.3.1.tar.gz</a><br/>\n<a href=\"../../packages/4e/bf/d7a2984e5c09312c93338c2ee0223bb46ca1ee00bad9cff33779eb21526b/decorator-3.3.3.tar.gz#md5=f5a0227cb1c34a0e7d5b7f9cd2ae3135\" rel=\"internal\">decorator-3.3.3.tar.gz</a><br/>\n<a href=\"../../packages/53/24/cc53f9f216dd5ef269e0af7c7651cbda162554a5b088621a205961c07a6f/decorator-4.0.10-py2.py3-none-any.whl#md5=ae79c6013101cdfee49146bacbc3fb10\" rel=\"internal\">decorator-4.0.10-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/57/07/f22e2c41d23d71d482b1c4e45fa3e51af4d521da17c5cca0ffd7b30f6789/decorator-4.0.0.tar.gz#md5=f417f7ad86de03eb37ecc20c3125f649\" rel=\"internal\">decorator-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/62/ad/ecdc6b1d0241bf4bf3d7f65b1576c4d8ff1d057bea786e080ae843c991b0/decorator-4.0.0-py2.py3-none-any.whl#md5=8e1f3e1d39cc5ca7bd9f651ee92ae7c1\" rel=\"internal\">decorator-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/68/04/621a0f896544814ce6c6a0e6bc01d19fc41d245d4515a2e4cf9e07a45a12/decorator-4.0.9.tar.gz#md5=f12c5651ccd707e12a0abaa4f76cd69a\" rel=\"internal\">decorator-4.0.9.tar.gz</a><br/>\n<a href=\"../../packages/7a/ee/c8a9600cd5b5e09d08828371f9010926bf9cc67522be03d131529f7237a3/decorator-4.0.4.tar.gz#md5=dd3a0669e1e6f09699eefa2c7fbd9756\" rel=\"internal\">decorator-4.0.4.tar.gz</a><br/>\n<a href=\"../../packages/7d/ca/493b2377bf42d57bdd985c31975be3d2b500ad9079199cecb7633e8e2cde/decorator-4.0.9-py2.py3-none-any.whl#md5=8bb72dc6e496c3f748d7aeabe4bfe4ff\" rel=\"internal\">decorator-4.0.9-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/86/12/f0d5879474424dd9379ec330975a85891fe06dbf4861acbe4988c1c3047b/decorator-4.0.3-py2.py3-none-any.whl#md5=d9e8e8f4a3b2865b21e119bc9b1ab5ed\" rel=\"internal\">decorator-4.0.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/99/b6/c61aa88527801323afd3b6aa599f98eb191d2026fce53a195be22dd79745/decorator-4.1.1-py2.py3-none-any.whl#md5=3814f2468971f6bf10b2069cb15c41ff\" rel=\"internal\">decorator-4.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a1/4e/c42167ba5c3192bed633726d39d7896cc55d4fa3ec4a1fb60cd3a53fc4c7/decorator-4.1.2-py2.py3-none-any.whl#md5=0bec41a29a46fde7a205ba8aabaabf91\" rel=\"internal\">decorator-4.1.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a3/8e/530a76d6608260902970ecd8cf68a199593d7a76162d6d4d09ccc17c0888/decorator-4.0.2-py2.py3-none-any.whl#md5=6e6b46b2ed8ed0ebd45938c8e748a0a3\" rel=\"internal\">decorator-4.0.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a8/26/93428c6d2885c8b5f2f0c569f8cb9c40bb4ab85c270e52bfb481c7bb1529/decorator-4.1.1.tar.gz#md5=dbae97f4c5228c0c8616ac0252f57874\" rel=\"internal\">decorator-4.1.1.tar.gz</a><br/>\n<a href=\"../../packages/bb/e0/f6e41e9091e130bf16d4437dabbac3993908e4d6485ecbc985ef1352db94/decorator-4.1.2.tar.gz#md5=a0f7f4fe00ae2dde93494d90c192cf8c\" rel=\"internal\">decorator-4.1.2.tar.gz</a><br/>\n<a href=\"../../packages/c3/bc/3a76f2d58894583970132914ccf819d396dc168e555792cc8147519e4a7e/decorator-4.1.0-py2.py3-none-any.whl#md5=0e730118662530c236b6cdeb38c61c1d\" rel=\"internal\">decorator-4.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c5/dd/2981cc27073de0df432d95f194cf9be333f7e373fcea7962488d5755c1a4/decorator-4.0.2.tar.gz#md5=033c9563af492c4ce2680ee6ca481fa7\" rel=\"internal\">decorator-4.0.2.tar.gz</a><br/>\n<a href=\"../../packages/cc/ac/5a16f1fc0506ff72fcc8fd4e858e3a1c231f224ab79bb7c4c9b2094cc570/decorator-4.0.11.tar.gz#md5=73644c8f0bd4983d1b6a34b49adec0ae\" rel=\"internal\">decorator-4.0.11.tar.gz</a><br/>\n<a href=\"../../packages/d0/4c/7664e6264b58fbc8a89b88f275cfc518b5c42cf71a55e6b716188ccc64e2/decorator-4.0.4-py2.py3-none-any.whl#md5=18e6961dc58bd0e9cc5f8db265f7d5e4\" rel=\"internal\">decorator-4.0.4-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ea/40/0c221a2d74f91c6966f77615b6d978bd32b34922827cbf80a3654f396011/decorator-4.0.1-py2.py3-none-any.whl#md5=1fba6846ec2e2623d449f3e47252917e\" rel=\"internal\">decorator-4.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ed/69/24345e0d49c700557f135d01f5de03345368303fdee81b54eae28bf6143d/decorator-4.0.8-py2.py3-none-any.whl#md5=3bf05818357035898005c7809d7e47e9\" rel=\"internal\">decorator-4.0.8-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f3/26/876d492f2394f29401eb652ddfa53dec2bc8721861c7fe0dce1b5d0d2b6a/decorator-3.4.0.tar.gz#md5=1e8756f719d746e2fc0dd28b41251356\" rel=\"internal\">decorator-3.4.0.tar.gz</a><br/>\n<a href=\"../../packages/f5/52/a4f3efffddfdfa602b9bb9d77ee984e2ee7c6c62a87de3016e51f5a83a75/decorator-3.3.2.tar.gz#md5=446f5165af67eb0fcd8fd28abd259e86\" rel=\"internal\">decorator-3.3.2.tar.gz</a><br/>\n<a href=\"../../packages/f6/5d/515561750323dd09539a645b5ea43ec418a5d91a3933ecea0605b3c6caac/decorator-4.0.8.tar.gz#md5=58a3c5069a6ca1b5a265ece1ba7de8f1\" rel=\"internal\">decorator-4.0.8.tar.gz</a><br/>\n<a href=\"../../packages/f7/34/204c9d36ce74607ecf399682121d6c7f05dc8c491fc1f644d86d0808d44a/decorator-4.0.6.tar.gz#md5=b17bfa17c294d33022a89de0f61d38fe\" rel=\"internal\">decorator-4.0.6.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8945",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2351",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "02a9c07a6960552a46714cbf1ddf5fbb25218661669f26cbc2be2ab2b726ae12",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 6",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3043166",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2131-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.386628,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

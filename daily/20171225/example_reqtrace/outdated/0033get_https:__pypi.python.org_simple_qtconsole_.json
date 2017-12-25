@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/qtconsole/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for qtconsole</title></head><body><h1>Links for qtconsole</h1><a href=\"../../packages/1b/57/4616e02bbc27761ae341fc8ed7185b29e737d64bcecf1fa349cdee601792/qtconsole-4.0.1.zip#md5=42860c1a5215a78e5916f4e600603301\" rel=\"internal\">qtconsole-4.0.1.zip</a><br/>\n<a href=\"../../packages/2b/94/ed3d11ab0ceac135f22fe418a9d5f99c4a071f74b5bd46c4f2ede65eafb1/qtconsole-4.2.1.tar.gz#md5=c08ebebc7a60629ebadf685361ca0798\" rel=\"internal\">qtconsole-4.2.1.tar.gz</a><br/>\n<a href=\"../../packages/32/63/29ba2f12cd4195eef706375adc00573d99cd381a500eeb9d026232850881/qtconsole-4.1.1-py2.py3-none-any.whl#md5=e565402b95eaad06c6b185f808cd8c91\" rel=\"internal\">qtconsole-4.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/45/ba/8952facb72ae6293cf5ef51b03815fb9ce1d289c74b209f33d034655afe3/qtconsole-4.1.0.zip#md5=e198b2d499f7590f65f7301dfdb1987c\" rel=\"internal\">qtconsole-4.1.0.zip</a><br/>\n<a href=\"../../packages/52/0e/082c44dd1f41027bcc83ee347c778f5a9f6adead20f64db6001fba4aaf0d/qtconsole-4.2.1-py2.py3-none-any.whl#md5=04629b6bfeaa40fd6ce845f918823037\" rel=\"internal\">qtconsole-4.2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/68/48/ed0e8989b7376704ecb8faa782384de98cc108de522ad8d21f449484de9a/qtconsole-4.3.1.tar.gz#md5=42df4f81f0b78706d87f759e5c8d6b39\" rel=\"internal\">qtconsole-4.3.1.tar.gz</a><br/>\n<a href=\"../../packages/88/fb/222f6c00f0239e9d6fa236f8ccfefa08eeff80972417d9e1e57a4089c885/qtconsole-4.2.1.zip#md5=c178758e15f42be2d29c4b3df5fe155d\" rel=\"internal\">qtconsole-4.2.1.zip</a><br/>\n<a href=\"../../packages/8a/f9/e4b62c21f166d452e5f418c56ed1c195bfe2228023c91b2e15b9ce73501f/qtconsole-4.2.0-py2.py3-none-any.whl#md5=5d4363bd4333d8218e52fc33c504327f\" rel=\"internal\">qtconsole-4.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/90/ff/047e0dca2627b162866920e7aa93f04523c0ae81e5c67060eec85701992d/qtconsole-4.3.1-py2.py3-none-any.whl#md5=818d1f471038d5b3433d27bf028f2627\" rel=\"internal\">qtconsole-4.3.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/93/4a/22429660359ff105230225e8a07f6b9255235ea87edd636fe8587b4275b3/qtconsole-4.0.0.tar.gz#md5=1e26773423044dba4ec138f1725d5582\" rel=\"internal\">qtconsole-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/a5/bb/13c9e1a9bbbf9c2c1581483a10aeec5c7aaa1af780ffd9559c5c311ce940/qtconsole-4.0.0.zip#md5=0c604b8b4592d254fb8a0f27d2ecb525\" rel=\"internal\">qtconsole-4.0.0.zip</a><br/>\n<a href=\"../../packages/a9/97/260d8c300f2e52fc6ef05cb55531af4a35df3d323b32d9b932c647f46fd7/qtconsole-4.0.1-py2.py3-none-any.whl#md5=668888d152c85690f1a8f5188b845837\" rel=\"internal\">qtconsole-4.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/bc/85/9e9bd347d28d30a688051511a69b50ab491f78a437f5377003925ad74c89/qtconsole-4.0.0-py2.py3-none-any.whl#md5=9cab4d6d1fd16a6b30b37e0f5c83c727\" rel=\"internal\">qtconsole-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c8/3a/1e13950d73f9df22b44f845e84be2c76b0033dbacfb57c7120133243ab2d/qtconsole-4.1.0.tar.gz#md5=4f3c43d2d526cbda7760b2c52b5cd79c\" rel=\"internal\">qtconsole-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/cc/97/41fb735c918bfb3d9bac3fa8347addc2ffc82fd06084940a1821cf333ac8/qtconsole-4.3.0.tar.gz#md5=e8fb599d209e3e55aa593c5b25d898ac\" rel=\"internal\">qtconsole-4.3.0.tar.gz</a><br/>\n<a href=\"../../packages/d2/09/70706583ad01a3c0787c8a481593da0d3db7f910f05703b81fb334cfd5f7/qtconsole-4.1.1.tar.gz#md5=12f474ab467d2945249d149d2d32f208\" rel=\"internal\">qtconsole-4.1.1.tar.gz</a><br/>\n<a href=\"../../packages/d9/58/0b635d7296d122813d98df7618e4e0ef7a35135b4a9edac73671ef5473c9/qtconsole-4.0.1.tar.gz#md5=a8f17246361ee37ec55d3222dee9e18c\" rel=\"internal\">qtconsole-4.0.1.tar.gz</a><br/>\n<a href=\"../../packages/da/84/1de5988ff3f1a74d57974ee22c8df0f96db19ca1d9c2e5b43b7862219a3d/qtconsole-4.1.0-py2.py3-none-any.whl#md5=3f120575f6802340a4f676c2d4d77c4c\" rel=\"internal\">qtconsole-4.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/db/a1/86135bb160cc5c6237820ae0c64c112540fd30208963bdf361b9fe283caf/qtconsole-4.3.0-py2.py3-none-any.whl#md5=0cf53ea3c49a04d0cda77f9fe07c6edc\" rel=\"internal\">qtconsole-4.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/de/60/860ec4249e58d92abbad6b8183bfd673bb1ab85272657031a3ec4e329b30/qtconsole-4.2.0.tar.gz#md5=d08f3f75d2fd7cfa2c863dac0c045d87\" rel=\"internal\">qtconsole-4.2.0.tar.gz</a><br/>\n<a href=\"../../packages/eb/c2/db4afbe72a11a4570f6f67bfe833b54ee998b5ecce50a690e2c001350cdd/qtconsole-4.1.1.zip#md5=e2b0c38344bc584b96b3fe39851645f2\" rel=\"internal\">qtconsole-4.1.1.zip</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "5844",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1657",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:17 GMT",
+      "Fastly-Debug-Digest": "53366a4f112c8f4d3e3ca2b152daf364cdcfa49978997276e2f57b83dc64e38e",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3092407",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2121-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205978.516567,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

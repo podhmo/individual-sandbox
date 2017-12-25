@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/httplib2/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for httplib2</title></head><body><h1>Links for httplib2</h1><a href=\"../../packages/06/63/c68c69427aef33e861821d8b32d720421a388cd43723125148a3f33ab9f7/httplib2-0.9.1.zip#md5=5db0cec10d9bf6bd6767820ac304a3ce\" rel=\"internal\">httplib2-0.9.1.zip</a><br/>\n<a href=\"../../packages/1d/b1/135a95f55963bec8fb9d0c9bc8ff658eef15419d8908df2ce2d230e6120f/httplib2-0.7.6.tar.gz#md5=3f440fff00e0d2d3c2971693de283cdf\" rel=\"internal\">httplib2-0.7.6.tar.gz</a><br/>\n<a href=\"../../packages/38/9c/cd76fde3a74d36a0317422dee019ae5f73ce27e62d817ca003e018d9f9d8/httplib2-0.9.1.tar.gz#md5=c49590437e4c5729505d034cd34a8528\" rel=\"internal\">httplib2-0.9.1.tar.gz</a><br/>\n<a href=\"../../packages/4d/60/98c33ac88b1f71be740d16c63d8d64b68ddc840c75ac884920ac46101f6b/httplib2-0.7.7.zip#md5=de94c069e284e6e75dcfbb6ba0e17b52\" rel=\"internal\">httplib2-0.7.7.zip</a><br/>\n<a href=\"../../packages/60/f1/c6f02beb9baadc7035e851ba381dd1d4331b4d8a337775f16ab36815ad5e/httplib2-0.7.5.tar.gz#md5=6e4f2b01fdb6a7cc4da4043a4ff7ca08\" rel=\"internal\">httplib2-0.7.5.tar.gz</a><br/>\n<a href=\"../../packages/62/89/95df81f893da90744f0086d6841086953c41d25da4950e034dcfdf8cf334/httplib2-0.7.4.tar.gz#md5=1ef27e7b9225fd0941e3134ce8b46128\" rel=\"internal\">httplib2-0.7.4.tar.gz</a><br/>\n<a href=\"../../packages/76/5b/223f8b6ad06e331d496aac9c1be0fe05441f450c1859674a15cbd5be5ca9/httplib2-0.9.zip#md5=bdad6a844e0cb890b681fe7c811cfea5\" rel=\"internal\">httplib2-0.9.zip</a><br/>\n<a href=\"../../packages/80/09/e42bce51b2615202884098fb11d76671992374be62e037625182c7ea7f7b/httplib2-0.7.7.tar.gz#md5=b4ac0b1f2af72043496bf6b9a4c1757f\" rel=\"internal\">httplib2-0.7.7.tar.gz</a><br/>\n<a href=\"../../packages/82/67/815f1bdcac4787760e6a4d052467ceb65944d6a23f2b0f7502dee6b84508/httplib2-0.7.4.zip#md5=37000b45eb3555c8b98faef0f400ddcf\" rel=\"internal\">httplib2-0.7.4.zip</a><br/>\n<a href=\"../../packages/a3/3d/60276e1e0ea090833031abe1855a934113e3d64d2a6a667ab91a8e312f43/httplib2-0.7.3.tar.gz#md5=bf44ef622813ccb4d2acd277c4654806\" rel=\"internal\">httplib2-0.7.3.tar.gz</a><br/>\n<a href=\"../../packages/ad/8a/2f2fbdbf1cc414a69c9ff116c5a939621e6945f0edac7c8fad8777f3b189/httplib2-0.7.3.zip#md5=2ab079fe79949f5bb44fae612b6cc527\" rel=\"internal\">httplib2-0.7.3.zip</a><br/>\n<a href=\"../../packages/b0/c9/4e9ec1dbce7696d4b474cd7d9469a35bb5af43bac5cf9b0ad5bede36f910/httplib2-0.8.zip#md5=c92df9674a18f2b6e20ff2c5b7ada579\" rel=\"internal\">httplib2-0.8.zip</a><br/>\n<a href=\"../../packages/b1/e8/a49f534214a5c850faaad1678bea812991559d53bea49ecc7321f38a5757/httplib2-0.9.2.zip#md5=404bac4a4e0d10b3ba498ce483c8c456\" rel=\"internal\">httplib2-0.9.2.zip</a><br/>\n<a href=\"../../packages/c5/a3/eb31b7bc8b6b3edaa42f4d71c4734af98027835fd7503b1c469ac116119f/httplib2-0.7.6.zip#md5=a48e5e43ef3c75591046b4f4b7c15186\" rel=\"internal\">httplib2-0.7.6.zip</a><br/>\n<a href=\"../../packages/d3/51/ac7e695ffd88de81d1655074a4727d30dbc13e95199628598816053000ca/httplib2-0.9.tar.gz#md5=09d8e8016911fc40e2e4c58f1aa3ec24\" rel=\"internal\">httplib2-0.9.tar.gz</a><br/>\n<a href=\"../../packages/e4/2e/a7e27d2c36076efeb8c0e519758968b20389adf57a9ce3af139891af2696/httplib2-0.10.3.tar.gz#md5=709c305e1b00e9c0af49ee816429569c\" rel=\"internal\">httplib2-0.10.3.tar.gz</a><br/>\n<a href=\"../../packages/f0/cf/71451a11600b896b3e186361b73a971372cd2c124666798af8cd4ffa6ac8/httplib2-0.8.tar.gz#md5=94cb8a3b196dfd19253c46609489d9f1\" rel=\"internal\">httplib2-0.8.tar.gz</a><br/>\n<a href=\"../../packages/f6/d2/edbda80b0c50a0c9d306259ac1f54b12000057ed8cb2f5372309a7e758b0/httplib2-0.7.5.zip#md5=3c5b12e40e7b962530535e22a6a6de07\" rel=\"internal\">httplib2-0.7.5.zip</a><br/>\n<a href=\"../../packages/ff/a9/5751cdf17a70ea89f6dde23ceb1705bfb638fd8cee00f845308bf8d26397/httplib2-0.9.2.tar.gz#md5=bd1b1445b3b2dfa7276b09b1a07b7f0e\" rel=\"internal\">httplib2-0.9.2.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8871",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1489",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "43e991e55daaac03180dfa9674218b31116ffa20d114e25a6af75f3ba1fefe2a",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "11, 3",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2623062",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2137-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.215688,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

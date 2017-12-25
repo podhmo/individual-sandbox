@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/nejimaki/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for nejimaki</title></head><body><h1>Links for nejimaki</h1><a href=\"../../packages/6c/1d/9ed10b85cef12548e758410db69097d0a995b6ca90d5f59c49416bcfa566/nejimaki-0.1.0-py2.py3-none-any.whl#md5=24706bd810fe2f99db881c1251fdca78\" rel=\"internal\">nejimaki-0.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/71/77/d25b60dc1b8faa99b43dd1a29db7e1a3760064338e46502c177d8c3fffc0/nejimaki-0.1.1-py2.py3-none-any.whl#md5=390c89056f3d571736fe539ec35ace81\" rel=\"internal\">nejimaki-0.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/96/d8/613cd1e58f8df9f21b52005c2c18bac224dd664e3113af0112dad31a868d/nejimaki-0.1.2.tar.gz#md5=714b4627e4a2e9dfe37e2ef29b451836\" rel=\"internal\">nejimaki-0.1.2.tar.gz</a><br/>\n<a href=\"../../packages/a5/bb/88dab0b1560fb459813cc0da784948b19cb177a4570c2f914b4cfd970653/nejimaki-0.1.0.tar.gz#md5=fdef279854ed5765bb4431d9b9dc32bf\" rel=\"internal\">nejimaki-0.1.0.tar.gz</a><br/>\n<a href=\"../../packages/b2/9c/e26a8e6d3d4da317c3a6a0cb122014db06f60136ba1c43f59e2598ca30da/nejimaki-0.1.1.tar.gz#md5=af2fbb63be40a8f3a93879507605ceb0\" rel=\"internal\">nejimaki-0.1.1.tar.gz</a><br/>\n<a href=\"../../packages/d6/e9/1007d49428a05407fdd9e0d3fb67c76eede435dc282e674b0c27103031d2/nejimaki-0.1.2-py2.py3-none-any.whl#md5=474067662bfdf6811258aa423f5a6f7c\" rel=\"internal\">nejimaki-0.1.2-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "47664",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "604",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:22 GMT",
+      "Fastly-Debug-Digest": "e5da9a1ac673186251a36d8dfd90585808654b9db26e66aaa8e869dd1b7da9d5",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2855410",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2141-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205982.323490,VS0,VE170",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

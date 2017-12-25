@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/korpokkur/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for korpokkur</title></head><body><h1>Links for korpokkur</h1><a href=\"../../packages/16/a4/030d29f40e6f8caf0a51a530ca3332826ddf9b376ceb8775672b86084bd6/korpokkur-0.0.8.1.tar.gz#md5=34405f8669bda64eb8d80452f5192a18\" rel=\"internal\">korpokkur-0.0.8.1.tar.gz</a><br/>\n<a href=\"../../packages/2e/a6/2e1887a1e9541e71737941d2673ea50750e02f2086abd52c6d05bd484eaf/korpokkur-0.1.tar.gz#md5=cd3c0e89f20c08e636cfb45d9743a8ac\" rel=\"internal\">korpokkur-0.1.tar.gz</a><br/>\n<a href=\"../../packages/55/e6/b99f3422f064ecf3db6589bf91c8f516630f1071881f5ebfc4def1eb6ca6/korpokkur-0.0.9.2.tar.gz#md5=22e2380a27c0f22964d7f4f75a2d0f66\" rel=\"internal\">korpokkur-0.0.9.2.tar.gz</a><br/>\n<a href=\"../../packages/7f/18/108d4a6db147c1f0fa69de10d9365b0197acd7cccbf50107b0b9b20d3f58/korpokkur-0.0.8.tar.gz#md5=7f8dd2fc17529678c0240892895aae0b\" rel=\"internal\">korpokkur-0.0.8.tar.gz</a><br/>\n<a href=\"../../packages/96/27/9cacfc6dbbdb535b59c6bb60c22696409740be740bc1aa74d7a192ca5fe8/korpokkur-0.1-py3-none-any.whl#md5=e382567df6eb93d9dc32d39eaf2c2aea\" rel=\"internal\">korpokkur-0.1-py3-none-any.whl</a><br/>\n<a href=\"../../packages/9c/37/6dae1e69b30ec3acbff539e0279234844382b380ce1ac37c00da3389b030/korpokkur-0.0.4.tar.gz#md5=6e2e60808d353a61a5715dc23a91ddd6\" rel=\"internal\">korpokkur-0.0.4.tar.gz</a><br/>\n<a href=\"../../packages/9d/dc/04b7385736408956666d885da84ee104890e6aaa163aa85ce14abe1793ab/korpokkur-0.0.9.1.tar.gz#md5=7cdea2ba42cbe2b117f51111c7666931\" rel=\"internal\">korpokkur-0.0.9.1.tar.gz</a><br/>\n<a href=\"../../packages/aa/83/6c7b32bc67c8453b3d1eae258296f250148c1a5850cfa5940f7b366b857f/korpokkur-0.0.5.tar.gz#md5=3ac3e6e381539479f241a59c7c093de7\" rel=\"internal\">korpokkur-0.0.5.tar.gz</a><br/>\n<a href=\"../../packages/ab/03/0f9c8c9ee6bf593e3f60c127399a1639002bc12629450a6af29850171a7b/korpokkur-0.0.9.tar.gz#md5=8a47a137fefa688b3a702ad95d6f33cc\" rel=\"internal\">korpokkur-0.0.9.tar.gz</a><br/>\n<a href=\"../../packages/b8/00/01b25d7e74da439034b7b9f3d228ca9ffe439ec7cb98a5f14c546b21b300/korpokkur-0.0.9.3.tar.gz#md5=bcbecf9bf57a8581fd80903ca0489447\" rel=\"internal\">korpokkur-0.0.9.3.tar.gz</a><br/>\n<a href=\"../../packages/f0/f7/9e18de110e25ff42f60516c2c1f0a216a2141eb15d3bceb7b99681568ea3/korpokkur-0.0.6.tar.gz#md5=6e95e0c4b7a6e8f991bbbe035225a296\" rel=\"internal\">korpokkur-0.0.6.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "63396",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "947",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:20 GMT",
+      "Fastly-Debug-Digest": "46b5eb5c8161f3259499d10323873b7c6b1aff8aae695dbd90488a05cbd54927",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2374939",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2125-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.684832,VS0,VE169",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

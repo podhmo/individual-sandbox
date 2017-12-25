@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/jupyter-client/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for jupyter-client</title></head><body><h1>Links for jupyter-client</h1><a href=\"../../packages/01/6d/1566172f3497c79741774971df80db44e10d3c692801e59f9cd3ea64b19a/jupyter_client-5.0.1.tar.gz#md5=73852317f98b85d4ffc6565040c04dd6\" rel=\"internal\">jupyter_client-5.0.1.tar.gz</a><br/>\n<a href=\"../../packages/28/3d/ad981e404f81b44a6e068b53d240414c940cebb92841ca92307dfb67c169/jupyter_client-5.1.0-py2.py3-none-any.whl#md5=c2e66112519884276f0808653e85f1ce\" rel=\"internal\">jupyter_client-5.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/39/bc/3679bee00a2958230a42e5d6b31bbea178119a7f167e233fdec67ebef3b2/jupyter_client-4.0.0-py2.py3-none-any.whl#md5=3de4c490580d407b3f3158e0256daf2f\" rel=\"internal\">jupyter_client-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/3c/ff/e9b79c88435b35fb4c3ba6ac0bc6373e15ae797abf89e34a9a784fa5c42c/jupyter_client-5.2.0-py2.py3-none-any.whl#md5=90709fbda36e6c91f0f38459b4480cbf\" rel=\"internal\">jupyter_client-5.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/40/17/c8dc0d104a15f1d8f3bc20fab6d947cf0e7fffb1df5ba5159da18a770061/jupyter_client-4.2.2.tar.gz#md5=f887b2c076297ed8216d89b17a2000ea\" rel=\"internal\">jupyter_client-4.2.2.tar.gz</a><br/>\n<a href=\"../../packages/46/df/a277a5bdbfdcb89aaa201de0822748b08c4faf1b377fee1d130d8658f8c4/jupyter_client-4.0.0.tar.gz#md5=11ec05c5356c86ea3fe6b6008732874c\" rel=\"internal\">jupyter_client-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/60/1f/40830d080e0748544b51eddb0f4b2b63c185e100c51ac9e735f76d530082/jupyter_client-4.2.0.tar.gz#md5=e6a6da231c8a456e95a09ddded594b32\" rel=\"internal\">jupyter_client-4.2.0.tar.gz</a><br/>\n<a href=\"../../packages/62/74/f7485020a07c695de6e9fc205e00bce5de74acb46b5f72d583fd407961c2/jupyter_client-4.1.1.tar.gz#md5=2a90f6d3ebe6e7f3602aa2a3956f613d\" rel=\"internal\">jupyter_client-4.1.1.tar.gz</a><br/>\n<a href=\"../../packages/66/2d/5c1bd097ad63b4b1a66bb88e31ff146284ed5bb86bdd437765cd56acdf8c/jupyter_client-4.3.0.tar.gz#md5=4ae3d5e04baea1e8fa8d3ec24c600c17\" rel=\"internal\">jupyter_client-4.3.0.tar.gz</a><br/>\n<a href=\"../../packages/72/a9/66918a0686985a02ece6df3b19dcedacf8e291e652793e946ed68b5c1730/jupyter_client-4.3.0.zip#md5=8d682f4ba867bece6496770de4ca2974\" rel=\"internal\">jupyter_client-4.3.0.zip</a><br/>\n<a href=\"../../packages/88/03/d8e218721af0b084d4fda5e3bb89dc201505780f96ae060bf5e3e67c7707/jupyter_client-4.4.0.tar.gz#md5=8a428a07cbcd4f2e4ca7c2f728b718ea\" rel=\"internal\">jupyter_client-4.4.0.tar.gz</a><br/>\n<a href=\"../../packages/94/38/184e5f096396aeda1ea1df2be3116cfd2ae8500c1ab8bd0c35f33b18412d/jupyter_client-4.2.1.zip#md5=90303f703e93320c2893c3cef64d7d0f\" rel=\"internal\">jupyter_client-4.2.1.zip</a><br/>\n<a href=\"../../packages/a7/a1/29d2284986596be9023ad6b6fe1de989318fb1526e7ec99a43519d69d709/jupyter_client-4.4.0-py2.py3-none-any.whl#md5=e010bc34d2965246bced3b5de1cf5c7c\" rel=\"internal\">jupyter_client-4.4.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ab/f5/57a8d68eef68a7bec68a75cd1ef6e9d455c66106c65bf3ba37cb626ecebb/jupyter_client-5.0.1-py2.py3-none-any.whl#md5=6a906d168fde557df5db3e7ed62e6304\" rel=\"internal\">jupyter_client-5.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/b0/d5/418205a8c83cd34dc1e83b852936a6fe02e4ba3bdc420dc12a0a0ca7c3d8/jupyter_client-4.1.1-py2.py3-none-any.whl#md5=2942344b917532429472ac1ccc93e976\" rel=\"internal\">jupyter_client-4.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/b3/7e/bdf5c21890c19bac2b3b9e51f4d1f1469627d7ca0cbf81bc0a6d101eb712/jupyter_client-4.0.0.zip#md5=42200250cbfe117b6fde32f050d6130e\" rel=\"internal\">jupyter_client-4.0.0.zip</a><br/>\n<a href=\"../../packages/bb/b0/6f33f2e88343a8fb04289de186320b1ddb165f1a646af41b07be14f78379/jupyter_client-4.3.0-py2.py3-none-any.whl#md5=f49ca5e0b5fdad59360cd57d2aedc2ca\" rel=\"internal\">jupyter_client-4.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/bf/c7/6a2fabf67d396fe0e77f2e895f7b2058699b1c5cb761ed3520755cd9ec71/jupyter_client-5.2.0.tar.gz#md5=f5953ce1140a2cc061bc0273e1dbb378\" rel=\"internal\">jupyter_client-5.2.0.tar.gz</a><br/>\n<a href=\"../../packages/c3/4d/6431e0fbb301f8f6ebf52f4a4f5bb4cbf9f64d64e2e2c16c305b95b17e25/jupyter_client-4.2.0-py2.py3-none-any.whl#md5=42871f0c27832c25ca682103ba11bb99\" rel=\"internal\">jupyter_client-4.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/cc/47/2dd2c62723c727177a6218c3b5c35ab8d634840a6e6b2b054d450089359c/jupyter_client-4.2.2.zip#md5=45756e782cf207f6f416f1a663a3423d\" rel=\"internal\">jupyter_client-4.2.2.zip</a><br/>\n<a href=\"../../packages/cc/c8/ab3b82f3436bef22b4e6a5bde26fce2d038362607ac0d0c4999bfa05a3cd/jupyter_client-4.2.1-py2.py3-none-any.whl#md5=aacd8d3872bca4661f6c2ff3edccbf16\" rel=\"internal\">jupyter_client-4.2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/d1/c4/8a480fc7f04359e6d3101c6cb4cb8ad89ea84bcfa07957b3718c299eba4b/jupyter_client-4.2.1.tar.gz#md5=2d4e254269ccb9bcf9b0016e26e0378d\" rel=\"internal\">jupyter_client-4.2.1.tar.gz</a><br/>\n<a href=\"../../packages/d4/51/09da9a18cd858b28cee596a628660a8cbf9830bdd89fe94361bfe18a0bb4/jupyter_client-5.1.0.tar.gz#md5=990ab28f63861cc29f90585d3f725b10\" rel=\"internal\">jupyter_client-5.1.0.tar.gz</a><br/>\n<a href=\"../../packages/dc/0e/3ff75bf088953f34d742b301ee8dc5f0bf516754150faf5a955af1ff484d/jupyter_client-4.1.1.zip#md5=3f8b08528fe4d2af9fd1179c11115463\" rel=\"internal\">jupyter_client-4.1.1.zip</a><br/>\n<a href=\"../../packages/df/a4/b5e368fb08cad84c6fc9d9d27453f11f70c025d8a36e0417324c0eb3a917/jupyter_client-5.0.0-py2.py3-none-any.whl#md5=3a154c55871a923da67363a89991dd3a\" rel=\"internal\">jupyter_client-5.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/e5/6f/65412ed462202b90134b7e761b0b7e7f949e07a549c1755475333727b3d0/jupyter_client-5.0.0.tar.gz#md5=1acd331b5c9fb4d79dae9939e79f2426\" rel=\"internal\">jupyter_client-5.0.0.tar.gz</a><br/>\n<a href=\"../../packages/f4/d8/3b7095e71b0015e6d91fbc45e96ce7245485280531f39e215b5c2f84af3b/jupyter_client-4.1.0.tar.gz#md5=89329db71318f921245816a6c37b2427\" rel=\"internal\">jupyter_client-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/fa/25/f12d01277872636dfda8ab425f81f87c6db9fa963dd38344b010e9fa5f9c/jupyter_client-4.2.0.zip#md5=efa7d7af946cd48f5b899c626a145afb\" rel=\"internal\">jupyter_client-4.2.0.zip</a><br/>\n<a href=\"../../packages/fd/7a/07ad70876fa3e6906440ff8bbecbb24d958d3547ca350544ac70fe2221bf/jupyter_client-4.2.2-py2.py3-none-any.whl#md5=16aa3ce20707d7cc4c0c9c7a1dd09195\" rel=\"internal\">jupyter_client-4.2.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ff/3f/9dbbe6fc01be4ac5b63b8becdda2408663492305763fd999a1616399e760/jupyter_client-4.1.0.zip#md5=de19180916f7b1996defecb3e4f9f583\" rel=\"internal\">jupyter_client-4.1.0.zip</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "688",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2309",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:20 GMT",
+      "Fastly-Debug-Digest": "7bb274c36284d4098785be126d1709838f19929078fba98a4c0ece5eb960ba74",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3424861",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2144-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.943717,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

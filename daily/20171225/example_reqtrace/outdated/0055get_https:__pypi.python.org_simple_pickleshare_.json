@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/pickleshare/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for pickleshare</title></head><body><h1>Links for pickleshare</h1><a href=\"../../packages/02/54/b4946204b0989c53a3b92ac294e1c2aa8cd45d99a574115965aa5bccef0a/pickleshare-0.7.2-py2.py3-none-any.whl#md5=761350505da8e08e4eb44b8c6d773c2f\" rel=\"internal\">pickleshare-0.7.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/24/b5/b35c58325a358e928167934013a49df2af9b637e5f55e0bf627ff1d35535/pickleshare-0.2.tar.gz#md5=0a52543380de55bcfe53eb77adb43775\" rel=\"internal\">pickleshare-0.2.tar.gz</a><br/>\n<a href=\"../../packages/34/a4/654d2f47846769c59080bf8ba4350df2411b7088120098519325b19cac65/pickleshare-0.7.1-py2.py3-none-any.whl#md5=c174fdd781d300b51c962362c16a4977\" rel=\"internal\">pickleshare-0.7.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/35/d3/a956e127871c58f2a1d6a37f776c5ef9eb5ceb1d847ee8e5ab114b0a09a4/pickleshare-0.1.tar.gz#md5=41e3d3b22a3cc9b3b11f103043460fd7\" rel=\"internal\">pickleshare-0.1.tar.gz</a><br/>\n<a href=\"../../packages/4b/c4/6fb142a1579e9de6f5cd9213e85ee6cc119f43b2dabc8861d62af25fab40/pickleshare-0.7.1.tar.gz#md5=d039ea7dc706180fc4b7953da3bcb3cb\" rel=\"internal\">pickleshare-0.7.1.tar.gz</a><br/>\n<a href=\"../../packages/58/47/8b219a446eb351e1cb966cc10662bf8fa90a7710a9c61c2e81a585661ebb/pickleshare-0.5.tar.gz#md5=25337740507cb855ad58bfcf60f7710e\" rel=\"internal\">pickleshare-0.5.tar.gz</a><br/>\n<a href=\"../../packages/5d/29/5f3eb419067a98fe98d78a7e309fef03abceb2dc3e3587c88e2ca704ba20/pickleshare-0.7.3.tar.gz#md5=0ccdd8e65737a92eec47888dae61ff95\" rel=\"internal\">pickleshare-0.7.3.tar.gz</a><br/>\n<a href=\"../../packages/69/fe/dd137d84daa0fd13a709e448138e310d9ea93070620c9db5454e234af525/pickleshare-0.7.4.tar.gz#md5=6a9e5dd8dfc023031f6b7b3f824cab12\" rel=\"internal\">pickleshare-0.7.4.tar.gz</a><br/>\n<a href=\"../../packages/6c/19/621ba06fb9f9d8606e4b096aeea9f09954cecdcc83f0e64b22197dca09ef/pickleshare-0.3.zip#md5=7737704561846f395557635025d924cb\" rel=\"internal\">pickleshare-0.3.zip</a><br/>\n<a href=\"../../packages/7b/5f/36348c02caad79310a97c2a03899a4572a870dc0d925d7f3f647c1ff7891/pickleshare-0.4.tar.gz#md5=8451850db4ee230f20a00fdb0e45ab64\" rel=\"internal\">pickleshare-0.4.tar.gz</a><br/>\n<a href=\"../../packages/9b/2a/8d1da939bd3417fc66236e321766363a504b07de54439c5635fba06da8dd/pickleshare-0.2-py2.4.egg#md5=0e06901ce9ac17892da5c654abbcdf29\" rel=\"internal\">pickleshare-0.2-py2.4.egg</a><br/>\n<a href=\"../../packages/9f/17/daa142fc9be6b76f26f24eeeb9a138940671490b91cb5587393f297c8317/pickleshare-0.7.4-py2.py3-none-any.whl#md5=922081613889c8f67b3b4f493f8831c3\" rel=\"internal\">pickleshare-0.7.4-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a0/d0/d2daee922f1c5128128e4737b1c7fdd4f93670a303ceafe80e5414b959a3/pickleshare-0.7.3-py2.py3-none-any.whl#md5=1db3f7a084ad3e359a02ad35156ef4e9\" rel=\"internal\">pickleshare-0.7.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ad/69/bcf0c55ded3779e6e1c9460c69854678d4b78f08482449caaf8e82d5f8eb/pickleshare-0.7.2.tar.gz#md5=29d74cde0255546b6b2e1b48a0b31a54\" rel=\"internal\">pickleshare-0.7.2.tar.gz</a><br/>\n<a href=\"../../packages/ba/d3/f8e5c37786288e502b3cd5017b701c3e2f17cbdf8e35673b6c7983ef5099/pickleshare-0.6-py2.py3-none-any.whl#md5=09c0b452d91d03df921fdf09747e510b\" rel=\"internal\">pickleshare-0.6-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c5/a9/fcb641df59b757739917bf8e9078dc02d4502fd28ced65b8b683608dd178/pickleshare-0.7.tar.gz#md5=7af5afa21c7813e4104d1fe309fbf617\" rel=\"internal\">pickleshare-0.7.tar.gz</a><br/>\n<a href=\"../../packages/c7/56/bb63fa493b583685e919bfbb874bb2a1c112edc88e899eefa344722f480d/pickleshare-0.6.tar.gz#md5=7fadddce8b1b0110c4ef905be795001a\" rel=\"internal\">pickleshare-0.6.tar.gz</a><br/>\n<a href=\"../../packages/d4/9f/2c00e6d4e77353f1a66e0aef951843f6a327b6ec8fa6c010a01d01150dc6/pickleshare-0.1-py2.4.egg#md5=3a9ff16e6c34ade7cf045faea9d0409d\" rel=\"internal\">pickleshare-0.1-py2.4.egg</a><br/>\n<a href=\"../../packages/d8/77/59cf3f26476c412d3d26f4310baf12d3fd7bad7f8bbc9a597e387484c823/pickleshare-0.7-py2.py3-none-any.whl#md5=c62aac32c3f7f62a4f1d094b22a60eeb\" rel=\"internal\">pickleshare-0.7-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8683",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1521",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:19 GMT",
+      "Fastly-Debug-Digest": "f9c191273fa5d96a3a489b6956da6e5ae7ac0e7977cd7a48f804077001d7c53b",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 4",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2279998",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2140-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205979.137870,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

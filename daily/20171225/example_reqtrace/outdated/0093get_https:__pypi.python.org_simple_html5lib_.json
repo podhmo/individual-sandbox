@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/html5lib/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for html5lib</title></head><body><h1>Links for html5lib</h1><a href=\"../../packages/02/a1/c18f17b473cb11ef0fffae6ea1322507ca5f29e7a2f71107f5547a9485c8/html5lib-1.0b3.tar.gz#md5=10c166c7931c9630ce50a5bb9b62ef32\" rel=\"internal\">html5lib-1.0b3.tar.gz</a><br/>\n<a href=\"../../packages/06/1c/8281e3ba695db6d01b5deda2c232fff897094f9d5bdef9eb5b8972d6dc1c/html5lib-0.11.1.tar.gz#md5=eb8db849473ac024110136f947dae5e4\" rel=\"internal\">html5lib-0.11.1.tar.gz</a><br/>\n<a href=\"../../packages/0d/0f/6e7a4171c150e4c52cff10184697a63dd9eaeae5c7b7f5023ef6b16aaf59/html5lib-0.99999.tar.gz#md5=08345e46504e88897c91c513f2dda627\" rel=\"internal\">html5lib-0.99999.tar.gz</a><br/>\n<a href=\"../../packages/17/ee/99e69cdcefc354e0c18ff2cc60aeeb5bfcc2e33f051bf0cc5526d790c445/html5lib-0.999999999.tar.gz#md5=8578e4e3a341436cb9743a9e4a299239\" rel=\"internal\">html5lib-0.999999999.tar.gz</a><br/>\n<a href=\"../../packages/2c/e8/4944b8a4e48951cf9db0cd05c4efdfc341583017f66d67b04ac1f4e63ab5/html5lib-0.99.tar.gz#md5=b7d837eac0f572736f7753cabaab16ce\" rel=\"internal\">html5lib-0.99.tar.gz</a><br/>\n<a href=\"../../packages/2f/74/7793ca2d36f676b740efc04b7ba887c610119beb5841d1805cb3515616cb/html5lib-1.0b10-py2.py3-none-any.whl#md5=cdfa6accc825b9d004b87c1d2683df3a\" rel=\"internal\">html5lib-1.0b10-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/2f/89/04a6f0beec623397c6c849530dbc538ba96935d367a36be40f5effdd03a7/html5lib-0.99999999.tar.gz#md5=a82ce28a690a3939b2ac89dff4a2804e\" rel=\"internal\">html5lib-0.99999999.tar.gz</a><br/>\n<a href=\"../../packages/3b/89/c32486cdca98f476252a9db2cc836b605de4807ac4602ca55b3e7b52b7a8/html5lib-1.0b8.tar.gz#md5=c3116519cb39bec8254e14aef2f2e3be\" rel=\"internal\">html5lib-1.0b8.tar.gz</a><br/>\n<a href=\"../../packages/50/9b/61ada852e7dc635c8e4ad0a06fe80837e1e9f0006d3cc855567ae813632a/html5lib-1.0b7.tar.gz#md5=53c4d48c1225224f0a9d6fbd8fcfcf18\" rel=\"internal\">html5lib-1.0b7.tar.gz</a><br/>\n<a href=\"../../packages/5a/30/9ac138ccbdb50fed34b3c415bea9f84244f35f4f02e3eb1877e4e5671dc7/html5lib-1.0b1.tar.gz#md5=032cf8766f9a76ad96719bd8abd29fd6\" rel=\"internal\">html5lib-1.0b1.tar.gz</a><br/>\n<a href=\"../../packages/5a/a8/2e264a1fc01e6e32c1d7583f22c83b4ac1582b5d7f35214a01960f0bc979/html5lib-0.90.tar.gz#md5=576a5d9c64265e0e013d0f4155af027c\" rel=\"internal\">html5lib-0.90.tar.gz</a><br/>\n<a href=\"../../packages/67/0a/eaed53deddf114819094bc8879aebb715963f16ddfc9752548782150691c/html5lib-1.0b2.tar.gz#md5=ce0b9317628e40bf55a9d71f6948cbba\" rel=\"internal\">html5lib-1.0b2.tar.gz</a><br/>\n<a href=\"../../packages/78/8d/1661477d643e5dfd55f482201470e7fdbefd617e9848df39ba397e55d14a/html5lib-0.999999.tar.gz#md5=4d00a24741618a65b7102cce341dfedb\" rel=\"internal\">html5lib-0.999999.tar.gz</a><br/>\n<a href=\"../../packages/83/73/0df3214779794428ff5c924b83caea96f27c4dc71d4ccb135b5817211d4a/html5lib-0.11.tar.gz#md5=e713676bc0822340895aa7898e9d0dc7\" rel=\"internal\">html5lib-0.11.tar.gz</a><br/>\n<a href=\"../../packages/85/3e/cf449cf1b5004e87510b9368e7a5f1acd8831c2d6691edd3c62a0823f98f/html5lib-1.0.1.tar.gz#md5=942a0688d6bdf20d087c9805c40182ad\" rel=\"internal\">html5lib-1.0.1.tar.gz</a><br/>\n<a href=\"../../packages/87/f0/1f5a9bff9a082e19d1fd86d2973d9e00ff931032946d100d612ae76b0d5d/html5lib-0.95.tar.gz#md5=fe607f9917d81763e842f818f23464ee\" rel=\"internal\">html5lib-0.95.tar.gz</a><br/>\n<a href=\"../../packages/89/d5/388a3afbac4a1c6674c67e6e472b17e97b8883c8ca25c809b594a6fea23f/html5lib-0.9.tar.gz#md5=1f9c6a66a37023da716fd8cdedcf8cf4\" rel=\"internal\">html5lib-0.9.tar.gz</a><br/>\n<a href=\"../../packages/8a/ed/fd8710ed9d3c982283a457991009a74f4cb0b3317345f925ca2f211794d4/html5lib-0.2.tar.gz#md5=a93958d638be7c6dfd2921e0126b8c6e\" rel=\"internal\">html5lib-0.2.tar.gz</a><br/>\n<a href=\"../../packages/8c/8e/dfa046c6275177e76bf52bb4b6c604c2a595c81475fb75624d0f77e0880c/html5lib-1.0b9.tar.gz#md5=52504bc225a6cc916c441dfb63b92a8e\" rel=\"internal\">html5lib-1.0b9.tar.gz</a><br/>\n<a href=\"../../packages/97/16/982214624095c1420c75f3bd295d9e658794aafb95fc075823de107e0ae4/html5lib-1.0b10.tar.gz#md5=5ada1243b7a863624b2f35245b2186e9\" rel=\"internal\">html5lib-1.0b10.tar.gz</a><br/>\n<a href=\"../../packages/a5/62/bbd2be0e7943ec8504b517e62bab011b4946e1258842bc159e5dfde15b96/html5lib-1.0.1-py2.py3-none-any.whl#md5=42cf98d73a886c8ee883b5cadf18aafe\" rel=\"internal\">html5lib-1.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ae/ae/bcb60402c60932b32dfaf19bb53870b29eda2cd17551ba5639219fb5ebf9/html5lib-0.9999999.tar.gz#md5=ef43cb05e9e799f25d65d1135838a96f\" rel=\"internal\">html5lib-0.9999999.tar.gz</a><br/>\n<a href=\"../../packages/c2/0d/656e77a2a0e2e1487c5a40d394e7a80e5e038825b1dacc922d0d642cf1aa/html5lib-0.9999.tar.gz#md5=95986c7a12c63d13a7a9f243abdf8179\" rel=\"internal\">html5lib-0.9999.tar.gz</a><br/>\n<a href=\"../../packages/da/66/ea28be5e5aa471f499b2dac8dd57c0755743daaec050c418f6e24688aaa6/html5lib-1.0-reupload.tar.gz#md5=e961f52ec1f7eade1f25fe79d77c3611\" rel=\"internal\">html5lib-1.0-reupload.tar.gz</a><br/>\n<a href=\"../../packages/e2/fc/5c017ce54ba9e69f52215019c8feb7566f14b52381cbf72992db2c36ef59/html5lib-1.0b5.tar.gz#md5=95224fc71ee15da0a9df64b93ab89771\" rel=\"internal\">html5lib-1.0b5.tar.gz</a><br/>\n<a href=\"../../packages/e9/aa/8f56d12c27aaeb3d8478a0b2fef7b5acb7cd1a8074c520ba96d99077b70d/html5lib-1.0b6.tar.gz#md5=babcd7277e30f85c064d95a39969c79f\" rel=\"internal\">html5lib-1.0b6.tar.gz</a><br/>\n<a href=\"../../packages/f6/89/c388a695d6a3d274c27c113d2e489c517bf1db8ab7e9b9ee1f8f41f69aad/html5lib-0.10.tar.gz#md5=48a0c483ae4e8aa71d1703cf4837c52a\" rel=\"internal\">html5lib-0.10.tar.gz</a><br/>\n<a href=\"../../packages/f7/71/a96f36d34394bcfff9fb54bfe0aa72cc5b4ff2f803e5728645aef38f7aee/html5lib-0.999999999-py2.py3-none-any.whl#md5=c94780c55ea28529c39ad19ed372d629\" rel=\"internal\">html5lib-0.999999999-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/fc/37/a7d7d3e5151e4ff0d364cc47a52d18c334eee60485b7318550b8e09f9d53/html5lib-0.999.tar.gz#md5=acb8ba4d6db5637360a07859192eb7f8\" rel=\"internal\">html5lib-0.999.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "6144",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2210",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "261f385303f649be6f7ba87c966489699eab70e6fa69e02f66baf26c551b63c7",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 3",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3397888",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2147-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.234403,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

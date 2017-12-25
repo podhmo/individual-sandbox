@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/mccabe/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for mccabe</title></head><body><h1>Links for mccabe</h1><a href=\"../../packages/06/18/fa675aa501e11d6d6ca0ae73a101b2f3571a565e0f7d38e062eec18a91ee/mccabe-0.6.1.tar.gz#md5=723df2f7b1737b8887475bac4c763e1e\" rel=\"internal\">mccabe-0.6.1.tar.gz</a><br/>\n<a href=\"../../packages/17/9c/66792b5f917a09f7e433dfd6e20ac12964006e1d794f799c2333afc10be1/mccabe-0.5.2-py2.py3-none-any.whl#md5=a8d6b93fd1a93478f39076cb0fc4d65c\" rel=\"internal\">mccabe-0.5.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/22/b9/0f8c3a3f734bc66f3f278a658285f4a5347a52b0c38ce8c11863930ad77f/mccabe-0.3-py2.py3-none-any.whl#md5=fb444e9597f475743eb63920e83aa7b5\" rel=\"internal\">mccabe-0.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/3c/e1/619bae96ab3712279061952585369d64dcf22b9fd1ad29c83c6468df1825/mccabe-0.6.0.tar.gz#md5=9e4c44759d274152c07dcdacfaf0a4f6\" rel=\"internal\">mccabe-0.6.0.tar.gz</a><br/>\n<a href=\"../../packages/57/fa/4a0cda4cf9877d2bd12ab031ae4ecfdc5c1bbb6e68f3fe80da4f29947c2a/mccabe-0.5.0.tar.gz#md5=8304dc8dc2c7e0b15912e2638ee21c0a\" rel=\"internal\">mccabe-0.5.0.tar.gz</a><br/>\n<a href=\"../../packages/59/a2/1382f6a41af561a12914bb3e79edef744872520db42f99347bcdc3af6bbc/mccabe-0.5.0-py2.py3-none-any.whl#md5=89c36f1d550ee2bdffea6034f86bef32\" rel=\"internal\">mccabe-0.5.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/68/21/b80d285b35061757a6fccd867d40757d21fda8337537de288c463b06ecfd/mccabe-0.6.0-py2.py3-none-any.whl#md5=5d66549fd1aa9b6df6aa50a2f08338ba\" rel=\"internal\">mccabe-0.6.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/69/be/9c322ed286263a93e5ee0ff575662d0709fc73ee906522e7cfa72b08b946/mccabe-0.5.3-py2.py3-none-any.whl#md5=a2b3c3a1bf3f0e1aaebd689a14a015fa\" rel=\"internal\">mccabe-0.5.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/84/75/d7966b7280635e96a243d27ca39e5954e9af632a36a4e8eee44660e53540/mccabe-0.3.1-py2.py3-none-any.whl#md5=bea6b1fdd1cffb8afb4d7cac046f104f\" rel=\"internal\">mccabe-0.3.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl#md5=6afffd590703262843327af8c4051928\" rel=\"internal\">mccabe-0.6.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ba/99/352f7ff08af01c11a8e38260796b9096e662334b454f934f06210eabbb46/mccabe-0.4.0-py2.py3-none-any.whl#md5=eed948bb360ba1f8a7d64a457cf157ee\" rel=\"internal\">mccabe-0.4.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/bb/c9/a7d3a53fdaee1fdff753e8333ccf8affe944ac1d4dc4894dbcaa3db5954b/mccabe-0.3.1.tar.gz#md5=9a1570c470ff5db678cc0c03d5c0c237\" rel=\"internal\">mccabe-0.3.1.tar.gz</a><br/>\n<a href=\"../../packages/be/5e/fdae307772168a9b5cdb352c5f125e3c097cf610f481fb73b652274bde89/mccabe-0.5.1-py2.py3-none-any.whl#md5=76d90b138aa44a57af3cf03887fe0b89\" rel=\"internal\">mccabe-0.5.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c9/0b/b66016d49fc1b24864743e388bc4fa7dcbb83c29553b867404fad5b5855d/mccabe-0.5.3.tar.gz#md5=74b632a536d99015351044737cd3b242\" rel=\"internal\">mccabe-0.5.3.tar.gz</a><br/>\n<a href=\"../../packages/c9/2e/75231479e11a906b64ac43bad9d0bb534d00080b18bdca8db9da46e1faf7/mccabe-0.3.tar.gz#md5=81640948ff226f8c12b3277059489157\" rel=\"internal\">mccabe-0.3.tar.gz</a><br/>\n<a href=\"../../packages/e5/7e/560bce4f5c06e8a30e9f5475d8e285eb3494a3591a04849c3cc822215493/mccabe-0.2.tar.gz#md5=c1012c7c24081471f45aab864d4e3805\" rel=\"internal\">mccabe-0.2.tar.gz</a><br/>\n<a href=\"../../packages/ec/b1/79c08edbb2a652f2f697c2b71dc08ede14e615bf6aa325237a32e0ed36f0/mccabe-0.2.1.tar.gz#md5=5a3f3fa6a4bad126c88aaaa7dab682f5\" rel=\"internal\">mccabe-0.2.1.tar.gz</a><br/>\n<a href=\"../../packages/f1/b7/ff36d1a163079688633a776e1717b5459caccbb68973afab2aa8345ac40f/mccabe-0.5.2.tar.gz#md5=01fe4ba7270322aabc0fdf3f2189c5cd\" rel=\"internal\">mccabe-0.5.2.tar.gz</a><br/>\n<a href=\"../../packages/f6/e7/54461a958bb8b16f8db5f849d5d08b7d74153e064ac385fb68ff09f0bd27/mccabe-0.4.0.tar.gz#md5=8c425db05f310adcd4bb174b991f26f5\" rel=\"internal\">mccabe-0.4.0.tar.gz</a><br/>\n<a href=\"../../packages/fd/7c/9cbdc4515bc26e8527d164fc5983308d721c685620ee1aa025a72c7f056f/mccabe-0.5.1.tar.gz#md5=40d1d6380fc210e761b59f0d4929541f\" rel=\"internal\">mccabe-0.5.1.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8954",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1577",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:20 GMT",
+      "Fastly-Debug-Digest": "a888d78b2f73e2431b4d2651fd3ce1b5e0ba612dc8a13b4103c4d355fb9d1af0",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 5",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2600671",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2121-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205980.227107,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

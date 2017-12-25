@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/pycodestyle/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for pycodestyle</title></head><body><h1>Links for pycodestyle</h1><a href=\"../../packages/1d/31/c63f6dbede25dc53135e54175b5cbbc4932f417e169c0a4b2339a69bffc5/pycodestyle-2.1.0.tar.gz#md5=1eb1f0b36abdc5e59d14d1cbbcd6a744\" rel=\"internal\">pycodestyle-2.1.0.tar.gz</a><br/>\n<a href=\"../../packages/32/09/8e580517e4af96141c41f531bca14c4408e7cb716864022737811aaac1be/pycodestyle-2.3.0-py2.py3-none-any.whl#md5=ef05f646493089bd7fa95cd6cc0a949b\" rel=\"internal\">pycodestyle-2.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/43/9f/56e824b197398582b0c1aaaa2272560bc51f395fe3e45e1dd88de4bb24dc/pycodestyle-2.2.0.tar.gz#md5=642c31fc2a72a55a4acdf8ac46d5fb64\" rel=\"internal\">pycodestyle-2.2.0.tar.gz</a><br/>\n<a href=\"../../packages/46/95/0b74196cb512cbf5127c27636115d63126c0f1a10383d828b9ad7295f381/pycodestyle-2.2.0-py2.py3-none-any.whl#md5=a81fed42208142ddb530d8e953991511\" rel=\"internal\">pycodestyle-2.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/49/16/455af11e9afef9a38804c516910ba8093f673981a55dbfd4688974b45f40/pycodestyle-2.1.0-py2.py3-none-any.whl#md5=f9697d0c8ce9ff29c2bfd1981afb2fcd\" rel=\"internal\">pycodestyle-2.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/73/31/136a79364c1681a3c276796d1f5090833bd03461b78a1b037638d1a2c484/pycodestyle-2.0.0-py2.py3-none-any.whl#md5=25ad6c33896472973bc849d058b36c30\" rel=\"internal\">pycodestyle-2.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/ab/59/bfe563694774450cf6e614b67b2a03f57827c716b7468c64254d9f8c0ec6/pycodestyle-2.3.0.tar.gz#md5=2822fb1633f842ecaef825f7235b22ed\" rel=\"internal\">pycodestyle-2.3.0.tar.gz</a><br/>\n<a href=\"../../packages/ba/d1/9973e3eb4a45342b6b377f7d3f40f02c25b49fe783c42199ea653f41e87a/pycodestyle-1.8.0.dev0-py2.py3-none-any.whl#md5=cc3a77e0b3d7e6c031ff8b8ec2702036\" rel=\"internal\">pycodestyle-1.8.0.dev0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/db/b1/9f798e745a4602ab40bf6a9174e1409dcdde6928cf800d3aab96a65b1bbf/pycodestyle-2.0.0.tar.gz#md5=733291d308def897c0c48c7840b7f6bc\" rel=\"internal\">pycodestyle-2.0.0.tar.gz</a><br/>\n<a href=\"../../packages/dd/66/fda85afe66edcd5e41a8cca7cc6a1da0cabef0fca8fdff197d82adf17a7a/pycodestyle-1.8.0.dev0.tar.gz#md5=89036205d4ea5c8970081ba8372aa838\" rel=\"internal\">pycodestyle-1.8.0.dev0.tar.gz</a><br/>\n<a href=\"../../packages/e1/88/0e2cbf412bd849ea6f1af1f97882add46a374f4ba1d2aea39353609150ad/pycodestyle-2.3.1.tar.gz#md5=240e342756af30cae0983b16303a2055\" rel=\"internal\">pycodestyle-2.3.1.tar.gz</a><br/>\n<a href=\"../../packages/e4/81/78fe51eb4038d1388b7217dd63770b0f428370207125047312886c923b26/pycodestyle-2.3.1-py2.py3-none-any.whl#md5=44c7a6ef1a52f66f706f0fdccae64046\" rel=\"internal\">pycodestyle-2.3.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/e7/9c/2b551f54271c08fd920edbefcea3defe2edf662a86757708df9ca866a033/pycodestyle-2.0.0a1.tar.gz#md5=c9b5ddd26d0d78a729f2cc3cafe450e7\" rel=\"internal\">pycodestyle-2.0.0a1.tar.gz</a><br/>\n<a href=\"../../packages/f3/af/5b89bfeb26b1ddc7ca6b502e2e6bf92ea3eeb04099929288753b084100a5/pycodestyle-2.0.0a1-py2.py3-none-any.whl#md5=5b7389420f5577cdf1ed0dd05b8076db\" rel=\"internal\">pycodestyle-2.0.0a1-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "18148",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1166",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:18 GMT",
+      "Fastly-Debug-Digest": "480eb9cc96d90369811d9598be85ae7b9f056ceb02423ef34bc5aeb8e00a48ae",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 7",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2607932",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2120-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205978.002137,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

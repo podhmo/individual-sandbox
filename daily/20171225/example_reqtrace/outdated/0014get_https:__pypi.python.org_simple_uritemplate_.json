@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/uritemplate/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for uritemplate</title></head><body><h1>Links for uritemplate</h1><a href=\"../../packages/05/cf/98cd9ec86a8b5962f884f87b92e81f3716335e28ec3f4ccddb2abb415633/uritemplate-2.0.0rc2-py2-none-any.whl#md5=2807f319b9e0a87bf868da26314cc492\" rel=\"internal\">uritemplate-2.0.0rc2-py2-none-any.whl</a><br/>\n<a href=\"../../packages/0c/c5/ffa3b9dda6161fb8f4073141eea38fa97e496dd38035b4c72b0ef1d2b362/uritemplate-0.5.1.tar.gz#md5=ab391a688552bc849594f5e40be4c996\" rel=\"internal\">uritemplate-0.5.1.tar.gz</a><br/>\n<a href=\"../../packages/0f/02/ea3394cf49c5efcb6fd78294179cb621bd88d88bca2df3095c6b1595c0f4/uritemplate-2.0.0rc1.tar.gz#md5=f6f2d275a0eb9abc1530dc90497685c1\" rel=\"internal\">uritemplate-2.0.0rc1.tar.gz</a><br/>\n<a href=\"../../packages/32/42/d5edeb07d44ccb83ced5356b0d75f1f60aa8455cbe42b6f1e5db7b523de5/uritemplate-2.0.0rc1-py2-none-any.whl#md5=ee70a668fb4694040428794059baa7b3\" rel=\"internal\">uritemplate-2.0.0rc1-py2-none-any.whl</a><br/>\n<a href=\"../../packages/41/36/d3ea386483707b6b03e243ab5490d8d4d19c506486cf8cfa5b40008d9c59/uritemplate-0.5.2.tar.gz#md5=88293fb6afb2c70abbb5ee5dfb29e6c0\" rel=\"internal\">uritemplate-0.5.2.tar.gz</a><br/>\n<a href=\"../../packages/5a/6d/66aed916219c1a25e12a01457ea5442f80e54ed3844ef688b25e20dada5f/uritemplate-0.6.tar.gz#md5=ecfc1ea8d62c7f2b47aad625afae6173\" rel=\"internal\">uritemplate-0.6.tar.gz</a><br/>\n<a href=\"../../packages/7a/6b/37b80c80bc5c5a600dd0dc56351de0f8421de95a929e25245f0fac1b5050/uritemplate-2.0.0-py2-none-any.whl#md5=a4fd0c44561ebc7c45ba65810dea8e87\" rel=\"internal\">uritemplate-2.0.0-py2-none-any.whl</a><br/>\n<a href=\"../../packages/a4/b9/427bef1ffcae381e194f51874b708d7c1ec3ee25b4d41619136fcdd9ddca/uritemplate-2.0.0rc2.tar.gz#md5=6105faafc726b5f697fc2a4f63384e3a\" rel=\"internal\">uritemplate-2.0.0rc2.tar.gz</a><br/>\n<a href=\"../../packages/a8/e7/fbce648b46d95520b296b7951bc3e7996d40db54eedcd0dfa1876a532e74/uritemplate-0.5.tar.gz#md5=f1916193845a32ab298e9f385f2415a7\" rel=\"internal\">uritemplate-0.5.tar.gz</a><br/>\n<a href=\"../../packages/ba/83/069aee6d676e890b638c7c7da60063ff6abce00b4bb59d9a9e6249131bfa/uritemplate-2.0.0.tar.gz#md5=34c75eff2888508ebe9da79cb1c154a2\" rel=\"internal\">uritemplate-2.0.0.tar.gz</a><br/>\n<a href=\"../../packages/cd/db/f7b98cdc3f81513fb25d3cbe2501d621882ee81150b745cdd1363278c10a/uritemplate-3.0.0.tar.gz#md5=1ec31e0d8a2eec72357b2cef4bce5945\" rel=\"internal\">uritemplate-3.0.0.tar.gz</a><br/>\n<a href=\"../../packages/e5/7d/9d5a640c4f8bf2c8b1afc015e9a9d8de32e13c9016dcc4b0ec03481fb396/uritemplate-3.0.0-py2.py3-none-any.whl#md5=ab58d573c5584499b57399522e6c4945\" rel=\"internal\">uritemplate-3.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f6/25/66a49231b44409d7f07cfcf2506a8b070ce3c99fc47cc256bea833f24791/uritemplate-3.0.0-py2-none-any.whl#md5=b420ae8183a8af42481b1c655f528dfa\" rel=\"internal\">uritemplate-3.0.0-py2-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "3892",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1094",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:16 GMT",
+      "Fastly-Debug-Digest": "c3b87a8d47d6de028a7364bb35c79c8fd5c6b3ec001fc62ee4a67e1e3320b3e7",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "4, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2312274",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2139-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.712172,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

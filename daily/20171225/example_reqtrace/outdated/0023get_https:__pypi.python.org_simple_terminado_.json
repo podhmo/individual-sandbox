@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/terminado/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for terminado</title></head><body><h1>Links for terminado</h1><a href=\"../../packages/07/d6/cc8e11e4bbb2127f8b6447d9fd2ce77a46f33cbeb5c6fe155f8ccc3ae7a7/terminado-0.3.3.tar.gz#md5=51e339c0e8dd1d11f6d6ad033b11acab\" rel=\"internal\">terminado-0.3.3.tar.gz</a><br/>\n<a href=\"../../packages/0a/f4/98c52734d005ca8186fca3ae4bcca2e806c2d133c077123f2f36648f35cc/terminado-0.4.tar.gz#md5=ca2a6347cb6faf995baab1f64c21f40e\" rel=\"internal\">terminado-0.4.tar.gz</a><br/>\n<a href=\"../../packages/1c/e7/2e0db4a19ef1ec0bc492cfde9a5c2c6a9cd09569eb1934fcc7cf17a0f2f8/terminado-0.7-py2.py3-none-any.whl#md5=af1714d4157697b6f26691ebd31dc885\" rel=\"internal\">terminado-0.7-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/2e/20/a26211a24425923d46e1213b376a6ee60dc30bcdf1b0c345e2c3769deb1c/terminado-0.8.1-py2.py3-none-any.whl#md5=fa63b4f05641d97ee363ed5feb6d3b22\" rel=\"internal\">terminado-0.8.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/4e/87/62a8a8da7cacb3b85f22e4665cbedec7d44e97adb551129202a3fb69475a/terminado-0.3.1.tar.gz#md5=983247bfc513a6aa71a67fde0944b334\" rel=\"internal\">terminado-0.3.1.tar.gz</a><br/>\n<a href=\"../../packages/58/59/aabe84fce2f45da10165435cec204d982863e176f6849a4a4fe2652a20a8/terminado-0.6.tar.gz#md5=5b6c65da27fe1ed07a9f80f0588cdaba\" rel=\"internal\">terminado-0.6.tar.gz</a><br/>\n<a href=\"../../packages/67/84/ce0ebd0f60e1cbe040f8e065eef7063855d59d9cf5e6438b3f8439fc7e15/terminado-0.8.1.tar.gz#md5=616515f562939e979b67c72b667afba9\" rel=\"internal\">terminado-0.8.1.tar.gz</a><br/>\n<a href=\"../../packages/6f/b6/31371ec7e805ca2db901cc52302cd517a1bfe512b382ddbedd851dde8515/terminado-0.7.tar.gz#md5=119675884d3eba2646b577fcb0de3b3a\" rel=\"internal\">terminado-0.7.tar.gz</a><br/>\n<a href=\"../../packages/8e/20/ff191e82bfa09283d24385fa0e2b4dacfd268ccf9153a3a7d3a230043594/terminado-0.3.2.tar.gz#md5=209b978863b8df6659f95acd11c3c564\" rel=\"internal\">terminado-0.3.2.tar.gz</a><br/>\n<a href=\"../../packages/91/a5/129e45d6e7e597f64a7e073288724efb0b7b68954f6b16c00fada05c9d3c/terminado-0.8.tar.gz#md5=5d64a640e87f3f8135bf136989fcf6c3\" rel=\"internal\">terminado-0.8.tar.gz</a><br/>\n<a href=\"../../packages/9b/fd/8dfb64877a020511461233230c442ed629bdf845792afc3d5f5f07989598/terminado-0.5.tar.gz#md5=e992c6262a5f4c8952fee93da31a067e\" rel=\"internal\">terminado-0.5.tar.gz</a><br/>\n<a href=\"../../packages/a7/1f/23b9ced84b853bf2e5d42719a51075b6ed937d149d843d6d2a8f8ff03add/terminado-0.8-py2.py3-none-any.whl#md5=8ec5e63cda8a696e89240d1f0bfba588\" rel=\"internal\">terminado-0.8-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/d5/b8/76ba9f6328ec5fd35b20bf8514bf5677dfde6880f6c838eebaf2a9a8b4ed/terminado-0.1.tar.gz#md5=1592d98b3e963d3bd6f87d475134bf6f\" rel=\"internal\">terminado-0.1.tar.gz</a><br/>\n<a href=\"../../packages/d6/28/b0f9c19981d93b0cbc1e9ca01890cb2ffeca1ab1aeab1b1244d0647fe169/terminado-0.3.tar.gz#md5=e05175894cd5ce384bb94833df37b8a0\" rel=\"internal\">terminado-0.3.tar.gz</a><br/>\n<a href=\"../../packages/fe/8f/00a354a0f45d96db4208db488d4afb4a8d25c30379bbe90f2879aff73558/terminado-0.2.tar.gz#md5=1b20a13c1c01f308ed09a6cd7f77d4b6\" rel=\"internal\">terminado-0.2.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "6441",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1220",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:17 GMT",
+      "Fastly-Debug-Digest": "e7a173720291047a3567b3ba550789511e1eca33dd0a6e6cd73f7ab90fb644df",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3370612",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2135-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.065155,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

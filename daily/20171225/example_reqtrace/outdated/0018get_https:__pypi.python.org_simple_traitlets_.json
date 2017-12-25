@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/traitlets/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for traitlets</title></head><body><h1>Links for traitlets</h1><a href=\"../../packages/02/88/7b13d9403ef58c5a9cccac6fe32744245014123112690f90ef0e02e5b145/traitlets-4.0.0.dev0.tar.gz#md5=c7462697d26b8c6dcb8b8bcfe49741e8\" rel=\"internal\">traitlets-4.0.0.dev0.tar.gz</a><br/>\n<a href=\"../../packages/03/04/65443a410abe159faba069a6f5978aa66634ef5e5eb00d0b5ac06d394d88/traitlets-4.1.0.tar.gz#md5=2ebf5e11a19f82f25395b4a793097080\" rel=\"internal\">traitlets-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/10/ed/37ca0815e846baea11d2cc65d7eeb127aef9c22f886847f151c372fc0d66/traitlets-4.2.0-py2.py3-none-any.whl#md5=af7152df07f753772457538d823cf542\" rel=\"internal\">traitlets-4.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/27/62/c6906577a9a87e576941fa3c089c4254e92190c7524327af0e72b8ee165f/traitlets-4.2.2.zip#md5=b0da7131d974ab487f5eb5750d15338e\" rel=\"internal\">traitlets-4.2.2.zip</a><br/>\n<a href=\"../../packages/29/23/df9b27cc2e327260458f6f5b6a23f59f61f5b3857645fdbf8930e8544a2c/traitlets-4.0.0.tar.gz#md5=27df56a921848686cf52766177a434f2\" rel=\"internal\">traitlets-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/33/cb/c9a8ab0c4676b3a72ab3586a30dc09bc714e24c24f66efdaad06f71cd81e/traitlets-4.2.1.tar.gz#md5=f9cc1ad00a793a65d7bc88d69ee65920\" rel=\"internal\">traitlets-4.2.1.tar.gz</a><br/>\n<a href=\"../../packages/3a/9b/4a47994434b0f9f044c0cb44ebd5402a7cef4e02ff0662f7f5a2eeb6d484/traitlets-4.0.0-py2.py3-none-any.whl#md5=72d33d7dc0b62eca6f7272b7501bc62c\" rel=\"internal\">traitlets-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/3c/5c/4b0d5617778b7ae81f1f6b8df0e413346d925bb984a36f4d7d7839c5109f/traitlets-4.1.0.b1.zip#md5=f69f8a098a7a78124b51f4be28a2504c\" rel=\"internal\">traitlets-4.1.0.b1.zip</a><br/>\n<a href=\"../../packages/59/99/a4bab5162afe190a8fe0629561f6bcf4f0b0d789365580b27c93acfa5da0/traitlets-4.2.1.zip#md5=57799d882b5020c031b538bafcb539ed\" rel=\"internal\">traitlets-4.2.1.zip</a><br/>\n<a href=\"../../packages/68/fe/a542484eb8d1b7b8949a06936f702dac80d316becc5d8416def728e13cea/traitlets-4.3.0-py2.py3-none-any.whl#md5=21f73894621be8238a265fc6a9a23a76\" rel=\"internal\">traitlets-4.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/8a/75/fae66fe77e714df62f9e84ce7b36dff3874bb1046d97a2d468e5857ab305/traitlets-4.1.0b1-py2.py3-none-any.whl#md5=da4c896c78546ae4aeea79cb035cfc7b\" rel=\"internal\">traitlets-4.1.0b1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/8e/e4/9a4f64c580154104d73b7accc9d562d72a3acd377f187313c82569068dd9/traitlets-4.0.0.dev0-py2.py3-none-any.whl#md5=242d8b897320fa9b9ca7b70c40262761\" rel=\"internal\">traitlets-4.0.0.dev0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/93/d6/abcb22de61d78e2fc3959c964628a5771e47e7cc60d53e9342e21ed6cc9a/traitlets-4.3.2-py2.py3-none-any.whl#md5=ed8d701989c74fe1984114f3bcab7f98\" rel=\"internal\">traitlets-4.3.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/9b/d7/86cecf66f0ba550b4e2affb20356780eda4a70d48aa11c2a4b0d6f662c16/traitlets-4.0.0.dev0.zip#md5=690e279f7cabe4729ada18e4d6a6f052\" rel=\"internal\">traitlets-4.0.0.dev0.zip</a><br/>\n<a href=\"../../packages/a2/13/44a127f47098adbbf4df56332b28741c0040d5067426a863aa772bba85e9/traitlets-4.3.0b1-py2.py3-none-any.whl#md5=6f6df0a5ebab1642b16143ec437c6d8c\" rel=\"internal\">traitlets-4.3.0b1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a4/07/9b7636322c152ab1dacae9d38131067523d6ce5ca926a656586f6f947e77/traitlets-4.2.2.tar.gz#md5=d0725f9818bd9e112a6531da26d433b8\" rel=\"internal\">traitlets-4.2.2.tar.gz</a><br/>\n<a href=\"../../packages/a5/98/7f5ef2fe9e9e071813aaf9cb91d1a732e0a68b6c44a32b38cb8e14c3f069/traitlets-4.3.2.tar.gz#md5=3068663f2f38fd939a9eb3a500ccc154\" rel=\"internal\">traitlets-4.3.2.tar.gz</a><br/>\n<a href=\"../../packages/a6/dd/72471258f000737ae6ada6c34163f0834b77520a687aef89e9f13681e812/traitlets-4.1.0.b1.tar.gz#md5=677393d0dbe5279bcbbb0236ee7c4693\" rel=\"internal\">traitlets-4.1.0.b1.tar.gz</a><br/>\n<a href=\"../../packages/a7/47/bd149e0c9ed0b8b634d6df2eb6ff11d63886759fb379c60605653e6281c2/traitlets-4.3.0.tar.gz#md5=c26c7157d2e942b25071db490aea6a7d\" rel=\"internal\">traitlets-4.3.0.tar.gz</a><br/>\n<a href=\"../../packages/a9/ad/95d6844772e3aab19fed497837da0b4c289157ed99d42514d646fcbd1158/traitlets-4.1.0b1.tar.gz#md5=c5ed6dfa6edf43623e386c615506260e\" rel=\"internal\">traitlets-4.1.0b1.tar.gz</a><br/>\n<a href=\"../../packages/ad/25/a507caa3514e7651fd14ffcffcd279779f604fefa3391b225bfb09d5c407/traitlets-4.2.2-py2.py3-none-any.whl#md5=417ebee7f7aa3e303e0515290ea525db\" rel=\"internal\">traitlets-4.2.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/b1/d6/5b5aa6d5c474691909b91493da1e8972e309c9f01ecfe4aeafd272eb3234/traitlets-4.3.1.tar.gz#md5=dd0b1b6e5d31ce446d55a4b5e5083c98\" rel=\"internal\">traitlets-4.3.1.tar.gz</a><br/>\n<a href=\"../../packages/b3/bd/27f298719a732f31b5c68c6ce9b4427beaef263d271e31feb76d2a12933f/traitlets-0.0.1.tar.gz#md5=23991fb5875c4d6c8a9daa89a10d8ca7\" rel=\"internal\">traitlets-0.0.1.tar.gz</a><br/>\n<a href=\"../../packages/b6/72/f62f13fb8cdb85af5239788d4c57c281b3a92efc9d2ad9cc44cb14c8c26d/traitlets-4.3.1-py2.py3-none-any.whl#md5=4611e9eef0bf7420bdc057e6d8019e95\" rel=\"internal\">traitlets-4.3.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c5/27/e258c60be495e0c2cc858440b0d207e9a87818c512cb0e6f89ef191fe599/traitlets-0.0.2.tar.gz#md5=2432ef4618fa6b2e8c90a20a65a14ce8\" rel=\"internal\">traitlets-0.0.2.tar.gz</a><br/>\n<a href=\"../../packages/c7/ac/7bb361161e9b37d00a0b81f0e360fe0be8e2b9156e4da74aabf7f167b237/traitlets-4.1.0-py2.py3-none-any.whl#md5=ae20c0511992bc7e586d90401158c160\" rel=\"internal\">traitlets-4.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/da/86/3f84712d790c5c3891d1a2dfe88f1dd11249b198625ee76c3caad84580ef/traitlets-4.3.0b1.tar.gz#md5=feae420381bf358038e625ff01f5a3c4\" rel=\"internal\">traitlets-4.3.0b1.tar.gz</a><br/>\n<a href=\"../../packages/db/f3/a24062437f01ceae74edf622ac3f8c55b555a2ed1967e5e3d945efe54c3d/traitlets-4.2.1-py2.py3-none-any.whl#md5=d99a6356482caf22d76e787c1edf062b\" rel=\"internal\">traitlets-4.2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/eb/1c/41c7d9f25082d88c1de04f6e38ea186a70b16b458da9bc65876fc50fe73d/traitlets-4.1.0.zip#md5=602eb5826a454eb358a9e9619905c3e4\" rel=\"internal\">traitlets-4.1.0.zip</a><br/>\n<a href=\"../../packages/f3/84/5a3a25bbe8e686497ab9ee03b7b6a847f4bd00ca3b886c2830764365e448/traitlets-4.1.0b1.zip#md5=e7d88c274b75714c27a2fc8509975b67\" rel=\"internal\">traitlets-4.1.0b1.zip</a><br/>\n<a href=\"../../packages/fc/e3/92ffefe42ba9cae394ec62e3e582ca44e4506637128a17d2ee0ea1626f6f/traitlets-4.2.0.zip#md5=36bb5518550076620c19814e9bb9074c\" rel=\"internal\">traitlets-4.2.0.zip</a><br/>\n<a href=\"../../packages/ff/7a/a646fc35930bdd018d28e68b0beb4613247d40f0c9f0966a0af30ea165ef/traitlets-4.2.0.tar.gz#md5=1cab635cd97d6919a3396b5002135f8f\" rel=\"internal\">traitlets-4.2.0.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "10076",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2436",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:16 GMT",
+      "Fastly-Debug-Digest": "1e0219f73002f185602755156c36e193671b25f6d3528ce0f8ef444359383f07",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 6",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2662902",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2133-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.954015,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

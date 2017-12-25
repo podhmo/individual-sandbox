@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/jupyter-console/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for jupyter-console</title></head><body><h1>Links for jupyter-console</h1><a href=\"../../packages/01/18/bd0165448c3eb0cd4c35a154918dcc7795cf137f2acc8637a724c3ea96e2/jupyter_console-4.0.2-py2.py3-none-any.whl#md5=339979ea2f650dade3c1186c74348988\" rel=\"internal\">jupyter_console-4.0.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/05/d6/64a59934c7fb8bf46e8b42bf6b21015643d9dd02e52234c7c8bc929dec5e/jupyter_console-5.0.0.tar.gz#md5=65d86429f41cc374a144f22526fe5048\" rel=\"internal\">jupyter_console-5.0.0.tar.gz</a><br/>\n<a href=\"../../packages/13/26/66ef8da9b13f315e037b0602281b68028cc186d25726818445ccd5d01da6/jupyter_console-4.0.1-py2.py3-none-any.whl#md5=3d185157f3663d24c6a22ba89fd9f21e\" rel=\"internal\">jupyter_console-4.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/16/e3/4cd1a7219e30629d0a8b79f321bb06fbe46e2df31c6b3f8420234031fed2/jupyter_console-4.0.3.tar.gz#md5=2c4994d1de2d94bf9bcefc4f9df110fd\" rel=\"internal\">jupyter_console-4.0.3.tar.gz</a><br/>\n<a href=\"../../packages/1b/dd/525c3400823f2661f4aa129dd3c9010223bf250677af4b115d9d775b7f8a/jupyter_console-4.1.1-py2.py3-none-any.whl#md5=d650f48f6558d37d571b3477681686dd\" rel=\"internal\">jupyter_console-4.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/24/27/490056f250c78d36095288ea5fc519c90bd89731ae0c3def707a679324c2/jupyter_console-4.0.1.tar.gz#md5=142d0adc6da66aea781e4ca3b8411e6b\" rel=\"internal\">jupyter_console-4.0.1.tar.gz</a><br/>\n<a href=\"../../packages/25/29/4c681ad27ee9417cc9ec3c5f0de8451ff8eb4df222820b25876d9b6c207f/jupyter_console-4.1.0.tar.gz#md5=db3ee05de6f2216b158786c2674baae1\" rel=\"internal\">jupyter_console-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/2c/3e/f1103504dda691d3a0ac2ddb74ce50ceb3601571ca5ae23ceefe9884e17f/jupyter_console-4.0.3.zip#md5=0697bc91936a14424693eb97b3b5c4e5\" rel=\"internal\">jupyter_console-4.0.3.zip</a><br/>\n<a href=\"../../packages/3c/c9/deeb9a1275ea1ed524e774352f3462991c805b55bc7f6ef414756d84ed96/jupyter_console-4.1.1.tar.gz#md5=a80bfb1b129fc3c8d6c33e3306af933c\" rel=\"internal\">jupyter_console-4.1.1.tar.gz</a><br/>\n<a href=\"../../packages/44/d4/eb6da1920e52840c840874c868711be82798d6579c49a04c301b1d1e06d8/jupyter_console-5.0.0b1.tar.gz#md5=a23c11c97d7ab3be3d296f333728f3fc\" rel=\"internal\">jupyter_console-5.0.0b1.tar.gz</a><br/>\n<a href=\"../../packages/4e/7a/205090ef4e3cfa8f265ce2300b9cfa0b6b874063b193ec74668490461b88/jupyter_console-4.0.0-py2.py3-none-any.whl#md5=e62ee1d886367e307a126b4e7272cd01\" rel=\"internal\">jupyter_console-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/62/f2/98b2010357cdc067861321406ec997bb0741d459f6ba1f1bf8444f0284e8/jupyter_console-4.1.0.zip#md5=c83ff35820d87dfaae274d8848ffb692\" rel=\"internal\">jupyter_console-4.1.0.zip</a><br/>\n<a href=\"../../packages/6c/be/f3fb50ef1607b044838c67ef5be19598af1a78e9840e22afe516ef6c1d6b/jupyter_console-4.1.1.zip#md5=859239c2939d8fbd486fadc178e36b35\" rel=\"internal\">jupyter_console-4.1.1.zip</a><br/>\n<a href=\"../../packages/6d/8b/f95b66f6eafd0451b654e3d430248526d216ae500264f2edd99cd89e7a9e/jupyter_console-4.0.1.zip#md5=7e601eb1372d0ccfbb76d74be0a73790\" rel=\"internal\">jupyter_console-4.0.1.zip</a><br/>\n<a href=\"../../packages/6d/a8/0824682f3dfbce1c0281f7853b060802add4db00995627c2fb3f83ab0ebd/jupyter_console-5.0.0b1-py2.py3-none-any.whl#md5=4a9adf89ab7ad31e3a0ee76f8a3cbf84\" rel=\"internal\">jupyter_console-5.0.0b1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/77/82/6469cd7fccf7958cbe5dce2e623f1e3c5e27f1bb1ad36d90519bc2d5d370/jupyter_console-5.2.0-py2.py3-none-any.whl#md5=e48a2d9e7561daaab53109927a13833f\" rel=\"internal\">jupyter_console-5.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/77/c5/ff30e514c3c5098efa48678b30b32dc651f046ed434442398105ee416c16/jupyter_console-4.0.2.zip#md5=0adebb8a292117f6cd6d032be0205657\" rel=\"internal\">jupyter_console-4.0.2.zip</a><br/>\n<a href=\"../../packages/79/db/9a6afc84d77b41ef82397f0efc05c830efa5bb485fa933604bd90ccd75db/jupyter_console-5.0.0.zip#md5=35254638004cbb50dbfb16f1f7f22272\" rel=\"internal\">jupyter_console-5.0.0.zip</a><br/>\n<a href=\"../../packages/7c/c2/5e865900de40f7bf80b5cfbf9a79532f540a6679c7ded8f793f99cf546fa/jupyter_console-4.0.3-py2.py3-none-any.whl#md5=f5dc58614909438e939d37806548f337\" rel=\"internal\">jupyter_console-4.0.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/84/e2/be8da2cef5263ed5f030487c0733bda777e7893f50c131bdb6d15d50c4cc/jupyter_console-4.0.0.zip#md5=3dec7ff2767b0e60188fee92eddb7025\" rel=\"internal\">jupyter_console-4.0.0.zip</a><br/>\n<a href=\"../../packages/9b/f6/5c8e3ce943eb407863b5088f35dec26f0792dbe2749d5a0353cabca810fc/jupyter_console-4.0.0.tar.gz#md5=9f531e715b7d90d214b533e18448b6aa\" rel=\"internal\">jupyter_console-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/b3/cb/8e330d7ca98d8549d129de061a2cb94127db0d03aed06795234bd0da98b0/jupyter_console-5.1.0-py2.py3-none-any.whl#md5=9eba89495927ceca559a7029cf53be5e\" rel=\"internal\">jupyter_console-5.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/cb/83/f96e41ddb29ad76f806d6412e87e64af3120482dc0d8b5decf5eb8d82b99/jupyter_console-5.1.0.tar.gz#md5=20eff10b4cd93f081207bfa0cc5a3b0e\" rel=\"internal\">jupyter_console-5.1.0.tar.gz</a><br/>\n<a href=\"../../packages/cd/bb/fa8901715c009a00ea4c42897da8585189d4781c64f4617a8bd65ca01a3a/jupyter_console-5.2.0.tar.gz#md5=175953df3c76ffa6d4d5cb23198ab324\" rel=\"internal\">jupyter_console-5.2.0.tar.gz</a><br/>\n<a href=\"../../packages/e1/47/4151ebbe41c3229e2f6a67dc9d7ec015723e624a5d1f0c4e49ee807a3668/jupyter_console-4.1.0-py2.py3-none-any.whl#md5=131450f92d0dce3f484f761c4ca661e9\" rel=\"internal\">jupyter_console-4.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f4/21/b4208374b500ba31f98fc0909def785eaa40a3623b64c8d311d856986230/jupyter_console-5.0.0-py2.py3-none-any.whl#md5=5ecd85fa18527323443d0d0ee0c8b2e3\" rel=\"internal\">jupyter_console-5.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/fd/40/b8745103d2e0d87c8f539f27f5001fbd1f1c02cdff39d3bd3d816f5245c3/jupyter_console-4.0.2.tar.gz#md5=73e7b712cabd84625ff0ecc1c9ea698f\" rel=\"internal\">jupyter_console-4.0.2.tar.gz</a><br/>\n<a href=\"../../packages/fe/30/927d41ce05b6a9d30f174656d2d9259d7c2628d815d6561f9d8ebe887cf3/jupyter_console-5.0.0b1.zip#md5=f0d027763b4934519350630dde8ae526\" rel=\"internal\">jupyter_console-5.0.0b1.zip</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8651",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2157",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:20 GMT",
+      "Fastly-Debug-Digest": "2099d089355ff889167202988a359799bec00e5f0b5da2c29ff32fc7395ca089",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3111471",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2137-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.929092,VS0,VE1",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

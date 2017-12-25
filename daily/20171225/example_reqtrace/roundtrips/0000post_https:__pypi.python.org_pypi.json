@@ -1,0 +1,39 @@
+{
+  "request": {
+    "body": "<?xml version='1.0'?>\n<methodCall>\n<methodName>search</methodName>\n<params>\n<param>\n<value><struct>\n<member>\n<name>name</name>\n<value><array><data>\n<value><string>pipenv</string></value>\n</data></array></value>\n</member>\n<member>\n<name>summary</name>\n<value><array><data>\n<value><string>pipenv</string></value>\n</data></array></value>\n</member>\n</struct></value>\n</param>\n<param>\n<value><string>or</string></value>\n</param>\n</params>\n</methodCall>\n",
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate",
+      "Connection": "keep-alive",
+      "Content-Length": "448",
+      "Content-Type": "text/xml",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "POST",
+    "url": "https://pypi.python.org/pypi"
+  },
+  "response": {
+    "body": "<?xml version='1.0'?>\n<methodResponse>\n<params>\n<param>\n<value><array><data>\n<value><struct>\n<member>\n<name>_pypi_ordering</name>\n<value><boolean>0</boolean></value>\n</member>\n<member>\n<name>version</name>\n<value><string>0.2</string></value>\n</member>\n<member>\n<name>name</name>\n<value><string>pipenv-package-requirements</string></value>\n</member>\n<member>\n<name>summary</name>\n<value><string>Pipenv tools for requirements.txt</string></value>\n</member>\n</struct></value>\n<value><struct>\n<member>\n<name>_pypi_ordering</name>\n<value><boolean>0</boolean></value>\n</member>\n<member>\n<name>version</name>\n<value><string>1.0.0</string></value>\n</member>\n<member>\n<name>name</name>\n<value><string>tox-pipenv</string></value>\n</member>\n<member>\n<name>summary</name>\n<value><string>A pipenv plugin for tox</string></value>\n</member>\n</struct></value>\n<value><struct>\n<member>\n<name>_pypi_ordering</name>\n<value><boolean>0</boolean></value>\n</member>\n<member>\n<name>version</name>\n<value><string>0.0.1</string></value>\n</member>\n<member>\n<name>name</name>\n<value><string>pipenv-tools</string></value>\n</member>\n<member>\n<name>summary</name>\n<value><string>The missing tools for pipenv.</string></value>\n</member>\n</struct></value>\n<value><struct>\n<member>\n<name>_pypi_ordering</name>\n<value><boolean>0</boolean></value>\n</member>\n<member>\n<name>version</name>\n<value><string>0.1.9</string></value>\n</member>\n<member>\n<name>name</name>\n<value><string>pipenv-to-requirements</string></value>\n</member>\n<member>\n<name>summary</name>\n<value><string>Generate requirements[-dev].txt from Pipfile using pipenv</string></value>\n</member>\n</struct></value>\n<value><struct>\n<member>\n<name>_pypi_ordering</name>\n<value><boolean>0</boolean></value>\n</member>\n<member>\n<name>version</name>\n<value><string>9.0.1</string></value>\n</member>\n<member>\n<name>name</name>\n<value><string>pipenv</string></value>\n</member>\n<member>\n<name>summary</name>\n<value><string>Python Development Workflow for Humans.</string></value>\n</member>\n</struct></value>\n</data></array></value>\n</param>\n</params>\n</methodResponse>\n",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Connection": "keep-alive",
+      "Content-Type": "text/xml",
+      "Date": "Mon, 25 Dec 2017 12:40:01 GMT",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Transfer-Encoding": "chunked",
+      "Via": "1.1 varnish",
+      "X-Cache": "MISS",
+      "X-Cache-Hits": "0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-nrt6122-NRT",
+      "X-Timer": "S1514205601.560476,VS0,VE782",
+      "X-XSS-Protection": "1; mode=block",
+      "charset": "UTF-8"
+    },
+    "status_code": 200
+  }
+}

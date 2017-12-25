@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/webencodings/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for webencodings</title></head><body><h1>Links for webencodings</h1><a href=\"../../packages/09/7e/3bc753d7e12e770201021bde5f62d515a4e9eb6adcadcbb7e548c9d33040/webencodings-0.1.tar.gz#md5=e04f6601f31073e24a9811d7c5975b22\" rel=\"internal\">webencodings-0.1.tar.gz</a><br/>\n<a href=\"../../packages/0b/02/ae6ceac1baeda530866a85075641cec12989bd8d31af6d5ab4a3e8c92f47/webencodings-0.5.1.tar.gz#md5=32f6e261d52e57bf7e1c4d41546d15b8\" rel=\"internal\">webencodings-0.5.1.tar.gz</a><br/>\n<a href=\"../../packages/0d/cd/e7724622c49d8e392041b468a330ed2019953676507f28169299c1153a7e/webencodings-0.3.tar.gz#md5=b291c9bb99144947c162ec770259248f\" rel=\"internal\">webencodings-0.3.tar.gz</a><br/>\n<a href=\"../../packages/89/be/b9b6338b1eb548401f8b4b08b30b654b39fbfeb826a83cc374ac252398dd/webencodings-0.2.tar.gz#md5=f589ae91d484e01683856555fd13991c\" rel=\"internal\">webencodings-0.2.tar.gz</a><br/>\n<a href=\"../../packages/a4/1b/5add42eff950cf85ecdd3244fc7e7eef8ebb81131289ad69b8b0089f86ab/webencodings-0.4.tar.gz#md5=67812574c852836036e6cdc8a951e28f\" rel=\"internal\">webencodings-0.4.tar.gz</a><br/>\n<a href=\"../../packages/c3/e5/74d05eed73b09752ac3dc4a8a69ae92ffa1ce92fcb03eaa624d1fcd17e33/webencodings-0.5.tar.gz#md5=878714d45241f7970dffd8991d61fff9\" rel=\"internal\">webencodings-0.5.tar.gz</a><br/>\n<a href=\"../../packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl#md5=36654e7c7b772611b536014fa9e6e918\" rel=\"internal\">webencodings-0.5.1-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "6498",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "672",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:16 GMT",
+      "Fastly-Debug-Digest": "2c759fb3d7f5aed807af7071ba03b2551f3f38d69fa770367a4c5506f0e21a04",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2756013",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2140-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205976.418677,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

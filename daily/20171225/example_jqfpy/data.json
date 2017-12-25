@@ -1,0 +1,27 @@
+[
+  {
+    "name": "foo",
+    "skills": [
+      {
+        "name": "x"
+      },
+      {
+        "name": "y"
+      },
+      {
+        "name": "z"
+      }
+    ]
+  },
+  {
+    "name": "bar",
+    "skills": [
+      {
+        "name": "x"
+      },
+      {
+        "name": "y"
+      }
+    ]
+  }
+]

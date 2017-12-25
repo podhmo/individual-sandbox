@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/idna/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for idna</title></head><body><h1>Links for idna</h1><a href=\"../../packages/08/c6/71319d9ac2055156562992b16cb01dbee74f431c0372d580a8fef6ca0e4c/idna-2.4-py2.py3-none-any.whl#md5=952d5c1df7fca0ca4b1a050e77781bea\" rel=\"internal\">idna-2.4-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/0d/3b/ebe79efc3c00fc8dfd391938c6594c73539aeb55d5a38ebb901bae95c770/idna-1.1.tar.gz#md5=9f5bfff6b317763c5a6f674707744dbe\" rel=\"internal\">idna-1.1.tar.gz</a><br/>\n<a href=\"../../packages/11/7d/9bbbd7bb35f34b0169542487d2a8859e44306bb2e6a4455d491800a5621f/idna-2.5-py2.py3-none-any.whl#md5=a7e9abecc669f5bd2ddb53b453008d32\" rel=\"internal\">idna-2.5-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/22/35/04dedec60e9366ba19ac7c147cd715c88a7e87d43cda47a75802190c0950/idna-0.2.tar.gz#md5=36d5a8db3d6d46cb5d401d0ead4acde6\" rel=\"internal\">idna-0.2.tar.gz</a><br/>\n<a href=\"../../packages/27/cc/6dd9a3869f15c2edfab863b992838277279ce92663d334df9ecf5106f5c6/idna-2.6-py2.py3-none-any.whl#md5=875c4a7b32b4897537d5ea9247b5c79e\" rel=\"internal\">idna-2.6-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/65/4a/a571c5d86b11d98244fc822bf75322d2f5663372b8a80d2348d8a55c4332/idna-0.8.tar.gz#md5=2bf526060960309de59d5dbbf7789a26\" rel=\"internal\">idna-0.8.tar.gz</a><br/>\n<a href=\"../../packages/69/27/5f76009f13c6dda4ed5016cbfebf68773f21374f9792db02821c05326a75/idna-2.0.tar.gz#md5=bd17a9d15e755375f48a62c13b25b801\" rel=\"internal\">idna-2.0.tar.gz</a><br/>\n<a href=\"../../packages/6b/f4/bb42887fb16eb5f5957897fec9e16d18c56dd8cdd2a729c13947ed786b92/idna-2.2-py2.py3-none-any.whl#md5=fbda7cc9f538bc08e4b23745eba6abac\" rel=\"internal\">idna-2.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/71/02/dee75fc3e6f7455bf69221164f94586ee13552c5f33c8002335667a3d122/idna-2.1-py2.py3-none-any.whl#md5=3504ea3c28f95c5ce00fa02c07e1dba6\" rel=\"internal\">idna-2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/7c/75/b566d769455929ee6ab308d8a1c6c5aecc4928e72b25d42dd019c99f7015/idna-2.0-py2.py3-none-any.whl#md5=40fa688bb01833b2a807fcc40ddaa8c0\" rel=\"internal\">idna-2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/81/62/c32d933d487d9756f55782de85a70b90cd6827a59a3e330f6adada408241/idna-2.3.tar.gz#md5=b2e3cb6afde43ebd521c3b7484d22235\" rel=\"internal\">idna-2.3.tar.gz</a><br/>\n<a href=\"../../packages/8e/52/8146be5f86bf668895e68e85d564572addae141a12a0344347c921002246/idna-0.3.tar.gz#md5=b5e01837926a3d293cd8e6e27c4244ea\" rel=\"internal\">idna-0.3.tar.gz</a><br/>\n<a href=\"../../packages/94/fe/efb1cb6f505e1a560b3d080ae6b9fddc11e7c542d694ce4635c49b1ccdcb/idna-2.2.tar.gz#md5=e2d3f8a45d3d048a653eb186896e9e3e\" rel=\"internal\">idna-2.2.tar.gz</a><br/>\n<a href=\"../../packages/a3/06/40cb383eaea6e97047666db51abc2f2b32046f3e2a6e5ab2b946630f6062/idna-2.4.tar.gz#md5=b27328914784bf3e4f6fae16f4b75ba9\" rel=\"internal\">idna-2.4.tar.gz</a><br/>\n<a href=\"../../packages/be/06/2c523c1aa1d85aafb21e95e6e207de373e5fad4f2062242ca3b69c69758d/idna-0.6.tar.gz#md5=3bedb7eb5a386b0bd8b5549c8e36378a\" rel=\"internal\">idna-0.6.tar.gz</a><br/>\n<a href=\"../../packages/c4/93/a80bccdee90d97b113b76e2f0ba8e3260034bd0e55cea3ccb66098e710d8/idna-1.0.tar.gz#md5=01abd8bd98f119e02aad6e686ff6181b\" rel=\"internal\">idna-1.0.tar.gz</a><br/>\n<a href=\"../../packages/c8/6b/d109774559ad508c094c6e7d9b7f97722e61a964976c24ca3a4fa0a0b870/idna-0.9.tar.gz#md5=adeaa25679040dc6f8098a2e2ab6c42d\" rel=\"internal\">idna-0.9.tar.gz</a><br/>\n<a href=\"../../packages/c9/8a/14a079eeb7e89449dd8af6037e57ff53722be0d927a11bd21490a5d0a7b0/idna-0.5.tar.gz#md5=590a2dc0fb09b5647d6a86d1585dfc1a\" rel=\"internal\">idna-0.5.tar.gz</a><br/>\n<a href=\"../../packages/cf/57/53ac056e1a9d028dfce896929d0fc769e53a1e4d0917c2ec163acae4528f/idna-0.7.tar.gz#md5=235729aa2bf99e1b940eba53fcbfb37c\" rel=\"internal\">idna-0.7.tar.gz</a><br/>\n<a href=\"../../packages/d5/af/5d5ed7f2a78182724234c025e5ab5f2166a5212b0c6bf9a9fa891f139c5d/idna-0.4.tar.gz#md5=3d9ad8650e630ffe7d47cd9756bcc126\" rel=\"internal\">idna-0.4.tar.gz</a><br/>\n<a href=\"../../packages/d8/82/28a51052215014efc07feac7330ed758702fc0581347098a81699b5281cb/idna-2.5.tar.gz#md5=fc1d992bef73e8824db411bb5d21f012\" rel=\"internal\">idna-2.5.tar.gz</a><br/>\n<a href=\"../../packages/e6/d7/930b670f75990f8fa5b2ad598b997d66afbf24b672ce504df224e6a4d760/idna-2.3-py2.py3-none-any.whl#md5=9a91c6e3a19352cc06f493e768a926d5\" rel=\"internal\">idna-2.3-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f4/bd/0467d62790828c23c47fc1dfa1b1f052b24efdf5290f071c7a91d0d82fd3/idna-2.6.tar.gz#md5=c706e2790b016bd0ed4edd2d4ba4d147\" rel=\"internal\">idna-2.6.tar.gz</a><br/>\n<a href=\"../../packages/fb/84/8c27516fbaa8147acd2e431086b473c453c428e24e8fb99a1d89ce381851/idna-2.1.tar.gz#md5=f6473caa9c5e0cc1ad3fd5d04c3c114b\" rel=\"internal\">idna-2.1.tar.gz</a><br/>\n<a href=\"../../packages/ff/ee/57ca2b52dea2df65a15d4ab2669c89ff29fa227668917cebc43e689360be/idna-2.1-py2-none-any.whl#md5=d87a2689779f273f3a67c97cdda2352d\" rel=\"internal\">idna-2.1-py2-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8987",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1924",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "d8bb016d5b08ae79926522ff414a3555d8131e8b5d2daac1873c9e143088b26b",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "2, 23",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3080111",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2135-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.180418,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

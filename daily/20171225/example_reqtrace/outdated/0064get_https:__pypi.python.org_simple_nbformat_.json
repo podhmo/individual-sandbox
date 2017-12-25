@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/nbformat/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for nbformat</title></head><body><h1>Links for nbformat</h1><a href=\"../../packages/03/ac/befb692b03d880f9d66b9f09bf3277634480d7acad743511e83b88649085/nbformat-4.0.0-py2.py3-none-any.whl#md5=f40344bd46bda2cc0415a9cfefe77aa0\" rel=\"internal\">nbformat-4.0.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/0a/38/5c2b242f2d7b047261c795d960be804abb91866b4e4eee71ba105241eecb/nbformat-4.0.0.zip#md5=d3396bcec6cf626562a91a66595ac7bc\" rel=\"internal\">nbformat-4.0.0.zip</a><br/>\n<a href=\"../../packages/11/2d/83180bdaa7c8aa1ff2308b928607d66ae907fb7061cbe59dc1e6243b69db/nbformat-4.0.1-py2.py3-none-any.whl#md5=7d85500f000f30476160b69bb2fe9503\" rel=\"internal\">nbformat-4.0.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/34/f7/9ab0eb5eea044223c4b05c66ad885b07fb2149e35731d305666ae3254a97/nbformat-4.0.1.tar.gz#md5=684c4dc3c6fd8036fd1ae1c908003e23\" rel=\"internal\">nbformat-4.0.1.tar.gz</a><br/>\n<a href=\"../../packages/6e/0e/160754f7ae3e984863f585a3743b0ed1702043a81245907c8fae2d537155/nbformat-4.4.0.tar.gz#md5=2d5f873138d9fbc2a3f9eaaebca3b8a1\" rel=\"internal\">nbformat-4.4.0.tar.gz</a><br/>\n<a href=\"../../packages/81/63/5cb425bfa9cff370a740c8d6fd26f17c7db152c1877aca3e7671ecfa8ce3/nbformat-4.2.0.tar.gz#md5=f90f24d317b651226a6b547fa69d8da4\" rel=\"internal\">nbformat-4.2.0.tar.gz</a><br/>\n<a href=\"../../packages/c1/3a/34e514c8687daa4c6502ddc0c7a8fdd57a885d59572e74bff584be177cba/nbformat-4.0.0.tar.gz#md5=ce31bb7f34c6a3554dc4a7625fc3033f\" rel=\"internal\">nbformat-4.0.0.tar.gz</a><br/>\n<a href=\"../../packages/c5/9d/7cc4a5e291ac24cfa5f02612f43c056f62575357fcf381ec70adcc7ebd02/nbformat-4.0.1.zip#md5=3faf3101a28d53933fbdb294c579b17c\" rel=\"internal\">nbformat-4.0.1.zip</a><br/>\n<a href=\"../../packages/c5/b5/f38ceeeac63e9b4d7d630151be8875beb3d4a86eba5b5ad9d3dbefadadea/nbformat-4.1.0.tar.gz#md5=9d71dd1aa7ce3cc04b191cce151d6645\" rel=\"internal\">nbformat-4.1.0.tar.gz</a><br/>\n<a href=\"../../packages/d6/4c/8058f1170dbdbe5a66e9431489f85d2d3e5a8e6314dd7ed1f7b10d864a70/nbformat-4.1.0-py2.py3-none-any.whl#md5=cb50ca80cd6a5862cf7cf013c9f505b1\" rel=\"internal\">nbformat-4.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/da/27/9a654d2b6cc1eaa517d1c5a4405166c7f6d72f04f6e7eea41855fe808a46/nbformat-4.4.0-py2.py3-none-any.whl#md5=e80d1b25cae72287e3e700f30d6f68cb\" rel=\"internal\">nbformat-4.4.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/e5/cc/e41bb9357165a2428431873469232d70b161ccc0e0c0e407acc069123f0d/nbformat-4.3.0-py2.py3-none-any.whl#md5=606b74ffcf104089c14482861de138d1\" rel=\"internal\">nbformat-4.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f2/fd/f3d5316d3d3c295993cf7d08d0105f2454acef9db363b33b72e3aed0808e/nbformat-4.2.0-py2.py3-none-any.whl#md5=319090fe260774341dc3a3b388fb4263\" rel=\"internal\">nbformat-4.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f9/c5/89df4abf906f766727f976e170caa85b4f1c1d1feb1f45d716016e68e19f/nbformat-4.3.0.tar.gz#md5=9a00d20425914cd5ba5f97769d9963ca\" rel=\"internal\">nbformat-4.3.0.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "50436",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1160",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:19 GMT",
+      "Fastly-Debug-Digest": "fc9d1902b31eae41c5615a5698eee1b0b816de97f3b473bf3e32dfe520037b6f",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "10, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3267209",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2147-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205980.799682,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

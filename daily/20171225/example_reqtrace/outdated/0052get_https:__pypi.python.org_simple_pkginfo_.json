@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/pkginfo/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for pkginfo</title></head><body><h1>Links for pkginfo</h1><a href=\"../../packages/0a/1d/559044ae0662fcc0e85c3ca2e29d08218a3075250b08fd1bc7234c1077e1/pkginfo-0.2.tar.gz#md5=2b6d1f4b5444f4dbc2bc6c7d19698a25\" rel=\"internal\">pkginfo-0.2.tar.gz</a><br/>\n<a href=\"../../packages/0e/52/0606dfd96a9f01d7259c47a8fdf6ad57132995a90cfd51c81ffa1f942203/pkginfo-1.3.1.tar.gz#md5=281c6425bbbbb1d17685f578b804901e\" rel=\"internal\">pkginfo-1.3.1.tar.gz</a><br/>\n<a href=\"../../packages/12/02/99750ba24433005b1e69992100b82098d23fb3e6b6a7789f6bc12632ada4/pkginfo-0.9.1.tar.gz#md5=3ed83e121795512b4e224ff9cba9b154\" rel=\"internal\">pkginfo-0.9.1.tar.gz</a><br/>\n<a href=\"../../packages/15/92/6a46d8fe596a2a94b1bcf20f1c9ee8e83e85f673e4c0c2bd27c616405b21/pkginfo-0.9.tar.gz#md5=3ff277ab8e7fcda270331f4a54fe7d2a\" rel=\"internal\">pkginfo-0.9.tar.gz</a><br/>\n<a href=\"../../packages/1a/19/cb286392e2a1c1069116d740ec66085cb046a62afc86f2b0effeb23be245/pkginfo-0.1.1.tar.gz#md5=edda5d10d202afd0df6ec9172bf1d1b6\" rel=\"internal\">pkginfo-0.1.1.tar.gz</a><br/>\n<a href=\"../../packages/1c/66/24327ca312d238f97f4900ae26a59542161b5d8aa9859ed6aa0e4a648969/pkginfo-1.0b2.tar.gz#md5=a128968e2cef65536938d164ae3398db\" rel=\"internal\">pkginfo-1.0b2.tar.gz</a><br/>\n<a href=\"../../packages/1e/50/7f0403893522d8d2d9620ff6453afa2f20371ab08007ca97c5241cc7b7f6/pkginfo-0.6.tar.gz#md5=d42dba760b08f1708f8012d52de23ce1\" rel=\"internal\">pkginfo-0.6.tar.gz</a><br/>\n<a href=\"../../packages/52/46/4f32a372e3949b2a48e6b59b7e9634e3857c0fe2e5291b8afe1e3a37787a/pkginfo-1.1b1.tar.gz#md5=68c486fd204a4ea683c8f429fa0d2617\" rel=\"internal\">pkginfo-1.1b1.tar.gz</a><br/>\n<a href=\"../../packages/58/54/57f7c5638fecdf232a5b6b767da467b0ff31467d7f86a7364c252acf2321/pkginfo-1.4.1.tar.gz#md5=3d093d5b51c7902e7dd1736100e0ce87\" rel=\"internal\">pkginfo-1.4.1.tar.gz</a><br/>\n<a href=\"../../packages/61/9f/a674e8ed0c1ddd5689be38025eb1bc2f8b1b060f356b15eb3a963fbf262e/pkginfo-1.0b1.tar.gz#md5=7d14b0206792bf2f1544871fd38aaccb\" rel=\"internal\">pkginfo-1.0b1.tar.gz</a><br/>\n<a href=\"../../packages/71/32/3783e3269344bf7e83ed6285e64956820a0632f04c019f8696a6c11e0489/pkginfo-1.3.0.tar.gz#md5=65878ac2a2c29b2c8a6d1009e81cfd8a\" rel=\"internal\">pkginfo-1.3.0.tar.gz</a><br/>\n<a href=\"../../packages/73/0b/8332625f8421c6f9778bf7b6d27667a34815a71349ae9e9fb65c34514d8d/pkginfo-0.4.tar.gz#md5=ead49ef74a9ec0a5da26a6ab419295c4\" rel=\"internal\">pkginfo-0.4.tar.gz</a><br/>\n<a href=\"../../packages/74/3e/133d5e6fc9febe8b186c0bc56f5662a9ad48637496f32788acaebb0c27f3/pkginfo-1.4.1-py2.py3-none-any.whl#md5=caba5b9c7da97744c2ced498cdc4a27f\" rel=\"internal\">pkginfo-1.4.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/75/e1/24bf46c9f5a827d54b1ab2f79718cfdf4e54ab637b52d6ea406ca2561819/pkginfo-0.8.tar.gz#md5=2a9179f46f63228a8a2c95ad810aa5e5\" rel=\"internal\">pkginfo-0.8.tar.gz</a><br/>\n<a href=\"../../packages/76/f6/c7cccd59dd5fa1c99638893064378ef97d7e2b109207f6c1ee9d129c6317/pkginfo-1.1.tar.gz#md5=bf13f02edff2d7999827e7cb7368d020\" rel=\"internal\">pkginfo-1.1.tar.gz</a><br/>\n<a href=\"../../packages/78/fd/036f26d159eb6b82c22b6518f030a541b7dffe8c933e98f5f3528b5cfe9f/pkginfo-0.1.tar.gz#md5=22bf0f846a9dad23092fb225b1fe06f6\" rel=\"internal\">pkginfo-0.1.tar.gz</a><br/>\n<a href=\"../../packages/7d/71/bf03e369199aec5d04fa923f0f145303fc7d5f75feb2a93d1e44db643926/pkginfo-1.0.tar.gz#md5=808b441a44680450974616bd543c6e0d\" rel=\"internal\">pkginfo-1.0.tar.gz</a><br/>\n<a href=\"../../packages/8a/b5/cc4f29bef2b4fc9379065c6ed5c9764f3c07061a6459519f6df3088b4f12/pkginfo-0.7.tar.gz#md5=00a2b07cd5213b8c5d42d2524515f0eb\" rel=\"internal\">pkginfo-0.7.tar.gz</a><br/>\n<a href=\"../../packages/90/03/627a447f458335ff8601ff9a4bcd278e239c2fc2280699bc1733b2d15f63/pkginfo-0.3.tar.gz#md5=aa51abb332fb12a5756ebd8811073345\" rel=\"internal\">pkginfo-0.3.tar.gz</a><br/>\n<a href=\"../../packages/97/18/dfb0d2aab2aca8433babaa37f47f364477c34a90686cb98dc0c5a7a16e16/pkginfo-0.4.1.tar.gz#md5=10017fe960246b4711fde4c3fc03f29c\" rel=\"internal\">pkginfo-0.4.1.tar.gz</a><br/>\n<a href=\"../../packages/a4/b9/3037c73402a857d2b5de763350598cc75dfb6d66f4075d06dfbcca3c65a9/pkginfo-0.5.tar.gz#md5=5b62180214d944c9e33a8f255b31197d\" rel=\"internal\">pkginfo-0.5.tar.gz</a><br/>\n<a href=\"../../packages/a9/52/f6f41c68625a79bc037d8d75b5a5aa5f525ce2831152be81b5fdb5150175/pkginfo-1.2.1.tar.gz#md5=4489be0244c003744ca18758fa12e468\" rel=\"internal\">pkginfo-1.2.1.tar.gz</a><br/>\n<a href=\"../../packages/bc/3e/046ec2439e233161f99d2f6cceb1ac49176612b6f6250cd6cb9919cda97a/pkginfo-1.3.2.tar.gz#md5=8db6cbdf1d810c7270c88992d196951f\" rel=\"internal\">pkginfo-1.3.2.tar.gz</a><br/>\n<a href=\"../../packages/d4/76/cf29c3b070bf95dfa8b59e23a0c19e42483a4d20987c74b30ed4df2ab911/pkginfo-1.4.0.tar.gz#md5=5c3711ac7d8b906ec1ea0e8a8f54ffc6\" rel=\"internal\">pkginfo-1.4.0.tar.gz</a><br/>\n<a href=\"../../packages/e0/72/7490f6e03a2d819c2afe49703584237e3fa3989548bdd71071df86b0e116/pkginfo-1.2b1.tar.gz#md5=54511cf8b03eb08220fa9ec9e53f5d31\" rel=\"internal\">pkginfo-1.2b1.tar.gz</a><br/>\n<a href=\"../../packages/e5/dc/1d523a4691e0073aee803d125bf449def4fae2d9309d5a1b5728703325af/pkginfo-1.2.tar.gz#md5=498531f6c5c2d4936f0c5ab1dce02e97\" rel=\"internal\">pkginfo-1.2.tar.gz</a><br/>\n<a href=\"../../packages/f4/2e/499044bcb3accc39b7971bd760f2b4d6b86a532ff8e673ebbabda3be965d/pkginfo-1.3.2-py2.py3-none-any.whl#md5=c205ea4d34c83b0091d50c476046cb26\" rel=\"internal\">pkginfo-1.3.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f8/f5/3b14689fb9a5b2bdbdda673b804a90934bfcc527f9fb2173e7f6081595e8/pkginfo-1.4.0-py2.py3-none-any.whl#md5=58b657dc5c451519273035061f362269\" rel=\"internal\">pkginfo-1.4.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/fb/ab/b250e3a9b8fb62270e503a60eeb48d15effc076d81211eb6fc926071f681/pkginfo-1.3.1-py2.py3-none-any.whl#md5=c66b3dd4695c46fa9bf757fc387455cc\" rel=\"internal\">pkginfo-1.3.1-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "8567",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2214",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:18 GMT",
+      "Fastly-Debug-Digest": "dfab64c0328ba78637396928e4d4bb511a76e7ed97108bdf2cc634560fdd5798",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2447089",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2120-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205979.842245,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

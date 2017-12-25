@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/pickuppath/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for pickuppath</title></head><body><h1>Links for pickuppath</h1><a href=\"../../packages/37/92/0fb1fae5b2fa473e861d84c9d83be9af948faa29f377cd3651facbde8361/pickuppath-0.1.0-py2.py3-none-any.whl#md5=cdd62b62739c7e47b6b700f946b817f6\" rel=\"internal\">pickuppath-0.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/80/4a/dbb59793f1ae645c9a8af5727e4c85b1bb19b905c08c8e18f79fa9325290/pickuppath-0.1.1-py2.py3-none-any.whl#md5=ffb76f9dfa3da6e47eab43fc1b38d52f\" rel=\"internal\">pickuppath-0.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/93/4c/0537afc0e5a9e555410cccb29673a5878766e604cdcbe5b7ec982514f60f/pickuppath-0.1.1.tar.gz#md5=e6af4435dd157c60f1edba29f56aecc1\" rel=\"internal\">pickuppath-0.1.1.tar.gz</a><br/>\n<a href=\"../../packages/ca/43/648d32fe01382c36705524a6f619fe1e62b6b27b8daadc80903ea7bca3d5/pickuppath-0.1.0.tar.gz#md5=0c3b573e46eadf745a01835cc92a7dbe\" rel=\"internal\">pickuppath-0.1.0.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "37283",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "468",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:19 GMT",
+      "Fastly-Debug-Digest": "1d821937b9481803032ce93c5de5c6bb96f82324bb467e72279b1f73474c2df7",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3067028",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2128-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205979.896298,VS0,VE170",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

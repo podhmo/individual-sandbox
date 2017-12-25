@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/testpath/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for testpath</title></head><body><h1>Links for testpath</h1><a href=\"../../packages/15/19/d7bc380c479a184e4a5a9ce516e4e2a773165f89b445f7cdced83d94de25/testpath-0.3.1-py2.py3-none-any.whl#md5=12728181294cf6f815421081d620c494\" rel=\"internal\">testpath-0.3.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/a9/a1/3ea2f6838ad99d7825852c155055f457b9b8748372317bff18d81ed9e696/testpath-0.2-py2.py3-none-any.whl#md5=b6293c37d70fcaed3fa19f357765b0d9\" rel=\"internal\">testpath-0.2-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/f4/8b/b71e9ee10e5f751e9d959bc750ab122ba04187f5aa52aabdc4e63b0e31a7/testpath-0.3.1.tar.gz#md5=2cd5ed5522fda781bb497c9d80ae2fc9\" rel=\"internal\">testpath-0.3.1.tar.gz</a><br/>\n<a href=\"../../packages/f9/c4/c0b22f35138bc26a6058c39cb61db1e8977e5e9550b12cd2cb02ef56fc51/testpath-0.1.tar.gz#md5=401918bcd0b0e5b71a9b909835117bc6\" rel=\"internal\">testpath-0.1.tar.gz</a><br/>\n<a href=\"../../packages/fe/53/301852a341e1f5cc82f9987d28595fb04ef2d9869a4efa2d379d207b2b77/testpath-0.3-py2.py3-none-any.whl#md5=8d73a01748dca501886c65ff442a61da\" rel=\"internal\">testpath-0.3-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "10496",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "532",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:17 GMT",
+      "Fastly-Debug-Digest": "09d9bfd0c315c4bd617bfae52bc0f68bee3b53f9b2890dbdf5a1ee9edbdd9724",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "4, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "2895844",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2127-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.050060,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

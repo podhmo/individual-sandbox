@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/kamidana/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for kamidana</title></head><body><h1>Links for kamidana</h1><a href=\"../../packages/00/e3/6719de7f3b9a6cc723bd3c93ed7376496e70c479f2baa05f2b2afe1c09f1/kamidana-0.4.1-py2.py3-none-any.whl#md5=a6bd8f42b0e2a057b634a1688d31fb67\" rel=\"internal\">kamidana-0.4.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/01/06/4acdece01519d9b1850e76309bc715c31fcd9cfa28c65f434e462d80f839/kamidana-0.1.0.tar.gz#md5=100e64147b143ee658e80fe417365e9c\" rel=\"internal\">kamidana-0.1.0.tar.gz</a><br/>\n<a href=\"../../packages/06/35/68af7be834e8c9be01f93d016380c88c350d3e65dcb5244f8d5e31194a53/kamidana-0.4.1.tar.gz#md5=55185942b8aebe1f42a08e9a6bd78ed2\" rel=\"internal\">kamidana-0.4.1.tar.gz</a><br/>\n<a href=\"../../packages/0f/41/6eeee6514012518d6485c98f57d078f1eb25961bbe9af4ff8e07ca362164/kamidana-0.5.1-py2.py3-none-any.whl#md5=5c590742c268d862283f429270e30b27\" rel=\"internal\">kamidana-0.5.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/35/12/0bd2ab9c4c7db047bb8f47305822f9299626907d163d30719495fb6066fa/kamidana-0.3.0-py2.py3-none-any.whl#md5=9a7d175b38cb8287f8fd2eb7e164f3bf\" rel=\"internal\">kamidana-0.3.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/39/b6/dd49445e1d409f8ffb74b7706e948f7231b679c3e7e124ecf9f87bf0e640/kamidana-0.4.0.tar.gz#md5=cf70d4cdbe319ece7e82538ecdfa5f82\" rel=\"internal\">kamidana-0.4.0.tar.gz</a><br/>\n<a href=\"../../packages/48/9e/732b48ebcd2b6e97ae437245b85ce662ca797ad75589794233ea61e54e71/kamidana-0.1.1-py2.py3-none-any.whl#md5=cf08fa9decbe3aabfaff5d3b451a74c8\" rel=\"internal\">kamidana-0.1.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/58/9f/670cde1f03d7bc336a7e9627091dc713538c1dcdac314a2dc4b9cbfd501d/kamidana-0.2.0.tar.gz#md5=d0d5717bc9a03885c8788c6ba5c8d519\" rel=\"internal\">kamidana-0.2.0.tar.gz</a><br/>\n<a href=\"../../packages/65/95/3fa3ed1a329c6fc3a12830bcaeb37b528c6c4f4014f1224f2d39004b15d1/kamidana-0.3.0.tar.gz#md5=3e383564425c31e667a388c99f421e2d\" rel=\"internal\">kamidana-0.3.0.tar.gz</a><br/>\n<a href=\"../../packages/7a/02/753602de1999d2285d5ee09e996ea5d95a5a590ddb28c128116ab9482ef2/kamidana-0.1.0-py2.py3-none-any.whl#md5=5236149b369df3d735616f5100d52b90\" rel=\"internal\">kamidana-0.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/8b/75/db081f523a13fddd939114813d04e28a60ffc470c8a376bf712aa259e95b/kamidana-0.2.0-py2.py3-none-any.whl#md5=15f9777a2d799555415ee87ae060ab65\" rel=\"internal\">kamidana-0.2.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/8e/be/1e6fe518ecea651202c209ef1adfe596f60d1d53fe6ff1b4db1c5dc1f1c7/kamidana-0.2.1-py2.py3-none-any.whl#md5=6ea8f34eabeb2d2bfffd3a55fba4616a\" rel=\"internal\">kamidana-0.2.1-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/9c/40/3d31b80e9784782333765dfff282434e61b9a19dce06e222aa92a92a620d/kamidana-0.2.1.tar.gz#md5=4a4d0f7e7516f758fda35f74f0d452d8\" rel=\"internal\">kamidana-0.2.1.tar.gz</a><br/>\n<a href=\"../../packages/a0/1a/fbbb11333ef3cf682bf2ab3a04acc4f54ea4cc8459b6ba3f2cce250a9fbc/kamidana-0.5.1.tar.gz#md5=792bb14ce194b7ca31d38dc2f18b7796\" rel=\"internal\">kamidana-0.5.1.tar.gz</a><br/>\n<a href=\"../../packages/b6/4b/53b14f550ac4853b3f22c553f4d143e427d063ab2bde89e7405e03398c60/kamidana-0.1.1.tar.gz#md5=aecc77f5fdb728113af2a0414fb146c9\" rel=\"internal\">kamidana-0.1.1.tar.gz</a><br/>\n<a href=\"../../packages/e1/cc/ccbd72af008b9a100dc1dad6ac712d93d34a2a3094f621f6a03f18f97a95/kamidana-0.5.0.tar.gz#md5=fd4f4a775266ed51ecfd343c2c489c26\" rel=\"internal\">kamidana-0.5.0.tar.gz</a><br/>\n<a href=\"../../packages/fa/37/084798e27d239751762d48373bff5493394c76494b53bc161706ca38908b/kamidana-0.5.0-py2.py3-none-any.whl#md5=10141dcd38ac24463dec884655b47d33\" rel=\"internal\">kamidana-0.5.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/fb/30/4e3f1428f78b9591a103f0d6d3458ee6443dad416f010f7ac38ef7439414/kamidana-0.4.0-py2.py3-none-any.whl#md5=711864e309def5ef97dacb962f7aa9f2\" rel=\"internal\">kamidana-0.4.0-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "64711",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1440",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:24 GMT",
+      "Fastly-Debug-Digest": "d246f011e0a1d6acc6ec5e4b8406b0f946393b108d900183549d686d9c410558",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3232097",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2134-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205984.481299,VS0,VE166",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

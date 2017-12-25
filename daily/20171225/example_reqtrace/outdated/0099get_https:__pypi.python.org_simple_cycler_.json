@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/cycler/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for cycler</title></head><body><h1>Links for cycler</h1><a href=\"../../packages/3a/94/c67a0ca1c56aa26fdc957f17f9c119f85b5f3739d63f3bae8baf05603281/cycler-0.9.0.tar.gz#md5=0b418dbaded3aba6021af03246e2f7d0\" rel=\"internal\">cycler-0.9.0.tar.gz</a><br/>\n<a href=\"../../packages/9e/c6/0b8a8f2fd07b1bfd1c407c5b56d8f5cf18874fee9705dce46771405411c3/cycler-0.9.0-py2.py3-none-any.whl#md5=f9f9ecf41a4abd230947d75298fc5aa0\" rel=\"internal\">cycler-0.9.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/c2/4b/137dea450d6e1e3d474e1d873cd1d4f7d3beed7e0dc973b06e8e10d32488/cycler-0.10.0.tar.gz#md5=4cb42917ac5007d1cdff6cccfe2d016b\" rel=\"internal\">cycler-0.10.0.tar.gz</a><br/>\n<a href=\"../../packages/f7/d2/e07d3ebb2bd7af696440ce7e754c59dd546ffe1bbe732c8ab68b9c834e61/cycler-0.10.0-py2.py3-none-any.whl#md5=2820ec00c7dd68487bde1a7cdb165904\" rel=\"internal\">cycler-0.10.0-py2.py3-none-any.whl</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "58292",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "461",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:21 GMT",
+      "Fastly-Debug-Digest": "66664ded0ce8f79db173fd3e7b0beedb390e6102b7282cdf7d749120abbc736e",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 98",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "1958601",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2125-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.401843,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/nbreversible/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for nbreversible</title></head><body><h1>Links for nbreversible</h1><a href=\"../../packages/19/bc/2a6019b8d2de8cef032c08c48532bc1db1d2db1bad1d28cd153215c56235/nbreversible-0.0.0-py3-none-any.whl#md5=ef18a40f8ff757f49f9bbe65ddd5770a\" rel=\"internal\">nbreversible-0.0.0-py3-none-any.whl</a><br/>\n<a href=\"../../packages/d4/4f/15adb987934e8582613830768287d491602c1dc0e7e753978e51d2fa5e0a/nbreversible-0.0.0.tar.gz#md5=fcbaaf3e4fdf4d76b6e2da9e03ca6d47\" rel=\"internal\">nbreversible-0.0.0.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "47773",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "324",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:23 GMT",
+      "Fastly-Debug-Digest": "8a8183c30f5745645ae48653e73ed84736841288070c351359bfc3b0012ec4b7",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, MISS",
+      "X-Cache-Hits": "1, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3354953",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2147-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205983.221868,VS0,VE181",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

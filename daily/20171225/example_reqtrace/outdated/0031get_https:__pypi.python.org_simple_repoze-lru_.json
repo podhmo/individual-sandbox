@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/repoze-lru/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for repoze-lru</title></head><body><h1>Links for repoze-lru</h1><a href=\"../../packages/0f/e1/9d22823297ef45f7fb9ae7cf04ed9470d65112035a8fbee3d00fd01dd63b/repoze.lru-0.2.tar.gz#md5=4377823ff45160e88bdc1922c3a67864\" rel=\"internal\">repoze.lru-0.2.tar.gz</a><br/>\n<a href=\"../../packages/12/bc/595a77c4b5e204847fdf19268314ef59c85193a9dc9f83630fc459c0fee5/repoze.lru-0.7.tar.gz#md5=c08cc030387e0b1fc53c5c7d964b35e2\" rel=\"internal\">repoze.lru-0.7.tar.gz</a><br/>\n<a href=\"../../packages/19/a0/c916f7bba26725b8f99011aee2c51bae10e3366528ab2715cb72992a3d38/repoze.lru-0.5.tar.gz#md5=dc83073c54ae20d1aa4bbd5a57e5cb9c\" rel=\"internal\">repoze.lru-0.5.tar.gz</a><br/>\n<a href=\"../../packages/6e/1e/aa15cc90217e086dc8769872c8778b409812ff036bf021b15795638939e4/repoze.lru-0.6.tar.gz#md5=2c3b64b17a8e18b405f55d46173e14dd\" rel=\"internal\">repoze.lru-0.6.tar.gz</a><br/>\n<a href=\"../../packages/9e/74/fc1d06dc1c0f96da0297372c6f6902f03393d744380aa4f847a572522c6f/repoze.lru-0.4.tar.gz#md5=9f6ab7a4ff871ba795cadf56c20fb0f0\" rel=\"internal\">repoze.lru-0.4.tar.gz</a><br/>\n<a href=\"../../packages/b0/30/6cc0c95f0b59ad4b3b9163bff7cdcf793cc96fac64cf398ff26271f5cf5e/repoze.lru-0.7-py3-none-any.whl#md5=78343875530963db838d7eab596ef443\" rel=\"internal\">repoze.lru-0.7-py3-none-any.whl</a><br/>\n<a href=\"../../packages/b7/5c/805639666b59a7f2ef576e0c595efccbdae1df3a7b48669e681f78138b97/repoze.lru-0.3.tar.gz#md5=da478fab8acaf77c8a963c163d976aa5\" rel=\"internal\">repoze.lru-0.3.tar.gz</a><br/>\n<a href=\"../../packages/d6/b2/2dcad0412dd79e8f2d856570624a78540f0988bd3675315e0ee51b760460/repoze.lru-0.1.tar.gz#md5=fbbf75032b655a1e520ff0d492d183e5\" rel=\"internal\">repoze.lru-0.1.tar.gz</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "63244",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "737",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:17 GMT",
+      "Fastly-Debug-Digest": "1b7fff490c94b827c60fca91de5af4fcac10bd50c1ad2eaae0af3acbd83f4c76",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "1, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3155378",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2121-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205977.483947,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

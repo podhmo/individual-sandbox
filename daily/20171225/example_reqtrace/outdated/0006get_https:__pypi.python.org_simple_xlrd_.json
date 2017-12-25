@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/xlrd/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for xlrd</title></head><body><h1>Links for xlrd</h1><a href=\"../../packages/00/af/ba252ebbb5838bace050d429e373a5773d1125734fc36128bfde63accc4d/xlrd-0.7.1.zip#md5=851bd20873224d97cfb5ccca2d22b81c\" rel=\"internal\">xlrd-0.7.1.zip</a><br/>\n<a href=\"../../packages/07/e6/e95c4eec6221bfd8528bcc4ea252a850bffcc4be88ebc367e23a1a84b0bb/xlrd-1.1.0-py2.py3-none-any.whl#md5=baef6cc82027269dbc9e1479d1dc942f\" rel=\"internal\">xlrd-1.1.0-py2.py3-none-any.whl</a><br/>\n<a href=\"../../packages/0c/b0/8946fe3f9c2690c164aaa88dfd43b56347d3cdeac34124b988acd1aaa151/xlrd-1.0.0-py3-none-any.whl#md5=e0f34565ac1ca7677f49280bb99e929b\" rel=\"internal\">xlrd-1.0.0-py3-none-any.whl</a><br/>\n<a href=\"../../packages/0d/49/dd3ec2c89864eae47b438017d71031492be38671f4b5a0e902fd5e7abc97/xlrd-0.7.1.win32.msi#md5=3bef7fd8449193e974570bca31c8ba36\" rel=\"internal\">xlrd-0.7.1.win32.msi</a><br/>\n<a href=\"../../packages/0e/a2/8818791a988897f2b4c0528626d191ccda9fb9ba6f4ef8130a955ef73029/xlrd-0.7.0.zip#md5=8e528ede508df109185b1ea218972540\" rel=\"internal\">xlrd-0.7.0.zip</a><br/>\n<a href=\"../../packages/2c/86/69d4b3f50c725efd338be9ac89c55a07e4c18678cbdca69dfdc618715c88/xlrd-0.5.2.zip#md5=f16d6b8a8976106c6de2b611401c9c49\" rel=\"internal\">xlrd-0.5.2.zip</a><br/>\n<a href=\"../../packages/31/69/cc9aa897cf25e8ace34e36144d95cfbe4ce0837b41b1ed980b77997f5b95/xlrd-0.9.2.tar.gz#md5=91a81ee76233e9f3115acaaa1b251b0e\" rel=\"internal\">xlrd-0.9.2.tar.gz</a><br/>\n<a href=\"../../packages/42/7e/91eeba8e4d57a0763df3c6d9ff1db37bc5dc152b61884ffb01fa1c88df39/xlrd-0.7.2.tar.gz#md5=01ace6937f2a72ff6e4500a9d10d40d3\" rel=\"internal\">xlrd-0.7.2.tar.gz</a><br/>\n<a href=\"../../packages/42/85/25caf967c2d496067489e0bb32df069a8361e1fd96a7e9f35408e56b3aab/xlrd-1.0.0.tar.gz#md5=9a91b688cd4945477ac28187a54f9a3b\" rel=\"internal\">xlrd-1.0.0.tar.gz</a><br/>\n<a href=\"../../packages/48/d1/2d2850ca86bb2e850dc30387c8d7080ca7b611544ea8724e66fc716527fd/xlrd-0.9.4-py3-none-any.whl#md5=f4c37427112ea94bd2a8859d21aeae13\" rel=\"internal\">xlrd-0.9.4-py3-none-any.whl</a><br/>\n<a href=\"../../packages/4d/dc/829582af1583458cae260d7192240682f8d03d0a89aa2812b3c93654ff83/xlrd-0.5.2.win32.exe#md5=1b0ae2239da47ff6038188e7d35937df\" rel=\"internal\">xlrd-0.5.2.win32.exe</a><br/>\n<a href=\"../../packages/53/50/f3d444c7c8a8d83c247b96d1539f968b80b9bde523882c79d3d68730564d/xlrd-0.7.0.win32.exe#md5=28fc6891ceb98de40236fcee23dfa816\" rel=\"internal\">xlrd-0.7.0.win32.exe</a><br/>\n<a href=\"../../packages/68/3d/aa8d4b44f4325fb811641bbd3e4351eddb1dec33502ecd6f060abac44ddc/xlrd-0.7.8.tar.gz#md5=071d9c39d3e12ad756ece4335c6d6f4a\" rel=\"internal\">xlrd-0.7.8.tar.gz</a><br/>\n<a href=\"../../packages/71/be/cfcfaf098899bf6f3d0843b075ab7bbda945658a3ce9282c14f9e8e89a9b/xlrd-0.9.1.tar.gz#md5=f490da9d0c6565aa6b516ced39950934\" rel=\"internal\">xlrd-0.9.1.tar.gz</a><br/>\n<a href=\"../../packages/77/3f/d7dfc3fe414ad0f0adcc56862e11211dff963c2be20b34fda6eb26c228fe/xlrd-0.8.0.tar.gz#md5=32af399c1e8b4b1e0b4752bab069f00b\" rel=\"internal\">xlrd-0.8.0.tar.gz</a><br/>\n<a href=\"../../packages/7b/98/7445165b69d4e95403372c07845ad1756af509ac85fc33c5b88e1c3f90c9/xlrd-0.9.0.tar.gz#md5=61102459833cc31d6b05404325fa45a8\" rel=\"internal\">xlrd-0.9.0.tar.gz</a><br/>\n<a href=\"../../packages/86/cf/bb010f16cefa8f26ac9329ca033134bcabc7a27f5c3d8de961bacc0f80b3/xlrd-1.1.0.tar.gz#md5=b85c9916ac755cad489a9005f5a0d390\" rel=\"internal\">xlrd-1.1.0.tar.gz</a><br/>\n<a href=\"../../packages/87/49/342d51ed33425df919fb84c4f1a10cf32fbd5cc358785f4ddc91bfabf461/xlrd-0.6.1.zip#md5=e3da69ffa47dff466f181c2e149a2c02\" rel=\"internal\">xlrd-0.6.1.zip</a><br/>\n<a href=\"../../packages/8d/b1/7b39c713586d7a6f262d06ea429fbed0530834dc82ee03473a623ce2c716/xlrd-0.7.9.tar.gz#md5=8e6833676d78ef65515481952eb0fd76\" rel=\"internal\">xlrd-0.7.9.tar.gz</a><br/>\n<a href=\"../../packages/95/16/c66b9186b852778c5d01135311ea23e441a69f5fd5ad2a45979c1b4ad506/xlrd-0.7.5.tar.gz#md5=2d71c1444f7c19351c55ff5a0fe7fe2f\" rel=\"internal\">xlrd-0.7.5.tar.gz</a><br/>\n<a href=\"../../packages/97/3e/6ad1f9888977036bd656d1f32fc0fab415b19ddc6424b4fe7f3a6f996182/xlrd-0.7.1.win32.exe#md5=801174b0a9dc60886fa3e74925b2a50d\" rel=\"internal\">xlrd-0.7.1.win32.exe</a><br/>\n<a href=\"../../packages/9a/07/a849c0f687b4c96523da04111d3659120f2278a7dc2955dcfca8c5422970/xlrd-0.7.3.tar.gz#md5=144957ecdf0a38de907210fd57458f96\" rel=\"internal\">xlrd-0.7.3.tar.gz</a><br/>\n<a href=\"../../packages/9c/78/62543e531665e766b247d12d2868bc9d87173231ed864a8b743c1c63a738/xlrd-0.7.4.tar.gz#md5=aacaf6570411b275b4c0fa1ee8ba6497\" rel=\"internal\">xlrd-0.7.4.tar.gz</a><br/>\n<a href=\"../../packages/a8/b1/bf7e936d9ea1e68c5e3247fcafaa45fe3967282bb419a8c54312be0f64af/xlrd-0.7.1.tar.gz#md5=d0439a7ad1ae583a6ba3942efd0189c8\" rel=\"internal\">xlrd-0.7.1.tar.gz</a><br/>\n<a href=\"../../packages/ae/b3/196a676fa6bf4c81be3d27bcabba90dd79d6f202df8de98a1df38664f9b3/xlrd-0.7.0.tar.gz#md5=7c9ff72ccc8c1eef5aa17a4df421c73a\" rel=\"internal\">xlrd-0.7.0.tar.gz</a><br/>\n<a href=\"../../packages/b1/13/6fbcb55fef0b34c70cb3753741eaafc0e91553a1318653587a7d145caf15/xlrd-0.9.3.tar.gz#md5=6f3325132f246594988171bc72e1a385\" rel=\"internal\">xlrd-0.9.3.tar.gz</a><br/>\n<a href=\"../../packages/b6/1a/9ab16ad92f2d86e435a69a8339201e122aaddec43e214f1736a750df618f/xlrd-0.7.9.win32.exe#md5=9b5c92a10c01910fc95cbe3f2cbbe7c0\" rel=\"internal\">xlrd-0.7.9.win32.exe</a><br/>\n<a href=\"../../packages/c4/e8/201a198d44718f889d0374da3c8b5c598869c4392ecfbd76fbe75f57c247/xlrd-0.6.1a4.zip#md5=881937c56bee89bc4142b2ccf797273b\" rel=\"internal\">xlrd-0.6.1a4.zip</a><br/>\n<a href=\"../../packages/c6/33/f7019d25782b826a7ecff146bfd1075f0a26d2d1992d9e256effefd42972/xlrd-0.6.1a4.win32.exe#md5=a4b246a81c960acfa635fbb76b47fc31\" rel=\"internal\">xlrd-0.6.1a4.win32.exe</a><br/>\n<a href=\"../../packages/e2/16/80a55157f5be037edf8d063683b0a67b5c68777bfe2baae6120684e9bc28/xlrd-0.7.9.win32.msi#md5=87b7f9fe15255a23d15b6e4102302383\" rel=\"internal\">xlrd-0.7.9.win32.msi</a><br/>\n<a href=\"../../packages/e3/25/5c7bcebace711cd8bc9decd603e8c3eb4ef04e642ec16522fead8fcf66db/xlrd-0.7.7.tar.gz#md5=ba46c586b4c1df977bf7bdcd711590bf\" rel=\"internal\">xlrd-0.7.7.tar.gz</a><br/>\n<a href=\"../../packages/f2/5a/62f55aef47f733e5181ded0487491a2ab2aeb38a054336f1c1ac7c788821/xlrd-0.9.4.tar.gz#md5=911839f534d29fe04525ef8cd88fe865\" rel=\"internal\">xlrd-0.9.4.tar.gz</a><br/>\n<a href=\"../../packages/fd/e8/7f9e0be2512e7a39cc36ed5f1c1e463ad31ad94beb3d33577791cacebe0f/xlrd-0.7.6.tar.gz#md5=7f0b865ad54f94c4330b632cec18cdd3\" rel=\"internal\">xlrd-0.7.6.tar.gz</a><br/>\n<a href=\"../../packages/fe/27/f41f865f33cc84fedd4f9a6150cb8936b87765b6b0a1b36e961ea9097244/xlrd-0.6.1.win32.exe#md5=ea4a4bf102cd8bdbf76b047b8feeed17\" rel=\"internal\">xlrd-0.6.1.win32.exe</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "9630",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "2586",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:16 GMT",
+      "Fastly-Debug-Digest": "20c3b5feb381fef270189447511c6880f9e91251668eb1886e9be394d3913528",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "3, 2",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3113811",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2150-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205976.288280,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/line-profiler/"
+  },
+  "response": {
+    "body": "<!DOCTYPE html><html><head><title>Links for line-profiler</title></head><body><h1>Links for line-profiler</h1><a href=\"../../packages/0f/8b/803471ca150d9247a18726f848f6633d301aba634ed013fd2645d8b16ce5/line_profiler-2.1.1.tar.gz#md5=b4a0d6e1bc11df7560b14870b3858bd8\" rel=\"internal\">line_profiler-2.1.1.tar.gz</a><br/>\n<a href=\"../../packages/14/fc/ecf4e238bb601ff829068e5a72cd1bd67b0ee0ae379db172eb6a0779c6b6/line_profiler-2.1.2.tar.gz#md5=141cb6996f0e3188ca05bfddcb403e36\" rel=\"internal\">line_profiler-2.1.2.tar.gz</a><br/>\n<a href=\"../../packages/20/13/cbe031fc7b6860ee30abd2e53ddb45726028614fc4e71cd43889aa54efdf/line_profiler-1.0.tar.gz#md5=2f8352acfedf83f701a564583db5e14d\" rel=\"internal\">line_profiler-1.0.tar.gz</a><br/>\n<a href=\"../../packages/37/24/1f1e28ec94cfc8fb613fac1b214eb9b18b2bcaa0e608b8b4003c4505b610/line_profiler-1.0b3.tar.gz#md5=63fc2a757192eb5e577559cfdff5b831\" rel=\"internal\">line_profiler-1.0b3.tar.gz</a><br/>\n<a href=\"../../packages/39/fe/0bcffdfce330bea5cb2caf35f2483660f64aedf345583c93c94971869e98/line_profiler-1.0b3-py2.7-win32.egg#md5=97a629eeb7742cbaa9cccac0b9fd848e\" rel=\"internal\">line_profiler-1.0b3-py2.7-win32.egg</a><br/>\n<a href=\"../../packages/53/c9/499ee68f85f2e333f1d114b85f3cd196b9784dec9ef59771e71de57eb4dc/line_profiler-1.0b3.win32-py2.7.exe#md5=5291b022cc675a335c2813458ec8e7ad\" rel=\"internal\">line_profiler-1.0b3.win32-py2.7.exe</a><br/>\n<a href=\"../../packages/5c/3b/8eb5ee70f66c2733f6f9d2357ddb5abb757514244c4ff1d4b61a0bac1b8c/line_profiler-1.0b2-py2.5-macosx-10.3-fat.egg#md5=a2b602712c2f438d190b13beeb96061e\" rel=\"internal\">line_profiler-1.0b2-py2.5-macosx-10.3-fat.egg</a><br/>\n<a href=\"../../packages/5f/8f/af3e712dc26de1d62e8e5d596bd77906afcae33ac4abd6bcccd2b6e15127/line_profiler-1.0b2-py2.5-win32.egg#md5=57377793a2da6fdd257a94b5b3ae85ce\" rel=\"internal\">line_profiler-1.0b2-py2.5-win32.egg</a><br/>\n<a href=\"../../packages/61/48/5035985974a79034df05af2c4f888cbdd1b7c9387a71106774b5af9817b5/line_profiler-1.0b2.tar.gz#md5=90c9e67062f0e01f3e0e6f952a9fdc1d\" rel=\"internal\">line_profiler-1.0b2.tar.gz</a><br/>\n<a href=\"../../packages/65/48/61da8ca03e197bb57800c8839f403f2fb7bdf1cfe87fa62e0b35b683273c/line_profiler-2.0.tar.gz#md5=fc93c6bcfac3b7cb1912cb28836d7ee6\" rel=\"internal\">line_profiler-2.0.tar.gz</a><br/>\n<a href=\"../../packages/6d/a7/dcd0b49587f9ea9dd6726a26017c743d57f305b7cd52e25a37e80ef05846/line_profiler-1.0b1.win32-py2.5.exe#md5=6fc8ea1dc5caa3848200c8bbcd8012b5\" rel=\"internal\">line_profiler-1.0b1.win32-py2.5.exe</a><br/>\n<a href=\"../../packages/b0/99/a497b468c365ee6d5678d4f6cc0aeb272429a871d9a42930444e7f84d6c9/line_profiler-1.0b1-py2.5-win32.egg#md5=9257ee18e6ea2ec15f9ccf044591d6bc\" rel=\"internal\">line_profiler-1.0b1-py2.5-win32.egg</a><br/>\n<a href=\"../../packages/b3/92/b2726c95be3a455ebf13d4e214908dfd50099bcd007047d3e759213ad827/line_profiler-2.0-cp27-none-macosx_10_11_intel.whl#md5=ac6499665c257a3da55f64d0ee9d8cf0\" rel=\"internal\">line_profiler-2.0-cp27-none-macosx_10_11_intel.whl</a><br/>\n<a href=\"../../packages/bb/0f/1b282832275aa7b371fa2c7de85c84ee1a0f765dd6c0e33df4597adc61ed/line_profiler-1.0b1.tar.gz#md5=b28039f08d3048222f452b8589fba568\" rel=\"internal\">line_profiler-1.0b1.tar.gz</a><br/>\n<a href=\"../../packages/be/93/2b4598162bb13eef26ba0991f9335c798dc8b526b88520b7d0da22890347/line_profiler-1.0b2.win32-py2.5.exe#md5=6713a1357d3ec12f640de055c96f273d\" rel=\"internal\">line_profiler-1.0b2.win32-py2.5.exe</a><br/>\n<a href=\"../../packages/e7/b8/8fc7af0a5de42c1ca01a94a5b662a8cf829b96ffc81606cdbc7169af1426/line_profiler-1.0b1-py2.5-macosx-10.3-fat.egg#md5=db7b9b8693078c8c7c408d8d1863e7cb\" rel=\"internal\">line_profiler-1.0b1-py2.5-macosx-10.3-fat.egg</a><br/>\n</body></html>",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "36903",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Encoding": "gzip",
+      "Content-Length": "1367",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:20 GMT",
+      "Fastly-Debug-Digest": "c6a0d87965ef2e120956b76d7a1d505c26d72dd82f75d5c9f81ff20d25e34e9c",
+      "Server": "nginx/1.10.3",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Vary": "Accept-Encoding",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "HIT, HIT",
+      "X-Cache-Hits": "26, 1",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-PYPI-LAST-SERIAL": "3430060",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2140-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205981.666974,VS0,VE0",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 200
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "request": {
+    "body": null,
+    "headers": {
+      "Accept": "text/html",
+      "Accept-Encoding": "gzip, deflate",
+      "Cache-Control": "max-age=600",
+      "Connection": "keep-alive",
+      "User-Agent": "pip/9.0.1 {\"cpu\":\"x86_64\",\"distro\":{\"libc\":{\"lib\":\"glibc\",\"version\":\"2.26\"},\"name\":\"Arch Linux\"},\"implementation\":{\"name\":\"CPython\",\"version\":\"3.6.2\"},\"installer\":{\"name\":\"pip\",\"version\":\"9.0.1\"},\"openssl_version\":\"OpenSSL 1.1.0f  25 May 2017\",\"python\":\"3.6.2\",\"system\":{\"name\":\"Linux\",\"release\":\"4.13.9-1-ARCH\"}}"
+    },
+    "method": "GET",
+    "url": "https://pypi.python.org/simple/yayapf/"
+  },
+  "response": {
+    "body": "Not Found (yayapf does not exist)\n\n",
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Age": "0",
+      "Cache-Control": "max-age=600, public",
+      "Connection": "keep-alive",
+      "Content-Length": "35",
+      "Content-Type": "text/plain; charset=utf-8",
+      "Date": "Mon, 25 Dec 2017 12:46:16 GMT",
+      "Fastly-Debug-Digest": "4303da59d4f4a8b46bf32bd9f6935e6006c6ddeefe9bf4d7b44507555fd1af0b",
+      "Server": "nginx/1.10.3",
+      "Via": "1.1 varnish, 1.1 varnish",
+      "X-Cache": "MISS, MISS",
+      "X-Cache-Hits": "0, 0",
+      "X-Clacks-Overhead": "GNU Terry Pratchett",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "deny",
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-Served-By": "cache-iad2134-IAD, cache-nrt6126-NRT",
+      "X-Timer": "S1514205976.864371,VS0,VE183",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "status_code": 404
+  }
+}
