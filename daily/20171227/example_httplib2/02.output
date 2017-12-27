@@ -1,0 +1,17 @@
+{
+  "accept_encoding": "gzip, deflate",
+  "body": [
+    [
+      "name",
+      "foo"
+    ]
+  ],
+  "content_length": "8",
+  "content_type": "application/x-www-form-urlencoded",
+  "host": "localhost:44444",
+  "method": "POST",
+  "path": "/",
+  "querystring": "",
+  "url": "http://localhost:44444/",
+  "user_agent": "Python-httplib2/0.10.3 (gzip)"
+}

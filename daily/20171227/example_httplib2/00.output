@@ -1,0 +1,11 @@
+{
+  "accept_encoding": "gzip, deflate",
+  "content_length": "",
+  "content_type": "text/plain",
+  "host": "localhost:44444",
+  "method": "GET",
+  "path": "/",
+  "querystring": "",
+  "url": "http://localhost:44444/",
+  "user_agent": "Python-httplib2/0.10.3 (gzip)"
+}
