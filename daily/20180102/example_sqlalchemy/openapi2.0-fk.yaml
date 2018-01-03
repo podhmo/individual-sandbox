@@ -1,0 +1,30 @@
+definitions:
+  Group:
+    properties:
+      id:
+        type: integer
+      name:
+        maxLength: 255
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+    required:
+    - id
+    title: Group
+    type: object
+  User:
+    properties:
+      group_id:
+        relation: group
+        type: integer
+      id:
+        type: integer
+      name:
+        maxLength: 255
+        type: string
+    required:
+    - id
+    title: User
+    type: object
