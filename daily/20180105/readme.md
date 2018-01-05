@@ -1,3 +1,56 @@
+## sbt-assemblyもうすこし
+
+assemblyとassemblyPackageDependency
+
+```
+$ diff -u <(jar tf target/scala-2.10/hello-assembly-1.0.jar | sort) <(jar tf target/scala-2.10/hello-assembly-1.0-deps.jar | sort)
+--- /dev/fd/63  2018-01-05 19:22:04.000000000 +0900
++++ /dev/fd/62  2018-01-05 19:22:04.000000000 +0900
+@@ -1,10 +1,4 @@
+ META-INF/MANIFEST.MF
+-foo/
+-foo/bar/
+-foo/bar/baz/
+-foo/bar/baz/Main$.class
+-foo/bar/baz/Main$delayedInit$body.class
+-foo/bar/baz/Main.class
+ library.properties
+ rootdoc.txt
+ scala/
+```
+
+### sbt packageは？
+
+```
+sbt package
+```
+
+### dependencyを除いてbuild
+
+build.sbtに以下を追加
+
+```
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = false)
+```
+
+```
+$ sbt assembly
+$ jar tf target/scala-2.10/hello-assembly-1.0.jar
+META-INF/MANIFEST.MF
+foo/
+foo/bar/
+foo/bar/baz/
+foo/bar/baz/Main$.class
+foo/bar/baz/Main$delayedInit$body.class
+foo/bar/baz/Main.class
+```
+
+実行は
+
+```
+$ java -cp "target/scala-2.10/hello-assembly-1.0-deps.jar:target/scala-2.10/hello_2.10-1.0.jar" foo.bar.baz.Main
+```
+
 ## sbtの基礎
 
 ただただ実行するだけ
