@@ -1,3 +1,62 @@
+## sbt 特定のsub projectだけを対象にassemblyを呼ぶ
+
+```
+> project <subproject>
+> assembly
+```
+
+あるいはbuild.sbtで各projectに対して以下をつける
+
+```
+aggregate in assembly := false
+```
+
+- https://github.com/sbt/sbt-assembly/issues/168
+
+## sbt上で環境変数を変える
+
+```
+show envVars
+set envVars += 'x' -> y;
+show envVars
+```
+
+- [sbt - How to set system properties for runMain on command line? - Stack Overflow](https://stackoverflow.com/questions/21389392/how-to-set-system-properties-for-runmain-on-command-line "sbt - How to set system properties for runMain on command line? - Stack Overflow")
+
+## sbt 真面目に理解
+
+- http://www.scala-sbt.org/1.0/docs/ja
+
+### cheat sheet
+
+- sbt new -- scaffold (`sbt new scala/scala-seed.g8`とかする)
+- sbt clean -- target以下を消す(target/は.gitignoreすれば良さそう)
+- sbt compile -- build
+- sbt run -- buildされたコードの実行
+- sbt package -- jar作成(ただし自分自身だけ)
+- sbt ~testQuick -- 監視してテスト実行(止めるのはenterキー)
+- sbt reload -- build.sbtなどを読み直す
+- sbt project -- 現在のprojectを変更する
+
+
+:warning: 毎回JVMの立ち上がりとJITを動かすのは馬鹿馬鹿しいのでsbtは立ち上げっぱなしにする
+
+### ファイルの書き方
+
+- build.sbt
+- project/*.sbt
+
+ディレクトリ構造
+
+http://www.scala-sbt.org/1.0/docs/ja/Directories.html
+
+
+## scalaのこと
+
+- sbt packageで作ったjarのこと
+- jar tfとmeta-inf/manifest.mf
+- java -cp <jar file> <class>
+
 ## sbt-assemblyもうすこし
 
 assemblyとassemblyPackageDependency
