@@ -1,0 +1,19 @@
+[
+  {
+    "age": 22,
+    "name": "bar",
+    "skills": [
+      {"name": "y"},
+      {"name": "x"}
+    ]
+  },
+  {
+    "age": 20,
+    "name": "foo",
+    "skills": [
+      {"name": "x"},
+      {"name": "z"},
+      {"name": "y"}
+    ]
+  }
+]

@@ -2,24 +2,30 @@ import operator
 import math
 
 
+def _to_accesssor(k):
+    if callable(k):
+        return k
+    elif isinstance(k, (str, bytes)):
+        return operator.itemgetter(k)
+    elif isinstance(k, (list, tuple)):
+        return lambda v: tuple([v.get(sk) for sk in k])
+    else:
+        raise ValueError(k)
+
+
 class Merger:
-    def __init__(self, missing_value=math.nan, fill=True):
+    def __init__(self, missing_value=math.nan, fill=True, accessor_factory=_to_accesssor):
         self.missing_value = missing_value
         self.fill = fill
+        self.accessor_factory = accessor_factory
 
     def merge(self, left, right, *, how="inner", left_on=None, right_on=None, on=None):
+        assert on or (left_on and right_on)
+
         if on is not None:
             left_on = right_on = on
-        if not callable(left_on):
-            if isinstance(left_on, (list, tuple)):
-                left_on = lambda d: tuple([d[k] for k in left_on])  # noqa
-            else:
-                left_on = operator.itemgetter(left_on)
-        if not callable(right_on):
-            if isinstance(right_on, (list, tuple)):
-                right_on = lambda d: tuple([d[k] for k in right_on])  # noqa
-            else:
-                right_on = operator.itemgetter(right_on)
+        left_on = self.accessor_factory(left_on)
+        right_on = self.accessor_factory(right_on)
 
         if how == "inner":
             return self._merge_inner(left, right, left_on, right_on)
