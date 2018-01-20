@@ -1,0 +1,2555 @@
+digraph g {
+    g0 [label="shutil"]
+    g1 [label="bz2"]
+    g2 [label="lzma"]
+    g3 [label="fnmatch"]
+    g4 [label="_compression"]
+    g5 [label="pipenv.cli"]
+    g6 [label="pipenv.__version__"]
+    g7 [label="blindspin"]
+    g8 [label="requests"]
+    g9 [label="click_didyoumean"]
+    g10 [label="flake8.main.cli"]
+    g11 [label="click"]
+    g12 [label="pipenv.progress"]
+    g13 [label="semver"]
+    g14 [label="json"]
+    g15 [label="pipenv.project"]
+    g16 [label="signal"]
+    g17 [label="pip"]
+    g18 [label="crayons"]
+    g19 [label="pipreqs"]
+    g20 [label="glob"]
+    g21 [label="background"]
+    g22 [label="pipfile"]
+    g23 [label="pipdeptree"]
+    g24 [label="urllib3"]
+    g25 [label="flake8"]
+    g26 [label="dotenv"]
+    g27 [label="requirements"]
+    g28 [label="flake8.main"]
+    g29 [label="click_completion"]
+    g30 [label="tempfile"]
+    g31 [label="delegator"]
+    g32 [label="pipreqs.pipreqs"]
+    g33 [label="random"]
+    g34 [label="hashlib"]
+    g35 [label="bisect"]
+    g36 [label="json.decoder"]
+    g37 [label="json.scanner"]
+    g38 [label="json.encoder"]
+    g39 [label="urllib3.connectionpool"]
+    g40 [label="__future__"]
+    g41 [label="urllib3.poolmanager"]
+    g42 [label="socket"]
+    g43 [label="selectors"]
+    g44 [label="urllib3.request"]
+    g45 [label="urllib3.connection"]
+    g46 [label="urllib3.exceptions"]
+    g47 [label="urllib3.response"]
+    g48 [label="ssl"]
+    g49 [label="ipaddress"]
+    g50 [label="base64"]
+    g51 [label="urllib3.packages.ssl_match_hostname"]
+    g52 [label="urllib3.packages"]
+    g53 [label="urllib3.packages.six"]
+    g54 [label="http.client"]
+    g55 [label="queue"]
+    g56 [label="http"]
+    g57 [label="email.parser"]
+    g58 [label="email.message"]
+    g59 [label="email"]
+    g60 [label="email.feedparser"]
+    g61 [label="email.errors"]
+    g62 [label="email._policybase"]
+    g63 [label="email.header"]
+    g64 [label="email.quoprimime"]
+    g65 [label="email.charset"]
+    g66 [label="email.base64mime"]
+    g67 [label="email.encoders"]
+    g68 [label="quopri"]
+    g69 [label="email.utils"]
+    g70 [label="urllib.parse"]
+    g71 [label="email._parseaddr"]
+    g72 [label="datetime"]
+    g73 [label="urllib"]
+    g74 [label="calendar"]
+    g75 [label="email._encoded_words"]
+    g76 [label="uu"]
+    g77 [label="email.iterators"]
+    g78 [label="urllib3.util.wait"]
+    g79 [label="urllib3.util.selectors"]
+    g80 [label="urllib3.util.connection"]
+    g81 [label="urllib3.util"]
+    g82 [label="urllib3.util.ssl_"]
+    g83 [label="urllib3.util.response"]
+    g84 [label="urllib3.util.retry"]
+    g85 [label="urllib3.util.request"]
+    g86 [label="urllib3.util.timeout"]
+    g87 [label="urllib3.util.url"]
+    g88 [label="hmac"]
+    g89 [label="urllib3._collections"]
+    g90 [label="ctypes"]
+    g91 [label="ctypes._endian"]
+    g92 [label="uuid"]
+    g93 [label="ctypes.util"]
+    g94 [label="subprocess"]
+    g95 [label="urllib3.filepost"]
+    g96 [label="urllib3.fields"]
+    g97 [label="mimetypes"]
+    g98 [label="multiprocessing.context"]
+    g99 [label="multiprocessing.process"]
+    g100 [label="multiprocessing.reduction"]
+    g101 [label="pickle"]
+    g102 [label="_compat_pickle"]
+    g103 [label="multiprocessing"]
+    g104 [label="concurrent.futures"]
+    g105 [label="concurrent"]
+    g106 [label="concurrent.futures.thread"]
+    g107 [label="concurrent.futures._base"]
+    g108 [label="concurrent.futures.process"]
+    g109 [label="multiprocessing.connection"]
+    g110 [label="multiprocessing.util"]
+    g111 [label="click.types"]
+    g112 [label="click._compat"]
+    g113 [label="click.exceptions"]
+    g114 [label="click.utils"]
+    g115 [label="click.globals"]
+    g116 [label="click.core"]
+    g117 [label="click._unicodefun"]
+    g118 [label="click.termui"]
+    g119 [label="click.decorators"]
+    g120 [label="click.formatting"]
+    g121 [label="click.parser"]
+    g122 [label="inspect"]
+    g123 [label="ast"]
+    g124 [label="dis"]
+    g125 [label="opcode"]
+    g126 [label="shlex"]
+    g127 [label="six"]
+    g128 [label="platform"]
+    g129 [label="colorama.ansitowin32"]
+    g130 [label="colorama.winterm"]
+    g131 [label="colorama.ansi"]
+    g132 [label="colorama.win32"]
+    g133 [label="colorama.initialise"]
+    g134 [label="colorama"]
+    g135 [label="encodings"]
+    g136 [label="encodings.utf_16_be"]
+    g137 [label="encodings.unicode_escape"]
+    g138 [label="encodings.utf_16_le"]
+    g139 [label="dotenv.cli"]
+    g140 [label="dotenv.main"]
+    g141 [label="dotenv.ipython"]
+    g142 [label="IPython"]
+    g143 [label="IPython.core"]
+    g144 [label="IPython.core.release"]
+    g145 [label="IPython.terminal.embed"]
+    g146 [label="IPython.core.getipython"]
+    g147 [label="IPython.core.application"]
+    g148 [label="IPython.terminal"]
+    g149 [label="IPython.utils.frame"]
+    g150 [label="traitlets.traitlets"]
+    g151 [label="traitlets.utils.bunch"]
+    g152 [label="traitlets.utils.sentinel"]
+    g153 [label="traitlets.utils.importstring"]
+    g154 [label="traitlets.utils.getargspec"]
+    g155 [label="traitlets.utils"]
+    g156 [label="ipython_genutils"]
+    g157 [label="ipython_genutils._version"]
+    g158 [label="ipython_genutils.py3compat"]
+    g159 [label="ipython_genutils.encoding"]
+    g160 [label="traitlets"]
+    g161 [label="traitlets._version"]
+    g162 [label="IPython.core.crashhandler"]
+    g163 [label="traitlets.config"]
+    g164 [label="IPython.core.profiledir"]
+    g165 [label="traitlets.config.application"]
+    g166 [label="ipython_genutils.importstring"]
+    g167 [label="decorator"]
+    g168 [label="traitlets.config.configurable"]
+    g169 [label="traitlets.config.loader"]
+    g170 [label="ipython_genutils.path"]
+    g171 [label="ipython_genutils.text"]
+    g172 [label="IPython.utils.sysinfo"]
+    g173 [label="IPython.core.ultratb"]
+    g174 [label="pprint"]
+    g175 [label="pydoc"]
+    g176 [label="pkgutil"]
+    g177 [label="IPython.utils.path"]
+    g178 [label="IPython.core.display_trap"]
+    g179 [label="IPython.core.debugger"]
+    g180 [label="IPython.utils.data"]
+    g181 [label="IPython.utils.openpy"]
+    g182 [label="IPython.utils.terminal"]
+    g183 [label="IPython.utils.PyColorize"]
+    g184 [label="pdb"]
+    g185 [label="bdb"]
+    g186 [label="IPython.utils.py3compat"]
+    g187 [label="IPython.utils"]
+    g188 [label="IPython.core.excolors"]
+    g189 [label="IPython.testing.skipdoctest"]
+    g190 [label="IPython.testing"]
+    g191 [label="IPython.utils.coloransi"]
+    g192 [label="IPython.utils.ipstruct"]
+    g193 [label="IPython.utils.colorable"]
+    g194 [label="pygments"]
+    g195 [label="pygments.util"]
+    g196 [label="IPython.utils.encoding"]
+    g197 [label="code"]
+    g198 [label="cmd"]
+    g199 [label="codeop"]
+    g200 [label="pexpect"]
+    g201 [label="pexpect.run"]
+    g202 [label="pexpect.utils"]
+    g203 [label="pexpect.pty_spawn"]
+    g204 [label="pexpect.exceptions"]
+    g205 [label="pexpect.expect"]
+    g206 [label="pty"]
+    g207 [label="tty"]
+    g208 [label="pexpect.spawnbase"]
+    g209 [label="ptyprocess"]
+    g210 [label="ptyprocess.ptyprocess"]
+    g211 [label="ptyprocess.util"]
+    g212 [label="IPython.utils._process_posix"]
+    g213 [label="IPython.utils._process_common"]
+    g214 [label="IPython.utils.process"]
+    g215 [label="IPython.utils.decorators"]
+    g216 [label="IPython.utils._sysinfo"]
+    g217 [label="IPython.paths"]
+    g218 [label="IPython.utils.importstring"]
+    g219 [label="IPython.core.interactiveshell"]
+    g220 [label="IPython.terminal.interactiveshell"]
+    g221 [label="IPython.core.compilerop"]
+    g222 [label="IPython.core.magic"]
+    g223 [label="IPython.core.magic_arguments"]
+    g224 [label="IPython.terminal.ipapp"]
+    g225 [label="IPython.core.error"]
+    g226 [label="IPython.utils.text"]
+    g227 [label="pathlib"]
+    g228 [label="ntpath"]
+    g229 [label="IPython.core.inputsplitter"]
+    g230 [label="getopt"]
+    g231 [label="IPython.core.oinspect"]
+    g232 [label="IPython.core.page"]
+    g233 [label="IPython.core.display"]
+    g234 [label="pygments.lexers"]
+    g235 [label="IPython.lib"]
+    g236 [label="IPython.utils.dir2"]
+    g237 [label="pygments.formatters"]
+    g238 [label="IPython.lib.pretty"]
+    g239 [label="IPython.utils.wildcard"]
+    g240 [label="IPython.lib.security"]
+    g241 [label="getpass"]
+    g242 [label="pygments.plugin"]
+    g243 [label="pygments.lexers.python"]
+    g244 [label="pygments.modeline"]
+    g245 [label="pygments.lexers._mapping"]
+    g246 [label="pygments.lexer"]
+    g247 [label="pygments.filters"]
+    g248 [label="pygments.filter"]
+    g249 [label="pygments.regexopt"]
+    g250 [label="pygments.token"]
+    g251 [label="pygments.unistring"]
+    g252 [label="pygments.formatters.html"]
+    g253 [label="pygments.formatters._mapping"]
+    g254 [label="pygments.formatter"]
+    g255 [label="pygments.styles"]
+    g256 [label="IPython.core.inputtransformer"]
+    g257 [label="IPython.core.splitinput"]
+    g258 [label="IPython.utils.tokenize2"]
+    g259 [label="IPython.core.builtin_trap"]
+    g260 [label="IPython.core.extensions"]
+    g261 [label="IPython.core.history"]
+    g262 [label="IPython.core.alias"]
+    g263 [label="IPython.core.prefilter"]
+    g264 [label="IPython.core.usage"]
+    g265 [label="IPython.core.displaypub"]
+    g266 [label="runpy"]
+    g267 [label="IPython.core.logger"]
+    g268 [label="IPython.core.displayhook"]
+    g269 [label="pickleshare"]
+    g270 [label="IPython.core.formatters"]
+    g271 [label="IPython.core.payload"]
+    g272 [label="IPython.utils.io"]
+    g273 [label="IPython.utils.strdispatch"]
+    g274 [label="IPython.utils.syspathcontext"]
+    g275 [label="IPython.utils.tempdir"]
+    g276 [label="IPython.core.events"]
+    g277 [label="IPython.utils.contexts"]
+    g278 [label="IPython.display"]
+    g279 [label="IPython.core.autocall"]
+    g280 [label="IPython.core.macro"]
+    g281 [label="IPython.utils.sentinel"]
+    g282 [label="sqlite3"]
+    g283 [label="sqlite3.dbapi2"]
+    g284 [label="IPython.lib.display"]
+    g285 [label="IPython.utils.capture"]
+    g286 [label="IPython.core.hooks"]
+    g287 [label="wcwidth.wcwidth"]
+    g288 [label="wcwidth.table_zero"]
+    g289 [label="wcwidth.table_wide"]
+    g290 [label="wcwidth"]
+    g291 [label="prompt_toolkit.utils"]
+    g292 [label="prompt_toolkit.filters.base"]
+    g293 [label="prompt_toolkit.filters"]
+    g294 [label="prompt_toolkit.filters.utils"]
+    g295 [label="prompt_toolkit.filters.cli"]
+    g296 [label="prompt_toolkit.filters.types"]
+    g297 [label="prompt_toolkit.key_binding"]
+    g298 [label="prompt_toolkit.cache"]
+    g299 [label="prompt_toolkit.key_binding.vi_state"]
+    g300 [label="prompt_toolkit.enums"]
+    g301 [label="prompt_toolkit.auto_suggest"]
+    g302 [label="prompt_toolkit.buffer"]
+    g303 [label="prompt_toolkit.clipboard"]
+    g304 [label="prompt_toolkit.document"]
+    g305 [label="prompt_toolkit.completion"]
+    g306 [label="prompt_toolkit.history"]
+    g307 [label="prompt_toolkit.search_state"]
+    g308 [label="prompt_toolkit.validation"]
+    g309 [label="prompt_toolkit.clipboard.base"]
+    g310 [label="prompt_toolkit.selection"]
+    g311 [label="prompt_toolkit.clipboard.in_memory"]
+    g312 [label="prompt_toolkit.application"]
+    g313 [label="prompt_toolkit.key_binding.bindings"]
+    g314 [label="prompt_toolkit.key_binding.defaults"]
+    g315 [label="prompt_toolkit.key_binding.bindings.emacs"]
+    g316 [label="prompt_toolkit.key_binding.bindings.basic"]
+    g317 [label="prompt_toolkit.buffer_mapping"]
+    g318 [label="prompt_toolkit.key_binding.bindings.vi"]
+    g319 [label="prompt_toolkit.key_binding.bindings.named_commands"]
+    g320 [label="prompt_toolkit.layout"]
+    g321 [label="prompt_toolkit.keys"]
+    g322 [label="prompt_toolkit.renderer"]
+    g323 [label="prompt_toolkit.layout.controls"]
+    g324 [label="prompt_toolkit.token"]
+    g325 [label="prompt_toolkit.layout.screen"]
+    g326 [label="prompt_toolkit.mouse_events"]
+    g327 [label="prompt_toolkit.layout.lexers"]
+    g328 [label="prompt_toolkit.layout.processors"]
+    g329 [label="prompt_toolkit.layout.utils"]
+    g330 [label="prompt_toolkit.reactive"]
+    g331 [label="prompt_toolkit.layout.containers"]
+    g332 [label="prompt_toolkit.layout.dimension"]
+    g333 [label="prompt_toolkit.layout.margins"]
+    g334 [label="prompt_toolkit.layout.mouse_handlers"]
+    g335 [label="prompt_toolkit.output"]
+    g336 [label="prompt_toolkit.styles"]
+    g337 [label="prompt_toolkit.styles.from_pygments"]
+    g338 [label="prompt_toolkit.styles.base"]
+    g339 [label="prompt_toolkit.styles.defaults"]
+    g340 [label="prompt_toolkit.styles.from_dict"]
+    g341 [label="prompt_toolkit.styles.utils"]
+    g342 [label="pygments.styles.default"]
+    g343 [label="pygments.style"]
+    g344 [label="prompt_toolkit.key_binding.bindings.completion"]
+    g345 [label="prompt_toolkit.key_binding.registry"]
+    g346 [label="prompt_toolkit.key_binding.input_processor"]
+    g347 [label="prompt_toolkit.key_binding.bindings.scroll"]
+    g348 [label="prompt_toolkit.key_binding.digraphs"]
+    g349 [label="prompt_toolkit.interface"]
+    g350 [label="prompt_toolkit.input"]
+    g351 [label="prompt_toolkit.eventloop.callbacks"]
+    g352 [label="prompt_toolkit.eventloop"]
+    g353 [label="prompt_toolkit.eventloop.base"]
+    g354 [label="prompt_toolkit.terminal"]
+    g355 [label="prompt_toolkit.terminal.vt100_input"]
+    g356 [label="prompt_toolkit"]
+    g357 [label="prompt_toolkit.shortcuts"]
+    g358 [label="prompt_toolkit.terminal.vt100_output"]
+    g359 [label="prompt_toolkit.layout.prompt"]
+    g360 [label="prompt_toolkit.layout.toolbars"]
+    g361 [label="prompt_toolkit.layout.menus"]
+    g362 [label="IPython.terminal.pt_inputhooks"]
+    g363 [label="IPython.terminal.debugger"]
+    g364 [label="IPython.terminal.magics"]
+    g365 [label="prompt_toolkit.key_binding.manager"]
+    g366 [label="IPython.terminal.prompts"]
+    g367 [label="IPython.core.completer"]
+    g368 [label="IPython.utils.generics"]
+    g369 [label="IPython.core.latex_symbols"]
+    g370 [label="typing"]
+    g371 [label="jedi"]
+    g372 [label="simplegeneric"]
+    g373 [label="jedi._compatibility"]
+    g374 [label="imp"]
+    g375 [label="jedi.parser.tree"]
+    g376 [label="jedi.parser.parser"]
+    g377 [label="jedi.parser.pgen2.parse"]
+    g378 [label="jedi.parser.pgen2"]
+    g379 [label="jedi.parser.tokenize"]
+    g380 [label="jedi.common"]
+    g381 [label="jedi.parser.token"]
+    g382 [label="jedi.settings"]
+    g383 [label="jedi.parser"]
+    g384 [label="jedi.parser.pgen2.pgen"]
+    g385 [label="jedi.parser.python"]
+    g386 [label="jedi.parser.pgen2.grammar"]
+    g387 [label="jedi.parser.python.parser"]
+    g388 [label="jedi.parser.python.tree"]
+    g389 [label="jedi.parser.cache"]
+    g390 [label="jedi.parser.python.diff"]
+    g391 [label="difflib"]
+    g392 [label="jedi.debug"]
+    g393 [label="jedi.api"]
+    g394 [label="jedi.api.classes"]
+    g395 [label="jedi.api.completion"]
+    g396 [label="jedi.api.interpreter"]
+    g397 [label="jedi.cache"]
+    g398 [label="jedi.api.usages"]
+    g399 [label="jedi.api.helpers"]
+    g400 [label="jedi.evaluate.representation"]
+    g401 [label="jedi.evaluate.docstrings"]
+    g402 [label="jedi.evaluate.imports"]
+    g403 [label="jedi.evaluate.iterable"]
+    g404 [label="jedi.evaluate.recursion"]
+    g405 [label="jedi.evaluate.cache"]
+    g406 [label="jedi.evaluate.compiled"]
+    g407 [label="jedi.evaluate.dynamic"]
+    g408 [label="jedi.evaluate.param"]
+    g409 [label="jedi.evaluate.filters"]
+    g410 [label="jedi.evaluate.compiled.fake"]
+    g411 [label="jedi.evaluate.context"]
+    g412 [label="jedi.evaluate.helpers"]
+    g413 [label="jedi.evaluate.flow_analysis"]
+    g414 [label="jedi.evaluate.analysis"]
+    g415 [label="jedi.evaluate.precedence"]
+    g416 [label="jedi.evaluate.pep0484"]
+    g417 [label="jedi.evaluate.sys_path"]
+    g418 [label="jedi.evaluate.site"]
+    g419 [label="jedi.evaluate"]
+    g420 [label="jedi.evaluate.finder"]
+    g421 [label="jedi.evaluate.stdlib"]
+    g422 [label="jedi.evaluate.instance"]
+    g423 [label="jedi.api.keywords"]
+    g424 [label="pydoc_data.topics"]
+    g425 [label="pydoc_data"]
+    g426 [label="jedi.evaluate.compiled.mixed"]
+    g427 [label="IPython.terminal.ptutils"]
+    g428 [label="IPython.terminal.shortcuts"]
+    g429 [label="IPython.lib.clipboard"]
+    g430 [label="pkg_resources"]
+    g431 [label="plistlib"]
+    g432 [label="pkg_resources._vendor.packaging.version"]
+    g433 [label="zipfile"]
+    g434 [label="pkg_resources.py31compat"]
+    g435 [label="pkg_resources._vendor.packaging.specifiers"]
+    g436 [label="pkg_resources.extern"]
+    g437 [label="pkg_resources._vendor.packaging.requirements"]
+    g438 [label="xml"]
+    g439 [label="xml.parsers.expat"]
+    g440 [label="xml.parsers"]
+    g441 [label="pkg_resources._vendor.six"]
+    g442 [label="pkg_resources._vendor.appdirs"]
+    g443 [label="pkg_resources._vendor.pyparsing"]
+    g444 [label="pkg_resources._vendor"]
+    g445 [label="pkg_resources._vendor.packaging"]
+    g446 [label="pkg_resources._vendor.packaging.__about__"]
+    g447 [label="pkg_resources._vendor.packaging._structures"]
+    g448 [label="pkg_resources._vendor.packaging._compat"]
+    g449 [label="pkg_resources._vendor.packaging.markers"]
+    g450 [label="IPython.core.magics"]
+    g451 [label="IPython.core.magics.basic"]
+    g452 [label="IPython.core.magics.code"]
+    g453 [label="IPython.core.magics.script"]
+    g454 [label="IPython.core.magics.execution"]
+    g455 [label="IPython.core.magics.auto"]
+    g456 [label="IPython.core.magics.osm"]
+    g457 [label="IPython.core.magics.logging"]
+    g458 [label="IPython.core.magics.display"]
+    g459 [label="IPython.core.magics.namespace"]
+    g460 [label="IPython.core.magics.pylab"]
+    g461 [label="IPython.core.magics.config"]
+    g462 [label="IPython.core.magics.extension"]
+    g463 [label="IPython.core.magics.history"]
+    g464 [label="IPython.utils.module_paths"]
+    g465 [label="cProfile"]
+    g466 [label="timeit"]
+    g467 [label="pstats"]
+    g468 [label="IPython.utils.timing"]
+    g469 [label="profile"]
+    g470 [label="optparse"]
+    g471 [label="IPython.core.pylabtools"]
+    g472 [label="IPython.lib.backgroundjobs"]
+    g473 [label="IPython.extensions.storemagic"]
+    g474 [label="IPython.extensions"]
+    g475 [label="IPython.core.shellapp"]
+    g476 [label="pexpect.popen_spawn"]
+    g477 [label="chardet"]
+    g478 [label="chardet.universaldetector"]
+    g479 [label="chardet.version"]
+    g480 [label="chardet.compat"]
+    g481 [label="chardet.charsetgroupprober"]
+    g482 [label="chardet.charsetprober"]
+    g483 [label="chardet.enums"]
+    g484 [label="chardet.latin1prober"]
+    g485 [label="chardet.mbcsgroupprober"]
+    g486 [label="chardet.sbcsgroupprober"]
+    g487 [label="chardet.escprober"]
+    g488 [label="chardet.escsm"]
+    g489 [label="chardet.codingstatemachine"]
+    g490 [label="chardet.utf8prober"]
+    g491 [label="chardet.mbcssm"]
+    g492 [label="chardet.cp949prober"]
+    g493 [label="chardet.gb2312prober"]
+    g494 [label="chardet.euctwprober"]
+    g495 [label="chardet.euckrprober"]
+    g496 [label="chardet.sjisprober"]
+    g497 [label="chardet.eucjpprober"]
+    g498 [label="chardet.big5prober"]
+    g499 [label="chardet.jpcntx"]
+    g500 [label="chardet.chardistribution"]
+    g501 [label="chardet.mbcharsetprober"]
+    g502 [label="chardet.euctwfreq"]
+    g503 [label="chardet.gb2312freq"]
+    g504 [label="chardet.big5freq"]
+    g505 [label="chardet.jisfreq"]
+    g506 [label="chardet.euckrfreq"]
+    g507 [label="chardet.sbcharsetprober"]
+    g508 [label="chardet.langhebrewmodel"]
+    g509 [label="chardet.langcyrillicmodel"]
+    g510 [label="chardet.langgreekmodel"]
+    g511 [label="chardet.hebrewprober"]
+    g512 [label="chardet.langturkishmodel"]
+    g513 [label="chardet.langthaimodel"]
+    g514 [label="chardet.langbulgarianmodel"]
+    g515 [label="urllib3.contrib"]
+    g516 [label="requests.utils"]
+    g517 [label="requests.api"]
+    g518 [label="requests.models"]
+    g519 [label="requests.packages"]
+    g520 [label="requests.__version__"]
+    g521 [label="requests.exceptions"]
+    g522 [label="html"]
+    g523 [label="html.entities"]
+    g524 [label="cgi"]
+    g525 [label="requests.cookies"]
+    g526 [label="requests._internal_utils"]
+    g527 [label="requests.structures"]
+    g528 [label="requests.certs"]
+    g529 [label="certifi"]
+    g530 [label="certifi.core"]
+    g531 [label="_pydecimal"]
+    g532 [label="numbers"]
+    g533 [label="decimal"]
+    g534 [label="simplejson"]
+    g535 [label="simplejson.decoder"]
+    g536 [label="simplejson.encoder"]
+    g537 [label="simplejson.raw_json"]
+    g538 [label="simplejson.errors"]
+    g539 [label="simplejson.compat"]
+    g540 [label="simplejson.scanner"]
+    g541 [label="requests.compat"]
+    g542 [label="http.cookiejar"]
+    g543 [label="urllib.request"]
+    g544 [label="http.cookies"]
+    g545 [label="urllib.error"]
+    g546 [label="urllib.response"]
+    g547 [label="idna"]
+    g548 [label="idna.package_data"]
+    g549 [label="idna.core"]
+    g550 [label="idna.intranges"]
+    g551 [label="idna.idnadata"]
+    g552 [label="encodings.idna"]
+    g553 [label="stringprep"]
+    g554 [label="requests.hooks"]
+    g555 [label="requests.status_codes"]
+    g556 [label="requests.auth"]
+    g557 [label="requests.sessions"]
+    g558 [label="requests.adapters"]
+    g559 [label="pip.exceptions"]
+    g560 [label="pip.utils"]
+    g561 [label="pip.utils.deprecation"]
+    g562 [label="pip.commands"]
+    g563 [label="pip.vcs"]
+    g564 [label="pip._vendor.requests"]
+    g565 [label="pip.vcs.git"]
+    g566 [label="pip.vcs.mercurial"]
+    g567 [label="pip.vcs.subversion"]
+    g568 [label="pip.vcs.bazaar"]
+    g569 [label="pip._vendor"]
+    g570 [label="pip.baseparser"]
+    g571 [label="pip._vendor.requests.packages.urllib3.connectionpool"]
+    g572 [label="pip._vendor.requests.packages.urllib3.packages.six"]
+    g573 [label="pip._vendor.requests.packages.urllib3.request"]
+    g574 [label="pip._vendor.requests.packages.urllib3.response"]
+    g575 [label="pip._vendor.requests.packages.urllib3.connection"]
+    g576 [label="pip._vendor.requests.packages.urllib3.exceptions"]
+    g577 [label="pip._vendor.requests.packages.urllib3.packages"]
+    g578 [label="pip._vendor.requests.packages.urllib3.packages.ssl_match_hostname"]
+    g579 [label="pip._vendor.requests.packages.urllib3.util"]
+    g580 [label="pip._vendor.requests.packages.urllib3.util.retry"]
+    g581 [label="pip._vendor.requests.packages.urllib3.util.connection"]
+    g582 [label="pip._vendor.requests.packages.urllib3.util.ssl_"]
+    g583 [label="pip._vendor.requests.packages.urllib3.util.url"]
+    g584 [label="pip._vendor.requests.packages.urllib3.util.timeout"]
+    g585 [label="pip._vendor.requests.packages.urllib3.util.response"]
+    g586 [label="pip._vendor.requests.packages.urllib3.util.request"]
+    g587 [label="pip._vendor.requests.packages.urllib3._collections"]
+    g588 [label="pip._vendor.requests.packages.urllib3.filepost"]
+    g589 [label="pip._vendor.requests.packages.urllib3.fields"]
+    g590 [label="pip._vendor.requests.packages.urllib3"]
+    g591 [label="pip._vendor.requests.packages.urllib3.poolmanager"]
+    g592 [label="pip._vendor.requests.packages"]
+    g593 [label="pip._vendor.requests.packages.chardet"]
+    g594 [label="pip._vendor.requests.models"]
+    g595 [label="pip._vendor.requests.utils"]
+    g596 [label="pip._vendor.requests.api"]
+    g597 [label="pip._vendor.requests.exceptions"]
+    g598 [label="pip._vendor.requests.cookies"]
+    g599 [label="pip._vendor.requests.certs"]
+    g600 [label="pip._vendor.requests.structures"]
+    g601 [label="pip._vendor.requests.compat"]
+    g602 [label="pip._vendor.requests.auth"]
+    g603 [label="pip._vendor.requests.hooks"]
+    g604 [label="pip._vendor.requests.status_codes"]
+    g605 [label="pip._vendor.requests.adapters"]
+    g606 [label="pip._vendor.requests.packages.urllib3.contrib"]
+    g607 [label="pip._vendor.requests.sessions"]
+    g608 [label="pip._vendor.six"]
+    g609 [label="pip._vendor.pkg_resources"]
+    g610 [label="pip._vendor.retrying"]
+    g611 [label="tarfile"]
+    g612 [label="pip.locations"]
+    g613 [label="pip.compat"]
+    g614 [label="logging.config"]
+    g615 [label="logging.handlers"]
+    g616 [label="socketserver"]
+    g617 [label="distutils.command"]
+    g618 [label="distutils.sysconfig"]
+    g619 [label="distutils.command.install"]
+    g620 [label="pip.utils.appdirs"]
+    g621 [label="distutils"]
+    g622 [label="distutils.errors"]
+    g623 [label="distutils.core"]
+    g624 [label="distutils.log"]
+    g625 [label="distutils.dist"]
+    g626 [label="distutils.cmd"]
+    g627 [label="distutils.extension"]
+    g628 [label="distutils.config"]
+    g629 [label="distutils.debug"]
+    g630 [label="distutils.fancy_getopt"]
+    g631 [label="distutils.util"]
+    g632 [label="distutils.spawn"]
+    g633 [label="distutils.dep_util"]
+    g634 [label="distutils.archive_util"]
+    g635 [label="distutils.file_util"]
+    g636 [label="distutils.dir_util"]
+    g637 [label="configparser"]
+    g638 [label="pip._vendor.packaging.specifiers"]
+    g639 [label="pip._vendor.packaging"]
+    g640 [label="pip._vendor.packaging.requirements"]
+    g641 [label="pip._vendor.appdirs"]
+    g642 [label="pip._vendor.packaging.version"]
+    g643 [label="pip._vendor.packaging.__about__"]
+    g644 [label="pip._vendor.packaging._structures"]
+    g645 [label="pip._vendor.packaging._compat"]
+    g646 [label="pip._vendor.pyparsing"]
+    g647 [label="pip._vendor.packaging.markers"]
+    g648 [label="pip.models"]
+    g649 [label="pip.models.index"]
+    g650 [label="pip.download"]
+    g651 [label="pip.utils.glibc"]
+    g652 [label="pip._vendor.cachecontrol"]
+    g653 [label="pip._vendor.cachecontrol.caches"]
+    g654 [label="pip.utils.setuptools_build"]
+    g655 [label="pip.utils.filesystem"]
+    g656 [label="pip.utils.logging"]
+    g657 [label="pip.utils.encoding"]
+    g658 [label="pip.utils.ui"]
+    g659 [label="pip._vendor.colorama.ansitowin32"]
+    g660 [label="pip._vendor.colorama.winterm"]
+    g661 [label="pip._vendor.colorama.ansi"]
+    g662 [label="pip._vendor.colorama.win32"]
+    g663 [label="pip._vendor.colorama.initialise"]
+    g664 [label="pip._vendor.colorama"]
+    g665 [label="pip._vendor.progress.spinner"]
+    g666 [label="pip._vendor.progress"]
+    g667 [label="pip._vendor.progress.bar"]
+    g668 [label="pip._vendor.progress.helpers"]
+    g669 [label="pip._vendor.cachecontrol.controller"]
+    g670 [label="pip._vendor.cachecontrol.cache"]
+    g671 [label="pip._vendor.cachecontrol.serialize"]
+    g672 [label="pip._vendor.cachecontrol.compat"]
+    g673 [label="pip._vendor.cachecontrol.adapter"]
+    g674 [label="pip._vendor.cachecontrol.filewrapper"]
+    g675 [label="pip._vendor.cachecontrol.wrapper"]
+    g676 [label="pip._vendor.lockfile"]
+    g677 [label="pip._vendor.lockfile.linklockfile"]
+    g678 [label="pip._vendor.cachecontrol.caches.file_cache"]
+    g679 [label="pip._vendor.lockfile.mkdirlockfile"]
+    g680 [label="redis"]
+    g681 [label="pip._vendor.cachecontrol.caches.redis_cache"]
+    g682 [label="redis.client"]
+    g683 [label="redis._compat"]
+    g684 [label="redis.connection"]
+    g685 [label="redis.lock"]
+    g686 [label="redis.exceptions"]
+    g687 [label="distutils.version"]
+    g688 [label="redis.utils"]
+    g689 [label="hiredis"]
+    g690 [label="hiredis.version"]
+    g691 [label="xmlrpc.client"]
+    g692 [label="xmlrpc"]
+    g693 [label="gzip"]
+    g694 [label="pip.index"]
+    g695 [label="pip._vendor.html5lib"]
+    g696 [label="pip.wheel"]
+    g697 [label="pip.utils.packaging"]
+    g698 [label="compileall"]
+    g699 [label="py_compile"]
+    g700 [label="pip._vendor.distlib"]
+    g701 [label="pip._vendor.packaging.utils"]
+    g702 [label="csv"]
+    g703 [label="pip._vendor.distlib.scripts"]
+    g704 [label="pip.pep425tags"]
+    g705 [label="html.parser"]
+    g706 [label="_markupbase"]
+    g707 [label="pip._vendor.distlib.compat"]
+    g708 [label="pip._vendor.distlib.resources"]
+    g709 [label="pip._vendor.distlib.util"]
+    g710 [label="pip._vendor.webencodings"]
+    g711 [label="pip._vendor.webencodings.labels"]
+    g712 [label="pip._vendor.html5lib._inputstream"]
+    g713 [label="pip._vendor.html5lib._utils"]
+    g714 [label="pip._vendor.html5lib.constants"]
+    g715 [label="xml.etree.cElementTree"]
+    g716 [label="xml.etree"]
+    g717 [label="xml.etree.ElementTree"]
+    g718 [label="xml.etree.ElementPath"]
+    g719 [label="pip._vendor.html5lib.html5parser"]
+    g720 [label="pip._vendor.html5lib.treebuilders"]
+    g721 [label="pip._vendor.html5lib._tokenizer"]
+    g722 [label="pip._vendor.html5lib.treebuilders.base"]
+    g723 [label="pip._vendor.html5lib._trie.py"]
+    g724 [label="pip._vendor.html5lib._trie._base"]
+    g725 [label="pip._vendor.html5lib._trie"]
+    g726 [label="pip._vendor.html5lib.treewalkers"]
+    g727 [label="pip._vendor.html5lib.serializer"]
+    g728 [label="xml.sax.xmlreader"]
+    g729 [label="xml.sax._exceptions"]
+    g730 [label="xml.sax.handler"]
+    g731 [label="xml.sax"]
+    g732 [label="xml.sax.saxutils"]
+    g733 [label="pip.cmdoptions"]
+    g734 [label="pip.utils.hashes"]
+    g735 [label="pip.basecommand"]
+    g736 [label="pip.status_codes"]
+    g737 [label="pip.utils.outdated"]
+    g738 [label="pip.req"]
+    g739 [label="pip.req.req_install"]
+    g740 [label="pip.req.req_uninstall"]
+    g741 [label="pip.req.req_set"]
+    g742 [label="pip.req.req_file"]
+    g743 [label="pip.commands.completion"]
+    g744 [label="pip.commands.hash"]
+    g745 [label="pip.commands.install"]
+    g746 [label="pip.commands.show"]
+    g747 [label="pip.commands.help"]
+    g748 [label="pip.commands.wheel"]
+    g749 [label="pip.commands.search"]
+    g750 [label="pip.commands.download"]
+    g751 [label="pip.commands.uninstall"]
+    g752 [label="pip.commands.freeze"]
+    g753 [label="pip.commands.list"]
+    g754 [label="pip.commands.check"]
+    g755 [label="pip.utils.build"]
+    g756 [label="pip.operations"]
+    g757 [label="pip.operations.freeze"]
+    g758 [label="pip.operations.check"]
+    g759 [label="wheel"]
+    g760 [label="pipfile.api"]
+    g761 [label="pipfile.__about__"]
+    g762 [label="toml"]
+    g763 [label="requirements.requirement"]
+    g764 [label="requirements.vcs"]
+    g765 [label="requirements.fragment"]
+    g766 [label="requirements.parser"]
+    g767 [label="flake8.checker"]
+    g768 [label="flake8.defaults"]
+    g769 [label="flake8.processor"]
+    g770 [label="flake8.exceptions"]
+    g771 [label="flake8.utils"]
+    g772 [label="flake8.main.application"]
+    g773 [label="flake8.options.manager"]
+    g774 [label="flake8.main.options"]
+    g775 [label="flake8.options.aggregator"]
+    g776 [label="flake8.plugins"]
+    g777 [label="flake8.plugins.manager"]
+    g778 [label="flake8.options"]
+    g779 [label="flake8.style_guide"]
+    g780 [label="flake8.statistics"]
+    g781 [label="setuptools"]
+    g782 [label="setuptools.extension"]
+    g783 [label="setuptools.extern"]
+    g784 [label="distutils.filelist"]
+    g785 [label="setuptools.version"]
+    g786 [label="setuptools.dist"]
+    g787 [label="setuptools.monkey"]
+    g788 [label="setuptools.depends"]
+    g789 [label="setuptools.py33compat"]
+    g790 [label="setuptools.py36compat"]
+    g791 [label="setuptools.config"]
+    g792 [label="setuptools.windows_support"]
+    g793 [label="distutils.msvc9compiler"]
+    g794 [label="distutils.ccompiler"]
+    g795 [label="setuptools.msvc"]
+    g796 [label="flake8.main.debug"]
+    g797 [label="flake8.main.vcs"]
+    g798 [label="flake8.main.mercurial"]
+    g799 [label="flake8.main.git"]
+    g800 [label="flake8.options.config"]
+    g801 [label="flake8.plugins.notifier"]
+    g802 [label="flake8.plugins._trie"]
+    g803 [label="yarg"]
+    g804 [label="docopt"]
+    g805 [label="yarg.client"]
+    g806 [label="yarg.package"]
+    g807 [label="yarg.exceptions"]
+    g808 [label="yarg.release"]
+    g809 [label="yarg.parse"]
+    g810 [label="contoml"]
+    g811 [label="contoml._version"]
+    g812 [label="pipenv.utils"]
+    g813 [label="piptools.resolver"]
+    g814 [label="piptools.scripts.compile"]
+    g815 [label="fuzzywuzzy"]
+    g816 [label="piptools.repositories"]
+    g817 [label="pipenv.pep508checker"]
+    g818 [label="piptools"]
+    g819 [label="piptools.scripts"]
+    g820 [label="parse"]
+    g821 [label="fuzzywuzzy.process"]
+    g822 [label="fuzzywuzzy.utils"]
+    g823 [label="fuzzywuzzy.string_processing"]
+    g824 [label="fuzzywuzzy.fuzz"]
+    g825 [label="piptools.click"]
+    g826 [label="piptools.logging"]
+    g827 [label="first"]
+    g828 [label="piptools.cache"]
+    g829 [label="piptools.locations"]
+    g830 [label="piptools.exceptions"]
+    g831 [label="piptools.utils"]
+    g832 [label="pipenv.environments"]
+    g833 [label="appdirs"]
+    g834 [label="piptools.repositories.local"]
+    g835 [label="piptools.repositories.base"]
+    g836 [label="piptools.repositories.pypi"]
+    g837 [label="piptools.writer"]
+    g838 [label="piptools._compat"]
+    g839 [label="piptools.io"]
+    g840 [label="pipenv"]
+    g841 [label="00import"]
+    g0 -> g1 [label="0.00076s"]
+    g0 -> g2 [label="0.0005s"]
+    g0 -> g3 [label="0.0001s"]
+    g1 -> g4 [label="0.00018s"]
+    g5 -> g6 [label="3e-05s"]
+    g5 -> g7 [label="8e-05s"]
+    g5 -> g8 [label="0.03343s"]
+    g5 -> g9 [label="0.00011s"]
+    g5 -> g10 [label="0.01166s"]
+    g5 -> g11 [label="0.00846s"]
+    g5 -> g12 [label="0.00013s"]
+    g5 -> g13 [label="0.00145s"]
+    g5 -> g14 [label="0.00198s"]
+    g5 -> g15 [label="0.00827s"]
+    g5 -> g16 [label="0.00145s"]
+    g5 -> g17 [label="0.17691s"]
+    g5 -> g18 [label="0.00217s"]
+    g5 -> g19 [label="4e-05s"]
+    g5 -> g20 [label="9e-05s"]
+    g5 -> g21 [label="0.00709s"]
+    g5 -> g22 [label="0.00104s"]
+    g5 -> g23 [label="0.00025s"]
+    g5 -> g24 [label="0.04599s"]
+    g5 -> g25 [label="9e-05s"]
+    g5 -> g26 [label="0.26503s"]
+    g5 -> g27 [label="0.00154s"]
+    g5 -> g0 [label="0.00367s"]
+    g5 -> g28 [label="3e-05s"]
+    g5 -> g29 [label="0.00495s"]
+    g5 -> g30 [label="0.00578s"]
+    g5 -> g31 [label="0.00034s"]
+    g5 -> g32 [label="0.00192s"]
+    g33 -> g34 [label="0.00331s"]
+    g33 -> g35 [label="0.00029s"]
+    g30 -> g33 [label="0.00515s"]
+    g36 -> g37 [label="0.00081s"]
+    g14 -> g36 [label="0.00127s"]
+    g14 -> g38 [label="0.00038s"]
+    g24 -> g39 [label="0.04415s"]
+    g24 -> g40 [label="7e-05s"]
+    g24 -> g41 [label="0.00118s"]
+    g42 -> g43 [label="0.00138s"]
+    g39 -> g44 [label="0.00785s"]
+    g39 -> g45 [label="0.00534s"]
+    g39 -> g46 [label="0.02496s"]
+    g39 -> g42 [label="0.00403s"]
+    g39 -> g47 [label="0.00064s"]
+    g48 -> g49 [label="0.00183s"]
+    g48 -> g50 [label="0.00057s"]
+    g51 -> g48 [label="0.00742s"]
+    g52 -> g51 [label="0.00763s"]
+    g46 -> g53 [label="0.00099s"]
+    g46 -> g52 [label="0.00784s"]
+    g53 -> g54 [label="0.01364s"]
+    g53 -> g55 [label="0.0002s"]
+    g53 -> g56 [label="0.00082s"]
+    g54 -> g57 [label="0.0104s"]
+    g54 -> g58 [label="0.00171s"]
+    g54 -> g59 [label="5e-05s"]
+    g60 -> g61 [label="0.00063s"]
+    g60 -> g62 [label="0.00845s"]
+    g63 -> g64 [label="0.00021s"]
+    g63 -> g65 [label="0.00066s"]
+    g63 -> g66 [label="7e-05s"]
+    g67 -> g68 [label="0.00011s"]
+    g65 -> g67 [label="0.00039s"]
+    g62 -> g63 [label="0.00269s"]
+    g62 -> g69 [label="0.00507s"]
+    g69 -> g70 [label="0.00169s"]
+    g69 -> g71 [label="0.00066s"]
+    g69 -> g72 [label="0.00102s"]
+    g69 -> g73 [label="4e-05s"]
+    g71 -> g74 [label="0.00037s"]
+    g57 -> g60 [label="0.01018s"]
+    g58 -> g75 [label="0.00029s"]
+    g58 -> g76 [label="0.00014s"]
+    g58 -> g77 [label="8e-05s"]
+    g78 -> g79 [label="0.00071s"]
+    g80 -> g78 [label="0.00086s"]
+    g81 -> g82 [label="0.00088s"]
+    g81 -> g83 [label="6e-05s"]
+    g81 -> g84 [label="0.00072s"]
+    g81 -> g80 [label="0.00106s"]
+    g81 -> g85 [label="9e-05s"]
+    g81 -> g86 [label="0.00016s"]
+    g81 -> g87 [label="0.00049s"]
+    g82 -> g88 [label="0.00059s"]
+    g45 -> g89 [label="0.00021s"]
+    g45 -> g81 [label="0.00464s"]
+    g90 -> g91 [label="0.00012s"]
+    g92 -> g90 [label="0.00221s"]
+    g92 -> g93 [label="0.00071s"]
+    g93 -> g94 [label="0.00049s"]
+    g95 -> g92 [label="0.00606s"]
+    g95 -> g96 [label="0.00095s"]
+    g96 -> g97 [label="0.00059s"]
+    g44 -> g95 [label="0.00745s"]
+    g98 -> g99 [label="0.00029s"]
+    g98 -> g100 [label="0.00259s"]
+    g101 -> g102 [label="0.00029s"]
+    g100 -> g101 [label="0.00193s"]
+    g103 -> g98 [label="0.00358s"]
+    g21 -> g104 [label="0.00263s"]
+    g21 -> g103 [label="0.00384s"]
+    g21 -> g105 [label="5e-05s"]
+    g104 -> g106 [label="0.0001s"]
+    g104 -> g107 [label="0.00072s"]
+    g104 -> g108 [label="0.00146s"]
+    g109 -> g110 [label="0.00024s"]
+    g108 -> g109 [label="0.00115s"]
+    g111 -> g112 [label="0.00037s"]
+    g111 -> g113 [label="0.00063s"]
+    g114 -> g115 [label="4e-05s"]
+    g113 -> g114 [label="0.0003s"]
+    g116 -> g117 [label="6e-05s"]
+    g116 -> g111 [label="0.00153s"]
+    g116 -> g118 [label="0.00011s"]
+    g116 -> g119 [label="0.00525s"]
+    g116 -> g120 [label="0.00035s"]
+    g120 -> g121 [label="0.00014s"]
+    g122 -> g123 [label="0.00027s"]
+    g122 -> g124 [label="0.00099s"]
+    g124 -> g125 [label="0.00024s"]
+    g119 -> g122 [label="0.0049s"]
+    g11 -> g116 [label="0.00822s"]
+    g29 -> g126 [label="0.00035s"]
+    g29 -> g127 [label="0.00064s"]
+    g29 -> g128 [label="0.00325s"]
+    g129 -> g130 [label="0.00034s"]
+    g129 -> g131 [label="0.00022s"]
+    g130 -> g132 [label="9e-05s"]
+    g133 -> g129 [label="0.00167s"]
+    g134 -> g133 [label="0.00181s"]
+    g18 -> g134 [label="0.00197s"]
+    g135 -> g136 [label="0.0001s"]
+    g135 -> g137 [label="0.00011s"]
+    g135 -> g138 [label="0.00011s"]
+    g139 -> g140 [label="0.00038s"]
+    g26 -> g139 [label="0.00071s"]
+    g26 -> g141 [label="0.26406s"]
+    g142 -> g143 [label="3e-05s"]
+    g142 -> g144 [label="5e-05s"]
+    g142 -> g145 [label="0.23814s"]
+    g142 -> g146 [label="3e-05s"]
+    g142 -> g147 [label="0.02398s"]
+    g142 -> g148 [label="3e-05s"]
+    g142 -> g149 [label="8e-05s"]
+    g150 -> g151 [label="5e-05s"]
+    g150 -> g152 [label="5e-05s"]
+    g150 -> g153 [label="0.00086s"]
+    g150 -> g154 [label="5e-05s"]
+    g150 -> g155 [label="3e-05s"]
+    g156 -> g157 [label="3e-05s"]
+    g153 -> g156 [label="0.00019s"]
+    g153 -> g158 [label="0.00042s"]
+    g158 -> g159 [label="4e-05s"]
+    g160 -> g150 [label="0.00301s"]
+    g160 -> g161 [label="4e-05s"]
+    g147 -> g162 [label="0.01533s"]
+    g147 -> g163 [label="0.00386s"]
+    g147 -> g160 [label="0.00333s"]
+    g147 -> g164 [label="0.00043s"]
+    g165 -> g166 [label="4e-05s"]
+    g165 -> g167 [label="0.00097s"]
+    g165 -> g168 [label="0.00144s"]
+    g169 -> g170 [label="6e-05s"]
+    g168 -> g169 [label="0.0009s"]
+    g168 -> g171 [label="9e-05s"]
+    g163 -> g165 [label="0.00368s"]
+    g162 -> g172 [label="0.00023s"]
+    g162 -> g173 [label="0.01446s"]
+    g162 -> g174 [label="0.00022s"]
+    g175 -> g176 [label="0.00065s"]
+    g173 -> g175 [label="0.00195s"]
+    g173 -> g177 [label="0.00501s"]
+    g173 -> g178 [label="9e-05s"]
+    g173 -> g179 [label="0.00537s"]
+    g173 -> g180 [label="4e-05s"]
+    g173 -> g181 [label="0.00051s"]
+    g173 -> g182 [label="6e-05s"]
+    g179 -> g183 [label="0.00238s"]
+    g179 -> g184 [label="0.00106s"]
+    g179 -> g185 [label="0.0002s"]
+    g179 -> g186 [label="0.00027s"]
+    g179 -> g187 [label="4e-05s"]
+    g179 -> g188 [label="9e-05s"]
+    g179 -> g189 [label="4e-05s"]
+    g179 -> g190 [label="4e-05s"]
+    g191 -> g192 [label="8e-05s"]
+    g183 -> g193 [label="0.00174s"]
+    g183 -> g191 [label="0.00033s"]
+    g194 -> g195 [label="0.00132s"]
+    g193 -> g194 [label="0.00152s"]
+    g186 -> g196 [label="4e-05s"]
+    g184 -> g197 [label="0.00028s"]
+    g184 -> g198 [label="0.00017s"]
+    g197 -> g199 [label="8e-05s"]
+    g200 -> g201 [label="8e-05s"]
+    g200 -> g202 [label="6e-05s"]
+    g200 -> g203 [label="0.003s"]
+    g200 -> g204 [label="0.00011s"]
+    g200 -> g205 [label="0.0002s"]
+    g206 -> g207 [label="0.00038s"]
+    g203 -> g208 [label="0.00017s"]
+    g203 -> g206 [label="0.00062s"]
+    g203 -> g209 [label="0.00094s"]
+    g210 -> g211 [label="6e-05s"]
+    g209 -> g210 [label="0.00076s"]
+    g212 -> g213 [label="7e-05s"]
+    g212 -> g200 [label="0.00406s"]
+    g214 -> g212 [label="0.00446s"]
+    g177 -> g214 [label="0.00462s"]
+    g177 -> g215 [label="4e-05s"]
+    g172 -> g216 [label="3e-05s"]
+    g217 -> g218 [label="3e-05s"]
+    g164 -> g217 [label="0.00018s"]
+    g145 -> g219 [label="0.01397s"]
+    g145 -> g220 [label="0.17859s"]
+    g145 -> g221 [label="9e-05s"]
+    g145 -> g222 [label="0.019s"]
+    g145 -> g223 [label="0.00321s"]
+    g145 -> g224 [label="0.02173s"]
+    g223 -> g225 [label="0.00013s"]
+    g223 -> g226 [label="0.0024s"]
+    g227 -> g228 [label="0.00086s"]
+    g226 -> g227 [label="0.00173s"]
+    g222 -> g229 [label="0.00988s"]
+    g222 -> g230 [label="8e-05s"]
+    g222 -> g231 [label="0.00829s"]
+    g232 -> g233 [label="0.00044s"]
+    g231 -> g234 [label="0.0018s"]
+    g231 -> g235 [label="0.00042s"]
+    g231 -> g236 [label="4e-05s"]
+    g231 -> g237 [label="0.00032s"]
+    g231 -> g238 [label="0.00033s"]
+    g231 -> g232 [label="0.00072s"]
+    g231 -> g239 [label="9e-05s"]
+    g240 -> g241 [label="9e-05s"]
+    g235 -> g240 [label="0.00025s"]
+    g234 -> g242 [label="4e-05s"]
+    g234 -> g243 [label="0.00273s"]
+    g234 -> g244 [label="0.00045s"]
+    g234 -> g245 [label="0.00074s"]
+    g246 -> g247 [label="0.00058s"]
+    g246 -> g248 [label="8e-05s"]
+    g246 -> g249 [label="0.00017s"]
+    g247 -> g250 [label="0.0003s"]
+    g243 -> g251 [label="0.00017s"]
+    g243 -> g246 [label="0.00162s"]
+    g237 -> g252 [label="0.00072s"]
+    g237 -> g253 [label="8e-05s"]
+    g254 -> g255 [label="5e-05s"]
+    g252 -> g254 [label="0.00021s"]
+    g256 -> g257 [label="0.0006s"]
+    g256 -> g258 [label="0.00632s"]
+    g229 -> g256 [label="0.00878s"]
+    g219 -> g259 [label="0.00012s"]
+    g219 -> g260 [label="0.00012s"]
+    g219 -> g261 [label="0.00365s"]
+    g219 -> g262 [label="0.00033s"]
+    g219 -> g263 [label="0.00141s"]
+    g219 -> g264 [label="6e-05s"]
+    g219 -> g265 [label="0.00013s"]
+    g219 -> g266 [label="0.00013s"]
+    g219 -> g267 [label="0.00014s"]
+    g219 -> g268 [label="0.00016s"]
+    g219 -> g269 [label="0.00043s"]
+    g219 -> g270 [label="0.00154s"]
+    g219 -> g271 [label="0.00012s"]
+    g219 -> g272 [label="0.00063s"]
+    g219 -> g273 [label="0.00039s"]
+    g219 -> g274 [label="8e-05s"]
+    g219 -> g275 [label="0.00012s"]
+    g219 -> g276 [label="7e-05s"]
+    g219 -> g277 [label="8e-05s"]
+    g219 -> g278 [label="0.0004s"]
+    g263 -> g279 [label="0.0001s"]
+    g263 -> g280 [label="0.00019s"]
+    g270 -> g281 [label="5e-05s"]
+    g282 -> g283 [label="0.00099s"]
+    g261 -> g282 [label="0.00117s"]
+    g278 -> g284 [label="0.00026s"]
+    g272 -> g285 [label="0.00013s"]
+    g273 -> g286 [label="0.00012s"]
+    g287 -> g288 [label="0.00015s"]
+    g287 -> g289 [label="0.00018s"]
+    g290 -> g287 [label="0.00076s"]
+    g291 -> g290 [label="0.00098s"]
+    g292 -> g291 [label="0.00142s"]
+    g293 -> g294 [label="7e-05s"]
+    g293 -> g295 [label="0.00263s"]
+    g293 -> g292 [label="0.002s"]
+    g293 -> g296 [label="0.00021s"]
+    g295 -> g297 [label="4e-05s"]
+    g295 -> g298 [label="0.00019s"]
+    g295 -> g299 [label="0.00012s"]
+    g295 -> g300 [label="0.00011s"]
+    g301 -> g293 [label="0.00566s"]
+    g302 -> g303 [label="0.00111s"]
+    g302 -> g304 [label="0.001s"]
+    g302 -> g301 [label="0.00598s"]
+    g302 -> g305 [label="0.00018s"]
+    g302 -> g306 [label="0.00081s"]
+    g302 -> g307 [label="7e-05s"]
+    g302 -> g308 [label="0.00015s"]
+    g309 -> g310 [label="0.00013s"]
+    g303 -> g311 [label="9e-05s"]
+    g303 -> g309 [label="0.0005s"]
+    g312 -> g313 [label="3e-05s"]
+    g312 -> g314 [label="6e-05s"]
+    g312 -> g315 [label="0.00031s"]
+    g312 -> g316 [label="0.013s"]
+    g312 -> g317 [label="9e-05s"]
+    g312 -> g318 [label="0.00085s"]
+    g312 -> g302 [label="0.0106s"]
+    g316 -> g319 [label="0.00125s"]
+    g316 -> g320 [label="0.00621s"]
+    g316 -> g321 [label="0.0002s"]
+    g316 -> g322 [label="0.00458s"]
+    g323 -> g324 [label="6e-05s"]
+    g323 -> g325 [label="0.00085s"]
+    g323 -> g326 [label="8e-05s"]
+    g323 -> g327 [label="0.00053s"]
+    g323 -> g328 [label="0.00075s"]
+    g327 -> g329 [label="0.00011s"]
+    g328 -> g330 [label="0.00015s"]
+    g331 -> g323 [label="0.00367s"]
+    g331 -> g332 [label="0.00011s"]
+    g331 -> g333 [label="0.00039s"]
+    g320 -> g331 [label="0.0059s"]
+    g322 -> g334 [label="0.0001s"]
+    g322 -> g335 [label="0.00026s"]
+    g322 -> g336 [label="0.00343s"]
+    g336 -> g337 [label="0.00113s"]
+    g336 -> g338 [label="0.00077s"]
+    g336 -> g339 [label="0.00015s"]
+    g336 -> g340 [label="0.00024s"]
+    g340 -> g341 [label="4e-05s"]
+    g337 -> g342 [label="0.00037s"]
+    g337 -> g343 [label="0.0003s"]
+    g344 -> g345 [label="0.00029s"]
+    g319 -> g344 [label="0.0005s"]
+    g319 -> g346 [label="0.00023s"]
+    g315 -> g347 [label="6e-05s"]
+    g318 -> g348 [label="0.00028s"]
+    g349 -> g350 [label="0.00155s"]
+    g349 -> g351 [label="0.0001s"]
+    g349 -> g352 [label="3e-05s"]
+    g349 -> g312 [label="0.02574s"]
+    g349 -> g353 [label="0.00011s"]
+    g350 -> g354 [label="3e-05s"]
+    g350 -> g355 [label="0.00061s"]
+    g356 -> g349 [label="0.02876s"]
+    g356 -> g357 [label="0.00201s"]
+    g357 -> g358 [label="0.00044s"]
+    g357 -> g359 [label="0.00011s"]
+    g357 -> g360 [label="0.00037s"]
+    g357 -> g361 [label="0.00035s"]
+    g220 -> g362 [label="9e-05s"]
+    g220 -> g363 [label="0.04051s"]
+    g220 -> g364 [label="0.00081s"]
+    g220 -> g356 [label="0.03109s"]
+    g220 -> g365 [label="7e-05s"]
+    g220 -> g366 [label="0.00014s"]
+    g367 -> g368 [label="0.00037s"]
+    g367 -> g369 [label="0.00048s"]
+    g367 -> g370 [label="0.00739s"]
+    g367 -> g371 [label="0.02932s"]
+    g368 -> g372 [label="7e-05s"]
+    g373 -> g374 [label="0.00029s"]
+    g375 -> g373 [label="0.00053s"]
+    g376 -> g375 [label="0.00081s"]
+    g376 -> g377 [label="0.00969s"]
+    g376 -> g378 [label="3e-05s"]
+    g379 -> g380 [label="0.00471s"]
+    g379 -> g381 [label="9e-05s"]
+    g380 -> g382 [label="0.00439s"]
+    g377 -> g379 [label="0.0095s"]
+    g383 -> g384 [label="0.0004s"]
+    g383 -> g385 [label="0.00483s"]
+    g383 -> g376 [label="0.01096s"]
+    g384 -> g386 [label="8e-05s"]
+    g387 -> g388 [label="0.00235s"]
+    g385 -> g389 [label="0.00016s"]
+    g385 -> g390 [label="0.00166s"]
+    g385 -> g387 [label="0.00258s"]
+    g390 -> g391 [label="0.00075s"]
+    g390 -> g392 [label="8e-05s"]
+    g393 -> g394 [label="0.00994s"]
+    g393 -> g395 [label="0.00014s"]
+    g393 -> g396 [label="0.00031s"]
+    g393 -> g397 [label="9e-05s"]
+    g393 -> g383 [label="0.01658s"]
+    g393 -> g398 [label="7e-05s"]
+    g393 -> g399 [label="0.00097s"]
+    g400 -> g401 [label="0.00091s"]
+    g400 -> g402 [label="0.00064s"]
+    g400 -> g403 [label="0.00138s"]
+    g400 -> g404 [label="0.0001s"]
+    g400 -> g405 [label="7e-05s"]
+    g400 -> g406 [label="0.00191s"]
+    g400 -> g407 [label="0.00013s"]
+    g400 -> g408 [label="0.00019s"]
+    g406 -> g409 [label="0.00049s"]
+    g406 -> g410 [label="0.0001s"]
+    g406 -> g411 [label="0.00025s"]
+    g406 -> g412 [label="0.00011s"]
+    g409 -> g413 [label="8e-05s"]
+    g403 -> g414 [label="0.00013s"]
+    g403 -> g415 [label="8e-05s"]
+    g403 -> g416 [label="0.00018s"]
+    g417 -> g418 [label="0.00013s"]
+    g402 -> g417 [label="0.00032s"]
+    g419 -> g420 [label="0.00018s"]
+    g419 -> g400 [label="0.00665s"]
+    g419 -> g421 [label="0.00107s"]
+    g421 -> g422 [label="0.00056s"]
+    g394 -> g419 [label="0.00846s"]
+    g394 -> g423 [label="0.00092s"]
+    g423 -> g424 [label="0.00051s"]
+    g423 -> g425 [label="3e-05s"]
+    g396 -> g426 [label="0.00014s"]
+    g371 -> g393 [label="0.02912s"]
+    g363 -> g427 [label="0.00019s"]
+    g363 -> g367 [label="0.03963s"]
+    g363 -> g428 [label="0.00025s"]
+    g364 -> g429 [label="9e-05s"]
+    g430 -> g431 [label="0.0023s"]
+    g430 -> g432 [label="0.00362s"]
+    g430 -> g433 [label="0.00061s"]
+    g430 -> g434 [label="6e-05s"]
+    g430 -> g435 [label="0.00707s"]
+    g430 -> g436 [label="8e-05s"]
+    g430 -> g437 [label="0.02035s"]
+    g431 -> g438 [label="4e-05s"]
+    g431 -> g439 [label="0.00052s"]
+    g431 -> g440 [label="4e-05s"]
+    g436 -> g441 [label="0.01089s"]
+    g436 -> g442 [label="0.00013s"]
+    g436 -> g443 [label="0.01131s"]
+    g436 -> g444 [label="3e-05s"]
+    g436 -> g445 [label="0.00022s"]
+    g445 -> g446 [label="4e-05s"]
+    g432 -> g447 [label="8e-05s"]
+    g435 -> g448 [label="5e-05s"]
+    g437 -> g449 [label="0.00105s"]
+    g242 -> g430 [label="0.09888s"]
+    g450 -> g451 [label="0.0028s"]
+    g450 -> g452 [label="0.00109s"]
+    g450 -> g453 [label="0.00146s"]
+    g450 -> g454 [label="0.00479s"]
+    g450 -> g455 [label="0.00033s"]
+    g450 -> g456 [label="0.00214s"]
+    g450 -> g457 [label="0.0005s"]
+    g450 -> g458 [label="0.00057s"]
+    g450 -> g459 [label="0.00125s"]
+    g450 -> g460 [label="0.00154s"]
+    g450 -> g461 [label="0.00028s"]
+    g450 -> g462 [label="0.00034s"]
+    g450 -> g463 [label="0.00152s"]
+    g454 -> g464 [label="5e-05s"]
+    g454 -> g465 [label="0.00153s"]
+    g454 -> g466 [label="0.00011s"]
+    g454 -> g467 [label="0.00021s"]
+    g454 -> g468 [label="4e-05s"]
+    g469 -> g470 [label="0.0007s"]
+    g465 -> g469 [label="0.00112s"]
+    g460 -> g471 [label="0.00013s"]
+    g453 -> g472 [label="0.00027s"]
+    g224 -> g473 [label="0.00023s"]
+    g224 -> g474 [label="3e-05s"]
+    g224 -> g450 [label="0.02004s"]
+    g224 -> g475 [label="0.00053s"]
+    g141 -> g142 [label="0.26331s"]
+    g31 -> g476 [label="0.00012s"]
+    g477 -> g478 [label="0.00796s"]
+    g477 -> g479 [label="4e-05s"]
+    g477 -> g480 [label="4e-05s"]
+    g481 -> g482 [label="8e-05s"]
+    g481 -> g483 [label="0.00012s"]
+    g478 -> g484 [label="8e-05s"]
+    g478 -> g485 [label="0.00488s"]
+    g478 -> g486 [label="0.00142s"]
+    g478 -> g487 [label="0.00037s"]
+    g478 -> g481 [label="0.00053s"]
+    g487 -> g488 [label="6e-05s"]
+    g487 -> g489 [label="6e-05s"]
+    g490 -> g491 [label="0.00011s"]
+    g485 -> g492 [label="0.00106s"]
+    g485 -> g493 [label="7e-05s"]
+    g485 -> g494 [label="7e-05s"]
+    g485 -> g495 [label="6e-05s"]
+    g485 -> g496 [label="0.00238s"]
+    g485 -> g490 [label="0.00026s"]
+    g485 -> g497 [label="8e-05s"]
+    g485 -> g498 [label="0.00013s"]
+    g496 -> g499 [label="0.00021s"]
+    g496 -> g500 [label="0.00174s"]
+    g496 -> g501 [label="7e-05s"]
+    g500 -> g502 [label="0.00033s"]
+    g500 -> g503 [label="0.0002s"]
+    g500 -> g504 [label="0.0003s"]
+    g500 -> g505 [label="0.00022s"]
+    g500 -> g506 [label="0.00013s"]
+    g486 -> g507 [label="8e-05s"]
+    g486 -> g508 [label="9e-05s"]
+    g486 -> g509 [label="0.0001s"]
+    g486 -> g510 [label="8e-05s"]
+    g486 -> g511 [label="8e-05s"]
+    g486 -> g512 [label="9e-05s"]
+    g486 -> g513 [label="9e-05s"]
+    g486 -> g514 [label="9e-05s"]
+    g8 -> g515 [label="3e-05s"]
+    g8 -> g516 [label="0.01834s"]
+    g8 -> g477 [label="0.00845s"]
+    g8 -> g517 [label="0.0011s"]
+    g8 -> g518 [label="0.00162s"]
+    g8 -> g519 [label="0.00193s"]
+    g8 -> g520 [label="4e-05s"]
+    g8 -> g521 [label="0.00039s"]
+    g522 -> g523 [label="0.00077s"]
+    g524 -> g522 [label="0.0014s"]
+    g516 -> g525 [label="0.00025s"]
+    g516 -> g526 [label="0.01479s"]
+    g516 -> g527 [label="0.00016s"]
+    g516 -> g524 [label="0.00174s"]
+    g516 -> g528 [label="0.00042s"]
+    g529 -> g530 [label="6e-05s"]
+    g528 -> g529 [label="0.00021s"]
+    g531 -> g532 [label="0.0004s"]
+    g533 -> g531 [label="0.00373s"]
+    g534 -> g535 [label="0.00057s"]
+    g534 -> g536 [label="0.00094s"]
+    g534 -> g533 [label="0.00406s"]
+    g534 -> g537 [label="5e-05s"]
+    g534 -> g538 [label="7e-05s"]
+    g535 -> g539 [label="5e-05s"]
+    g535 -> g540 [label="0.00024s"]
+    g541 -> g542 [label="0.0042s"]
+    g541 -> g543 [label="0.00194s"]
+    g541 -> g544 [label="0.00162s"]
+    g541 -> g534 [label="0.00637s"]
+    g545 -> g546 [label="0.00014s"]
+    g543 -> g545 [label="0.00037s"]
+    g526 -> g541 [label="0.01467s"]
+    g547 -> g548 [label="3e-05s"]
+    g547 -> g549 [label="0.0009s"]
+    g549 -> g550 [label="4e-05s"]
+    g549 -> g551 [label="0.00014s"]
+    g519 -> g547 [label="0.00119s"]
+    g552 -> g553 [label="0.00027s"]
+    g518 -> g554 [label="4e-05s"]
+    g518 -> g555 [label="0.00023s"]
+    g518 -> g556 [label="0.00016s"]
+    g518 -> g552 [label="0.00055s"]
+    g557 -> g558 [label="0.00068s"]
+    g517 -> g557 [label="0.00096s"]
+    g17 -> g559 [label="0.00116s"]
+    g17 -> g560 [label="0.11338s"]
+    g17 -> g561 [label="0.00013s"]
+    g17 -> g562 [label="0.00579s"]
+    g17 -> g563 [label="0.00023s"]
+    g17 -> g564 [label="0.01263s"]
+    g17 -> g565 [label="0.00016s"]
+    g17 -> g566 [label="0.0138s"]
+    g17 -> g567 [label="0.02734s"]
+    g17 -> g568 [label="0.00013s"]
+    g17 -> g569 [label="7e-05s"]
+    g17 -> g570 [label="0.00028s"]
+    g571 -> g572 [label="0.00076s"]
+    g571 -> g573 [label="0.00039s"]
+    g571 -> g574 [label="0.00092s"]
+    g571 -> g575 [label="0.00245s"]
+    g571 -> g576 [label="0.00051s"]
+    g571 -> g577 [label="0.00022s"]
+    g577 -> g578 [label="4e-05s"]
+    g579 -> g580 [label="0.00014s"]
+    g579 -> g581 [label="0.0001s"]
+    g579 -> g582 [label="0.00015s"]
+    g579 -> g583 [label="0.00052s"]
+    g579 -> g584 [label="8e-05s"]
+    g579 -> g585 [label="0.0001s"]
+    g579 -> g586 [label="5e-05s"]
+    g575 -> g587 [label="0.00021s"]
+    g575 -> g579 [label="0.00184s"]
+    g588 -> g589 [label="9e-05s"]
+    g573 -> g588 [label="0.00023s"]
+    g590 -> g571 [label="0.00612s"]
+    g590 -> g591 [label="0.00136s"]
+    g592 -> g590 [label="0.00789s"]
+    g592 -> g593 [label="5e-05s"]
+    g564 -> g594 [label="0.00108s"]
+    g564 -> g595 [label="0.00149s"]
+    g564 -> g592 [label="0.00828s"]
+    g564 -> g596 [label="0.00124s"]
+    g595 -> g597 [label="0.00034s"]
+    g595 -> g598 [label="0.00029s"]
+    g595 -> g599 [label="4e-05s"]
+    g595 -> g600 [label="0.00013s"]
+    g595 -> g601 [label="6e-05s"]
+    g594 -> g602 [label="0.00046s"]
+    g594 -> g603 [label="4e-05s"]
+    g602 -> g604 [label="0.00022s"]
+    g605 -> g606 [label="3e-05s"]
+    g607 -> g605 [label="0.00078s"]
+    g596 -> g607 [label="0.00107s"]
+    g559 -> g608 [label="0.00071s"]
+    g560 -> g609 [label="0.10068s"]
+    g560 -> g610 [label="0.00022s"]
+    g560 -> g611 [label="0.00071s"]
+    g560 -> g612 [label="0.00808s"]
+    g560 -> g613 [label="0.00268s"]
+    g614 -> g615 [label="0.00045s"]
+    g614 -> g616 [label="0.00045s"]
+    g613 -> g614 [label="0.00239s"]
+    g612 -> g617 [label="4e-05s"]
+    g612 -> g618 [label="0.00085s"]
+    g612 -> g619 [label="0.00618s"]
+    g612 -> g620 [label="8e-05s"]
+    g612 -> g621 [label="4e-05s"]
+    g618 -> g622 [label="0.00025s"]
+    g619 -> g623 [label="0.00568s"]
+    g619 -> g624 [label="8e-05s"]
+    g623 -> g625 [label="0.00154s"]
+    g623 -> g626 [label="0.00095s"]
+    g623 -> g627 [label="9e-05s"]
+    g623 -> g628 [label="0.00245s"]
+    g623 -> g629 [label="4e-05s"]
+    g625 -> g630 [label="0.00042s"]
+    g625 -> g631 [label="0.00043s"]
+    g631 -> g632 [label="7e-05s"]
+    g631 -> g633 [label="5e-05s"]
+    g626 -> g634 [label="0.00014s"]
+    g626 -> g635 [label="0.0001s"]
+    g626 -> g636 [label="9e-05s"]
+    g628 -> g637 [label="0.00215s"]
+    g609 -> g638 [label="0.00106s"]
+    g609 -> g639 [label="0.00031s"]
+    g609 -> g640 [label="0.00928s"]
+    g609 -> g641 [label="0.00013s"]
+    g609 -> g642 [label="0.00081s"]
+    g639 -> g643 [label="4e-05s"]
+    g642 -> g644 [label="9e-05s"]
+    g638 -> g645 [label="4e-05s"]
+    g640 -> g646 [label="0.00727s"]
+    g640 -> g647 [label="0.00082s"]
+    g648 -> g649 [label="0.00014s"]
+    g650 -> g651 [label="5e-05s"]
+    g650 -> g652 [label="0.00186s"]
+    g650 -> g653 [label="0.00557s"]
+    g650 -> g648 [label="0.00031s"]
+    g650 -> g654 [label="4e-05s"]
+    g650 -> g655 [label="4e-05s"]
+    g650 -> g656 [label="0.00133s"]
+    g650 -> g657 [label="0.0002s"]
+    g650 -> g658 [label="0.00134s"]
+    g659 -> g660 [label="0.0003s"]
+    g659 -> g661 [label="0.00019s"]
+    g660 -> g662 [label="0.0001s"]
+    g663 -> g659 [label="0.00078s"]
+    g664 -> g663 [label="0.00091s"]
+    g656 -> g664 [label="0.00106s"]
+    g658 -> g665 [label="0.00012s"]
+    g658 -> g666 [label="0.00011s"]
+    g658 -> g667 [label="0.00034s"]
+    g667 -> g668 [label="9e-05s"]
+    g669 -> g670 [label="9e-05s"]
+    g669 -> g671 [label="0.0005s"]
+    g671 -> g672 [label="0.00033s"]
+    g673 -> g669 [label="0.00121s"]
+    g673 -> g674 [label="7e-05s"]
+    g675 -> g673 [label="0.00155s"]
+    g652 -> g675 [label="0.0017s"]
+    g676 -> g677 [label="8e-05s"]
+    g678 -> g679 [label="8e-05s"]
+    g678 -> g676 [label="0.0005s"]
+    g653 -> g678 [label="0.00085s"]
+    g653 -> g680 [label="0.00426s"]
+    g653 -> g681 [label="7e-05s"]
+    g682 -> g683 [label="0.0001s"]
+    g682 -> g684 [label="0.00254s"]
+    g682 -> g685 [label="0.00011s"]
+    g684 -> g686 [label="0.00024s"]
+    g684 -> g687 [label="0.00097s"]
+    g684 -> g688 [label="0.00062s"]
+    g689 -> g690 [label="3e-05s"]
+    g688 -> g689 [label="0.00041s"]
+    g680 -> g682 [label="0.00396s"]
+    g608 -> g691 [label="0.00092s"]
+    g608 -> g692 [label="3e-05s"]
+    g691 -> g693 [label="0.00024s"]
+    g566 -> g650 [label="0.01359s"]
+    g694 -> g695 [label="0.0124s"]
+    g694 -> g696 [label="0.01163s"]
+    g694 -> g697 [label="0.0001s"]
+    g698 -> g699 [label="0.00011s"]
+    g696 -> g700 [label="8e-05s"]
+    g696 -> g701 [label="0.0001s"]
+    g696 -> g702 [label="0.00051s"]
+    g696 -> g698 [label="0.00034s"]
+    g696 -> g703 [label="0.00773s"]
+    g696 -> g704 [label="0.00105s"]
+    g705 -> g706 [label="0.00055s"]
+    g707 -> g705 [label="0.00251s"]
+    g703 -> g708 [label="0.00433s"]
+    g703 -> g707 [label="0.00294s"]
+    g708 -> g709 [label="0.00404s"]
+    g710 -> g711 [label="9e-05s"]
+    g712 -> g710 [label="0.00079s"]
+    g712 -> g713 [label="0.0018s"]
+    g712 -> g714 [label="0.00077s"]
+    g713 -> g715 [label="0.00144s"]
+    g713 -> g716 [label="3e-05s"]
+    g717 -> g718 [label="0.0004s"]
+    g715 -> g717 [label="0.00132s"]
+    g719 -> g720 [label="5e-05s"]
+    g719 -> g721 [label="0.00153s"]
+    g719 -> g722 [label="0.00029s"]
+    g719 -> g712 [label="0.00478s"]
+    g723 -> g724 [label="0.0001s"]
+    g725 -> g723 [label="0.00028s"]
+    g721 -> g725 [label="0.00086s"]
+    g695 -> g726 [label="9e-05s"]
+    g695 -> g727 [label="0.00409s"]
+    g695 -> g719 [label="0.00779s"]
+    g728 -> g729 [label="0.00013s"]
+    g728 -> g730 [label="0.00013s"]
+    g731 -> g728 [label="0.00071s"]
+    g727 -> g732 [label="0.00021s"]
+    g727 -> g731 [label="0.00091s"]
+    g567 -> g694 [label="0.02658s"]
+    g733 -> g734 [label="0.0001s"]
+    g735 -> g736 [label="6e-05s"]
+    g735 -> g737 [label="0.00012s"]
+    g735 -> g733 [label="0.00039s"]
+    g735 -> g738 [label="0.00147s"]
+    g739 -> g740 [label="0.00013s"]
+    g738 -> g739 [label="0.00062s"]
+    g738 -> g741 [label="0.00025s"]
+    g738 -> g742 [label="0.00027s"]
+    g743 -> g735 [label="0.00257s"]
+    g562 -> g744 [label="8e-05s"]
+    g562 -> g745 [label="0.00033s"]
+    g562 -> g743 [label="0.00272s"]
+    g562 -> g746 [label="0.0001s"]
+    g562 -> g747 [label="6e-05s"]
+    g562 -> g748 [label="0.00011s"]
+    g562 -> g749 [label="0.00011s"]
+    g562 -> g750 [label="0.00034s"]
+    g562 -> g751 [label="0.00011s"]
+    g562 -> g752 [label="0.0004s"]
+    g562 -> g753 [label="0.00014s"]
+    g562 -> g754 [label="0.00019s"]
+    g750 -> g755 [label="0.00014s"]
+    g752 -> g756 [label="3e-05s"]
+    g752 -> g757 [label="8e-05s"]
+    g754 -> g758 [label="4e-05s"]
+    g745 -> g759 [label="3e-05s"]
+    g22 -> g760 [label="0.00075s"]
+    g22 -> g761 [label="4e-05s"]
+    g760 -> g762 [label="0.00043s"]
+    g763 -> g764 [label="4e-05s"]
+    g763 -> g765 [label="0.00016s"]
+    g766 -> g763 [label="0.00126s"]
+    g27 -> g766 [label="0.00139s"]
+    g767 -> g768 [label="0.00074s"]
+    g767 -> g769 [label="0.00064s"]
+    g767 -> g770 [label="0.00023s"]
+    g769 -> g771 [label="0.00036s"]
+    g772 -> g773 [label="0.00044s"]
+    g772 -> g774 [label="0.00538s"]
+    g772 -> g767 [label="0.00218s"]
+    g772 -> g775 [label="0.00059s"]
+    g772 -> g776 [label="3e-05s"]
+    g772 -> g777 [label="0.00066s"]
+    g772 -> g778 [label="3e-05s"]
+    g772 -> g779 [label="0.0013s"]
+    g779 -> g780 [label="0.0004s"]
+    g781 -> g782 [label="0.00028s"]
+    g781 -> g783 [label="4e-05s"]
+    g781 -> g784 [label="0.0001s"]
+    g781 -> g785 [label="0.0004s"]
+    g781 -> g786 [label="0.0016s"]
+    g782 -> g787 [label="8e-05s"]
+    g788 -> g789 [label="0.00036s"]
+    g786 -> g790 [label="7e-05s"]
+    g786 -> g788 [label="0.00055s"]
+    g786 -> g791 [label="0.00018s"]
+    g786 -> g792 [label="5e-05s"]
+    g793 -> g794 [label="0.00021s"]
+    g787 -> g795 [label="0.00122s"]
+    g796 -> g781 [label="0.00457s"]
+    g774 -> g796 [label="0.00478s"]
+    g774 -> g797 [label="0.00038s"]
+    g797 -> g798 [label="6e-05s"]
+    g797 -> g799 [label="0.0001s"]
+    g775 -> g800 [label="0.00045s"]
+    g801 -> g802 [label="7e-05s"]
+    g777 -> g801 [label="0.00024s"]
+    g10 -> g772 [label="0.01155s"]
+    g32 -> g803 [label="0.00102s"]
+    g32 -> g804 [label="0.00035s"]
+    g805 -> g806 [label="0.00027s"]
+    g805 -> g807 [label="0.00018s"]
+    g806 -> g808 [label="7e-05s"]
+    g803 -> g809 [label="8e-05s"]
+    g803 -> g805 [label="0.00067s"]
+    g810 -> g811 [label="3e-05s"]
+    g15 -> g812 [label="0.0077s"]
+    g15 -> g810 [label="0.0002s"]
+    g812 -> g813 [label="0.00177s"]
+    g812 -> g814 [label="0.00117s"]
+    g812 -> g815 [label="4e-05s"]
+    g812 -> g816 [label="0.00069s"]
+    g812 -> g817 [label="6e-05s"]
+    g812 -> g818 [label="3e-05s"]
+    g812 -> g819 [label="3e-05s"]
+    g812 -> g820 [label="0.00136s"]
+    g812 -> g821 [label="0.00097s"]
+    g822 -> g823 [label="0.00011s"]
+    g824 -> g822 [label="0.00029s"]
+    g821 -> g824 [label="0.00081s"]
+    g813 -> g825 [label="7e-05s"]
+    g813 -> g826 [label="7e-05s"]
+    g813 -> g827 [label="4e-05s"]
+    g813 -> g828 [label="0.00112s"]
+    g828 -> g829 [label="0.00049s"]
+    g828 -> g830 [label="0.00018s"]
+    g828 -> g831 [label="0.0001s"]
+    g832 -> g833 [label="0.00014s"]
+    g829 -> g832 [label="0.00035s"]
+    g834 -> g835 [label="0.0001s"]
+    g816 -> g834 [label="0.00029s"]
+    g816 -> g836 [label="0.00017s"]
+    g837 -> g838 [label="4e-05s"]
+    g837 -> g839 [label="0.00031s"]
+    g814 -> g837 [label="0.00065s"]
+    g840 -> g5 [label="0.59188s"]
+    g841 -> g840 [label="0.59245s"]
+}
+// load ~/my/lib/python3.6/site-packages/pipenv/__init__.py ... 0.5924477577209473s
+// load ~/my/lib/python3.6/site-packages/pipenv/cli.py ... 0.5918803215026855s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/dotenv/__init__.py ... 0.2650315761566162s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/dotenv/ipython.py ... 0.2640550136566162s
+// load ~/my/lib/python3.6/site-packages/IPython/__init__.py ... 0.2633070945739746s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/embed.py ... 0.23813724517822266s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/interactiveshell.py ... 0.1785898208618164s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/__init__.py ... 0.17690563201904297s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/__init__.py ... 0.11338138580322266s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/pkg_resources/__init__.py ... 0.10068082809448242s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/__init__.py ... 0.0988779067993164s
+// load ~/my/lib/python3.6/site-packages/urllib3/__init__.py ... 0.045993804931640625s
+// load ~/my/lib/python3.6/site-packages/urllib3/connectionpool.py ... 0.044150352478027344s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/debugger.py ... 0.04051399230957031s
+// load ~/my/lib/python3.6/site-packages/IPython/core/completer.py ... 0.03963422775268555s
+// load ~/my/lib/python3.6/site-packages/requests/__init__.py ... 0.03343009948730469s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/__init__.py ... 0.031089305877685547s
+// load ~/my/lib/python3.6/site-packages/jedi/__init__.py ... 0.029317617416381836s
+// load ~/my/lib/python3.6/site-packages/jedi/api/__init__.py ... 0.029119014739990234s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/interface.py ... 0.028755903244018555s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/vcs/subversion.py ... 0.027342796325683594s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/index.py ... 0.02658390998840332s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/application.py ... 0.025743484497070312s
+// load ~/my/lib/python3.6/site-packages/urllib3/exceptions.py ... 0.024962186813354492s
+// load ~/my/lib/python3.6/site-packages/IPython/core/application.py ... 0.023977279663085938s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/ipapp.py ... 0.021728038787841797s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/requirements.py ... 0.020349502563476562s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/__init__.py ... 0.020043134689331055s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magic.py ... 0.01899862289428711s
+// load ~/my/lib/python3.6/site-packages/requests/utils.py ... 0.018336772918701172s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/__init__.py ... 0.01658463478088379s
+// load ~/my/lib/python3.6/site-packages/IPython/core/crashhandler.py ... 0.015331029891967773s
+// load ~/my/lib/python3.6/site-packages/requests/_internal_utils.py ... 0.014790058135986328s
+// load ~/my/lib/python3.6/site-packages/requests/compat.py ... 0.014672517776489258s
+// load ~/my/lib/python3.6/site-packages/IPython/core/ultratb.py ... 0.014456987380981445s
+// load ~/my/lib/python3.6/site-packages/IPython/core/interactiveshell.py ... 0.013970375061035156s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/vcs/mercurial.py ... 0.013795852661132812s
+// load /usr/lib/python3.6/http/client.py ... 0.013635396957397461s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/download.py ... 0.013593196868896484s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/basic.py ... 0.013000249862670898s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/__init__.py ... 0.012631893157958984s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/__init__.py ... 0.012401580810546875s
+// load ~/my/lib/python3.6/site-packages/flake8/main/cli.py ... 0.011664628982543945s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/wheel.py ... 0.011627197265625s
+// load ~/my/lib/python3.6/site-packages/flake8/main/application.py ... 0.011548757553100586s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/pyparsing.py ... 0.011314868927001953s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/parser.py ... 0.01095890998840332s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/six.py ... 0.01089334487915039s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/buffer.py ... 0.010602951049804688s
+// load /usr/lib/python3.6/email/parser.py ... 0.010396480560302734s
+// load /usr/lib/python3.6/email/feedparser.py ... 0.01017618179321289s
+// load ~/my/lib/python3.6/site-packages/jedi/api/classes.py ... 0.009943962097167969s
+// load ~/my/lib/python3.6/site-packages/IPython/core/inputsplitter.py ... 0.009879350662231445s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/pgen2/parse.py ... 0.009694337844848633s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/tokenize.py ... 0.009497404098510742s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/requirements.py ... 0.009278535842895508s
+// load ~/my/lib/python3.6/site-packages/IPython/core/inputtransformer.py ... 0.008783340454101562s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/__init__.py ... 0.008464813232421875s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/__init__.py ... 0.008457422256469727s
+// load ~/my/lib/python3.6/site-packages/chardet/__init__.py ... 0.008448362350463867s
+// load /usr/lib/python3.6/email/_policybase.py ... 0.008445501327514648s
+// load ~/my/lib/python3.6/site-packages/IPython/core/oinspect.py ... 0.008289337158203125s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/__init__.py ... 0.008275747299194336s
+// load ~/my/lib/python3.6/site-packages/pipenv/project.py ... 0.008268594741821289s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/core.py ... 0.008217573165893555s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/locations.py ... 0.008084535598754883s
+// load ~/my/lib/python3.6/site-packages/chardet/universaldetector.py ... 0.00796365737915039s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/__init__.py ... 0.007893085479736328s
+// load ~/my/lib/python3.6/site-packages/urllib3/request.py ... 0.007848501205444336s
+// load ~/my/lib/python3.6/site-packages/urllib3/packages/__init__.py ... 0.007837533950805664s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/html5parser.py ... 0.007794380187988281s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/distlib/scripts.py ... 0.007733345031738281s
+// load ~/my/lib/python3.6/site-packages/pipenv/utils.py ... 0.0077016353607177734s
+// load ~/my/lib/python3.6/site-packages/urllib3/packages/ssl_match_hostname/__init__.py ... 0.007632255554199219s
+// load ~/my/lib/python3.6/site-packages/urllib3/filepost.py ... 0.007452249526977539s
+// load /usr/lib/python3.6/ssl.py ... 0.007416486740112305s
+// load /usr/lib/python3.6/typing.py ... 0.00738835334777832s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/pyparsing.py ... 0.00727391242980957s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/background.py ... 0.007091522216796875s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/specifiers.py ... 0.007066488265991211s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/representation.py ... 0.006650686264038086s
+// load ~/my/lib/python3.6/site-packages/simplejson/__init__.py ... 0.006369829177856445s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/tokenize2.py ... 0.006322383880615234s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/__init__.py ... 0.006213665008544922s
+// load /usr/lib/python3.6/distutils/command/install.py ... 0.0061795711517333984s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/connectionpool.py ... 0.006119966506958008s
+// load /usr/lib/python3.6/uuid.py ... 0.006062030792236328s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/auto_suggest.py ... 0.0059816837310791016s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/containers.py ... 0.00589752197265625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/__init__.py ... 0.005791425704956055s
+// load /usr/lib/python3.6/tempfile.py ... 0.0057752132415771484s
+// load /usr/lib/python3.6/distutils/core.py ... 0.005680084228515625s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/filters/__init__.py ... 0.0056610107421875s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/caches/__init__.py ... 0.005566835403442383s
+// load ~/my/lib/python3.6/site-packages/flake8/main/options.py ... 0.005384683609008789s
+// load ~/my/lib/python3.6/site-packages/IPython/core/debugger.py ... 0.0053730010986328125s
+// load ~/my/lib/python3.6/site-packages/urllib3/connection.py ... 0.0053446292877197266s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/decorators.py ... 0.005247592926025391s
+// load /usr/lib/python3.6/random.py ... 0.0051496028900146484s
+// load /usr/lib/python3.6/email/utils.py ... 0.005068540573120117s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/path.py ... 0.005009651184082031s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click_completion.py ... 0.0049495697021484375s
+// load /usr/lib/python3.6/inspect.py ... 0.004901885986328125s
+// load ~/my/lib/python3.6/site-packages/chardet/mbcsgroupprober.py ... 0.004884481430053711s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/python/__init__.py ... 0.004825115203857422s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/execution.py ... 0.00478816032409668s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_inputstream.py ... 0.004779815673828125s
+// load ~/my/lib/python3.6/site-packages/flake8/main/debug.py ... 0.004778861999511719s
+// load ~/my/lib/python3.6/site-packages/jedi/common.py ... 0.0047113895416259766s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/__init__.py ... 0.004637718200683594s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/process.py ... 0.004619121551513672s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/renderer.py ... 0.00458216667175293s
+// load ~/my/lib/python3.6/site-packages/setuptools/__init__.py ... 0.004567146301269531s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/_process_posix.py ... 0.0044612884521484375s
+// load ~/my/lib/python3.6/site-packages/jedi/settings.py ... 0.004386186599731445s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/distlib/resources.py ... 0.004329204559326172s
+// load ~/my/lib/python3.6/site-packages/redis/__init__.py ... 0.00426173210144043s
+// load /usr/lib/python3.6/http/cookiejar.py ... 0.004203319549560547s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/serializer.py ... 0.0040895938873291016s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/__init__.py ... 0.004064321517944336s
+// load /usr/lib/python3.6/decimal.py ... 0.004063606262207031s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/distlib/util.py ... 0.004038810729980469s
+// load /usr/lib/python3.6/socket.py ... 0.004030704498291016s
+// load ~/my/lib/python3.6/site-packages/redis/client.py ... 0.003960609436035156s
+// load ~/my/lib/python3.6/site-packages/traitlets/config/__init__.py ... 0.0038576126098632812s
+// load /usr/lib/python3.6/multiprocessing/__init__.py ... 0.0038423538208007812s
+// load /usr/lib/python3.6/_pydecimal.py ... 0.0037310123443603516s
+// load ~/my/lib/python3.6/site-packages/traitlets/config/application.py ... 0.0036842823028564453s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/controls.py ... 0.0036733150482177734s
+// load /usr/lib/python3.6/shutil.py ... 0.0036721229553222656s
+// load ~/my/lib/python3.6/site-packages/IPython/core/history.py ... 0.003648519515991211s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/version.py ... 0.0036163330078125s
+// load /usr/lib/python3.6/multiprocessing/context.py ... 0.0035796165466308594s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/__init__.py ... 0.0034332275390625s
+// load ~/my/lib/python3.6/site-packages/traitlets/__init__.py ... 0.003331899642944336s
+// load /usr/lib/python3.6/hashlib.py ... 0.003307342529296875s
+// load /usr/lib/python3.6/platform.py ... 0.0032477378845214844s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magic_arguments.py ... 0.003209352493286133s
+// load ~/my/lib/python3.6/site-packages/traitlets/traitlets.py ... 0.0030128955841064453s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/pty_spawn.py ... 0.0030035972595214844s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/distlib/compat.py ... 0.0029366016387939453s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/basic.py ... 0.0027985572814941406s
+// load ~/my/lib/python3.6/site-packages/pygments/lexers/python.py ... 0.002729654312133789s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/completion.py ... 0.002716541290283203s
+// load /usr/lib/python3.6/email/header.py ... 0.0026857852935791016s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/compat/__init__.py ... 0.0026788711547851562s
+// load /usr/lib/python3.6/concurrent/futures/__init__.py ... 0.002630949020385742s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/filters/cli.py ... 0.002628326416015625s
+// load /usr/lib/python3.6/multiprocessing/reduction.py ... 0.002594470977783203s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/python/parser.py ... 0.0025796890258789062s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/basecommand.py ... 0.002571582794189453s
+// load ~/my/lib/python3.6/site-packages/redis/connection.py ... 0.002535104751586914s
+// load /usr/lib/python3.6/html/parser.py ... 0.0025110244750976562s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/connection.py ... 0.002454519271850586s
+// load /usr/lib/python3.6/distutils/config.py ... 0.0024499893188476562s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/text.py ... 0.0024023056030273438s
+// load /usr/lib/python3.6/logging/config.py ... 0.0023903846740722656s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/PyColorize.py ... 0.002384185791015625s
+// load ~/my/lib/python3.6/site-packages/chardet/sjisprober.py ... 0.0023767948150634766s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/python/tree.py ... 0.002350330352783203s
+// load /usr/lib/python3.6/plistlib.py ... 0.0022971630096435547s
+// load /usr/lib/python3.6/ctypes/__init__.py ... 0.0022122859954833984s
+// load ~/my/lib/python3.6/site-packages/flake8/checker.py ... 0.0021750926971435547s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/crayons.py ... 0.0021736621856689453s
+// load /usr/lib/python3.6/configparser.py ... 0.0021517276763916016s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/osm.py ... 0.002141714096069336s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/shortcuts.py ... 0.002012014389038086s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/filters/base.py ... 0.0020012855529785156s
+// load /usr/lib/python3.6/json/__init__.py ... 0.0019767284393310547s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/__init__.py ... 0.0019712448120117188s
+// load /usr/lib/python3.6/pydoc.py ... 0.0019526481628417969s
+// load /usr/lib/python3.6/urllib/request.py ... 0.0019385814666748047s
+// load /usr/lib/python3.6/pickle.py ... 0.0019309520721435547s
+// load ~/my/lib/python3.6/site-packages/requests/packages.py ... 0.0019309520721435547s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipreqs/pipreqs.py ... 0.0019249916076660156s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/compiled/__init__.py ... 0.0019075870513916016s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/__init__.py ... 0.0018570423126220703s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/__init__.py ... 0.0018372535705566406s
+// load /usr/lib/python3.6/ipaddress.py ... 0.0018346309661865234s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/initialise.py ... 0.00180816650390625s
+// load ~/my/lib/python3.6/site-packages/pygments/lexers/__init__.py ... 0.0018010139465332031s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_utils.py ... 0.0018000602722167969s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/resolver.py ... 0.0017709732055664062s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/colorable.py ... 0.001741170883178711s
+// load ~/my/lib/python3.6/site-packages/chardet/chardistribution.py ... 0.0017387866973876953s
+// load /usr/lib/python3.6/cgi.py ... 0.0017364025115966797s
+// load /usr/lib/python3.6/pathlib.py ... 0.001725912094116211s
+// load /usr/lib/python3.6/email/message.py ... 0.0017058849334716797s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/wrapper.py ... 0.0016994476318359375s
+// load /usr/lib/python3.6/urllib/parse.py ... 0.0016894340515136719s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/ansitowin32.py ... 0.0016667842864990234s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/python/diff.py ... 0.0016586780548095703s
+// load /usr/lib/python3.6/http/cookies.py ... 0.0016243457794189453s
+// load ~/my/lib/python3.6/site-packages/requests/models.py ... 0.0016226768493652344s
+// load ~/my/lib/python3.6/site-packages/pygments/lexer.py ... 0.0016202926635742188s
+// load ~/my/lib/python3.6/site-packages/setuptools/dist.py ... 0.0016047954559326172s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/input.py ... 0.0015549659729003906s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/adapter.py ... 0.0015540122985839844s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/requirements/__init__.py ... 0.0015447139739990234s
+// load /usr/lib/python3.6/distutils/dist.py ... 0.0015435218811035156s
+// load ~/my/lib/python3.6/site-packages/IPython/core/formatters.py ... 0.0015416145324707031s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/pylab.py ... 0.0015387535095214844s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_tokenizer.py ... 0.0015301704406738281s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/types.py ... 0.0015282630920410156s
+// load /usr/lib/python3.6/cProfile.py ... 0.0015268325805664062s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/history.py ... 0.001522064208984375s
+// load ~/my/lib/python3.6/site-packages/pygments/__init__.py ... 0.0015211105346679688s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/utils.py ... 0.0014851093292236328s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/req/__init__.py ... 0.0014748573303222656s
+// load /usr/lib/python3.6/concurrent/futures/process.py ... 0.0014612674713134766s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/script.py ... 0.0014598369598388672s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/semver.py ... 0.0014545917510986328s
+// load /usr/lib/python3.6/signal.py ... 0.0014467239379882812s
+// load ~/my/lib/python3.6/site-packages/traitlets/config/configurable.py ... 0.0014448165893554688s
+// load /usr/lib/python3.6/xml/etree/cElementTree.py ... 0.0014386177062988281s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/utils.py ... 0.0014235973358154297s
+// load ~/my/lib/python3.6/site-packages/chardet/sbcsgroupprober.py ... 0.0014164447784423828s
+// load ~/my/lib/python3.6/site-packages/IPython/core/prefilter.py ... 0.0014057159423828125s
+// load /usr/lib/python3.6/html/__init__.py ... 0.00139617919921875s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/requirements/parser.py ... 0.0013880729675292969s
+// load /usr/lib/python3.6/selectors.py ... 0.0013833045959472656s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/iterable.py ... 0.0013756752014160156s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/parse.py ... 0.0013642311096191406s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/poolmanager.py ... 0.001363515853881836s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/ui.py ... 0.0013403892517089844s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/logging.py ... 0.0013306140899658203s
+// load ~/my/lib/python3.6/site-packages/pygments/util.py ... 0.0013225078582763672s
+// load /usr/lib/python3.6/xml/etree/ElementTree.py ... 0.0013213157653808594s
+// load ~/my/lib/python3.6/site-packages/flake8/style_guide.py ... 0.0012996196746826172s
+// load /usr/lib/python3.6/json/decoder.py ... 0.001270294189453125s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/requirements/requirement.py ... 0.001264333724975586s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/namespace.py ... 0.0012545585632324219s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/named_commands.py ... 0.001253366470336914s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/api.py ... 0.0012385845184326172s
+// load ~/my/lib/python3.6/site-packages/setuptools/msvc.py ... 0.0012197494506835938s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/controller.py ... 0.0012111663818359375s
+// load ~/my/lib/python3.6/site-packages/idna/__init__.py ... 0.0011873245239257812s
+// load ~/my/lib/python3.6/site-packages/urllib3/poolmanager.py ... 0.0011820793151855469s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/scripts/compile.py ... 0.0011742115020751953s
+// load /usr/lib/python3.6/sqlite3/__init__.py ... 0.0011706352233886719s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/exceptions.py ... 0.0011582374572753906s
+// load /usr/lib/python3.6/multiprocessing/connection.py ... 0.0011475086212158203s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/from_pygments.py ... 0.0011258125305175781s
+// load /usr/lib/python3.6/profile.py ... 0.0011227130889892578s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/cache.py ... 0.0011222362518310547s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/clipboard/__init__.py ... 0.0011105537414550781s
+// load ~/my/lib/python3.6/site-packages/requests/api.py ... 0.0010993480682373047s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/code.py ... 0.0010914802551269531s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/models.py ... 0.0010771751403808594s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/stdlib.py ... 0.001073598861694336s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/sessions.py ... 0.0010652542114257812s
+// load ~/my/lib/python3.6/site-packages/chardet/cp949prober.py ... 0.0010640621185302734s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/__init__.py ... 0.0010633468627929688s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/specifiers.py ... 0.0010576248168945312s
+// load /usr/lib/python3.6/pdb.py ... 0.0010559558868408203s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/connection.py ... 0.0010554790496826172s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/pep425tags.py ... 0.0010519027709960938s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/markers.py ... 0.0010495185852050781s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipfile/__init__.py ... 0.00103759765625s
+// load /usr/lib/python3.6/datetime.py ... 0.0010192394256591797s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/__init__.py ... 0.001018524169921875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/document.py ... 0.0010042190551757812s
+// load /usr/lib/python3.6/sqlite3/dbapi2.py ... 0.0009918212890625s
+// load /usr/lib/python3.6/dis.py ... 0.0009918212890625s
+// load ~/my/lib/python3.6/site-packages/urllib3/packages/six.py ... 0.0009865760803222656s
+// load ~/my/lib/python3.6/site-packages/wcwidth/__init__.py ... 0.0009791851043701172s
+// load ~/my/lib/python3.6/site-packages/decorator.py ... 0.0009720325469970703s
+// load ~/my/lib/python3.6/site-packages/jedi/api/helpers.py ... 0.0009717941284179688s
+// load /usr/lib/python3.6/distutils/version.py ... 0.0009715557098388672s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/fuzzywuzzy/process.py ... 0.0009675025939941406s
+// load ~/my/lib/python3.6/site-packages/requests/sessions.py ... 0.0009562969207763672s
+// load ~/my/lib/python3.6/site-packages/urllib3/fields.py ... 0.0009522438049316406s
+// load /usr/lib/python3.6/distutils/cmd.py ... 0.0009462833404541016s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/ptyprocess/__init__.py ... 0.0009448528289794922s
+// load ~/my/lib/python3.6/site-packages/simplejson/encoder.py ... 0.0009431838989257812s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/response.py ... 0.0009245872497558594s
+// load ~/my/lib/python3.6/site-packages/jedi/api/keywords.py ... 0.0009236335754394531s
+// load /usr/lib/python3.6/xmlrpc/client.py ... 0.0009191036224365234s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/docstrings.py ... 0.0009143352508544922s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/initialise.py ... 0.0009121894836425781s
+// load /usr/lib/python3.6/xml/sax/__init__.py ... 0.0009074211120605469s
+// load ~/my/lib/python3.6/site-packages/idna/core.py ... 0.0009016990661621094s
+// load ~/my/lib/python3.6/site-packages/traitlets/config/loader.py ... 0.0008990764617919922s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/ssl_.py ... 0.0008823871612548828s
+// load /usr/lib/python3.6/ntpath.py ... 0.00086212158203125s
+// load ~/my/lib/python3.6/site-packages/traitlets/utils/importstring.py ... 0.0008614063262939453s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/wait.py ... 0.0008566379547119141s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_trie/__init__.py ... 0.0008566379547119141s
+// load /usr/lib/python3.6/distutils/sysconfig.py ... 0.000850677490234375s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/screen.py ... 0.0008504390716552734s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/vi.py ... 0.0008504390716552734s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/caches/file_cache.py ... 0.0008459091186523438s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/markers.py ... 0.0008237361907958984s
+// load /usr/lib/python3.6/http/__init__.py ... 0.0008206367492675781s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/magics.py ... 0.0008120536804199219s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/fuzzywuzzy/fuzz.py ... 0.0008108615875244141s
+// load /usr/lib/python3.6/json/scanner.py ... 0.0008099079132080078s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/history.py ... 0.0008096694946289062s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/tree.py ... 0.0008089542388916016s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/version.py ... 0.0008065700531005859s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/webencodings/__init__.py ... 0.0007939338684082031s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/ansitowin32.py ... 0.0007808208465576172s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/adapters.py ... 0.0007753372192382812s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/base.py ... 0.0007719993591308594s
+// load /usr/lib/python3.6/html/entities.py ... 0.0007674694061279297s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/constants.py ... 0.0007653236389160156s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/ptyprocess/ptyprocess.py ... 0.0007617473602294922s
+// load /usr/lib/python3.6/bz2.py ... 0.0007584095001220703s
+// load ~/my/lib/python3.6/site-packages/wcwidth/wcwidth.py ... 0.0007576942443847656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/packages/six.py ... 0.0007574558258056641s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/processors.py ... 0.0007522106170654297s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipfile/api.py ... 0.0007495880126953125s
+// load /usr/lib/python3.6/difflib.py ... 0.0007472038269042969s
+// load ~/my/lib/python3.6/site-packages/pygments/lexers/_mapping.py ... 0.0007443428039550781s
+// load ~/my/lib/python3.6/site-packages/flake8/defaults.py ... 0.0007443428039550781s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/retry.py ... 0.0007214546203613281s
+// load /usr/lib/python3.6/concurrent/futures/_base.py ... 0.0007193088531494141s
+// load ~/my/lib/python3.6/site-packages/pygments/formatters/html.py ... 0.0007181167602539062s
+// load ~/my/lib/python3.6/site-packages/IPython/core/page.py ... 0.0007164478302001953s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/six.py ... 0.000713348388671875s
+// load /usr/lib/python3.6/ctypes/util.py ... 0.0007116794586181641s
+// load /usr/lib/python3.6/tarfile.py ... 0.0007114410400390625s
+// load /usr/lib/python3.6/xml/sax/xmlreader.py ... 0.0007090568542480469s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/selectors.py ... 0.0007090568542480469s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/dotenv/cli.py ... 0.0007061958312988281s
+// load /usr/lib/python3.6/optparse.py ... 0.0007030963897705078s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/repositories/__init__.py ... 0.0006887912750244141s
+// load ~/my/lib/python3.6/site-packages/requests/adapters.py ... 0.0006773471832275391s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/client.py ... 0.0006666183471679688s
+// load /usr/lib/python3.6/email/_parseaddr.py ... 0.0006601810455322266s
+// load /usr/lib/python3.6/email/charset.py ... 0.0006597042083740234s
+// load ~/my/lib/python3.6/site-packages/flake8/plugins/manager.py ... 0.0006561279296875s
+// load /usr/lib/python3.6/pkgutil.py ... 0.0006458759307861328s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/writer.py ... 0.0006453990936279297s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/imports.py ... 0.0006432533264160156s
+// load ~/my/lib/python3.6/site-packages/urllib3/response.py ... 0.0006418228149414062s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/six.py ... 0.0006382465362548828s
+// load ~/my/lib/python3.6/site-packages/flake8/processor.py ... 0.0006380081176757812s
+// load /usr/lib/python3.6/email/errors.py ... 0.0006341934204101562s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/exceptions.py ... 0.0006334781646728516s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/io.py ... 0.0006318092346191406s
+// load ~/my/lib/python3.6/site-packages/redis/utils.py ... 0.0006189346313476562s
+// load /usr/lib/python3.6/pty.py ... 0.0006158351898193359s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/req/req_install.py ... 0.0006155967712402344s
+// load /usr/lib/python3.6/zipfile.py ... 0.000614166259765625s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/terminal/vt100_input.py ... 0.0006067752838134766s
+// load ~/my/lib/python3.6/site-packages/IPython/core/splitinput.py ... 0.000598907470703125s
+// load /usr/lib/python3.6/hmac.py ... 0.0005934238433837891s
+// load /usr/lib/python3.6/mimetypes.py ... 0.0005929470062255859s
+// load ~/my/lib/python3.6/site-packages/flake8/options/aggregator.py ... 0.0005886554718017578s
+// load ~/my/lib/python3.6/site-packages/pygments/filters/__init__.py ... 0.0005831718444824219s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/display.py ... 0.0005691051483154297s
+// load ~/my/lib/python3.6/site-packages/simplejson/decoder.py ... 0.0005674362182617188s
+// load /usr/lib/python3.6/base64.py ... 0.0005660057067871094s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/instance.py ... 0.0005571842193603516s
+// load ~/my/lib/python3.6/site-packages/setuptools/depends.py ... 0.0005507469177246094s
+// load /usr/lib/python3.6/encodings/idna.py ... 0.0005495548248291016s
+// load /usr/lib/python3.6/_markupbase.py ... 0.0005481243133544922s
+// load ~/my/lib/python3.6/site-packages/chardet/charsetgroupprober.py ... 0.0005331039428710938s
+// load ~/my/lib/python3.6/site-packages/jedi/_compatibility.py ... 0.0005321502685546875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/lexers.py ... 0.0005283355712890625s
+// load ~/my/lib/python3.6/site-packages/IPython/core/shellapp.py ... 0.00052642822265625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/url.py ... 0.0005199909210205078s
+// load /usr/lib/python3.6/xml/parsers/expat.py ... 0.0005195140838623047s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/exceptions.py ... 0.0005135536193847656s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/openpy.py ... 0.0005087852478027344s
+// load /usr/lib/python3.6/pydoc_data/topics.py ... 0.0005080699920654297s
+// load /usr/lib/python3.6/csv.py ... 0.0005075931549072266s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/lockfile/__init__.py ... 0.0005049705505371094s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/clipboard/base.py ... 0.0005033016204833984s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/serialize.py ... 0.0005018711090087891s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/completion.py ... 0.0005016326904296875s
+// load /usr/lib/python3.6/lzma.py ... 0.0004999637603759766s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/logging.py ... 0.00049591064453125s
+// load /usr/lib/python3.6/subprocess.py ... 0.0004887580871582031s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/filters.py ... 0.0004887580871582031s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/url.py ... 0.00048804283142089844s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/locations.py ... 0.0004851818084716797s
+// load ~/my/lib/python3.6/site-packages/IPython/core/latex_symbols.py ... 0.000476837158203125s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/auth.py ... 0.0004601478576660156s
+// load ~/my/lib/python3.6/site-packages/pygments/modeline.py ... 0.000453948974609375s
+// load /usr/lib/python3.6/socketserver.py ... 0.00045180320739746094s
+// load /usr/lib/python3.6/logging/handlers.py ... 0.00044727325439453125s
+// load ~/my/lib/python3.6/site-packages/flake8/options/config.py ... 0.0004467964172363281s
+// load ~/my/lib/python3.6/site-packages/IPython/core/display.py ... 0.0004444122314453125s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/terminal/vt100_output.py ... 0.0004360675811767578s
+// load ~/my/lib/python3.6/site-packages/flake8/options/manager.py ... 0.00043582916259765625s
+// load ~/my/lib/python3.6/site-packages/IPython/core/profiledir.py ... 0.0004324913024902344s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/toml.py ... 0.0004317760467529297s
+// load /usr/lib/python3.6/distutils/util.py ... 0.000431060791015625s
+// load ~/my/lib/python3.6/site-packages/pickleshare.py ... 0.000431060791015625s
+// load ~/my/lib/python3.6/site-packages/requests/certs.py ... 0.000423431396484375s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/py3compat.py ... 0.0004215240478515625s
+// load /usr/lib/python3.6/distutils/fancy_getopt.py ... 0.0004200935363769531s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/__init__.py ... 0.00041604042053222656s
+// load ~/my/lib/python3.6/site-packages/hiredis/__init__.py ... 0.0004124641418457031s
+// load /usr/lib/python3.6/xml/etree/ElementPath.py ... 0.00040411949157714844s
+// load ~/my/lib/python3.6/site-packages/flake8/statistics.py ... 0.0004038810729980469s
+// load ~/my/lib/python3.6/site-packages/IPython/display.py ... 0.00040340423583984375s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/pgen2/pgen.py ... 0.0004031658172607422s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/freeze.py ... 0.00039958953857421875s
+// load ~/my/lib/python3.6/site-packages/setuptools/version.py ... 0.0003986358642578125s
+// load /usr/lib/python3.6/numbers.py ... 0.0003960132598876953s
+// load /usr/lib/python3.6/email/encoders.py ... 0.0003948211669921875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/margins.py ... 0.0003933906555175781s
+// load ~/my/lib/python3.6/site-packages/requests/exceptions.py ... 0.00039267539978027344s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/cmdoptions.py ... 0.00039196014404296875s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/request.py ... 0.00039076805114746094s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/strdispatch.py ... 0.0003883838653564453s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/dotenv/main.py ... 0.0003840923309326172s
+// load /usr/lib/python3.6/tty.py ... 0.00038361549377441406s
+// load /usr/lib/python3.6/json/encoder.py ... 0.000377655029296875s
+// load ~/my/lib/python3.6/site-packages/flake8/main/vcs.py ... 0.00037670135498046875s
+// load ~/my/lib/python3.6/site-packages/pygments/styles/default.py ... 0.00037407875061035156s
+// load ~/my/lib/python3.6/site-packages/chardet/escprober.py ... 0.00037097930908203125s
+// load /usr/lib/python3.6/calendar.py ... 0.000370025634765625s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/_compat.py ... 0.0003688335418701172s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/toolbars.py ... 0.00036787986755371094s
+// load /usr/lib/python3.6/urllib/error.py ... 0.0003662109375s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/generics.py ... 0.00036525726318359375s
+// load ~/my/lib/python3.6/site-packages/setuptools/py33compat.py ... 0.0003643035888671875s
+// load ~/my/lib/python3.6/site-packages/flake8/utils.py ... 0.0003578662872314453s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/docopt.py ... 0.0003509521484375s
+// load /usr/lib/python3.6/shlex.py ... 0.0003502368927001953s
+// load ~/my/lib/python3.6/site-packages/pipenv/environments.py ... 0.0003502368927001953s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/menus.py ... 0.0003459453582763672s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/formatting.py ... 0.00034546852111816406s
+// load /usr/lib/python3.6/compileall.py ... 0.0003447532653808594s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/winterm.py ... 0.00034427642822265625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/progress/bar.py ... 0.00034308433532714844s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/extension.py ... 0.0003418922424316406s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/delegator.py ... 0.00034117698669433594s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/exceptions.py ... 0.0003402233123779297s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/download.py ... 0.0003387928009033203s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/pretty.py ... 0.00033211708068847656s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/coloransi.py ... 0.0003306865692138672s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/install.py ... 0.00032973289489746094s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/compat.py ... 0.0003275871276855469s
+// load ~/my/lib/python3.6/site-packages/chardet/euctwfreq.py ... 0.0003275871276855469s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/auto.py ... 0.0003273487091064453s
+// load ~/my/lib/python3.6/site-packages/IPython/core/alias.py ... 0.00032639503479003906s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/sys_path.py ... 0.00032401084899902344s
+// load ~/my/lib/python3.6/site-packages/pygments/formatters/__init__.py ... 0.0003151893615722656s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/emacs.py ... 0.00031304359436035156s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/io.py ... 0.0003116130828857422s
+// load ~/my/lib/python3.6/site-packages/jedi/api/interpreter.py ... 0.00030922889709472656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/__init__.py ... 0.0003077983856201172s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/models/__init__.py ... 0.0003063678741455078s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/winterm.py ... 0.0003032684326171875s
+// load ~/my/lib/python3.6/site-packages/pygments/style.py ... 0.000301361083984375s
+// load ~/my/lib/python3.6/site-packages/pygments/token.py ... 0.0002994537353515625s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/utils.py ... 0.0002987384796142578s
+// load ~/my/lib/python3.6/site-packages/chardet/big5freq.py ... 0.00029730796813964844s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/fuzzywuzzy/utils.py ... 0.0002944469451904297s
+// load /usr/lib/python3.6/bisect.py ... 0.0002925395965576172s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/registry.py ... 0.0002925395965576172s
+// load /usr/lib/python3.6/multiprocessing/process.py ... 0.0002923011779785156s
+// load /usr/lib/python3.6/_compat_pickle.py ... 0.0002918243408203125s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/cookies.py ... 0.0002884864807128906s
+// load /usr/lib/python3.6/email/_encoded_words.py ... 0.0002872943878173828s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/treebuilders/base.py ... 0.00028634071350097656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/repositories/local.py ... 0.000286102294921875s
+// load /usr/lib/python3.6/imp.py ... 0.00028514862060546875s
+// load /usr/lib/python3.6/code.py ... 0.00028443336486816406s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/digraphs.py ... 0.00028324127197265625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/baseparser.py ... 0.0002818107604980469s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_trie/py.py ... 0.0002808570861816406s
+// load ~/my/lib/python3.6/site-packages/setuptools/extension.py ... 0.00027680397033691406s
+// load ~/my/lib/python3.6/site-packages/IPython/core/magics/config.py ... 0.00027680397033691406s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/py3compat.py ... 0.0002734661102294922s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/package.py ... 0.0002701282501220703s
+// load /usr/lib/python3.6/ast.py ... 0.0002694129943847656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/req/req_file.py ... 0.00026798248291015625s
+// load /usr/lib/python3.6/stringprep.py ... 0.00026726722717285156s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/backgroundjobs.py ... 0.00026702880859375s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/output.py ... 0.00026154518127441406s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/display.py ... 0.00025963783264160156s
+// load ~/my/lib/python3.6/site-packages/chardet/utf8prober.py ... 0.00025534629821777344s
+// load /usr/lib/python3.6/distutils/errors.py ... 0.0002522468566894531s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/context.py ... 0.0002522468566894531s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/req/req_set.py ... 0.00025081634521484375s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/security.py ... 0.0002505779266357422s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/shortcuts.py ... 0.0002498626708984375s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipdeptree.py ... 0.00024962425231933594s
+// load ~/my/lib/python3.6/site-packages/requests/cookies.py ... 0.0002465248107910156s
+// load ~/my/lib/python3.6/site-packages/simplejson/scanner.py ... 0.00024127960205078125s
+// load ~/my/lib/python3.6/site-packages/redis/exceptions.py ... 0.00024080276489257812s
+// load /usr/lib/python3.6/multiprocessing/util.py ... 0.000240325927734375s
+// load ~/my/lib/python3.6/site-packages/flake8/plugins/notifier.py ... 0.00023984909057617188s
+// load /usr/lib/python3.6/opcode.py ... 0.0002396106719970703s
+// load /usr/lib/python3.6/gzip.py ... 0.0002372264862060547s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/from_dict.py ... 0.0002372264862060547s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/filepost.py ... 0.0002338886260986328s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/sysinfo.py ... 0.00023293495178222656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/vcs/__init__.py ... 0.0002300739288330078s
+// load ~/my/lib/python3.6/site-packages/requests/status_codes.py ... 0.00022912025451660156s
+// load ~/my/lib/python3.6/site-packages/IPython/extensions/storemagic.py ... 0.00022840499877929688s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/input_processor.py ... 0.0002281665802001953s
+// load ~/my/lib/python3.6/site-packages/flake8/exceptions.py ... 0.000225067138671875s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/ansi.py ... 0.0002224445343017578s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/packages/__init__.py ... 0.00022149085998535156s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/retrying.py ... 0.00021791458129882812s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/status_codes.py ... 0.000217437744140625s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__init__.py ... 0.0002167224884033203s
+// load /usr/lib/python3.6/pprint.py ... 0.0002155303955078125s
+// load ~/my/lib/python3.6/site-packages/chardet/jisfreq.py ... 0.0002155303955078125s
+// load ~/my/lib/python3.6/site-packages/urllib3/_collections.py ... 0.00021386146545410156s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/_collections.py ... 0.0002117156982421875s
+// load ~/my/lib/python3.6/site-packages/pygments/formatter.py ... 0.00021123886108398438s
+// load /usr/lib/python3.6/pstats.py ... 0.0002105236053466797s
+// load ~/my/lib/python3.6/site-packages/chardet/jpcntx.py ... 0.0002105236053466797s
+// load /usr/lib/python3.6/distutils/ccompiler.py ... 0.00021028518676757812s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/filters/types.py ... 0.00020837783813476562s
+// load /usr/lib/python3.6/xml/sax/saxutils.py ... 0.0002071857452392578s
+// load ~/my/lib/python3.6/site-packages/certifi/__init__.py ... 0.00020647048950195312s
+// load /usr/lib/python3.6/email/quoprimime.py ... 0.00020551681518554688s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/keys.py ... 0.0002033710479736328s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/expect.py ... 0.0002033710479736328s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/encoding.py ... 0.00020051002502441406s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/contoml/__init__.py ... 0.0002002716064453125s
+// load /usr/lib/python3.6/bdb.py ... 0.0001976490020751953s
+// load ~/my/lib/python3.6/site-packages/chardet/gb2312freq.py ... 0.0001976490020751953s
+// load /usr/lib/python3.6/queue.py ... 0.0001952648162841797s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/param.py ... 0.00019478797912597656s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/check.py ... 0.0001926422119140625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/ansi.py ... 0.0001926422119140625s
+// load ~/my/lib/python3.6/site-packages/IPython/core/macro.py ... 0.00019168853759765625s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/cache.py ... 0.00019121170043945312s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/__init__.py ... 0.00019097328186035156s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/ptutils.py ... 0.00018596649169921875s
+// load /usr/lib/python3.6/_compression.py ... 0.00018310546875s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/exceptions.py ... 0.00018072128295898438s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/finder.py ... 0.00018024444580078125s
+// load ~/my/lib/python3.6/site-packages/IPython/paths.py ... 0.00018024444580078125s
+// load ~/my/lib/python3.6/site-packages/setuptools/config.py ... 0.00017905235290527344s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/pep0484.py ... 0.0001780986785888672s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/exceptions.py ... 0.00017690658569335938s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/completion.py ... 0.0001766681671142578s
+// load ~/my/lib/python3.6/site-packages/wcwidth/table_wide.py ... 0.00017571449279785156s
+// load ~/my/lib/python3.6/site-packages/pygments/unistring.py ... 0.00017142295837402344s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/repositories/pypi.py ... 0.00017142295837402344s
+// load /usr/lib/python3.6/cmd.py ... 0.0001709461212158203s
+// load ~/my/lib/python3.6/site-packages/pygments/regexopt.py ... 0.00017023086547851562s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/spawnbase.py ... 0.00016760826110839844s
+// load ~/my/lib/python3.6/site-packages/requests/auth.py ... 0.0001633167266845703s
+// load ~/my/lib/python3.6/site-packages/IPython/core/displayhook.py ... 0.00016117095947265625s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/requirements/fragment.py ... 0.0001609325408935547s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/cache.py ... 0.0001609325408935547s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/vcs/git.py ... 0.0001595020294189453s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/timeout.py ... 0.00015664100646972656s
+// load ~/my/lib/python3.6/site-packages/requests/structures.py ... 0.00015592575073242188s
+// load ~/my/lib/python3.6/site-packages/wcwidth/table_zero.py ... 0.0001506805419921875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/validation.py ... 0.00015020370483398438s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/reactive.py ... 0.0001494884490966797s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/ssl_.py ... 0.00014829635620117188s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/defaults.py ... 0.00014662742614746094s
+// load /usr/lib/python3.6/distutils/archive_util.py ... 0.0001442432403564453s
+// load ~/my/lib/python3.6/site-packages/jedi/api/completion.py ... 0.00014400482177734375s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/retry.py ... 0.00014281272888183594s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/list.py ... 0.0001423358917236328s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/build.py ... 0.00014209747314453125s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/prompts.py ... 0.0001418590545654297s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/parser.py ... 0.00014138221740722656s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/compiled/mixed.py ... 0.00013971328735351562s
+// load ~/my/lib/python3.6/site-packages/idna/idnadata.py ... 0.0001392364501953125s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/models/index.py ... 0.00013899803161621094s
+// load ~/my/lib/python3.6/site-packages/IPython/core/logger.py ... 0.0001385211944580078s
+// load /usr/lib/python3.6/uu.py ... 0.0001373291015625s
+// load /usr/lib/python3.6/urllib/response.py ... 0.00013709068298339844s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/appdirs.py ... 0.00013637542724609375s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/deprecation.py ... 0.00013446807861328125s
+// load ~/my/lib/python3.6/site-packages/IPython/core/pylabtools.py ... 0.0001342296600341797s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/structures.py ... 0.00013399124145507812s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/appdirs.py ... 0.00013327598571777344s
+// load /usr/lib/python3.6/runpy.py ... 0.0001327991485595703s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/vcs/bazaar.py ... 0.00013256072998046875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/selection.py ... 0.0001323223114013672s
+// load ~/my/lib/python3.6/site-packages/pipenv/progress.py ... 0.0001323223114013672s
+// load /usr/lib/python3.6/xml/sax/_exceptions.py ... 0.0001316070556640625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/req/req_uninstall.py ... 0.0001316070556640625s
+// load ~/my/lib/python3.6/site-packages/chardet/big5prober.py ... 0.00013113021850585938s
+// load ~/my/lib/python3.6/site-packages/IPython/core/error.py ... 0.00013065338134765625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/appdirs.py ... 0.00013017654418945312s
+// load ~/my/lib/python3.6/site-packages/chardet/euckrfreq.py ... 0.00012946128845214844s
+// load ~/my/lib/python3.6/site-packages/IPython/core/displaypub.py ... 0.00012874603271484375s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/capture.py ... 0.00012826919555664062s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/dynamic.py ... 0.0001277923583984375s
+// load /usr/lib/python3.6/xml/sax/handler.py ... 0.00012755393981933594s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/site.py ... 0.0001270771026611328s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/analysis.py ... 0.00012683868408203125s
+// load ~/my/lib/python3.6/site-packages/IPython/core/payload.py ... 0.0001232624053955078s
+// load /usr/lib/python3.6/ctypes/_endian.py ... 0.00012040138244628906s
+// load ~/my/lib/python3.6/site-packages/IPython/core/builtin_trap.py ... 0.00011897087097167969s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/popen_spawn.py ... 0.00011754035949707031s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/vi_state.py ... 0.00011706352233886719s
+// load ~/my/lib/python3.6/site-packages/chardet/enums.py ... 0.00011706352233886719s
+// load ~/my/lib/python3.6/site-packages/IPython/core/hooks.py ... 0.0001163482666015625s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/progress/spinner.py ... 0.00011610984802246094s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/outdated.py ... 0.00011563301086425781s
+// load ~/my/lib/python3.6/site-packages/IPython/core/extensions.py ... 0.00011539459228515625s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/tempdir.py ... 0.00011515617370605469s
+// load /usr/lib/python3.6/encodings/unicode_escape.py ... 0.00011491775512695312s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/eventloop/base.py ... 0.00011396408081054688s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/termui.py ... 0.00011396408081054688s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/progress/__init__.py ... 0.00011396408081054688s
+// load /usr/lib/python3.6/py_compile.py ... 0.00011348724365234375s
+// load ~/my/lib/python3.6/site-packages/redis/lock.py ... 0.00011277198791503906s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click_didyoumean/__init__.py ... 0.00011134147644042969s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/enums.py ... 0.00010967254638671875s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/search.py ... 0.00010943412780761719s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/exceptions.py ... 0.00010895729064941406s
+// load ~/my/lib/python3.6/site-packages/chardet/mbcssm.py ... 0.00010895729064941406s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/fuzzywuzzy/string_processing.py ... 0.00010848045349121094s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/wheel.py ... 0.00010848045349121094s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/uninstall.py ... 0.00010848045349121094s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/helpers.py ... 0.00010752677917480469s
+// load /usr/lib/python3.6/quopri.py ... 0.00010704994201660156s
+// load /usr/lib/python3.6/encodings/utf_16_le.py ... 0.00010633468627929688s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/utils.py ... 0.00010633468627929688s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/dimension.py ... 0.00010633468627929688s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/prompt.py ... 0.00010585784912109375s
+// load /usr/lib/python3.6/timeit.py ... 0.00010561943054199219s
+// load /usr/lib/python3.6/distutils/filelist.py ... 0.00010442733764648438s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/colorama/win32.py ... 0.00010418891906738281s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/repositories/base.py ... 0.00010395050048828125s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/utils.py ... 0.00010371208190917969s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/show.py ... 0.00010251998901367188s
+// load /usr/lib/python3.6/concurrent/futures/thread.py ... 0.00010204315185546875s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/recursion.py ... 0.00010204315185546875s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/layout/mouse_handlers.py ... 0.00010085105895996094s
+// load /usr/lib/python3.6/distutils/file_util.py ... 0.00010061264038085938s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/response.py ... 0.00010013580322265625s
+// load ~/my/lib/python3.6/site-packages/flake8/main/git.py ... 0.00010013580322265625s
+// load ~/my/lib/python3.6/site-packages/chardet/langcyrillicmodel.py ... 0.00010013580322265625s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/compiled/fake.py ... 9.989738464355469e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/autocall.py ... 9.989738464355469e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/connection.py ... 9.942054748535156e-05s
+// load /usr/lib/python3.6/fnmatch.py ... 9.894371032714844e-05s
+// load ~/my/lib/python3.6/site-packages/redis/_compat.py ... 9.894371032714844e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/_trie/_base.py ... 9.846687316894531e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/eventloop/callbacks.py ... 9.799003601074219e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/hashes.py ... 9.799003601074219e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/utils.py ... 9.72747802734375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/packaging.py ... 9.608268737792969e-05s
+// load /usr/lib/python3.6/encodings/utf_16_be.py ... 9.512901306152344e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/langbulgarianmodel.py ... 9.465217590332031e-05s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/request.py ... 9.393692016601562e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/progress/helpers.py ... 9.322166442871094e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/clipboard/in_memory.py ... 9.274482727050781e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/excolors.py ... 9.274482727050781e-05s
+// load /usr/lib/python3.6/distutils/dir_util.py ... 9.250640869140625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/compilerop.py ... 9.179115295410156e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/langhebrewmodel.py ... 9.1552734375e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/cache.py ... 9.131431579589844e-05s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/text.py ... 9.131431579589844e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/__init__.py ... 9.083747863769531e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/langturkishmodel.py ... 9.059906005859375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/treewalkers/__init__.py ... 9.012222290039062e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/display_trap.py ... 9.012222290039062e-05s
+// load /usr/lib/python3.6/distutils/extension.py ... 8.916854858398438e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/_structures.py ... 8.845329284667969e-05s
+// load /usr/lib/python3.6/glob.py ... 8.821487426757812e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/fields.py ... 8.7738037109375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/colorama/win32.py ... 8.749961853027344e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/wildcard.py ... 8.749961853027344e-05s
+// load /usr/lib/python3.6/getpass.py ... 8.654594421386719e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/cache.py ... 8.606910705566406e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/langthaimodel.py ... 8.606910705566406e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/token.py ... 8.58306884765625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/pt_inputhooks/__init__.py ... 8.559226989746094e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/buffer_mapping.py ... 8.535385131835938e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/webencodings/labels.py ... 8.535385131835938e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/lib/clipboard.py ... 8.511543273925781e-05s
+// load ~/my/lib/python3.6/site-packages/setuptools/monkey.py ... 8.487701416015625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/parse.py ... 8.416175842285156e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/eucjpprober.py ... 8.416175842285156e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/hash.py ... 8.392333984375e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/langgreekmodel.py ... 8.392333984375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/distlib/__init__.py ... 8.368492126464844e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/precedence.py ... 8.368492126464844e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/latin1prober.py ... 8.368492126464844e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/ipstruct.py ... 8.344650268554688e-05s
+// load /usr/lib/python3.6/email/iterators.py ... 8.320808410644531e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/extern/__init__.py ... 8.249282836914062e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/syspathcontext.py ... 8.225440979003906e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/appdirs.py ... 8.177757263183594e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/debug.py ... 8.153915405273438e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/lockfile/linklockfile.py ... 8.130073547363281e-05s
+// load /usr/lib/python3.6/getopt.py ... 8.106231689453125e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/frame.py ... 8.106231689453125e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/contexts.py ... 8.082389831542969e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/timeout.py ... 8.0108642578125e-05s
+// load /usr/lib/python3.6/distutils/log.py ... 7.891654968261719e-05s
+// load ~/my/lib/python3.6/site-packages/pygments/filter.py ... 7.867813110351562e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/flow_analysis.py ... 7.867813110351562e-05s
+// load /usr/lib/python3.6/codeop.py ... 7.82012939453125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/blindspin/__init__.py ... 7.82012939453125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/run.py ... 7.724761962890625e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/_structures.py ... 7.700920104980469e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/lockfile/mkdirlockfile.py ... 7.700920104980469e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/operations/freeze.py ... 7.677078247070312e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/hebrewprober.py ... 7.677078247070312e-05s
+// load ~/my/lib/python3.6/site-packages/pygments/formatters/_mapping.py ... 7.605552673339844e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/mouse_events.py ... 7.581710815429688e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/sbcharsetprober.py ... 7.557868957519531e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/pgen2/grammar.py ... 7.510185241699219e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/charsetprober.py ... 7.510185241699219e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/manager.py ... 7.462501525878906e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/plugins/_trie.py ... 7.295608520507812e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/_process_common.py ... 7.295608520507812e-05s
+// load ~/my/lib/python3.6/site-packages/simplejson/errors.py ... 7.224082946777344e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/search_state.py ... 7.176399230957031e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/yarg/release.py ... 7.176399230957031e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/api/usages.py ... 7.176399230957031e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/filters/utils.py ... 7.152557373046875e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/caches/redis_cache.py ... 7.081031799316406e-05s
+// load ~/my/lib/python3.6/site-packages/simplegeneric.py ... 6.961822509765625e-05s
+// load /usr/lib/python3.6/__future__.py ... 6.914138793945312e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/evaluate/cache.py ... 6.866455078125e-05s
+// load ~/my/lib/python3.6/site-packages/setuptools/py36compat.py ... 6.818771362304688e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/events.py ... 6.771087646484375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/cachecontrol/filewrapper.py ... 6.699562072753906e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/logging.py ... 6.67572021484375e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/mbcharsetprober.py ... 6.651878356933594e-05s
+// load /usr/lib/python3.6/distutils/spawn.py ... 6.628036499023438e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/gb2312prober.py ... 6.604194641113281e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/__init__.py ... 6.580352783203125e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/euctwprober.py ... 6.580352783203125e-05s
+// load /usr/lib/python3.6/email/base64mime.py ... 6.508827209472656e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/click.py ... 6.508827209472656e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/token.py ... 6.4849853515625e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/escsm.py ... 6.4849853515625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/terminal.py ... 6.4849853515625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/pep508checker.py ... 6.365776062011719e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/euckrprober.py ... 6.341934204101562e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pexpect/utils.py ... 6.318092346191406e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/codingstatemachine.py ... 6.318092346191406e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/scroll.py ... 6.29425048828125e-05s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/path.py ... 6.246566772460938e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/usage.py ... 6.222724914550781e-05s
+// load ~/my/lib/python3.6/site-packages/urllib3/util/response.py ... 6.198883056640625e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/defaults.py ... 6.079673767089844e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/status_codes.py ... 6.079673767089844e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/commands/help.py ... 6.031990051269531e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/_unicodefun.py ... 5.984306335449219e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/py31compat.py ... 5.91278076171875e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/main/mercurial.py ... 5.8650970458984375e-05s
+// load ~/my/lib/python3.6/site-packages/certifi/core.py ... 5.841255187988281e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/compat.py ... 5.793571472167969e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/ptyprocess/util.py ... 5.53131103515625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/release.py ... 5.435943603515625e-05s
+// load ~/my/lib/python3.6/site-packages/traitlets/utils/bunch.py ... 5.412101745605469e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/_compat.py ... 5.3882598876953125e-05s
+// load /usr/lib/python3.6/email/__init__.py ... 5.269050598144531e-05s
+// load ~/my/lib/python3.6/site-packages/pygments/styles/__init__.py ... 5.269050598144531e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/html5lib/treebuilders/__init__.py ... 5.1975250244140625e-05s
+// load ~/my/lib/python3.6/site-packages/traitlets/utils/sentinel.py ... 5.14984130859375e-05s
+// load ~/my/lib/python3.6/site-packages/simplejson/compat.py ... 5.030632019042969e-05s
+// load ~/my/lib/python3.6/site-packages/setuptools/windows_support.py ... 5.030632019042969e-05s
+// load ~/my/lib/python3.6/site-packages/traitlets/utils/getargspec.py ... 4.9591064453125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/util/request.py ... 4.887580871582031e-05s
+// load ~/my/lib/python3.6/site-packages/simplejson/raw_json.py ... 4.863739013671875e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/sentinel.py ... 4.839897155761719e-05s
+// load /usr/lib/python3.6/distutils/dep_util.py ... 4.76837158203125e-05s
+// load /usr/lib/python3.6/concurrent/__init__.py ... 4.696846008300781e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/chardet/__init__.py ... 4.649162292480469e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/module_paths.py ... 4.649162292480469e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/glibc.py ... 4.57763671875e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/timing.py ... 4.458427429199219e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/__about__.py ... 4.410743713378906e-05s
+// load /usr/lib/python3.6/xml/parsers/__init__.py ... 4.38690185546875e-05s
+// load ~/my/lib/python3.6/site-packages/setuptools/extern/__init__.py ... 4.38690185546875e-05s
+// load /usr/lib/python3.6/distutils/command/__init__.py ... 4.315376281738281e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/dir2.py ... 4.315376281738281e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/packaging/_compat.py ... 4.267692565917969e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/styles/utils.py ... 4.2438507080078125e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/__init__.py ... 4.2438507080078125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/click/globals.py ... 4.2438507080078125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/filesystem.py ... 4.220008850097656e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/encoding.py ... 4.1961669921875e-05s
+// load ~/my/lib/python3.6/site-packages/pygments/plugin.py ... 4.172325134277344e-05s
+// load ~/my/lib/python3.6/site-packages/requests/hooks.py ... 4.1484832763671875e-05s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/encoding.py ... 4.1484832763671875e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/data.py ... 4.124641418457031e-05s
+// load /usr/lib/python3.6/distutils/debug.py ... 4.100799560546875e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py ... 4.100799560546875e-05s
+// load ~/my/lib/python3.6/site-packages/traitlets/_version.py ... 4.0531158447265625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/_compat/__init__.py ... 4.0531158447265625e-05s
+// load ~/my/lib/python3.6/site-packages/idna/intranges.py ... 4.0531158447265625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/operations/check.py ... 3.9577484130859375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/certs.py ... 3.9577484130859375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipfile/__about__.py ... 3.886222839355469e-05s
+// load ~/my/lib/python3.6/site-packages/requests/__version__.py ... 3.8623809814453125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/hooks.py ... 3.8623809814453125e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/fuzzywuzzy/__init__.py ... 3.838539123535156e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/packaging/__about__.py ... 3.790855407714844e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/requirements/vcs.py ... 3.743171691894531e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/decorators.py ... 3.743171691894531e-05s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/importstring.py ... 3.695487976074219e-05s
+// load /usr/lib/python3.6/xml/__init__.py ... 3.6716461181640625e-05s
+// load /usr/lib/python3.6/urllib/__init__.py ... 3.6716461181640625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/__init__.py ... 3.6716461181640625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/pipreqs/__init__.py ... 3.62396240234375e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/vendor/first.py ... 3.62396240234375e-05s
+// load /usr/lib/python3.6/distutils/__init__.py ... 3.600120544433594e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/utils/setuptools_build.py ... 3.552436828613281e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/version.py ... 3.552436828613281e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/testing/skipdoctest.py ... 3.552436828613281e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/testing/__init__.py ... 3.528594970703125e-05s
+// load ~/my/lib/python3.6/site-packages/chardet/compat.py ... 3.504753112792969e-05s
+// load ~/my/lib/python3.6/site-packages/pkg_resources/_vendor/__init__.py ... 3.4809112548828125e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/extensions/__init__.py ... 3.4809112548828125e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/plugins/__init__.py ... 3.457069396972656e-05s
+// load /usr/lib/python3.6/lib-dynload/array.cpython-36m-x86_64-linux-gnu.so ... 3.4332275390625e-05s
+// load ~/my/lib/python3.6/site-packages/traitlets/utils/__init__.py ... 3.4332275390625e-05s
+// load ~/my/lib/python3.6/site-packages/hiredis/version.py ... 3.4332275390625e-05s
+// load ~/my/lib/python3.6/site-packages/urllib3/contrib/__init__.py ... 3.361701965332031e-05s
+// load ~/my/lib/python3.6/site-packages/jedi/parser/pgen2/__init__.py ... 3.361701965332031e-05s
+// load ~/my/lib/python3.6/site-packages/ipython_genutils/_version.py ... 3.361701965332031e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/importstring.py ... 3.361701965332031e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/terminal/__init__.py ... 3.337860107421875e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/__version__.py ... 3.2901763916015625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/getipython.py ... 3.24249267578125e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/main/__init__.py ... 3.1948089599609375e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/key_binding/bindings/__init__.py ... 3.147125244140625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/__init__.py ... 3.147125244140625e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/_vendor/requests/packages/urllib3/contrib/__init__.py ... 3.147125244140625e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/eventloop/__init__.py ... 3.123283386230469e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/piptools/scripts/__init__.py ... 3.123283386230469e-05s
+// load /usr/lib/python3.6/xmlrpc/__init__.py ... 3.0994415283203125e-05s
+// load ~/my/lib/python3.6/site-packages/flake8/options/__init__.py ... 3.0994415283203125e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/core/__init__.py ... 3.0994415283203125e-05s
+// load ~/my/lib/python3.6/site-packages/idna/package_data.py ... 3.075599670410156e-05s
+// load /usr/lib/python3.6/pydoc_data/__init__.py ... 3.0279159545898438e-05s
+// load ~/my/lib/python3.6/site-packages/prompt_toolkit/terminal/__init__.py ... 3.0279159545898438e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/contoml/_version.py ... 3.0040740966796875e-05s
+// load ~/my/lib/python3.6/site-packages/wheel/__init__.py ... 2.956390380859375e-05s
+// load /usr/lib/python3.6/xml/etree/__init__.py ... 2.9325485229492188e-05s
+// load ~/my/lib/python3.6/site-packages/pipenv/patched/pip/operations/__init__.py ... 2.9087066650390625e-05s
+// load ~/my/lib/python3.6/site-packages/IPython/utils/_sysinfo.py ... 2.9087066650390625e-05s
+// load /usr/lib/python3.6/lib-dynload/_lzma.cpython-36m-x86_64-linux-gnu.so ... 9.059906005859375e-06s
+// load /usr/lib/python3.6/lib-dynload/math.cpython-36m-x86_64-linux-gnu.so ... 8.344650268554688e-06s
+// load /usr/lib/python3.6/lib-dynload/_sha3.cpython-36m-x86_64-linux-gnu.so ... 8.344650268554688e-06s
+// load /usr/lib/python3.6/lib-dynload/_hashlib.cpython-36m-x86_64-linux-gnu.so ... 8.344650268554688e-06s
+// load /usr/lib/python3.6/lib-dynload/grp.cpython-36m-x86_64-linux-gnu.so ... 8.106231689453125e-06s
+// load /usr/lib/python3.6/lib-dynload/binascii.cpython-36m-x86_64-linux-gnu.so ... 7.62939453125e-06s
+// load /usr/lib/python3.6/lib-dynload/_blake2.cpython-36m-x86_64-linux-gnu.so ... 7.3909759521484375e-06s
+// load /usr/lib/python3.6/lib-dynload/_ssl.cpython-36m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load /usr/lib/python3.6/lib-dynload/_pickle.cpython-36m-x86_64-linux-gnu.so ... 5.245208740234375e-06s
+// load /usr/lib/python3.6/lib-dynload/_datetime.cpython-36m-x86_64-linux-gnu.so ... 5.245208740234375e-06s
+// load /usr/lib/python3.6/lib-dynload/_ctypes.cpython-36m-x86_64-linux-gnu.so ... 5.245208740234375e-06s
+// load /usr/lib/python3.6/lib-dynload/pyexpat.cpython-36m-x86_64-linux-gnu.so ... 5.0067901611328125e-06s
+// load /usr/lib/python3.6/lib-dynload/_socket.cpython-36m-x86_64-linux-gnu.so ... 5.0067901611328125e-06s
+// load /usr/lib/python3.6/lib-dynload/select.cpython-36m-x86_64-linux-gnu.so ... 4.76837158203125e-06s
+// load /usr/lib/python3.6/lib-dynload/zlib.cpython-36m-x86_64-linux-gnu.so ... 4.5299530029296875e-06s
+// load /usr/lib/python3.6/lib-dynload/_sqlite3.cpython-36m-x86_64-linux-gnu.so ... 4.5299530029296875e-06s
+// load /usr/lib/python3.6/lib-dynload/_lsprof.cpython-36m-x86_64-linux-gnu.so ... 4.5299530029296875e-06s
+// load /usr/lib/python3.6/lib-dynload/unicodedata.cpython-36m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.6/lib-dynload/_json.cpython-36m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.6/lib-dynload/termios.cpython-36m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_random.cpython-36m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_elementtree.cpython-36m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.6/lib-dynload/fcntl.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_posixsubprocess.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_multiprocessing.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_csv.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_bz2.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load ~/my/lib/python3.6/site-packages/simplejson/_speedups.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load ~/my/lib/python3.6/site-packages/hiredis/hiredis.cpython-36m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.6/lib-dynload/_bisect.cpython-36m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.6/lib-dynload/resource.cpython-36m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.6/lib-dynload/_opcode.cpython-36m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
