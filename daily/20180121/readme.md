@@ -1,4 +1,4 @@
-## g o 手軽なunit testを
+## go 手軽なunit testを
 
 - stretchr/testify/mock と vektra/mockery を組み合わせると便利
 - (gomock使うより全然良い)
