@@ -1,0 +1,11 @@
+## gomockとtestify/mockのどちらが良いか
+
+結論から言うと常にtestify/mockで良い気がした。
+
+gomockにはmockgenがあった(しかし現在ではtestify/mockにもmockeryがある)。
+
+
+特にgomockでは関心外の領域でdummy objectとして利用したくなった時に不便。(mockの生成に*testing.Tを受け取る必要があるのが面倒。gomockを忘れることができないのが面倒)
+
+あと、gomockは登録とasserttionが不可分なところがちょっと嫌(実際にはdeferでFinishを呼ばないということはできるけれど嫌な習慣)。一方でtesitfy/mockはassertionを呼ばなければ良いだけなので手軽(細かい話をするとassertionとfakeを兼ねたいときと兼ねたくない場合がありfakeだけ行いたい場合もある)。
+
