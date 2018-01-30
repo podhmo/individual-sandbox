@@ -1,0 +1,54 @@
+digraph g {
+  g1 [label="go/ast"]
+  g2 [label="go/format"]
+  g3 [label="go/scanner"]
+  g4 [label="go/token"]
+  g5 [label="go/build"]
+  g6 [label="go/doc"]
+  g7 [label="go/foo/libbar"]
+  g8 [label="go/parser"]
+  g9 [label="go/constant"]
+  g10 [label="go/printer"]
+  g11 [label="go/importer"]
+  g12 [label="go/types"]
+  g13 [label="go/format)"]
+  g14 [label="go/printer/nodes"]
+  g1 -> g2
+  g1 -> g3
+  g1 -> g4
+  g5 -> g1
+  g5 -> g6
+  g5 -> g7
+  g5 -> g8
+  g5 -> g4
+  g9 -> g4
+  g6 -> g1
+  g6 -> g5
+  g6 -> g8
+  g6 -> g4
+  g2 -> g1
+  g2 -> g8
+  g2 -> g10
+  g2 -> g4
+  g11 -> g5
+  g11 -> g4
+  g11 -> g12
+  g8 -> g1
+  g8 -> g3
+  g8 -> g4
+  g10 -> g1
+  g10 -> g13
+  g10 -> g8
+  g10 -> g14
+  g10 -> g3
+  g10 -> g4
+  g3 -> g4
+  g4 -> g10
+  g12 -> g1
+  g12 -> g5
+  g12 -> g9
+  g12 -> g11
+  g12 -> g8
+  g12 -> g3
+  g12 -> g4
+}

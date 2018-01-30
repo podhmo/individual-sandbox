@@ -1,0 +1,6 @@
+go/build
+go/internal/gccgoimporter
+go/internal/gcimporter
+go/internal/srcimporter
+go/token
+go/types

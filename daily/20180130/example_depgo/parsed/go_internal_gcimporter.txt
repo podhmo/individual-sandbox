@@ -1,0 +1,8 @@
+go/ast
+go/build
+go/constant
+go/importer
+go/internal/gcimporter
+go/token
+go/types
+go/types/gcexportdata

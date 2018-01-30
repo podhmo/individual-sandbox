@@ -1,0 +1,2 @@
+go/ast
+go/doc

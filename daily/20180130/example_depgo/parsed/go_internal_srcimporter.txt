@@ -1,0 +1,6 @@
+go/ast
+go/build
+go/internal/srcimporter
+go/parser
+go/token
+go/types

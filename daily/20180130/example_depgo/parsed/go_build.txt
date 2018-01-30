@@ -1,0 +1,6 @@
+go/ast
+go/build
+go/doc
+go/foo/libbar
+go/parser
+go/token

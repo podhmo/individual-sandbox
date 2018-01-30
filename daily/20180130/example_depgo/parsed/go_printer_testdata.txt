@@ -1,0 +1,6 @@
+go/ast
+go/parser
+go/printer
+go/printer/nodes
+go/scanner
+go/token
