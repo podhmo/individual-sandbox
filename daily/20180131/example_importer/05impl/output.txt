@@ -1,0 +1,29 @@
+P is  type p.P struct{Name string}
+P has Name?  field Name string [0] false
+P has Name?  field Name string [0] false
+P has String()?  func (*p.P).String() string [0] false
+P has String()?  <nil> [] true
+
+P is  type p.P2 = p.P
+P has Name?  field Name string [0] false
+P has Name?  field Name string [0] false
+P has String()?  func (*p.P).String() string [0] false
+P has String()?  <nil> [] true
+
+P is  type p.P3 struct{Name string}
+P has Name?  field Name string [0] false
+P has Name?  field Name string [0] false
+P has String()?  <nil> [] false
+P has String()?  <nil> [] false
+
+P is  type p.P4 = p.P
+P has Name?  field Name string [0] false
+P has Name?  field Name string [0] false
+P has String()?  func (*p.P).String() string [0] false
+P has String()?  <nil> [] true
+
+P is  type p.P5 struct{Name string}
+P has Name?  field Name string [0] false
+P has Name?  field Name string [0] false
+P has String()?  <nil> [] false
+P has String()?  <nil> [] false
