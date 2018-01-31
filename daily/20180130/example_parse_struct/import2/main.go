@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"go/importer"
 	"go/token"
 	"go/types"
@@ -27,4 +28,5 @@ func main() {
 	}
 	pp.ColoringEnabled = false
 	pp.Println(val)
+	fmt.Println(val)
 }
