@@ -14,3 +14,10 @@ sourceを直接
 ```
 importer.For("source")
 ```
+
+## go mvpkgの使い方
+
+```
+$ go get -v golang.org/x/tools/cmd/gomvpkg
+$ gomvpkg -from github.com/podhmo/something/xyz -to github.com/podhmo/something/service/xyz
+```
