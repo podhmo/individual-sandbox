@@ -30,6 +30,9 @@ type S struct {
 	}
 
 	file, err := parser.ParseFile(fset, "p", code, parser.AllErrors)
+	if err != nil {
+		log.Fatal(err)
+	}
 	pkg, err := conf.Check("p", fset, []*ast.File{file}, nil)
 	if err != nil {
 		log.Fatal(err)

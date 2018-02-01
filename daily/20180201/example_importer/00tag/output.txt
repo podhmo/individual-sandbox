@@ -1,0 +1,3 @@
+field Name string (exported=true, jsonname=name, found=true)
+field Age int (exported=true, jsonname=age, found=true)
+field i int (exported=false, jsonname=, found=false)
