@@ -1,3 +1,10 @@
+## go てきとうなアプリのコードからstructを抜き出す
+
+```
+go get -v github.com/blue-jay/blueprint
+```
+
+
 ## go gorenameを早くする
 
 はじめの段階
