@@ -2,8 +2,5 @@ run:
 	go run main.go
 
 bench:
-	go test -bench=. -benchmem
+	go test -bench=. -benchmem -count 3
 
-benchprof:
-	go test -bench=. -benchmem -cpuprofile=/tmp/bench.prof
-	go tool pprof /tmp/bench.prof

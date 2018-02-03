@@ -1,8 +1,10 @@
 package main
 
 import (
+	"io"
 	"os"
 	"strconv"
+	"strings"
 )
 
 // Person :
@@ -19,32 +21,35 @@ type VividInfo struct {
 	Weapon string `json:"weapon"`
 }
 
-type stringWriter interface {
-	WriteString(s string) (n int, err error)
-}
-
 // WritePerson :
-func WritePerson(p *Person, w stringWriter) {
-	w.WriteString(`{`)
-	w.WriteString(`"id": `)
-	w.WriteString(strconv.FormatInt(int64(p.ID), 10))
-	w.WriteString(`, "name": "`)
-	w.WriteString(p.Name)
-	w.WriteString(`", "birthday": "`)
-	w.WriteString(p.Birthday)
-	w.WriteString(`", "vivid_info": `)
-	WriteVividInfo(&p.VividInfo, w)
-	w.WriteString(`}`)
+func WritePerson(p *Person, w io.Writer) {
+	a := make([]string, 0, 124)
+	a = writePerson(p, a)
+	io.WriteString(w, strings.Join(a, ""))
 }
 
-// WriteVividInfo :
-func WriteVividInfo(v *VividInfo, w stringWriter) {
-	w.WriteString(`{`)
-	w.WriteString(`"color": "`)
-	w.WriteString(v.Color)
-	w.WriteString(`", "weapon": "`)
-	w.WriteString(v.Weapon)
-	w.WriteString(`"}`)
+func writePerson(p *Person, r []string) []string {
+	r = append(r, `{`)
+	r = append(r, `"id": `)
+	r = append(r, strconv.FormatInt(int64(p.ID), 10))
+	r = append(r, `, "name": "`)
+	r = append(r, p.Name)
+	r = append(r, `", "birthday": "`)
+	r = append(r, p.Birthday)
+	r = append(r, `", "vivid_info": `)
+	r = writeVividInfo(&p.VividInfo, r)
+	r = append(r, `}`)
+	return r
+}
+
+func writeVividInfo(v *VividInfo, r []string) []string {
+	r = append(r, `{`)
+	r = append(r, `"color": "`)
+	r = append(r, v.Color)
+	r = append(r, `", "weapon": "`)
+	r = append(r, v.Weapon)
+	r = append(r, `"}`)
+	return r
 }
 
 func main() {
