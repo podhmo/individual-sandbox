@@ -16,6 +16,10 @@ func run() error {
 	code0 := `
 package p
 type S struct {}
+func (s *S) Hello() string {
+	return "Hello"
+}
+type T struct {}
 `
 	code1 := `
 package p
@@ -39,6 +43,25 @@ type S struct {
 	fmt.Println("----------------------------------------")
 	printer.Fprint(os.Stdout, fset, f1)
 	fmt.Println("----------------------------------------")
+
+	var x ast.Node
+    // collect decl sureba
+	ast.Inspect(f1, func(n ast.Node) bool {
+		if decl, ok := n.(*ast.GenDecl); ok {
+			if spec, ok := n.(*ast.TypeSpec); ok {
+				if spec.Name.Name == "S" {
+					x = spec
+				}
+			}
+			return false
+		}
+		return true
+	})
+	// or
+	// f0.Decls[0] = f1.Decls[0]
+
+	fmt.Printf("%#v\n", f0.Decls)
+	printer.Fprint(os.Stdout, fset, f0)
 	return nil
 }
 
