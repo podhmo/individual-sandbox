@@ -1,0 +1,144 @@
+     0  *ast.File {
+     1  .  Package: 2:1
+     2  .  Name: *ast.Ident {
+     3  .  .  NamePos: 2:9
+     4  .  .  Name: "p"
+     5  .  }
+     6  .  Decls: []ast.Decl (len = 3) {
+     7  .  .  0: *ast.GenDecl {
+     8  .  .  .  TokPos: 3:1
+     9  .  .  .  Tok: import
+    10  .  .  .  Lparen: -
+    11  .  .  .  Specs: []ast.Spec (len = 1) {
+    12  .  .  .  .  0: *ast.ImportSpec {
+    13  .  .  .  .  .  Path: *ast.BasicLit {
+    14  .  .  .  .  .  .  ValuePos: 3:8
+    15  .  .  .  .  .  .  Kind: STRING
+    16  .  .  .  .  .  .  Value: "\"time\""
+    17  .  .  .  .  .  }
+    18  .  .  .  .  .  EndPos: -
+    19  .  .  .  .  }
+    20  .  .  .  }
+    21  .  .  .  Rparen: -
+    22  .  .  }
+    23  .  .  1: *ast.GenDecl {
+    24  .  .  .  TokPos: 5:1
+    25  .  .  .  Tok: type
+    26  .  .  .  Lparen: -
+    27  .  .  .  Specs: []ast.Spec (len = 1) {
+    28  .  .  .  .  0: *ast.TypeSpec {
+    29  .  .  .  .  .  Name: *ast.Ident {
+    30  .  .  .  .  .  .  NamePos: 5:6
+    31  .  .  .  .  .  .  Name: "A"
+    32  .  .  .  .  .  .  Obj: *ast.Object {
+    33  .  .  .  .  .  .  .  Kind: type
+    34  .  .  .  .  .  .  .  Name: "A"
+    35  .  .  .  .  .  .  .  Decl: *(obj @ 28)
+    36  .  .  .  .  .  .  }
+    37  .  .  .  .  .  }
+    38  .  .  .  .  .  Assign: -
+    39  .  .  .  .  .  Type: *ast.StructType {
+    40  .  .  .  .  .  .  Struct: 5:8
+    41  .  .  .  .  .  .  Fields: *ast.FieldList {
+    42  .  .  .  .  .  .  .  Opening: 5:15
+    43  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+    44  .  .  .  .  .  .  .  .  0: *ast.Field {
+    45  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    46  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    47  .  .  .  .  .  .  .  .  .  .  .  NamePos: 6:2
+    48  .  .  .  .  .  .  .  .  .  .  .  Name: "Before"
+    49  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    50  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    51  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Before"
+    52  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 44)
+    53  .  .  .  .  .  .  .  .  .  .  .  }
+    54  .  .  .  .  .  .  .  .  .  .  }
+    55  .  .  .  .  .  .  .  .  .  }
+    56  .  .  .  .  .  .  .  .  .  Type: *ast.SelectorExpr {
+    57  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    58  .  .  .  .  .  .  .  .  .  .  .  NamePos: 6:9
+    59  .  .  .  .  .  .  .  .  .  .  .  Name: "time"
+    60  .  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    62  .  .  .  .  .  .  .  .  .  .  .  NamePos: 6:14
+    63  .  .  .  .  .  .  .  .  .  .  .  Name: "Time"
+    64  .  .  .  .  .  .  .  .  .  .  }
+    65  .  .  .  .  .  .  .  .  .  }
+    66  .  .  .  .  .  .  .  .  }
+    67  .  .  .  .  .  .  .  }
+    68  .  .  .  .  .  .  .  Closing: 7:1
+    69  .  .  .  .  .  .  }
+    70  .  .  .  .  .  .  Incomplete: false
+    71  .  .  .  .  .  }
+    72  .  .  .  .  }
+    73  .  .  .  }
+    74  .  .  .  Rparen: -
+    75  .  .  }
+    76  .  .  2: *ast.GenDecl {
+    77  .  .  .  TokPos: 8:1
+    78  .  .  .  Tok: type
+    79  .  .  .  Lparen: -
+    80  .  .  .  Specs: []ast.Spec (len = 1) {
+    81  .  .  .  .  0: *ast.TypeSpec {
+    82  .  .  .  .  .  Name: *ast.Ident {
+    83  .  .  .  .  .  .  NamePos: 8:6
+    84  .  .  .  .  .  .  Name: "B"
+    85  .  .  .  .  .  .  Obj: *ast.Object {
+    86  .  .  .  .  .  .  .  Kind: type
+    87  .  .  .  .  .  .  .  Name: "B"
+    88  .  .  .  .  .  .  .  Decl: *(obj @ 81)
+    89  .  .  .  .  .  .  }
+    90  .  .  .  .  .  }
+    91  .  .  .  .  .  Assign: -
+    92  .  .  .  .  .  Type: *ast.StructType {
+    93  .  .  .  .  .  .  Struct: 8:8
+    94  .  .  .  .  .  .  Fields: *ast.FieldList {
+    95  .  .  .  .  .  .  .  Opening: 8:15
+    96  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+    97  .  .  .  .  .  .  .  .  0: *ast.Field {
+    98  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    99  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   100  .  .  .  .  .  .  .  .  .  .  .  NamePos: 9:2
+   101  .  .  .  .  .  .  .  .  .  .  .  Name: "Before"
+   102  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   103  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   104  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Before"
+   105  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 97)
+   106  .  .  .  .  .  .  .  .  .  .  .  }
+   107  .  .  .  .  .  .  .  .  .  .  }
+   108  .  .  .  .  .  .  .  .  .  }
+   109  .  .  .  .  .  .  .  .  .  Type: *ast.SelectorExpr {
+   110  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+   111  .  .  .  .  .  .  .  .  .  .  .  NamePos: 9:9
+   112  .  .  .  .  .  .  .  .  .  .  .  Name: "time"
+   113  .  .  .  .  .  .  .  .  .  .  }
+   114  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   115  .  .  .  .  .  .  .  .  .  .  .  NamePos: 9:14
+   116  .  .  .  .  .  .  .  .  .  .  .  Name: "Time"
+   117  .  .  .  .  .  .  .  .  .  .  }
+   118  .  .  .  .  .  .  .  .  .  }
+   119  .  .  .  .  .  .  .  .  }
+   120  .  .  .  .  .  .  .  }
+   121  .  .  .  .  .  .  .  Closing: 10:1
+   122  .  .  .  .  .  .  }
+   123  .  .  .  .  .  .  Incomplete: false
+   124  .  .  .  .  .  }
+   125  .  .  .  .  }
+   126  .  .  .  }
+   127  .  .  .  Rparen: -
+   128  .  .  }
+   129  .  }
+   130  .  Scope: *ast.Scope {
+   131  .  .  Objects: map[string]*ast.Object (len = 2) {
+   132  .  .  .  "A": *(obj @ 32)
+   133  .  .  .  "B": *(obj @ 85)
+   134  .  .  }
+   135  .  }
+   136  .  Imports: []*ast.ImportSpec (len = 1) {
+   137  .  .  0: *(obj @ 12)
+   138  .  }
+   139  .  Unresolved: []*ast.Ident (len = 2) {
+   140  .  .  0: *(obj @ 57)
+   141  .  .  1: *(obj @ 110)
+   142  .  }
+   143  }
