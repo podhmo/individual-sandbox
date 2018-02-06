@@ -16,9 +16,13 @@ func main() {
 
 	code := (`
 package p
+
+import "time"
+
 type S struct {
 	Name string ` + "`" + `json:"name"` + "`" + `
 	Age int ` + "`" + `json:"age"` + "`" + `
+    Birth time.Time ` + "`" + `json:"birth"` + "`" + `
 	i  int
 }
 `)

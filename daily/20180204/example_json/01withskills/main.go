@@ -71,6 +71,7 @@ func main() {
 		`{"name": "Ken", "age": 24, "skills": []}`,
 		`{"name": "Ken", "age": 24}`,
 		`{"name": "Ken", "age": 24, "skills": [{}]}`,
+		`{"name": "Ken", "age": 24, "skills": [{"name": "a"}, {"name": "b"}]}`,
 		`{"name": "bob"}`,
 	}
 
