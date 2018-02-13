@@ -1,0 +1,17 @@
+----------------------------------------
+*0 "time" as time
+*1 "fmt" as f
+*0 "github.com/podhmo/sandbox/primitive" as primitive
+----------------------------------------
+package model
+
+import (
+	"time"
+	f "fmt"
+	"github.com/podhmo/sandbox/primitive"
+)
+
+type Person struct {
+	Name	string
+	Birth	time.Time
+}
