@@ -1,0 +1,208 @@
+     0  *ast.File {
+     1  .  Package: ./user.go:2:1
+     2  .  Name: *ast.Ident {
+     3  .  .  NamePos: ./user.go:2:9
+     4  .  .  Name: "p"
+     5  .  }
+     6  .  Decls: []ast.Decl (len = 2) {
+     7  .  .  0: *ast.GenDecl {
+     8  .  .  .  TokPos: ./user.go:3:1
+     9  .  .  .  Tok: type
+    10  .  .  .  Lparen: -
+    11  .  .  .  Specs: []ast.Spec (len = 1) {
+    12  .  .  .  .  0: *ast.TypeSpec {
+    13  .  .  .  .  .  Name: *ast.Ident {
+    14  .  .  .  .  .  .  NamePos: ./user.go:3:6
+    15  .  .  .  .  .  .  Name: "User"
+    16  .  .  .  .  .  .  Obj: *ast.Object {
+    17  .  .  .  .  .  .  .  Kind: type
+    18  .  .  .  .  .  .  .  Name: "User"
+    19  .  .  .  .  .  .  .  Decl: *(obj @ 12)
+    20  .  .  .  .  .  .  }
+    21  .  .  .  .  .  }
+    22  .  .  .  .  .  Assign: -
+    23  .  .  .  .  .  Type: *ast.StructType {
+    24  .  .  .  .  .  .  Struct: ./user.go:3:11
+    25  .  .  .  .  .  .  Fields: *ast.FieldList {
+    26  .  .  .  .  .  .  .  Opening: ./user.go:3:18
+    27  .  .  .  .  .  .  .  List: []*ast.Field (len = 2) {
+    28  .  .  .  .  .  .  .  .  0: *ast.Field {
+    29  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    30  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    31  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:3:19
+    32  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+    33  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    34  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    35  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+    36  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 28)
+    37  .  .  .  .  .  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  .  .  .  .  }
+    39  .  .  .  .  .  .  .  .  .  }
+    40  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+    41  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:3:24
+    42  .  .  .  .  .  .  .  .  .  .  Name: "string"
+    43  .  .  .  .  .  .  .  .  .  }
+    44  .  .  .  .  .  .  .  .  }
+    45  .  .  .  .  .  .  .  .  1: *ast.Field {
+    46  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    47  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    48  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:3:32
+    49  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+    50  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    51  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    52  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+    53  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 45)
+    54  .  .  .  .  .  .  .  .  .  .  .  }
+    55  .  .  .  .  .  .  .  .  .  .  }
+    56  .  .  .  .  .  .  .  .  .  }
+    57  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+    58  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:3:36
+    59  .  .  .  .  .  .  .  .  .  .  Name: "int"
+    60  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  .  Closing: ./user.go:3:40
+    64  .  .  .  .  .  .  }
+    65  .  .  .  .  .  .  Incomplete: false
+    66  .  .  .  .  .  }
+    67  .  .  .  .  }
+    68  .  .  .  }
+    69  .  .  .  Rparen: -
+    70  .  .  }
+    71  .  .  1: *ast.GenDecl {
+    72  .  .  .  TokPos: ./user.go:5:1
+    73  .  .  .  Tok: type
+    74  .  .  .  Lparen: ./user.go:5:6
+    75  .  .  .  Specs: []ast.Spec (len = 2) {
+    76  .  .  .  .  0: *ast.TypeSpec {
+    77  .  .  .  .  .  Name: *ast.Ident {
+    78  .  .  .  .  .  .  NamePos: ./user.go:6:1
+    79  .  .  .  .  .  .  Name: "User2"
+    80  .  .  .  .  .  .  Obj: *ast.Object {
+    81  .  .  .  .  .  .  .  Kind: type
+    82  .  .  .  .  .  .  .  Name: "User2"
+    83  .  .  .  .  .  .  .  Decl: *(obj @ 76)
+    84  .  .  .  .  .  .  }
+    85  .  .  .  .  .  }
+    86  .  .  .  .  .  Assign: -
+    87  .  .  .  .  .  Type: *ast.StructType {
+    88  .  .  .  .  .  .  Struct: ./user.go:6:7
+    89  .  .  .  .  .  .  Fields: *ast.FieldList {
+    90  .  .  .  .  .  .  .  Opening: ./user.go:6:14
+    91  .  .  .  .  .  .  .  List: []*ast.Field (len = 2) {
+    92  .  .  .  .  .  .  .  .  0: *ast.Field {
+    93  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    94  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    95  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:6:15
+    96  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+    97  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    98  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    99  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+   100  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 92)
+   101  .  .  .  .  .  .  .  .  .  .  .  }
+   102  .  .  .  .  .  .  .  .  .  .  }
+   103  .  .  .  .  .  .  .  .  .  }
+   104  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   105  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:6:20
+   106  .  .  .  .  .  .  .  .  .  .  Name: "string"
+   107  .  .  .  .  .  .  .  .  .  }
+   108  .  .  .  .  .  .  .  .  }
+   109  .  .  .  .  .  .  .  .  1: *ast.Field {
+   110  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   111  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   112  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:6:28
+   113  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   114  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   115  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   116  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   117  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 109)
+   118  .  .  .  .  .  .  .  .  .  .  .  }
+   119  .  .  .  .  .  .  .  .  .  .  }
+   120  .  .  .  .  .  .  .  .  .  }
+   121  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   122  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:6:32
+   123  .  .  .  .  .  .  .  .  .  .  Name: "int"
+   124  .  .  .  .  .  .  .  .  .  }
+   125  .  .  .  .  .  .  .  .  }
+   126  .  .  .  .  .  .  .  }
+   127  .  .  .  .  .  .  .  Closing: ./user.go:6:36
+   128  .  .  .  .  .  .  }
+   129  .  .  .  .  .  .  Incomplete: false
+   130  .  .  .  .  .  }
+   131  .  .  .  .  }
+   132  .  .  .  .  1: *ast.TypeSpec {
+   133  .  .  .  .  .  Name: *ast.Ident {
+   134  .  .  .  .  .  .  NamePos: ./user.go:7:1
+   135  .  .  .  .  .  .  Name: "User3"
+   136  .  .  .  .  .  .  Obj: *ast.Object {
+   137  .  .  .  .  .  .  .  Kind: type
+   138  .  .  .  .  .  .  .  Name: "User3"
+   139  .  .  .  .  .  .  .  Decl: *(obj @ 132)
+   140  .  .  .  .  .  .  }
+   141  .  .  .  .  .  }
+   142  .  .  .  .  .  Assign: -
+   143  .  .  .  .  .  Type: *ast.StructType {
+   144  .  .  .  .  .  .  Struct: ./user.go:7:7
+   145  .  .  .  .  .  .  Fields: *ast.FieldList {
+   146  .  .  .  .  .  .  .  Opening: ./user.go:7:14
+   147  .  .  .  .  .  .  .  List: []*ast.Field (len = 2) {
+   148  .  .  .  .  .  .  .  .  0: *ast.Field {
+   149  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   150  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   151  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:7:15
+   152  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+   153  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   154  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   155  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Name"
+   156  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 148)
+   157  .  .  .  .  .  .  .  .  .  .  .  }
+   158  .  .  .  .  .  .  .  .  .  .  }
+   159  .  .  .  .  .  .  .  .  .  }
+   160  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   161  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:7:20
+   162  .  .  .  .  .  .  .  .  .  .  Name: "string"
+   163  .  .  .  .  .  .  .  .  .  }
+   164  .  .  .  .  .  .  .  .  }
+   165  .  .  .  .  .  .  .  .  1: *ast.Field {
+   166  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+   167  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   168  .  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:7:28
+   169  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   170  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+   171  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+   172  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Age"
+   173  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 165)
+   174  .  .  .  .  .  .  .  .  .  .  .  }
+   175  .  .  .  .  .  .  .  .  .  .  }
+   176  .  .  .  .  .  .  .  .  .  }
+   177  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+   178  .  .  .  .  .  .  .  .  .  .  NamePos: ./user.go:7:32
+   179  .  .  .  .  .  .  .  .  .  .  Name: "int"
+   180  .  .  .  .  .  .  .  .  .  }
+   181  .  .  .  .  .  .  .  .  }
+   182  .  .  .  .  .  .  .  }
+   183  .  .  .  .  .  .  .  Closing: ./user.go:7:36
+   184  .  .  .  .  .  .  }
+   185  .  .  .  .  .  .  Incomplete: false
+   186  .  .  .  .  .  }
+   187  .  .  .  .  }
+   188  .  .  .  }
+   189  .  .  .  Rparen: ./user.go:8:1
+   190  .  .  }
+   191  .  }
+   192  .  Scope: *ast.Scope {
+   193  .  .  Objects: map[string]*ast.Object (len = 3) {
+   194  .  .  .  "User": *(obj @ 16)
+   195  .  .  .  "User2": *(obj @ 80)
+   196  .  .  .  "User3": *(obj @ 136)
+   197  .  .  }
+   198  .  }
+   199  .  Unresolved: []*ast.Ident (len = 6) {
+   200  .  .  0: *(obj @ 40)
+   201  .  .  1: *(obj @ 57)
+   202  .  .  2: *(obj @ 104)
+   203  .  .  3: *(obj @ 121)
+   204  .  .  4: *(obj @ 160)
+   205  .  .  5: *(obj @ 177)
+   206  .  }
+   207  }
