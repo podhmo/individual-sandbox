@@ -25,10 +25,9 @@ func main() {
 		fmt.Println("in main.go")
 		w := W{Prog: prog, File: prog.Package(".").Files[0]}
 		loaderQ := w.NameTo(prog.Package(".").Pkg)
-		fmt.Println(types.TypeString(
-			prog.Package("golang.org/x/tools/go/loader").Pkg.Scope().Lookup("Config").Type(),
-			loaderQ),
-		)
+		typ := prog.Package("golang.org/x/tools/go/loader").Pkg.Scope().Lookup("Config").Type()
+		fmt.Println(types.TypeString(typ, loaderQ))
+		fmt.Println(types.TypeString(types.NewPointer(typ), loaderQ))
 	}
 
 	fmt.Println("----------------------------------------")
@@ -37,10 +36,9 @@ func main() {
 		fmt.Println("in golang.org/x/tools/go/loader/loader.go")
 		w := W{Prog: prog, File: prog.Package("golang.org/x/tools/go/loader").Files[0]}
 		loaderQ := w.NameTo(prog.Package("golang.org/x/tools/go/loader").Pkg)
-		fmt.Println(types.TypeString(
-			prog.Package("golang.org/x/tools/go/loader").Pkg.Scope().Lookup("Config").Type(),
-			loaderQ),
-		)
+		typ := prog.Package("golang.org/x/tools/go/loader").Pkg.Scope().Lookup("Config").Type()
+		fmt.Println(types.TypeString(typ, loaderQ))
+		fmt.Println(types.TypeString(types.NewPointer(typ), loaderQ))
 	}
 }
 
