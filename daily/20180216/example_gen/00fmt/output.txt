@@ -1,0 +1,14 @@
+func fmt.Errorf(format string, a ...interface{}) error
+type fmt.Formatter interface{Format(f fmt.State, c rune)}
+func fmt.Fprint(w io.Writer, a ...interface{}) (n int, err error)
+func fmt.Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)
+func fmt.Fprintln(w io.Writer, a ...interface{}) (n int, err error)
+func fmt.Fscan(r io.Reader, a ...interface{}) (n int, err error)
+func fmt.Fscanf(r io.Reader, format string, a ...interface{}) (n int, err error)
+func fmt.Fscanln(r io.Reader, a ...interface{}) (n int, err error)
+type fmt.GoStringer interface{GoString() string}
+func fmt.Print(a ...interface{}) (n int, err error)
+func fmt.Printf(format string, a ...interface{}) (n int, err error)
+func fmt.Println(a ...interface{}) (n int, err error)
+func fmt.Scan(a ...interface{}) (n int, err error)
+type fmt.ScanState interface{Read(buf []byte) (n int, err error); ReadRune() (r rune, size int, err error); SkipSpace(); Token(skipSpace bool, f func(rune) bool) (token []byte, err error); UnreadRune() error;
