@@ -15,3 +15,4 @@
 ### 準候補的なもの
 
 - github.com/hashicorp/go-multierror
+- github.com/pkg/profile
