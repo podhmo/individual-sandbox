@@ -2,7 +2,6 @@ package main
 
 // hmm
 import (
-	"bytes"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -13,14 +12,13 @@ import (
 	"os"
 
 	"github.com/podhmo/astknife/action/replace"
-	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
 func main() {
 	code0 := `
 package p
 import "fmt"
-// F :
+// F : 0
 func F() int {
 	return 10
 }
@@ -33,7 +31,7 @@ func G() int {
 	code1 := `
 package p
 
-// F :
+// F : 1
 func F() int {
 	// xxx
 	x := 5
@@ -51,28 +49,27 @@ func F() int {
 		log.Fatal(err)
 	}
 
-	f0F := f0.Scope.Lookup("F")
-	f1F := f1.Scope.Lookup("F")
-
 	if _, err := replace.ToplevelToFile(f0, f0.Scope.Lookup("F"), f1.Scope.Lookup("F")); err != nil {
 		log.Fatal(err)
 	}
-	printer.Fprint(os.Stdout, fset, f0)
+	// printer.Fprint(os.Stdout, fset, f0)
 
 	{
-		var b bytes.Buffer
-		dumpPositions(f0, &b)
-
-		move(f1F.Decl.(ast.Node), int((f0F.Pos()-f0.Pos())-(f1F.Pos()-f1.Pos())))
-
-		var b2 bytes.Buffer
-		dumpPositions(f0, &b2)
-
-		dmp := diffmatchpatch.New()
-		diffs := dmp.DiffMain(b.String(), b2.String(), false)
-		fmt.Println(dmp.DiffPrettyText(diffs))
+		// f0G := f0.Scope.Lookup("G")
+		// f1G := f1.Scope.Lookup("G")
+		// _ = f1G
+		// move(f0G.Decl.(ast.Node), 4)
+		{
+			cg := f0.Scope.Lookup("G").Decl.(*ast.FuncDecl).Doc
+			cg.List[0].Slash = token.Pos(cg.List[0].Slash + 4)
+		}
+		{
+			cg := f0.Scope.Lookup("F").Decl.(*ast.FuncDecl).Doc
+			cg.List[0].Slash = token.Pos(cg.List[0].Slash - 6)
+		}
 	}
 	printer.Fprint(os.Stdout, fset, f0)
+	// ast.Fprint(os.Stdout, fset, f0, nil)
 }
 
 func dumpPositions(f ast.Node, w io.Writer) {
