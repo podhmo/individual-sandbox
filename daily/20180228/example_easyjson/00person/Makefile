@@ -1,0 +1,2 @@
+gen:
+	easyjson -all *.go
