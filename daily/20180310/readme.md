@@ -1,3 +1,14 @@
+## dep-ignoreがほしい
+
+そもそもdepで作られる設定ファイルってどういうものがあるのだっけ？
+
+- Gopkg.toml -- 
+- Gopkg.lock --
+
+### depって何でtomlを読み込んでるの？
+
+- https://github.com/pelletier/go-toml
+
 ## docbase
 
 docbaseのapiのclientも作っておくべきかな？

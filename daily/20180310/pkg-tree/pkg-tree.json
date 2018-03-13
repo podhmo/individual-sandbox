@@ -1,0 +1,51 @@
+[
+  {
+    "dependency": [
+      {
+        "dependency": [],
+        "id": 41,
+        "pkg": "github.com/pkg/errors"
+      },
+      {
+        "dependency": [
+          {
+            "dependency": [
+              {
+                "dependency": [],
+                "id": 51,
+                "pkg": "github.com/alecthomas/template/parse"
+              }
+            ],
+            "id": 50,
+            "pkg": "github.com/alecthomas/template"
+          },
+          {
+            "dependency": [],
+            "id": 52,
+            "pkg": "github.com/alecthomas/units"
+          }
+        ],
+        "id": 42,
+        "pkg": "gopkg.in/alecthomas/kingpin.v2"
+      },
+      {
+        "dependency": [
+          {
+            "dependency": [],
+            "id": 54,
+            "pkg": "golang.org/x/tools/go/ast/astutil"
+          },
+          {
+            "dependency": [],
+            "id": 55,
+            "pkg": "golang.org/x/tools/go/buildutil"
+          }
+        ],
+        "id": 53,
+        "pkg": "golang.org/x/tools/go/loader"
+      }
+    ],
+    "id": 0,
+    "pkg": "github.com/podhmo/pkg-tree"
+  }
+]
