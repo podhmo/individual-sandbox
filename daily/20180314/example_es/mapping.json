@@ -1,0 +1,33 @@
+{
+  "mappings": {
+    "values": {
+      "_all": {
+        "enabled": false
+      },
+      "_source": {
+        "enabled": true
+      },
+      "dynamic": false,
+      "properties": {
+        "id": {
+          "index": true,
+          "type": "keyword"
+        },
+        "value": {
+          "index": false,
+          "type": "keyword"
+        },
+        "workspaceId": {
+          "index": true,
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "settings": {
+    "index.requests.cache.enable": true,
+    "number_of_replicas": 0,
+    "number_of_shards": 1,
+    "refresh_interval": "1s"
+  }
+}
