@@ -4,46 +4,32 @@ import "sync"
 
 // GoRoutineWithChannel :
 func GoRoutineWithChannel(teams []Team) []Team {
-	teamsChannel := GetTeamsChanel(teams)
-	newTeamsChannel := UpdateTeamsAsync(teamsChannel)
-	var resultTeams []Team
+	resultTeams := make([]Team, len(teams))
+	var wg sync.WaitGroup
 	for i := 0; i < len(teams); i++ {
-		t := <-newTeamsChannel
-		resultTeams = append(resultTeams, t)	}
+		wg.Add(1)
+		go func(i int) {
+			updateTeamAsync(&teams[i])
+			resultTeams[i] = teams[i]
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
 	return resultTeams
 }
 
-// GetTeamsChanel :
-func GetTeamsChanel(teams []Team) <-chan Team {
-	out := make(chan Team, len(teams))
-	go func() {
-		for _, n := range teams {
-			out <- n
-		}
-		close(out)
-	}()
-	return out
-}
-
-// UpdateTeamsAsync :
-func UpdateTeamsAsync(teams ...<-chan Team) <-chan Team {
+func updateTeamAsync(team *Team) {
+	services := team.Services
+	resultServices := make([]Service, len(services))
 	var wg sync.WaitGroup
-	out := make(chan Team)
-	output := func(ts <-chan Team) {
-		for t := range ts {
-			t.Update()
-			out <- t
-		}
-		wg.Done()
+	for i := 0; i < len(services); i++ {
+		wg.Add(1)
+		go func(i int) {
+			services[i].Update()
+			resultServices[i] = services[i]
+			wg.Done()
+		}(i)
 	}
-	wg.Add(len(teams))
-	for _, t := range teams {
-		go output(t)
-	}
-
-	go func() {
-		wg.Wait()
-		close(out)
-	}()
-	return out
+	wg.Wait()
+	team.Services = resultServices
 }

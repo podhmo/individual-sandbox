@@ -26,9 +26,8 @@ func main() {
 	})
 	w := os.Stdout
 
-	runWith("noop", w, teams, func(teams []internal.Team) []internal.Team { return *teams })
-	runWith("Go without Channel", w, teams, internal.GoRoutineWithoutChannel)
-	runWith("Go without Channel with Sort", w, teams, internal.GoRoutineWithoutChannelWithSort)
+	// runWith("noop", w, teams, func(teams []internal.Team) []internal.Team { return teams })
+	// runWith("Go without Channel", w, teams, internal.GoRoutineWithoutChannel)
 	runWith("Go with Channel", w, teams, internal.GoRoutineWithChannel)
-	runWith("Go with Sync exec", w, teams, internal.SyncExecution)
+	// runWith("Go with Sync exec", w, teams, internal.SyncExecution)
 }
