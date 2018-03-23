@@ -13,9 +13,9 @@ func SyncExecution(teams []Team) []Team {
 // SyncUpdate :
 func (c *Team) SyncUpdate() {
 	var services []Service
-	for _, v := range *c.Services {
+	for _, v := range c.Services {
 		v.Update()
 		services = append(services, v)
 	}
-	c.Services = &services
+	c.Services = services
 }

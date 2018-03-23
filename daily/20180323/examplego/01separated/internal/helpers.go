@@ -22,7 +22,7 @@ func Setup(opt Opt) []Team {
 			}
 			services = append(services, service)
 		}
-		team.Services = &services
+		team.Services = services
 		teams = append(teams, team)
 	}
 	return teams
@@ -31,7 +31,7 @@ func Setup(opt Opt) []Team {
 func Score(teams []Team) int {
 	n := 0
 	for i := range teams {
-		services := *teams[i].Services
+		services := teams[i].Services
 		for j := range services {
 			n += services[j].Value
 		}

@@ -9,7 +9,7 @@ import (
 	"./internal"
 )
 
-func runWith(title string, w io.Writer, teams *[]internal.Team, action func(teams []internal.Team) []internal.Team) {
+func runWith(title string, w io.Writer, teams []internal.Team, action func(teams []internal.Team) []internal.Team) {
 	fmt.Printf("********************************************** %s", title)
 	resultTeams := action(teams)
 	encoder := json.NewEncoder(w)
