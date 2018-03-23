@@ -1,9 +1,9 @@
 package internal
 
 // SyncExecution :
-func SyncExecution(teams *[]Team) []Team {
+func SyncExecution(teams []Team) []Team {
 	var newTeams []Team
-	for _, v := range *teams {
+	for _, v := range teams {
 		v.SyncUpdate()
 		newTeams = append(newTeams, v)
 	}

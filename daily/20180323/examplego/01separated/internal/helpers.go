@@ -9,7 +9,7 @@ type Opt struct {
 }
 
 // Setup :
-func Setup(opt Opt) *[]Team {
+func Setup(opt Opt) []Team {
 	var teams []Team
 	for i := 0; i < opt.TeamSize; i++ {
 		team := Team{
@@ -25,7 +25,7 @@ func Setup(opt Opt) *[]Team {
 		team.Services = &services
 		teams = append(teams, team)
 	}
-	return &teams
+	return teams
 }
 
 func Score(teams []Team) int {
