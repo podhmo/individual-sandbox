@@ -62,8 +62,13 @@ func UpdateTeamsAsync(teams ...<-chan Team) <-chan Team {
 	out := make(chan Team)
 	output := func(ts <-chan Team) {
 		for t := range ts {
-			t.Update()
-			out <- t
+			t := t
+			wg.Add(1)
+			go func() {
+				t.Update()
+				out <- t
+				wg.Done()
+			}()
 		}
 		wg.Done()
 	}

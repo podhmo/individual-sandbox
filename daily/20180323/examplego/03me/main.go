@@ -140,7 +140,7 @@ func updateTeamsWithChannel(teams []Team) <-chan *Team {
 
 func main() {
 	teams := setup(Opt{
-		TeamSize:    5,
+		TeamSize:    20,
 		ServiceSize: 5,
 	})
 

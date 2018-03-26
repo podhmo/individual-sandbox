@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"math/rand"
@@ -8,6 +9,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"golang.org/x/sync/semaphore"
 )
 
 // Conditional :
@@ -45,10 +47,15 @@ func (c *Conditional) Go(f func() error) {
 
 func main() {
 	c := New()
-	for i := 0; i < 35; i++ {
+	sem := semaphore.NewWeighted(2)
+
+	for i := 0; i < 5; i++ {
 		i := i
 
 		c.Go(func() error {
+			sem.Acquire(context.Background(), 1)
+			defer sem.Release(1)
+
 			n := int(rand.Float64() * 1000)
 			log.Println("start", i, n)
 			time.Sleep(time.Duration(n) * time.Millisecond)
