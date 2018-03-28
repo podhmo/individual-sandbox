@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/podhmo/handwriting"
-	"github.com/podhmo/handwriting/deriving"
+	"github.com/podhmo/handwriting/codegen/deriving"
 )
 
 func run() error {

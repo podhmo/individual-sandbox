@@ -33,7 +33,7 @@ func run(dir, name, filename string) error {
 
 	f.Import("fmt")
 	f.Code(func(e *handwriting.Emitter) error {
-		pkg := e.Pkg.Pkg
+		pkg := e.PkgInfo.Pkg
 		o := e.Output
 
 		target := pkg.Scope().Lookup(name)
