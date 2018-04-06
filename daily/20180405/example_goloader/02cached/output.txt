@@ -1,0 +1,10 @@
+2018/04/05 22:58:20 load directory loaded 312 allpackages 52
+2018/04/05 22:58:20 time 397.426584ms
+2018/04/05 22:58:21 load directory2(with cache) loaded 54 allpackages 52
+2018/04/05 22:58:21 time 435.110396ms
+2018/04/05 22:58:22 load directory2 loaded 623 allpackages 52
+2018/04/05 22:58:22 time 723.643311ms
+2018/04/05 22:58:24 load directory10 (with cache) loaded 55 allpackages 52
+2018/04/05 22:58:24 time 2.468740974s
+2018/04/05 22:58:28 load directory10 loaded 3119 allpackages 52
+2018/04/05 22:58:28 time 3.554209628s

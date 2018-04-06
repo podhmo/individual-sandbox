@@ -1,0 +1,6 @@
+load directory 61
+2018/04/05 22:34:50 time 199.585919ms
+load directory2 122
+2018/04/05 22:34:50 time 388.726019ms
+load directory10 610
+2018/04/05 22:34:52 time 1.837919141s
