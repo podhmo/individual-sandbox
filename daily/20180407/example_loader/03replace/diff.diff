@@ -1,0 +1,26 @@
+--- before.go	2018-04-08 20:45:34.311077503 +0900
++++ after.go	2018-04-08 20:45:46.785757895 +0900
+@@ -1,18 +1,18 @@
+ package main
+ 
+-import "fmt"
++import "fmt2"
+ 
+ type s struct{}
+ 
+-func (s s)Println(x string) {}
++func (s s) Println(x string) {}
+ 
+-func main(){
+-	fmt.Println("xxx")
++func main() {
++	fmt2.Println("xxx")
+ 
+ 	{
+ 		fmt := s{}
+ 		fmt.Println("yyy")
+ 	}
+ 
+-	fmt.Println("xxx")
++	fmt2.Println("xxx")
+ }
