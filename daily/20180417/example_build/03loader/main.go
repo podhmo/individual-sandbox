@@ -130,7 +130,7 @@ func main() {
 }
 
 func run() error {
-	loader, err := New(3)
+	loader, err := New(10)
 	if err != nil {
 		return err
 	}
