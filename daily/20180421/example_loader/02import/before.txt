@@ -1,0 +1,82 @@
+type time.Location struct {
+ name string;
+ zone []time.zone;
+ tx []time.zoneTrans;
+ cacheStart int64;
+ cacheEnd int64;
+ cacheZone *time.zone
+}
+
+type time.ParseError struct {
+ Layout string;
+ Value string;
+ LayoutElem string;
+ ValueElem string;
+ Message string
+}
+
+type time.Ticker struct {
+ C <-chan time.Time;
+ r time.runtimeTimer
+}
+
+type time.Time struct {
+ wall uint64;
+ ext int64;
+ loc *time.Location
+}
+
+type time.Timer struct {
+ C <-chan time.Time;
+ r time.runtimeTimer
+}
+
+type time.dataIO struct {
+ p []byte;
+ error bool
+}
+
+var time.localLoc time.Location
+var time.localOnce sync.Once
+type time.runtimeTimer struct {
+ tb uintptr;
+ i int;
+ when int64;
+ period int64;
+ f func(interface {
+ 
+}
+, uintptr);
+ arg interface {
+ 
+}
+;
+ seq uintptr
+}
+
+var time.utcLoc time.Location
+type time.zone struct {
+ name string;
+ offset int;
+ isDST bool
+}
+
+type time.zoneTrans struct {
+ when int64;
+ index uint8;
+ isstd bool;
+ isutc bool
+}
+
+var time.zoneinfoOnce sync.Once
+-- all ---------------------------------
+package sys ("runtime/internal/sys")
+package unsafe ("unsafe")
+package runtime ("runtime")
+package atomic ("sync/atomic")
+package time ("time")
+package errors ("errors")
+package syscall ("syscall")
+package sync ("sync")
+package race ("internal/race")
+package atomic ("runtime/internal/atomic")

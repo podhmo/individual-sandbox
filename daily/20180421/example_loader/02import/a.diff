@@ -1,0 +1,38 @@
+--- before.txt	2018-04-22 20:42:00.745454154 +0900
++++ after.txt	2018-04-22 20:42:24.718020584 +0900
+@@ -1,3 +1,7 @@
++/usr/lib/go/src/time/format.go:7:8: could not import errors (invalid package name: "")
++/usr/lib/go/src/time/sys_unix.go:11:2: could not import syscall (invalid package name: "")
++/usr/lib/go/src/time/zoneinfo.go:9:2: could not import sync (invalid package name: "")
++/usr/lib/go/src/time/zoneinfo_unix.go:15:2: could not import runtime (invalid package name: "")
+ type time.Location struct {
+  name string;
+  zone []time.zone;
+@@ -37,7 +41,6 @@
+ }
+ 
+ var time.localLoc time.Location
+-var time.localOnce sync.Once
+ type time.runtimeTimer struct {
+  tb uintptr;
+  i int;
+@@ -68,15 +71,9 @@
+  isutc bool
+ }
+ 
+-var time.zoneinfoOnce sync.Once
+ -- all ---------------------------------
+-package sys ("runtime/internal/sys")
+-package unsafe ("unsafe")
+-package runtime ("runtime")
+-package atomic ("sync/atomic")
++package  ("errors")
++package  ("syscall")
++package  ("sync")
++package  ("runtime")
+ package time ("time")
+-package errors ("errors")
+-package syscall ("syscall")
+-package sync ("sync")
+-package race ("internal/race")
+-package atomic ("runtime/internal/atomic")
