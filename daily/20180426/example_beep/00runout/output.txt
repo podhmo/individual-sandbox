@@ -1,0 +1,2 @@
+2018/04/26 14:22:03 fork/exec /usr/bin/osascript: resource temporarily unavailable
+exit status 1
