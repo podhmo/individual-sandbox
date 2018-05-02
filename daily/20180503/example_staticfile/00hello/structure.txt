@@ -1,0 +1,10 @@
+.
+├── config
+│   └── message.txt
+├── main.go
+├── Makefile
+├── statik
+│   └── statik.go
+└── structure.txt
+
+2 directories, 5 files
