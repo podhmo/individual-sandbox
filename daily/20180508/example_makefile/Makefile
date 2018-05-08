@@ -1,7 +1,7 @@
 define gorunT =
-	mkdir -p public
-	cp $(1) public/`echo $(1) | sed 's@/@_@g'`
-	go run $(1) | tee $(addsuffix .output.txt,$(basename $(1)))
+	mkdir -p public;
+	cp $(1) public/`echo $(1) | sed 's@/@_@g'`;
+	go run $(1) | tee $(addsuffix .output.txt,$(basename $(1)));
 endef
 
 WS := %
@@ -29,7 +29,7 @@ rungo-dynamic:
 
 # go run */main.go (find main.go via shell)
 rungo-dynamic-shell:
-	$(foreach gomain,$(shell find . -name "main.go"),$(call gorunT,$(gomain)))
+	$(foreach gomain,$(shell find . -name "main.go" | sed 's@^./@@g'),$(call gorunT,$(gomain)))
 
 # pythontest:
 # 	echo $(dir $(wildcard */setup.py))
