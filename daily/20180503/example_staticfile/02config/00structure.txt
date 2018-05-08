@@ -1,0 +1,13 @@
+.
+├── 00structure.txt
+├── Makefile
+├── main.go
+├── public
+│   ├── dev
+│   │   └── config.json
+│   └── prod
+│       └── config.json
+└── statik
+    └── statik.go
+
+4 directories, 6 files
