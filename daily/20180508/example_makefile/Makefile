@@ -1,7 +1,8 @@
 define gorunT =
-	mkdir -p public;
-	cp $(1) public/`echo $(1) | sed 's@/@_@g'`;
-	go run $(1) | tee $(addsuffix .output.txt,$(basename $(1)));
+	mkdir -p public
+	cp $(1) public/`echo $(1) | sed 's@/@_@g'`
+	go run $(1) | tee $(addsuffix .output.txt,$(basename $(1)))
+
 endef
 
 WS := %
