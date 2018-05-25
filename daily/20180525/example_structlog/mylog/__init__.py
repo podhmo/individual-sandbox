@@ -51,7 +51,9 @@ def processor_find_caller_information(depth=4):
             break
 
         # add to dict
-        event_dict["caller"] = "{}:{}".format(rv[0].replace(os.environ.get("HOME", "HOME"), "~"), rv[1])
+        event_dict["caller"] = "{}:{}".format(
+            rv[0].replace(os.environ.get("HOME", "HOME"), "~"), rv[1]
+        )
         # event_dict["fn"] = rv[2]  # function name
         return event_dict
 
@@ -147,6 +149,7 @@ def make_ordered_context(*args, **kwargs):
     d["caller"] = ""
     d["source"] = ""
     return d
+
 
 # structlogは、configure()を呼ぶ前にget_logger()されたloggerに関してはconfigが適用されない(ひどい)
 def setup(*args, **kwargs):
