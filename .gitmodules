@@ -1,3 +1,6 @@
 [submodule "daily/20180526/example_seaborn"]
 	path = daily/20180526/example_seaborn
 	url = git@github.com:podhmo-sandbox/seaborn-sandbox.git
+[submodule "daily/20180601/example_go_plugin"]
+	path = daily/20180601/example_go_plugin
+	url = git@github.com:podhmo-sandbox/go-plugin-sandbox.git
