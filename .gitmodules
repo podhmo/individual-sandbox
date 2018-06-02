@@ -4,3 +4,6 @@
 [submodule "daily/20180601/example_go_plugin"]
 	path = daily/20180601/example_go_plugin
 	url = git@github.com:podhmo-sandbox/go-plugin-sandbox.git
+[submodule "daily/20180602/example_react_native_web"]
+	path = daily/20180602/example_react_native_web
+	url = git@github.com:podhmo-sandbox/react-native-web-sandbox.git
