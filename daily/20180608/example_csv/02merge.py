@@ -18,5 +18,7 @@ print(df1)
 merged = df0.merge(df1, how="left", on="groupId")
 print(merged)
 
-merged2 = extract_main_metrics(df0, "name").merge(extract_main_metrics(df1, "name"), how="left", on="groupId")
+merged2 = extract_main_metrics(df0, "name").merge(
+    extract_main_metrics(df1, "name"), how="left", on="groupId"
+)
 print(merged2)
