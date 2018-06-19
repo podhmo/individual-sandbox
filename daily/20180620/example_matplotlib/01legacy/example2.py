@@ -9,7 +9,7 @@ x = np.linspace(-1.5, 1.5, n)
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-ax.set_axis_bgcolor("#bdb76b")
+ax.set_facecolor("#bdb76b")
 ax.plot(x, np.sin(x))
 ax.set_title('Without masked values')
 

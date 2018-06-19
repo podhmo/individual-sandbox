@@ -20,12 +20,12 @@ Zm = ma.masked_where(np.fabs(Qz) < 0.5 * np.amax(Qz), Z)
 
 fig = plt.figure()
 ax = fig.add_subplot(121)
-ax.set_axis_bgcolor("#bdb76b")
+ax.set_facecolor("#bdb76b")
 ax.pcolormesh(Qx, Qz, Z, shading='gouraud')
 ax.set_title('Without masked values')
 
 ax = fig.add_subplot(122)
-ax.set_axis_bgcolor("#bdb76b")
+ax.set_facecolor("#bdb76b")
 col = ax.pcolormesh(Qx, Qz, Zm, shading='gouraud')
 ax.set_title('With masked values')
 

@@ -1,10 +1,10 @@
 import json
 import time
 import datetime
+import base64
 import tornado.web
 import tornado.ioloop
 import tornado.websocket
-import numpy as np
 
 import matplotlib
 matplotlib.use('Agg')  # noqa
@@ -12,15 +12,15 @@ matplotlib.use('Agg')  # noqa
 from matplotlib import _png
 from matplotlib import backend_bases
 
-from io import StringIO
-png_buffer = StringIO()  # bytesIO?
+from io import BytesIO
+png_buffer = BytesIO()  # bytesIO?
 
 html = """
 <html>
 <head>
 <script src="static/mpl.js"></script>
 <body>
-<canvas id="myCanvas" width="100" height="75"
+<canvas id="myCanvas" width="800" height="600"
    onmousedown="mouse_event(event, 'button_press')"
    onmouseup="mouse_event(event, 'button_release')"
    onmousemove="mouse_event(event, 'motion_notify')">
@@ -53,7 +53,6 @@ def serve_figure(fig, port=8888):
         def dynamic_update(self):
             if self.needs_draw is False:
                 Image.image_number += 1
-                print("@", Image.image_number)
             self.needs_draw = True
 
     toolbar = Toolbar(fig.canvas)
@@ -120,29 +119,16 @@ def serve_figure(fig, port=8888):
                 fig.canvas.draw()
                 fig.canvas.toolbar.needs_draw = False
             renderer = fig.canvas.get_renderer()
-            buffer = np.array(np.frombuffer(renderer.buffer_rgba(), dtype=np.uint32), copy=True)
-            buffer = buffer.reshape((int(renderer.height), int(renderer.width)))
-
-            last_buffer = self.last_buffer
-            if last_buffer is not None:
-                diff = buffer != last_buffer
-                if not np.any(diff):
-                    output = np.zeros((1, 1))
-                else:
-                    output = np.where(diff, buffer, 0)
-            else:
-                output = buffer
 
             png_buffer.seek(0)
             png_buffer.truncate()
             # global_timer()
-            _png.write_png(output.tostring(), output.shape[1], output.shape[0], png_buffer)
+            _png.write_png(renderer._renderer, png_buffer)
             # print global_timer
             datauri = "data:image/png;base64,{0}".format(
-                png_buffer.getvalue().encode("base64").replace("\n", "")
+                base64.encodebytes(png_buffer.getvalue()).decode("ascii")
             )
             self.write_message(datauri)
-            self.last_buffer = buffer
 
     class Event(tornado.websocket.WebSocketHandler):
         def open(self):
