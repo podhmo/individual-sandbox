@@ -1,3 +1,7 @@
+run1:
+	open http://localhost:8888&
+	python example.py
+
 setup:
 	pip install -r requirements.txt
 

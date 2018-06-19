@@ -12,20 +12,20 @@ matplotlib.use('Agg')  # noqa
 from matplotlib import _png
 from matplotlib import backend_bases
 
-import cStringIO
-png_buffer = cStringIO.StringIO()
+from io import StringIO
+png_buffer = StringIO()  # bytesIO?
 
 html = """
 <html>
 <head>
 <script src="static/mpl.js"></script>
 <body>
-<canvas id="myCanvas" width="800" height="600"
+<canvas id="myCanvas" width="100" height="75"
    onmousedown="mouse_event(event, 'button_press')"
    onmouseup="mouse_event(event, 'button_release')"
    onmousemove="mouse_event(event, 'motion_notify')">
-   </canvas>
-   <div id="message">MESSAGE</div>
+</canvas>
+<div id="message">MESSAGE</div>
 </body>
 </html>
 """
@@ -53,6 +53,7 @@ def serve_figure(fig, port=8888):
         def dynamic_update(self):
             if self.needs_draw is False:
                 Image.image_number += 1
+                print("@", Image.image_number)
             self.needs_draw = True
 
     toolbar = Toolbar(fig.canvas)
@@ -119,8 +120,8 @@ def serve_figure(fig, port=8888):
                 fig.canvas.draw()
                 fig.canvas.toolbar.needs_draw = False
             renderer = fig.canvas.get_renderer()
-            buffer = np.array(np.frombuffer(renderer.buffer_rgba(0, 0), dtype=np.uint32), copy=True)
-            buffer = buffer.reshape((renderer.height, renderer.width))
+            buffer = np.array(np.frombuffer(renderer.buffer_rgba(), dtype=np.uint32), copy=True)
+            buffer = buffer.reshape((int(renderer.height), int(renderer.width)))
 
             last_buffer = self.last_buffer
             if last_buffer is not None:
@@ -132,11 +133,11 @@ def serve_figure(fig, port=8888):
             else:
                 output = buffer
 
-            png_buffer.reset()
+            png_buffer.seek(0)
             png_buffer.truncate()
-            #global_timer()
+            # global_timer()
             _png.write_png(output.tostring(), output.shape[1], output.shape[0], png_buffer)
-            #print global_timer
+            # print global_timer
             datauri = "data:image/png;base64,{0}".format(
                 png_buffer.getvalue().encode("base64").replace("\n", "")
             )
