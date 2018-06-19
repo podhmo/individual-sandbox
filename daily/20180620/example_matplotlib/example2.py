@@ -1,12 +1,11 @@
 import serve_figure
 
 import numpy as np
-from numpy import ma
 from matplotlib import pyplot as plt
 
 n = 30
 
-x = np.linspace(-1.5,1.5,n)
+x = np.linspace(-1.5, 1.5, n)
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
