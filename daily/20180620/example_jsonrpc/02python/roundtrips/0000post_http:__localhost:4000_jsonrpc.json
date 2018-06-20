@@ -1,0 +1,32 @@
+{
+  "request": {
+    "body": "{\"method\": \"echo\", \"params\": [\"echome!\"], \"jsonrpc\": \"2.0\", \"id\": 0}",
+    "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate",
+      "Connection": "keep-alive",
+      "Content-Length": "68",
+      "User-Agent": "python-requests/2.18.4",
+      "content-type": "application/json"
+    },
+    "host": "localhost:4000",
+    "method": "POST",
+    "path": "/jsonrpc",
+    "queries": [],
+    "url": "http://localhost:4000/jsonrpc"
+  },
+  "response": {
+    "body": {
+      "id": 0,
+      "jsonrpc": "2.0",
+      "result": "echome!"
+    },
+    "headers": {
+      "Content-Length": "48",
+      "Content-Type": "application/json",
+      "Date": "Wed, 20 Jun 2018 08:54:31 GMT",
+      "Server": "Werkzeug/0.14.1 Python/3.6.4"
+    },
+    "status_code": 200
+  }
+}
