@@ -1,0 +1,249 @@
+----------------------------------------
+class XMLWriter(XMLWriter <- object):
+    _XMLWriter__flush(self, indent)
+    start(self, tag, attrib)
+    comment(self, comment)
+    data(self, text)
+    end(self, tag, indent)
+    close(self, id)
+    element(self, tag, text, attrib)
+    flush(self)
+----------------------------------------
+class RendererSVG(RendererSVG <- RendererBase <- object):
+    finalize(self)
+    _write_default_style(self)
+    _make_id(self, type, content)
+    _make_flip_transform(self, transform)
+    _get_font(self, prop)
+    _get_hatch(self, gc, rgbFace)
+    _write_hatches(self)
+    _get_style_dict(self, gc, rgbFace)
+    _get_style(self, gc, rgbFace)
+    _get_clip(self, gc)
+    _write_clips(self)
+    _write_svgfonts(self)
+    _convert_path(self, path, transform, clip, simplify, sketch)
+    _adjust_char_id(self, char_id)
+    _draw_text_as_text(self, gc, x, y, s, prop, angle, ismath, mtext)
+
+
+class RendererBase(RendererBase <- object):
+    """An abstract base class to handle drawing/rendering operations.
+
+    The following methods must be implemented in the backend for full
+    functionality (though just implementing :meth:`draw_path` alone would
+    give a highly capable backend):
+
+    * :meth:`draw_path`
+    * :meth:`draw_image`
+    * :meth:`draw_gouraud_triangle`
+
+    The following methods *should* be implemented in the backend for
+    optimization reasons:
+
+    * :meth:`draw_text`
+    * :meth:`draw_markers`
+    * :meth:`draw_path_collection`
+    * :meth:`draw_quad_mesh`
+
+    """
+    open_group(self, s, gid)
+    close_group(self, s)
+    draw_path(self, gc, path, transform, rgbFace)
+    draw_markers(self, gc, marker_path, marker_trans, path, trans, rgbFace)
+    draw_path_collection(self, gc, master_transform, paths, all_transforms, offsets, offsetTrans, facecolors, edgecolors, linewidths, linestyles, antialiaseds, urls, offset_position)
+    draw_quad_mesh(self, gc, master_transform, meshWidth, meshHeight, coordinates, offsets, offsetTrans, facecolors, antialiased, edgecolors)
+    draw_gouraud_triangle(self, gc, points, colors, transform)
+    draw_gouraud_triangles(self, gc, triangles_array, colors_array, transform)
+    _iter_collection_raw_paths(self, master_transform, paths, all_transforms)
+    _iter_collection_uses_per_path(self, paths, all_transforms, offsets, facecolors, edgecolors)
+    _iter_collection(self, gc, master_transform, all_transforms, path_ids, offsets, offsetTrans, facecolors, edgecolors, linewidths, linestyles, antialiaseds, urls, offset_position)
+    get_image_magnification(self)
+    draw_image(self, gc, x, y, im, transform)
+    option_image_nocomposite(self)
+    option_scale_image(self)
+    draw_tex(self, gc, x, y, s, prop, angle, ismath, mtext)
+    draw_text(self, gc, x, y, s, prop, angle, ismath, mtext)
+    _get_text_path_transform(self, x, y, s, prop, angle, ismath)
+    _draw_text_as_path(self, gc, x, y, s, prop, angle, ismath)
+    get_text_width_height_descent(self, s, prop, ismath)
+    flipy(self)
+    get_canvas_width_height(self)
+    get_texmanager(self)
+    new_gc(self)
+    points_to_pixels(self, points)
+    strip_math(self, s)
+    start_rasterizing(self)
+    stop_rasterizing(self)
+    start_filter(self)
+    stop_filter(self, filter_func)
+----------------------------------------
+class FigureCanvasSVG(FigureCanvasSVG <- FigureCanvasBase <- object):
+    print_svg(self, filename)
+    print_svgz(self, filename)
+    _print_svg(self, filename, svgwriter)
+
+
+class FigureCanvasBase(FigureCanvasBase <- object):
+    """
+    The canvas the figure renders into.
+
+    Public attributes
+
+        *figure*
+            A :class:`matplotlib.figure.Figure` instance
+
+      """
+    @classmethod(get_supported_filetypes(cls))
+    @classmethod(get_supported_filetypes_grouped(cls))
+    @classmethod(get_default_filetype(cls))
+    _idle_draw_cntx()
+    is_saving(self)
+    onRemove(self, ev)
+    onHilite(self, ev)
+    pick(self, mouseevent)
+    blit(self, bbox)
+    resize(self, w, h)
+    draw_event(self, renderer)
+    resize_event(self)
+    close_event(self, guiEvent)
+    key_press_event(self, key, guiEvent)
+    key_release_event(self, key, guiEvent)
+    pick_event(self, mouseevent, artist)
+    scroll_event(self, x, y, step, guiEvent)
+    button_press_event(self, x, y, button, dblclick, guiEvent)
+    button_release_event(self, x, y, button, guiEvent)
+    motion_notify_event(self, x, y, guiEvent)
+    leave_notify_event(self, guiEvent)
+    enter_notify_event(self, guiEvent, xy)
+    idle_event(self, guiEvent)
+    grab_mouse(self, ax)
+    release_mouse(self, ax)
+    draw(self)
+    draw_idle(self)
+    draw_cursor(self, event)
+    get_width_height(self)
+    _get_output_canvas(self, format)
+    print_figure(self, filename, dpi, facecolor, edgecolor, orientation, format)
+    get_window_title(self)
+    set_window_title(self, title)
+    get_default_filename(self)
+    switch_backends(self, FigureCanvasClass)
+    mpl_connect(self, s, func)
+    mpl_disconnect(self, cid)
+    new_timer(self)
+    flush_events(self)
+    start_event_loop(self, timeout)
+    stop_event_loop(self)
+    start_event_loop_default(self, timeout)
+    stop_event_loop_default(self)
+----------------------------------------
+class FigureManagerSVG(FigureManagerSVG <- FigureManagerBase <- object):
+    pass
+
+
+class FigureManagerBase(FigureManagerBase <- object):
+    """
+    Helper class for pyplot mode, wraps everything up into a neat bundle
+
+    Public attibutes:
+
+    *canvas*
+        A :class:`FigureCanvasBase` instance
+
+    *num*
+        The figure number
+    """
+    show(self)
+    destroy(self)
+    full_screen_toggle(self)
+    resize(self, w, h)
+    key_press(self, event)
+    show_popup(self, msg)
+    get_window_title(self)
+    set_window_title(self, title)
+----------------------------------------
+class FigureCanvasSVG(FigureCanvasSVG <- FigureCanvasBase <- object):
+    print_svg(self, filename)
+    print_svgz(self, filename)
+    _print_svg(self, filename, svgwriter)
+
+
+class FigureCanvasBase(FigureCanvasBase <- object):
+    """
+    The canvas the figure renders into.
+
+    Public attributes
+
+        *figure*
+            A :class:`matplotlib.figure.Figure` instance
+
+      """
+    @classmethod(get_supported_filetypes(cls))
+    @classmethod(get_supported_filetypes_grouped(cls))
+    @classmethod(get_default_filetype(cls))
+    _idle_draw_cntx()
+    is_saving(self)
+    onRemove(self, ev)
+    onHilite(self, ev)
+    pick(self, mouseevent)
+    blit(self, bbox)
+    resize(self, w, h)
+    draw_event(self, renderer)
+    resize_event(self)
+    close_event(self, guiEvent)
+    key_press_event(self, key, guiEvent)
+    key_release_event(self, key, guiEvent)
+    pick_event(self, mouseevent, artist)
+    scroll_event(self, x, y, step, guiEvent)
+    button_press_event(self, x, y, button, dblclick, guiEvent)
+    button_release_event(self, x, y, button, guiEvent)
+    motion_notify_event(self, x, y, guiEvent)
+    leave_notify_event(self, guiEvent)
+    enter_notify_event(self, guiEvent, xy)
+    idle_event(self, guiEvent)
+    grab_mouse(self, ax)
+    release_mouse(self, ax)
+    draw(self)
+    draw_idle(self)
+    draw_cursor(self, event)
+    get_width_height(self)
+    _get_output_canvas(self, format)
+    print_figure(self, filename, dpi, facecolor, edgecolor, orientation, format)
+    get_window_title(self)
+    set_window_title(self, title)
+    get_default_filename(self)
+    switch_backends(self, FigureCanvasClass)
+    mpl_connect(self, s, func)
+    mpl_disconnect(self, cid)
+    new_timer(self)
+    flush_events(self)
+    start_event_loop(self, timeout)
+    stop_event_loop(self)
+    start_event_loop_default(self, timeout)
+    stop_event_loop_default(self)
+----------------------------------------
+class FigureManagerSVG(FigureManagerSVG <- FigureManagerBase <- object):
+    pass
+
+
+class FigureManagerBase(FigureManagerBase <- object):
+    """
+    Helper class for pyplot mode, wraps everything up into a neat bundle
+
+    Public attibutes:
+
+    *canvas*
+        A :class:`FigureCanvasBase` instance
+
+    *num*
+        The figure number
+    """
+    show(self)
+    destroy(self)
+    full_screen_toggle(self)
+    resize(self, w, h)
+    key_press(self, event)
+    show_popup(self, msg)
+    get_window_title(self)
+    set_window_title(self, title)
