@@ -75,7 +75,6 @@ def emit_class(cls, d, m):
         if "method" in attrs:
             for name, attr in attrs["method"].items():
                 try:
-                    argspec = inspect.getfullargspec(attr)
-                    m.stmt("{}({})", name, ", ".join(argspec.args))
+                    m.stmt("{}{}", name, str(inspect.signature(attr)))
                 except Exception as e:
                     m.stmt("#", name, "##", str(e))
