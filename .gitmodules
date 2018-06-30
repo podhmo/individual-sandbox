@@ -7,9 +7,6 @@
 [submodule "daily/20180602/example_react_native_web"]
 	path = daily/20180602/example_react_native_web
 	url = git@github.com:podhmo-sandbox/react-native-web-sandbox.git
-[submodule "20180602/example_react_native_web"]
-	path = 20180602/example_react_native_web
-	url = git@github.com:podhmo-sandbox/react-native-web-sandbox.git
 [submodule "daily/20180626/material-design-html-sandbox"]
 	path = daily/20180626/material-design-html-sandbox
 	url = git@github.com:podhmo-sandbox/material-design-html-sandbox.git
