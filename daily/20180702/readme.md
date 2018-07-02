@@ -34,3 +34,55 @@ pluginsで提供されているのか
 - asyncioベースで作る?(websockets)
 - slackのbot部分から？
 - port, handlers, store
+- subscription
+- pluginシステムをもうちょっと良い感じにしたい?
+
+
+機能拡張
+
+- 他のdataでもいけるように
+- 再開できる
+- 結果を記録できる
+- 絵とか表示したい
+
+### hmm
+
+```
+myfunc.getpokenamelist()
+mention_func()
+  # reset
+    - myfunc.reset()
+      - myfunc.makekanalistGetnn()
+      - myfunc.makekanalistNotnn()
+  # log
+  # ranking
+    - myfunc.remarkRanking()
+  # hint
+    - myfunc.hint(req)
+  # 詳細
+    - myfunc.getpokedetail(req)
+    - myfunc.checkExistenceAllPoke(req)
+  # else
+    - myfunc.checkExistencePoke(req)
+    - myfunc.memoryRemark(req)
+    - myfunc.checkExistencereq(req)
+    - myfunc.countreqstock(req)
+    - myfunc.checkTruelastword(req)
+    - myfunc.forgivelastword(req)
+    - myfunc.shiritori(req)
+      - myfunc.getshiri(req)
+      - myfunc.delstock(kana, val)
+      - myfunc.pokechoice(kana)
+        - myfunc.delnstock(kana, val)
+        - myfunc.memorylastword(req)
+        - myfunc.reqstockappend(req)
+```
+
+helpers
+
+```
+- myfunc.left(text, e)
+- myfunc.mid(text, s, e)
+- myfunc.right(text, s)
+```
+
