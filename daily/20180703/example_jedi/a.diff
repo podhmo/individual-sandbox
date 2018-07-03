@@ -1,0 +1,66 @@
+diff --git a/emacs.d/74-language-python.el b/emacs.d/74-language-python.el
+index 1c7b253..46afc30 100644
+--- a/emacs.d/74-language-python.el
++++ b/emacs.d/74-language-python.el
+@@ -97,20 +97,25 @@
+     (setq beg (point-min))
+     (setq end (point-max))
+     )
+-  (let ((yapf (or (pickup-file "bin/yayapf") "yapf")))
++  (let ((yapf (or (pickup-file "bin/yayapf") (pickup-file "bin/yapf") "yapf")))
+     (my:execute-formatter-command "yayapf" yapf  beg end)))
+ 
+ ;; jedi
+ (with-eval-after-load 'python
+   (require 'pickup) ; individual package
+-
+   (defun my:python-jedi-setup ()
+-    (let ((cmds `(,(pickup:pickup-file "bin/python") ,@(cdr jedi:server-command)))
+-          (args '("--log-traceback")))
+-      (when cmds (set (make-local-variable 'jedi:server-command) cmds))
+-      (when args (set (make-local-variable 'jedi:server-args) args))
+-      )
+-    (jedi-mode 1)
++    (let ((alternative-python (pickup:pickup-file "bin/python"))
++          (cmds jedi:server-command)
++          (args '("--log-level" "DEBUG")))
++
++      (when alternative-python
++        ;; venv/foo/bin/python -> venv/foo
++        (let ((venv-path (file-name-directory (substring-no-properties (file-name-directory alternative-python) 0 -1))))
++          (setq args (append args `("--virtual-env" ,venv-path))))
++        )
++      (setq-local jedi:server-command cmds)
++      (setq-local jedi:server-args args))
++    (jedi-mode 1))
+ 
+     (let ((map python-mode-map))
+       (define-key map (kbd "M-.") 'jedi:goto-definition)
+@@ -131,16 +136,17 @@
+   (setq jedi:complete-on-dot t)
+   (setq jedi:use-shortcuts t)
+ 
+-  ;; this is work-around
+-  (defun my:safe-python-jedi-setup ()
+-    (let ((p (start-process "find jedi" nil (pickup:pickup-file "bin/python")  "-c" "import jedi; import epc")))
+-      (set-process-sentinel
+-       p
+-       (lambda (p status)
+-         (cond ((= 0 (process-exit-status p)) (my:python-jedi-setup))
+-               (t (message "jedi is not found. please install `pip install jedi epc`"))))))
+-    )
+-  (add-hook 'python-mode-hook 'my:safe-python-jedi-setup)
++  ;; ;; this is work-around
++  ;; (defun my:safe-python-jedi-setup ()
++  ;;   (let ((p (start-process "find jedi" nil (pickup:pickup-file "bin/python")  "-c" "import jedi; import epc")))
++  ;;     (set-process-sentinel
++  ;;      p
++  ;;      (lambda (p status)
++  ;;        (cond ((= 0 (process-exit-status p)) (my:python-jedi-setup))
++  ;;              (t (message "jedi is not found. please install `pip install jedi epc`"))))))
++  ;;   )
++(add-hook 'python-mode-hook 'my:python-jedi-setup)
++
+   )
+ 
+ ;;; auto-pair

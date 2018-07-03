@@ -1,5 +1,4 @@
 import jedi
-import slacker
 import os.path
 
 
@@ -27,7 +26,7 @@ def definition_to_dict(d):
 
 
 source = """\
-import slacker
+import kamidana
 """
 print(get_definition(source, 1, 7, "."))
 # (ffap-python:find-program ffap-python:python-program-name)
