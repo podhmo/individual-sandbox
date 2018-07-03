@@ -1,3 +1,26 @@
+## python corountine
+
+corountineというのはiteratorを取る代わりに何かの継続っぽいものを取るみたいな感じなのだなー。
+
+```python
+def run(itr):
+    yield ["x", "x*x"]
+    for x in itr:
+        x = int(x)
+        yield {"x": x, "x*x": x * x}
+```
+
+と
+
+```python
+def run():
+    x = yield ["x", "x*x"]
+    while True:
+        x = int(x)
+        x = yield {"x": x, "x*x": x * x}
+```
+
+
 ## python jediで上手く補完できない
 
 jediはこの環境変数を見る `VIRTUAL_ENV`。

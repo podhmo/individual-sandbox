@@ -1,0 +1,29 @@
+--- 03handler_cli.py	2018-07-03 16:46:50.000000000 +0900
++++ 05handler_cli.py	2018-07-03 18:30:10.000000000 +0900
+@@ -3,15 +3,14 @@
+ 
+ 
+ def main(args):
+-    run(args.input)
++    yield from run(args.input)
+ 
+ 
+ def run(itr):
+-    w = csv.DictWriter(sys.stdout, fieldnames=["x", "x*x"])
+-    w.writeheader()
++    yield ["x", "x*x"]
+     for x in itr:
+         x = int(x)
+-        w.writerow({"x": x, "x*x": x * x})
++        yield {"x": x, "x*x": x * x}
+ 
+ 
+ if __name__ == "__main__":
+@@ -19,4 +18,6 @@
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--input", action="append", default=["1", "2", "3", "4", "5"])
+     args = parser.parse_args()
+-    main(args)
++    itr = main(args)
++    w = csv.DictWriter(sys.stdout, fieldnames=next(itr))
++    w.writerows(itr)

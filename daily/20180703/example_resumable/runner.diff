@@ -1,0 +1,46 @@
+--- 03runner_cli.py	2018-07-03 16:46:50.000000000 +0900
++++ 05runner_cli.py	2018-07-03 18:32:03.000000000 +0900
+@@ -3,9 +3,6 @@
+ import threading
+ import logging
+ import requests
+-import csv
+-from contextlib import redirect_stdout
+-from io import StringIO
+ from wsgiref.simple_server import make_server
+ logger = logging.getLogger(__name__)
+ 
+@@ -27,19 +24,13 @@
+         content_length = int(environ["CONTENT_LENGTH"])
+ 
+         val = json.loads(wsgi_input.read(content_length))
+-        io = StringIO()
+-        with redirect_stdout(io):
+ 
+-            class args:
+-                input = [val]
++        class args:
++            input = [val]
+ 
+-            consume(args)
+-
+-        io.seek(0)
+-        r = csv.DictReader(io)
+-        result = list(r)
+-        assert len(result) == 1
+-        return [json.dumps(result[0]).encode("utf-8")]
++        result = list(consume(args))
++        assert len(result) == 2
++        return [json.dumps(result[1]).encode("utf-8")]
+ 
+     return app
+ 
+@@ -49,7 +40,7 @@
+     logging.basicConfig(level=logging.INFO)
+ 
+     import magicalimport
+-    handler_main = magicalimport.import_symbol("./03handler_cli.py:main")
++    handler_main = magicalimport.import_symbol("./05handler_cli.py:main")
+     app = make_app(handler_main)
+ 
+     port = find_free_port()
