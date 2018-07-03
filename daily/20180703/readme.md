@@ -1,3 +1,15 @@
+## python scriptingで良い感じに
+
+- argparseの妙
+- itertoolsの妙
+- Makefileの妙
+- (resume)
+
+あと不足していること
+
+- localの環境から離れる場合
+- logの追加,途中で中断
+
 ## python corountine
 
 corountineというのはiteratorを取る代わりに何かの継続っぽいものを取るみたいな感じなのだなー。
