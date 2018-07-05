@@ -1,8 +1,19 @@
+## bq tableの生成・更新
+
+```
+# 生成
+$ bq mk --schema=schema.json <project id>:<data set>.<table>
+# 更新
+$ bq update --schema=schema.json <project id>:<data set>.<table>
+```
+
 ## bq datasetの一覧など
 
 ```
+# dataset
 $ bq ls --format-prettyjson
-$ bq show --format=prettyjson <project id>:<data set>.<table>
+# tables
+$ bq ls <project id>:<data set>
 ```
 
 ## bq credentialsを変える方法
