@@ -1,0 +1,21 @@
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:00  0.0  0.0  70196 14768
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:04  111  0.0  70848 15416
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:04  111  0.0  70456 15024
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:05  105  0.3 110324 54908
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:05  106  0.2 104180 48784
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:06  101  0.3 110324 55044
+  PID     TIME %CPU %MEM    VSZ   RSS
+12126 00:00:06  101  0.2 104180 48912
+before write
+----------------------------------------
+after write
+----------------------------------------
+load dataclass
+----------------------------------------
+load dataclass
