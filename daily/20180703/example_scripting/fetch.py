@@ -31,6 +31,20 @@ def run(*, config, size=None, x_list=None, y_list=None, input=None, decoration=N
 
 def decoration_for_calculation(itr):
     for row in itr:
+        # ここでどのような結果が欲しいのか全て網羅されるのが良い
+        r = {}
+        r["id"] = row["id"]
+        r["x"] = row["x"]
+        r["y"] = row["y"]
+        if row["y"] == 0:
+            yield r
+            continue
+        r["x_y_rate"] = row["x"] / row["y"]
+        yield r
+
+
+def decoration_for_calculation(itr):
+    for row in itr:
         if row["y"] == 0:
             yield row
             continue

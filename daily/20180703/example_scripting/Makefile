@@ -9,5 +9,7 @@ default:
 one:
 	${CMD} -x 1 -y 2
 
+xs := 1 2 3 4 5
+ys := -2 -1 0 1 2
 many:
-	${CMD} -x 1 -x 2 -x 3 -x 4 -x 5 -y 2 -y 1 -y 0 -y 1 -y 2
+	${CMD} $(addprefix -x ,$(xs)) $(addprefix -y ,$(ys))
