@@ -1,0 +1,337 @@
+[
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter.git",
+    "stargazers_count": 5130,
+    "updated_at": "2018-07-11T06:51:28Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/notebook.git",
+    "stargazers_count": 4381,
+    "updated_at": "2018-07-11T02:40:59Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/docker-stacks.git",
+    "stargazers_count": 2972,
+    "updated_at": "2018-07-11T00:57:46Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_kernel_test.git",
+    "stargazers_count": 29,
+    "updated_at": "2018-07-10T15:36:58Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter.github.io.git",
+    "stargazers_count": 85,
+    "updated_at": "2018-07-10T13:33:34Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/colaboratory.git",
+    "stargazers_count": 652,
+    "updated_at": "2018-07-10T11:18:57Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbdime.git",
+    "stargazers_count": 678,
+    "updated_at": "2018-07-10T09:35:37Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbconvert.git",
+    "stargazers_count": 433,
+    "updated_at": "2018-07-10T05:27:31Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbgrader.git",
+    "stargazers_count": 518,
+    "updated_at": "2018-07-10T05:27:16Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbviewer.git",
+    "stargazers_count": 1225,
+    "updated_at": "2018-07-10T05:26:44Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_client.git",
+    "stargazers_count": 103,
+    "updated_at": "2018-07-10T03:24:17Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/repo2docker.git",
+    "stargazers_count": 172,
+    "updated_at": "2018-07-09T00:42:14Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/qtconsole.git",
+    "stargazers_count": 124,
+    "updated_at": "2018-07-08T17:12:05Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/help.git",
+    "stargazers_count": 236,
+    "updated_at": "2018-07-08T14:05:17Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/ngcm-tutorial.git",
+    "stargazers_count": 41,
+    "updated_at": "2018-07-08T00:55:18Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/governance.git",
+    "stargazers_count": 17,
+    "updated_at": "2018-07-07T04:20:19Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/tmpnb.git",
+    "stargazers_count": 529,
+    "updated_at": "2018-07-06T03:03:07Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/dashboards.git",
+    "stargazers_count": 763,
+    "updated_at": "2018-07-05T17:53:09Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/kernel_gateway.git",
+    "stargazers_count": 165,
+    "updated_at": "2018-07-05T14:52:01Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/kernel_gateway_demos.git",
+    "stargazers_count": 75,
+    "updated_at": "2018-07-05T11:43:07Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-drive.git",
+    "stargazers_count": 340,
+    "updated_at": "2018-07-05T08:10:08Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbformat.git",
+    "stargazers_count": 56,
+    "updated_at": "2018-07-02T12:48:23Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_console.git",
+    "stargazers_count": 89,
+    "updated_at": "2018-07-02T05:56:42Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/terminado.git",
+    "stargazers_count": 166,
+    "updated_at": "2018-07-02T05:21:54Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbmanager.git",
+    "stargazers_count": 32,
+    "updated_at": "2018-06-28T06:10:46Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/scipy-advanced-tutorial.git",
+    "stargazers_count": 61,
+    "updated_at": "2018-06-28T00:13:30Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbconvert-examples.git",
+    "stargazers_count": 99,
+    "updated_at": "2018-06-27T02:57:24Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/atom-notebook.git",
+    "stargazers_count": 287,
+    "updated_at": "2018-06-25T09:31:15Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-sphinx-theme.git",
+    "stargazers_count": 14,
+    "updated_at": "2018-06-20T11:09:35Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/testpath.git",
+    "stargazers_count": 14,
+    "updated_at": "2018-06-17T19:47:57Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_core.git",
+    "stargazers_count": 67,
+    "updated_at": "2018-06-16T23:07:59Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/enhancement-proposals.git",
+    "stargazers_count": 26,
+    "updated_at": "2018-06-15T13:52:01Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/debugger.git",
+    "stargazers_count": 28,
+    "updated_at": "2018-06-14T21:23:51Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/try.jupyter.org.git",
+    "stargazers_count": 7,
+    "updated_at": "2018-06-14T11:04:52Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/design.git",
+    "stargazers_count": 56,
+    "updated_at": "2018-06-06T14:57:50Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/roadmap.git",
+    "stargazers_count": 56,
+    "updated_at": "2018-06-05T09:21:37Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/cookiecutter-docker-stacks.git",
+    "stargazers_count": 0,
+    "updated_at": "2018-06-02T21:34:11Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_logger.git",
+    "stargazers_count": 4,
+    "updated_at": "2018-06-02T04:50:40Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_server.git",
+    "stargazers_count": 24,
+    "updated_at": "2018-05-24T07:54:37Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/echo_kernel.git",
+    "stargazers_count": 13,
+    "updated_at": "2018-05-24T07:54:16Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/docker-demo-images.git",
+    "stargazers_count": 79,
+    "updated_at": "2018-05-23T04:56:12Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jvm-repr.git",
+    "stargazers_count": 11,
+    "updated_at": "2018-05-22T23:46:17Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/mozfest15-training.git",
+    "stargazers_count": 8,
+    "updated_at": "2018-05-15T18:04:07Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/kernels.git",
+    "stargazers_count": 8,
+    "updated_at": "2018-05-01T17:00:18Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/newsletter.git",
+    "stargazers_count": 12,
+    "updated_at": "2018-04-23T13:46:31Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/test-grid.git",
+    "stargazers_count": 0,
+    "updated_at": "2018-01-22T18:48:59Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/win-tornado-terminals.git",
+    "stargazers_count": 2,
+    "updated_at": "2018-01-22T18:48:56Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter_markdown.git",
+    "stargazers_count": 0,
+    "updated_at": "2018-01-22T18:48:44Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/conf-event-log.git",
+    "stargazers_count": 0,
+    "updated_at": "2018-01-22T18:48:37Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-packaging.git",
+    "stargazers_count": 5,
+    "updated_at": "2018-01-22T18:48:18Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/sphinxcontrib_github_alt.git",
+    "stargazers_count": 2,
+    "updated_at": "2018-01-22T18:48:14Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-alabaster-theme.git",
+    "stargazers_count": 3,
+    "updated_at": "2018-01-22T18:48:12Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/project-mgt.git",
+    "stargazers_count": 4,
+    "updated_at": "2018-01-22T18:48:04Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/sphinx_rtd_theme.git",
+    "stargazers_count": 1,
+    "updated_at": "2018-01-22T18:47:53Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-sprints.git",
+    "stargazers_count": 4,
+    "updated_at": "2018-01-22T18:47:27Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/experiments.git",
+    "stargazers_count": 2,
+    "updated_at": "2018-01-22T18:47:22Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/surveys.git",
+    "stargazers_count": 8,
+    "updated_at": "2018-01-22T18:47:12Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/cdn.jupyter.org.git",
+    "stargazers_count": 3,
+    "updated_at": "2018-01-22T18:46:24Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/jupyter-blog-theme.git",
+    "stargazers_count": 2,
+    "updated_at": "2018-01-22T18:46:22Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/lbnl-jupyterday.git",
+    "stargazers_count": 3,
+    "updated_at": "2018-01-22T18:46:11Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/scipy-2015-advanced-topics.git",
+    "stargazers_count": 2,
+    "updated_at": "2018-01-22T18:45:48Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/strata-sv-2015-tutorial.git",
+    "stargazers_count": 22,
+    "updated_at": "2018-01-22T18:45:37Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/tmpnb-deploy.git",
+    "stargazers_count": 19,
+    "updated_at": "2018-01-22T18:45:24Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/tmpnb-redirector.git",
+    "stargazers_count": 14,
+    "updated_at": "2018-01-22T18:45:23Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nature-demo.git",
+    "stargazers_count": 11,
+    "updated_at": "2018-01-22T18:45:20Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/nbcache.git",
+    "stargazers_count": 5,
+    "updated_at": "2018-01-22T18:45:01Z"
+  },
+  {
+    "ssh_url": "git@github.com:jupyter/scipy-sprint.git",
+    "stargazers_count": 2,
+    "updated_at": "2017-03-23T14:47:40Z"
+  }
+]
