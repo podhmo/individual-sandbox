@@ -1,0 +1,46 @@
+version: '3'
+services:
+  # http://localhost:3000
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: always
+    ports:
+     - "3000:3000"
+    volumes:
+     - "grafana-storage:/var/lib/grafana"
+    environment:
+      GF_SERVER_ROOT_URL: "http://localhost:3000"
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    depends_on:
+      - graphite
+    networks:
+      - grafana-net
+  # http://localhost:12080/dashboard
+  # http://localhost:12080/render?from=-10mins&until=now&target=stats.example
+  # https://hub.docker.com/r/graphiteapp/docker-graphite-statsd/
+  graphite:
+    container_name: graphite
+    image: graphiteapp/graphite-statsd
+    restart: always
+    volumes:
+      - "graphite-storage:/opt/graphite/storage"
+      - "$PWD/statsd:/opt/statsd"
+      - "$PWD/logs/graphite:/var/log"
+      # - "$PWD/config/graphite:/opt/graphite/conf"
+      # - /path/to/statsd:/opt/statsd
+    ports:
+      - "12080:80"
+      - "12003:2003"
+      # - "12004:2004"
+      # - "12023:2023"
+      # - "12024:2024"
+      - "8125:8125"
+      - "8126:8126"
+    networks:
+      - grafana-net
+networks:
+  grafana-net:
+volumes:
+  grafana-storage:
+  graphite-storage:

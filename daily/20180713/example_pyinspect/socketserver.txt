@@ -1,0 +1,595 @@
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] get_request(self)
+01:    [method, OVERRIDE] server_activate(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ForkingMixIn <- builtins.object
+01:    [method] handle_timeout(self)
+02:        [method] collect_children(self)
+01:    [method] process_request(self, request, client_address)
+01:    [method] service_actions(self)
+02:        [method] collect_children(self)
+
+----------------------------------------
+00:socketserver.ThreadingMixIn <- builtins.object
+01:    [method] process_request(self, request, client_address)
+02:        [method] process_request_thread(self, request, client_address)
+
+----------------------------------------
+00:socketserver.ForkingUDPServer <- socketserver.ForkingMixIn <- socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ForkingMixIn <- builtins.object
+01:    [method] handle_timeout(self)
+02:        [method] collect_children(self)
+01:    [method] process_request(self, request, client_address)
+01:    [method] service_actions(self)
+02:        [method] collect_children(self)
+
+00:socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] get_request(self)
+01:    [method, OVERRIDE] server_activate(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ForkingTCPServer <- socketserver.ForkingMixIn <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ForkingMixIn <- builtins.object
+01:    [method] handle_timeout(self)
+02:        [method] collect_children(self)
+01:    [method] process_request(self, request, client_address)
+01:    [method] service_actions(self)
+02:        [method] collect_children(self)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ThreadingUDPServer <- socketserver.ThreadingMixIn <- socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ThreadingMixIn <- builtins.object
+01:    [method] process_request(self, request, client_address)
+02:        [method] process_request_thread(self, request, client_address)
+
+00:socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] get_request(self)
+01:    [method, OVERRIDE] server_activate(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ThreadingTCPServer <- socketserver.ThreadingMixIn <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ThreadingMixIn <- builtins.object
+01:    [method] process_request(self, request, client_address)
+02:        [method] process_request_thread(self, request, client_address)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.UnixStreamServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.UnixDatagramServer <- socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] get_request(self)
+01:    [method, OVERRIDE] server_activate(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ThreadingUnixStreamServer <- socketserver.ThreadingMixIn <- socketserver.UnixStreamServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ThreadingMixIn <- builtins.object
+01:    [method] process_request(self, request, client_address)
+02:        [method] process_request_thread(self, request, client_address)
+
+00:socketserver.UnixStreamServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.ThreadingUnixDatagramServer <- socketserver.ThreadingMixIn <- socketserver.UnixDatagramServer <- socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.ThreadingMixIn <- builtins.object
+01:    [method] process_request(self, request, client_address)
+02:        [method] process_request_thread(self, request, client_address)
+
+00:socketserver.UnixDatagramServer <- socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+
+00:socketserver.UDPServer <- socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] get_request(self)
+01:    [method, OVERRIDE] server_activate(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.TCPServer <- socketserver.BaseServer <- builtins.object
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass, bind_and_activate=True)
+02:        [method] server_bind(self)
+02:        [method, OVERRIDE] server_activate(self)
+02:        [method, OVERRIDE] server_close(self)
+01:    [method] fileno(self)
+01:    [method] get_request(self)
+01:    [method, OVERRIDE] shutdown_request(self, request)
+02:        [method, OVERRIDE] close_request(self, request)
+
+00:socketserver.BaseServer <- builtins.object
+01:    [method] __enter__(self)
+01:    [method] __exit__(self, *args)
+02:        [method] server_close(self)
+01:    [method, OVERRIDE] __init__(self, server_address, RequestHandlerClass)
+01:    [method] handle_request(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+02:        [method] handle_timeout(self)
+01:    [method] serve_forever(self, poll_interval=0.5)
+02:        [method] service_actions(self)
+02:        [method] _handle_request_noblock(self)
+03:            [method] verify_request(self, request, client_address)
+03:            [method] shutdown_request(self, request)
+04:                [method] close_request(self, request)
+03:            [method] process_request(self, request, client_address)
+04:                [method] finish_request(self, request, client_address)
+04:                [method] shutdown_request(self, request)
+05:                    [method] close_request(self, request)
+03:            [method] handle_error(self, request, client_address)
+01:    [method] server_activate(self)
+01:    [method] shutdown(self)
+
+----------------------------------------
+00:socketserver.BaseRequestHandler <- builtins.object
+01:    [method, OVERRIDE] __init__(self, request, client_address, server)
+02:        [method] setup(self)
+02:        [method] handle(self)
+02:        [method] finish(self)
+
+----------------------------------------
+00:socketserver.StreamRequestHandler <- socketserver.BaseRequestHandler <- builtins.object
+01:    [method, OVERRIDE] finish(self)
+01:    [method, OVERRIDE] setup(self)
+
+00:socketserver.BaseRequestHandler <- builtins.object
+01:    [method, OVERRIDE] __init__(self, request, client_address, server)
+02:        [method] setup(self)
+02:        [method] handle(self)
+02:        [method] finish(self)
+
+----------------------------------------
+00:socketserver._SocketWriter <- io.BufferedIOBase <- _io._BufferedIOBase <- io.IOBase <- _io._IOBase <- builtins.object
+01:    [method, OVERRIDE] __init__(self, sock)
+01:    [method, OVERRIDE] fileno(self)
+01:    [method, OVERRIDE] writable(self)
+01:    [method, OVERRIDE] write(self, b)
+
+00:io.BufferedIOBase <- _io._BufferedIOBase <- io.IOBase <- _io._IOBase <- builtins.object
+
+00:_io._BufferedIOBase <- _io._IOBase <- builtins.object
+01:    [method] detach(self, /)
+01:    [method] readinto(self, buffer, /)
+01:    [method] readinto1(self, buffer, /)
+
+00:io.IOBase <- _io._IOBase <- builtins.object
+
+00:_io._IOBase <- builtins.object
+01:    [method] __iter__(self, /)
+01:    [method, OVERRIDE] __new__(*args, **kwargs)
+01:    [method] __next__(self, /)
+01:    [method] close(self, /)
+01:    [method] fileno(self, /)
+01:    [method] flush(self, /)
+01:    [method] isatty(self, /)
+01:    [method] readable(self, /)
+01:    [method] readline(self, size=-1, /)
+01:    [method] readlines(self, hint=-1, /)
+01:    [method] seekable(self, /)
+01:    [method] tell(self, /)
+01:    [method] writable(self, /)
+01:    [method] writelines(self, lines, /)
+
+----------------------------------------
+00:socketserver.DatagramRequestHandler <- socketserver.BaseRequestHandler <- builtins.object
+01:    [method, OVERRIDE] finish(self)
+01:    [method, OVERRIDE] setup(self)
+
+00:socketserver.BaseRequestHandler <- builtins.object
+01:    [method, OVERRIDE] __init__(self, request, client_address, server)
+02:        [method] setup(self)
+02:        [method] handle(self)
+02:        [method] finish(self)
+
+----------------------------------------
