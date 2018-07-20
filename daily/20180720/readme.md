@@ -1,3 +1,10 @@
+## go gocode
+
+```console
+$ go get -u -v github.com/mdempsky/gocode
+$ go get -u -v github.com/rogpeppe/godef
+```
+
 ## rust quickrunで実行ファイルが残る
 
 ```
