@@ -1,4 +1,78 @@
-## rust
+## rust quickrunで実行ファイルが残る
+
+```
+    ("rust" . ((:command . "rustc")
+               (:exec . ("%c %o -o %e %s" "%e %a"))
+               (:compile-only . "%c %o -o %e %s")
+               (:remove . ("%e"))
+               (:description . "Compile rust and execute")))
+
+;; ここで
+
+(defconst quickrun--template-place-holders
+  '("%c" "%o" "%s" "%S" "%a" "%d" "%n" "%N" "%e" "%E")
+  "A list of place holders of each language parameter.
+Place holders are beginning with '%' and replaced by:
+%c: :command parameter
+%o: command options
+%s: source code name
+%S: source code name without extension
+%a: program argument
+%d: directory name
+%n: absolute path of source code without extension
+%N: source code path without extension
+%e: absolute path of source code with executable extension(.exe, .out, .class)
+%E: source code name with executable extension
+")
+```
+
+つまり
+
+```
+;; (:exec . ("%c %o -o %e %s" "%e %a"))
+"<compiler> <compiler arguments> -o <executable path> <source file>" "<executable path> <program arguments>"
+```
+
+debugしてみる
+
+```lisp
+(setq quickrun-debug nil)
+```
+
+実行結果
+
+```
+Quickrun Execute: rustc -o ./qr_10962m_m.out qr_10962m_m.rs at ./
+View mode: type C-h for help, ? for commands, q to quit.
+Quickrun Execute: ./qr_10962m_m.out  at ./
+View mode: type C-h for help, ? for commands, q to quit.
+Quickrun remove (./qr_10962m_m.out ./qr_10962m_m.rs)
+```
+
+そもそも何かがおかしい。どこかで謎の実行がある？
+
+```lisp
+  (when (boundp 'quickrun--language-alist)
+    (setq quickrun--language-alist
+          (remove* "rust" quickrun--language-alist :key 'car :test 'equal))
+    (add-to-list 'quickrun--language-alist
+      '("rust" . ((:command . "rustc-wrap")
+                 (:exec . ("%c %o -o %e %s" "%e %a"))
+                 (:compile-only . "%c %o -o %e %s")
+                 (:remove . ("%e"))
+                 (:description . "Compile rust and execute")))))
+```
+
+hmmm
+
+```bash
+#!/bin/bash
+echo $@ >> ~/.cargo/rustc.log
+rustc $@
+```
+
+
+## rust by example
 
 - https://doc.rust-lang.org/rust-by-example/
 
