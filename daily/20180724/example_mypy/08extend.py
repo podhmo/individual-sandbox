@@ -11,7 +11,10 @@ class HasB(tx.Protocol):
     b: str
 
 
-class AB(HasA, HasB, tx.Protocol):
+T = t.TypeVar("T")
+
+
+class AB(HasA, HasB, t.Generic[T]):
     pass
 
 
@@ -19,23 +22,16 @@ def use(ob: AB) -> None:
     print(ob.a, ob.b)
 
 
-T = t.TypeVar("T")
-
-
-class EAB(t.Generic[T]):
+class Params(mx.TypedDict):
     a: str
     b: str
 
-    class Params(mx.TypedDict):
-        a: str
-        b: str
 
-
-def extend(ob: T, d: EAB.Params) -> EAB[T]:
+def extend(ob: T, d: Params) -> AB[T]:
     x = t.cast(t.Any, ob)
     x.a = d["a"]
     x.b = d["b"]
-    return t.cast(EAB[T], x)
+    return t.cast(AB[T], x)
 
 
 def main() -> None:

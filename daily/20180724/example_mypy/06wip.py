@@ -1,48 +1,47 @@
-from collections import ChainMap
-import typing_extensions as tx
 import typing as t
 
-
-class P(tx.Protocol):
-    start: int
-    end: int
+T = t.TypeVar("T")
 
 
-T = t.TypeVar("T", bound="StackedContext")
+class EX(t.Generic[T]):
+    x: str
 
 
-class StackedContext:
-    cmap: ChainMap
-
-    def __init__(self, cmap: t.Optional[ChainMap] = None) -> None:
-        self.cmap = cmap or ChainMap({})
-
-    def new_child(self: T, d: t.Optional[dict] = None) -> T:
-        d = d or {}
-        ob = self.__class__(self.cmap.new_child(d))  # type: T
-        return ob
-
-    def __getattr__(self, name: str) -> t.Any:
-        try:
-            return self.cmap[name]
-        except KeyError as e:
-            raise AttributeError(str(e))
+def extend_x(ob: T) -> EX[T]:
+    ob2 = t.cast(t.Any, ob)
+    ob2.x = "foo"
+    return t.cast(EX[T], ob2)
 
 
-def make_context() -> P:
-    c = StackedContext()
-    d = {"start": start, "end": end}
-    return c.new_child(d)
+class EY(t.Generic[T]):
+    y: str
 
 
-def f(ob: P) -> str:
-    return '({start}, {end})'.format(start=ob.start, end=ob.end)
+def extend_y(ob: T) -> EY[T]:
+    ob2 = t.cast(t.Any, ob)
+    ob2.y = "foo"
+    return t.cast(EY[T], ob2)
 
 
 def main() -> None:
-    ob = Impl(start=10, end=20)
-    print(f(ob))
+    class Ob:
+        pass
+
+    ob = Ob()
+    ob2 = extend_x(ob)
+    print(ob2.x)
+
+    ob3 = extend_y(ob2)
+    print(ob3.y)
+    print(ob3.x)  # error
+
+    class EFull(EY[Ob], EX[Ob]):
+        pass
+
+    ob4 = t.cast(EFull, ob3)
+    print(ob4.y)
+    print(ob4.x)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

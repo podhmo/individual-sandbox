@@ -1,4 +1,4 @@
-default: 1
+default: 6
 
 0:
 	mypy --strict 00*.py
@@ -12,3 +12,7 @@ default: 1
 	mypy --strict 04*.py
 5:
 	mypy --strict 05*.py
+6:
+	mypy --strict 06*.py
+7:
+	mypy --strict 07*.py
