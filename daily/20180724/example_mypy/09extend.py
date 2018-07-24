@@ -1,24 +1,13 @@
-import typing as t
 import typing_extensions as tx
 import mypy_extensions as mx
 
 
 class HasA(tx.Protocol):
-    # a: str
-    @property
-    def a(self):
-        pass
-
-    @a.setter
-    def a(self, v):
-        pass
+    a: str
 
 
 class HasB(tx.Protocol):
     b: str
-
-
-T = t.TypeVar("T")
 
 
 class AB(HasA, HasB):
@@ -33,13 +22,14 @@ Params = mx.TypedDict("Params", {"a": str, "b": str})
 
 
 def run(d: Params) -> None:
-    class Ob(AB):
+    class Ob:
         z = "boo"
-        # a = d["a"]
+
+    class Ob2(Ob, AB):
+        a = d["a"]
         b = d["b"]
 
-    ob = Ob()
-    ob.a = d["a"]
+    ob = Ob2()
     use(ob)
     print(ob.z)
 
