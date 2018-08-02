@@ -1,0 +1,59 @@
+mitmproxy.net.http.response.Response <- mitmproxy.net.http.message.Message <- mitmproxy.coretypes.serializable.Serializable <- builtins.object
+    [method, OVERRIDE] __init__(self, *args, **kwargs)
+    [method, OVERRIDE] __repr__(self)
+        [property] status_code
+        [property] reason
+    [method] _get_cookies(self)
+    [method] _set_cookies(self, value)
+    [property] cookies
+    [class method] make(status_code:int=200, content:Union[bytes, str]=b'', headers:Union[Dict[str, ~AnyStr], Iterable[Tuple[bytes, bytes]]]=())
+    [method] refresh(self, now=None)
+
+mitmproxy.net.http.message.Message <- mitmproxy.coretypes.serializable.Serializable <- builtins.object
+    [method, OVERRIDE] __eq__(self, other)
+    [method] decode(self, strict=True)
+        [property] content
+        [method] get_content(self, strict:bool=True) -> bytes
+            [property] raw_content
+            [property] headers
+        [property] headers
+    [method] encode(self, e)
+        [property] content
+        [property] raw_content
+        [property] headers
+    [class method, OVERRIDE] from_state(state)
+    [method, OVERRIDE] get_state(self)
+    [method] get_text(self, strict:bool=True) -> Union[str, NoneType]
+        [property] raw_content
+        [method] _guess_encoding(self) -> str
+            [method] _get_content_type_charset(self) -> Union[str, NoneType]
+                [property] headers
+            [property] headers
+        [method] get_content(self, strict:bool=True) -> bytes
+            [property] raw_content
+            [property] headers
+    [property] http_version
+    [method] replace(self, pattern, repl, flags=0, count=0)
+        [property] content
+        [property] headers
+    [method] set_content(self, value)
+        [property] raw_content
+        [property] headers
+    [method, OVERRIDE] set_state(self, state)
+    [method] set_text(self, text)
+        [property] content
+        [method] _guess_encoding(self) -> str
+            [method] _get_content_type_charset(self) -> Union[str, NoneType]
+                [property] headers
+            [property] headers
+        [property] headers
+    [property] text
+    [property] timestamp_end
+    [property] timestamp_start
+
+mitmproxy.coretypes.serializable.Serializable <- builtins.object
+    [method] copy(self)
+        [method] get_state(self)
+        [class method] from_state(state)
+    [method] set_state(self, state)
+
