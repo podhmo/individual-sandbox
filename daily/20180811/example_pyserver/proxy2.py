@@ -52,7 +52,6 @@ class Proxy:
         environ: dict,
         start_response: t.Callable[[str, t.List[t.Tuple[str, str]]], None],
     ) -> None:
-
         response = self.request(Request(environ))
         if response.status_code == 200:
             content = self.response(response)
@@ -66,6 +65,8 @@ class Proxy:
 def main(port=4444):
     def request(req: Request) -> Response:
         url = "http://localhost:5000"
+        if req.query_string:
+            url = f"{url}?{req.query_string}"
         return requests.request(req.method, url, data=req.data, headers=req.headers)
 
     def response(res: Response) -> bytes:
