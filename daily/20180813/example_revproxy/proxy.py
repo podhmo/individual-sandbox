@@ -2,7 +2,6 @@ import typing as t
 import typing_extensions as tx
 import json
 from wsgiref.simple_server import make_server
-from handofcats import as_command
 import requests
 
 
@@ -13,6 +12,10 @@ class Request:
     @property
     def wsgi_input(self):
         return self.environ["wsgi.input"]
+
+    @property
+    def path(self):
+        return self.environ["PATH_INFO"]
 
     @property
     def method(self):
@@ -33,7 +36,10 @@ class Request:
 
     @property
     def content_length(self):
-        return int(self.environ.get("CONTENT_LENGTH", "0"))
+        v = self.environ.get("CONTENT_LENGTH") or None
+        if v is None:
+            return None
+        return int(v)
 
     @property
     def data(self):
@@ -78,10 +84,9 @@ class Proxy:
         return [content]
 
 
-@as_command()
 def main(port=4444):
     def request(req: Request) -> Response:
-        url = "http://localhost:5000"
+        url = f"http://localhost:5000{req.path}"
         if req.query_string:
             url = f"{url}?{req.query_string}"
         return requests.request(req.method, url, data=req.data, headers=req.headers)
@@ -96,5 +101,13 @@ def main(port=4444):
         return json.dumps(body).encode("utf-8")
 
     proxy = Proxy(request, response)
-    httpd = make_server('', port, proxy)
-    httpd.serve_forever()
+    with make_server('', port, proxy) as httpd:
+        httpd.serve_forever()
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=4444)
+    args = parser.parse_args()
+    main(port=args.port)

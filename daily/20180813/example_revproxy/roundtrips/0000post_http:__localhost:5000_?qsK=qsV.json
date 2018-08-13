@@ -1,0 +1,37 @@
+{
+  "request": {
+    "body": "{\"foo\": \"boo\"}\n",
+    "headers": {
+      "ACCEPT": "application/json, */*",
+      "ACCEPT-ENCODING": "gzip, deflate",
+      "CONNECTION": "keep-alive",
+      "Content-Length": "15",
+      "HEADERX": "headerV",
+      "HOST": "localhost:5001",
+      "USER-AGENT": "HTTPie/0.9.8"
+    },
+    "host": "localhost:5000",
+    "method": "POST",
+    "path": "/",
+    "queries": [
+      [
+        "qsK",
+        "qsV"
+      ]
+    ],
+    "url": "http://localhost:5000/?qsK=qsV"
+  },
+  "response": {
+    "body": {
+      "age": "20",
+      "name": "foo"
+    },
+    "headers": {
+      "Content-Length": "28",
+      "Content-type": "application/json; charset=utf-8",
+      "Date": "Mon, 13 Aug 2018 15:05:23 GMT",
+      "Server": "WSGIServer/0.2 CPython/3.7.0"
+    },
+    "status_code": 200
+  }
+}
