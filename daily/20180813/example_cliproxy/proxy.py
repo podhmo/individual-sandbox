@@ -78,7 +78,9 @@ class Proxy:
     ) -> None:
         req = Request(environ)
         if req.method == "CONNECT":
-            pass
+            start_response(f'200 OK', [])
+            return [b'Connection Established']
+
         response = self.request(req)
         for k in list(response.headers.keys()):
             if is_hop_by_hop(k):
@@ -108,7 +110,9 @@ def main(port=4444):
         return json.dumps(body).encode("utf-8")
 
     proxy = Proxy(request, response)
-    with make_server('', port, proxy) as httpd:
+    from wsgiref.simple_server import WSGIRequestHandler as HandlerClass
+    HandlerClass.http_version = "1.1"
+    with make_server('', port, proxy, handler_class=HandlerClass) as httpd:
         httpd.serve_forever()
 
 
