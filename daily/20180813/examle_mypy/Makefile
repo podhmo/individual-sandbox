@@ -1,0 +1,2 @@
+default:
+	mypy --strict *.py
