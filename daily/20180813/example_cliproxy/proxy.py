@@ -110,10 +110,12 @@ def main(port=4444):
         return json.dumps(body).encode("utf-8")
 
     proxy = Proxy(request, response)
-    from wsgiref.simple_server import WSGIRequestHandler as HandlerClass
-    HandlerClass.http_version = "1.1"
-    with make_server('', port, proxy, handler_class=HandlerClass) as httpd:
-        httpd.serve_forever()
+    # from wsgiref.simple_server import WSGIRequestHandler as HandlerClass
+    # HandlerClass.http_version = "1.1"
+    # with make_server('', port, proxy, handler_class=HandlerClass) as httpd:
+    #     httpd.serve_forever()
+    from werkzeug.serving import run_simple
+    run_simple("", port, proxy)
 
 
 if __name__ == "__main__":
