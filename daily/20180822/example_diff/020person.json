@@ -1,0 +1,13 @@
+{
+  "type": "person",
+  "name": "foo",
+  "age": 20,
+  "father": {
+    "type": "rel",
+    "name": "X"
+  },
+  "mother": {
+    "type": "rel",
+    "name": "Y"
+  }
+}

@@ -1,0 +1,21 @@
+- name: foo
+  age: 10
+  parents:
+    - name: A
+      age: 40
+    - name: B
+      age: 44
+- name: bar
+  age: 20
+  parents:
+    - name: B
+      age: 44
+    - name: A
+      age: 40
+- name: bar2
+  age: 18
+  parents:
+    - name: B
+      age: 44
+    - name: A
+      age: 40
