@@ -1,0 +1,11 @@
+[server]
+cmd = ["./00hello-server.py"]
+numprocesses = 1
+restart = "on-failure"
+start_immediate = true
+
+[client]
+cmd = ["./00hello-client.py"]
+numprocesses = 1
+restart = "on-failure"
+start_immediate = true
