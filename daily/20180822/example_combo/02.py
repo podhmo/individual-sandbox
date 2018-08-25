@@ -1,8 +1,3 @@
-from functools import partial
-
-# function as stream
-
-
 class Select:
     def __init__(self, name, *, input, output, value=None):
         self.name = name
@@ -25,40 +20,33 @@ class Select:
 
 
 class Handler:
-    def __init__(self, actions):
-        self.actions = actions
+    def __init__(self, store, *, actions=None):
+        self.store = store
+        self.actions = actions or {}
 
     def register(self, fn, *, name=None):
         self.actions[name or fn.__name__] = fn
         return fn
 
-    def __call__(self, name, value, *, store):
+    def __call__(self, name, value):
         action = self.actions.get(name)
         if action is not None:
-            action(store, value)
+            action(self.store, value)
 
 
 def main():
-    def make_top(store, *, name):
+    def make0(store, *, name):
         def set0(store, value):
             store["commit"][0] = value
             store["subdata"] = store["data"][value]
 
-        return Select(
-            name,
-            output=partial(h, store=store),
-            input=lambda: list(store["data"].keys()),
-        ), set0
+        return Select(name, output=h, input=lambda: list(store["data"].keys())), set0
 
-    def make_sub(store, *, name):
+    def make1(store, *, name):
         def set1(store, value):
             store["commit"][1] = value
 
-        return Select(
-            name,
-            output=partial(h, store=store),
-            input=lambda: store["data"].get(store["commit"][0])
-        ), set1
+        return Select(name, output=h, input=lambda: store["data"].get(store["commit"][0])), set1
 
     store = {
         "commit": [None, None],
@@ -69,19 +57,23 @@ def main():
         }
     }
 
-    h = Handler({})
-    top, action = make_top(store, name="top")
+    h = Handler(store)
+    top, action = make0(store, name="0")
     h.register(action, name=top.name)
-    sub, action = make_sub(store, name="sub")
+    sub, action = make1(store, name="1")
     h.register(action, name=sub.name)
 
-    def MAIN():
+    def loop():
         while True:
-            yield f"{store['commit']} -- \t<{top}> -- <{sub}>"
+            params = yield f"{store['commit']} -- \t<{top}> -- <{sub}>"
+            if params is not None:
+                h(*params)
 
-    loop = iter(MAIN())
+    loop = iter(loop())
     print(next(loop))
-    top.select("J")
+    loop.send(("0", "E"))  # from data
+    print(next(loop))
+    top.select("J")  # from presentation
     print(next(loop))
     sub.select("い")
     print(next(loop))
