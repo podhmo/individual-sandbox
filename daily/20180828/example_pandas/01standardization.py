@@ -23,4 +23,5 @@ df["z_log_std"] = stats.zscore(df["z_log"])
 df["z_log_std2"] = scale(df["z_log"])
 print(df)
 
-
+for name in df.columns:
+    print(name, "mean", df[name].mean(), "std", df[name].std())
