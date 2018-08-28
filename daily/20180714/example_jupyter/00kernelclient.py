@@ -8,3 +8,4 @@ msg = c.execute("x = 1")
 print("msg", msg)
 msg = c.execute("print('hello')")
 print("msg", msg)
+
