@@ -83,3 +83,14 @@ categorical dataが。。
 - http://spitta8823.hatenablog.com/entry/2017/06/14/025442
 - https://blog.amedama.jp/entry/2018/06/21/235951
 - https://blog.amedama.jp/entry/2018/07/23/084500
+
+## python plot scatter with reflected marker size
+
+- https://stackoverflow.com/questions/14827650/pyplot-scatter-plot-marker-size
+- https://jakevdp.github.io/PythonDataScienceHandbook/04.02-simple-scatter-plots.html
+- https://python-graph-gallery.com/bubble-plot/
+
+
+これが一番わかりやすそう。
+
+https://python-graph-gallery.com/272-map-a-color-to-bubble-plot/
