@@ -1,0 +1,5 @@
+scikit-learn
+jupyter
+jupyter-emacskeys
+matplotlib
+scipy
