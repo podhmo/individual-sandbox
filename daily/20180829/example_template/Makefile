@@ -9,3 +9,7 @@
 	python 03*.py --config 03config.yaml
 04:
 	python 04*.py --config 04config.yaml
+05:
+	python 05*.py
+06:
+	python 06*.py 06.jinja2

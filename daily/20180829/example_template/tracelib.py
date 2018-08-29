@@ -12,11 +12,14 @@ class Object:
         return Object(f"{self._name}.{name}", attr, tracer=self._tracer)
 
     def __iter__(self):
-        return iter([self.__getattr__('__iter__')()])
+        yield self.__getattr__('__iter__')()
 
     def __call__(self, *args, **kwargs):
         self._tracer.trace_args(args, kwargs)
         return self
+
+    def items(self):
+        yield ("", self.__getattr__('items')())
 
     def __repr__(self):
         return f"<{self.__class__.__name__} {self._name!r}>"
