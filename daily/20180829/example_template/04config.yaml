@@ -1,0 +1,5 @@
+#  name == {{c.name}} && age > 20 && {{c.friends.find(c.subject).count()}} > 3
+template: |
+  {{c.friends.find(c.subject)}} > 3
+defaults:
+  name: bar
