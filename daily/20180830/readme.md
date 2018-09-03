@@ -37,5 +37,7 @@ b'\\N{HIRAGANA LETTER A}'
 'あ'
 ```
 
+
+- https://docs.python.jp/3/howto/unicode.html
 - https://docs.python.jp/3/library/codecs.html#error-handlers
 - https://docs.python.org/3/library/html.html
