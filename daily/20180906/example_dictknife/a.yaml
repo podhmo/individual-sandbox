@@ -1,0 +1,8 @@
+definitions:
+  a:
+    type: object
+    properties:
+      b:
+        $ref: "b.yaml#/definitions/b"
+      c:
+        type: string

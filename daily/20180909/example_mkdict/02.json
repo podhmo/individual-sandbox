@@ -1,0 +1,47 @@
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "tags": "vegetarian"
+              }
+            }
+          ]
+        }
+      },
+      "score_mode": "sum",
+      "boost_mode": "multiply",
+      "functions": [
+        {
+          "filter": {
+            "term": {
+              "cook_time_min": 10
+            },
+            "weight": 10
+          }
+        },
+        {
+          "filter": {
+            "range": {
+              "prep_time_min": {
+                "lte": 20
+              }
+            }
+          },
+          "weight": 10
+        },
+        {
+          "filter": {
+            "match": {
+              "ingredients": "garlic"
+            }
+          },
+          "weight": 5
+        }
+      ]
+    }
+  }
+}

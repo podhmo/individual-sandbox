@@ -1,0 +1,17 @@
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "prev_time_min": 15
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

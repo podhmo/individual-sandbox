@@ -1,0 +1,30 @@
+[NbConvertApp] Converting notebook 03nbreversible.ipynb to markdown
+[NbConvertApp] Executing notebook with kernel: python
+
+
+```python
+%matplotlib inline
+from matplotlib import pyplot as plt
+xs = [1, 2, 3, 4]
+plt.plot(xs)
+
+```
+
+    @@@ post_run_cell <function _enable_matplotlib_integration.<locals>.configure_once at 0x7f7c765572f0> ipykernel.pylab.backend_inline
+    @@@ post_execute <function install_repl_displayhook.<locals>.post_execute at 0x7f7c7655b730> matplotlib.pyplot
+    @@@ post_execute <function flush_figures at 0x7f7c765571e0> ipykernel.pylab.backend_inline
+
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x7f7c74295630>]
+
+
+
+
+![png](03nbreversible_files/03nbreversible_0_2.png)
+
+
+    @@@ post_execute <function flush_figures at 0x7f7c765571e0> ipykernel.pylab.backend_inline
+
