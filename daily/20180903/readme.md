@@ -1,5 +1,3 @@
-
-
 ## python gloudの情報を取り出す
 
 ```
@@ -26,3 +24,23 @@ memo
 replace '\.async' '.aasync'
 replace 'aasyncio'  'asyncio'
 ```
+
+## js prettier
+
+install
+
+```console
+$ npm install -g prettier
+# or yarn
+```
+
+write
+
+```console
+$ prettier --single-quote --trailing-comma es5 --write "{app,__{tests,mocks}__}/**/*.js"
+```
+
+### see also
+
+https://prettier.io/docs/en/install.html
+

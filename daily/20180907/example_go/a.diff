@@ -1,0 +1,28 @@
+--- 00return.go	2018-09-07 18:04:28.000000000 +0900
++++ 01return.go	2018-09-07 18:05:22.000000000 +0900
+@@ -14,13 +14,19 @@
+ }
+ 
+ func run(x, y int) (int, error) {
+-	n, err := f(x)
+-	if err != nil {
+-		return 0, err
++	n, xErr := f(x)
++	{
++		err := xErr
++		if err != nil {
++			return 0, err
++		}
+ 	}
+-	m, err2 := f(x)
+-	if err2 != nil {
+-		return 0, err2
++	m, yErr := f(x)
++	{
++		err := yErr
++		if err != nil {
++			return 0, err
++		}
+ 	}
+ 	return n + m, nil
+ }
