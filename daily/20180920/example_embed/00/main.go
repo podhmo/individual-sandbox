@@ -17,7 +17,11 @@ func (f *fake) F() {
 	fmt.Println("f")
 }
 
+func use(i I) {
+	i.F()
+}
+
 func main() {
 	fake := &fake{}
-	fake.F()
+	use(fake)
 }
