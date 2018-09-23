@@ -33,17 +33,18 @@ class Driver:
             stream=out or self.out,
         )
 
-    def patch(self, logger):
-        class Wrapper:
-            def __init__(self, logger: logging.Logger, name: str) -> None:
-                self.logger = logger
-                self.name = name
 
-            def write(self, s: str) -> None:
-                if s.strip():
-                    getattr(self.logger, self.name)(s)
+def patch(logger):
+    class Wrapper:
+        def __init__(self, logger: logging.Logger, name: str) -> None:
+            self.logger = logger
+            self.name = name
 
-        sys.modules["builtins"].print = partial(print, file=Wrapper(logger, "info"))
+        def write(self, s: str) -> None:
+            if s.strip():
+                getattr(self.logger, self.name)(s)
+
+    sys.modules["builtins"].print = partial(print, file=Wrapper(logger, "info"))
 
 
 def get_driver(path) -> Driver:  # using protocol (types)
@@ -61,31 +62,32 @@ def call_file(
     python_module: t.Optional[str],
     args: t.Sequence[str],
 ) -> None:
-    spec = None
     if python_module is not None:
         # for: python -m <module>
         if filepath is not None:
             args.insert(0, filepath)
         spec = find_spec(python_module)
+        sys.argv[1:] = args
+        driver.setup(level=logging.DEBUG)  # xxx
+        patch(driver.get_logger(spec.name))
+        return SourceFileLoader("__main__", spec.origin).load_module()
     elif os.path.exists(filepath) and not os.path.isdir(filepath):
         # for: python <file>
         spec = spec_from_file_location("__main__", filepath)
-
-    if spec is not None:
         sys.argv[1:] = args
         driver.setup(level=logging.DEBUG)  # xxx
-        driver.patch(driver.get_logger(spec.name))
+        patch(driver.get_logger(spec.name))
         return SourceFileLoader("__main__", spec.origin).load_module()
+    else:
+        # for: <command>
+        cmdpath = shutil.which(filepath)
+        if not cmdpath:
+            raise RuntimeError(f"not supported: {sys.argv}")
 
-    # for: <command>
-    cmdpath = shutil.which(filepath)
-    if not cmdpath:
-        raise RuntimeError(f"not supported: {sys.argv}")
-
-    sys.argv[1:] = args
-    driver.setup(level=logging.DEBUG)  # xxx
-    driver.patch(driver.get_logger(os.path.basename(cmdpath)))
-    return SourceFileLoader("__main__", cmdpath).load_module()
+        sys.argv[1:] = args
+        driver.setup(level=logging.DEBUG)  # xxx
+        patch(driver.get_logger(os.path.basename(cmdpath)))
+        return SourceFileLoader("__main__", cmdpath).load_module()
 
 
 def main():
