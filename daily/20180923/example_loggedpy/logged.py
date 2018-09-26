@@ -34,17 +34,16 @@ class Driver:
         )
 
 
-def patch(logger):
-    class Wrapper:
-        def __init__(self, logger: logging.Logger, name: str) -> None:
-            self.logger = logger
-            self.name = name
+def patch(logger, name="info"):
+    class Wrapper(logging.LoggerAdapter):
+        write = getattr(logging.LoggerAdapter, name)
 
-        def write(self, s: str) -> None:
-            if s.strip():
-                getattr(self.logger, self.name)(s)
+    class SuppressEmptyStringFilter(logging.Filter):
+        def filter(self, record):
+            return bool(record.msg.strip())
 
-    sys.modules["builtins"].print = partial(print, file=Wrapper(logger, "info"))
+    logger.addFilter(SuppressEmptyStringFilter())
+    sys.modules["builtins"].print = partial(print, file=Wrapper(logger, {}), end="")
 
 
 def get_driver(path) -> Driver:  # using protocol (types)
@@ -52,7 +51,12 @@ def get_driver(path) -> Driver:  # using protocol (types)
         return globals()[path[1:]]()
     else:
         module, name = path.rsplit(":", 1)
-        return getattr(import_module(module), name)()
+        if os.path.exists(module):
+            module_id = module.replace(".", "_").replace("-", "_")
+            m = SourceFileLoader(module_id, module).load_module()
+        else:
+            m = import_module(module)
+        return getattr(m, name)()
 
 
 def call_file(
@@ -95,12 +99,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filepath", nargs="?")
     parser.add_argument("-m", "--python-module")
-    parser.add_argument("--driver", default=":Driver")
+    parser.add_argument("--loggedpy-driver", default=":Driver")
     args, extras = parser.parse_known_args()
 
     if args.filepath is None and args.python_module is None:
         return parser.print_help()
-    driver = get_driver(args.driver)
+    driver = get_driver(args.loggedpy_driver)
 
     return call_file(driver, filepath=args.filepath, python_module=args.python_module, args=extras)
 
