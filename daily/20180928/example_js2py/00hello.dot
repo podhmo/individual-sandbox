@@ -1,0 +1,607 @@
+digraph g {
+    g0 [label="js2py.base"]
+    g1 [label="copy"]
+    g2 [label="js2py.prototypes.jsnumber"]
+    g3 [label="js2py.internals.simplex"]
+    g4 [label="js2py.prototypes.jserror"]
+    g5 [label="js2py.prototypes.jsboolean"]
+    g6 [label="js2py.prototypes.jsarraybuffer"]
+    g7 [label="js2py.prototypes.jsfunction"]
+    g8 [label="js2py.translators"]
+    g9 [label="js2py.internals"]
+    g10 [label="js2py.utils"]
+    g11 [label="js2py.prototypes.jsobject"]
+    g12 [label="js2py.prototypes"]
+    g13 [label="js2py.prototypes.jsstring"]
+    g14 [label="numpy"]
+    g15 [label="js2py.utils.injector"]
+    g16 [label="js2py.prototypes.jstypedarray"]
+    g17 [label="js2py.prototypes.jsarray"]
+    g18 [label="pyjsparser.parser"]
+    g19 [label="__future__"]
+    g20 [label="pyjsparser.pyjsparserdata"]
+    g21 [label="pyjsparser.std_nodes"]
+    g22 [label="pprint"]
+    g23 [label="pyjsparser"]
+    g24 [label="js2py.translators.translator"]
+    g25 [label="six"]
+    g26 [label="struct"]
+    g27 [label="js2py.translators.friendly_nodes"]
+    g28 [label="js2py.translators.translating_nodes"]
+    g29 [label="random"]
+    g30 [label="bisect"]
+    g31 [label="hashlib"]
+    g32 [label="dis"]
+    g33 [label="opcode"]
+    g34 [label="numpy.version"]
+    g35 [label="numpy.ctypeslib"]
+    g36 [label="numpy._distributor_init"]
+    g37 [label="numpy._import_tools"]
+    g38 [label="numpy.random"]
+    g39 [label="numpy.polynomial"]
+    g40 [label="numpy.ma"]
+    g41 [label="numpy.add_newdocs"]
+    g42 [label="numpy._globals"]
+    g43 [label="numpy.fft"]
+    g44 [label="numpy.__config__"]
+    g45 [label="numpy.lib"]
+    g46 [label="numpy.lib.info"]
+    g47 [label="numpy.lib.type_check"]
+    g48 [label="numpy.lib.polynomial"]
+    g49 [label="numpy.lib.mixins"]
+    g50 [label="numpy.lib.arraypad"]
+    g51 [label="numpy.lib.index_tricks"]
+    g52 [label="numpy.lib.arraysetops"]
+    g53 [label="numpy.lib.arrayterator"]
+    g54 [label="numpy.lib.shape_base"]
+    g55 [label="numpy.lib.financial"]
+    g56 [label="numpy.lib.npyio"]
+    g57 [label="numpy.lib.nanfunctions"]
+    g58 [label="numpy.lib._version"]
+    g59 [label="numpy.lib.scimath"]
+    g60 [label="numpy.core"]
+    g61 [label="numpy.core.memmap"]
+    g62 [label="numpy.core.numeric"]
+    g63 [label="numpy.core.records"]
+    g64 [label="datetime"]
+    g65 [label="numpy.core.machar"]
+    g66 [label="numpy.core.einsumfunc"]
+    g67 [label="numpy.core.info"]
+    g68 [label="numpy.core.shape_base"]
+    g69 [label="numpy.core.defchararray"]
+    g70 [label="numpy.core.function_base"]
+    g71 [label="numpy.testing"]
+    g72 [label="numpy.core._internal"]
+    g73 [label="numpy.core.getlimits"]
+    g74 [label="numpy.compat"]
+    g75 [label="numpy.compat.py3k"]
+    g76 [label="numpy.compat._inspect"]
+    g77 [label="pathlib"]
+    g78 [label="urllib"]
+    g79 [label="ntpath"]
+    g80 [label="urllib.parse"]
+    g81 [label="fnmatch"]
+    g82 [label="ctypes"]
+    g83 [label="numpy.core.numerictypes"]
+    g84 [label="ctypes._endian"]
+    g85 [label="numbers"]
+    g86 [label="pickle"]
+    g87 [label="_compat_pickle"]
+    g88 [label="numpy.core.fromnumeric"]
+    g89 [label="numpy.core.arrayprint"]
+    g90 [label="numpy.core._methods"]
+    g91 [label="unittest.result"]
+    g92 [label="unittest.util"]
+    g93 [label="unittest"]
+    g94 [label="unittest.suite"]
+    g95 [label="unittest.loader"]
+    g96 [label="unittest.main"]
+    g97 [label="unittest.case"]
+    g98 [label="difflib"]
+    g99 [label="unittest.signals"]
+    g100 [label="signal"]
+    g101 [label="unittest.runner"]
+    g102 [label="numpy.testing._private.decorators"]
+    g103 [label="numpy.testing._private.utils"]
+    g104 [label="numpy.testing._private.nosetester"]
+    g105 [label="numpy.testing._private.pytesttester"]
+    g106 [label="numpy.testing._private"]
+    g107 [label="bz2"]
+    g108 [label="_compression"]
+    g109 [label="shutil"]
+    g110 [label="lzma"]
+    g111 [label="numpy.lib.utils"]
+    g112 [label="tempfile"]
+    g113 [label="numpy.lib.ufunclike"]
+    g114 [label="numpy.lib.function_base"]
+    g115 [label="numpy.lib.twodim_base"]
+    g116 [label="numpy.lib.histograms"]
+    g117 [label="numpy.matrixlib"]
+    g118 [label="numpy.lib.stride_tricks"]
+    g119 [label="numpy.matrixlib.defmatrix"]
+    g120 [label="numpy.linalg"]
+    g121 [label="ast"]
+    g122 [label="numpy.linalg.info"]
+    g123 [label="numpy.linalg.linalg"]
+    g124 [label="numpy.lib.format"]
+    g125 [label="numpy.lib._iotools"]
+    g126 [label="numpy.lib._datasource"]
+    g127 [label="_pydecimal"]
+    g128 [label="contextvars"]
+    g129 [label="decimal"]
+    g130 [label="numpy.fft.fftpack"]
+    g131 [label="numpy.fft.info"]
+    g132 [label="numpy.fft.helper"]
+    g133 [label="numpy.polynomial.polynomial"]
+    g134 [label="numpy.polynomial._polybase"]
+    g135 [label="numpy.polynomial.polyutils"]
+    g136 [label="numpy.polynomial.laguerre"]
+    g137 [label="numpy.polynomial.chebyshev"]
+    g138 [label="numpy.polynomial.hermite_e"]
+    g139 [label="numpy.polynomial.hermite"]
+    g140 [label="numpy.polynomial.legendre"]
+    g141 [label="numpy.random.info"]
+    g142 [label="numpy.ma.core"]
+    g143 [label="textwrap"]
+    g144 [label="numpy.ma.extras"]
+    g145 [label="js2py.prototypes.jsregexp"]
+    g146 [label="js2py"]
+    g147 [label="js2py.evaljs"]
+    g148 [label="js2py.node_import"]
+    g149 [label="json"]
+    g150 [label="js2py.es6"]
+    g151 [label="json.decoder"]
+    g152 [label="json.scanner"]
+    g153 [label="json.encoder"]
+    g154 [label="subprocess"]
+    g155 [label="selectors"]
+    g156 [label="glob"]
+    g157 [label="00hello"]
+    g158 [label="js2py.pyjs"]
+    g159 [label="js2py.constructors.jsint8array"]
+    g160 [label="js2py.constructors.jsarraybuffer"]
+    g161 [label="js2py.constructors.jsregexp"]
+    g162 [label="js2py.constructors.jsarray"]
+    g163 [label="js2py.constructors.jsnumber"]
+    g164 [label="js2py.host.jseval"]
+    g165 [label="js2py.constructors.jsboolean"]
+    g166 [label="js2py.constructors.jsobject"]
+    g167 [label="js2py.prototypes.jsjson"]
+    g168 [label="js2py.constructors.jsuint16array"]
+    g169 [label="js2py.constructors.jsstring"]
+    g170 [label="js2py.host.console"]
+    g171 [label="js2py.constructors.jsdate"]
+    g172 [label="js2py.host.jsfunctions"]
+    g173 [label="js2py.constructors"]
+    g174 [label="js2py.constructors.jsfloat32array"]
+    g175 [label="js2py.constructors.jsfloat64array"]
+    g176 [label="js2py.host"]
+    g177 [label="js2py.constructors.jsmath"]
+    g178 [label="js2py.constructors.jsint32array"]
+    g179 [label="js2py.constructors.jsuint8clampedarray"]
+    g180 [label="js2py.constructors.jsuint32array"]
+    g181 [label="js2py.constructors.jsfunction"]
+    g182 [label="js2py.constructors.jsint16array"]
+    g183 [label="js2py.constructors.jsuint8array"]
+    g184 [label="pytz"]
+    g185 [label="pytz.lazy"]
+    g186 [label="pytz.exceptions"]
+    g187 [label="pytz.tzinfo"]
+    g188 [label="pytz.tzfile"]
+    g189 [label="tzlocal.unix"]
+    g190 [label="tzlocal"]
+    g191 [label="js2py.constructors.time_helpers"]
+    g192 [label="inspect"]
+    g0 -> g1 [label="0.0003s"]
+    g0 -> g2 [label="7e-05s"]
+    g0 -> g3 [label="0.00011s"]
+    g0 -> g4 [label="5e-05s"]
+    g0 -> g5 [label="5e-05s"]
+    g0 -> g6 [label="6e-05s"]
+    g0 -> g7 [label="7e-05s"]
+    g0 -> g8 [label="0.45563s"]
+    g0 -> g9 [label="4e-05s"]
+    g0 -> g10 [label="4e-05s"]
+    g0 -> g11 [label="6e-05s"]
+    g0 -> g12 [label="4e-05s"]
+    g0 -> g13 [label="0.00029s"]
+    g0 -> g14 [label="0.11025s"]
+    g0 -> g15 [label="0.00139s"]
+    g0 -> g16 [label="9e-05s"]
+    g0 -> g17 [label="0.00012s"]
+    g18 -> g19 [label="8e-05s"]
+    g18 -> g20 [label="0.44696s"]
+    g18 -> g21 [label="0.00029s"]
+    g18 -> g22 [label="0.00023s"]
+    g23 -> g18 [label="0.44845s"]
+    g8 -> g24 [label="0.00666s"]
+    g8 -> g23 [label="0.44864s"]
+    g25 -> g26 [label="0.00027s"]
+    g27 -> g25 [label="0.00118s"]
+    g28 -> g27 [label="0.00172s"]
+    g28 -> g29 [label="0.00317s"]
+    g29 -> g30 [label="0.00022s"]
+    g29 -> g31 [label="0.00208s"]
+    g24 -> g28 [label="0.00545s"]
+    g15 -> g32 [label="0.00036s"]
+    g15 -> g33 [label="0.00028s"]
+    g14 -> g34 [label="4e-05s"]
+    g14 -> g35 [label="0.00019s"]
+    g14 -> g36 [label="4e-05s"]
+    g14 -> g37 [label="0.00015s"]
+    g14 -> g38 [label="0.00091s"]
+    g14 -> g39 [label="0.00293s"]
+    g14 -> g40 [label="0.00385s"]
+    g14 -> g41 [label="0.09956s"]
+    g14 -> g42 [label="0.00014s"]
+    g14 -> g43 [label="0.00076s"]
+    g14 -> g44 [label="7e-05s"]
+    g45 -> g46 [label="5e-05s"]
+    g45 -> g47 [label="0.08138s"]
+    g45 -> g48 [label="0.00057s"]
+    g45 -> g49 [label="0.00028s"]
+    g45 -> g50 [label="0.00027s"]
+    g45 -> g51 [label="0.00591s"]
+    g45 -> g52 [label="0.00016s"]
+    g45 -> g53 [label="0.00012s"]
+    g45 -> g54 [label="0.00018s"]
+    g45 -> g55 [label="0.00498s"]
+    g45 -> g56 [label="0.00169s"]
+    g45 -> g57 [label="0.00019s"]
+    g45 -> g58 [label="0.00011s"]
+    g45 -> g59 [label="0.00015s"]
+    g60 -> g61 [label="0.00016s"]
+    g60 -> g62 [label="0.00481s"]
+    g60 -> g63 [label="0.00032s"]
+    g60 -> g64 [label="0.0015s"]
+    g60 -> g65 [label="0.00014s"]
+    g60 -> g66 [label="0.00025s"]
+    g60 -> g67 [label="4e-05s"]
+    g60 -> g68 [label="0.00026s"]
+    g60 -> g69 [label="0.00046s"]
+    g60 -> g70 [label="0.00013s"]
+    g60 -> g71 [label="0.0136s"]
+    g60 -> g72 [label="0.00966s"]
+    g60 -> g73 [label="0.00094s"]
+    g74 -> g75 [label="0.00409s"]
+    g74 -> g76 [label="0.0001s"]
+    g77 -> g78 [label="6e-05s"]
+    g77 -> g79 [label="0.00095s"]
+    g77 -> g80 [label="0.00121s"]
+    g77 -> g81 [label="0.00011s"]
+    g75 -> g77 [label="0.00385s"]
+    g72 -> g82 [label="0.00206s"]
+    g72 -> g74 [label="0.0046s"]
+    g72 -> g83 [label="0.00147s"]
+    g82 -> g84 [label="0.00016s"]
+    g83 -> g85 [label="0.00038s"]
+    g86 -> g87 [label="0.00033s"]
+    g62 -> g88 [label="0.00076s"]
+    g62 -> g89 [label="0.00065s"]
+    g62 -> g86 [label="0.00212s"]
+    g88 -> g90 [label="0.0003s"]
+    g91 -> g92 [label="0.0003s"]
+    g93 -> g94 [label="0.00023s"]
+    g93 -> g95 [label="0.00068s"]
+    g93 -> g96 [label="0.0028s"]
+    g93 -> g97 [label="0.00224s"]
+    g93 -> g91 [label="0.00071s"]
+    g97 -> g98 [label="0.00078s"]
+    g99 -> g100 [label="0.00188s"]
+    g101 -> g99 [label="0.00216s"]
+    g96 -> g101 [label="0.00248s"]
+    g71 -> g102 [label="0.00012s"]
+    g71 -> g103 [label="0.00458s"]
+    g71 -> g104 [label="0.00017s"]
+    g71 -> g105 [label="0.0001s"]
+    g71 -> g106 [label="6e-05s"]
+    g71 -> g93 [label="0.00753s"]
+    g107 -> g108 [label="0.00018s"]
+    g109 -> g107 [label="0.00064s"]
+    g109 -> g110 [label="0.00033s"]
+    g103 -> g111 [label="0.00084s"]
+    g103 -> g112 [label="0.00045s"]
+    g103 -> g109 [label="0.0022s"]
+    g47 -> g113 [label="0.0001s"]
+    g47 -> g60 [label="0.08093s"]
+    g114 -> g115 [label="0.00015s"]
+    g114 -> g116 [label="0.00017s"]
+    g51 -> g117 [label="0.0039s"]
+    g51 -> g114 [label="0.00117s"]
+    g51 -> g118 [label="0.00013s"]
+    g119 -> g120 [label="0.00141s"]
+    g119 -> g121 [label="0.00168s"]
+    g120 -> g122 [label="6e-05s"]
+    g120 -> g123 [label="0.00098s"]
+    g117 -> g119 [label="0.00366s"]
+    g56 -> g124 [label="0.00018s"]
+    g56 -> g125 [label="0.00036s"]
+    g56 -> g126 [label="0.00029s"]
+    g127 -> g128 [label="0.00027s"]
+    g129 -> g127 [label="0.00424s"]
+    g55 -> g129 [label="0.00473s"]
+    g41 -> g45 [label="0.09801s"]
+    g43 -> g130 [label="0.00046s"]
+    g43 -> g131 [label="4e-05s"]
+    g130 -> g132 [label="0.0001s"]
+    g133 -> g134 [label="0.00081s"]
+    g133 -> g135 [label="0.00013s"]
+    g39 -> g136 [label="0.0002s"]
+    g39 -> g137 [label="0.00022s"]
+    g39 -> g133 [label="0.0013s"]
+    g39 -> g138 [label="0.00026s"]
+    g39 -> g139 [label="0.00018s"]
+    g39 -> g140 [label="0.00018s"]
+    g38 -> g141 [label="5e-05s"]
+    g142 -> g143 [label="0.00109s"]
+    g40 -> g142 [label="0.0031s"]
+    g40 -> g144 [label="0.00043s"]
+    g13 -> g145 [label="6e-05s"]
+    g146 -> g147 [label="0.00221s"]
+    g146 -> g0 [label="0.70923s"]
+    g146 -> g148 [label="0.00153s"]
+    g147 -> g149 [label="0.00175s"]
+    g147 -> g150 [label="8e-05s"]
+    g151 -> g152 [label="0.00062s"]
+    g149 -> g151 [label="0.00103s"]
+    g149 -> g153 [label="0.00038s"]
+    g154 -> g155 [label="0.00039s"]
+    g148 -> g154 [label="0.0012s"]
+    g148 -> g156 [label="8e-05s"]
+    g157 -> g146 [label="0.71343s"]
+    g157 -> g158 [label="0.04555s"]
+    g158 -> g159 [label="0.00119s"]
+    g158 -> g160 [label="0.00032s"]
+    g158 -> g161 [label="6e-05s"]
+    g158 -> g162 [label="0.00046s"]
+    g158 -> g163 [label="8e-05s"]
+    g158 -> g164 [label="0.00236s"]
+    g158 -> g165 [label="7e-05s"]
+    g158 -> g166 [label="0.00289s"]
+    g158 -> g167 [label="0.00128s"]
+    g158 -> g168 [label="0.0013s"]
+    g158 -> g169 [label="0.00025s"]
+    g158 -> g170 [label="0.00022s"]
+    g158 -> g171 [label="0.01739s"]
+    g158 -> g172 [label="0.00257s"]
+    g158 -> g173 [label="3e-05s"]
+    g158 -> g174 [label="0.00132s"]
+    g158 -> g175 [label="0.00142s"]
+    g158 -> g176 [label="4e-05s"]
+    g158 -> g177 [label="0.00285s"]
+    g158 -> g178 [label="0.0013s"]
+    g158 -> g179 [label="0.00129s"]
+    g158 -> g180 [label="0.00148s"]
+    g158 -> g181 [label="0.00043s"]
+    g158 -> g182 [label="0.0013s"]
+    g158 -> g183 [label="0.00122s"]
+    g184 -> g185 [label="0.00017s"]
+    g184 -> g186 [label="0.00012s"]
+    g184 -> g187 [label="0.00015s"]
+    g184 -> g188 [label="7e-05s"]
+    g189 -> g184 [label="0.00138s"]
+    g190 -> g189 [label="0.00156s"]
+    g191 -> g190 [label="0.0017s"]
+    g171 -> g191 [label="0.01179s"]
+    g164 -> g192 [label="0.00138s"]
+}
+// load VENV/lib/python3.7/site-packages/js2py/__init__.py ... 0.7134299278259277s
+// load VENV/lib/python3.7/site-packages/js2py/base.py ... 0.7092349529266357s
+// load VENV/lib/python3.7/site-packages/js2py/translators/__init__.py ... 0.4556269645690918s
+// load VENV/lib/python3.7/site-packages/pyjsparser/__init__.py ... 0.4486391544342041s
+// load VENV/lib/python3.7/site-packages/pyjsparser/parser.py ... 0.4484536647796631s
+// load VENV/lib/python3.7/site-packages/pyjsparser/pyjsparserdata.py ... 0.4469623565673828s
+// load VENV/lib/python3.7/site-packages/numpy/__init__.py ... 0.11024737358093262s
+// load VENV/lib/python3.7/site-packages/numpy/add_newdocs.py ... 0.09956073760986328s
+// load VENV/lib/python3.7/site-packages/numpy/lib/__init__.py ... 0.09801244735717773s
+// load VENV/lib/python3.7/site-packages/numpy/lib/type_check.py ... 0.08138251304626465s
+// load VENV/lib/python3.7/site-packages/numpy/core/__init__.py ... 0.08092713356018066s
+// load VENV/lib/python3.7/site-packages/js2py/pyjs.py ... 0.045554399490356445s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsdate.py ... 0.017390012741088867s
+// load VENV/lib/python3.7/site-packages/numpy/testing/__init__.py ... 0.013604879379272461s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/time_helpers.py ... 0.011790037155151367s
+// load VENV/lib/python3.7/site-packages/numpy/core/_internal.py ... 0.00965738296508789s
+// load /usr/lib/python3.7/unittest/__init__.py ... 0.007527589797973633s
+// load VENV/lib/python3.7/site-packages/js2py/translators/translator.py ... 0.006657123565673828s
+// load VENV/lib/python3.7/site-packages/numpy/lib/index_tricks.py ... 0.005908966064453125s
+// load VENV/lib/python3.7/site-packages/js2py/translators/translating_nodes.py ... 0.0054492950439453125s
+// load VENV/lib/python3.7/site-packages/numpy/lib/financial.py ... 0.0049839019775390625s
+// load VENV/lib/python3.7/site-packages/numpy/core/numeric.py ... 0.004811525344848633s
+// load /usr/lib/python3.7/decimal.py ... 0.00472569465637207s
+// load VENV/lib/python3.7/site-packages/numpy/compat/__init__.py ... 0.004604816436767578s
+// load VENV/lib/python3.7/site-packages/numpy/testing/_private/utils.py ... 0.00457763671875s
+// load /usr/lib/python3.7/_pydecimal.py ... 0.0042362213134765625s
+// load VENV/lib/python3.7/site-packages/numpy/compat/py3k.py ... 0.004091501235961914s
+// load VENV/lib/python3.7/site-packages/numpy/matrixlib/__init__.py ... 0.003900766372680664s
+// load /usr/lib/python3.7/pathlib.py ... 0.003847837448120117s
+// load VENV/lib/python3.7/site-packages/numpy/ma/__init__.py ... 0.003847837448120117s
+// load VENV/lib/python3.7/site-packages/numpy/matrixlib/defmatrix.py ... 0.0036585330963134766s
+// load /usr/lib/python3.7/random.py ... 0.0031747817993164062s
+// load VENV/lib/python3.7/site-packages/numpy/ma/core.py ... 0.003095388412475586s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/__init__.py ... 0.002934694290161133s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsobject.py ... 0.0028934478759765625s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsmath.py ... 0.002851247787475586s
+// load /usr/lib/python3.7/unittest/main.py ... 0.002802610397338867s
+// load VENV/lib/python3.7/site-packages/js2py/host/jsfunctions.py ... 0.002566814422607422s
+// load /usr/lib/python3.7/unittest/runner.py ... 0.0024840831756591797s
+// load VENV/lib/python3.7/site-packages/js2py/host/jseval.py ... 0.002361297607421875s
+// load /usr/lib/python3.7/unittest/case.py ... 0.00223541259765625s
+// load VENV/lib/python3.7/site-packages/js2py/evaljs.py ... 0.002212047576904297s
+// load /usr/lib/python3.7/shutil.py ... 0.002201557159423828s
+// load /usr/lib/python3.7/unittest/signals.py ... 0.002157449722290039s
+// load /usr/lib/python3.7/pickle.py ... 0.0021219253540039062s
+// load /usr/lib/python3.7/hashlib.py ... 0.002077817916870117s
+// load /usr/lib/python3.7/ctypes/__init__.py ... 0.0020601749420166016s
+// load /usr/lib/python3.7/signal.py ... 0.0018832683563232422s
+// load /usr/lib/python3.7/json/__init__.py ... 0.001753091812133789s
+// load VENV/lib/python3.7/site-packages/js2py/translators/friendly_nodes.py ... 0.0017178058624267578s
+// load VENV/lib/python3.7/site-packages/tzlocal/__init__.py ... 0.0017023086547851562s
+// load VENV/lib/python3.7/site-packages/numpy/lib/npyio.py ... 0.0016911029815673828s
+// load /usr/lib/python3.7/ast.py ... 0.0016796588897705078s
+// load VENV/lib/python3.7/site-packages/tzlocal/unix.py ... 0.0015587806701660156s
+// load VENV/lib/python3.7/site-packages/js2py/node_import.py ... 0.0015316009521484375s
+// load /usr/lib/python3.7/datetime.py ... 0.0014958381652832031s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsuint32array.py ... 0.0014808177947998047s
+// load VENV/lib/python3.7/site-packages/numpy/core/numerictypes.py ... 0.001474618911743164s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsfloat64array.py ... 0.0014164447784423828s
+// load VENV/lib/python3.7/site-packages/numpy/linalg/__init__.py ... 0.0014142990112304688s
+// load VENV/lib/python3.7/site-packages/js2py/utils/injector.py ... 0.0013911724090576172s
+// load VENV/lib/python3.7/site-packages/pytz/__init__.py ... 0.0013844966888427734s
+// load /usr/lib/python3.7/inspect.py ... 0.001375436782836914s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsfloat32array.py ... 0.0013201236724853516s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsint32array.py ... 0.001300811767578125s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsuint16array.py ... 0.0013003349304199219s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/polynomial.py ... 0.0012984275817871094s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsint16array.py ... 0.001295328140258789s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsuint8clampedarray.py ... 0.0012903213500976562s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsjson.py ... 0.0012788772583007812s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsuint8array.py ... 0.0012202262878417969s
+// load /usr/lib/python3.7/urllib/parse.py ... 0.0012090206146240234s
+// load /usr/lib/python3.7/subprocess.py ... 0.0011982917785644531s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsint8array.py ... 0.0011913776397705078s
+// load VENV/lib/python3.7/site-packages/six.py ... 0.0011813640594482422s
+// load VENV/lib/python3.7/site-packages/numpy/lib/function_base.py ... 0.0011696815490722656s
+// load /usr/lib/python3.7/textwrap.py ... 0.0010876655578613281s
+// load /usr/lib/python3.7/json/decoder.py ... 0.0010340213775634766s
+// load VENV/lib/python3.7/site-packages/numpy/linalg/linalg.py ... 0.0009801387786865234s
+// load /usr/lib/python3.7/ntpath.py ... 0.0009477138519287109s
+// load VENV/lib/python3.7/site-packages/numpy/core/getlimits.py ... 0.00093841552734375s
+// load VENV/lib/python3.7/site-packages/numpy/random/__init__.py ... 0.0009086132049560547s
+// load VENV/lib/python3.7/site-packages/numpy/lib/utils.py ... 0.0008368492126464844s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/_polybase.py ... 0.0008103847503662109s
+// load /usr/lib/python3.7/difflib.py ... 0.0007755756378173828s
+// load VENV/lib/python3.7/site-packages/numpy/core/fromnumeric.py ... 0.0007605552673339844s
+// load VENV/lib/python3.7/site-packages/numpy/fft/__init__.py ... 0.0007576942443847656s
+// load /usr/lib/python3.7/unittest/result.py ... 0.0007143020629882812s
+// load /usr/lib/python3.7/unittest/loader.py ... 0.0006766319274902344s
+// load VENV/lib/python3.7/site-packages/numpy/core/arrayprint.py ... 0.0006515979766845703s
+// load /usr/lib/python3.7/bz2.py ... 0.0006358623504638672s
+// load /usr/lib/python3.7/json/scanner.py ... 0.0006196498870849609s
+// load VENV/lib/python3.7/site-packages/numpy/lib/polynomial.py ... 0.0005674362182617188s
+// load VENV/lib/python3.7/site-packages/numpy/core/defchararray.py ... 0.0004646778106689453s
+// load VENV/lib/python3.7/site-packages/numpy/fft/fftpack.py ... 0.0004603862762451172s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsarray.py ... 0.0004558563232421875s
+// load /usr/lib/python3.7/tempfile.py ... 0.00045228004455566406s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsfunction.py ... 0.0004298686981201172s
+// load VENV/lib/python3.7/site-packages/numpy/ma/extras.py ... 0.00042724609375s
+// load /usr/lib/python3.7/selectors.py ... 0.0003864765167236328s
+// load /usr/lib/python3.7/numbers.py ... 0.0003764629364013672s
+// load /usr/lib/python3.7/json/encoder.py ... 0.0003764629364013672s
+// load VENV/lib/python3.7/site-packages/numpy/lib/_iotools.py ... 0.0003609657287597656s
+// load /usr/lib/python3.7/dis.py ... 0.00035500526428222656s
+// load /usr/lib/python3.7/lzma.py ... 0.00033354759216308594s
+// load /usr/lib/python3.7/_compat_pickle.py ... 0.0003254413604736328s
+// load VENV/lib/python3.7/site-packages/numpy/core/records.py ... 0.00032210350036621094s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsarraybuffer.py ... 0.00031638145446777344s
+// load /usr/lib/python3.7/unittest/util.py ... 0.00030350685119628906s
+// load VENV/lib/python3.7/site-packages/numpy/core/_methods.py ... 0.0002989768981933594s
+// load /usr/lib/python3.7/copy.py ... 0.0002968311309814453s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsstring.py ... 0.000293731689453125s
+// load VENV/lib/python3.7/site-packages/numpy/lib/_datasource.py ... 0.0002918243408203125s
+// load VENV/lib/python3.7/site-packages/pyjsparser/std_nodes.py ... 0.00029158592224121094s
+// load VENV/lib/python3.7/site-packages/numpy/lib/mixins.py ... 0.0002846717834472656s
+// load /usr/lib/python3.7/opcode.py ... 0.0002751350402832031s
+// load VENV/lib/python3.7/site-packages/numpy/lib/arraypad.py ... 0.0002727508544921875s
+// load /usr/lib/python3.7/contextvars.py ... 0.0002715587615966797s
+// load /usr/lib/python3.7/struct.py ... 0.00026917457580566406s
+// load VENV/lib/python3.7/site-packages/numpy/core/shape_base.py ... 0.00026488304138183594s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/hermite_e.py ... 0.0002560615539550781s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsstring.py ... 0.0002548694610595703s
+// load VENV/lib/python3.7/site-packages/numpy/core/einsumfunc.py ... 0.00025177001953125s
+// load /usr/lib/python3.7/pprint.py ... 0.00023245811462402344s
+// load /usr/lib/python3.7/unittest/suite.py ... 0.0002300739288330078s
+// load VENV/lib/python3.7/site-packages/js2py/host/console.py ... 0.0002238750457763672s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/chebyshev.py ... 0.00022292137145996094s
+// load /usr/lib/python3.7/bisect.py ... 0.00021648406982421875s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/laguerre.py ... 0.00019812583923339844s
+// load VENV/lib/python3.7/site-packages/numpy/lib/nanfunctions.py ... 0.00018644332885742188s
+// load VENV/lib/python3.7/site-packages/numpy/ctypeslib.py ... 0.0001857280731201172s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/hermite.py ... 0.00018477439880371094s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/legendre.py ... 0.00017833709716796875s
+// load /usr/lib/python3.7/_compression.py ... 0.00017762184143066406s
+// load VENV/lib/python3.7/site-packages/numpy/lib/shape_base.py ... 0.00017762184143066406s
+// load VENV/lib/python3.7/site-packages/numpy/lib/format.py ... 0.00017571449279785156s
+// load VENV/lib/python3.7/site-packages/numpy/testing/_private/nosetester.py ... 0.0001723766326904297s
+// load VENV/lib/python3.7/site-packages/numpy/lib/histograms.py ... 0.000171661376953125s
+// load VENV/lib/python3.7/site-packages/pytz/lazy.py ... 0.0001678466796875s
+// load /usr/lib/python3.7/ctypes/_endian.py ... 0.000164031982421875s
+// load VENV/lib/python3.7/site-packages/numpy/core/memmap.py ... 0.0001633167266845703s
+// load VENV/lib/python3.7/site-packages/numpy/lib/arraysetops.py ... 0.00015807151794433594s
+// load VENV/lib/python3.7/site-packages/pytz/tzinfo.py ... 0.00015401840209960938s
+// load VENV/lib/python3.7/site-packages/numpy/lib/scimath.py ... 0.00014829635620117188s
+// load VENV/lib/python3.7/site-packages/numpy/_import_tools.py ... 0.00014781951904296875s
+// load VENV/lib/python3.7/site-packages/numpy/lib/twodim_base.py ... 0.0001475811004638672s
+// load VENV/lib/python3.7/site-packages/numpy/_globals.py ... 0.00014162063598632812s
+// load VENV/lib/python3.7/site-packages/numpy/core/machar.py ... 0.00013756752014160156s
+// load VENV/lib/python3.7/site-packages/numpy/core/function_base.py ... 0.0001342296600341797s
+// load VENV/lib/python3.7/site-packages/numpy/lib/stride_tricks.py ... 0.0001323223114013672s
+// load VENV/lib/python3.7/site-packages/numpy/polynomial/polyutils.py ... 0.0001270771026611328s
+// load VENV/lib/python3.7/site-packages/numpy/lib/arrayterator.py ... 0.00012421607971191406s
+// load VENV/lib/python3.7/site-packages/numpy/testing/_private/decorators.py ... 0.00011754035949707031s
+// load VENV/lib/python3.7/site-packages/pytz/exceptions.py ... 0.00011610984802246094s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsarray.py ... 0.00011610984802246094s
+// load VENV/lib/python3.7/site-packages/numpy/lib/_version.py ... 0.00011444091796875s
+// load VENV/lib/python3.7/site-packages/js2py/internals/simplex.py ... 0.00011372566223144531s
+// load /usr/lib/python3.7/fnmatch.py ... 0.00010991096496582031s
+// load VENV/lib/python3.7/site-packages/numpy/compat/_inspect.py ... 0.00010323524475097656s
+// load VENV/lib/python3.7/site-packages/numpy/lib/ufunclike.py ... 0.000102996826171875s
+// load VENV/lib/python3.7/site-packages/numpy/testing/_private/pytesttester.py ... 9.799003601074219e-05s
+// load VENV/lib/python3.7/site-packages/numpy/fft/helper.py ... 9.655952453613281e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jstypedarray.py ... 9.250640869140625e-05s
+// load /usr/lib/python3.7/__future__.py ... 8.296966552734375e-05s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsnumber.py ... 8.0108642578125e-05s
+// load VENV/lib/python3.7/site-packages/js2py/es6/__init__.py ... 7.939338684082031e-05s
+// load /usr/lib/python3.7/glob.py ... 7.796287536621094e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsnumber.py ... 7.104873657226562e-05s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsboolean.py ... 6.818771362304688e-05s
+// load VENV/lib/python3.7/site-packages/pytz/tzfile.py ... 6.699562072753906e-05s
+// load VENV/lib/python3.7/site-packages/numpy/__config__.py ... 6.628036499023438e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsfunction.py ... 6.628036499023438e-05s
+// load VENV/lib/python3.7/site-packages/numpy/linalg/info.py ... 6.079673767089844e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsregexp.py ... 5.888938903808594e-05s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/jsregexp.py ... 5.8650970458984375e-05s
+// load /usr/lib/python3.7/urllib/__init__.py ... 5.841255187988281e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsobject.py ... 5.626678466796875e-05s
+// load VENV/lib/python3.7/site-packages/numpy/testing/_private/__init__.py ... 5.5789947509765625e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsarraybuffer.py ... 5.5789947509765625e-05s
+// load VENV/lib/python3.7/site-packages/numpy/random/info.py ... 5.459785461425781e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jsboolean.py ... 4.863739013671875e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/jserror.py ... 4.8160552978515625e-05s
+// load VENV/lib/python3.7/site-packages/numpy/lib/info.py ... 4.5299530029296875e-05s
+// load VENV/lib/python3.7/site-packages/js2py/utils/__init__.py ... 4.482269287109375e-05s
+// load VENV/lib/python3.7/site-packages/numpy/core/info.py ... 4.38690185546875e-05s
+// load VENV/lib/python3.7/site-packages/numpy/fft/info.py ... 4.029273986816406e-05s
+// load VENV/lib/python3.7/site-packages/numpy/version.py ... 3.933906555175781e-05s
+// load VENV/lib/python3.7/site-packages/js2py/prototypes/__init__.py ... 3.933906555175781e-05s
+// load VENV/lib/python3.7/site-packages/js2py/internals/__init__.py ... 3.8623809814453125e-05s
+// load VENV/lib/python3.7/site-packages/numpy/_distributor_init.py ... 3.838539123535156e-05s
+// load VENV/lib/python3.7/site-packages/js2py/host/__init__.py ... 3.552436828613281e-05s
+// load VENV/lib/python3.7/site-packages/js2py/constructors/__init__.py ... 3.266334533691406e-05s
+// load VENV/lib/python3.7/site-packages/numpy/core/multiarray.cpython-37m-x86_64-linux-gnu.so ... 9.059906005859375e-06s
+// load /usr/lib/python3.7/lib-dynload/_contextvars.cpython-37m-x86_64-linux-gnu.so ... 7.867813110351562e-06s
+// load /usr/lib/python3.7/lib-dynload/_datetime.cpython-37m-x86_64-linux-gnu.so ... 6.198883056640625e-06s
+// load /usr/lib/python3.7/lib-dynload/_pickle.cpython-37m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load /usr/lib/python3.7/lib-dynload/_ctypes.cpython-37m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load VENV/lib/python3.7/site-packages/numpy/linalg/lapack_lite.cpython-37m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load VENV/lib/python3.7/site-packages/numpy/linalg/_umath_linalg.cpython-37m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load VENV/lib/python3.7/site-packages/numpy/core/umath.cpython-37m-x86_64-linux-gnu.so ... 5.4836273193359375e-06s
+// load /usr/lib/python3.7/lib-dynload/_hashlib.cpython-37m-x86_64-linux-gnu.so ... 5.0067901611328125e-06s
+// load /usr/lib/python3.7/lib-dynload/zlib.cpython-37m-x86_64-linux-gnu.so ... 4.76837158203125e-06s
+// load VENV/lib/python3.7/site-packages/numpy/core/_multiarray_tests.cpython-37m-x86_64-linux-gnu.so ... 4.76837158203125e-06s
+// load /usr/lib/python3.7/lib-dynload/math.cpython-37m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.7/lib-dynload/grp.cpython-37m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.7/lib-dynload/binascii.cpython-37m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.7/lib-dynload/_struct.cpython-37m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.7/lib-dynload/_bz2.cpython-37m-x86_64-linux-gnu.so ... 4.291534423828125e-06s
+// load /usr/lib/python3.7/lib-dynload/_lzma.cpython-37m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.7/lib-dynload/_json.cpython-37m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.7/lib-dynload/_blake2.cpython-37m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.7/lib-dynload/unicodedata.cpython-37m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.7/lib-dynload/_sha3.cpython-37m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load VENV/lib/python3.7/site-packages/numpy/random/mtrand.cpython-37m-x86_64-linux-gnu.so ... 3.814697265625e-06s
+// load /usr/lib/python3.7/lib-dynload/_random.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/_posixsubprocess.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/_bisect.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load VENV/lib/python3.7/site-packages/numpy/fft/fftpack_lite.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/select.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/_opcode.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
