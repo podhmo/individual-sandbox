@@ -7,5 +7,10 @@ setup:
 
 # github.com/podhmo/moduleknife
 show-deps:
-	module-graph 00hello.py
+	modulegraph 00hello.py | grep -v "^'Hello" > 00hello.dot
 	dot -Tsvg 00hello.dot | tee 00hello.svg
+
+# semver
+semver:
+	test -d node-semver || git clone --depth=1 https://github.com/isaacs/node-semver
+	python transpile.py node-semver/semver.js | yapf | tee semver.py
