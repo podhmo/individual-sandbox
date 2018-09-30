@@ -1,7 +1,6 @@
 import typing as t
 import typing_extensions as tx
 from functools import singledispatch
-from dictknife import loading
 
 
 class reify(object):
@@ -82,27 +81,35 @@ class Resolver:
     def resolve_object_properties(self, cls, *, history: t.Sequence["Member"]) -> t.Dict:
         properties = {}
         for target in cls.mro():
-            for k, v in target.__dict__.items():
+            for k, typ in t.get_type_hints(target).items():
                 if k in properties:
                     continue
                 if k in self._schema_ignore_props_set:
                     continue
                 if k.startswith("_"):
                     continue
-                properties[k] = self.resolve_field(v, history=history)
+                properties[k] = self.resolve_field(typ, history=history)
         return properties
 
     def resolve_array_items(self, cls, *, history: t.Sequence["Member"]) -> t.Dict:
         return self.resolve_type(cls.items, history=history)
 
     def resolve_field(self, v, *, history: t.Sequence["Member"]) -> t.Dict:
-        if hasattr(v, "as_dict"):
-            return self.resolve_type(v, history=history)
-        # xxx:
-        return {"type": self.resolve_type(v, history=history)}
+        required = True
+        if is_optional(v):
+            required = False
+            v = get_primitive_from_optional(v)
+
+        if is_schema(v):
+            d = self.resolve_type(v, history=history)
+        else:
+            d = {"type": self.resolve_type(v, history=history)}
+        d["required"] = required
+        return d
 
     def resolve_type(self, v, *, history: t.Sequence["Member"]) -> t.Dict:
-        if not hasattr(v, "as_dict"):
+        if not is_schema(v):
+            v = v()  # str or int or ...
             return guess_type(v)
 
         ref = getattr(v, "_ref", None)  # xxx
@@ -121,7 +128,6 @@ class Resolver:
 DEFAULT_RESOLVER = Resolver()
 
 
-# todo: ref
 class Member(tx.Protocol):
     def get_name(self) -> str:
         ...
@@ -186,6 +192,12 @@ class Object:
         properties = r.resolve_object_properties(cls, history=h)
         if properties:
             d["properties"] = properties
+            required = []
+            for name, props in properties.items():
+                if props.pop("required", False):
+                    required.append(name)
+            if required:
+                d["required"] = required
         return d
 
 
@@ -304,44 +316,16 @@ def is_namespace(ns) -> bool:
     return hasattr(ns, "mount")
 
 
-class Person(Object):
-    """person"""
-
-    name: str = "foo"
-    age: int = 20
+def is_schema(v):
+    return hasattr(v, "as_dict")
 
 
-class XPerson(Object):
-    """X person"""
-    x: str = "x"
-    person: Person = Person  # xxx:
+def is_optional(typ, *, nonetype=type(None)) -> bool:
+    return hasattr(typ,
+                   "__origin__") and typ.__origin__ == t.Union and nonetype in typ.__args__ and len(
+                       typ.__args__
+                   ) == 2
 
 
-class PersonWithNickname(Person):
-    """Y person"""
-    nickname: str = "str"
-
-
-class People(Array):
-    items = Person
-
-
-# todo: optional
-# todo: see typing definition in field
-# todo: string as type (order of reference)
-# todo: mount only ref root
-with Namespace("components") as components:
-    with Namespace("schemas", ns=components) as schemas:
-        # schemas.mount(Person)
-        schemas.mount(People)
-        schemas.mount(XPerson)
-        schemas.mount(PersonWithNickname)
-    assert get_resolver().lookup.lookup(components, "schemas/Person") is not None
-    loading.dumpfile(components.as_dict(), format="json")
-
-# schemas = Namespace("schemas")
-# schemas.mount(People)
-
-# with Namespace("components") as components:
-#     components.mount(schemas)
-#     loading.dumpfile(components.as_dict(), format="json")
+def get_primitive_from_optional(typ, *, nonetype=type(None)) -> bool:
+    return [x for x in typ.__args__ if x != nonetype][0]
