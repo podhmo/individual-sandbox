@@ -59,6 +59,7 @@ https://github.com/podhmo-sandbox/openapi-sandbox/tree/master/docs/examples/01qu
 - /paths/~1users~1{userId}/get/parameters/0/typeが/paths/~1users~1{userId}/get/parameters/0/schema/typeの方に移動されている
 - 200/schemasが変わって200/content/application~1json/schema
 - /paths/~1users/post/parameters/0/in/bodyが変わって/paths/~1users/post/requestBody/contentになった
+- (formDataとjsonBodyがrequestBodyに,           application/x-www-form-urlencoded)
 
 ### 02 models
 
@@ -71,6 +72,10 @@ https://github.com/podhmo-sandbox/openapi-sandbox/tree/master/docs/examples/01qu
 - https://swagger.io/docs/specification/2-0/authentication/
 
 yamlの位置をどうにかする何か欲しいな。。
+
+### 便利
+
+- https://qiita.com/shunichi_com/items/e63114f8d67beba14bfd
 
 ## emacs elispも整形して欲しい
 
