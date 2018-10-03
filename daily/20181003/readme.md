@@ -48,7 +48,7 @@ pandas.DataFrameなどはどうやって型をつける？ > pluginで
 - https://github.com/python/mypy/issues/5409
 - https://github.com/TypedDjango/django-stubs/issues/5
 
-すごく単純には以下の様な形。Pluginを継承してそのhookを差し込む。(mypyの[test-data]()を見るのが一番便利)
+すごく単純には以下の様な形。Pluginを継承してそのhookを差し込む。(mypyの[test-data](https://github.com/python/mypy/tree/master/test-data)を見るのが一番便利)
 
 ```python
 from mypy.plugin import Plugin
@@ -67,7 +67,7 @@ def register(version):
     return MyPlugin
 ```
 
-
+あとは安直にmypy/plugin.pyの中を除くのが良い。[open-callback](https://github.com/python/mypy/blob/f59a8713df613a331202e4f02fbbc418a6f99628/mypy/plugin.py#L386)とか
 
 直接コードを読む方法も
 
