@@ -1,3 +1,9 @@
+## python faker使ってみる
+
+example_faker
+
+fakerはcliも使えるのか。。
+
 ## mypy pluginsの有効化
 
 mypy.iniでとかやる？
