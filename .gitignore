@@ -101,3 +101,6 @@ node_modules
 
 # misc
 bin/*
+share
+include
+etc

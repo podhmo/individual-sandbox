@@ -179,3 +179,9 @@ c.close()
 ```
 
 ## marshmallow+oneOf
+
+
+## discord.py ちょっと中覗いてみる
+
+- https://github.com/Rapptz/discord.py
+- https://discordpy.readthedocs.io/en/latest/
