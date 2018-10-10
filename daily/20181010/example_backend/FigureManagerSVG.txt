@@ -1,0 +1,12 @@
+matplotlib.backends.backend_svg.FigureManagerSVG <- matplotlib.backend_bases.FigureManagerBase <- builtins.object
+
+matplotlib.backend_bases.FigureManagerBase <- builtins.object
+    [method, OVERRIDE] __init__(self, canvas, num)
+        [method] key_press(self, event)
+    [method] destroy(self)
+    [method] full_screen_toggle(self)
+    [method] get_window_title(self)
+    [method] resize(self, w, h)
+    [method] set_window_title(self, title)
+    [method] show(self)
+    [method] show_popup(self, msg)

@@ -1,0 +1,11 @@
+matplotlib.backends.backend_svg.XMLWriter <- builtins.object
+    [method] _XMLWriter__flush(self, indent=True)
+    [method, OVERRIDE] __init__(self, file)
+        [method] flush(self)
+    [method] close(self, id)
+        [method] end(self, tag=None, indent=True)
+    [method] comment(self, comment)
+    [method] element(self, tag, text=None, attrib={}, **extra)
+        [method] start(self, tag, attrib={}, **extra)
+        [method] end(self, tag=None, indent=True)
+        [method] data(self, text)

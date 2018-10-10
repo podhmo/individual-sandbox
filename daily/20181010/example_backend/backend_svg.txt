@@ -1,0 +1,8 @@
+matplotlib.backends.backend_svg._BackendSVG <- matplotlib.backend_bases._Backend <- builtins.object
+
+matplotlib.backend_bases._Backend <- builtins.object
+    [class method] draw_if_interactive()
+    [static method] export(cls)
+    [class method] new_figure_manager(num, *args, **kwargs)
+        [class method] new_figure_manager_given_figure(num, figure)
+    [class method] show(block=None)
