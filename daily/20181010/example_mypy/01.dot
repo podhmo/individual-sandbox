@@ -1,0 +1,410 @@
+digraph g {
+    g0 [label="01api"]
+    g1 [label="mypy"]
+    g2 [label="mypy.api"]
+    g3 [label="mypy.main"]
+    g4 [label="typing"]
+    g5 [label="mypy.build"]
+    g6 [label="ast"]
+    g7 [label="mypy.find_sources"]
+    g8 [label="subprocess"]
+    g9 [label="configparser"]
+    g10 [label="selectors"]
+    g11 [label="signal"]
+    g12 [label="mypy.fscache"]
+    g13 [label="mypy.fixup"]
+    g14 [label="mypy.parse"]
+    g15 [label="mypy.nodes"]
+    g16 [label="distutils.sysconfig"]
+    g17 [label="mypy.semanal_pass3"]
+    g18 [label="mypy.moduleinfo"]
+    g19 [label="mypy.report"]
+    g20 [label="hashlib"]
+    g21 [label="mypy.indirection"]
+    g22 [label="mypy.semanal_pass1"]
+    g23 [label="mypy.checker"]
+    g24 [label="mypy.sitepkgs"]
+    g25 [label="mypy.server.deps"]
+    g26 [label="json"]
+    g27 [label="distutils"]
+    g28 [label="distutils.errors"]
+    g29 [label="json.decoder"]
+    g30 [label="json.scanner"]
+    g31 [label="json.encoder"]
+    g32 [label="__future__"]
+    g33 [label="pathlib"]
+    g34 [label="fnmatch"]
+    g35 [label="urllib.parse"]
+    g36 [label="urllib"]
+    g37 [label="ntpath"]
+    g38 [label="mypy.util"]
+    g39 [label="xml"]
+    g40 [label="xml.sax.saxutils"]
+    g41 [label="xml.sax"]
+    g42 [label="xml.sax.xmlreader"]
+    g43 [label="xml.sax.handler"]
+    g44 [label="xml.sax._exceptions"]
+    g45 [label="base64"]
+    g46 [label="struct"]
+    g47 [label="urllib.request"]
+    g48 [label="email"]
+    g49 [label="http.client"]
+    g50 [label="bisect"]
+    g51 [label="urllib.error"]
+    g52 [label="tempfile"]
+    g53 [label="http"]
+    g54 [label="email.feedparser"]
+    g55 [label="email.errors"]
+    g56 [label="email._policybase"]
+    g57 [label="email.header"]
+    g58 [label="email.charset"]
+    g59 [label="email.base64mime"]
+    g60 [label="email.quoprimime"]
+    g61 [label="email.encoders"]
+    g62 [label="quopri"]
+    g63 [label="email.utils"]
+    g64 [label="random"]
+    g65 [label="datetime"]
+    g66 [label="socket"]
+    g67 [label="email._parseaddr"]
+    g68 [label="calendar"]
+    g69 [label="email.parser"]
+    g70 [label="email.message"]
+    g71 [label="ssl"]
+    g72 [label="email._encoded_words"]
+    g73 [label="email.iterators"]
+    g74 [label="uu"]
+    g75 [label="bz2"]
+    g76 [label="_compression"]
+    g77 [label="shutil"]
+    g78 [label="lzma"]
+    g79 [label="urllib.response"]
+    g80 [label="mypy.strconv"]
+    g81 [label="mypy.visitor"]
+    g82 [label="mypy.types"]
+    g83 [label="mypy.experiments"]
+    g84 [label="mypy.semanal"]
+    g85 [label="copy"]
+    g86 [label="mypy.sharedparse"]
+    g87 [label="mypy.tvar_scope"]
+    g88 [label="mypy.semanal_newtype"]
+    g89 [label="mypy.traverser"]
+    g90 [label="mypy.literals"]
+    g91 [label="mypy.messages"]
+    g92 [label="mypy.typevars"]
+    g93 [label="mypy.semanal_namedtuple"]
+    g94 [label="mypy.typeanal"]
+    g95 [label="mypy.semanal_enum"]
+    g96 [label="mypy.semanal_typeddict"]
+    g97 [label="mypy.errors"]
+    g98 [label="mypy.sametypes"]
+    g99 [label="mypy.erasetype"]
+    g100 [label="mypy.version"]
+    g101 [label="mypy.options"]
+    g102 [label="mypy.scope"]
+    g103 [label="pprint"]
+    g104 [label="mypy.defaults"]
+    g105 [label="difflib"]
+    g106 [label="mypy.fastparse"]
+    g107 [label="typed_ast.ast3"]
+    g108 [label="typed_ast"]
+    g109 [label="mypy.exprtotype"]
+    g110 [label="mypy.plugin"]
+    g111 [label="mypy.semanal_shared"]
+    g112 [label="mypy.maptype"]
+    g113 [label="mypy.expandtype"]
+    g114 [label="mypy.join"]
+    g115 [label="mypy.subtypes"]
+    g116 [label="mypy.typestate"]
+    g117 [label="mypy.applytype"]
+    g118 [label="mypy.constraints"]
+    g119 [label="mypy.server.trigger"]
+    g120 [label="mypy.server"]
+    g121 [label="mypy.solve"]
+    g122 [label="mypy.meet"]
+    g123 [label="mypy.infer"]
+    g124 [label="mypy.checkexpr"]
+    g125 [label="mypy.checkmember"]
+    g126 [label="mypy.checkstrformat"]
+    g127 [label="mypy.binder"]
+    g128 [label="mypy.treetransform"]
+    g129 [label="mypy.stats"]
+    g0 -> g1 [label="8e-05s"]
+    g0 -> g2 [label="0.10492s"]
+    g2 -> g3 [label="0.10311s"]
+    g2 -> g4 [label="0.00147s"]
+    g3 -> g5 [label="0.0945s"]
+    g3 -> g6 [label="0.00167s"]
+    g3 -> g7 [label="0.00022s"]
+    g3 -> g8 [label="0.00345s"]
+    g3 -> g9 [label="0.00215s"]
+    g8 -> g10 [label="0.001s"]
+    g8 -> g11 [label="0.00084s"]
+    g5 -> g12 [label="0.00024s"]
+    g5 -> g13 [label="0.0003s"]
+    g5 -> g14 [label="0.00014s"]
+    g5 -> g15 [label="0.04567s"]
+    g5 -> g16 [label="0.00119s"]
+    g5 -> g17 [label="0.0005s"]
+    g5 -> g18 [label="0.00024s"]
+    g5 -> g19 [label="0.00142s"]
+    g5 -> g20 [label="0.0034s"]
+    g5 -> g21 [label="0.00024s"]
+    g5 -> g22 [label="0.02494s"]
+    g5 -> g23 [label="0.00841s"]
+    g5 -> g24 [label="0.00033s"]
+    g5 -> g25 [label="0.00049s"]
+    g5 -> g26 [label="0.00252s"]
+    g5 -> g27 [label="9e-05s"]
+    g16 -> g28 [label="0.00035s"]
+    g29 -> g30 [label="0.0011s"]
+    g26 -> g31 [label="0.00047s"]
+    g26 -> g29 [label="0.0016s"]
+    g24 -> g32 [label="0.00012s"]
+    g33 -> g34 [label="0.00013s"]
+    g33 -> g35 [label="0.00095s"]
+    g33 -> g36 [label="9e-05s"]
+    g33 -> g37 [label="0.00074s"]
+    g38 -> g39 [label="0.0001s"]
+    g38 -> g33 [label="0.00366s"]
+    g38 -> g40 [label="0.03311s"]
+    g38 -> g41 [label="0.00171s"]
+    g42 -> g43 [label="0.00032s"]
+    g42 -> g44 [label="0.00023s"]
+    g41 -> g42 [label="0.00132s"]
+    g45 -> g46 [label="0.00067s"]
+    g47 -> g45 [label="0.00109s"]
+    g47 -> g48 [label="0.00012s"]
+    g47 -> g49 [label="0.01765s"]
+    g47 -> g50 [label="0.00075s"]
+    g47 -> g51 [label="0.00047s"]
+    g47 -> g52 [label="0.00281s"]
+    g47 -> g53 [label="0.00104s"]
+    g54 -> g55 [label="0.00052s"]
+    g54 -> g56 [label="0.00935s"]
+    g57 -> g58 [label="0.00063s"]
+    g57 -> g59 [label="0.00011s"]
+    g57 -> g60 [label="0.00025s"]
+    g61 -> g62 [label="0.00013s"]
+    g58 -> g61 [label="0.00034s"]
+    g56 -> g63 [label="0.00661s"]
+    g56 -> g57 [label="0.00213s"]
+    g63 -> g64 [label="0.0011s"]
+    g63 -> g65 [label="0.00136s"]
+    g63 -> g66 [label="0.00207s"]
+    g63 -> g67 [label="0.0011s"]
+    g67 -> g68 [label="0.00055s"]
+    g69 -> g54 [label="0.01072s"]
+    g49 -> g69 [label="0.011s"]
+    g49 -> g70 [label="0.00169s"]
+    g49 -> g71 [label="0.00363s"]
+    g70 -> g72 [label="0.00028s"]
+    g70 -> g73 [label="0.0001s"]
+    g70 -> g74 [label="0.00013s"]
+    g75 -> g76 [label="0.00017s"]
+    g77 -> g78 [label="0.00031s"]
+    g77 -> g75 [label="0.0006s"]
+    g52 -> g77 [label="0.00185s"]
+    g51 -> g79 [label="0.0002s"]
+    g40 -> g47 [label="0.03268s"]
+    g80 -> g38 [label="0.03997s"]
+    g80 -> g81 [label="0.00057s"]
+    g15 -> g80 [label="0.04127s"]
+    g22 -> g82 [label="0.00338s"]
+    g22 -> g83 [label="0.00013s"]
+    g22 -> g84 [label="0.02078s"]
+    g82 -> g85 [label="0.00039s"]
+    g82 -> g86 [label="0.00012s"]
+    g84 -> g87 [label="0.00019s"]
+    g84 -> g88 [label="0.0002s"]
+    g84 -> g89 [label="0.00026s"]
+    g84 -> g90 [label="0.00043s"]
+    g84 -> g91 [label="0.00249s"]
+    g84 -> g92 [label="0.00079s"]
+    g84 -> g93 [label="0.00368s"]
+    g84 -> g94 [label="0.00736s"]
+    g84 -> g95 [label="0.00021s"]
+    g84 -> g96 [label="0.00027s"]
+    g84 -> g97 [label="0.00192s"]
+    g92 -> g98 [label="0.00021s"]
+    g92 -> g99 [label="0.00027s"]
+    g97 -> g100 [label="8e-05s"]
+    g97 -> g101 [label="0.00081s"]
+    g97 -> g102 [label="0.00022s"]
+    g101 -> g103 [label="0.00025s"]
+    g101 -> g104 [label="8e-05s"]
+    g91 -> g105 [label="0.00129s"]
+    g106 -> g107 [label="0.00214s"]
+    g106 -> g108 [label="9e-05s"]
+    g109 -> g106 [label="0.00375s"]
+    g94 -> g110 [label="0.00157s"]
+    g94 -> g111 [label="0.00026s"]
+    g94 -> g109 [label="0.00408s"]
+    g112 -> g113 [label="0.00021s"]
+    g114 -> g115 [label="0.00234s"]
+    g114 -> g112 [label="0.00049s"]
+    g115 -> g116 [label="0.00072s"]
+    g115 -> g117 [label="0.00013s"]
+    g115 -> g118 [label="0.00052s"]
+    g116 -> g119 [label="9e-05s"]
+    g116 -> g120 [label="8e-05s"]
+    g93 -> g114 [label="0.00327s"]
+    g121 -> g122 [label="0.00027s"]
+    g123 -> g121 [label="0.00057s"]
+    g124 -> g123 [label="0.00098s"]
+    g124 -> g125 [label="0.00036s"]
+    g124 -> g126 [label="0.00087s"]
+    g23 -> g127 [label="0.0005s"]
+    g23 -> g128 [label="0.00067s"]
+    g23 -> g124 [label="0.00486s"]
+    g19 -> g129 [label="0.00029s"]
+}
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/api.py ... 0.10491609573364258s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/main.py ... 0.10310697555541992s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/build.py ... 0.09450316429138184s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/nodes.py ... 0.04566597938537598s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/strconv.py ... 0.04126787185668945s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/util.py ... 0.03997397422790527s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/saxutils.py ... 0.03310704231262207s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/request.py ... 0.03267502784729004s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_pass1.py ... 0.024935007095336914s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal.py ... 0.020775794982910156s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py ... 0.017647981643676758s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/parser.py ... 0.010995149612426758s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/feedparser.py ... 0.010716915130615234s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/_policybase.py ... 0.00934910774230957s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/checker.py ... 0.008409976959228516s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/typeanal.py ... 0.007359981536865234s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/utils.py ... 0.0066051483154296875s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/checkexpr.py ... 0.0048639774322509766s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/exprtotype.py ... 0.004076957702636719s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/fastparse.py ... 0.003751993179321289s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_namedtuple.py ... 0.0036840438842773438s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/pathlib.py ... 0.0036640167236328125s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/ssl.py ... 0.0036270618438720703s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/subprocess.py ... 0.003454923629760742s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/hashlib.py ... 0.003400087356567383s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/types.py ... 0.003379344940185547s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/join.py ... 0.0032651424407958984s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/tempfile.py ... 0.002810239791870117s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py ... 0.0025169849395751953s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/messages.py ... 0.0024869441986083984s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/subtypes.py ... 0.002341032028198242s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/configparser.py ... 0.0021538734436035156s
+// load $HOME/venv/web/lib/python3.7/site-packages/typed_ast/ast3.py ... 0.0021440982818603516s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/header.py ... 0.0021262168884277344s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/socket.py ... 0.0020742416381835938s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/errors.py ... 0.0019218921661376953s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/shutil.py ... 0.001850128173828125s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/__init__.py ... 0.0017061233520507812s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/message.py ... 0.0016908645629882812s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/ast.py ... 0.0016722679138183594s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/decoder.py ... 0.0015969276428222656s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/plugin.py ... 0.0015659332275390625s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/typing.py ... 0.001470327377319336s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/report.py ... 0.0014162063598632812s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/datetime.py ... 0.001363992691040039s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/xmlreader.py ... 0.001318216323852539s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/difflib.py ... 0.0012869834899902344s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/distutils/sysconfig.py ... 0.001191854476928711s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/random.py ... 0.0010981559753417969s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/scanner.py ... 0.0010960102081298828s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/_parseaddr.py ... 0.0010957717895507812s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/base64.py ... 0.0010919570922851562s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/__init__.py ... 0.001035928726196289s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/selectors.py ... 0.0010030269622802734s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/infer.py ... 0.0009849071502685547s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/parse.py ... 0.0009517669677734375s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/checkstrformat.py ... 0.0008690357208251953s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/signal.py ... 0.0008370876312255859s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/options.py ... 0.0008120536804199219s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/typevars.py ... 0.0007939338684082031s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/bisect.py ... 0.0007512569427490234s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/ntpath.py ... 0.0007350444793701172s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/typestate.py ... 0.0007162094116210938s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/struct.py ... 0.0006670951843261719s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/treetransform.py ... 0.0006668567657470703s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/charset.py ... 0.0006258487701416016s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/bz2.py ... 0.0005998611450195312s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/visitor.py ... 0.00057220458984375s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/solve.py ... 0.0005691051483154297s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/calendar.py ... 0.0005509853363037109s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/errors.py ... 0.0005247592926025391s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/constraints.py ... 0.0005190372467041016s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/binder.py ... 0.0005040168762207031s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_pass3.py ... 0.0005021095275878906s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/maptype.py ... 0.0004930496215820312s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/server/deps.py ... 0.0004901885986328125s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/error.py ... 0.0004711151123046875s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py ... 0.0004668235778808594s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/literals.py ... 0.0004329681396484375s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/copy.py ... 0.00038933753967285156s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/checkmember.py ... 0.0003609657287597656s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/distutils/errors.py ... 0.00034999847412109375s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/encoders.py ... 0.00034499168395996094s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/sitepkgs.py ... 0.0003349781036376953s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/handler.py ... 0.0003230571746826172s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lzma.py ... 0.0003120899200439453s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/fixup.py ... 0.0002999305725097656s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/stats.py ... 0.0002942085266113281s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/_encoded_words.py ... 0.00028395652770996094s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_typeddict.py ... 0.0002739429473876953s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/erasetype.py ... 0.00026679039001464844s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/meet.py ... 0.00026607513427734375s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/traverser.py ... 0.00026416778564453125s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_shared.py ... 0.0002620220184326172s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/pprint.py ... 0.0002529621124267578s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/quoprimime.py ... 0.00025010108947753906s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/moduleinfo.py ... 0.000244140625s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/fscache.py ... 0.0002422332763671875s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/indirection.py ... 0.00023508071899414062s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/sax/_exceptions.py ... 0.0002288818359375s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/find_sources.py ... 0.00021886825561523438s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/scope.py ... 0.0002181529998779297s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/expandtype.py ... 0.00021195411682128906s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/sametypes.py ... 0.0002067089080810547s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_enum.py ... 0.00020623207092285156s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/semanal_newtype.py ... 0.00020194053649902344s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/response.py ... 0.00019884109497070312s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/tvar_scope.py ... 0.0001938343048095703s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/_compression.py ... 0.00017380714416503906s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/parse.py ... 0.0001430511474609375s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/experiments.py ... 0.00013208389282226562s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/uu.py ... 0.00013113021850585938s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/applytype.py ... 0.0001289844512939453s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/fnmatch.py ... 0.00012803077697753906s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/quopri.py ... 0.000125885009765625s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/__init__.py ... 0.00012421607971191406s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/__future__.py ... 0.0001220703125s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/sharedparse.py ... 0.00012111663818359375s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/base64mime.py ... 0.00010991096496582031s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/xml/__init__.py ... 0.0001049041748046875s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/email/iterators.py ... 9.894371032714844e-05s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_json.cpython-37m-darwin.so ... 8.797645568847656e-05s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/distutils/__init__.py ... 8.797645568847656e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/server/trigger.py ... 8.702278137207031e-05s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/__init__.py ... 8.511543273925781e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/typed_ast/__init__.py ... 8.511543273925781e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/defaults.py ... 8.177757263183594e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/server/__init__.py ... 8.0108642578125e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/__init__.py ... 7.82012939453125e-05s
+// load $HOME/venv/web/lib/python3.7/site-packages/mypy/version.py ... 7.605552673339844e-05s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_scproxy.cpython-37m-darwin.so ... 9.775161743164062e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_struct.cpython-37m-darwin.so ... 5.9604644775390625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_posixsubprocess.cpython-37m-darwin.so ... 5.9604644775390625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_bisect.cpython-37m-darwin.so ... 5.9604644775390625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/math.cpython-37m-darwin.so ... 5.0067901611328125e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_random.cpython-37m-darwin.so ... 5.0067901611328125e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_hashlib.cpython-37m-darwin.so ... 5.0067901611328125e-06s
+// load $HOME/venv/web/lib/python3.7/site-packages/_ast3.cpython-37m-darwin.so ... 4.76837158203125e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/binascii.cpython-37m-darwin.so ... 4.0531158447265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_socket.cpython-37m-darwin.so ... 4.0531158447265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/zlib.cpython-37m-darwin.so ... 3.814697265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/select.cpython-37m-darwin.so ... 3.814697265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_ssl.cpython-37m-darwin.so ... 3.814697265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_datetime.cpython-37m-darwin.so ... 3.814697265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_bz2.cpython-37m-darwin.so ... 3.814697265625e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_blake2.cpython-37m-darwin.so ... 3.0994415283203125e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/grp.cpython-37m-darwin.so ... 2.86102294921875e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_sha3.cpython-37m-darwin.so ... 2.86102294921875e-06s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload/_lzma.cpython-37m-darwin.so ... 2.86102294921875e-06s
