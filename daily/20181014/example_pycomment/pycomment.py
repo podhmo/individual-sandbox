@@ -87,10 +87,16 @@ class Transformer(PyTreeVisitor):
     def visit_NEWLINE(self, node):
         if node.prefix.lstrip().startswith(self.marker):
             # MEMO: <expr> -> _ = <expr>
-
             target = node
-            while type_repr(target.parent.type) != "simple_stmt":
-                target = target.parernt
+            while True:
+                parent = target.parent
+                if parent is None:
+                    return
+
+                if type_repr(target.parent.type) == "simple_stmt":
+                    break
+                target = parent
+
             eol = target  # target is Leaf("\n]")
             target = eol.prev_sibling
 
@@ -112,7 +118,14 @@ class Transformer(PyTreeVisitor):
                     )
                 )
             )
-            print_stmt.prefix = target.prefix
+
+            print_stmt.prefix = assigned.prefix
+            # xxx: for first line
+            if not print_stmt.prefix:
+                prev_line = assigned.parent.prev_sibling
+                if prev_line.type == token.INDENT:
+                    print_stmt.prefix = prev_line.value
+
             print_stmt.append_child(Newline())
 
             for i, stmt in enumerate(this_stmt.parent.children):
@@ -148,14 +161,14 @@ def run(sourcefile, out=sys.stdout):
                 break
 
             m = rx.search(line)
-            if m is None:
+            k = str(lineno)
+            if m is None or k not in result_map:
                 print(line, end="", file=out)
             else:
-                print(line[:m.start()] + COMMENT_MARKER, result_map[str(lineno)], file=out)
+                print(line[:m.start()] + COMMENT_MARKER, result_map[k], file=out)
                 i += 1
 
     if stdout_outputs:
-        print("", file=out)
         print(STDOUT_HEADER_MARKER, file=out)
         for line in stdout_outputs:
             print("# >>", line, file=out)
