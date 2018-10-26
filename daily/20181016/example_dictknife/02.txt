@@ -1,0 +1,34 @@
+{
+  "name": "foo",
+  "age": 20,
+  "father": {
+    "name": "bar",
+    "age": 40
+  }
+}{
+  "name": "foo",
+  "age": 20,
+  "father/name": "bar",
+  "father/age": 40
+}----------------------------------------
+{
+  "name": "foo",
+  "age": 20,
+  "parents": [
+    {
+      "name": "bar",
+      "age": 40
+    },
+    {
+      "name": "boo",
+      "age": 40
+    }
+  ]
+}{
+  "name": "foo",
+  "age": 20,
+  "parents/name/0": "bar",
+  "parents/age/0": 40,
+  "parents/name/1": "boo",
+  "parents/age/1": 40
+}
