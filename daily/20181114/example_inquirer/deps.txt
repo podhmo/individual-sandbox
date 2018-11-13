@@ -1,0 +1,4 @@
+inquirer==2.5.1
+  - blessings [required: >=1.7, installed: 1.7]
+    - six [required: Any, installed: 1.11.0]
+  - readchar [required: >=2.0.0, installed: 2.0.1]
