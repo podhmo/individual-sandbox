@@ -12,3 +12,9 @@ setup:
 	python 04*.py
 05:
 	python 05*.py
+06:
+	python 06*.py
+07:
+	python 07*.py
+08:
+	python 08*.py

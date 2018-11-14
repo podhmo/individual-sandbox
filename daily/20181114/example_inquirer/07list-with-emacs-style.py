@@ -1,4 +1,5 @@
 import inquirer
+import string
 from inquirer import themes
 from inquirer.render.console import ConsoleRender, List
 from readchar import key
@@ -11,25 +12,22 @@ class ExtendedConsoleRender(ConsoleRender):
         return super().render_factory(question_type)
 
 
-# [(hex(i), c) for i, c in enumerate(string.ascii_lowercase, 1)]
-CTRL_G = "\x07"
-CTRL_N = "\x0e"
-CTRL_P = "\x10"
+CTRL_MAP = {c: chr(i) for i, c in enumerate(string.ascii_uppercase, 1)}
 
 
 class ExtendedList(List):
     def process_input(self, pressed):
         # emacs style
-        if pressed in (key.CTRL_B, CTRL_P):
+        if pressed in (CTRL_MAP["B"], CTRL_MAP["P"]):
             pressed = key.UP
-        elif pressed in (key.CTRL_F, CTRL_N):
+        elif pressed in (CTRL_MAP["F"], CTRL_MAP["N"]):
             pressed = key.DOWN
-        elif pressed == CTRL_G:
-            pressed = key.CTRL_C
-        elif pressed == key.CTRL_A:
+        elif pressed == CTRL_MAP["G"]:
+            pressed = CTRL_MAP["C"]
+        elif pressed == CTRL_MAP["A"]:
             self.current = 0
             return
-        elif pressed == key.CTRL_E:
+        elif pressed == CTRL_MAP["G"]:
             self.current = len(self.question.choices) - 1
             return
 
