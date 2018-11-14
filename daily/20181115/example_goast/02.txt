@@ -1,0 +1,15 @@
+package main
+
+import (
+	"log"
+)
+
+func mainInner() {
+	if err := run(); err != nil {
+		log.Fatalf("%+v", err)
+	}
+}
+
+func run() error {
+	return nil
+}

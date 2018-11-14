@@ -1,0 +1,151 @@
+     0  *ast.File {
+     1  .  Package: 2:1
+     2  .  Name: *ast.Ident {
+     3  .  .  NamePos: 2:9
+     4  .  .  Name: "p"
+     5  .  }
+     6  .  Decls: []ast.Decl (len = 2) {
+     7  .  .  0: *ast.GenDecl {
+     8  .  .  .  TokPos: 4:1
+     9  .  .  .  Tok: type
+    10  .  .  .  Lparen: -
+    11  .  .  .  Specs: []ast.Spec (len = 1) {
+    12  .  .  .  .  0: *ast.TypeSpec {
+    13  .  .  .  .  .  Name: *ast.Ident {
+    14  .  .  .  .  .  .  NamePos: 4:6
+    15  .  .  .  .  .  .  Name: "S"
+    16  .  .  .  .  .  .  Obj: *ast.Object {
+    17  .  .  .  .  .  .  .  Kind: type
+    18  .  .  .  .  .  .  .  Name: "S"
+    19  .  .  .  .  .  .  .  Decl: *(obj @ 12)
+    20  .  .  .  .  .  .  }
+    21  .  .  .  .  .  }
+    22  .  .  .  .  .  Assign: -
+    23  .  .  .  .  .  Type: *ast.StructType {
+    24  .  .  .  .  .  .  Struct: 4:8
+    25  .  .  .  .  .  .  Fields: *ast.FieldList {
+    26  .  .  .  .  .  .  .  Opening: 4:15
+    27  .  .  .  .  .  .  .  Closing: 5:1
+    28  .  .  .  .  .  .  }
+    29  .  .  .  .  .  .  Incomplete: false
+    30  .  .  .  .  .  }
+    31  .  .  .  .  }
+    32  .  .  .  }
+    33  .  .  .  Rparen: -
+    34  .  .  }
+    35  .  .  1: *ast.FuncDecl {
+    36  .  .  .  Recv: *ast.FieldList {
+    37  .  .  .  .  Opening: 7:6
+    38  .  .  .  .  List: []*ast.Field (len = 1) {
+    39  .  .  .  .  .  0: *ast.Field {
+    40  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+    41  .  .  .  .  .  .  .  0: *ast.Ident {
+    42  .  .  .  .  .  .  .  .  NamePos: 7:7
+    43  .  .  .  .  .  .  .  .  Name: "s"
+    44  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    45  .  .  .  .  .  .  .  .  .  Kind: var
+    46  .  .  .  .  .  .  .  .  .  Name: "s"
+    47  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 39)
+    48  .  .  .  .  .  .  .  .  }
+    49  .  .  .  .  .  .  .  }
+    50  .  .  .  .  .  .  }
+    51  .  .  .  .  .  .  Type: *ast.StarExpr {
+    52  .  .  .  .  .  .  .  Star: 7:9
+    53  .  .  .  .  .  .  .  X: *ast.Ident {
+    54  .  .  .  .  .  .  .  .  NamePos: 7:10
+    55  .  .  .  .  .  .  .  .  Name: "Struct"
+    56  .  .  .  .  .  .  .  }
+    57  .  .  .  .  .  .  }
+    58  .  .  .  .  .  }
+    59  .  .  .  .  }
+    60  .  .  .  .  Closing: 7:16
+    61  .  .  .  }
+    62  .  .  .  Name: *ast.Ident {
+    63  .  .  .  .  NamePos: 7:18
+    64  .  .  .  .  Name: "Add"
+    65  .  .  .  }
+    66  .  .  .  Type: *ast.FuncType {
+    67  .  .  .  .  Func: 7:1
+    68  .  .  .  .  Params: *ast.FieldList {
+    69  .  .  .  .  .  Opening: 7:21
+    70  .  .  .  .  .  List: []*ast.Field (len = 1) {
+    71  .  .  .  .  .  .  0: *ast.Field {
+    72  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 2) {
+    73  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    74  .  .  .  .  .  .  .  .  .  NamePos: 7:22
+    75  .  .  .  .  .  .  .  .  .  Name: "x"
+    76  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    77  .  .  .  .  .  .  .  .  .  .  Kind: var
+    78  .  .  .  .  .  .  .  .  .  .  Name: "x"
+    79  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 71)
+    80  .  .  .  .  .  .  .  .  .  }
+    81  .  .  .  .  .  .  .  .  }
+    82  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    83  .  .  .  .  .  .  .  .  .  NamePos: 7:25
+    84  .  .  .  .  .  .  .  .  .  Name: "y"
+    85  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    86  .  .  .  .  .  .  .  .  .  .  Kind: var
+    87  .  .  .  .  .  .  .  .  .  .  Name: "y"
+    88  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 71)
+    89  .  .  .  .  .  .  .  .  .  }
+    90  .  .  .  .  .  .  .  .  }
+    91  .  .  .  .  .  .  .  }
+    92  .  .  .  .  .  .  .  Type: *ast.Ident {
+    93  .  .  .  .  .  .  .  .  NamePos: 7:27
+    94  .  .  .  .  .  .  .  .  Name: "int"
+    95  .  .  .  .  .  .  .  }
+    96  .  .  .  .  .  .  }
+    97  .  .  .  .  .  }
+    98  .  .  .  .  .  Closing: 7:30
+    99  .  .  .  .  }
+   100  .  .  .  .  Results: *ast.FieldList {
+   101  .  .  .  .  .  Opening: -
+   102  .  .  .  .  .  List: []*ast.Field (len = 1) {
+   103  .  .  .  .  .  .  0: *ast.Field {
+   104  .  .  .  .  .  .  .  Type: *ast.Ident {
+   105  .  .  .  .  .  .  .  .  NamePos: 7:32
+   106  .  .  .  .  .  .  .  .  Name: "int"
+   107  .  .  .  .  .  .  .  }
+   108  .  .  .  .  .  .  }
+   109  .  .  .  .  .  }
+   110  .  .  .  .  .  Closing: -
+   111  .  .  .  .  }
+   112  .  .  .  }
+   113  .  .  .  Body: *ast.BlockStmt {
+   114  .  .  .  .  Lbrace: 7:36
+   115  .  .  .  .  List: []ast.Stmt (len = 1) {
+   116  .  .  .  .  .  0: *ast.ReturnStmt {
+   117  .  .  .  .  .  .  Return: 8:2
+   118  .  .  .  .  .  .  Results: []ast.Expr (len = 1) {
+   119  .  .  .  .  .  .  .  0: *ast.BinaryExpr {
+   120  .  .  .  .  .  .  .  .  X: *ast.Ident {
+   121  .  .  .  .  .  .  .  .  .  NamePos: 8:9
+   122  .  .  .  .  .  .  .  .  .  Name: "x"
+   123  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 76)
+   124  .  .  .  .  .  .  .  .  }
+   125  .  .  .  .  .  .  .  .  OpPos: 8:11
+   126  .  .  .  .  .  .  .  .  Op: +
+   127  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+   128  .  .  .  .  .  .  .  .  .  NamePos: 8:13
+   129  .  .  .  .  .  .  .  .  .  Name: "y"
+   130  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 85)
+   131  .  .  .  .  .  .  .  .  }
+   132  .  .  .  .  .  .  .  }
+   133  .  .  .  .  .  .  }
+   134  .  .  .  .  .  }
+   135  .  .  .  .  }
+   136  .  .  .  .  Rbrace: 9:1
+   137  .  .  .  }
+   138  .  .  }
+   139  .  }
+   140  .  Scope: *ast.Scope {
+   141  .  .  Objects: map[string]*ast.Object (len = 1) {
+   142  .  .  .  "S": *(obj @ 16)
+   143  .  .  }
+   144  .  }
+   145  .  Unresolved: []*ast.Ident (len = 3) {
+   146  .  .  0: *(obj @ 53)
+   147  .  .  1: *(obj @ 92)
+   148  .  .  2: *(obj @ 104)
+   149  .  }
+   150  }
