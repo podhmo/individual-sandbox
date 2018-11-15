@@ -1,3 +1,87 @@
+## python starletteの中をのぞく
+
+- black使っているのか
+- starletteとstarlette[full]は別物
+- testsを外に出すものも見かける様になった
+- ?toplevelのディレクトリは何なんだろう？ -> applications?
+- uvicornに依存しているのではなくASGIなのでuvicornで実行するという感じ
+
+```python
+from starlette.applications import Starlette
+from starlette.responses import JSONResponse
+import uvicorn
+
+app = Starlette()
+
+@app.route('/')
+async def homepage(request):
+    return JSONResponse({'hello': 'world'})
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8000)
+```
+
+interface
+
+```python
+Scope = typing.MutableMapping[str, typing.Any]
+Message = typing.MutableMapping[str, typing.Any]
+
+class ASGIInstance:
+    class Receive:
+        def __call__(self) -> typing.Awaitable[Message]:
+            ...
+
+    class Send:
+        def __call__(self, message: Message) -> typing.Awaitable[None]:
+            ...
+
+    def __call__(self, receive: Receive, send: Send) -> typing.Awaitable[None]:
+        ...
+
+class ASGIApp:
+    def __call__(self, scope: Scope) -> ASGIInstance:
+        ...
+```
+
+### starletteのasgiappの意味は？
+
+```python
+class Starlette:
+    def __init__(self, debug: bool = False, template_directory: str = None) -> None:
+        self._debug = debug
+        self.router = Router()
+        self.lifespan_handler = LifespanHandler()
+        self.exception_middleware = ExceptionMiddleware(self.router, debug=debug)
+        self.error_middleware = ServerErrorMiddleware(
+            self.exception_middleware, debug=debug
+        # )
+        self.schema_generator = None  # type: typing.Optional[BaseSchemaGenerator]
+        self.template_env = self.load_template_env(template_directory)
+
+
+    def __call__(self, scope: Scope) -> ASGIInstance:
+        scope["app"] = self
+        if scope["type"] == "lifespan":
+            return self.lifespan_handler(scope)
+        return self.error_middleware(scope)
+```
+
+それ以外はappというよりregistryというか便利オブジェクトという感じか
+
+```python
+class LifespanHandler:
+    async def run_lifespan(self, receive: Receive, send: Send) -> None:
+        message = await receive()
+        assert message["type"] == "lifespan.startup"
+        await self.run_startup()
+        await send({"type": "lifespan.startup.complete"})
+        message = await receive()
+        assert message["type"] == "lifespan.shutdown"
+        await self.run_shutdown()
+        await send({"type": "lifespan.shutdown.complete"})
+```
+
 ## go ast メソッドと関数見分けるのどうするんだっけ？
 
 `*ast.FuncDecl` が `Recv` を持っていたらMethod
