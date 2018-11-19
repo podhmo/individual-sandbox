@@ -82,6 +82,35 @@ class LifespanHandler:
         await send({"type": "lifespan.shutdown.complete"})
 ```
 
+## go newの使い道ないと思っていた
+
+
+## archのpackageにpatchをあてたい
+
+(abs = arch build system)
+
+https://wiki.archlinux.jp/index.php/%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E3%83%91%E3%83%83%E3%83%81%E3%82%92%E9%81%A9%E7%94%A8
+
+`prepare()` をいじるのが手軽そう。ところでmakepkgはどこでやるんだろ？
+
+- https://wiki.archlinux.jp/index.php/Makepkg
+- https://wiki.archlinux.jp/index.php/%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%BD%9C%E6%88%90
+- https://wiki.archlinux.jp/index.php/PKGBUILD
+
+## go printerでdebug mode有効にする方法
+
+package内のprivateなconstだった。buildし直さないとダメ？
+
+```
+$ go env | grep -i root
+GOROOT="/usr/lib/go"
+cd /usr/lib/go/src
+```
+
+### せっかくなのでarch上でどうなっているのか把握する
+
+- https://www.archlinux.org/packages/community/x86_64/go/
+
 ## go ast メソッドと関数見分けるのどうするんだっけ？
 
 `*ast.FuncDecl` が `Recv` を持っていたらMethod
