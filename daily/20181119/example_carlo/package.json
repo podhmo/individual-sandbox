@@ -11,5 +11,8 @@
   "dependencies": {
     "carlo": "^0.9.28",
     "parcel-bundler": "^1.10.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.1.6"
   }
 }
