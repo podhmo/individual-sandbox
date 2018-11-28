@@ -10,6 +10,10 @@ import (
 	"go/token"
 	"log"
 	"os"
+
+	"io/ioutil"
+
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -19,26 +23,7 @@ func main() {
 }
 
 func run() error {
-	source := `
-package main
-
-import (
-	"fmt"
-	"log"
-)
-
-func main(){
-	if err := run(); err != nil {
-		log.Fatalf("%+v", err)
-	}
-}
-
-func run() error {
-	fmt.Println("hello")
-	return nil
-}
-`
-	source2 := `
+	wrapTemplate := `
 package p
 func main() {
 	fmt.Println("start")
@@ -46,14 +31,25 @@ func main() {
 	mainInner()
 }
 `
+	// xxx: mainInner
+	if len(os.Args) <= 1 {
+		fmt.Fprintln(os.Stderr, "cmd <target file>")
+		os.Exit(1)
+	}
+	targetFile := os.Args[1] // target file
+
 	fset := token.NewFileSet()
-	f, err := parser.ParseFile(fset, "main", source, parser.AllErrors)
+	source, err := ioutil.ReadFile(targetFile)
 	if err != nil {
 		return err
 	}
-	f2, err := parser.ParseFile(fset, "extra", source2, parser.AllErrors)
+	f, err := parser.ParseFile(fset, "main", source, parser.AllErrors)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "parse main")
+	}
+	f2, err := parser.ParseFile(fset, "extra", wrapTemplate, parser.AllErrors)
+	if err != nil {
+		return errors.Wrap(err, "parse extra")
 	}
 
 	ob := f.Scope.Lookup("main")

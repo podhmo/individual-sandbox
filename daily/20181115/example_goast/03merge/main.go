@@ -51,7 +51,7 @@ func main() {
 	if err != nil {
 		return err
 	}
-	f2, err := parser.ParseFile(fset, "extra", source2, parser.AllErrors)
+	f2, err := parser.ParseFile(fset, "p", source2, parser.AllErrors)
 	if err != nil {
 		return err
 	}
