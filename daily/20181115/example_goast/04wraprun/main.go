@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"go/ast"
-	"go/format"
 	"go/parser"
 	"go/printer"
 	"go/token"
@@ -14,6 +13,7 @@ import (
 	"io/ioutil"
 
 	"github.com/pkg/errors"
+	"golang.org/x/tools/imports"
 )
 
 func main() {
@@ -43,6 +43,8 @@ func main() {
 	if err != nil {
 		return err
 	}
+
+	log.Println("parse", targetFile)
 	f, err := parser.ParseFile(fset, "main", source, parser.AllErrors)
 	if err != nil {
 		return errors.Wrap(err, "parse main")
@@ -52,25 +54,42 @@ func main() {
 		return errors.Wrap(err, "parse extra")
 	}
 
-	ob := f.Scope.Lookup("main")
-	if ob.Kind != ast.Fun {
-		return fmt.Errorf("unexpected type %s", ob.Kind)
+	log.Println("transform AST")
+
+	if f.Scope.Lookup("mainInner") == nil {
+		main := f.Scope.Lookup("main")
+		if main.Kind != ast.Fun {
+			return fmt.Errorf("unexpected type %s", main.Kind)
+		}
+		main.Decl.(*ast.FuncDecl).Name.Name = "mainInner"
+	} else {
+		main := f.Scope.Lookup("main")
+		for i, decl := range f.Decls {
+			if main.Decl == decl {
+				f.Decls = append(f.Decls[:i], f.Decls[i+1:]...)
+				fmt.Println("ok")
+				break
+			}
+		}
 	}
-	ob.Decl.(*ast.FuncDecl).Name.Name = "mainInner"
 
 	fn := f2.Scope.Lookup("main").Decl.(*ast.FuncDecl)
 	f.Decls = append(f.Decls, fn)
 
+	log.Println("write", targetFile)
 	buf := new(bytes.Buffer)
-	// buf := os.Stdout
 	if err := printer.Fprint(buf, fset, f); err != nil {
 		return err
 	}
 
-	output, err := format.Source(buf.Bytes())
+	output, err := imports.Process(targetFile, buf.Bytes(), &imports.Options{
+		TabWidth:  8,
+		TabIndent: true,
+		Comments:  true,
+		Fragment:  true,
+	})
 	if err != nil {
 		return err
 	}
-	os.Stdout.Write(output)
-	return nil
+	return ioutil.WriteFile(targetFile, output, 0644)
 }
