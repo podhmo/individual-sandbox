@@ -10,7 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "carlo": "^0.9.28",
-    "parcel-bundler": "^1.10.3"
+    "i": "^0.3.6",
+    "ndb-node-pty-prebuilt": "^0.8.0",
+    "parcel-bundler": "^1.10.3",
+    "systeminformation": "^3.48.4",
+    "xterm": "^3.8.0"
   },
   "devDependencies": {
     "typescript": "^3.1.6"
