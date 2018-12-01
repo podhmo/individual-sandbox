@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -12,6 +14,6 @@ func main() {
 }
 
 func run() error {
-	fmt.Println("Hello")
+	fmt.Println("Hello", strings.Join(os.Args, " "))
 	return nil
 }

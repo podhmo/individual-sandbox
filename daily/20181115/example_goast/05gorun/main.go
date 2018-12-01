@@ -7,10 +7,11 @@ import (
 	"go/parser"
 	"go/printer"
 	"go/token"
+	"io/ioutil"
 	"log"
 	"os"
 
-	"io/ioutil"
+	"os/exec"
 
 	"github.com/pkg/errors"
 	"golang.org/x/tools/imports"
@@ -91,5 +92,15 @@ func main() {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(targetFile, output, 0644)
+	if err := ioutil.WriteFile(targetFile, output, 0644); err != nil {
+		return err
+	}
+
+	args := []string{"run"}
+	args = append(args, os.Args[1:]...)
+	cmd := exec.Command("go", args...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }

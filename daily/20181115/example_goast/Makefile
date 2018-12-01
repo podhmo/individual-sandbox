@@ -1,4 +1,5 @@
 default: 00 01 02
+TARGET ?= ./hello/main.go
 
 00:
 	go run 00*/main.go | tee 00.txt
@@ -11,8 +12,12 @@ default: 00 01 02
 	go run 03*/main.go | tee 03merge/output/main.go
 	go run 03*/output/main.go
 04:
-	mkdir -p ${GOPATH}/src/github.com/podhmo
-	rm -f ${GOPATH}/src/github.com/podhmo/wraprun
-	ln -s $(shell pwd)/04wraprun ${GOPATH}/src/github.com/podhmo/wraprun
-	(go install ${GOPATH}/src/github.com/podhmo/wraprun) && wraprun ./hello/main.go
-	rm `which wraprun`
+	go run ./04wraprun/ ${TARGET}
+	git checkout ${TARGET}
+
+05:
+	go run ./05gorun/ ${TARGET}
+	git checkout ${TARGET}
+
+06:
+	$(MAKE) 04 TARGET=get
