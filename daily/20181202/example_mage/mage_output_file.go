@@ -12,20 +12,21 @@ import (
 	"strings"
 	"text/tabwriter"
 	"time"
+	
 )
 
 func main() {
-	// These functions are local variables to avoid name conflicts with
+	// These functions are local variables to avoid name conflicts with 
 	// magefiles.
 	list := func() error {
-
+		
 		w := tabwriter.NewWriter(os.Stdout, 0, 4, 4, ' ', 0)
 		fmt.Println("Targets:")
-		fmt.Fprintln(w, "  build\t"+"A build step that requires additional params, or platform specific steps for example")
-		fmt.Fprintln(w, "  clean\t"+"up after yourself")
-		fmt.Fprintln(w, "  install\t"+"A custom install step if you need your bin someplace other than go/bin")
-		fmt.Fprintln(w, "  installDeps\t"+"Manage your deps, or running package managers.")
-		fmt.Fprintln(w, "  ls\t"+"")
+			fmt.Fprintln(w, "  build\t" + "A build step that requires additional params, or platform specific steps for example")
+			fmt.Fprintln(w, "  clean\t" + "up after yourself")
+			fmt.Fprintln(w, "  install\t" + "A custom install step if you need your bin someplace other than go/bin")
+			fmt.Fprintln(w, "  installDeps\t" + "Manage your deps, or running package managers.")
+			fmt.Fprintln(w, "  ls\t" + "")
 		err := w.Flush()
 		return err
 	}
@@ -108,13 +109,15 @@ func main() {
 		return
 	}
 
-	targets := map[string]bool{
-
-		"build":       true,
-		"clean":       true,
-		"install":     true,
+	targets := map[string]bool {
+		
+		"build": true,
+		"clean": true,
+		"install": true,
 		"installdeps": true,
-		"ls":          true,
+		"ls": true,
+		
+		
 	}
 
 	var unknown []string
@@ -138,61 +141,61 @@ func main() {
 			os.Exit(1)
 		}
 		switch strings.ToLower(os.Args[1]) {
-		case "build":
-			fmt.Print("mage build:\n\n")
-			fmt.Println("A build step that requires additional params, or platform specific steps for example")
-			fmt.Println()
-
-			var aliases []string
-			if len(aliases) > 0 {
-				fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
-			}
-			return
-		case "clean":
-			fmt.Print("mage clean:\n\n")
-			fmt.Println("Clean up after yourself")
-			fmt.Println()
-
-			var aliases []string
-			if len(aliases) > 0 {
-				fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
-			}
-			return
-		case "install":
-			fmt.Print("mage install:\n\n")
-			fmt.Println("A custom install step if you need your bin someplace other than go/bin")
-			fmt.Println()
-
-			var aliases []string
-			if len(aliases) > 0 {
-				fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
-			}
-			return
-		case "installdeps":
-			fmt.Print("mage installdeps:\n\n")
-			fmt.Println("Manage your deps, or running package managers.")
-			fmt.Println()
-
-			var aliases []string
-			if len(aliases) > 0 {
-				fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
-			}
-			return
-		case "ls":
-			fmt.Print("mage ls:\n\n")
-			fmt.Println("LS")
-			fmt.Println()
-
-			var aliases []string
-			if len(aliases) > 0 {
-				fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
-			}
-			return
-
-		default:
-			logger.Printf("Unknown target: %q\n", os.Args[1])
-			os.Exit(1)
-		}
+			case "build":
+				fmt.Print("mage build:\n\n")
+				fmt.Println("A build step that requires additional params, or platform specific steps for example")
+				fmt.Println()
+				
+				var aliases []string
+				if len(aliases) > 0 {
+					fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
+				}
+				return
+			case "clean":
+				fmt.Print("mage clean:\n\n")
+				fmt.Println("Clean up after yourself")
+				fmt.Println()
+				
+				var aliases []string
+				if len(aliases) > 0 {
+					fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
+				}
+				return
+			case "install":
+				fmt.Print("mage install:\n\n")
+				fmt.Println("A custom install step if you need your bin someplace other than go/bin")
+				fmt.Println()
+				
+				var aliases []string
+				if len(aliases) > 0 {
+					fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
+				}
+				return
+			case "installdeps":
+				fmt.Print("mage installdeps:\n\n")
+				fmt.Println("Manage your deps, or running package managers.")
+				fmt.Println()
+				
+				var aliases []string
+				if len(aliases) > 0 {
+					fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
+				}
+				return
+			case "ls":
+				fmt.Print("mage ls:\n\n")
+				fmt.Println("LS")
+				fmt.Println()
+				
+				var aliases []string
+				if len(aliases) > 0 {
+					fmt.Printf("Aliases: %s\n\n", strings.Join(aliases, ", "))
+				}
+				return
+			
+			default:
+				logger.Printf("Unknown target: %q\n", os.Args[1])
+				os.Exit(1)
+		}	
 	}
 	if len(os.Args) < 2 {
 		if err := list(); err != nil {
@@ -203,57 +206,57 @@ func main() {
 	}
 	for _, target := range os.Args[1:] {
 		switch strings.ToLower(target) {
-
+		
 		}
 		switch strings.ToLower(target) {
-
-		case "build":
-			if verbose {
-				logger.Println("Running target:", "Build")
-			}
-			wrapFn := func(ctx context.Context) error {
+		
+			case "build":
+				if verbose {
+					logger.Println("Running target:", "Build")
+				}
+							wrapFn := func(ctx context.Context) error {
 				return Build()
 			}
 			err := runTarget(wrapFn)
-			handleError(logger, err)
-		case "clean":
-			if verbose {
-				logger.Println("Running target:", "Clean")
-			}
-			wrapFn := func(ctx context.Context) error {
+				handleError(logger, err)
+			case "clean":
+				if verbose {
+					logger.Println("Running target:", "Clean")
+				}
+							wrapFn := func(ctx context.Context) error {
 				Clean()
 				return nil
 			}
 			err := runTarget(wrapFn)
-			handleError(logger, err)
-		case "install":
-			if verbose {
-				logger.Println("Running target:", "Install")
-			}
-			wrapFn := func(ctx context.Context) error {
+				handleError(logger, err)
+			case "install":
+				if verbose {
+					logger.Println("Running target:", "Install")
+				}
+							wrapFn := func(ctx context.Context) error {
 				return Install()
 			}
 			err := runTarget(wrapFn)
-			handleError(logger, err)
-		case "installdeps":
-			if verbose {
-				logger.Println("Running target:", "InstallDeps")
-			}
-			wrapFn := func(ctx context.Context) error {
+				handleError(logger, err)
+			case "installdeps":
+				if verbose {
+					logger.Println("Running target:", "InstallDeps")
+				}
+							wrapFn := func(ctx context.Context) error {
 				return InstallDeps()
 			}
 			err := runTarget(wrapFn)
-			handleError(logger, err)
-		case "ls":
-			if verbose {
-				logger.Println("Running target:", "Ls")
-			}
-			wrapFn := func(ctx context.Context) error {
+				handleError(logger, err)
+			case "ls":
+				if verbose {
+					logger.Println("Running target:", "Ls")
+				}
+							wrapFn := func(ctx context.Context) error {
 				return Ls()
 			}
 			err := runTarget(wrapFn)
-			handleError(logger, err)
-
+				handleError(logger, err)
+		
 		default:
 			// should be impossible since we check this above.
 			logger.Printf("Unknown target: %q\n", os.Args[1])
@@ -261,3 +264,7 @@ func main() {
 		}
 	}
 }
+
+
+
+

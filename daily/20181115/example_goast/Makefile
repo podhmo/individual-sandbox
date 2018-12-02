@@ -16,7 +16,7 @@ TARGET ?= ./hello/main.go
 	git checkout ${TARGET}
 
 05:
-	go run ./05gorun/ ${TARGET}
+	go run ./05gorun/ ${TARGET} world
 	git checkout ${TARGET}
 
 06:

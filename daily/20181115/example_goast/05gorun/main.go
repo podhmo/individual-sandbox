@@ -10,7 +10,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-
 	"os/exec"
 
 	"github.com/pkg/errors"
