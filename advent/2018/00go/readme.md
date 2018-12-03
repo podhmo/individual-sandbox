@@ -162,10 +162,21 @@ HTTPSの通信に対してもMITM用のproxyを立ててそのproxy越しに通�
 例えば、以下は[googleのspreadsheetのAPIのquickstartの例](https://developers.google.com/sheets/api/quickstart/go)をtraceしたときの例です。
 
 ```
-$ mkdir -p output
-$ TRACE=output go run main.go
-2018/12/02 18:27:48 trace to 0001https:@@sheets.googleapis.com@v4@spreadsheets@1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms@values@Class%20Data%21A2%3AE?alt=json&prettyPrint=false
+mkdir -p output
+TRACE=output run main.go
+2018/12/04 01:51:50 trace to 0001https:@@sheets.googleapis.com@v4@spreadsheets@1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms@values@Class%20Data%21A2%3AE?alt=json&prettyPrint=false
+Name, Major:
+Alexandra, English
+Andrew, Math
+Anna, English
+Becky, Art
+Benjamin, English
+Carl, Art
 ...
+Robert, English
+Sean, Physics
+Stacy, Math
+Thomas, Art
 Will, Math
 
 $ tree output/
