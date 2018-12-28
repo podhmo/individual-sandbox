@@ -1,0 +1,17 @@
+diff -N -ur 00ng/go.mod 01ok/go.mod
+--- 00ng/go.mod	1970-01-01 09:00:00.000000000 +0900
++++ 01ok/go.mod	2018-12-26 07:31:27.539177780 +0900
+@@ -0,0 +1 @@
++module m
+diff -N -ur 00ng/main.go 01ok/main.go
+--- 00ng/main.go	2018-12-26 07:15:18.837219706 +0900
++++ 01ok/main.go	2018-12-26 07:31:33.159657145 +0900
+@@ -1,7 +1,7 @@
+ package main
+ 
+ import (
+-	"./xxx"
++	"m/xxx"
+ )
+ 
+ func main() {

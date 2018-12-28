@@ -1,0 +1,29 @@
+{
+	"ID": "golang.org/x/tools/go/types/typeutil",
+	"Name": "typeutil",
+	"PkgPath": "golang.org/x/tools/go/types/typeutil",
+	"GoFiles": [
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/callee.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/imports.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/map.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/methodsetcache.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/ui.go"
+	],
+	"CompiledGoFiles": [
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/callee.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/imports.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/map.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/methodsetcache.go",
+		"/home/nao/go/pkg/mod/golang.org/x/tools@v0.0.0-20181220191307-f344c7530cd8/go/types/typeutil/ui.go"
+	],
+	"ExportFile": "/home/nao/.cache/go-build/a2/a26a798473e3e6583eafb7ba1cab008ffca5301939086318b6ab78a82b0f9737-d",
+	"Imports": {
+		"bytes": "bytes",
+		"fmt": "fmt",
+		"go/ast": "go/ast",
+		"go/types": "go/types",
+		"golang.org/x/tools/go/ast/astutil": "golang.org/x/tools/go/ast/astutil",
+		"reflect": "reflect",
+		"sync": "sync"
+	}
+}
