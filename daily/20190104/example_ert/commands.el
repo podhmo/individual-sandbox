@@ -1,0 +1,5 @@
+(defun my:ert-buffer ()
+  (interactive)
+  (load-file buffer-file-name)
+  (call-interactively 'ert)
+  )
