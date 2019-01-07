@@ -1,0 +1,9 @@
+get user
+user1 on get user: not found (id=0)
+user3 on get user: not found (id=3)
+	((*main.User)(nil), (*main.User)(nil))
+!!! on get user: not found (id=3)
+----------------------------------------
+bind user
+user3 on bind user: not found (id=3)
+	(main.User{ID:"1", Name:"foo"}, main.User{ID:"", Name:""})
