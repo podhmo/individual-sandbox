@@ -1,0 +1,12 @@
+PYTHON := LOGLEVEL=DEBUG PYTHONASYNCIODEBUG=1 python -W default
+
+00:
+	${PYTHON} 00*.py
+01:
+	${PYTHON} 01*.py
+02:
+	${PYTHON} 02*.py
+03:
+	${PYTHON} 03*.py
+04:
+	${PYTHON} 04*.py
