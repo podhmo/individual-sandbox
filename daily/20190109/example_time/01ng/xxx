@@ -1,0 +1,10 @@
+time sleep 1  # aaaに出力したい
+
+real	0m1.002s
+user	0m0.000s
+sys	0m0.001s
+time sleep 1  # bbbに出力したい
+
+real	0m1.001s
+user	0m0.001s
+sys	0m0.000s
