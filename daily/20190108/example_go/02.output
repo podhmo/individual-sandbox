@@ -1,0 +1,1 @@
+src -> dst; dst=main.X{Name:"foo", AgePtr:(*int)(0xc0000120a8), Label:main.Label{Name:"FOO"}, Alias:(*main.Label)(0xc00000e1e0)}
