@@ -9,16 +9,17 @@ logger = logging.getLogger(__name__)
 async def fetch(session, url):
     async with session.get(url) as response:
         html = await response.text()
-        print(url, response.status, repr(html[:100]))
+        return (url, response.status, repr(html[:100]))
 
 
 # todo: middleware?
 async def main():
     async with aiohttp.ClientSession() as session:
         ex = Executor()
-        ex.submit(fetch, session, 'http://python.org')
-        ex.submit(fetch, session, 'http://python.org')
-        await ex.run()
+        ex.register(fetch, session, 'http://python.org')
+        ex.register(fetch, session, 'http://python.org')
+        for url, status, body in await ex.execute():
+            print("@", url, status, body)
 
 
 logging.basicConfig(level=getattr(logging, os.environ.get("LOGLEVEL", "INFO")))

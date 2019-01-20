@@ -1,0 +1,11 @@
+--- 00group.py	2019-01-20 22:02:15.077816179 +0900
++++ 01group_limited.py	2019-01-20 22:01:08.580366520 +0900
+@@ -12,7 +12,7 @@
+     return i
+ 
+ 
+-g = Group()
++g = Group(concurrency=5)
+ for i in range(10):
+     g.go(run, i)
+ print(g.wait())
