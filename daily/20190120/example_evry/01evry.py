@@ -9,26 +9,20 @@ async def run(loop, *, second: int, command: str):
     q = asyncio.Queue()
     tmpq = asyncio.Queue()
 
-    def reader():
-        import threading
-        fut = loop.create_future()
-
+    async def reader():
         def _run():
             for line in iter(sys.stdin.readline, None):
                 if not line:
                     break
                 buf[0].write(line.encode("utf-8"))
 
-            def finish():
-                q.put_nowait(buf[0])
-                q.put_nowait(None)
-                fut.set_result(True)
+        def finish(fut):
+            q.put_nowait(buf[0])
+            q.put_nowait(None)
 
-            loop.call_soon_threadsafe(finish)
-
-        th = threading.Thread(target=_run, daemon=True)
-        th.start()
-        return fut
+        fut = loop.run_in_executor(None, _run)
+        fut.add_done_callback(finish)
+        return await fut
 
     async def cutter():
         while True:
