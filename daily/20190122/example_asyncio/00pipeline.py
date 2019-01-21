@@ -52,9 +52,9 @@ class App:
         q0 = asyncio.Queue()
         q1 = asyncio.Queue()
         futs = []
-        futs.append(self.loop.create_task(self.generate(q0)))
-        futs.append(self.loop.create_task(self.communicate(q0, q1)))
-        futs.append(self.loop.create_task(self.aggregate(q1)))
+        futs.append(self.generate(q0))
+        futs.append(self.communicate(q0, q1))
+        futs.append(self.aggregate(q1))
         await asyncio.wait(futs, loop=self.loop)
 
 
