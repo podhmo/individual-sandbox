@@ -35,8 +35,14 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "/application/json")
-	encoder := json.NewEncoder(w)
-	if err := encoder.Encode(&output); err != nil {
-		panic(err)
+	b, err := json.Marshal(&output)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder := json.NewEncoder(w)
+		if err := encoder.Encode(map[string]string{"error": err.Error()}); err != nil {
+			panic(err)
+		}
+		return
 	}
+	w.Write(b)
 }

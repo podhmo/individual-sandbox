@@ -1,0 +1,5 @@
+[
+  {"name": "bar", "age": 21, "nickname": "B"},
+  {"name": "foo", "age": 20},
+  {"name": "boo"}
+]

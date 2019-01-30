@@ -30,6 +30,45 @@ $ chsh -s /opt/local/bin/bash
 
 ## python asyncio
 
+- mailbox
+- create taskしたもののエラーに気づきにくい(typo)
+
+## python asyncio
+
+つなぎ合わせることができるようになるとどうなるんだろう？
+- loopを受け取る？
+- async関数を受け取る？
+- 関数を返す関数にするのは何が嬉しいんだろう？
+- 少なくとも消費者などを気にする形でなければ意味がない。
+
+- ネットワークは繋げて行きたい感じはする
+- メソッドチェインをするのは嬉しいの(lambdaは嬉しくない)?
+- デコレータは便利そうな気がしている。
+
+なにを事前に設定して、何を実行時に設定したいんだろう？
+Queueを指定できるのが利点ていうのは確かなのだよなー。
+裏側の配線はdecoratorのタイミングで決まってしまうのだけれど。それは嬉しいんだろうか？
+
+何もしなければasync iteratorになるのでは？
+
+## python asynbcio pattern
+
+https://medium.com/python-pandemonium/asyncio-coroutine-patterns-beyond-await-a6121486656f
+
+- recursive coroutines
+- (async_timeout?)
+
+task作ってgatherがfun-outになる。
+
+- awaitしてしまうと待ってしまう。そこでensure_future。
+- 残ったタスクのお掃除にasyncio.Task.all_tasks()
+
+periodic
+
+- 周期的にじっこうしたい場合には数を数えてensure futureで良いのかたしかに
+
+## python asyncio
+
 何を気にしたかったのだっけ？
 
 - asyncio.Queueをchannelのように使ってpipelineを構成できない？
@@ -45,7 +84,6 @@ $ chsh -s /opt/local/bin/bash
   - communicateが有効なのはどれ？(bytes,array,memoryview)
 
 - async iteratorの上手な使いかた
-
 
 ## python mypy
 

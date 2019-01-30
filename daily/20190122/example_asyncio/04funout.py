@@ -5,34 +5,26 @@ logging.basicConfig(level=getattr(logging, os.environ.get("LOGLEVEL", "INFO")))
 logger = logging.getLogger(__name__)
 
 
-# provider,communicator,consumer
-class Provider:
-    def __init__(self, loop: asyncio.BaseEventLoop):
-        self.loop = loop
-
-    async def __call__(self, outq: asyncio.Queue):
+def from_iterable(itr):
+    async def call(loop, outq: asyncio.Queue):
         for i in range(10):
-            logger.debug("provide[S]")
-            await asyncio.sleep(0.1, loop=loop)
-            logger.debug("provide[E]	v:%s", i)
+            logger.debug("provide[S]	v:%s", i)
             await outq.put(i)
         await outq.put(None)
         logger.debug("provide[CLOSE]")
 
+    return call
 
-class Communicator:
-    def __init__(self, loop: asyncio.BaseEventLoop):
-        self.loop = loop
 
-    async def __call__(self, inq: asyncio.Queue, outq: asyncio.Queue):
+def communicate(afn):
+    async def call(loop, inq: asyncio.Queue, outq: asyncio.Queue):
         while True:
             v = await inq.get()
             logger.debug("communicate[S]	v:%s", v)
             if v is None:
                 inq.task_done()
                 break
-            await asyncio.sleep(0.1, loop=self.loop)
-            v = v * v
+            v = await afn(v)
             logger.debug("communicate[E]	v:%s", v)
             await outq.put(v)
             inq.task_done()
@@ -40,34 +32,41 @@ class Communicator:
         await outq.put(None)
         logger.debug("communicate[CLOSE]")
 
+    return call
 
-class Aggregator:
-    def __init__(self, loop: asyncio.BaseEventLoop):
-        self.loop = loop
 
-    async def __call__(self, inq: asyncio.Queue):
+def consume(afn):
+    async def call(loop, inq: asyncio.Queue):
         while True:
             v = await inq.get()
-            logger.debug("aggregate[S]	v:%s", v)
+            logger.debug("consume[S]	v:%s", v)
             if v is None:
                 inq.task_done()
                 break
-            await asyncio.sleep(0.1, loop=self.loop)
-            print(v)
-            logger.debug("aggregate[E]	v:%s", v)
+            v = await afn(v)
+            logger.debug("consume[E]	v:%s", v)
             inq.task_done()
         await inq.join()
-        logger.debug("aggregate[CLOSE]")
+        logger.debug("consume[CLOSE]")
+
+    return call
 
 
 async def main(loop):
     q0 = asyncio.Queue()
     q1 = asyncio.Queue()
 
+    async def transform(v):
+        await asyncio.sleep(0.1, loop=loop)
+        return v * v
+
+    async def write(v):
+        print(v)
+
     futs = [
-        Provider(loop)(q0),
-        Communicator(loop)(q0, q1),
-        Aggregator(loop)(q1),
+        from_iterable(range(10))(loop, q0),
+        communicate(transform)(loop, q0, q1),
+        consume(write)(loop, q1),
     ]
     await asyncio.wait(futs, loop=loop)
 
