@@ -36,10 +36,16 @@ def merge(r):
 
 
 class Walker:
+    # two path scan move, copy
     def __init__(self):
         self.move_map = {}  # todo:
 
     def walk(self, src, dst):
+        if isinstance(src, (list, tuple)):
+            src = dict(enumerate(src))
+        if isinstance(dst, (list, tuple)):
+            dst = dict(enumerate(dst))
+
         # xxx: src and dst is None
         if hasattr(src, "keys"):
             return self._walk_dict(src, dst)
@@ -61,20 +67,6 @@ class Walker:
             r[k] = cmd("add", v=v, v1=None)
         return r
 
-    def _walk_list(self, src, dst):
-        r = {}
-        n = min(len(src), len(dst))
-        for i in range(n):
-            r[str(i)] = self.walk(src[i], dst[i])
-
-        if n == len(dst):
-            for i in range(n, len(src)):
-                r[str(i)] = cmd(op="remove", v=src[i])
-        else:
-            for i in range(n, len(dst)):
-                r[str(i)] = cmd(op="add", v=dst[i])
-        return r
-
     def _walk_atom(self, src, dst):
         if src is None:
             return cmd(op="add", v=dst)
@@ -93,139 +85,148 @@ class Tests(unittest.TestCase):
     def _callFUT(self, src, dst):
         return unpatch(src, dst)
 
-    def test00(self):
-        src = {"name": "foo"}
-        dst = {"name": "foo"}
+    def test(self):
+        import jsonpatch
 
-        got = self._callFUT(src, dst)
-        want = []
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test01(self):
-        src = {"name": "foo"}
-        dst = {"name": "bar"}
-
-        got = self._callFUT(src, dst)
-        want = [{"op": "replace", "path": "/name", "value": "bar"}]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test02(self):
-        src = {"name": "foo"}
-        dst = {}
-
-        got = self._callFUT(src, dst)
-        want = [{"op": "remove", "path": "/name"}]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test03(self):
-        src = {}
-        dst = {"name": "bar"}
-
-        got = self._callFUT(src, dst)
-        want = [{"op": "add", "path": "/name", "value": "bar"}]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test04(self):
-        src = {"point0": {"value": 10}}
-        dst = {"point1": {"value": 10}}
-
-        got = self._callFUT(src, dst)
-        # todo: move
-        want = [
-            {
-                "op": "remove",
-                "path": "/point0",
-            },
-            {
-                "op": "add",
-                "path": "/point1",
-                "value": {
+        C = namedtuple("C", "src, dst, want")
+        cases = [
+            C(
+                src={"name": "foo"},
+                dst={"name": "foo"},
+                want=[],
+            ),
+            C(
+                src={"name": "foo"},
+                dst={"name": "bar"},
+                want=[{
+                    "op": "replace",
+                    "path": "/name",
+                    "value": "bar"
+                }],
+            ),
+            C(
+                src={"name": "foo"},
+                dst={},
+                want=[{
+                    "op": "remove",
+                    "path": "/name"
+                }],
+            ),
+            C(
+                src={},
+                dst={"name": "bar"},
+                want=[{
+                    "op": "add",
+                    "path": "/name",
+                    "value": "bar"
+                }],
+            ),
+            C(
+                src={"point0": {
                     "value": 10
-                },
-            },
-        ]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test05(self):
-        src = {"point0": {"value": 10}}
-        dst = {"point0": {"value": 20}}
-
-        got = self._callFUT(src, dst)
-        want = [
-            {
-                "op": "replace",
-                "path": "/point0/value",
-                "value": 20,
-            },
-        ]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test06(self):
-        src = {"person": {"name": "foo", "age": 20, "type": "P"}}
-        dst = {"person": {"name": "bar", "nickname": "B", "type": "P"}}
-        got = self._callFUT(src, dst)
-        want = [
-            {
-                "op": "replace",
-                "path": "/person/name",
-                "value": "bar",
-            },
-            {
-                "op": "remove",
-                "path": "/person/age",
-            },
-            {
-                "op": "add",
-                "path": "/person/nickname",
-                "value": "B",
-            },
-        ]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
-
-    def test07(self):
-        src = [{}, {"person": {"name": "foo", "age": 20, "type": "P"}}]
-        dst = [{"person": {"name": "bar", "nickname": "B", "type": "P"}}, {}]
-        got = self._callFUT(src, dst)
-        want = [
-            {
-                "path": "/0/person",
-                "op": "add",
-                "value": {
+                }},
+                dst={"point1": {
+                    "value": 10
+                }},
+                # todo: move
+                want=[
+                    {
+                        "op": "remove",
+                        "path": "/point0",
+                    },
+                    {
+                        "op": "add",
+                        "path": "/point1",
+                        "value": {
+                            "value": 10
+                        },
+                    },
+                ],
+            ),
+            C(
+                src={"point0": {
+                    "value": 10
+                }},
+                dst={"point0": {
+                    "value": 20
+                }},
+                want=[
+                    {
+                        "op": "replace",
+                        "path": "/point0/value",
+                        "value": 20,
+                    },
+                ]
+            ),
+            C(
+                src={"person": {
+                    "name": "foo",
+                    "age": 20,
+                    "type": "P"
+                }},
+                dst={"person": {
                     "name": "bar",
                     "nickname": "B",
                     "type": "P"
-                }
-            },
-            {
-                "path": "/1/person",
-                "op": "remove",
-            },
+                }},
+                want=[
+                    {
+                        "op": "replace",
+                        "path": "/person/name",
+                        "value": "bar",
+                    },
+                    {
+                        "op": "remove",
+                        "path": "/person/age",
+                    },
+                    {
+                        "op": "add",
+                        "path": "/person/nickname",
+                        "value": "B",
+                    },
+                ]
+            ),
+            C(
+                src=[{}, {
+                    "person": {
+                        "name": "foo",
+                        "age": 20,
+                        "type": "P"
+                    }
+                }],
+                dst=[{
+                    "person": {
+                        "name": "bar",
+                        "nickname": "B",
+                        "type": "P"
+                    }
+                }, {}],
+                want=[
+                    {
+                        "path": "/0/person",
+                        "op": "add",
+                        "value": {
+                            "name": "bar",
+                            "nickname": "B",
+                            "type": "P"
+                        }
+                    },
+                    {
+                        "path": "/1/person",
+                        "op": "remove",
+                    },
+                ]
+            )
         ]
-        self.assertListEqual(
-            sorted([json.dumps(x, sort_keys=True) for x in got]),
-            sorted([json.dumps(x, sort_keys=True) for x in want])
-        )
+
+        for i, c in enumerate(cases):
+            with self.subTest(i):
+                got = list(self._callFUT(c.src, c.dst))
+                self.assertEqual(jsonpatch.JsonPatch(got).apply(c.src), c.dst)
+                self.assertListEqual(
+                    sorted([json.dumps(x, sort_keys=True) for x in got]),
+                    sorted([json.dumps(x, sort_keys=True) for x in c.want])
+                )
 
 
 if __name__ == "__main__":
