@@ -23,14 +23,13 @@ def merge(r):
     if r is None:
         return []
     if not hasattr(r, "keys"):
-        yield {"op": r.op, "path": "", "value": r.v, "from": r.v1}
+        yield {"path": "/", "op": r.op, "value": r.v, "from": r.v1}
     else:
         for k, v in r.items():
-            prefix = str(k).replace("~", "~0").replace("/",  "~1")
             for sv in merge(v):
                 yield {
+                    "path": f"/{k}/{sv['path'].lstrip('/')}".rstrip("/"),  # xxx
                     "op": sv["op"],
-                    "path": f"/{prefix}/{sv['path'].lstrip('/')}".rstrip("/"),  # xxx
                     "value": sv["value"],
                     "from": sv.pop("from", None),
                 }
@@ -42,30 +41,16 @@ class Walker:
         self.move_map = {}  # todo:
 
     def walk(self, src, dst):
+        if isinstance(src, (list, tuple)):
+            src = dict(enumerate(src))
+        if isinstance(dst, (list, tuple)):
+            dst = dict(enumerate(dst))
+
         # xxx: src and dst is None
         if hasattr(src, "keys"):
             return self._walk_dict(src, dst)
-        elif isinstance(src, (list, tuple)):
-            return self._walk_list(src, dst)
         else:
             return self._walk_atom(src, dst)
-
-    def _walk_list(self, src, dst):
-        r = {}
-        try:
-            n = min(len(src), len(dst))
-        except TypeError:
-            return cmd(op="replace", v=dst, v1=src)
-        for i in range(n):
-            r[str(i)] = self.walk(src[i], dst[i])
-
-        if n == len(dst):
-            for i in range(n, len(src)):
-                r[str(i)] = cmd(op="remove", v=src[i], v1=None)
-        else:
-            for i in range(n, len(dst)):
-                r[str(i)] = cmd(op="add", v=dst[i], v1=None)
-        return r
 
     def _walk_dict(self, src, dst):
         r = {}
@@ -97,8 +82,6 @@ import unittest  # noqa
 class Tests(unittest.TestCase):
     def _callFUT(self, src, dst):
         return unpatch(src, dst)
-
-    maxDiff = None
 
     def test(self):
         import jsonpatch
@@ -245,7 +228,7 @@ class Tests(unittest.TestCase):
                 dst=1,
                 want=[{
                     "op": "add",
-                    "path": "",  # root is ""
+                    "path": "/",
                     "value": 1
                 }],
                 skip_patch=True,
@@ -269,76 +252,6 @@ class Tests(unittest.TestCase):
                     "path": "/v",
                     "value": [1],
                 }],
-                skip_patch=False,
-            ),
-            C(
-                src={"v": [1]},
-                dst={"v": 1},
-                want=[{
-                    "op": "replace",
-                    "path": "/v",
-                    "value": 1,
-                }],
-                skip_patch=False,
-            ),
-            C(
-                src={
-                    "name": "foo",
-                    "age": 20
-                },
-                dst={"person": {
-                    "name": "foo",
-                    "age": 20
-                }},
-                # move ?
-                want=[
-                    {
-                        "op": "add",
-                        "path": "/person",
-                        "value": {
-                            "age": 20,
-                            "name": "foo"
-                        }
-                    },
-                    {
-                        "op": "remove",
-                        "path": "/age"
-                    },
-                    {
-                        "op": "remove",
-                        "path": "/name"
-                    },
-                ],
-                skip_patch=False,
-            ),
-            C(
-                src={
-                    "person": {
-                        "name": "foo",
-                        "age": 20,
-                    },
-                },
-                dst={
-                    "name": "foo",
-                    "age": 20
-                },
-                # move ?
-                want=[
-                    {
-                        "op": "remove",
-                        "path": "/person",
-                    },
-                    {
-                        "op": "add",
-                        "path": "/age",
-                        "value": 20,
-                    },
-                    {
-                        "op": "add",
-                        "path": "/name",
-                        "value": "foo"
-                    },
-                ],
                 skip_patch=False,
             )
         ]

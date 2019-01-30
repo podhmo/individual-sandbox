@@ -1,0 +1,101 @@
+[
+  {
+    "op": "remove",
+    "path": "/swagger",
+    "value": "2.0",
+    "from": null
+  },
+  {
+    "op": "replace",
+    "path": "/info/description",
+    "value": "Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.",
+    "from": "API description in Markdown."
+  },
+  {
+    "op": "replace",
+    "path": "/info/version",
+    "value": "0.1.9",
+    "from": "1.0.0"
+  },
+  {
+    "op": "remove",
+    "path": "/host",
+    "value": "api.example.com",
+    "from": null
+  },
+  {
+    "op": "remove",
+    "path": "/basePath",
+    "value": "/v1",
+    "from": null
+  },
+  {
+    "op": "remove",
+    "path": "/schemes",
+    "value": [
+      "https"
+    ],
+    "from": null
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1users/get/description",
+    "value": "Optional extended description in CommonMark or HTML.",
+    "from": "Optional extended description in Markdown."
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1users/get/produces",
+    "value": [
+      "application/json"
+    ],
+    "from": null
+  },
+  {
+    "op": "remove",
+    "path": "/paths/~1users/get/responses/200",
+    "value": {
+      "description": "OK"
+    },
+    "from": null
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1users/get/responses/200",
+    "value": {
+      "description": "A JSON array of user names",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "from": null
+  },
+  {
+    "op": "add",
+    "path": "/openapi",
+    "value": "3.0.0",
+    "from": null
+  },
+  {
+    "op": "add",
+    "path": "/servers",
+    "value": [
+      {
+        "url": "http://api.example.com/v1",
+        "description": "Optional server description, e.g. Main (production) server"
+      },
+      {
+        "url": "http://staging-api.example.com",
+        "description": "Optional server description, e.g. Internal staging server for testing"
+      }
+    ],
+    "from": null
+  }
+]
