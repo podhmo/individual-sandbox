@@ -1,0 +1,69 @@
+version: 2.1
+jobs:
+  build:
+    executor:
+      name: mine
+    steps:
+      - checkout
+  test:
+    executor:
+      name: mine
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      # https://circleci.com/blog/go-v1.11-modules-and-circleci/
+      - restore_cache:
+          name: Restore go modules cache
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
+
+      - run:
+          name: Vendoring
+          command: go mod download
+
+      - save_cache:
+          name: Save go modules cache
+          key: go-mod-v1-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+
+      - run:
+          name: Run tests
+          command: |
+            go test ./... -coverprofile=c.out
+
+      - run:
+          name: Convert html
+          command: go tool cover -html c.out -o c.html
+
+      - store_artifacts:
+          path: c.out
+          destination: c.out
+
+      - store_artifacts:
+          path: c.html
+          destination: c.html
+
+executors:
+  mine:
+    docker:
+      - image: circleci/golang:1.11.1
+        environment:
+          GO111MODULE: "on"
+    working_directory: /go/src/github.com/my-org/my-repo
+
+
+# setup
+# go mod init
+# go mod tidy
+# git add go.mod go.sum
+# git commit -m "Add go module support"
+# git push
+
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test
+

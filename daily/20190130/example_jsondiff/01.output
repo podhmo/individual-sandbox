@@ -1,46 +1,46 @@
 [
   {
-    "op": "remove",
-    "path": "/swagger"
+    "path": "/swagger",
+    "op": "remove"
   },
   {
-    "op": "replace",
     "path": "/info/description",
+    "op": "replace",
     "value": "Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML."
   },
   {
-    "op": "replace",
     "path": "/info/version",
+    "op": "replace",
     "value": "0.1.9"
   },
   {
-    "op": "remove",
-    "path": "/host"
+    "path": "/host",
+    "op": "remove"
   },
   {
-    "op": "remove",
-    "path": "/basePath"
+    "path": "/basePath",
+    "op": "remove"
   },
   {
-    "op": "remove",
-    "path": "/schemes"
+    "path": "/schemes",
+    "op": "remove"
   },
   {
-    "op": "replace",
     "path": "/paths/~1users/get/description",
+    "op": "replace",
     "value": "Optional extended description in CommonMark or HTML."
   },
   {
-    "op": "remove",
-    "path": "/paths/~1users/get/produces"
+    "path": "/paths/~1users/get/produces",
+    "op": "remove"
   },
   {
-    "op": "remove",
-    "path": "/paths/~1users/get/responses/200"
-  },
-  {
-    "op": "add",
     "path": "/paths/~1users/get/responses/200",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1users/get/responses/200",
+    "op": "add",
     "value": {
       "description": "A JSON array of user names",
       "content": {
@@ -56,13 +56,13 @@
     }
   },
   {
-    "op": "add",
     "path": "/openapi",
+    "op": "add",
     "value": "3.0.0"
   },
   {
-    "op": "add",
     "path": "/servers",
+    "op": "add",
     "value": [
       {
         "url": "http://api.example.com/v1",

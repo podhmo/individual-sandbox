@@ -1,67 +1,61 @@
 [
   {
-    "op": "remove",
     "path": "/swagger",
-    "value": "2.0",
-    "from": null
+    "op": "remove",
+    "x-from": "2.0"
   },
   {
-    "op": "replace",
     "path": "/info/description",
+    "op": "replace",
     "value": "Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.",
-    "from": "API description in Markdown."
+    "x-from": "API description in Markdown."
   },
   {
-    "op": "replace",
     "path": "/info/version",
-    "value": "0.1.9",
-    "from": "1.0.0"
-  },
-  {
-    "op": "remove",
-    "path": "/host",
-    "value": "api.example.com",
-    "from": null
-  },
-  {
-    "op": "remove",
-    "path": "/basePath",
-    "value": "/v1",
-    "from": null
-  },
-  {
-    "op": "remove",
-    "path": "/schemes",
-    "value": [
-      "https"
-    ],
-    "from": null
-  },
-  {
     "op": "replace",
+    "value": "0.1.9",
+    "x-from": "1.0.0"
+  },
+  {
+    "path": "/host",
+    "op": "remove",
+    "x-from": "api.example.com"
+  },
+  {
+    "path": "/basePath",
+    "op": "remove",
+    "x-from": "/v1"
+  },
+  {
+    "path": "/schemes",
+    "op": "remove",
+    "x-from": [
+      "https"
+    ]
+  },
+  {
     "path": "/paths/~1users/get/description",
+    "op": "replace",
     "value": "Optional extended description in CommonMark or HTML.",
-    "from": "Optional extended description in Markdown."
+    "x-from": "Optional extended description in Markdown."
   },
   {
-    "op": "remove",
     "path": "/paths/~1users/get/produces",
-    "value": [
-      "application/json"
-    ],
-    "from": null
-  },
-  {
     "op": "remove",
-    "path": "/paths/~1users/get/responses/200",
-    "value": {
-      "description": "OK"
-    },
-    "from": null
+    "x-from": [
+      "application/json"
+    ]
   },
   {
-    "op": "add",
     "path": "/paths/~1users/get/responses/200",
+    "op": "remove",
+    "x-from": {
+      "description": "OK"
+    }
+  },
+  {
+    "path": "/paths/~1users/get/responses/200",
+    "op": "add",
     "value": {
       "description": "A JSON array of user names",
       "content": {
@@ -74,18 +68,16 @@
           }
         }
       }
-    },
-    "from": null
+    }
   },
   {
-    "op": "add",
     "path": "/openapi",
-    "value": "3.0.0",
-    "from": null
+    "op": "add",
+    "value": "3.0.0"
   },
   {
-    "op": "add",
     "path": "/servers",
+    "op": "add",
     "value": [
       {
         "url": "http://api.example.com/v1",
@@ -95,7 +87,6 @@
         "url": "http://staging-api.example.com",
         "description": "Optional server description, e.g. Internal staging server for testing"
       }
-    ],
-    "from": null
+    ]
   }
 ]

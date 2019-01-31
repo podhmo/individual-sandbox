@@ -1,0 +1,13 @@
+builds:
+  - main: cmd/goecho/main.go
+    binary: goecho
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+release:
+  github:
+    owner: podhmo
+    name: goecho

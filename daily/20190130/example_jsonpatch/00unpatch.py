@@ -1,9 +1,9 @@
 import json
 from collections import namedtuple
-cmd = namedtuple("cmd", "op, v, v1")
+diff = namedtuple("diff", "op, value, x_from, x_to")
 
 # todo: move
-
+sentinel = object()
 
 def unpatch(src, dst, *, verbose=False):
     r = Walker().walk(src, dst)
@@ -11,29 +11,40 @@ def unpatch(src, dst, *, verbose=False):
 
     if not verbose:
         for row in rows:
-            row.pop("from", None)
             if row["op"] == "remove":
                 row.pop("value", None)
+            for k in list(row.keys()):
+                if k.startswith("x_"):
+                    row.pop(k)
             yield row
     else:
-        yield from rows
+        for row in rows:
+            if row["op"] == "remove":
+                row.pop("value", None)
+                row.pop("x_to", None)
+            elif row["op"] == "add":
+                row.pop("x_from", None)
+                row.pop("x_to", None)
+            elif row["op"] == "replace":
+                row.pop("x_to", None)
+            for k in list(row.keys()):
+                if not k.startswith("x_"):
+                    continue
+                row[k.replace("x_", "x-")] = row.pop(k)
+            yield row
 
 
 def merge(r):
     if r is None:
         return []
     if not hasattr(r, "keys"):
-        yield {"op": r.op, "path": "", "value": r.v, "from": r.v1}
+        yield {"path": "", **r._asdict()}
     else:
         for k, v in r.items():
-            prefix = str(k).replace("~", "~0").replace("/",  "~1")
+            prefix = str(k).replace("~", "~0").replace("/", "~1")
             for sv in merge(v):
-                yield {
-                    "op": sv["op"],
-                    "path": f"/{prefix}/{sv['path'].lstrip('/')}".rstrip("/"),  # xxx
-                    "value": sv["value"],
-                    "from": sv.pop("from", None),
-                }
+                sv["path"] = f"/{prefix}/{sv['path'].lstrip('/')}".rstrip("/")
+                yield sv
 
 
 class Walker:
@@ -55,16 +66,16 @@ class Walker:
         try:
             n = min(len(src), len(dst))
         except TypeError:
-            return cmd(op="replace", v=dst, v1=src)
+            return diff(op="replace", value=dst, x_from=src, x_to=dst)
         for i in range(n):
             r[str(i)] = self.walk(src[i], dst[i])
 
         if n == len(dst):
             for i in range(n, len(src)):
-                r[str(i)] = cmd(op="remove", v=src[i], v1=None)
+                r[str(i)] = diff(op="remove", value=None, x_from=src[i], x_to=None)
         else:
             for i in range(n, len(dst)):
-                r[str(i)] = cmd(op="add", v=dst[i], v1=None)
+                r[str(i)] = diff(op="add", value=dst[i], x_from=None, x_to=dst[i])
         return r
 
     def _walk_dict(self, src, dst):
@@ -73,20 +84,20 @@ class Walker:
             if k in dst:
                 r[k] = self.walk(v, dst[k])
             else:
-                r[k] = cmd("remove", v=v, v1=None)
+                r[k] = diff("remove", value=None, x_from=v, x_to=None)
         for k, v in dst.items():
             if k in r:
                 continue
-            r[k] = cmd("add", v=v, v1=None)
+            r[k] = diff("add", value=v, x_from=None, x_to=v)
         return r
 
     def _walk_atom(self, src, dst):
         if src is None:
-            return cmd(op="add", v=dst, v1=None)
+            return diff(op="add", value=dst, x_from=None, x_to=dst)
         elif dst is None:
-            return cmd(op="remove", v=src, v1=None)
+            return diff(op="remove", value=None, x_from=src, x_to=None)
         elif src != dst:
-            return cmd(op="replace", v=dst, v1=src)
+            return diff(op="replace", value=dst, x_from=src, x_to=dst)
         else:
             return None
 
