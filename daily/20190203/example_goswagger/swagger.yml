@@ -13,7 +13,9 @@ definitions:
 parameters:
   id:
     name: id
-    description: id
+    description:
+      # これは無理
+      $ref: "#/definitions/id"
     in: path
     type: string
     required: true
