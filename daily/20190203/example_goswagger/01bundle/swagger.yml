@@ -1,0 +1,43 @@
+consumes:
+- application/json
+info:
+  title: 01bundle
+  version: 0.1.0
+produces:
+- application/json
+schemes:
+- http
+swagger: '2.0'
+paths:
+  /messages:
+    get:
+      operationId: messages
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/id'
+  /messages/{id}:
+    parameters:
+    - $ref: '#/parameters/id'
+    get:
+      operationId: getMessage
+      responses:
+        200:
+          description: ok
+          schema:
+            type: string
+definitions:
+  id:
+    type: string
+    format: '[0-9a-f]{24}'
+    description: id
+parameters:
+  id:
+    name: id
+    description: id
+    in: path
+    type: string
+    required: true

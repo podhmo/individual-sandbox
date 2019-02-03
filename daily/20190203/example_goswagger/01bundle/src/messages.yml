@@ -1,0 +1,35 @@
+definitions:
+  id:
+    type: string
+    format: "[0-9a-f]{24}"
+    description: id
+
+parameters:
+  id:
+    name: id
+    description: id
+    in: path
+    type: string
+    required: true
+
+paths:
+  /messages:
+    get:
+      operationId: messages
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/id"
+  /messages/{id}:
+    parameters:
+      - {$ref: "#/parameters/id"}
+    get:
+      operationId: getMessage
+      responses:
+        200:
+          description: ok
+          schema:
+            type: string
