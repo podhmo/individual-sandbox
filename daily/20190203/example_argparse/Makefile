@@ -13,4 +13,15 @@
 	python 03dump.py -h || echo ""
 	python 03dump.py --format json --extra--sort-keys person.json
 	python 03dump.py --format toml --extra--sort-keys person.json
-	python 03dump.py --format json --extra--sort-keys --extra--foo-bar=1 person.json
+	python 03dump.py --format json --extra--sort-keys --extra--foo-bar=1 person.jso
+
+04:
+	# python 04dump.py -h || echo ""
+	# python 04dump.py
+	# python 04dump.py --format=csv
+	python 04dump.py --format=csv --extra--fullscan
+	python 04dump.py --format=json --extra--fullscan
+
+05:
+	python 05dump.py cat -h
+	python 05dump.py cat --format=csv --extra--fullscan
