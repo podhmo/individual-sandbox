@@ -1,13 +1,8 @@
-definitions:
-  id:
-    type: string
-    format: "[0-9a-f]{24}"
-    description: id
-
 parameters:
   id:
     name: id
-    description: id
+    description:
+      $precompile-ref: "data.yml#/definitions/id/description"
     in: path
     type: string
     required: true
@@ -22,7 +17,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/id"
+              $ref: "data.yml#/definitions/id"
   /messages/{id}:
     parameters:
       - {$ref: "#/parameters/id"}
