@@ -1,0 +1,30 @@
+parameters:
+  id:
+    name: id
+    description:
+      $precompile-ref: "data.yml#/definitions/id/description"
+    in: path
+    type: string
+    required: true
+
+paths:
+  /messages:
+    get:
+      operationId: messages
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: "data.yml#/definitions/id"
+  /messages/{id}:
+    parameters:
+      - {$ref: "#/parameters/id"}
+    get:
+      operationId: getMessage
+      responses:
+        200:
+          description: ok
+          schema:
+            type: string

@@ -1,0 +1,15 @@
+consumes:
+- application/json
+info:
+  title: 01bundle
+  version: 0.1.0
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
+paths:
+  /messages:
+    $ref: "messages.yml#/paths/~1messages"
+  /messages/{id}:
+    $ref: "messages.yml#/paths/~1messages~1{id}"
