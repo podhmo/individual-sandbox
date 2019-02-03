@@ -33,7 +33,7 @@ class ExtraArgumentsParsers:
     def add_parser(self, name):
         self.mapping[name] = p = self.parser_factory(
             f"{self.prefix} arguments {name}",
-            description=f"for {name}",
+            description=f"for {self.dest}={name}",
             add_help=False,
         )
         return p

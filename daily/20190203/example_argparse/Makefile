@@ -13,3 +13,4 @@
 	python 03dump.py -h || echo ""
 	python 03dump.py --format json --extra--sort-keys person.json
 	python 03dump.py --format toml --extra--sort-keys person.json
+	python 03dump.py --format json --extra--sort-keys --extra--foo-bar=1 person.json
