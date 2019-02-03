@@ -37,7 +37,7 @@ definitions:
 parameters:
   id:
     name: id
-    description: {}
+    description: id
     in: path
     type: string
     required: true
