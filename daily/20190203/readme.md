@@ -1,3 +1,9 @@
+## argumentparser python
+
+上書きoptionの上書きどうするのだっけ？
+
+- https://docs.python.jp/3/library/argparse.html#conflict-handler
+
 ## go-swagger swagger
 
 そういえば、$refってdescriptionのところでもいけたんだっけ？

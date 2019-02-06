@@ -5,6 +5,7 @@ diff = namedtuple("diff", "op, value, x_from, x_to")
 # todo: move
 sentinel = object()
 
+
 def unpatch(src, dst, *, verbose=False):
     r = Walker().walk(src, dst)
     rows = merge(r)
