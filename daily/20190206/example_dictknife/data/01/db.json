@@ -1,5 +1,5 @@
 {
-  "host": "http://localhost:9200",
+  "host": "http://localhost",
   "name": "foo-db",
   "port": 4444
 }
