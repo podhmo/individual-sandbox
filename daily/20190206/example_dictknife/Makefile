@@ -8,7 +8,7 @@ default: 00 01
 src:
 	mkdir -p src
 src/main.json:
-	swaggerknife ${OPTS} merge
+	swaggerknife ${OPTS} merge `ls src/*.json | grep -v main.json` --style ref --dst $@
 
 src/person.json: src
 	swaggerknife ${OPTS} json2swagger data/00/*.json --name person --dst $@ --annotate data/annotation/00.json
