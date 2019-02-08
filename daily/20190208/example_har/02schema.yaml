@@ -1,0 +1,257 @@
+definitions:
+  Top:
+    type: object
+    properties:
+      log:
+        type: object
+        properties:
+          version:
+            type: string
+          creator:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+            required:
+            - name
+            - version
+          browser:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+            required:
+            - name
+            - version
+          pages:
+            type: array
+            items:
+              type: object
+              properties:
+                startedDateTime:
+                  type: string
+                id:
+                  type: string
+                title:
+                  type: string
+                pageTimings:
+                  type: object
+                  properties:
+                    onContentLoad:
+                      type: integer
+                    onLoad:
+                      type: integer
+                  required:
+                  - onContentLoad
+                  - onLoad
+              required:
+              - startedDateTime
+              - id
+              - title
+              - pageTimings
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                pageref:
+                  type: string
+                startedDateTime:
+                  type: string
+                request:
+                  type: object
+                  properties:
+                    bodySize:
+                      type: integer
+                    method:
+                      type: string
+                    url:
+                      type: string
+                    httpVersion:
+                      type: string
+                    headers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        - value
+                    cookies:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        - value
+                    queryString:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        - value
+                    headersSize:
+                      type: integer
+                    postData:
+                      type: object
+                      properties:
+                        mimeType:
+                          type: string
+                        params:
+                          type: array
+                          items:
+                            type: any
+                        text:
+                          type: string
+                      required:
+                      - mimeType
+                      - params
+                      - text
+                  required:
+                  - bodySize
+                  - method
+                  - url
+                  - httpVersion
+                  - headers
+                  - cookies
+                  - queryString
+                  - headersSize
+                response:
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                    statusText:
+                      type: string
+                    httpVersion:
+                      type: string
+                    headers:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        - value
+                    cookies:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                        required:
+                        - name
+                        - value
+                    content:
+                      type: object
+                      properties:
+                        mimeType:
+                          type: string
+                        size:
+                          type: integer
+                        text:
+                          type: string
+                        encoding:
+                          type: string
+                      required:
+                      - mimeType
+                      - size
+                      - text
+                    redirectURL:
+                      type: string
+                    headersSize:
+                      type: integer
+                    bodySize:
+                      type: integer
+                  required:
+                  - status
+                  - statusText
+                  - httpVersion
+                  - headers
+                  - cookies
+                  - content
+                  - redirectURL
+                  - headersSize
+                  - bodySize
+                cache:
+                  type: object
+                  properties:
+                    afterRequest:
+                      type: any
+                      x-nullable: true
+                timings:
+                  type: object
+                  properties:
+                    blocked:
+                      type: integer
+                    dns:
+                      type: integer
+                    ssl:
+                      type: integer
+                    connect:
+                      type: integer
+                    send:
+                      type: integer
+                    wait:
+                      type: integer
+                    receive:
+                      type: integer
+                  required:
+                  - blocked
+                  - dns
+                  - ssl
+                  - connect
+                  - send
+                  - wait
+                  - receive
+                time:
+                  type: integer
+                _securityState:
+                  type: string
+                serverIPAddress:
+                  type: string
+                connection:
+                  type: string
+              required:
+              - pageref
+              - startedDateTime
+              - request
+              - response
+              - cache
+              - timings
+              - time
+              - _securityState
+        required:
+        - version
+        - creator
+        - browser
+        - pages
+        - entries
+    required:
+    - log

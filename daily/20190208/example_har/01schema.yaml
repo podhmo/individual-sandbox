@@ -1,0 +1,241 @@
+definitions:
+  creator:
+    type: object
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+    required:
+    - name
+    - version
+  pageTimings:
+    type: object
+    properties:
+      onContentLoad:
+        type: integer
+      onLoad:
+        type: integer
+    required:
+    - onContentLoad
+    - onLoad
+  pagesItem:
+    type: object
+    properties:
+      startedDateTime:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      pageTimings:
+        $ref: '#/definitions/pageTimings'
+    required:
+    - startedDateTime
+    - id
+    - title
+    - pageTimings
+  pages:
+    type: array
+    items:
+      $ref: '#/definitions/pagesItem'
+  headersItem:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    required:
+    - name
+    - value
+  headers:
+    type: array
+    items:
+      $ref: '#/definitions/headersItem'
+  params:
+    type: array
+    items:
+      type: any
+  postData:
+    type: object
+    properties:
+      mimeType:
+        type: string
+      params:
+        $ref: '#/definitions/params'
+      text:
+        type: string
+    required:
+    - mimeType
+    - params
+    - text
+  request:
+    type: object
+    properties:
+      bodySize:
+        type: integer
+      method:
+        type: string
+      url:
+        type: string
+      httpVersion:
+        type: string
+      headers:
+        $ref: '#/definitions/headers'
+      cookies:
+        $ref: '#/definitions/headers'
+      queryString:
+        $ref: '#/definitions/headers'
+      headersSize:
+        type: integer
+      postData:
+        $ref: '#/definitions/postData'
+    required:
+    - bodySize
+    - method
+    - url
+    - httpVersion
+    - headers
+    - cookies
+    - queryString
+    - headersSize
+  content:
+    type: object
+    properties:
+      mimeType:
+        type: string
+      size:
+        type: integer
+      text:
+        type: string
+      encoding:
+        type: string
+    required:
+    - mimeType
+    - size
+    - text
+  response:
+    type: object
+    properties:
+      status:
+        type: integer
+      statusText:
+        type: string
+      httpVersion:
+        type: string
+      headers:
+        $ref: '#/definitions/headers'
+      cookies:
+        $ref: '#/definitions/headers'
+      content:
+        $ref: '#/definitions/content'
+      redirectURL:
+        type: string
+      headersSize:
+        type: integer
+      bodySize:
+        type: integer
+    required:
+    - status
+    - statusText
+    - httpVersion
+    - headers
+    - cookies
+    - content
+    - redirectURL
+    - headersSize
+    - bodySize
+  cache:
+    type: object
+    properties:
+      afterRequest:
+        type: any
+        x-nullable: true
+  timings:
+    type: object
+    properties:
+      blocked:
+        type: integer
+      dns:
+        type: integer
+      ssl:
+        type: integer
+      connect:
+        type: integer
+      send:
+        type: integer
+      wait:
+        type: integer
+      receive:
+        type: integer
+    required:
+    - blocked
+    - dns
+    - ssl
+    - connect
+    - send
+    - wait
+    - receive
+  entriesItem:
+    type: object
+    properties:
+      pageref:
+        type: string
+      startedDateTime:
+        type: string
+      request:
+        $ref: '#/definitions/request'
+      response:
+        $ref: '#/definitions/response'
+      cache:
+        $ref: '#/definitions/cache'
+      timings:
+        $ref: '#/definitions/timings'
+      time:
+        type: integer
+      _securityState:
+        type: string
+      serverIPAddress:
+        type: string
+      connection:
+        type: string
+    required:
+    - pageref
+    - startedDateTime
+    - request
+    - response
+    - cache
+    - timings
+    - time
+    - _securityState
+  entries:
+    type: array
+    items:
+      $ref: '#/definitions/entriesItem'
+  log:
+    type: object
+    properties:
+      version:
+        type: string
+      creator:
+        $ref: '#/definitions/creator'
+      browser:
+        $ref: '#/definitions/creator'
+      pages:
+        $ref: '#/definitions/pages'
+      entries:
+        $ref: '#/definitions/entries'
+    required:
+    - version
+    - creator
+    - browser
+    - pages
+    - entries
+  Top:
+    type: object
+    properties:
+      log:
+        $ref: '#/definitions/log'
+    required:
+    - log

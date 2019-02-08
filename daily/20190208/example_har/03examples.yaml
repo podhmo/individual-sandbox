@@ -1,0 +1,71 @@
+log:
+  version: '1.1'
+  creator:
+    name: Firefox
+    version: '63.0'
+  browser:
+    name: Firefox
+    version: '63.0'
+  pages:
+  - startedDateTime: '2019-02-08T22:14:18.002+09:00'
+    id: page_1
+    title: podhmo's diary
+    pageTimings:
+      onContentLoad: 756
+      onLoad: 4779
+  entries:
+  - pageref: page_1
+    startedDateTime: '2019-02-08T22:14:18.002+09:00'
+    request:
+      bodySize: 0
+      method: GET
+      url: https://cdn.pool.st-hatena.com/valve/config.json
+      httpVersion: HTTP/2.0
+      headers:
+      - name: sk
+        value: adcdf91255c609974bb3205c2b3b601ef0452cf5
+      cookies:
+      - name: sk
+        value: adcdf91255c609974bb3205c2b3b601ef0452cf5
+      queryString:
+      - name: sk
+        value: adcdf91255c609974bb3205c2b3b601ef0452cf5
+      headersSize: 0
+      postData:
+        mimeType: text/plain
+        params:
+        - <>
+        text: '{"id":"1549631658569","at":1,"cur":["USD"],"imp":[{"id":"115b83d873feb888","tagid":"/4374287/blog_user","secure":1,"ext":{},"bidfloorcur":"U'
+    response:
+      status: 200
+      statusText: OK
+      httpVersion: HTTP/2.0
+      headers:
+      - name: sk
+        value: adcdf91255c609974bb3205c2b3b601ef0452cf5
+      cookies:
+      - name: sk
+        value: adcdf91255c609974bb3205c2b3b601ef0452cf5
+      content:
+        mimeType: application/json
+        size: 109793
+        text: '{"generatedAt":"1/24/2019, 7:06:28 PM GMT+9","serviceToSelectors":{"test":["body"],"anond":["#hatena-anond
+          div.section"],"news":["div.entry-'
+        encoding: base64
+      redirectURL: ''
+      headersSize: 0
+      bodySize: 12821
+    cache:
+      afterRequest: <>
+    timings:
+      blocked: 0
+      dns: 0
+      ssl: 0
+      connect: 0
+      send: 0
+      wait: 0
+      receive: 0
+    time: 0
+    _securityState: secure
+    serverIPAddress: 13.115.18.61
+    connection: '443'
