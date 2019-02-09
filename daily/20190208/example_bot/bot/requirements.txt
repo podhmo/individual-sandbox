@@ -1,0 +1,4 @@
+slackbot
+# dev
+flake8
+jedi
