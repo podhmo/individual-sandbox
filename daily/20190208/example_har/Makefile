@@ -17,3 +17,6 @@ default: 00 01 02 03
 03:
 	swaggerknife ${OPTS} json2swagger --name Top ${TARGET} -o yaml | jsonknife select --ref "#/definitions/Top@#/definitions/Top" -i yaml | jsonknife examples -f yaml --ref "#/definitions/Top" > 03examples.yaml
 
+# shrink
+04:
+	python shrink.py ${TARGET} > 04data.shrink.yaml
