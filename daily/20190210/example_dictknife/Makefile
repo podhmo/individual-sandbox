@@ -9,3 +9,5 @@ default: 00 01 02 03 04
 	python 03*.py --src src/main.yaml
 04:
 	python 04*.py --src src/main.yaml
+05:
+	python 05*.py --src src/main.yaml
