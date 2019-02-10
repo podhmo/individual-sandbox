@@ -1,5 +1,8 @@
 ## dictknife globalref,localref的な扱いを
 
+- 意外とscannerが使える
+- nameのconflictはruntime errorになるのはやりすぎ？
+
 ## go converter コンセプト的なプロトタイプ
 
 - 可能な限りfieldを自動で生成して欲しい

@@ -3,7 +3,7 @@ definitions:
     type: object
     properties:
       name:
-        type: string
+        $ref: "primitive.yaml#/definitions/name"
       port:
         type: integer
       host:

@@ -3,6 +3,10 @@ definitions:
     type: object
     properties:
       name:
-        type: string
+        $ref: "primitive.yaml#/definitions/name"
       age:
         type: integer
+  people:
+    type: array
+    items:
+      $ref: "#/definitions/person"
