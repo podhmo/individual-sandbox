@@ -30,6 +30,8 @@ def after_data(d):
 @as_command
 def run(*, src: str) -> None:
     resolver = get_resolver(src)
+    accessor = CachedItemAccessor(resolver)
+    item_map = make_dict()
     scanner = Scanner(accessor, item_map, strict=True)
     scanner.scan(resolver.doc)
 
