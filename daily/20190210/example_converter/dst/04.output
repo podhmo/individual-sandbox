@@ -1,0 +1,12 @@
+{
+  "name": "A",
+  "members": [
+    {
+      "name": "foo",
+      "age": 20,
+      "fullname": "A / foo",
+      "nickname": "f",
+      "iconURL": "https://examples.net/image/404.png"
+    }
+  ]
+}
