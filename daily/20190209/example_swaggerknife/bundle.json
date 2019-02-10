@@ -1,0 +1,73 @@
+{
+  "definitions": {
+    "api": {
+      "type": "object",
+      "properties": {
+        "secret-key": {
+          "type": "string",
+          "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "required": [
+        "secret-key"
+      ]
+    },
+    "db": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "example": "localhost"
+        },
+        "name": {
+          "type": "string",
+          "example": "xxx"
+        },
+        "port": {
+          "type": "integer",
+          "example": 444
+        }
+      },
+      "required": [
+        "host",
+        "name",
+        "port"
+      ]
+    },
+    "flags": {
+      "type": "object",
+      "properties": {
+        "testing": {
+          "type": "boolean",
+          "example": true
+        }
+      },
+      "required": [
+        "testing"
+      ]
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "api": {
+          "$ref": "#/definitions/api1"
+        },
+        "db": {
+          "$ref": "#/definitions/db1"
+        },
+        "flags": {
+          "$ref": "#/definitions/flags1"
+        }
+      }
+    },
+    "api1": {
+      "$ref": "#/definitions/api"
+    },
+    "db1": {
+      "$ref": "#/definitions/db"
+    },
+    "flags1": {
+      "$ref": "#/definitions/flags"
+    }
+  }
+}

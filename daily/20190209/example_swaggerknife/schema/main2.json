@@ -1,0 +1,27 @@
+{
+  "definitions": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "api": {
+          "$ref": "#/definitions/api"
+        },
+        "db": {
+          "$ref": "#/definitions/db"
+        },
+        "flags": {
+          "$ref": "#/definitions/flags"
+        }
+      }
+    },
+    "api": {
+      "$ref": "api.json#/definitions/api"
+    },
+    "db": {
+      "$ref": "db.json#/definitions/db"
+    },
+    "flags": {
+      "$ref": "flags.json#/definitions/flags"
+    }
+  }
+}

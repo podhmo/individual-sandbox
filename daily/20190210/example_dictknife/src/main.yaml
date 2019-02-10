@@ -1,0 +1,5 @@
+definitions:
+  person:
+    $ref: "person.yaml#/definitions/person"
+  db:
+    $ref: "db.yaml#/definitions/db"

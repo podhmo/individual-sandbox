@@ -1,0 +1,16 @@
+{
+  "definitions": {
+    "api": {
+      "type": "object",
+      "properties": {
+        "secret-key": {
+          "type": "string",
+          "example": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      },
+      "required": [
+        "secret-key"
+      ]
+    }
+  }
+}

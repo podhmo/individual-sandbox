@@ -1,9 +1,15 @@
-## browse-githubをまともにするか
+## browse-githubをまともにする
 
 - `(project-current)` 使っても良いのでは？
 - 現在のbranchの現在のファイルを開きたいかも？
 - `current-branch` は `(vc-git-branches)` の先頭
 - 現在の行は`(line-number-at-pos)`
+
+できた。 
+
+```
+(browse-github)
+```
 
 ## python black emacs
 
