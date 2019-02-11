@@ -1,7 +1,7 @@
 やっていること
 
-1. data/*.json のデータからschemaを推測
-2. schema/*.json をまとめてschema/main.jsonを作成
+1. [data/*.json](./data) のデータからschemaを推測
+2. schema/*.json をまとめて[schema/main.json](schema/main.json)を作成
 3. schema/main.jsonをたどって１つのファイルにまとめる([bundle.json](bundle.json))
 4. schema定義をみてpythonのコードを生成([schema.py](schema.py))
 
