@@ -1,0 +1,16 @@
+{
+  "definitions": {
+    "flags": {
+      "type": "object",
+      "properties": {
+        "testing": {
+          "type": "boolean",
+          "example": true
+        }
+      },
+      "required": [
+        "testing"
+      ]
+    }
+  }
+}
