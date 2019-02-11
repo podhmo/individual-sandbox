@@ -9,7 +9,7 @@ def run(*, src: str) -> None:
     logging.basicConfig(level=logging.DEBUG)
 
     resolver = get_resolver(src)
-    with Migration(resolver).migrate() as u:
+    with Migration(resolver).migrate(keep=True) as u:
         for k, item in u.iterate_items():
             if k == "definitions/person":
                 ref = "#/definitions/person/properties/value"
