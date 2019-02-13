@@ -8,3 +8,7 @@
 	python 03*.py
 04:
 	python 04*.py
+05:
+	kamidana hello.j2
+06:
+	kamidana hello2.j2
