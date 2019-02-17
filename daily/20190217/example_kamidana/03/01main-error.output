@@ -1,0 +1,13 @@
+------------------------------------------------------------
+exception: builtins.ZeroDivisionError
+message: division by zero
+where: 00error.j2
+------------------------------------------------------------
+01main.j2:
+      1: hello
+  ->  2: {% include "00error.j2" %}
+      3: bye
+
+00error.j2:
+      1: # zero division error
+  ->  2: {{ 1 / 0}}
