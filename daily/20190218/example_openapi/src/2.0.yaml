@@ -6,7 +6,7 @@ info:
 host: api.example.com
 basePath: /v1
 schemes:
-  - https
+  - http
 paths:
   /users:
     get:

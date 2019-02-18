@@ -13,4 +13,4 @@ dst:
 	dictknife diff -o jsonpatch src/petstore.{2,3}.0.json | tee dst/00petstore.patch.json
 01: dst
 	# xxx: savedir is not good parameters. emitting onto dst/01/src/01
-	python 2to3.py --src src/2.0.yaml --savedir dst/01 --dry-run
+	python 2to3.py --src src/2.0.yaml --savedir dst/01
