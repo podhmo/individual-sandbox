@@ -1,0 +1,997 @@
+[
+  {
+    "path": "/swagger",
+    "op": "remove"
+  },
+  {
+    "path": "/host",
+    "op": "remove"
+  },
+  {
+    "path": "/basePath",
+    "op": "remove"
+  },
+  {
+    "path": "/schemes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/post/consumes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/post/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/post/requestBody",
+    "op": "add",
+    "value": {
+      "$ref": "#/components/requestBodies/Pet"
+    }
+  },
+  {
+    "path": "/paths/~1pet/put/consumes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/put/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/put/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet/put/requestBody",
+    "op": "add",
+    "value": {
+      "$ref": "#/components/requestBodies/Pet"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/parameters/0/items",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/parameters/0/collectionFormat",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/parameters/0/explode",
+    "op": "add",
+    "value": true
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "available",
+          "pending",
+          "sold"
+        ],
+        "default": "available"
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByStatus/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Pet"
+          }
+        }
+      },
+      "application/json": {
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Pet"
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/parameters/0/items",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/parameters/0/collectionFormat",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/parameters/0/explode",
+    "op": "add",
+    "value": true
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1findByTags/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Pet"
+          }
+        }
+      },
+      "application/json": {
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Pet"
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/parameters/0/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "$ref": "#/components/schemas/Pet"
+        }
+      },
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/Pet"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/consumes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/parameters/0/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/parameters/1",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/parameters/2",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/post/requestBody",
+    "op": "add",
+    "value": {
+      "content": {
+        "application/x-www-form-urlencoded": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "Updated name of the pet",
+                "type": "string"
+              },
+              "status": {
+                "description": "Updated status of the pet",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/parameters/1/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/parameters/1/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}/delete/parameters/1/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/consumes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/parameters/0/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/parameters/1",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/parameters/2",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/ApiResponse"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1pet~1{petId}~1uploadImage/post/requestBody",
+    "op": "add",
+    "value": {
+      "content": {
+        "application/octet-stream": {
+          "schema": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1store~1inventory/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1inventory/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1inventory/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1store~1order/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order/post/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order/post/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order/post/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "$ref": "#/components/schemas/Order"
+        }
+      },
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/Order"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1store~1order/post/requestBody",
+    "op": "add",
+    "value": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Order"
+          }
+        }
+      },
+      "description": "order placed for purchasing the pet",
+      "required": true
+    }
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/parameters/0/maximum",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/parameters/0/minimum",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/parameters/0/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64",
+      "minimum": 1,
+      "maximum": 10
+    }
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "$ref": "#/components/schemas/Order"
+        }
+      },
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/Order"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/delete/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/delete/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/delete/parameters/0/minimum",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/delete/parameters/0/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1store~1order~1{orderId}/delete/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int64",
+      "minimum": 1
+    }
+  },
+  {
+    "path": "/paths/~1user/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user/post/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user/post/requestBody",
+    "op": "add",
+    "value": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "description": "Created user object",
+      "required": true
+    }
+  },
+  {
+    "path": "/paths/~1user~1createWithArray/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1createWithArray/post/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1createWithArray/post/requestBody",
+    "op": "add",
+    "value": {
+      "$ref": "#/components/requestBodies/UserArray"
+    }
+  },
+  {
+    "path": "/paths/~1user~1createWithList/post/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1createWithList/post/parameters/0",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1createWithList/post/requestBody",
+    "op": "add",
+    "value": {
+      "$ref": "#/components/requestBodies/UserArray"
+    }
+  },
+  {
+    "path": "/paths/~1user~1login/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "path": "/paths/~1user~1login/get/parameters/1/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/parameters/1/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/parameters/1/schema",
+    "op": "add",
+    "value": {
+      "type": "string",
+      "format": "password"
+    }
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Rate-Limit/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Rate-Limit/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Rate-Limit/schema",
+    "op": "add",
+    "value": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Expires-After/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Expires-After/format",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/headers/X-Expires-After/schema",
+    "op": "add",
+    "value": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  {
+    "path": "/paths/~1user~1login/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "type": "string"
+        }
+      },
+      "application/json": {
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1user~1logout/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/get/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/get/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "path": "/paths/~1user~1{username}/get/responses/200/schema",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/get/responses/200/content",
+    "op": "add",
+    "value": {
+      "application/xml": {
+        "schema": {
+          "$ref": "#/components/schemas/User"
+        }
+      },
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/User"
+        }
+      }
+    }
+  },
+  {
+    "path": "/paths/~1user~1{username}/put/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/put/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/put/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "path": "/paths/~1user~1{username}/put/parameters/1",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/put/requestBody",
+    "op": "add",
+    "value": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "description": "Updated user object",
+      "required": true
+    }
+  },
+  {
+    "path": "/paths/~1user~1{username}/delete/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/delete/parameters/0/type",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1user~1{username}/delete/parameters/0/schema",
+    "op": "add",
+    "value": {
+      "type": "string"
+    }
+  },
+  {
+    "path": "/securityDefinitions",
+    "op": "remove"
+  },
+  {
+    "path": "/definitions",
+    "op": "remove"
+  },
+  {
+    "path": "/openapi",
+    "op": "add",
+    "value": "3.0.0"
+  },
+  {
+    "path": "/servers",
+    "op": "add",
+    "value": [
+      {
+        "url": "http://petstore.swagger.io/v2"
+      }
+    ]
+  },
+  {
+    "path": "/x-origin",
+    "op": "add",
+    "value": [
+      {
+        "url": "http://petstore.swagger.io/v2/swagger.json",
+        "format": "swagger",
+        "version": "2.0",
+        "converter": {
+          "url": "https://github.com/mermade/swagger2openapi",
+          "version": "2.2.0"
+        }
+      }
+    ]
+  },
+  {
+    "path": "/components",
+    "op": "add",
+    "value": {
+      "schemas": {
+        "Order": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "petId": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "quantity": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "shipDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "status": {
+              "type": "string",
+              "description": "Order Status",
+              "enum": [
+                "placed",
+                "approved",
+                "delivered"
+              ]
+            },
+            "complete": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "xml": {
+            "name": "Order"
+          }
+        },
+        "Category": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "Category"
+          }
+        },
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "username": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "userStatus": {
+              "type": "integer",
+              "format": "int32",
+              "description": "User Status"
+            }
+          },
+          "xml": {
+            "name": "User"
+          }
+        },
+        "Tag": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "Tag"
+          }
+        },
+        "Pet": {
+          "type": "object",
+          "required": [
+            "name",
+            "photoUrls"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "category": {
+              "$ref": "#/components/schemas/Category"
+            },
+            "name": {
+              "type": "string",
+              "example": "doggie"
+            },
+            "photoUrls": {
+              "type": "array",
+              "xml": {
+                "name": "photoUrl",
+                "wrapped": true
+              },
+              "items": {
+                "type": "string"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "xml": {
+                "name": "tag",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            },
+            "status": {
+              "type": "string",
+              "description": "pet status in the store",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ]
+            }
+          },
+          "xml": {
+            "name": "Pet"
+          }
+        },
+        "ApiResponse": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "type": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "responses": {},
+      "parameters": {},
+      "examples": {},
+      "requestBodies": {
+        "Pet": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          },
+          "description": "Pet object that needs to be added to the store",
+          "required": true
+        },
+        "UserArray": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "description": "List of user object",
+          "required": true
+        }
+      },
+      "securitySchemes": {
+        "petstore_auth": {
+          "type": "oauth2",
+          "flows": {
+            "implicit": {
+              "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+              "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+              }
+            }
+          }
+        },
+        "api_key": {
+          "type": "apiKey",
+          "name": "api_key",
+          "in": "header"
+        }
+      },
+      "headers": {}
+    }
+  }
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "path": "/swagger",
+    "op": "remove"
+  },
+  {
+    "path": "/host",
+    "op": "remove"
+  },
+  {
+    "path": "/basePath",
+    "op": "remove"
+  },
+  {
+    "path": "/schemes",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1users/get/description",
+    "op": "replace",
+    "value": "Optional extended description in CommonMark or HTML."
+  },
+  {
+    "path": "/paths/~1users/get/produces",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1users/get/responses/200",
+    "op": "remove"
+  },
+  {
+    "path": "/paths/~1users/get/responses/200",
+    "op": "add",
+    "value": {
+      "description": "A JSON array of user names",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "path": "/openapi",
+    "op": "add",
+    "value": "3.0.0"
+  },
+  {
+    "path": "/servers",
+    "op": "add",
+    "value": [
+      {
+        "url": "http://api.example.com/v1",
+        "description": "Optional server description, e.g. Main (production) server"
+      }
+    ]
+  }
+]

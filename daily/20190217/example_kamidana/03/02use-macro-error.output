@@ -1,5 +1,15 @@
 ------------------------------------------------------------
-exception: kamidana._path.XTemplatePathNotFound
-message: [Errno 2] No such file or directory: '02main-inheritance.j2'
-where: None
+exception: builtins.ZeroDivisionError
+message: division by zero
+where: 02utils.j2
 ------------------------------------------------------------
+02main-use-macro.j2:
+      1: {%- import "02utils.j2" as u %}
+      2: 
+      3: - {{u.div(100, 20)}}
+  ->  4: - {{u.div(100, 0)}}
+
+02utils.j2:
+      1: {%- macro div(x, y) %}
+  ->  2: {{x}} / {{y}} = {{ x / y}}
+      3: {%- endmacro %}
