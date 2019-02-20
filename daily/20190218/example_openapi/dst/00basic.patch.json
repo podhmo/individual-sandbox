@@ -16,11 +16,6 @@
     "op": "remove"
   },
   {
-    "path": "/paths/~1users/get/description",
-    "op": "replace",
-    "value": "Optional extended description in CommonMark or HTML."
-  },
-  {
     "path": "/paths/~1users/get/produces",
     "op": "remove"
   },
