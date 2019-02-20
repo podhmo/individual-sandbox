@@ -23,6 +23,65 @@ def transform(doc):
     return r
 
 
+def migrate_for_mainfile(u, *, scope):
+    if u.has("swagger"):
+        u.pop("swagger")
+        u.update("openapi", "3.0.0")
+
+    if u.has("host"):
+        url = u.pop("host")
+        if u.has("basePath"):
+            base_path = u.pop("basePath")
+            url = "{}/{}".format(url.rstrip("/"), base_path.lstrip("/"))
+        description = ""
+
+        schemas = ["http"]
+        if u.has("schemes"):
+            schemas = u.pop("schemes")
+        servers = []
+        for schema in schemas:
+            server = u.make_dict()
+            server["url"] = "{}://{}".format(schema.rstrip(":/"), url)
+            server["description"] = description
+            servers.append(server)
+        u.update("/servers", servers)
+
+    if u.has("produces"):
+        scope.push({"produces": u.pop("produces")})
+
+
+def migrate_for_subfile(u, *, scope):
+    for resolver in u.resolvers:
+        uu = u.new_child(resolver)
+        if uu.has("paths", resolver=resolver):
+            from dictknife import DictWalker, Or
+
+            method_walker = DictWalker(
+                [Or(["get", "post", "put", "delete", "patch", "head"])]
+            )
+            schema_walker = DictWalker(["schema"])
+
+            for path, sd in method_walker.walk(uu.resolver.doc["paths"]):
+                # parameters
+                # responses
+                frame = {}
+                if "produces" in sd[path[-1]]:
+                    ref = path_to_json_pointer(["paths", *path, "produces"])
+                    frame["produces"] = uu.pop(ref)
+
+                with scope.scope(frame or None):
+                    if "responses" in sd[path[-1]]:
+                        for spath, ssd in schema_walker.walk(sd[path[-1]]["responses"]):
+                            fullpath = ["paths", *path, "responses", *spath]
+                            ref = path_to_json_pointer(fullpath)
+                            schema = uu.pop(ref)
+                            content = uu.make_dict()
+                            for produce in scope[["produces"]]:
+                                content[produce] = {"schema": schema}
+                            ref = path_to_json_pointer([*fullpath[:-1], "content"])
+                            uu.update(ref, content)
+
+
 # todo: skip x-XXX
 def run(*, src: str, savedir: str, log: str, dry_run: bool = False) -> None:
     logging.basicConfig(level=getattr(logging, log))
@@ -33,64 +92,9 @@ def run(*, src: str, savedir: str, log: str, dry_run: bool = False) -> None:
     # xxx: transform set by dump_options?
     m = Migration(resolver, dump_options={"sort_keys": False}, transform=transform)
     with m.migrate(dry_run=dry_run, keep=True, savedir=savedir) as u:
-        if u.has("swagger"):
-            u.pop("swagger")
-            u.update("openapi", "3.0.0")
-
-        if u.has("host"):
-            url = u.pop("host")
-            if u.has("basePath"):
-                base_path = u.pop("basePath")
-                url = "{}/{}".format(url.rstrip("/"), base_path.lstrip("/"))
-            description = ""
-
-            schemas = ["http"]
-            if u.has("schemes"):
-                schemas = u.pop("schemes")
-            servers = []
-            for schema in schemas:
-                server = u.make_dict()
-                server["url"] = "{}://{}".format(schema.rstrip(":/"), url)
-                server["description"] = description
-                servers.append(server)
-            u.update("/servers", servers)
-
-        # todo: stack
         scope = Scope()
-        if u.has("produces"):
-            scope.push({"produces": u.pop("produces")})
-
-        for resolver in u.resolvers:
-            uu = u.new_child(resolver)
-            if uu.has("paths", resolver=resolver):
-                from dictknife import DictWalker, Or
-
-                method_walker = DictWalker(
-                    [Or(["get", "post", "put", "delete", "patch", "head"])]
-                )
-                schema_walker = DictWalker(["schema"])
-
-                for path, sd in method_walker.walk(uu.resolver.doc["paths"]):
-                    # parameters
-                    # responses
-                    frame = {}
-                    if "produces" in sd[path[-1]]:
-                        ref = path_to_json_pointer(["paths", *path, "produces"])
-                        frame["produces"] = uu.pop(ref)
-
-                    with scope.scope(frame or None):
-                        if "responses" in sd[path[-1]]:
-                            for spath, ssd in schema_walker.walk(
-                                sd[path[-1]]["responses"]
-                            ):
-                                fullpath = ["paths", *path, "responses", *spath]
-                                ref = path_to_json_pointer(fullpath)
-                                schema = uu.pop(ref)
-                                content = uu.make_dict()
-                                for produce in scope[["produces"]]:
-                                    content[produce] = {"schema": schema}
-                                ref = path_to_json_pointer([*fullpath[:-1], "content"])
-                                uu.update(ref, content)
+        migrate_for_mainfile(u, scope=scope)
+        migrate_for_subfile(u, scope=scope)
 
 
 def main(argv=None):
