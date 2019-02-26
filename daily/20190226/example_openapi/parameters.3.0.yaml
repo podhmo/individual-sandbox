@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  version: ""
+  title: ""
+paths:
+  {}
+components:
+  parameters:
+    pcsv:
+      name: value
+      in: query
+      style: form
+      explode: false
+      schema:
+        type: array
+        items:
+          {}
+    pssv:
+      name: value
+      in: query
+      style: spaceDelimited
+      schema:
+        type: array
+        items:
+          {}
+    ppipes:
+      name: value
+      in: query
+      style: pipeDelimited
+      schema:
+        type: array
+        items:
+          {}
+    pmulti:
+      name: value
+      in: query
+      explode: true
+      schema:
+        type: array
+        items:
+          {}
+

@@ -1,0 +1,29 @@
+swagger: 2.0
+
+parameters:
+  pcsv:
+    name: value
+    in: query
+    type: array
+    collectionFormat: csv
+  pssv:
+    name: value
+    in: query
+    type: array
+    collectionFormat: ssv
+  # ptsv:
+  #   name: value
+  #   in: query
+  #   type: array
+  #   collectionFormat: tsv
+  ppipes:
+    name: value
+    in: query
+    type: array
+    collectionFormat: pipes
+  pmulti:
+    name: value
+    in: query
+    type: array
+    collectionFormat: multi
+
