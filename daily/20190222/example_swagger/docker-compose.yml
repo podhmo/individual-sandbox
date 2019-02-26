@@ -1,0 +1,13 @@
+version: "3"
+services:
+  codegen:
+    image: swaggerapi/swagger-codegen-cli-v3:3.0.5
+  generator:
+    image: swaggerapi/swagger-generator-v3:3.0.5
+    ports:
+      - "8080:8080"
+  validator:
+    image: usabillabv/openapi3-validator
+    volumes:
+      - "./:/project"
+
