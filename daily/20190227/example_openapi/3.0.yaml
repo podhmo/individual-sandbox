@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 1.0.0
+  contact:
+    name: foo
+
+tags:
+  - name: sample
+
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      operationId: listUsers
+      summary: Returns a list of users.
+      description: Optional extended description in Markdown.
+      responses:
+        "200":
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+servers:
+  - url: http://api.example.com/v1

@@ -1,3 +1,37 @@
+## openapi
+
+2to3
+
+```console
+$ npm install swagger2openapi
+$ ./node_modules/.bin/swagger2openapi <file>
+```
+
+validator(lint)
+
+```console
+$ npm install speccy
+$ ./node_modules/.bin/speccy lint <file>
+```
+
+resolveで良い感じにresolveしてくれるんじゃ。
+
+
+## openapiの変換
+
+oas-kit/swagger2openapiとの差分
+
+- requestBodiesへの変換
+- securitySchemesのflowsの変換
+- collectionFormatへの対応
+- paramters/formDataが変換されていない
+
+  - application/x-www-form-urlencoded
+  - multipart/form-data
+  - application/octet-stream // file or type=string,format=binary
+
+- headersの部分がそのまま(parametersと同じ感覚でやるべき？）
+
 ## openapi collectionFormat
 
 https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameter-object
@@ -80,3 +114,17 @@ cookie
 | pipeDelimited |  | false | n/a | n/a | blue|black|brown | R|100|G|200 |
 | deepObject |  | true | n/a | n/a | n/a | color[R]=100&color[G]=200&color[B]=150 |
 
+## 変換先を
+
+\	object	array
+csv	object	Array
+ssv	style=spaceDelimited	Array
+tsv	object	Array
+pipes	style=pipeDelimited	Array
+multi	object	Array
+
+tsvはdropされている。(RuntimeError出しておくか)
+
+## converterはある
+
+https://github.com/Mermade/oas-kit
