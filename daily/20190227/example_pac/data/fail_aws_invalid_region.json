@@ -1,0 +1,12 @@
+{
+  "config": {
+    "providers": {
+      "aws": {
+        "region": "us-west-2"
+      }
+    },
+    "variables": {
+      "env": "production"
+    }
+  }
+}

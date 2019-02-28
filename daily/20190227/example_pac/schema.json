@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "config": {
+      "$ref": "#/definitions/config"
+    }
+  },
+  "definitions": {
+    "config": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "variables": {
+              "type": "object",
+              "properties": {
+                "env": {
+                  "type": "string",
+                  "enum": [
+                    "production"
+                  ]
+                }
+              }
+            },
+            "providers": {
+              "type": "object",
+              "properties": {
+                "aws": {
+                  "type": "object",
+                  "properties": {
+                    "region": {
+                      "type": "string",
+                      "enum": [
+                        "us-west-1"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "variables": {
+              "type": "object",
+              "properties": {
+                "env": {
+                  "type": "string",
+                  "enum": [
+                    "staging"
+                  ]
+                }
+              }
+            },
+            "providers": {
+              "type": "object",
+              "properties": {
+                "aws": {
+                  "type": "object",
+                  "properties": {
+                    "region": {
+                      "type": "string",
+                      "enum": [
+                        "us-west-1"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

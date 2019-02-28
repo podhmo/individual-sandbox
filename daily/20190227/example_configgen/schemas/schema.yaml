@@ -1,0 +1,89 @@
+definitions:
+  variables:
+    type: object
+    properties:
+      env:
+        type: string
+        example: production
+    required:
+    - env
+  config:
+    type: object
+    properties:
+      region:
+        type: string
+        example: us-west-1
+        enum:
+        - us-east-1
+        - us-east-2
+        - us-west-1
+        - us-west-2
+    required:
+    - region
+  aliasItem:
+    type: object
+    properties:
+      config:
+        $ref: '#/definitions/config'
+    required:
+    - config
+  alias:
+    type: array
+    items:
+      $ref: '#/definitions/aliasItem'
+  aws:
+    type: object
+    properties:
+      alias:
+        $ref: '#/definitions/alias'
+    required:
+    - alias
+  providers:
+    type: object
+    properties:
+      aws:
+        $ref: '#/definitions/aws'
+    required:
+    - aws
+  configDup1:
+    type: object
+    properties:
+      providers:
+        $ref: '#/definitions/providers'
+    required:
+    - providers
+  tfplan:
+    type: object
+    properties:
+      variables:
+        $ref: '#/definitions/variables'
+      config:
+        $ref: '#/definitions/configDup1'
+    required:
+    - variables
+    - config
+  mock:
+    type: object
+    properties:
+      tfplan:
+        $ref: '#/definitions/tfplan'
+    required:
+    - tfplan
+  test:
+    type: object
+    properties:
+      main:
+        type: boolean
+        example: true
+    required:
+    - main
+  top:
+    type: object
+    properties:
+      mock:
+        $ref: '#/definitions/mock'
+      test:
+        $ref: '#/definitions/test'
+    required:
+    - mock
+    - test
