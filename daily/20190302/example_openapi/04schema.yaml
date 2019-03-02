@@ -1,0 +1,23 @@
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+    required:
+      - name
+    additionalProperties: false
+    patternProperties:
+      "^x-":
+        type: string
+
+allOf:
+  - $ref: "#/definitions/person"
+  - type: object
+    properties:
+      father:
+        $ref: "#/definitions/person"
+      mother:
+        $ref: "#/definitions/person"

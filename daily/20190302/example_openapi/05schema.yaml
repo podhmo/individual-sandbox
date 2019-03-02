@@ -1,0 +1,23 @@
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+    required:
+      - name
+    additionalProperties: false
+    patternProperties:
+      "^x-":
+        type: string
+
+allOf:
+  - $ref: "#/definitions/person"
+  - description: "名前の範囲を制限(in test)"
+    properties:
+      name:
+        enum:
+          - bar
+          - boo
