@@ -1,0 +1,5 @@
+[
+  {"name": "damage", "value": 100},
+  {"name": "heal", "value": 200},
+  {"name": "damage", "value": 100}
+]

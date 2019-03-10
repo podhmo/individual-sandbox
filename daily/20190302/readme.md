@@ -1,3 +1,9 @@
+## python now
+
+```
+datetime.now().strftime("%Y%m%dT%H%M%S%f.log")
+```
+
 ## openapi
 
 - https://github.com/getkin/kin-openapi
