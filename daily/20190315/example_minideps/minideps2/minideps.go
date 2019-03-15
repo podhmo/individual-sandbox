@@ -4,7 +4,6 @@ package minideps2
 func New() (*Graph, func()) {
 	g := &Graph{
 		nodes: []*Node{},
-		seen:  map[*State]*Node{},
 	}
 	return g, g.Run
 }
@@ -12,25 +11,67 @@ func New() (*Graph, func()) {
 // Graph :
 type Graph struct {
 	nodes []*Node
-	seen  map[*State]*Node
 }
 
 // NewNode :
-func (g *Graph) NewNode(name string, fn func(state State), depends ...*Node) *Node {
+func (g *Graph) NewNode(name string, fn func(state State), opts ...func(*Node)) *Node {
 	node := &Node{
-		Fn:      fn,
-		Depends: depends,
-		State:   &State{Name: name, Disabled: false},
+		Fn:    fn,
+		State: &State{Name: name, Disabled: false},
 	}
-	g.seen[node.State] = node
 	g.nodes = append(g.nodes, node)
+	for _, op := range opts {
+		op(node)
+	}
 	return node
 }
 
-// Walk :
-func (g *Graph) Walk() <-chan *Node {
+// WithDisabled :
+func (g *Graph) WithDisabled() func(n *Node) {
+	return func(n *Node) {
+		n.State.Disabled = true
+	}
+}
+
+// WithDepends :
+func (g *Graph) WithDepends(nodes ...*Node) func(n *Node) {
+	return func(n *Node) {
+		n.State.Depends = append(n.State.Depends, nodes...)
+	}
+}
+
+func (g *Graph) fixDisabled() {
+	candidates := map[bool][]*Node{}
+	for _, n := range g.nodes {
+		n := n
+		if len(n.State.Depends) > 0 {
+			candidates[n.State.Disabled] = append(candidates[n.State.Disabled], n)
+		}
+	}
+
+	var propagate func(node *Node, isDisabled bool)
+	seen := map[*State]struct{}{}
+	propagate = func(node *Node, isDisabled bool) {
+		seen[node.State] = struct{}{}
+		node.State.Disabled = isDisabled
+		for _, p := range node.State.Depends {
+			propagate(p, isDisabled)
+		}
+	}
+
+	for _, isDisabled := range []bool{true, false} {
+		for _, n := range candidates[isDisabled] {
+			if _, ok := seen[n.State]; !ok {
+				propagate(n, isDisabled)
+			}
+		}
+	}
+}
+
+func (g *Graph) walk() <-chan *Node {
 	ch := make(chan *Node)
 
+	// propagate disable
 	go func() {
 		defer close(ch)
 		candidates := map[bool][]*Node{}
@@ -38,23 +79,22 @@ func (g *Graph) Walk() <-chan *Node {
 
 		for _, n := range g.nodes {
 			n := n
-			if len(n.Depends) > 0 {
+			if len(n.State.Depends) > 0 {
 				candidates[n.State.Disabled] = append(candidates[n.State.Disabled], n)
 			}
 		}
 
-		for _, activated := range []bool{true, false} {
-			for _, n := range candidates[activated] {
-				for _, p := range n.Depends {
+		for _, isDisabled := range []bool{false, true} {
+			for _, n := range candidates[isDisabled] {
+				for _, p := range n.State.Depends {
 					if _, ok := seen[p.State]; !ok {
-						p.State.Disabled = n.State.Disabled
 						seen[p.State] = struct{}{}
 						ch <- p
 					}
-					if _, ok := seen[n.State]; !ok {
-						seen[n.State] = struct{}{}
-						ch <- n
-					}
+				}
+				if _, ok := seen[n.State]; !ok {
+					seen[n.State] = struct{}{}
+					ch <- n
 				}
 			}
 		}
@@ -72,7 +112,8 @@ func (g *Graph) Walk() <-chan *Node {
 
 // Run :
 func (g *Graph) Run() {
-	for n := range g.Walk() {
+	g.fixDisabled()
+	for n := range g.walk() {
 		n.Fn(*n.State)
 	}
 }
@@ -81,16 +122,18 @@ func (g *Graph) Run() {
 type State struct {
 	Name     string
 	Disabled bool
+	Depends  []*Node
 }
 
 // Node :
 type Node struct {
-	Depends []*Node
-	State   *State
-	Fn      func(state State)
+	State *State
+	Fn    func(state State)
 }
 
-// Disabled :
-func (n *Node) Disabled() {
-	n.State.Disabled = true
+// Adjust :
+func (n *Node) Adjust(opts ...func(node *Node)) {
+	for _, op := range opts {
+		op(n)
+	}
 }

@@ -26,15 +26,14 @@ func run() error {
 	})
 	c0 := deps.NewNode("c0", func(state minideps.State) {
 		pp.Println(state.Name, state.Disabled)
-	}, p0, p1)
+	})
 	c1 := deps.NewNode("c1", func(state minideps.State) {
 		pp.Println(state.Name, state.Disabled)
-	}, p1, p2)
+	})
 
-    // c0.Adjust(p0, p1)
-    // c1.Adjust(p1, p2)
-	c0.Disabled()
-	_ = c1
+	c0.Adjust(deps.WithDepends(p0, p1), deps.WithDisabled())
+	c1.Adjust(deps.WithDepends(p1, p2))
+
 	start()
 	return nil
 }
