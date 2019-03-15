@@ -143,7 +143,7 @@ func run() error {
 			fmt.Println("end consumer X", state.Disabled, as, cs)
 			return nil
 		})
-	}, produceA, produceC)
+	}, deps.WithDepends(produceA, produceC))
 
 	consumeY := deps.NewNode("Y", func(state minideps.State) {
 		g.Go(func() error {
@@ -151,7 +151,7 @@ func run() error {
 			fmt.Println("end consumer Y", state.Disabled, <-aForY, <-bForY)
 			return nil
 		})
-	}, produceA, produceB)
+	}, deps.WithDepends(produceA, produceB))
 
 	consumeZ := deps.NewNode("Z", func(state minideps.State) {
 		g.Go(func() error {
@@ -167,11 +167,11 @@ func run() error {
 			fmt.Println("end consumer Z", state.Disabled, bs, cs)
 			return nil
 		})
-	}, produceB, produceC)
+	}, deps.WithDepends(produceB, produceC))
 
 	_ = consumeX
-	consumeY.Disabled()
-	consumeZ.Disabled()
+	consumeY.Adjust(deps.WithDisabled())
+	consumeZ.Adjust(deps.WithDisabled())
 	start()
 
 	return g.Wait()

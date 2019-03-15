@@ -41,6 +41,7 @@ func (g *Graph) WithDepends(nodes ...*Node) func(n *Node) {
 }
 
 func (g *Graph) fixDisabled() {
+	// propagate disable
 	candidates := map[bool][]*Node{}
 	for _, n := range g.nodes {
 		n := n
@@ -68,10 +69,12 @@ func (g *Graph) fixDisabled() {
 	}
 }
 
-func (g *Graph) walk() <-chan *Node {
+// Walk :
+func (g *Graph) Walk() <-chan *Node {
+	g.fixDisabled()
+
 	ch := make(chan *Node)
 
-	// propagate disable
 	go func() {
 		defer close(ch)
 		candidates := map[bool][]*Node{}
@@ -112,8 +115,7 @@ func (g *Graph) walk() <-chan *Node {
 
 // Run :
 func (g *Graph) Run() {
-	g.fixDisabled()
-	for n := range g.walk() {
+	for n := range g.Walk() {
 		n.Fn(*n.State)
 	}
 }

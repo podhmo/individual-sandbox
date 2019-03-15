@@ -33,7 +33,5 @@ func run() error {
 
 	c0.Adjust(deps.WithDepends(p0, p1), deps.WithDisabled())
 	c1.Adjust(deps.WithDepends(p1, p2))
-
-	start()
 	return nil
 }
