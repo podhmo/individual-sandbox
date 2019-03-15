@@ -22,10 +22,9 @@ type Graph struct {
 // NewNode :
 func (g *Graph) NewNode(name string, fn func(state State), depends ...*Node) *Node {
 	node := &Node{
-		Name:    name,
 		Fn:      fn,
 		Depends: depends,
-		State:   &State{Activated: true},
+		State:   &State{Name: name, Activated: true},
 	}
 	g.seen[node.State] = node
 	g.nodes = append(g.nodes, node)
@@ -72,12 +71,12 @@ func (g *Graph) Run() {
 
 // State :
 type State struct {
+	Name      string
 	Activated bool
 }
 
 // Node :
 type Node struct {
-	Name    string
 	Depends []*Node
 	State   *State
 
