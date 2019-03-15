@@ -172,7 +172,7 @@ func run() error {
 		})
 	})
 
-	// consumerX
+	// consumer
 	consumeY(deps.WithDeactivated(), produceA, produceB)
 	consumeZ(deps.WithDeactivated(), produceB, produceC)
 	consumeX(deps.WithActivated(), produceA, produceC)

@@ -4,7 +4,7 @@ import "sync"
 
 // New :
 func New() (*Registry, func()) {
-	f := &Registry{}
+	f := &Registry{registered: map[bool][]func(){}}
 	return f, f.Start
 }
 
@@ -15,6 +15,11 @@ type Registry struct {
 
 // Start :
 func (r *Registry) Start() {
+	for _, status := range []bool{true, false} {
+		for _, fn := range r.registered[status] {
+			fn()
+		}
+	}
 }
 
 // NewProducer :
@@ -67,8 +72,13 @@ type consumer struct {
 
 func (c *consumer) Consume(opt func(state *State), depends ...func(state State)) {
 	opt(c.State)
-	for i := range depends {
-		depends[i](*c.State)
-	}
-	c.Fn(*c.State)
+	c.registry.registered[c.State.Activated] = append(
+		c.registry.registered[c.State.Activated],
+		func() {
+			for i := range depends {
+				depends[i](*c.State)
+			}
+			c.Fn(*c.State)
+		},
+	)
 }
