@@ -35,11 +35,11 @@ func run() error {
 		ch := make(chan int)
 		g.Go(func() error {
 			defer close(ch)
-			if !state.Activated {
+			if state.Disabled {
 				fmt.Println("disabled", "A")
 				return nil
 			}
-			fmt.Println("start", "A", state.Activated)
+			fmt.Println("start", "A", state.Disabled)
 			for i := 0; i < 5; i++ {
 				ch <- i
 			}
@@ -48,7 +48,7 @@ func run() error {
 		})
 		// modelatorI
 		g.Go(func() error {
-			fmt.Println("start", "i", state.Activated)
+			fmt.Println("start", "i", state.Disabled)
 			n := 0
 			defer close(aForX)
 			defer close(aForY)
@@ -67,12 +67,12 @@ func run() error {
 		ch := make(chan string)
 		g.Go(func() error {
 			defer close(ch)
-			if !state.Activated {
+			if state.Disabled {
 				fmt.Println("disabled", "B")
 				return nil
 			}
 
-			fmt.Println("start", "B", state.Activated)
+			fmt.Println("start", "B", state.Disabled)
 
 			xs := []string{"a", "b", "c", "d", "f"}
 			for _, x := range xs {
@@ -83,7 +83,7 @@ func run() error {
 		})
 		// modelatorJ
 		g.Go(func() error {
-			fmt.Println("start", "j", state.Activated)
+			fmt.Println("start", "j", state.Disabled)
 			var merged []string
 			defer close(bForY)
 			defer close(bForZ)
@@ -102,12 +102,12 @@ func run() error {
 		ch := make(chan string)
 		g.Go(func() error {
 			defer close(ch)
-			if !state.Activated {
+			if state.Disabled {
 				fmt.Println("disabled", "C")
 				return nil
 			}
 
-			fmt.Println("start", "C", state.Activated)
+			fmt.Println("start", "C", state.Disabled)
 			xs := []string{"x", "y"}
 			for _, x := range xs {
 				ch <- x
@@ -117,7 +117,7 @@ func run() error {
 		})
 		// modelatorJ
 		g.Go(func() error {
-			fmt.Println("start", "k", state.Activated)
+			fmt.Println("start", "k", state.Disabled)
 			defer close(cForX)
 			defer close(cForZ)
 			for x := range ch {
@@ -131,7 +131,7 @@ func run() error {
 
 	consumeX := deps.NewNode("X", func(state minideps.State) {
 		g.Go(func() error {
-			fmt.Println("start consumer X", state.Activated)
+			fmt.Println("start consumer X", state.Disabled)
 			var as []int
 			var cs []string
 			for x := range aForX {
@@ -140,22 +140,22 @@ func run() error {
 			for x := range cForX {
 				cs = append(cs, x)
 			}
-			fmt.Println("end consumer X", state.Activated, as, cs)
+			fmt.Println("end consumer X", state.Disabled, as, cs)
 			return nil
 		})
 	}, produceA, produceC)
 
 	consumeY := deps.NewNode("Y", func(state minideps.State) {
 		g.Go(func() error {
-			fmt.Println("start consumer Y", state.Activated)
-			fmt.Println("end consumer Y", state.Activated, <-aForY, <-bForY)
+			fmt.Println("start consumer Y", state.Disabled)
+			fmt.Println("end consumer Y", state.Disabled, <-aForY, <-bForY)
 			return nil
 		})
 	}, produceA, produceB)
 
 	consumeZ := deps.NewNode("Z", func(state minideps.State) {
 		g.Go(func() error {
-			fmt.Println("start consumer Z", state.Activated)
+			fmt.Println("start consumer Z", state.Disabled)
 			var bs []string
 			var cs []string
 			for x := range bForZ {
@@ -164,7 +164,7 @@ func run() error {
 			for x := range cForZ {
 				cs = append(cs, x)
 			}
-			fmt.Println("end consumer Z", state.Activated, bs, cs)
+			fmt.Println("end consumer Z", state.Disabled, bs, cs)
 			return nil
 		})
 	}, produceB, produceC)
