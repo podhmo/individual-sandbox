@@ -2,19 +2,55 @@ package minideps
 
 import "sync"
 
+// New :
+func New() (*Registry, func()) {
+	f := &Registry{}
+	return f, f.Start
+}
+
+// Registry :
+type Registry struct {
+	registered map[bool][]func()
+}
+
+// Start :
+func (r *Registry) Start() {
+}
+
+// NewProducer :
+func (r *Registry) NewProducer(fn func(state State)) func(state State) {
+	p := &producer{Fn: fn, registry: r}
+	return p.Produce
+}
+
+// NewConsumer :
+func (r *Registry) NewConsumer(fn func(state State)) func(opt func(state *State), depends ...func(state State)) {
+	c := &consumer{registry: r, Fn: fn, State: &State{Activated: true}}
+	return c.Consume
+}
+
+// WithDeactivated :
+func (r *Registry) WithDeactivated() func(state *State) {
+	return func(state *State) {
+		state.Activated = false
+	}
+}
+
+// WithActivated :
+func (r *Registry) WithActivated() func(state *State) {
+	return func(state *State) {
+		state.Activated = true
+	}
+}
+
 type producer struct {
-	once sync.Once
-	Fn   func(state State)
+	registry *Registry
+	once     sync.Once
+	Fn       func(state State)
 }
 
 func (p *producer) Produce(state State) {
 	p.once.Do(func() { p.Fn(state) })
-}
-
-// NewProducer :
-func NewProducer(fn func(state State)) func(state State) {
-	p := &producer{Fn: fn}
-	return p.Produce
 }
 
 // State :
@@ -24,8 +60,9 @@ type State struct {
 
 // consumer :
 type consumer struct {
-	State *State
-	Fn    func(state State)
+	registry *Registry
+	State    *State
+	Fn       func(state State)
 }
 
 func (c *consumer) Consume(opt func(state *State), depends ...func(state State)) {
@@ -34,24 +71,4 @@ func (c *consumer) Consume(opt func(state *State), depends ...func(state State))
 		depends[i](*c.State)
 	}
 	c.Fn(*c.State)
-}
-
-// NewConsumer :
-func NewConsumer(fn func(state State)) func(opt func(state *State), depends ...func(state State)) {
-	c := &consumer{Fn: fn, State: &State{Activated: true}}
-	return c.Consume
-}
-
-// WithDeactivated :
-func WithDeactivated() func(state *State) {
-	return func(state *State) {
-		state.Activated = false
-	}
-}
-
-// WithActivated :
-func WithActivated() func(state *State) {
-	return func(state *State) {
-		state.Activated = true
-	}
 }

@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"strings"
-
 	"m/minideps"
+	"strings"
 
 	"golang.org/x/sync/errgroup"
 )
@@ -30,7 +29,8 @@ func run() error {
 	cForX := make(chan string)
 	cForZ := make(chan string)
 
-	produceA := minideps.NewProducer(func(state minideps.State) {
+	deps, start := minideps.New()
+	produceA := deps.NewProducer(func(state minideps.State) {
 		fmt.Println("start producer A")
 		// producerA
 		ch := make(chan int)
@@ -63,7 +63,7 @@ func run() error {
 		})
 	})
 
-	produceB := minideps.NewProducer(func(state minideps.State) {
+	produceB := deps.NewProducer(func(state minideps.State) {
 		fmt.Println("start producer B")
 		// producerB
 		ch := make(chan string)
@@ -99,7 +99,7 @@ func run() error {
 		})
 	})
 
-	produceC := minideps.NewProducer(func(state minideps.State) {
+	produceC := deps.NewProducer(func(state minideps.State) {
 		fmt.Println("start producer C")
 		// producerC
 		ch := make(chan string)
@@ -132,7 +132,7 @@ func run() error {
 		})
 	})
 
-	consumeX := minideps.NewConsumer(func(state minideps.State) {
+	consumeX := deps.NewConsumer(func(state minideps.State) {
 		g.Go(func() error {
 			fmt.Println("start consumer X")
 			var as []int
@@ -148,7 +148,7 @@ func run() error {
 		})
 	})
 
-	consumeY := minideps.NewConsumer(func(state minideps.State) {
+	consumeY := deps.NewConsumer(func(state minideps.State) {
 		g.Go(func() error {
 			fmt.Println("start consumer Y")
 			fmt.Println("end consumer Y", state.Activated, <-aForY, <-bForY)
@@ -156,7 +156,7 @@ func run() error {
 		})
 	})
 
-	consumeZ := minideps.NewConsumer(func(state minideps.State) {
+	consumeZ := deps.NewConsumer(func(state minideps.State) {
 		g.Go(func() error {
 			fmt.Println("start consumer Z")
 			var bs []string
@@ -173,13 +173,10 @@ func run() error {
 	})
 
 	// consumerX
-	consumeX(minideps.WithActivated(), produceA, produceC)
-
-	// consumerY
-	consumeY(minideps.WithDeactivated(), produceA, produceB)
-
-	// consumerZ
-	consumeZ(minideps.WithDeactivated(), produceB, produceC)
+	consumeY(deps.WithDeactivated(), produceA, produceB)
+	consumeZ(deps.WithDeactivated(), produceB, produceC)
+	consumeX(deps.WithActivated(), produceA, produceC)
+	start()
 
 	return g.Wait()
 }
