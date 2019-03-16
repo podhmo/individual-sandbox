@@ -1,7 +1,9 @@
 package minideps2
 
+import "context"
+
 // New :
-func New() (*Graph, func()) {
+func New() (*Graph, func(opts ...func(*Graph))) {
 	g := &Graph{
 		nodes: []*Node{},
 	}
@@ -11,6 +13,8 @@ func New() (*Graph, func()) {
 // Graph :
 type Graph struct {
 	nodes []*Node
+	ctx   context.Context
+	wrap  func(s State, next func(State))
 }
 
 // NewNode :
@@ -114,9 +118,37 @@ func (g *Graph) Walk() <-chan *Node {
 }
 
 // Run :
-func (g *Graph) Run() {
+func (g *Graph) Run(opts ...func(*Graph)) {
+	for _, op := range opts {
+		op(g)
+	}
+
+	wrap := g.wrap
+	if wrap == nil {
+		wrap = func(s State, next func(State)) {
+			next(s)
+		}
+	}
 	for n := range g.Walk() {
-		n.Fn(*n.State)
+		n.State.ctx = g.ctx
+		wrap(*n.State, n.Fn)
+	}
+}
+
+// WithContext :
+func WithContext(ctx context.Context) func(*Graph) {
+	return func(g *Graph) {
+		if ctx == nil {
+			panic("nil context")
+		}
+		g.ctx = ctx
+	}
+}
+
+// WithWrapFunction :
+func WithWrapFunction(wrap func(s State, next func(State))) func(*Graph) {
+	return func(g *Graph) {
+		g.wrap = wrap
 	}
 }
 
@@ -125,6 +157,15 @@ type State struct {
 	Name     string
 	Disabled bool
 	Depends  []*Node
+	ctx      context.Context
+}
+
+// Context :
+func (s *State) Context() context.Context {
+	if s.ctx != nil {
+		return s.ctx
+	}
+	return context.Background()
 }
 
 // Node :

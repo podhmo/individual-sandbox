@@ -1,4 +1,4 @@
-package main_test
+package minideps_test
 
 import (
 	minideps "m/minideps2"
