@@ -5,23 +5,25 @@ import "context"
 // New :
 func New() (*Graph, func(opts ...func(*Graph))) {
 	g := &Graph{
-		nodes: []*Node{},
+		nodes:   []*Node{},
+		mapping: map[string]*Node{},
 	}
 	return g, g.Run
 }
 
 // Run :
-func Run(main func(g *Graph), opts ...func(g *Graph)) {
+func Run(setup func(*Graph), opts ...func(*Graph)) {
 	g, run := New()
-	main(g)
+	setup(g)
 	run(opts...)
 }
 
 // Graph :
 type Graph struct {
-	nodes []*Node
-	ctx   context.Context
-	wrap  func(s State, next func(State))
+	nodes   []*Node
+	mapping map[string]*Node
+	ctx     context.Context
+	wrap    func(s State, next func(State))
 }
 
 // NewNode :
@@ -31,10 +33,17 @@ func (g *Graph) NewNode(name string, fn func(state State), opts ...func(*Node)) 
 		State: &State{Name: name, Disabled: false},
 	}
 	g.nodes = append(g.nodes, node)
+	g.mapping[name] = node // conflict check?
 	for _, op := range opts {
 		op(node)
 	}
 	return node
+}
+
+// Node :
+func (g *Graph) Node(name string) (node *Node, existed bool) {
+	node, existed = g.mapping[name]
+	return
 }
 
 // WithDisabled :
