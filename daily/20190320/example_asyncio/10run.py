@@ -3,6 +3,7 @@ import asyncio
 import logging
 import os
 import time
+import requests
 from concurrent.futures import (
     ProcessPoolExecutor,
     TimeoutError,
@@ -14,24 +15,24 @@ from concurrent.futures import (
 logger = logging.getLogger(__name__)
 
 
-# 丁寧に書くならloopを明示的に(libraryならloopを明示的にわたす)
-# 雑ならloopは暗黙的で(appで依存の終端なら暗黙的で十分)
-# 今回はappのつもり
-
 # for testing: (don't use in production)
 is_ng = os.environ.get("NG", "") != ""
 
 
 def task():
-    time.sleep(10)
+    url = "http://localhost:8080"
+    logger.info("request: %r", url)
+    response = requests.get(url)
+    logger.info("response: %r", response)
+    return response.text
 
 
 async def do_task(loop):
-    logger.info("running task %s")
+    logger.info("running task")
     with ThreadPoolExecutor(max_workers=1) as executor:
         future = loop.run_in_executor(executor, task)
         await future
-
+    logger.info("end task")
     if is_ng:
         raise Exception("hmm")
     return "ok"
@@ -69,10 +70,10 @@ async def run(*, loop: asyncio.BaseEventLoop = None):
 
     interrupted = ev.is_set()
     if interrupted:
-        logger.info("task is interrupted (catch SIGINT)")
+        logger.info("** task is interrupted (catch SIGINT) **")
     else:
-        logger.info("task completed, result=%r", result)
+        logger.info("** task completed, result=%r **", result)
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format=f"%(asctime)s: {logging.BASIC_FORMAT}")
 asyncio.run(run(), debug=True)
