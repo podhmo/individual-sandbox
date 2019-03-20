@@ -46,6 +46,5 @@ func TestWrapCall(t *testing.T) {
 			next(s)
 		}))
 		assert.Exactly(t, []string{"b", "x", "a", "b", "y", "a"}, r)
-
 	})
 }

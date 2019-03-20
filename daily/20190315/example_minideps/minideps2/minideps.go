@@ -10,6 +10,13 @@ func New() (*Graph, func(opts ...func(*Graph))) {
 	return g, g.Run
 }
 
+// Run :
+func Run(main func(g *Graph), opts ...func(g *Graph)) {
+	g, run := New()
+	main(g)
+	run(opts...)
+}
+
 // Graph :
 type Graph struct {
 	nodes []*Node
