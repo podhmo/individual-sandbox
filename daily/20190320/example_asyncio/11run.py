@@ -3,6 +3,7 @@ import asyncio
 import logging
 import os
 import requests
+from mysleep import mysleep
 from concurrent.futures import (
     ProcessPoolExecutor,
     TimeoutError,
@@ -19,11 +20,7 @@ is_ng = os.environ.get("NG", "") != ""
 
 
 def task():
-    url = "http://localhost:8080"
-    logger.info("request: %r", url)
-    response = requests.get(url)
-    logger.info("response: %r", response)
-    return response.text
+    return mysleep("hello", 8)
 
 
 async def do_task(loop):

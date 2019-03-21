@@ -12,3 +12,11 @@ interrupt:
 	python runner.py python 02run.py
 10:
 	python runner.py python 10run.py
+
+export PYTHONPATH := ../example_cython/mysleep
+11:
+	python runner.py python 11run.py
+20:
+	python 20.py
+21:
+	python 21.py

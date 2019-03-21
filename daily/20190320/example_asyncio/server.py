@@ -7,7 +7,7 @@ def app(environ, start_response):
     start_response(status, headers)
     import time
 
-    time.sleep(10)
+    time.sleep(8)
     return [b'{"message": "hello world"}']
 
 
