@@ -1,3 +1,91 @@
+## emacs theme
+
+- https://github.com/hlissner/emacs-doom-themes/tree/screenshots
+- all-the-iconsで色々
+
+## emacs counsel
+
+elisp
+
+- counsel-find-library
+- counsel-describe-function
+- counsel-describe-variables
+- counsel-apropos
+
+ui
+
+- counsel-unicode-char
+- counsel-describe-face
+- counsel-faces
+
+hmm bookmarkで良い感じ似できたら良い。検索 -> marking -> markingしていったものを巡回
+
+### 絵文字
+
+- counsel-unicode-char
+- 表示は？ -> symbolaを入れるだけで大丈夫
+
+```console
+$ yay -S ttf-symbola
+```
+
+## go bingo
+
+- $GOPATHが指定されていないときに`~/go`を見てくれない
+
+## emacs elgot
+
+lsp-serverを全部殺す方法。ただし自動で復帰してくる。
+
+```lisp
+
+(cl-loop for p in (process-list)
+         do (let ((buf (process-buffer p)))
+           (when (string-prefix-p "EGLOT" (process-name p))
+             (kill-process p)
+             (kill-buffer buf))
+           )
+         )
+(process-buffer (car (process-list)))
+```
+
+### もう少し丁寧に読む
+
+autoloadは？
+
+それぞれどういう意味なんだろう？
+
+- eglot -- LSPサーバーの動かして繋げる。
+- eglot-ensure -- eglotのsessionを開始する
+
+shutdownはM-x eglot-shutdown
+
+```
+(setq my:server (eglot--read-server ""))
+(eglot-shutdown my:server)
+(eglot--message "hai")
+
+(eglot--capabilities my:server)
+(setf (eglot--project my:server))
+( (eglot--major-mode my:server))
+
+(eglot--inhibit-autoreconnect my:server)
+(eglot--managed-buffers my:server)
+```
+
+hmm
+
+```
+(cl-loop for server being the hash-values of eglot--servers-by-project
+  when server
+  do (print server))
+```
+
+### go-mode
+
+defaultの設定を外していきたい
+
+
 ## python lsp lsp serverのお試し
 
 - ["../20190313/example_mylsp"]("../20190313/example_mylsp")

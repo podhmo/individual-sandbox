@@ -1,0 +1,28 @@
+2019-03-30 17:08:12,505 UTC - WARNING - pyls.config.config - Failed to load pyls entry point 'pydocstyle': No module named 'pydocstyle'
+2019-03-30 17:08:12,518 UTC - WARNING - pyls.config.config - Failed to load pyls entry point 'rope_completion': No module named 'rope'
+2019-03-30 17:08:12,519 UTC - WARNING - pyls.config.config - Failed to load pyls entry point 'rope_rename': No module named 'rope'
+!! {'jsonrpc': '2.0', 'id': '5d37d249-70cc-49c7-be1b-5ccc31c3d914', 'method': 'initialize'}
+!! {'jsonrpc': '2.0', 'id': '3cf26a53-5633-45ff-a561-a41ebe2a8d26', 'method': 'textDocument/definition'}
+!! {'jsonrpc': '2.0', 'id': 'c440261c-9e6a-46ee-a0f0-7f6ca98683ea', 'method': 'shutdown'}
+!! {'jsonrpc': '2.0', 'id': '9de72ad7-662d-4540-80fc-3b35f060c572', 'method': 'exit'}
+{'id': '5d37d249-70cc-49c7-be1b-5ccc31c3d914',
+ 'jsonrpc': '2.0',
+ 'result': {'capabilities': {'codeActionProvider': True,
+                             'codeLensProvider': {'resolveProvider': False},
+                             'completionProvider': {'resolveProvider': False,
+                                                    'triggerCharacters': ['.']},
+                             'definitionProvider': True,
+                             'documentFormattingProvider': True,
+                             'documentHighlightProvider': True,
+                             'documentRangeFormattingProvider': True,
+                             'documentSymbolProvider': True,
+                             'executeCommandProvider': {'commands': []},
+                             'experimental': {},
+                             'hoverProvider': True,
+                             'referencesProvider': True,
+                             'renameProvider': True,
+                             'signatureHelpProvider': {'triggerCharacters': ['(',
+                                                                             ',']},
+                             'textDocumentSync': 2}}}
+{'id': '3cf26a53-5633-45ff-a561-a41ebe2a8d26', 'jsonrpc': '2.0', 'result': []}
+{'id': 'c440261c-9e6a-46ee-a0f0-7f6ca98683ea', 'jsonrpc': '2.0', 'result': None}

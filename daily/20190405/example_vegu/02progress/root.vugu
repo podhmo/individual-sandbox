@@ -1,0 +1,24 @@
+<div class="my-first-vugu-comp">
+  <div vg-for="data.Tasks">
+    <button @click="value.Increment()">Increment</button>
+    <progress max="100" :value="value.Value"></progress>
+    <p vg-html='fmt.Sprintf("%d%%", value.Value)'></p>
+  </div>
+</div>
+
+<style>
+.my-first-vugu-comp { background: #eee; }
+</style>
+
+<script type="application/x-go">
+type RootData struct { Tasks []*Task; }
+
+type Task struct { Value int;  Max int}
+func (t *Task) Increment() { t.Value += 10 }
+
+
+func (ct *Root) NewData(props vugu.Props) (interface{}, error) {
+	tasks := []*Task{{Max: 100}, {Max: 100}, {Max: 100}}
+	return &RootData{Tasks: tasks}, nil
+}
+</script>

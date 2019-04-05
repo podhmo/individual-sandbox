@@ -1,0 +1,44 @@
+<div>
+  <div vg-for="data.Tasks">
+    <button @click="value.Start(event)">Start</button>
+    <button @click="data.Reset(event, key)">Reset</button>
+    <progress max="100" :value="value.Value"></progress>
+    <p vg-html='fmt.Sprintf("%d%%", value.Value)'></p>
+  </div>
+</div>
+
+<script type="application/x-go">
+import (
+  "sync"
+  "time"
+)
+type RootData struct { Tasks []*Task; }
+func (data *RootData) Reset(event *vugu.DOMEvent, i int) {
+	go func(ee vugu.EventEnv){
+		ee.Lock()
+        data.Tasks[i] = &Task{Max: 100}
+		defer ee.UnlockRender()
+    }(event.EventEnv())
+}
+
+type Task struct { Value int;  Max int; once sync.Once }
+func (t *Task) Start(event *vugu.DOMEvent) {
+	t.once.Do(func(){
+		go func(ee vugu.EventEnv){
+			for i := 0; i<10; i++ {
+				ee.Lock()
+				t.Value += 10
+				ee.UnlockRender()
+
+				time.Sleep(100 * time.Millisecond)
+			}
+		}(event.EventEnv())
+	})
+}
+
+
+func (ct *Root) NewData(props vugu.Props) (interface{}, error) {
+	tasks := []*Task{{Max: 100}, {Max: 100}, {Max: 100}}
+	return &RootData{Tasks: tasks}, nil
+}
+</script>
