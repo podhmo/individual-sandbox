@@ -1,0 +1,13 @@
+<div class="my-first-vugu-comp">
+    <button @click="data.Toggle()">Test</button>
+    <div vg-if="data.Show">I am here!</div>
+</div>
+
+<style>
+.my-first-vugu-comp { background: #eee; }
+</style>
+
+<script type="application/x-go">
+type RootData struct { Show bool }
+func (data *RootData) Toggle() { data.Show = !data.Show }
+</script>

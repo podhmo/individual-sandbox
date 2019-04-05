@@ -1,0 +1,4 @@
+*.wasm
+main_wasm.go
+root.go
+go.sum
