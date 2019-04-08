@@ -1,0 +1,128 @@
+[
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/notebooks/Untitled.ipynb?kernel_name=python3",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/contents/Untitled.ipynb?content=0&_=1554543017688",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/custom/custom.css",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/config/notebook?_=1554543070095",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/config/common?_=1554543070096",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/kernelspecs",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/contents/Untitled.ipynb?type=notebook&_=1554543070097",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/custom/custom.js?v=20190406182956",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/sessions",
+      "method": "POST"
+    },
+    "response": {
+      "status": 201
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/contents/Untitled.ipynb/checkpoints?_=1554543070098",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/kernelspecs/python3/logo-64x64.png",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/nbextensions/jupyter-js-widgets/extension.js?v=20190406182956",
+      "method": "GET"
+    },
+    "response": {
+      "status": 304
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/nbextensions/jupyter_emacskeys/init.js?v=20190406182956",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200
+    }
+  },
+  {
+    "request": {
+      "url": "http://127.0.0.1:8888/api/kernels/caedb3f7-a003-4f18-ac3b-4fe2bd04bd21/channels?session_id=3d51b37779be4c488ca27fd328739f37",
+      "method": "GET"
+    },
+    "response": {
+      "status": 101
+    }
+  }
+]
