@@ -38,7 +38,7 @@ def aggregate(entries, *, shy: bool = False):
             continue
 
         if (
-            entry["response"]["status"] == 200
+            entry["response"]["status"] in (200, 304)
             and entry["request"]["method"].lower() == "get"
         ):
             if "javascript" in mimetype and not parsed.path.endswith(".json"):
@@ -108,6 +108,7 @@ def transform(
     get_value=get_value,
     with_response_type=True,
     with_request_type=True,
+    with_cookies=True,
     include_all=False,
 ):
     r = make_dict()
@@ -123,7 +124,14 @@ def transform(
 
                 # params :: path,query,header,cookie
                 parameters = []
-                for param_type, k in [("query", "queryString"), ("header", "headers"), ("cookie", "cookies")]:
+                for param_type, k, enabled in [
+                    ("query", "queryString", True),
+                    ("header", "headers", True),
+                    ("cookie", "cookies", with_cookies),
+                ]:
+                    if not enabled:
+                        continue
+
                     seen = seen_parameters[k]
                     for h in e["request"][k]:
                         if h["name"] in seen:
@@ -196,6 +204,7 @@ def run(
     shy: bool = False,
     with_request_type: bool = False,
     with_response_type: bool = False,
+    ignore_cookies: bool = False,
     include_all: bool = False,
 ) -> None:
     import re
@@ -219,6 +228,7 @@ def run(
                 r,
                 with_request_type=with_request_type,
                 with_response_type=with_response_type,
+                with_cookies=not ignore_cookies,
                 include_all=include_all,
             )
         )

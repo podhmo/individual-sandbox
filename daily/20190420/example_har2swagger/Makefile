@@ -1,4 +1,4 @@
-defaut: 00 01 02 03 04 05
+defaut: 00 01 02 03 04 05 06 07
 
 output:
 	mkdir -p output
@@ -29,4 +29,12 @@ data/sample.har:
 05: output
 	python parse.py --pattern hatena --ignore cdn --with-request-type --with-response-type --shy --file=${FILE} | tee output/05.swagger.md
 
+
+06: FILE ?= $(HOME)/Downloads/jupyter0.har
+06: output
+	python parse.py --pattern . --ignore-cookies --with-request-type --with-response-type --file=${FILE} | tee output/06.swagger.md
+
+07: FILE ?= $(HOME)/Downloads/jupyter1.har
+07: output
+	python parse.py --pattern . --ignore-cookies --with-request-type --with-response-type --file=${FILE} | tee output/07.swagger.md
 
