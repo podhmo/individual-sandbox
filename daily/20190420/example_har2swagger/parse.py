@@ -123,7 +123,7 @@ def transform(
 
                 # params :: path,query,header,cookie
                 parameters = []
-                for param_type, k in [("header", "headers"), ("cookie", "cookies")]:
+                for param_type, k in [("query", "queryString"), ("header", "headers"), ("cookie", "cookies")]:
                     seen = seen_parameters[k]
                     for h in e["request"][k]:
                         if h["name"] in seen:

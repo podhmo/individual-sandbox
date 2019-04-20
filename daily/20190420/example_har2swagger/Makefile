@@ -9,7 +9,7 @@ output:
 
 01: FILE ?= $(HOME)/Downloads/note.har
 01: output
-	python parse.py --pattern note --file=${FILE} | tee output/01.swagger.md
+	python parse.py --pattern note --file=${FILE} --with-request-type --with-response-type | tee output/01.swagger.md
 
 02: FILE ?= data.json
 02: output
