@@ -1,3 +1,34 @@
+## har2swagger
+
+- [data.har](../..//20190208/example_har/data.har)
+
+どこから作業をしようかな。
+
+- とりあえずresponsesを作る
+
+  - headersを見れるようにすると良い？
+  - responseのshapeはどうしよう？
+
+- requestも雑にでも対応したい
+
+  - query string
+  - header?
+  - cookie?
+
+- 不要そうなものにもpathsを追加してしまっている
+
+  - asset(画像,css,js)
+
+- har2swaggerしようとしたらgroupingできないとダメそうだよなー
+
+
+### json2swaggerを使う
+
+とりあえずschemaに分けない形で作ってみたいかも？
+
+- detectorの使いかたが分かっていないかも？
+
+
 ## webapi client library
 
 https://speakerdeck.com/player/ba29199aeb3344cd835bad09db424663?title=false&skipResize=true

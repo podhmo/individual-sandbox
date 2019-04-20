@@ -1,0 +1,61 @@
+{
+  "freq": 1,
+  "freq2": 0,
+  "type": "object",
+  "children": {
+    "data": {
+      "freq": 1,
+      "freq2": 0,
+      "type": "object",
+      "children": {
+        "hashtags": {
+          "freq": 5,
+          "freq2": 1,
+          "type": "object",
+          "children": {
+            "count": {
+              "freq": 5,
+              "freq2": 0,
+              "type": "integer",
+              "children": {},
+              "values": [
+                152188,
+                202115,
+                322691,
+                50359,
+                116733
+              ],
+              "name": "count",
+              "ref": "#/response/data/hashtags/4/count"
+            },
+            "name": {
+              "freq": 5,
+              "freq2": 0,
+              "type": "string",
+              "children": {},
+              "values": [
+                "#イラスト",
+                "#エッセイ",
+                "#日記",
+                "#詩",
+                "#小説"
+              ],
+              "name": "name",
+              "ref": "#/response/data/hashtags/4/name"
+            }
+          },
+          "values": [],
+          "name": "hashtags",
+          "type2": "array",
+          "ref": "#/response/data/hashtags"
+        }
+      },
+      "values": [],
+      "name": "data",
+      "ref": "#/response/data"
+    }
+  },
+  "values": [],
+  "name": "response",
+  "ref": "#/response"
+}
