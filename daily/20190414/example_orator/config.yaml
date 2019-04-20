@@ -1,0 +1,5 @@
+databases:
+  sqlite:
+    driver: sqlite
+    database: examples.db
+    log_queries: true

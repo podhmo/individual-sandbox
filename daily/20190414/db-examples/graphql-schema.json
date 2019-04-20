@@ -1,0 +1,772 @@
+{
+  "actor": {
+    "actor_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "first_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "film_actor_collection": {
+      "table": "film_actor",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "actor.actor_id",
+        "from": "film_actor.actor_id"
+      }
+    }
+  },
+  "address": {
+    "city": {
+      "table": "city",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "city.city_id",
+        "from": "address.city_id"
+      }
+    },
+    "address_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "address": {
+      "type": "String",
+      "nullable": false
+    },
+    "address2": {
+      "type": "String",
+      "nullable": true
+    },
+    "district": {
+      "type": "String",
+      "nullable": false
+    },
+    "city_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "postal_code": {
+      "type": "String",
+      "nullable": true
+    },
+    "phone": {
+      "type": "String",
+      "nullable": false
+    },
+    "location": {
+      "type": "NullType",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "customer_collection": {
+      "table": "customer",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "address.address_id",
+        "from": "customer.address_id"
+      }
+    },
+    "store_collection": {
+      "table": "store",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "address.address_id",
+        "from": "store.address_id"
+      }
+    },
+    "staff_collection": {
+      "table": "staff",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "address.address_id",
+        "from": "staff.address_id"
+      }
+    }
+  },
+  "city": {
+    "country": {
+      "table": "country",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "country.country_id",
+        "from": "city.country_id"
+      }
+    },
+    "city_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "city": {
+      "type": "String",
+      "nullable": false
+    },
+    "country_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "address_collection": {
+      "table": "address",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "city.city_id",
+        "from": "address.city_id"
+      }
+    }
+  },
+  "country": {
+    "country_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "country": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "city_collection": {
+      "table": "city",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "country.country_id",
+        "from": "city.country_id"
+      }
+    }
+  },
+  "category": {
+    "category_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "film_category_collection": {
+      "table": "film_category",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "category.category_id",
+        "from": "film_category.category_id"
+      }
+    }
+  },
+  "customer": {
+    "store": {
+      "table": "store",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "store.store_id",
+        "from": "customer.store_id"
+      }
+    },
+    "address": {
+      "table": "address",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "address.address_id",
+        "from": "customer.address_id"
+      }
+    },
+    "customer_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "store_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "first_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "email": {
+      "type": "String",
+      "nullable": true
+    },
+    "address_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "active": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "create_date": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": true
+    },
+    "rental_collection": {
+      "table": "rental",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "customer.customer_id",
+        "from": "rental.customer_id"
+      }
+    },
+    "payment_collection": {
+      "table": "payment",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "customer.customer_id",
+        "from": "payment.customer_id"
+      }
+    }
+  },
+  "store": {
+    "address": {
+      "table": "address",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "address.address_id",
+        "from": "store.address_id"
+      }
+    },
+    "staff": {
+      "table": "staff",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "store.manager_staff_id"
+      }
+    },
+    "store_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "manager_staff_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "address_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "inventory_collection": {
+      "table": "inventory",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "store.store_id",
+        "from": "inventory.store_id"
+      }
+    },
+    "customer_collection": {
+      "table": "customer",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "store.store_id",
+        "from": "customer.store_id"
+      }
+    },
+    "staff_collection": {
+      "table": "staff",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "store.store_id",
+        "from": "staff.store_id"
+      }
+    }
+  },
+  "staff": {
+    "address": {
+      "table": "address",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "address.address_id",
+        "from": "staff.address_id"
+      }
+    },
+    "store": {
+      "table": "store",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "store.store_id",
+        "from": "staff.store_id"
+      }
+    },
+    "staff_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "first_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_name": {
+      "type": "String",
+      "nullable": false
+    },
+    "address_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "picture": {
+      "type": "bytes",
+      "nullable": true
+    },
+    "email": {
+      "type": "String",
+      "nullable": true
+    },
+    "store_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "active": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "username": {
+      "type": "String",
+      "nullable": false
+    },
+    "password": {
+      "type": "String",
+      "nullable": true
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "rental_collection": {
+      "table": "rental",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "rental.staff_id"
+      }
+    },
+    "payment_collection": {
+      "table": "payment",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "payment.staff_id"
+      }
+    },
+    "store_collection": {
+      "table": "store",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "store.manager_staff_id"
+      }
+    }
+  },
+  "film": {
+    "language": {
+      "table": "language",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "language.language_id",
+        "from": "film.language_id"
+      }
+    },
+    "film_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "title": {
+      "type": "String",
+      "nullable": false
+    },
+    "description": {
+      "type": "String",
+      "nullable": true
+    },
+    "release_year": {
+      "type": "YEAR",
+      "nullable": true
+    },
+    "language_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "original_language_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "rental_duration": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "rental_rate": {
+      "type": "Decimal",
+      "nullable": false
+    },
+    "length": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "replacement_cost": {
+      "type": "Decimal",
+      "nullable": false
+    },
+    "rating": {
+      "type": "String",
+      "nullable": true
+    },
+    "special_features": {
+      "type": "String",
+      "nullable": true
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "film_actor_collection": {
+      "table": "film_actor",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "film.film_id",
+        "from": "film_actor.film_id"
+      }
+    },
+    "film_category_collection": {
+      "table": "film_category",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "film.film_id",
+        "from": "film_category.film_id"
+      }
+    },
+    "inventory_collection": {
+      "table": "inventory",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "film.film_id",
+        "from": "inventory.film_id"
+      }
+    }
+  },
+  "language": {
+    "film_collection": {
+      "table": "film",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "language.language_id",
+        "from": "film.original_language_id"
+      }
+    },
+    "language_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "name": {
+      "type": "String",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    }
+  },
+  "film_actor": {
+    "actor": {
+      "table": "actor",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "actor.actor_id",
+        "from": "film_actor.actor_id"
+      }
+    },
+    "film": {
+      "table": "film",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "film.film_id",
+        "from": "film_actor.film_id"
+      }
+    },
+    "actor_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "film_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    }
+  },
+  "film_category": {
+    "category": {
+      "table": "category",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "category.category_id",
+        "from": "film_category.category_id"
+      }
+    },
+    "film": {
+      "table": "film",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "film.film_id",
+        "from": "film_category.film_id"
+      }
+    },
+    "film_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "category_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    }
+  },
+  "film_text": {
+    "film_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "title": {
+      "type": "String",
+      "nullable": false
+    },
+    "description": {
+      "type": "String",
+      "nullable": true
+    }
+  },
+  "inventory": {
+    "store": {
+      "table": "store",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "store.store_id",
+        "from": "inventory.store_id"
+      }
+    },
+    "film": {
+      "table": "film",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "film.film_id",
+        "from": "inventory.film_id"
+      }
+    },
+    "inventory_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "film_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "store_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "rental_collection": {
+      "table": "rental",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "inventory.inventory_id",
+        "from": "rental.inventory_id"
+      }
+    }
+  },
+  "payment": {
+    "customer": {
+      "table": "customer",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "customer.customer_id",
+        "from": "payment.customer_id"
+      }
+    },
+    "staff": {
+      "table": "staff",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "payment.staff_id"
+      }
+    },
+    "rental": {
+      "table": "rental",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "rental.rental_id",
+        "from": "payment.rental_id"
+      }
+    },
+    "payment_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "customer_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "staff_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "rental_id": {
+      "type": "Integer",
+      "nullable": true
+    },
+    "amount": {
+      "type": "Decimal",
+      "nullable": false
+    },
+    "payment_date": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": true
+    }
+  },
+  "rental": {
+    "customer": {
+      "table": "customer",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "customer.customer_id",
+        "from": "rental.customer_id"
+      }
+    },
+    "inventory": {
+      "table": "inventory",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "inventory.inventory_id",
+        "from": "rental.inventory_id"
+      }
+    },
+    "staff": {
+      "table": "staff",
+      "direction": "MANYTOONE",
+      "uselist": false,
+      "relation": {
+        "to": "staff.staff_id",
+        "from": "rental.staff_id"
+      }
+    },
+    "rental_id": {
+      "type": "ID",
+      "nullable": false
+    },
+    "rental_date": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "inventory_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "customer_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "return_date": {
+      "type": "datetime",
+      "nullable": true
+    },
+    "staff_id": {
+      "type": "Integer",
+      "nullable": false
+    },
+    "last_update": {
+      "type": "datetime",
+      "nullable": false
+    },
+    "payment_collection": {
+      "table": "payment",
+      "direction": "ONETOMANY",
+      "uselist": true,
+      "relation": {
+        "to": "rental.rental_id",
+        "from": "payment.rental_id"
+      }
+    }
+  }
+}
