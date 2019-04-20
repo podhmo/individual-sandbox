@@ -2,12 +2,15 @@
 
 export TARGET ?=
 
-default: hello bye
+default:\
+ hello\
+ bye
 
 hello:
 	echo hello
 	echo hello
 
-bye: hello
+bye:\
+ hello
 	echo $(shell echo bye)
 

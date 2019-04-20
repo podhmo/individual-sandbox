@@ -1,6 +1,12 @@
+MSG ?= "hello"
+
+default:\
+ hello
+ bye
+
 hello:
-	echo hello
-	echo hello
+	@echo ${MSG}
+	echo ${MSG}
 
 bye:
 	echo $(shell echo bye)

@@ -1,5 +1,9 @@
 MSG ?= "hello"
 
+default:\
+ hello
+ bye
+
 hello:
 	@echo ${MSG}
 	echo ${MSG}
