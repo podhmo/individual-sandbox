@@ -117,11 +117,12 @@ def transform(
         for method, entries in methods.items():
             d = {"description": ""}
 
-            # todo: merge other output
             seen_parameters = defaultdict(set)
+            request_bodies: t.List[dict] = []
+            response_bodies_dict: t.Dict[t.Tuple[int, str], dict] = defaultdict(list)
+
             for e in entries:
                 # request
-
                 # params :: path,query,header,cookie
                 parameters = []
                 for param_type, k, enabled in [
@@ -154,12 +155,14 @@ def transform(
                     post_data = e["request"]["postData"]
                     content_type = post_data["mimeType"].split(";", 1)[0]
                     if content_type.endswith("/json") and with_request_type:
-                        d["requestBody"] = schemalib.makeschema(
+                        request_bodies.append(
                             loading.loads(post_data["text"], format="json")
                         )
 
                 # response
                 status = e["response"]["status"]
+                if status == 304:
+                    status = 200  # not modified -> ok
 
                 content_type = e["response"]["content"].get("mimeType")
                 if content_type is None:
@@ -177,19 +180,37 @@ def transform(
                 if content_type.startswith("text/"):
                     a.assign(schema, ["type"], "string")
                 elif content_type.endswith("/json") and with_response_type:
-                    response_body = loading.loads(
-                        e["response"]["content"]["text"], format="json"
+                    response_bodies_dict[(status, content_type)].append(
+                        loading.loads(e["response"]["content"]["text"], format="json")
                     )
-                    schema = schemalib.makeschema(response_body)
 
                 a.assign(
                     d,
                     ["responses", status],
                     {
                         "description": e["response"]["statusText"],
-                        "content": {content_type: schema},
+                        "content": {content_type: {"schema": schema}},
                     },
                 )
+
+            if request_bodies:
+                detector = schemalib.Detector()
+                info = None
+                for body in request_bodies:
+                    info = detector.detect(body, name="")
+                a.assign(d, ["requestBody"], schemalib.makeschema_from_info(info))
+            if response_bodies_dict:
+                for (status, content_type), bodies in response_bodies_dict.items():
+                    detector = schemalib.Detector()
+                    info = None
+                    for body in bodies:
+                        info = detector.detect(body, name="")
+                    a.assign(
+                        d,
+                        ["responses", status, "content", content_type, "schema"],
+                        schemalib.makeschema_from_info(info),
+                    )
+
             a.assign(r, ["paths", path, method.lower()], d)
     return r
 

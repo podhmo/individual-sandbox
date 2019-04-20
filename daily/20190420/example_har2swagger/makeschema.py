@@ -7,6 +7,12 @@ from dictknife.swaggerknife.json2swagger import Detector
 
 
 def makeschema(value: dict, *, name: str = "", detector: Detector = None):
+    detector = detector or Detector()
+    detected = detector.detect(value, name)
+    return makeschema_from_info(detected)
+
+
+def makeschema_from_info(info: dict) -> dict:
     def _on_schema(info, *, from_array=False):
         if not from_array and info.get("type2") == "array":
             return _on_array(info)
@@ -51,9 +57,7 @@ def makeschema(value: dict, *, name: str = "", detector: Detector = None):
             r["nullable"] = True
         return r
 
-    detector = detector or Detector()
-    detected = detector.detect(value, name)
-    return _on_schema(detected)
+    return _on_schema(info)
 
 
 from handofcats import as_command  # noqa

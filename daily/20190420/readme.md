@@ -21,6 +21,8 @@
 
 - har2swaggerしようとしたらgroupingできないとダメそうだよなー
 
+- 雑でもserversなどの情報を表示したい？
+
 
 ### json2swaggerを使う
 
