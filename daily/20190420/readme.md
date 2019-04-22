@@ -1,4 +1,11 @@
+## websocket har そういえばwebsocketってharで記録されるの？
+
+- https://stackoverflow.com/questions/29953531/how-to-save-websocket-frames-in-chrome/44957049
+- https://github.com/mitmproxy/mitmproxy/issues/899
+- http://south37.hatenablog.com/entry/2014/09/07/WebSocket%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E8%AA%BF%E3%81%B9%E3%81%A6%E3%81%BF%E3%81%9F%E3%80%82
+
 ## har2swagger
+
 
 - [data.har](../..//20190208/example_har/data.har)
 

@@ -77,8 +77,8 @@ def is_specific_header(
         return False
     elif name.startswith("x-"):
         return False
-    elif name.startswith("_"):
-        return False
+    # elif name.startswith("_"):
+    #     return False
     else:
         return True
 
