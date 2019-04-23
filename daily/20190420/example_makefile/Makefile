@@ -1,3 +1,5 @@
+default: 00 01
+
 00:
 	python parse.py 00*.mk | tee 00.output
 01:

@@ -11,3 +11,5 @@ hello:
 bye: hello
 	echo $(shell echo bye)
 
+# dummy
+dummy: ;

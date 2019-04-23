@@ -111,6 +111,8 @@ def emit(parsed: t.List[Node]) -> None:
         elif typ == "task":
             if not d["args"]:
                 print(f"{d['name']}:")
+            elif len(d["args"]) == 1 and d["args"][0] == ";":
+                print(f"{d['name']}: ;")
             else:
                 print(f"{d['name']}:\\")
                 for arg in d["args"][:-1]:
