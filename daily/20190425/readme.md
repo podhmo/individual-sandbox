@@ -19,3 +19,6 @@ go get -u -v github.com/podhmo/hatena/cmd/hatena
 
 https://github.com/golang/go/wiki/gopls
 
+## httpie の記法時々忘れる
+
+https://httpie.org/doc#request-items
