@@ -1,0 +1,8 @@
+# title: Reference
+"type": "object"
+"properties":
+  "$ref":
+    "format": "uriref"
+    "type": "string"
+required:
+  - "$ref"

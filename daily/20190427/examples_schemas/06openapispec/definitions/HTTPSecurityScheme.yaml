@@ -1,0 +1,5 @@
+definitions:
+  HTTPSecurityScheme:
+    oneOf:
+    - $ref: 'NonBearerHTTPSecurityScheme.yaml#/definitions/NonBearerHTTPSecurityScheme'
+    - $ref: 'BearerHTTPSecurityScheme.yaml#/definitions/BearerHTTPSecurityScheme'

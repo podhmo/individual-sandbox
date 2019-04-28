@@ -1,0 +1,28 @@
+definitions:
+  Response:
+    type: object
+    required:
+    - description
+    properties:
+      description:
+        type: string
+      headers:
+        additionalProperties:
+          oneOf:
+          - $ref: 'Header.yaml#/definitions/Header'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      content:
+        type: object
+        additionalProperties:
+          $ref: 'MediaType.yaml#/definitions/MediaType'
+      links:
+        type: object
+        additionalProperties:
+          oneOf:
+          - $ref: 'Link.yaml#/definitions/Link'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: Describes a single response from an API Operation, including design-time,
+      static  `links` to operations based on the response.

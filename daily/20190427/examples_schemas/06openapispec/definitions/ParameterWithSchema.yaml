@@ -1,0 +1,7 @@
+definitions:
+  ParameterWithSchema:
+    oneOf:
+    - $ref: 'ParameterWithSchemaWithExample.yaml#/definitions/ParameterWithSchemaWithExample'
+    - $ref: 'ParameterWithSchemaWithExamples.yaml#/definitions/ParameterWithSchemaWithExamples'
+    description: Describes a single operation parameter.  A unique parameter is defined
+      by a combination of a name and location.

@@ -1,0 +1,5 @@
+"properties":
+  properties:
+    name:
+      type: string
+

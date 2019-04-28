@@ -1,0 +1,11 @@
+definitions:
+  SecurityScheme:
+    oneOf:
+    - $ref: 'APIKeySecurityScheme.yaml#/definitions/APIKeySecurityScheme'
+    - $ref: 'HTTPSecurityScheme.yaml#/definitions/HTTPSecurityScheme'
+    - $ref: 'OAuth2SecurityScheme.yaml#/definitions/OAuth2SecurityScheme'
+    - $ref: 'OpenIdConnectSecurityScheme.yaml#/definitions/OpenIdConnectSecurityScheme'
+    description: Allows the definition of a security scheme that can be used by the
+      operations. Supported schemes are HTTP authentication, an API key (either as
+      a header or as a query parameter) and OAuth2's common flows (implicit, password,
+      application and access code).

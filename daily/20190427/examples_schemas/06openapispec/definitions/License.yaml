@@ -1,0 +1,15 @@
+definitions:
+  License:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+      url:
+        type: string
+        format: uriref
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: License information for the exposed API.

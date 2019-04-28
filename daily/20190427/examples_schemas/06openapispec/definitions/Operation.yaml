@@ -1,0 +1,51 @@
+definitions:
+  Operation:
+    type: object
+    required:
+    - responses
+    properties:
+      tags:
+        type: array
+        items:
+          type: string
+      summary:
+        type: string
+      description:
+        type: string
+      externalDocs:
+        $ref: 'ExternalDocumentation.yaml#/definitions/ExternalDocumentation'
+      operationId:
+        type: string
+      parameters:
+        type: array
+        items:
+          oneOf:
+          - $ref: 'Parameter.yaml#/definitions/Parameter'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      requestBody:
+        oneOf:
+        - $ref: 'RequestBody.yaml#/definitions/RequestBody'
+        - $ref: 'Reference.yaml#/definitions/Reference'
+      responses:
+        $ref: 'Responses.yaml#/definitions/Responses'
+      callbacks:
+        type: object
+        additionalProperties:
+          oneOf:
+          - $ref: 'Callback.yaml#/definitions/Callback'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      deprecated:
+        type: boolean
+        default: false
+      security:
+        type: array
+        items:
+          $ref: 'SecurityRequirement.yaml#/definitions/SecurityRequirement'
+      servers:
+        type: array
+        items:
+          $ref: 'Server.yaml#/definitions/Server'
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: Describes a single API operation on a path.

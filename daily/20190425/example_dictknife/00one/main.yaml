@@ -1,0 +1,29 @@
+definitions:
+  Components:
+    "type": "object"
+    properties:
+      schemas:
+        $ref: "#/definitions/Schemas"
+  Schemas:
+    "type": "object"
+    "patternProperties": {
+      "^[a-zA-Z0-9\\.\\-_]+$":
+        "oneOf":
+          - "$ref": "#/definitions/Reference"
+          - "$ref": "#/definitions/Schema"
+  Reference:
+    "type": "object"
+      "properties":
+        "$ref":
+          "format": "uriref"
+          "type": "string"
+      required:
+        - "$ref"
+  Schema:
+    "properties":
+      properties: {}
+propeties:
+  components:
+    $ref: "#/definitions/Components"
+  openapi:
+    type: string

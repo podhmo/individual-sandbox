@@ -1,0 +1,156 @@
+type: object
+required:
+- openapi
+- info
+- paths
+properties:
+  openapi:
+    type: string
+    pattern: ^3\.0\.\d(-.+)?$
+  info:
+    $ref: '#/definitions/Info'
+  externalDocs:
+    $ref: '#/definitions/ExternalDocumentation'
+  servers:
+    type: array
+    items:
+      $ref: '#/definitions/Server'
+  security:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityRequirement'
+  tags:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  paths:
+    $ref: '#/definitions/Paths'
+  components:
+    $ref: '#/definitions/Components'
+patternProperties:
+  ^x-: {}
+additionalProperties: false
+definitions:
+  Reference:
+    $ref: 'definitions/Reference.yaml#/definitions/Reference'
+  Info:
+    $ref: 'definitions/Info.yaml#/definitions/Info'
+  Contact:
+    $ref: 'definitions/Contact.yaml#/definitions/Contact'
+  License:
+    $ref: 'definitions/License.yaml#/definitions/License'
+  Server:
+    $ref: 'definitions/Server.yaml#/definitions/Server'
+  ServerVariable:
+    $ref: 'definitions/ServerVariable.yaml#/definitions/ServerVariable'
+  Components:
+    $ref: 'definitions/Components.yaml#/definitions/Components'
+  Schema:
+    $ref: 'definitions/Schema.yaml#/definitions/Schema'
+  Discriminator:
+    $ref: 'definitions/Discriminator.yaml#/definitions/Discriminator'
+  XML:
+    $ref: 'definitions/XML.yaml#/definitions/XML'
+  Response:
+    $ref: 'definitions/Response.yaml#/definitions/Response'
+  MediaType:
+    $ref: 'definitions/MediaType.yaml#/definitions/MediaType'
+  MediaTypeWithExample:
+    $ref: 'definitions/MediaTypeWithExample.yaml#/definitions/MediaTypeWithExample'
+  MediaTypeWithExamples:
+    $ref: 'definitions/MediaTypeWithExamples.yaml#/definitions/MediaTypeWithExamples'
+  Example:
+    $ref: 'definitions/Example.yaml#/definitions/Example'
+  Header:
+    $ref: 'definitions/Header.yaml#/definitions/Header'
+  HeaderWithSchema:
+    $ref: 'definitions/HeaderWithSchema.yaml#/definitions/HeaderWithSchema'
+  HeaderWithSchemaWithExample:
+    $ref: 'definitions/HeaderWithSchemaWithExample.yaml#/definitions/HeaderWithSchemaWithExample'
+  HeaderWithSchemaWithExamples:
+    $ref: 'definitions/HeaderWithSchemaWithExamples.yaml#/definitions/HeaderWithSchemaWithExamples'
+  HeaderWithContent:
+    $ref: 'definitions/HeaderWithContent.yaml#/definitions/HeaderWithContent'
+  Paths:
+    $ref: 'definitions/Paths.yaml#/definitions/Paths'
+  PathItem:
+    $ref: 'definitions/PathItem.yaml#/definitions/PathItem'
+  Operation:
+    $ref: 'definitions/Operation.yaml#/definitions/Operation'
+  Responses:
+    $ref: 'definitions/Responses.yaml#/definitions/Responses'
+  SecurityRequirement:
+    $ref: 'definitions/SecurityRequirement.yaml#/definitions/SecurityRequirement'
+  Tag:
+    $ref: 'definitions/Tag.yaml#/definitions/Tag'
+  ExternalDocumentation:
+    $ref: 'definitions/ExternalDocumentation.yaml#/definitions/ExternalDocumentation'
+  Parameter:
+    $ref: 'definitions/Parameter.yaml#/definitions/Parameter'
+  ParameterWithSchema:
+    $ref: 'definitions/ParameterWithSchema.yaml#/definitions/ParameterWithSchema'
+  ParameterWithSchemaWithExample:
+    $ref: 'definitions/ParameterWithSchemaWithExample.yaml#/definitions/ParameterWithSchemaWithExample'
+  ParameterWithSchemaWithExampleInPath:
+    $ref: 'definitions/ParameterWithSchemaWithExampleInPath.yaml#/definitions/ParameterWithSchemaWithExampleInPath'
+  ParameterWithSchemaWithExampleInQuery:
+    $ref: 'definitions/ParameterWithSchemaWithExampleInQuery.yaml#/definitions/ParameterWithSchemaWithExampleInQuery'
+  ParameterWithSchemaWithExampleInHeader:
+    $ref: 'definitions/ParameterWithSchemaWithExampleInHeader.yaml#/definitions/ParameterWithSchemaWithExampleInHeader'
+  ParameterWithSchemaWithExampleInCookie:
+    $ref: 'definitions/ParameterWithSchemaWithExampleInCookie.yaml#/definitions/ParameterWithSchemaWithExampleInCookie'
+  ParameterWithSchemaWithExamples:
+    $ref: 'definitions/ParameterWithSchemaWithExamples.yaml#/definitions/ParameterWithSchemaWithExamples'
+  ParameterWithSchemaWithExamplesInPath:
+    $ref: 'definitions/ParameterWithSchemaWithExamplesInPath.yaml#/definitions/ParameterWithSchemaWithExamplesInPath'
+  ParameterWithSchemaWithExamplesInQuery:
+    $ref: 'definitions/ParameterWithSchemaWithExamplesInQuery.yaml#/definitions/ParameterWithSchemaWithExamplesInQuery'
+  ParameterWithSchemaWithExamplesInHeader:
+    $ref: 'definitions/ParameterWithSchemaWithExamplesInHeader.yaml#/definitions/ParameterWithSchemaWithExamplesInHeader'
+  ParameterWithSchemaWithExamplesInCookie:
+    $ref: 'definitions/ParameterWithSchemaWithExamplesInCookie.yaml#/definitions/ParameterWithSchemaWithExamplesInCookie'
+  ParameterWithContent:
+    $ref: 'definitions/ParameterWithContent.yaml#/definitions/ParameterWithContent'
+  ParameterWithContentInPath:
+    $ref: 'definitions/ParameterWithContentInPath.yaml#/definitions/ParameterWithContentInPath'
+  ParameterWithContentNotInPath:
+    $ref: 'definitions/ParameterWithContentNotInPath.yaml#/definitions/ParameterWithContentNotInPath'
+  RequestBody:
+    $ref: 'definitions/RequestBody.yaml#/definitions/RequestBody'
+  SecurityScheme:
+    $ref: 'definitions/SecurityScheme.yaml#/definitions/SecurityScheme'
+  APIKeySecurityScheme:
+    $ref: 'definitions/APIKeySecurityScheme.yaml#/definitions/APIKeySecurityScheme'
+  HTTPSecurityScheme:
+    $ref: 'definitions/HTTPSecurityScheme.yaml#/definitions/HTTPSecurityScheme'
+  NonBearerHTTPSecurityScheme:
+    $ref: 'definitions/NonBearerHTTPSecurityScheme.yaml#/definitions/NonBearerHTTPSecurityScheme'
+  BearerHTTPSecurityScheme:
+    $ref: 'definitions/BearerHTTPSecurityScheme.yaml#/definitions/BearerHTTPSecurityScheme'
+  OAuth2SecurityScheme:
+    $ref: 'definitions/OAuth2SecurityScheme.yaml#/definitions/OAuth2SecurityScheme'
+  OpenIdConnectSecurityScheme:
+    $ref: 'definitions/OpenIdConnectSecurityScheme.yaml#/definitions/OpenIdConnectSecurityScheme'
+  OAuthFlows:
+    $ref: 'definitions/OAuthFlows.yaml#/definitions/OAuthFlows'
+  ImplicitOAuthFlow:
+    $ref: 'definitions/ImplicitOAuthFlow.yaml#/definitions/ImplicitOAuthFlow'
+  PasswordOAuthFlow:
+    $ref: 'definitions/PasswordOAuthFlow.yaml#/definitions/PasswordOAuthFlow'
+  ClientCredentialsFlow:
+    $ref: 'definitions/ClientCredentialsFlow.yaml#/definitions/ClientCredentialsFlow'
+  AuthorizationCodeOAuthFlow:
+    $ref: 'definitions/AuthorizationCodeOAuthFlow.yaml#/definitions/AuthorizationCodeOAuthFlow'
+  Link:
+    $ref: 'definitions/Link.yaml#/definitions/Link'
+  LinkWithOperationRef:
+    $ref: 'definitions/LinkWithOperationRef.yaml#/definitions/LinkWithOperationRef'
+  LinkWithOperationId:
+    $ref: 'definitions/LinkWithOperationId.yaml#/definitions/LinkWithOperationId'
+  Callback:
+    $ref: 'definitions/Callback.yaml#/definitions/Callback'
+  Encoding:
+    $ref: 'definitions/Encoding.yaml#/definitions/Encoding'
+description: This is the root document object for the API specification. It combines
+  what previously was the Resource Listing and API Declaration (version 1.2 and earlier)
+  together into one document.

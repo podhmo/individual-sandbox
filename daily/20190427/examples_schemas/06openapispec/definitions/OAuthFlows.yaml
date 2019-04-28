@@ -1,0 +1,16 @@
+definitions:
+  OAuthFlows:
+    type: object
+    properties:
+      implicit:
+        $ref: 'ImplicitOAuthFlow.yaml#/definitions/ImplicitOAuthFlow'
+      password:
+        $ref: 'PasswordOAuthFlow.yaml#/definitions/PasswordOAuthFlow'
+      clientCredentials:
+        $ref: 'ClientCredentialsFlow.yaml#/definitions/ClientCredentialsFlow'
+      authorizationCode:
+        $ref: 'AuthorizationCodeOAuthFlow.yaml#/definitions/AuthorizationCodeOAuthFlow'
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: Allows configuration of the supported OAuth Flows.

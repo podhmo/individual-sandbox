@@ -1,0 +1,19 @@
+definitions:
+  OpenIdConnectSecurityScheme:
+    type: object
+    required:
+    - type
+    - openIdConnectUrl
+    properties:
+      type:
+        type: string
+        enum:
+        - openIdConnect
+      openIdConnectUrl:
+        type: string
+        format: url
+      description:
+        type: string
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false

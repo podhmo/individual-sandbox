@@ -1,0 +1,26 @@
+{
+  "person": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "name": "George"
+              },
+              {
+                "name": "Charlotte"
+              }
+            ],
+            "name": "William"
+          },
+          {
+            "name": "Harry"
+          }
+        ],
+        "name": "Charles"
+      }
+    ],
+    "name": "Elizabeth"
+  }
+}

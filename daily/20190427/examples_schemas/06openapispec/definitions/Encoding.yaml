@@ -1,0 +1,25 @@
+definitions:
+  Encoding:
+    type: object
+    properties:
+      contentType:
+        type: string
+      headers:
+        type: object
+        additionalProperties:
+          $ref: 'Header.yaml#/definitions/Header'
+      style:
+        type: string
+        enum:
+        - form
+        - spaceDelimited
+        - pipeDelimited
+        - deepObject
+      explode:
+        type: boolean
+      allowReserved:
+        type: boolean
+        default: false
+    additionalProperties: false
+    description: An object representing multipart region encoding for `requestBody`
+      objects.

@@ -1,0 +1,11 @@
+definitions:
+  Components:
+    "type": "object"
+    properties:
+      schemas:
+        $ref: "schemas.yaml"
+propeties:
+  components:
+    $ref: "#/definitions/Components"
+  openapi:
+    type: string

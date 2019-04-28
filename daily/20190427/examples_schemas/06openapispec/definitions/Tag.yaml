@@ -1,0 +1,17 @@
+definitions:
+  Tag:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      externalDocs:
+        $ref: 'ExternalDocumentation.yaml#/definitions/ExternalDocumentation'
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: Allows adding meta data to a single tag that is used by the Operation
+      Object. It is not mandatory to have a Tag Object per tag used there.

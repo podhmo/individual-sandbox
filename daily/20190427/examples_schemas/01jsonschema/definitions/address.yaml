@@ -1,0 +1,14 @@
+definitions:
+  address:
+    properties:
+      city:
+        $ref: 'name.yaml#/definitions/name'
+      state:
+        type: string
+      street_address:
+        type: string
+    required:
+    - street_address
+    - city
+    - state
+    type: object

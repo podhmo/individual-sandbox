@@ -1,0 +1,137 @@
+definitions:
+  Schema:
+    type: object
+    properties:
+      title:
+        type: string
+      multipleOf:
+        type: number
+        minimum: 0
+        exclusiveMinimum: true
+      maximum:
+        type: number
+      exclusiveMaximum:
+        type: boolean
+        default: false
+      minimum:
+        type: number
+      exclusiveMinimum:
+        type: boolean
+        default: false
+      maxLength:
+        type: integer
+        minimum: 0
+      minLength:
+        type: integer
+        minimum: 0
+        default: 0
+      pattern:
+        type: string
+        format: regex
+      maxItems:
+        type: integer
+        minimum: 0
+      minItems:
+        type: integer
+        minimum: 0
+        default: 0
+      uniqueItems:
+        type: boolean
+        default: false
+      maxProperties:
+        type: integer
+        minimum: 0
+      minProperties:
+        type: integer
+        minimum: 0
+        default: 0
+      required:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      enum:
+        type: array
+        items: {}
+        minItems: 1
+      type:
+        type: string
+        enum:
+        - array
+        - boolean
+        - integer
+        - number
+        - object
+        - string
+      not:
+        oneOf:
+        - $ref: '#/definitions/Schema'
+        - $ref: 'Reference.yaml#/definitions/Reference'
+      allOf:
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/definitions/Schema'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      oneOf:
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/definitions/Schema'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      anyOf:
+        type: array
+        items:
+          oneOf:
+          - $ref: '#/definitions/Schema'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      items:
+        oneOf:
+        - $ref: '#/definitions/Schema'
+        - $ref: 'Reference.yaml#/definitions/Reference'
+      properties:
+        type: object
+        additionalProperties:
+          oneOf:
+          - $ref: '#/definitions/Schema'
+          - $ref: 'Reference.yaml#/definitions/Reference'
+      additionalProperties:
+        oneOf:
+        - $ref: '#/definitions/Schema'
+        - $ref: 'Reference.yaml#/definitions/Reference'
+        - type: boolean
+        default: true
+      description:
+        type: string
+      format:
+        type: string
+      default: {}
+      nullable:
+        type: boolean
+        default: false
+      discriminator:
+        $ref: 'Discriminator.yaml#/definitions/Discriminator'
+      readOnly:
+        type: boolean
+        default: false
+      writeOnly:
+        type: boolean
+        default: false
+      example: {}
+      externalDocs:
+        $ref: 'ExternalDocumentation.yaml#/definitions/ExternalDocumentation'
+      deprecated:
+        type: boolean
+        default: false
+      xml:
+        $ref: 'XML.yaml#/definitions/XML'
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: The Schema Object allows the definition of input and output data
+      types. These types can be objects, but also primitives and arrays. This object
+      is an extended subset of the JSON Schema Specification Wright Draft 00.  Further
+      information about the properties can be found in JSON Schema Core and JSON Schema
+      Validation. Unless stated otherwise, the property definitions follow the JSON
+      Schema specification as referenced here.
