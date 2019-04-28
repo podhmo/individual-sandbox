@@ -579,20 +579,12 @@ securityDefinitions:
 definitions:
   Order:
     $ref: 'definitions/Order.yaml#/definitions/Order'
-  Category:
-    $ref: 'definitions/Category.yaml#/definitions/Category'
   User:
     $ref: 'definitions/User.yaml#/definitions/User'
-  Tag:
-    $ref: 'definitions/Tag.yaml#/definitions/Tag'
   Pet:
     $ref: 'definitions/Pet.yaml#/definitions/Pet'
   ApiResponse:
     $ref: 'definitions/ApiResponse.yaml#/definitions/ApiResponse'
-  Amount:
-    $ref: 'definitions/Amount.yaml#/definitions/Amount'
-  Currency:
-    $ref: 'definitions/Currency.yaml#/definitions/Currency'
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

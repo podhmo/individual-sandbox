@@ -1,4 +1,4 @@
-default: 01 02 03 04 05
+default: 01 02 03 04 05 06
 
 01:
 	python -m dictknife.jsonknife.separate 01*/schema.json
