@@ -1,0 +1,37 @@
+{
+  "definitions": {
+    "Info": {
+      "type": "object",
+      "required": [
+        "title",
+        "version"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "termsOfService": {
+          "type": "string",
+          "format": "uriref"
+        },
+        "contact": {
+          "$ref": "Contact.json#/definitions/Contact"
+        },
+        "license": {
+          "$ref": "License.json#/definitions/License"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "The object provides metadata about the API. The metadata can be used by the clients if needed, and can be presented in editing or documentation generation tools for convenience."
+    }
+  }
+}

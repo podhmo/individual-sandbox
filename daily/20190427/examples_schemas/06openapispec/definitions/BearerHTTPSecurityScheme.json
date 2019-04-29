@@ -1,0 +1,35 @@
+{
+  "definitions": {
+    "BearerHTTPSecurityScheme": {
+      "type": "object",
+      "required": [
+        "type",
+        "scheme"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "enum": [
+            "bearer"
+          ]
+        },
+        "bearerFormat": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    }
+  }
+}

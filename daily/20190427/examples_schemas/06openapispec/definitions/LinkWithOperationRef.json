@@ -1,0 +1,29 @@
+{
+  "definitions": {
+    "LinkWithOperationRef": {
+      "type": "object",
+      "properties": {
+        "operationRef": {
+          "type": "string",
+          "format": "uriref"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "requestBody": {},
+        "description": {
+          "type": "string"
+        },
+        "server": {
+          "$ref": "Server.json#/definitions/Server"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "The `Link Object` is responsible for defining a possible operation based on a single response."
+    }
+  }
+}

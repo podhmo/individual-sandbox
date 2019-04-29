@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "Parameter": {
+      "oneOf": [
+        {
+          "$ref": "ParameterWithSchema.json#/definitions/ParameterWithSchema"
+        },
+        {
+          "$ref": "ParameterWithContent.json#/definitions/ParameterWithContent"
+        }
+      ],
+      "description": "Describes a single operation parameter.  A unique parameter is defined by a combination of a name and location."
+    }
+  }
+}

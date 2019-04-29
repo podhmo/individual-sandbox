@@ -1,0 +1,90 @@
+{
+  "definitions": {
+    "Operation": {
+      "type": "object",
+      "required": [
+        "responses"
+      ],
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "externalDocs": {
+          "$ref": "ExternalDocumentation.json#/definitions/ExternalDocumentation"
+        },
+        "operationId": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "Parameter.json#/definitions/Parameter"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        },
+        "requestBody": {
+          "oneOf": [
+            {
+              "$ref": "RequestBody.json#/definitions/RequestBody"
+            },
+            {
+              "$ref": "Reference.json#/definitions/Reference"
+            }
+          ]
+        },
+        "responses": {
+          "$ref": "Responses.json#/definitions/Responses"
+        },
+        "callbacks": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "Callback.json#/definitions/Callback"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        },
+        "deprecated": {
+          "type": "boolean",
+          "default": false
+        },
+        "security": {
+          "type": "array",
+          "items": {
+            "$ref": "SecurityRequirement.json#/definitions/SecurityRequirement"
+          }
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "Server.json#/definitions/Server"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Describes a single API operation on a path."
+    }
+  }
+}

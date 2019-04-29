@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "required": [
+    "openapi",
+    "info",
+    "paths"
+  ],
+  "properties": {
+    "openapi": {
+      "type": "string",
+      "pattern": "^3\\.0\\.\\d(-.+)?$"
+    },
+    "info": {
+      "$ref": "#/definitions/Info"
+    },
+    "externalDocs": {
+      "$ref": "#/definitions/ExternalDocumentation"
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Server"
+      }
+    },
+    "security": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SecurityRequirement"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "paths": {
+      "$ref": "#/definitions/Paths"
+    },
+    "components": {
+      "$ref": "#/definitions/Components"
+    }
+  },
+  "patternProperties": {
+    "^x-": {}
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Info": {
+      "$ref": "definitions/Info.json#/definitions/Info"
+    },
+    "Server": {
+      "$ref": "definitions/Server.json#/definitions/Server"
+    },
+    "Components": {
+      "$ref": "definitions/Components.json#/definitions/Components"
+    },
+    "Paths": {
+      "$ref": "definitions/Paths.json#/definitions/Paths"
+    },
+    "SecurityRequirement": {
+      "$ref": "definitions/SecurityRequirement.json#/definitions/SecurityRequirement"
+    },
+    "Tag": {
+      "$ref": "definitions/Tag.json#/definitions/Tag"
+    },
+    "ExternalDocumentation": {
+      "$ref": "definitions/ExternalDocumentation.json#/definitions/ExternalDocumentation"
+    }
+  },
+  "description": "This is the root document object for the API specification. It combines what previously was the Resource Listing and API Declaration (version 1.2 and earlier) together into one document."
+}

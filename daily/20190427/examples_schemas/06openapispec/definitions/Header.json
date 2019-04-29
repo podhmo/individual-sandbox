@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "Header": {
+      "oneOf": [
+        {
+          "$ref": "HeaderWithSchema.json#/definitions/HeaderWithSchema"
+        },
+        {
+          "$ref": "HeaderWithContent.json#/definitions/HeaderWithContent"
+        }
+      ],
+      "description": "The Header Object follows the structure of the Parameter Object, with the following changes:  1. `name` MUST NOT be specified, it is given in the Headers Object. 1. `in` MUST NOT be specified, it is implicitly in `header`. 1. All traits that are affected by the location MUST be applicable to a location of `header` (for example, `style`)."
+    }
+  }
+}

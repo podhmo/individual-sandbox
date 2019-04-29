@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "Paths": {
+      "type": "object",
+      "patternProperties": {
+        "^\\/": {
+          "$ref": "PathItem.json#/definitions/PathItem"
+        },
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Holds the relative paths to the individual endpoints and their operations. The path is appended to the URL from the `Server Object` in order to construct the full URL.  The Paths MAY be empty, due to ACL constraints."
+    }
+  }
+}

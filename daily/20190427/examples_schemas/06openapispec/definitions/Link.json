@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "Link": {
+      "oneOf": [
+        {
+          "$ref": "LinkWithOperationRef.json#/definitions/LinkWithOperationRef"
+        },
+        {
+          "$ref": "LinkWithOperationId.json#/definitions/LinkWithOperationId"
+        }
+      ],
+      "description": "The `Link Object` is responsible for defining a possible operation based on a single response."
+    }
+  }
+}

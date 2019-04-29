@@ -1,7 +1,0 @@
-definitions:
-  MediaType:
-    oneOf:
-    - $ref: 'MediaTypeWithExample.yaml#/definitions/MediaTypeWithExample'
-    - $ref: 'MediaTypeWithExamples.yaml#/definitions/MediaTypeWithExamples'
-    description: Each Media Type Object provides schema and examples for a the media
-      type identified by its key.  Media Type Objects can be used in a Content Object.

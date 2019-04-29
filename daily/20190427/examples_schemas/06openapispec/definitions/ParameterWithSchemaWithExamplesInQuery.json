@@ -1,0 +1,84 @@
+{
+  "definitions": {
+    "ParameterWithSchemaWithExamplesInQuery": {
+      "type": "object",
+      "required": [
+        "name",
+        "in",
+        "schema",
+        "examples"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "query"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "deprecated": {
+          "type": "boolean",
+          "default": false
+        },
+        "allowEmptyValue": {
+          "type": "boolean",
+          "default": false
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "form",
+            "spaceDelimited",
+            "pipeDelimited",
+            "deepObject"
+          ],
+          "default": "form"
+        },
+        "explode": {
+          "type": "boolean"
+        },
+        "allowReserved": {
+          "type": "boolean",
+          "default": false
+        },
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "Schema.json#/definitions/Schema"
+            },
+            {
+              "$ref": "Reference.json#/definitions/Reference"
+            }
+          ]
+        },
+        "examples": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "Example.json#/definitions/Example"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Describes a single operation parameter.  A unique parameter is defined by a combination of a name and location."
+    }
+  }
+}

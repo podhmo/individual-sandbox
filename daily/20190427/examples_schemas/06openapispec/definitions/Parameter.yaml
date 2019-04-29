@@ -1,7 +1,0 @@
-definitions:
-  Parameter:
-    oneOf:
-    - $ref: 'ParameterWithSchema.yaml#/definitions/ParameterWithSchema'
-    - $ref: 'ParameterWithContent.yaml#/definitions/ParameterWithContent'
-    description: Describes a single operation parameter.  A unique parameter is defined
-      by a combination of a name and location.

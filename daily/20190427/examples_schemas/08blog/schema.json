@@ -1,0 +1,129 @@
+{
+  "$id": "http://example.com/root.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {},
+  "description": "An explanation about the purpose of this instance.",
+  "properties": {
+    "checked": {
+      "$id": "#/properties/checked",
+      "default": false,
+      "description": "An explanation about the purpose of this instance.",
+      "examples": [
+        false
+      ],
+      "readOnly": true,
+      "title": "The Checked Schema",
+      "type": "boolean",
+      "writeOnly": false
+    },
+    "dimensions": {
+      "$id": "#/properties/dimensions",
+      "description": "An explanation about the purpose of this instance.",
+      "properties": {
+        "height": {
+          "$id": "#/properties/dimensions/properties/height",
+          "default": 0,
+          "description": "An explanation about the purpose of this instance.",
+          "examples": [
+            10
+          ],
+          "readOnly": true,
+          "title": "The Height Schema",
+          "type": "integer",
+          "writeOnly": false
+        },
+        "width": {
+          "$id": "#/properties/dimensions/properties/width",
+          "default": 0,
+          "description": "An explanation about the purpose of this instance.",
+          "examples": [
+            5
+          ],
+          "readOnly": true,
+          "title": "The Width Schema",
+          "type": "integer",
+          "writeOnly": false
+        }
+      },
+      "readOnly": true,
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "The Dimensions Schema",
+      "type": "object",
+      "writeOnly": false
+    },
+    "id": {
+      "$id": "#/properties/id",
+      "default": 0,
+      "description": "An explanation about the purpose of this instance.",
+      "examples": [
+        1
+      ],
+      "readOnly": true,
+      "title": "The Id Schema",
+      "type": "integer",
+      "writeOnly": false
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "default": "",
+      "description": "An explanation about the purpose of this instance.",
+      "examples": [
+        "A green door"
+      ],
+      "pattern": "^(.*)$",
+      "readOnly": true,
+      "title": "The Name Schema",
+      "type": "string",
+      "writeOnly": false
+    },
+    "price": {
+      "$id": "#/properties/price",
+      "default": 0,
+      "description": "An explanation about the purpose of this instance.",
+      "examples": [
+        12.5
+      ],
+      "readOnly": true,
+      "title": "The Price Schema",
+      "type": "number",
+      "writeOnly": false
+    },
+    "tags": {
+      "$id": "#/properties/tags",
+      "description": "An explanation about the purpose of this instance.",
+      "items": {
+        "$id": "#/properties/tags/items",
+        "default": "",
+        "description": "An explanation about the purpose of this instance.",
+        "examples": [
+          "home",
+          "green"
+        ],
+        "pattern": "^(.*)$",
+        "readOnly": true,
+        "title": "The Items Schema",
+        "type": "string",
+        "writeOnly": false
+      },
+      "readOnly": true,
+      "title": "The Tags Schema",
+      "type": "array",
+      "writeOnly": false
+    }
+  },
+  "readOnly": true,
+  "required": [
+    "checked",
+    "dimensions",
+    "id",
+    "name",
+    "price",
+    "tags"
+  ],
+  "title": "The Root Schema",
+  "type": "object",
+  "writeOnly": false
+}

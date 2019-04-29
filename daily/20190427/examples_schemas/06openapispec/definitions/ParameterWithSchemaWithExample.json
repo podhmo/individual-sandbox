@@ -1,0 +1,21 @@
+{
+  "definitions": {
+    "ParameterWithSchemaWithExample": {
+      "oneOf": [
+        {
+          "$ref": "ParameterWithSchemaWithExampleInPath.json#/definitions/ParameterWithSchemaWithExampleInPath"
+        },
+        {
+          "$ref": "ParameterWithSchemaWithExampleInQuery.json#/definitions/ParameterWithSchemaWithExampleInQuery"
+        },
+        {
+          "$ref": "ParameterWithSchemaWithExampleInHeader.json#/definitions/ParameterWithSchemaWithExampleInHeader"
+        },
+        {
+          "$ref": "ParameterWithSchemaWithExampleInCookie.json#/definitions/ParameterWithSchemaWithExampleInCookie"
+        }
+      ],
+      "description": "Describes a single operation parameter.  A unique parameter is defined by a combination of a name and location."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "definitions": {
+    "Response": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "headers": {
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "Header.json#/definitions/Header"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "MediaType.json#/definitions/MediaType"
+          }
+        },
+        "links": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "Link.json#/definitions/Link"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response."
+    }
+  }
+}

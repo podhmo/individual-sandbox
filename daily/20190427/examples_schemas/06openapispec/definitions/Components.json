@@ -1,0 +1,149 @@
+{
+  "definitions": {
+    "Components": {
+      "type": "object",
+      "properties": {
+        "schemas": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Schema.json#/definitions/Schema"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Response.json#/definitions/Response"
+                }
+              ]
+            }
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Parameter.json#/definitions/Parameter"
+                }
+              ]
+            }
+          }
+        },
+        "examples": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Example.json#/definitions/Example"
+                }
+              ]
+            }
+          }
+        },
+        "requestBodies": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "RequestBody.json#/definitions/RequestBody"
+                }
+              ]
+            }
+          }
+        },
+        "headers": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Header.json#/definitions/Header"
+                }
+              ]
+            }
+          }
+        },
+        "securitySchemes": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "SecurityScheme.json#/definitions/SecurityScheme"
+                }
+              ]
+            }
+          }
+        },
+        "links": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Link.json#/definitions/Link"
+                }
+              ]
+            }
+          }
+        },
+        "callbacks": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9\\.\\-_]+$": {
+              "oneOf": [
+                {
+                  "$ref": "Reference.json#/definitions/Reference"
+                },
+                {
+                  "$ref": "Callback.json#/definitions/Callback"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Holds a set of reusable objects for different aspects of the OAS. All objects defined within the components object will have no effect on the API unless they are explicitly referenced from properties outside the components object."
+    }
+  }
+}

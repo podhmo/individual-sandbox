@@ -1,0 +1,30 @@
+{
+  "definitions": {
+    "RequestBody": {
+      "type": "object",
+      "required": [
+        "content"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "MediaType.json#/definitions/MediaType"
+          }
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Describes a single request body."
+    }
+  }
+}

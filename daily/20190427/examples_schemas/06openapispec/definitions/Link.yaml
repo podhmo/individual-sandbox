@@ -1,7 +1,0 @@
-definitions:
-  Link:
-    oneOf:
-    - $ref: 'LinkWithOperationRef.yaml#/definitions/LinkWithOperationRef'
-    - $ref: 'LinkWithOperationId.yaml#/definitions/LinkWithOperationId'
-    description: The `Link Object` is responsible for defining a possible operation
-      based on a single response.

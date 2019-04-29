@@ -1,0 +1,46 @@
+{
+  "definitions": {
+    "MediaTypeWithExamples": {
+      "type": "object",
+      "required": [
+        "examples"
+      ],
+      "properties": {
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "Schema.json#/definitions/Schema"
+            },
+            {
+              "$ref": "Reference.json#/definitions/Reference"
+            }
+          ]
+        },
+        "examples": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "Example.json#/definitions/Example"
+              },
+              {
+                "$ref": "Reference.json#/definitions/Reference"
+              }
+            ]
+          }
+        },
+        "encoding": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "Encoding.json#/definitions/Encoding"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Each Media Type Object provides schema and examples for a the media type identified by its key.  Media Type Objects can be used in a Content Object."
+    }
+  }
+}

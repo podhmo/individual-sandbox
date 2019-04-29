@@ -1,0 +1,26 @@
+{
+  "definitions": {
+    "OAuthFlows": {
+      "type": "object",
+      "properties": {
+        "implicit": {
+          "$ref": "ImplicitOAuthFlow.json#/definitions/ImplicitOAuthFlow"
+        },
+        "password": {
+          "$ref": "PasswordOAuthFlow.json#/definitions/PasswordOAuthFlow"
+        },
+        "clientCredentials": {
+          "$ref": "ClientCredentialsFlow.json#/definitions/ClientCredentialsFlow"
+        },
+        "authorizationCode": {
+          "$ref": "AuthorizationCodeOAuthFlow.json#/definitions/AuthorizationCodeOAuthFlow"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "description": "Allows configuration of the supported OAuth Flows."
+    }
+  }
+}

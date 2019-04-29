@@ -1,0 +1,21 @@
+{
+  "definitions": {
+    "SecurityScheme": {
+      "oneOf": [
+        {
+          "$ref": "APIKeySecurityScheme.json#/definitions/APIKeySecurityScheme"
+        },
+        {
+          "$ref": "HTTPSecurityScheme.json#/definitions/HTTPSecurityScheme"
+        },
+        {
+          "$ref": "OAuth2SecurityScheme.json#/definitions/OAuth2SecurityScheme"
+        },
+        {
+          "$ref": "OpenIdConnectSecurityScheme.json#/definitions/OpenIdConnectSecurityScheme"
+        }
+      ],
+      "description": "Allows the definition of a security scheme that can be used by the operations. Supported schemes are HTTP authentication, an API key (either as a header or as a query parameter) and OAuth2's common flows (implicit, password, application and access code)."
+    }
+  }
+}

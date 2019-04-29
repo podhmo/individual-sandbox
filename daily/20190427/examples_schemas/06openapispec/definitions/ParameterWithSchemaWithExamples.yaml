@@ -1,9 +1,0 @@
-definitions:
-  ParameterWithSchemaWithExamples:
-    oneOf:
-    - $ref: 'ParameterWithSchemaWithExamplesInPath.yaml#/definitions/ParameterWithSchemaWithExamplesInPath'
-    - $ref: 'ParameterWithSchemaWithExamplesInQuery.yaml#/definitions/ParameterWithSchemaWithExamplesInQuery'
-    - $ref: 'ParameterWithSchemaWithExamplesInHeader.yaml#/definitions/ParameterWithSchemaWithExamplesInHeader'
-    - $ref: 'ParameterWithSchemaWithExamplesInCookie.yaml#/definitions/ParameterWithSchemaWithExamplesInCookie'
-    description: Describes a single operation parameter.  A unique parameter is defined
-      by a combination of a name and location.

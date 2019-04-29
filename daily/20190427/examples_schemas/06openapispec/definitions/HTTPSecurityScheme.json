@@ -1,0 +1,14 @@
+{
+  "definitions": {
+    "HTTPSecurityScheme": {
+      "oneOf": [
+        {
+          "$ref": "NonBearerHTTPSecurityScheme.json#/definitions/NonBearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "BearerHTTPSecurityScheme.json#/definitions/BearerHTTPSecurityScheme"
+        }
+      ]
+    }
+  }
+}

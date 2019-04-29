@@ -1,0 +1,3 @@
+definitions:
+  Pet:
+    $ref: 'definitions/Pet.yaml#/definitions/Pet'
