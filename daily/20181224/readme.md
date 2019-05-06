@@ -72,6 +72,7 @@ unicodeで指定しちゃうのが良いのでは？という話。
 設定の仕方だけを知りたいなら
 
 - https://knowledge.sakura.ad.jp/8494/ これが一番参考になるかも？
+- http://extra-vision.blogspot.com/2016/07/emacs.html
 
 ### fontsetを登録するには？
 
