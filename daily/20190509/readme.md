@@ -1,3 +1,25 @@
+## screen
+
+- http://yskwkzhr.blogspot.com/2010/11/screenrc.html
+- http://inaz2.hatenablog.com/entry/2017/01/14/001459
+
+- 分割 S
+- 分割 |
+- 戻る Q
+
+### 分割された領域をマウスでフォーカスしたくない？
+
+.screenrc
+
+```
+# マウスでフォーカスを変えられるように
+mousetrack on
+```
+
+### screenのタイトルをいい感じに自動でできない？
+
+
+
 ## python subprocess
 
 - 簡単なprocess managerを作りたい(inspired by too)

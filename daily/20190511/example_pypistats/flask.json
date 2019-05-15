@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "category": "2.6",
+      "downloads": 5287
+    },
+    {
+      "category": "2.7",
+      "downloads": 2274964
+    },
+    {
+      "category": "3.2",
+      "downloads": 23
+    },
+    {
+      "category": "3.3",
+      "downloads": 723
+    },
+    {
+      "category": "3.4",
+      "downloads": 120625
+    },
+    {
+      "category": "3.5",
+      "downloads": 899583
+    },
+    {
+      "category": "3.6",
+      "downloads": 4135489
+    },
+    {
+      "category": "3.7",
+      "downloads": 787076
+    },
+    {
+      "category": "3.8",
+      "downloads": 3190
+    },
+    {
+      "category": "null",
+      "downloads": 44777
+    }
+  ],
+  "package": "flask",
+  "type": "python_minor_downloads"
+}

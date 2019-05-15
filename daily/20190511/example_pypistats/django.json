@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "category": "2.6",
+      "downloads": 1320
+    },
+    {
+      "category": "2.7",
+      "downloads": 762206
+    },
+    {
+      "category": "3.2",
+      "downloads": 24
+    },
+    {
+      "category": "3.3",
+      "downloads": 381
+    },
+    {
+      "category": "3.4",
+      "downloads": 56461
+    },
+    {
+      "category": "3.5",
+      "downloads": 250227
+    },
+    {
+      "category": "3.6",
+      "downloads": 1078975
+    },
+    {
+      "category": "3.7",
+      "downloads": 595086
+    },
+    {
+      "category": "3.8",
+      "downloads": 1764
+    },
+    {
+      "category": "null",
+      "downloads": 30137
+    }
+  ],
+  "package": "django",
+  "type": "python_minor_downloads"
+}
