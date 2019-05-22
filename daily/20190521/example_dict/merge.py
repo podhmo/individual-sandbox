@@ -1,5 +1,4 @@
 import operator
-import math
 
 
 def _to_accesssor(k):
@@ -15,13 +14,23 @@ def _to_accesssor(k):
 
 class Merger:
     def __init__(
-        self, missing_value=math.nan, fill=True, accessor_factory=_to_accesssor
+        self, *, missing_value=None, fill=True, accessor_factory=_to_accesssor
     ):
         self.missing_value = missing_value
         self.fill = fill
         self.accessor_factory = accessor_factory
 
-    def merge(self, left, right, *, how="inner", left_on=None, right_on=None, on=None):
+    def merge(
+        self,
+        left,
+        right,
+        *,
+        how="inner",
+        left_on=None,
+        right_on=None,
+        on=None,
+        prefix=""
+    ):
         assert on or (left_on and right_on)
 
         if on is not None:
@@ -30,19 +39,19 @@ class Merger:
         right_on = self.accessor_factory(right_on)
 
         if how == "inner":
-            return self._merge_inner(left, right, left_on, right_on)
+            return self._merge_inner(left, right, left_on, right_on, prefix=prefix)
         elif how == "left":
-            return self._merge_left(left, right, left_on, right_on)
+            return self._merge_left(left, right, left_on, right_on, prefix=prefix)
         elif how == "right":
-            return self._merge_left(right, left, right_on, left_on)
+            return self._merge_left(right, left, right_on, left_on, prefix=prefix)
         elif how == "outer":
-            return self._merge_outer(left, right, left_on, right_on)
+            return self._merge_outer(left, right, left_on, right_on, prefix=prefix)
         else:
             raise ValueError("invalid merge method {}".format(how))
 
     __call__ = merge
 
-    def _merge_left(self, left, right, left_k, right_k):
+    def _merge_left(self, left, right, left_k, right_k, prefix=""):
         right_cache = {right_k(x): x for x in right}
         if self.fill:
             keys = set()
@@ -67,7 +76,7 @@ class Merger:
                         d[k] = self.missing_value
         return r
 
-    def _merge_outer(self, left, right, left_k, right_k):
+    def _merge_outer(self, left, right, left_k, right_k, prefix=""):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
         small_cache = {small_k(x): x for x in small}
 
@@ -110,12 +119,13 @@ class Merger:
                 continue
             d = sv.copy()
             if large_defaults is not None:
-                print("@", large_defaults)
-                # d.update(large_defaults)
+                for k, v in large_defaults.items():
+                    if k not in d:
+                        d[k] = v
             r.append(d)
         return r
 
-    def _merge_inner(self, left, right, left_k, right_k):
+    def _merge_inner(self, left, right, left_k, right_k, prefix=""):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
         small_cache = {small_k(sv): sv for sv in small}
         r = []

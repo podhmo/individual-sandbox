@@ -1,0 +1,15 @@
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+    required:
+      - name
+    additionalProperties: false
+properties:
+  person:
+    $ref: "#/definitions/person"
+additionalProperties: false

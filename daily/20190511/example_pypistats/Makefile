@@ -1,5 +1,8 @@
 GOOGLE_CREDENTIAL_FILE="<>.json"
 
+default:
+	echo '{"django": "django.json", "flask": "flask.json"}' | jqfpy 'd = {name: h.loadfile(fname) for name, fname in get().items()}; categories = sorted(set().union(*[get(f"{k}/data[]/category", d=d) for k in  d.keys()])); categories'
+
 stats: PKG ?= flask
 stats: CMD ?= python_minor
 stats:
