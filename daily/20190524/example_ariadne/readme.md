@@ -64,6 +64,19 @@ $ pip install --upgrade starlette
 
 ## ok
 
+server
+
+```console
+$ make
+uvicorn myscript:app
+INFO:uvicorn:Started server process [31539]
+INFO:uvicorn:Waiting for application startup.
+INFO:uvicorn:ASGI 'lifespan' protocol appears unsupported.
+INFO:uvicorn:Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
+
+client
+
 ```console
 $ echo '{"query":"{hello}"}' | http --json POST :8000
 HTTP/1.1 200 OK
