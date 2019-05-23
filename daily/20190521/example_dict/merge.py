@@ -20,17 +20,7 @@ class Merger:
         self.fill = fill
         self.accessor_factory = accessor_factory
 
-    def merge(
-        self,
-        left,
-        right,
-        *,
-        how="inner",
-        left_on=None,
-        right_on=None,
-        on=None,
-        prefix=""
-    ):
+    def merge(self, left, right, *, how="inner", left_on=None, right_on=None, on=None):
         assert on or (left_on and right_on)
 
         if on is not None:
@@ -39,19 +29,19 @@ class Merger:
         right_on = self.accessor_factory(right_on)
 
         if how == "inner":
-            return self._merge_inner(left, right, left_on, right_on, prefix=prefix)
+            return self._merge_inner(left, right, left_on, right_on)
         elif how == "left":
-            return self._merge_left(left, right, left_on, right_on, prefix=prefix)
+            return self._merge_left(left, right, left_on, right_on)
         elif how == "right":
-            return self._merge_left(right, left, right_on, left_on, prefix=prefix)
+            return self._merge_left(right, left, right_on, left_on)
         elif how == "outer":
-            return self._merge_outer(left, right, left_on, right_on, prefix=prefix)
+            return self._merge_outer(left, right, left_on, right_on)
         else:
             raise ValueError("invalid merge method {}".format(how))
 
     __call__ = merge
 
-    def _merge_left(self, left, right, left_k, right_k, prefix=""):
+    def _merge_left(self, left, right, left_k, right_k):
         right_cache = {right_k(x): x for x in right}
         if self.fill:
             keys = set()
@@ -76,7 +66,7 @@ class Merger:
                         d[k] = self.missing_value
         return r
 
-    def _merge_outer(self, left, right, left_k, right_k, prefix=""):
+    def _merge_outer(self, left, right, left_k, right_k):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
         small_cache = {small_k(x): x for x in small}
 
@@ -125,7 +115,7 @@ class Merger:
             r.append(d)
         return r
 
-    def _merge_inner(self, left, right, left_k, right_k, prefix=""):
+    def _merge_inner(self, left, right, left_k, right_k):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
         small_cache = {small_k(sv): sv for sv in small}
         r = []
@@ -147,3 +137,24 @@ def _ordered(left, right, left_k, right_k):
 
 
 merge = Merger()  # noqa
+
+
+# include/exclude? or only/ignore?
+def with_prefix(prefix, d, *, exclude=None, mutable=False):
+    exclude = exclude or []
+    _with_prefix = _with_prefix_mutable if mutable else _with_prefix_immutable
+    if hasattr(d, "append"):
+        return [_with_prefix(prefix, x, exclude=exclude) for x in d]
+    else:
+        return _with_prefix(prefix, d, exclude=exclude)
+
+
+def _with_prefix_immutable(prefix, d, *, exclude):
+    return {(k if k in exclude else prefix + k): v for k, v in d.items()}
+
+
+def _with_prefix_mutable(prefix, d, *, exclude):
+    for k in list(d.keys()):
+        if k not in exclude:
+            d[prefix + k] = d.pop(k)
+    return d
