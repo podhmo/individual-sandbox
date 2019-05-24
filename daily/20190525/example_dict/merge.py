@@ -1,4 +1,5 @@
 import operator
+from collections import defaultdict
 
 
 def _to_accesssor(k):
@@ -117,15 +118,19 @@ class Merger:
 
     def _merge_inner(self, left, right, left_k, right_k):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
-        small_cache = {small_k(sv): sv for sv in small}
+        small_cache = defaultdict(list)
+        for x in small:
+            small_cache[small_k(x)].append(x)
+
         r = []
         for lv in large:
             lk = large_k(lv)
             if lk not in small_cache:
                 continue
-            d = lv.copy()
-            d.update(small_cache[lk])
-            r.append(d)
+            for rv in small_cache[lk]:
+                d = lv.copy()
+                d.update(rv)
+                r.append(d)
         return r
 
 

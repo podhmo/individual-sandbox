@@ -23,6 +23,7 @@ class Tests(unittest.TestCase):
                 {"id": 10, "name": "Ax", "gid": 1},
                 {"id": 11, "name": "Ay", "gid": 1},
                 {"id": 20, "name": "Bi", "gid": 2},
+                {"id": 40, "name": "D?", "gid": 4},
             ]
 
         C = namedtuple("C", "msg, args, kwargs, want")
@@ -38,7 +39,7 @@ class Tests(unittest.TestCase):
                 ],
             ),
             C(
-                msg="inner join",
+                msg="inner join2",
                 args=["users", "groups"],
                 kwargs={"left_on": "gid", "right_on": "id"},
                 want=[
