@@ -1,4 +1,5 @@
 import unittest
+import copy
 import json
 import itertools
 from collections import namedtuple
@@ -26,6 +27,10 @@ class Tests(unittest.TestCase):
                 {"id": 40, "name": "D?", "gid": 4},
             ]
 
+        class copied:
+            groups = copy.deepcopy(data.groups)
+            users = copy.deepcopy(data.users)
+
         C = namedtuple("C", "msg, args, kwargs, want")
         cases = [
             C(
@@ -48,6 +53,40 @@ class Tests(unittest.TestCase):
                     {"id": 2, "name": "Bi", "gid": 2, "gname": "B"},
                 ],
             ),
+            C(
+                msg="left outer join",
+                args=["users", "groups"],
+                kwargs={"left_on": "gid", "right_on": "id", "how": "left"},
+                want=[
+                    {"id": 1, "name": "Ax", "gid": 1, "gname": "A"},
+                    {"id": 1, "name": "Ay", "gid": 1, "gname": "A"},
+                    {"id": 2, "name": "Bi", "gid": 2, "gname": "B"},
+                    {"id": 40, "name": "D?", "gid": 4, "gname": None},
+                ],
+            ),
+            C(
+                msg="right outer join",
+                args=["users", "groups"],
+                kwargs={"left_on": "gid", "right_on": "id", "how": "right"},
+                want=[
+                    {"id": 10, "name": "Ax", "gid": 1, "gname": "A"},
+                    {"id": 11, "name": "Ay", "gid": 1, "gname": "A"},
+                    {"id": 20, "name": "Bi", "gid": 2, "gname": "B"},
+                    {"id": 3, "name": None, "gid": None, "gname": "C"},
+                ],
+            ),
+            C(
+                msg="full outer join",
+                args=["users", "groups"],
+                kwargs={"left_on": "gid", "right_on": "id", "how": "outer"},
+                want=[
+                    {"id": 1, "name": "Ax", "gid": 1, "gname": "A"},
+                    {"id": 1, "name": "Ay", "gid": 1, "gname": "A"},
+                    {"id": 2, "name": "Bi", "gid": 2, "gname": "B"},
+                    {"id": 40, "name": "D?", "gid": 4, "gname": None},
+                    {"id": 3, "name": None, "gid": None, "gname": "C"},
+                ],
+            ),
         ]
         for c in cases:
             with self.subTest(msg=c.msg, args=c.args, kwargs=c.kwargs):
@@ -57,6 +96,9 @@ class Tests(unittest.TestCase):
                 self.assertTrue(
                     got == c.want, msg=_DifferenceReportText(got=got, want=c.want)
                 )
+
+                self.assertTrue(data.users == copied.users, "not modified")
+                self.assertTrue(data.groups == copied.groups, "not modified")
 
 
 class _DifferenceReportText:

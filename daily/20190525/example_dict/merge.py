@@ -43,7 +43,10 @@ class Merger:
     __call__ = merge
 
     def _merge_left(self, left, right, left_k, right_k):
-        right_cache = {right_k(x): x for x in right}
+        right_cache = defaultdict(list)
+        for x in right:
+            right_cache[right_k(x)].append(x)
+
         if self.fill:
             keys = set()
             for rv in right:
@@ -54,12 +57,15 @@ class Merger:
         unfilled = []
         for lv in left:
             k = left_k(lv)
-            d = lv.copy()
             if k in right_cache:
-                d.update(right_cache[k])
+                for rv in right_cache[k]:
+                    d = lv.copy()
+                    d.update(rv)
+                    r.append(d)
             else:
+                d = lv.copy()
                 unfilled.append(d)
-            r.append(d)
+                r.append(d)
         if self.fill:
             for d in unfilled:
                 for k in keys:
@@ -69,31 +75,37 @@ class Merger:
 
     def _merge_outer(self, left, right, left_k, right_k):
         large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
-        small_cache = {small_k(x): x for x in small}
+        small_cache = defaultdict(list)
+        for x in small:
+            small_cache[small_k(x)].append(x)
 
         r = []
         unfilled = []
         small_used = set()
+
+        large_keys = small_keys = None
         if self.fill:
             small_keys = set()
             large_keys = set()
-        else:
-            large_keys = small_keys = None
 
         for lv in large:
             lk = large_k(lv)
-            d = lv.copy()
             if lk in small_cache:
-                sv = small_cache[lk]
-                d.update(sv)
                 small_used.add(lk)
-                if small_keys is not None:
-                    small_keys.update(sv.keys())
+                for sv in small_cache[lk]:
+                    d = lv.copy()
+                    d.update(sv)
+                    r.append(d)
+                    if self.fill:
+                        small_keys.update(sv.keys())
             else:
+                d = lv.copy()
                 unfilled.append(d)
-            if large_keys is not None:
+                r.append(d)
+            if self.fill:
                 large_keys.update(lv.keys())
-            r.append(d)
+
+        large_defaults = None
         if self.fill:
             small_keys = tuple(small_keys)
             for x in unfilled:
@@ -101,15 +113,13 @@ class Merger:
                     if k not in x:
                         x[k] = self.missing_value
             large_defaults = {k: self.missing_value for k in large_keys}
-        else:
-            large_defaults = None
 
         for sv in small:
             sk = small_k(sv)
             if sk in small_used:
                 continue
             d = sv.copy()
-            if large_defaults is not None:
+            if self.fill:
                 for k, v in large_defaults.items():
                     if k not in d:
                         d[k] = v
