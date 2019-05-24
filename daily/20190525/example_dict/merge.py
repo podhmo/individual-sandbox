@@ -14,14 +14,26 @@ def _to_accesssor(k):
         raise ValueError(k)
 
 
-def how_left_outer_join(
-    left, right, left_k, right_k, *, fill=True, missing_value=None
-):
+class Options:
+    def __init__(self, *, fill: bool, missing_value, accessor_factory) -> None:
+        self.fill = fill
+        self.missing_value = missing_value
+        self.accessor_factory = accessor_factory
+
+
+_default_options = Options(
+    fill=True, missing_value=None, accessor_factory=_to_accesssor
+)
+
+
+def how_left_outer_join(left, right, left_k, right_k, *, options=_default_options):
+    missing_value = options.missing_value
+
     right_cache = defaultdict(list)
     for x in right:
         right_cache[right_k(x)].append(x)
 
-    if fill:
+    if options.fill:
         keys = set()
         for rv in right:
             keys.update(rv.keys())
@@ -40,7 +52,7 @@ def how_left_outer_join(
             d = lv.copy()
             unfilled.append(d)
             r.append(d)
-    if fill:
+    if options.fill:
         for d in unfilled:
             for k in keys:
                 if k not in d:
@@ -48,17 +60,13 @@ def how_left_outer_join(
     return r
 
 
-def how_right_outer_join(
-    left, right, left_k, right_k, *, fill=True, missing_value=None
-):
-    return how_left_outer_join(
-        right, left, right_k, left_k, fill=fill, missing_value=missing_value
-    )
+def how_right_outer_join(left, right, left_k, right_k, *, options=_default_options):
+    return how_left_outer_join(right, left, right_k, left_k, options=options)
 
 
-def how_full_outer_join(
-    left, right, left_k, right_k, *, fill=True, missing_value=None
-):
+def how_full_outer_join(left, right, left_k, right_k, *, options=_default_options):
+    missing_value = options.missing_value
+
     large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
     small_cache = defaultdict(list)
     for x in small:
@@ -69,7 +77,7 @@ def how_full_outer_join(
     small_used = set()
 
     large_keys = small_keys = None
-    if fill:
+    if options.fill:
         small_keys = set()
         large_keys = set()
 
@@ -81,17 +89,17 @@ def how_full_outer_join(
                 d = lv.copy()
                 d.update(sv)
                 r.append(d)
-                if fill:
+                if options.fill:
                     small_keys.update(sv.keys())
         else:
             d = lv.copy()
             unfilled.append(d)
             r.append(d)
-        if fill:
+        if options.fill:
             large_keys.update(lv.keys())
 
     large_defaults = None
-    if fill:
+    if options.fill:
         small_keys = tuple(small_keys)
         for x in unfilled:
             for k in small_keys:
@@ -104,7 +112,7 @@ def how_full_outer_join(
         if sk in small_used:
             continue
         d = sv.copy()
-        if fill:
+        if options.fill:
             for k, v in large_defaults.items():
                 if k not in d:
                     d[k] = v
@@ -112,7 +120,9 @@ def how_full_outer_join(
     return r
 
 
-def how_inner_join(left, right, left_k, right_k, *, fill=True, missing_value=None):
+def how_inner_join(left, right, left_k, right_k, *, options=_default_options):
+    missing_value = options.missing_value
+
     large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
     small_cache = defaultdict(list)
     for x in small:
@@ -145,17 +155,16 @@ def merge(
     right_on=None,
     on=None,
     how=how_inner_join,
-    accessor_factory=_to_accesssor,
-    missing_value=None,
-    fill=True,
+    options=_default_options,
 ):
     assert on or (left_on and right_on)
 
     if on is not None:
         left_on = right_on = on
-    left_on = accessor_factory(left_on)
-    right_on = accessor_factory(right_on)
-    return how(left, right, left_on, right_on, fill=fill, missing_value=missing_value)
+
+    left_on = options.accessor_factory(left_on)
+    right_on = options.accessor_factory(right_on)
+    return how(left, right, left_on, right_on, options=options)
 
 
 # include/exclude? or only/ignore?
