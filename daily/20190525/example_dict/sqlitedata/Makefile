@@ -2,7 +2,14 @@ OPTS ?= -echo -column -header
 
 demo: setup
 	$(MAKE) -s _demo
-_demo: inner-join left-outer-join full-outer-join
+_demo: select inner-join left-outer-join full-outer-join
+
+select:
+	$(info ****************************************)
+	$(info $@)
+	$(info ****************************************)
+	echo 'select * from users' | sqlite3 ${OPTS} data.db
+	echo 'select * from groups' | sqlite3 ${OPTS} data.db
 
 inner-join:
 	$(info ****************************************)
