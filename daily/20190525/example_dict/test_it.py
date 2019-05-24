@@ -100,6 +100,65 @@ class Tests(unittest.TestCase):
                 self.assertTrue(data.users == copied.users, "not modified")
                 self.assertTrue(data.groups == copied.groups, "not modified")
 
+    def test_multi_keys(self):
+        # no name change (e.g. users.name, skills.name)
+        # (id is conflicted, on merge, skipped)
+        class data:
+            classes = [
+                {"id": 1, "year": "1", "class": "A"},
+                {"id": 2, "year": "1", "class": "B"},
+                {"id": 3, "year": "1", "class": "C"},
+                {"id": 4, "year": "2", "class": "A"},
+                {"id": 5, "year": "2", "class": "B"},
+            ]
+            students = [
+                {"id": 1, "year": "1", "class": "A", "cid": 1, "name": "foo"},
+                {"id": 2, "year": "1", "class": "A", "cid": 1, "name": "bar"},
+                {"id": 3, "year": "1", "class": "B", "cid": 2, "name": "boo"},
+                {"id": 4, "year": "1", "class": "C", "cid": 3, "name": "yoo"},
+            ]
+
+        class copied:
+            classes = copy.deepcopy(data.classes)
+            students = copy.deepcopy(data.students)
+
+        C = namedtuple("C", "msg, args, kwargs, want")
+        cases = [
+            C(
+                msg="inner join",
+                args=["classes", "students"],
+                kwargs={"left_on": "id", "right_on": "cid"},
+                want=[
+                    {"id": 1, "year": "1", "class": "A", "cid": 1, "name": "foo"},
+                    {"id": 2, "year": "1", "class": "A", "cid": 1, "name": "bar"},
+                    {"id": 3, "year": "1", "class": "B", "cid": 2, "name": "boo"},
+                    {"id": 4, "year": "1", "class": "C", "cid": 3, "name": "yoo"},
+                ],
+            ),
+            C(
+                msg="inner join",
+                args=["classes", "students"],
+                kwargs={"left_on": ("year", "class"), "right_on": ("year", "class")},
+                want=[
+                    {"id": 1, "year": "1", "class": "A", "cid": 1, "name": "foo"},
+                    {"id": 2, "year": "1", "class": "A", "cid": 1, "name": "bar"},
+                    {"id": 3, "year": "1", "class": "B", "cid": 2, "name": "boo"},
+                    {"id": 4, "year": "1", "class": "C", "cid": 3, "name": "yoo"},
+                ],
+            )
+        ]
+        for c in cases:
+            with self.subTest(msg=c.msg, args=c.args, kwargs=c.kwargs):
+                args = [getattr(data, name) for name in c.args]
+                got = self._callFUT(*args, **c.kwargs)
+
+                self.assertTrue(
+                    got == c.want, msg=_DifferenceReportText(got=got, want=c.want)
+                )
+
+                self.assertTrue(data.students == copied.students, "not modified")
+                self.assertTrue(data.classes == copied.classes, "not modified")
+
 
 class _DifferenceReportText:
     def __init__(self, *, got, want):

@@ -8,6 +8,7 @@ def _to_accesssor(k):
     elif isinstance(k, (str, bytes)):
         return operator.itemgetter(k)
     elif isinstance(k, (list, tuple)):
+        # todo: compile?
         return lambda v: tuple([v.get(sk) for sk in k])
     else:
         raise ValueError(k)
