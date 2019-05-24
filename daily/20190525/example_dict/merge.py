@@ -15,15 +15,21 @@ def _to_accesssor(k):
 
 
 class Options:
-    def __init__(self, *, fill: bool, missing_value, accessor_factory) -> None:
+    def __init__(
+        self,
+        *,
+        fill: bool = True,
+        missing_value=None,
+        accessor_factory=_to_accesssor,
+        trim_right_key: bool = False,
+    ) -> None:
         self.fill = fill
         self.missing_value = missing_value
         self.accessor_factory = accessor_factory
+        self.trim_right_key = trim_right_key
 
 
-_default_options = Options(
-    fill=True, missing_value=None, accessor_factory=_to_accesssor
-)
+_default_options = Options()
 
 
 def how_left_outer_join(left, right, left_k, right_k, *, options=_default_options):
@@ -121,8 +127,6 @@ def how_full_outer_join(left, right, left_k, right_k, *, options=_default_option
 
 
 def how_inner_join(left, right, left_k, right_k, *, options=_default_options):
-    missing_value = options.missing_value
-
     large_k, small_k, large, small = _ordered(left, right, left_k, right_k)
     small_cache = defaultdict(list)
     for x in small:
@@ -162,27 +166,38 @@ def merge(
     if on is not None:
         left_on = right_on = on
 
-    left_on = options.accessor_factory(left_on)
-    right_on = options.accessor_factory(right_on)
-    return how(left, right, left_on, right_on, options=options)
+    left_on_accessor = options.accessor_factory(left_on)
+    right_on_accessor = options.accessor_factory(right_on)
+    r = how(left, right, left_on_accessor, right_on_accessor, options=options)
+    if options.trim_right_key:
+        if isinstance(right_on, (tuple, list)):
+            for row in r:
+                for k in row:
+                    row.pop(k, None)
+        elif isinstance(right_on, (str, bytes)):
+            for row in r:
+                row.pop(right_on, None)
+        else:
+            pass
+    return r
 
 
-# include/exclude? or only/ignore?
-def with_prefix(prefix, d, *, exclude=None, mutable=False):
-    exclude = exclude or []
+# include/ignore? or only/ignore?
+def with_prefix(prefix, d, *, ignore=None, mutable=False):
+    ignore = ignore or []
     _with_prefix = _with_prefix_mutable if mutable else _with_prefix_immutable
     if hasattr(d, "append"):
-        return [_with_prefix(prefix, x, exclude=exclude) for x in d]
+        return [_with_prefix(prefix, x, ignore=ignore) for x in d]
     else:
-        return _with_prefix(prefix, d, exclude=exclude)
+        return _with_prefix(prefix, d, ignore=ignore)
 
 
-def _with_prefix_immutable(prefix, d, *, exclude):
-    return {(k if k in exclude else prefix + k): v for k, v in d.items()}
+def _with_prefix_immutable(prefix, d, *, ignore):
+    return {(k if k in ignore else prefix + k): v for k, v in d.items()}
 
 
-def _with_prefix_mutable(prefix, d, *, exclude):
+def _with_prefix_mutable(prefix, d, *, ignore):
     for k in list(d.keys()):
-        if k not in exclude:
+        if k not in ignore:
             d[prefix + k] = d.pop(k)
     return d
