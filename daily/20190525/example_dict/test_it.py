@@ -12,6 +12,8 @@ class Tests(unittest.TestCase):
         return merge(*args, **kwargs)
 
     def test_it(self):
+        from merge import how_left_outer_join, how_right_outer_join, how_full_outer_join
+
         # no name change (e.g. users.name, skills.name)
         # (id is conflicted, on merge, skipped)
         class data:
@@ -56,7 +58,7 @@ class Tests(unittest.TestCase):
             C(
                 msg="left outer join",
                 args=["users", "groups"],
-                kwargs={"left_on": "gid", "right_on": "id", "how": "left"},
+                kwargs={"left_on": "gid", "right_on": "id", "how": how_left_outer_join},
                 want=[
                     {"id": 1, "name": "Ax", "gid": 1, "gname": "A"},
                     {"id": 1, "name": "Ay", "gid": 1, "gname": "A"},
@@ -67,7 +69,11 @@ class Tests(unittest.TestCase):
             C(
                 msg="right outer join",
                 args=["users", "groups"],
-                kwargs={"left_on": "gid", "right_on": "id", "how": "right"},
+                kwargs={
+                    "left_on": "gid",
+                    "right_on": "id",
+                    "how": how_right_outer_join,
+                },
                 want=[
                     {"id": 10, "name": "Ax", "gid": 1, "gname": "A"},
                     {"id": 11, "name": "Ay", "gid": 1, "gname": "A"},
@@ -78,7 +84,7 @@ class Tests(unittest.TestCase):
             C(
                 msg="full outer join",
                 args=["users", "groups"],
-                kwargs={"left_on": "gid", "right_on": "id", "how": "outer"},
+                kwargs={"left_on": "gid", "right_on": "id", "how": how_full_outer_join},
                 want=[
                     {"id": 1, "name": "Ax", "gid": 1, "gname": "A"},
                     {"id": 1, "name": "Ay", "gid": 1, "gname": "A"},
@@ -145,7 +151,7 @@ class Tests(unittest.TestCase):
                     {"id": 3, "year": "1", "class": "B", "cid": 2, "name": "boo"},
                     {"id": 4, "year": "1", "class": "C", "cid": 3, "name": "yoo"},
                 ],
-            )
+            ),
         ]
         for c in cases:
             with self.subTest(msg=c.msg, args=c.args, kwargs=c.kwargs):
