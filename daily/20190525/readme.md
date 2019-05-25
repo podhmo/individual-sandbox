@@ -1,3 +1,6 @@
+## emacs elscreenの名前の表記がおかしい
+
+
 ## python join的な演算を作る
 
 - 結合するためのkeyを指定できる(on,left_on,right_on)
