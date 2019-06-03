@@ -1,0 +1,39 @@
+--- 01shape/HeaderWithSchemaWithExample.txt	2019-05-31 03:28:00.680877551 +0900
++++ 01shape/HeaderWithContent.txt	2019-05-31 03:28:00.157543841 +0900
+@@ -5,30 +5,21 @@
+ properties/allowEmptyValue/default bool
+ properties/allowEmptyValue dict
+ properties/allowEmptyValue/type str
+-properties/allowReserved/default bool
+-properties/allowReserved dict
+-properties/allowReserved/type str
++properties/content/additionalProperties/$ref str
++properties/content/additionalProperties dict
++properties/content dict
++properties/content/maxProperties int
++properties/content/minProperties int
++properties/content/type str
+ properties/deprecated/default bool
+ properties/deprecated dict
+ properties/deprecated/type str
+ properties/description dict
+ properties/description/type str
+ properties dict
+-properties/example dict
+-properties/explode dict
+-properties/explode/type str
+ properties/required/default bool
+ properties/required dict
+ properties/required/type str
+-properties/schema dict
+-properties/schema/oneOf/[]/$ref str
+-properties/schema/oneOf/[] dict
+-properties/schema/oneOf list
+-properties/style/default str
+-properties/style dict
+-properties/style/enum list
+-properties/style/enum/[] str
+-properties/style/type str
+ required list
+ required/[] str
+ type str

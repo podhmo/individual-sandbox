@@ -1,0 +1,16 @@
+--- 01shape/HeaderWithSchemaWithExample.txt	2019-05-31 03:28:00.680877551 +0900
++++ 01shape/HeaderWithSchemaWithExamples.txt	2019-05-31 03:28:00.417544028 +0900
+@@ -14,7 +14,12 @@
+ properties/description dict
+ properties/description/type str
+ properties dict
+-properties/example dict
++properties/examples/additionalProperties dict
++properties/examples/additionalProperties/oneOf/[]/$ref str
++properties/examples/additionalProperties/oneOf/[] dict
++properties/examples/additionalProperties/oneOf list
++properties/examples dict
++properties/examples/type str
+ properties/explode dict
+ properties/explode/type str
+ properties/required/default bool

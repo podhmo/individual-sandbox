@@ -1,0 +1,4 @@
+description str
+oneOf/[]/$ref str
+oneOf/[] dict
+oneOf list

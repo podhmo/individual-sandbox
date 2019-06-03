@@ -1,0 +1,4 @@
+name: myapp
+dependencies:
+  js: ^0.6.0
+  intl: ^0.15.8

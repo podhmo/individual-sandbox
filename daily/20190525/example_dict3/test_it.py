@@ -110,8 +110,6 @@ class Tests(unittest.TestCase):
                 self.assertTrue(data.groups == copied.groups, "not modified")
 
     def test_multi_keys(self):
-        # no name change (e.g. users.name, skills.name)
-        # (id is conflicted, on merge, skipped)
         class data:
             classes = [
                 {"id": 1, "year": "1", "name": "A"},
