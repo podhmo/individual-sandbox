@@ -1,33 +1,20 @@
 import json
 import os
+from dictknife.jsonknife import path_to_json_pointer
 from dictknife import loading
 
 # todo: json pointer
 
 
 def describe_dict(d, *, life=None, showzero_callable=None):
+    sigmap = {}
+
     def _describe_type(v):
         if hasattr(v, "keys"):
             return dict.__name__
         return type(v).__name__
-        # if hasattr(v, "keys"):
-        #     return "D"
-        # elif isinstance(v, (list, tuple)):
-        #     return "L"
-        # elif isinstance(v, bool):
-        #     return "B"
-        # elif isinstance(v, str):
-        #     return "S"
-        # elif isinstance(v, int):
-        #     return "I"
-        # elif isinstance(v, float):
-        #     return "F"
-        # elif v is None:
-        #     return "?"
-        # else:  # any
-        #     return "*"
 
-    def _show_on_lifezero(d):
+    def _show_on_lifezero(d, *, path):
         if hasattr(d, "keys"):
             keys = []
             for k, v in sorted(d.items()):
@@ -37,11 +24,17 @@ def describe_dict(d, *, life=None, showzero_callable=None):
                     keys.append(f"{k}:{_describe_type(v)}@{len(v)}")
                 else:
                     keys.append(f"{k}:{_describe_type(v)}")
-            return {"$keys": keys}
+            rep = {"$keys": keys}
+            sig = json.dumps(rep, sort_keys=True, default=str)
+            if sig in sigmap:
+                return sigmap[sig]
+            sigmap[sig] = path_to_json_pointer(path)
+            return rep
+
         elif isinstance(d, (list, tuple)):
             seen = {}
             for x in d:
-                rep = _show(x, life=0)
+                rep = _show(x, life=0, path=path)
                 sig = json.dumps(rep, sort_keys=True, default=str)
                 if sig in seen:
                     continue
@@ -50,49 +43,70 @@ def describe_dict(d, *, life=None, showzero_callable=None):
         else:
             return _describe_type(v)
 
-    def _show(d, *, life, showzero_callable=showzero_callable or _show_on_lifezero):
+    def _show(
+        d, *, path, life, showzero_callable=showzero_callable or _show_on_lifezero
+    ):
         if life <= 0:
-            return showzero_callable(d)
+            return showzero_callable(d, path=path)
 
         if hasattr(d, "keys"):
             keys = []
             children = {}
             for k, v in sorted(d.items()):
+                path.append(k)
                 if hasattr(v, "__len__") and len(v) == 0:
                     keys.append(f"{k}:{_describe_type(v)}@{len(v)}")
                 elif hasattr(v, "keys"):
-                    children[k] = _show(v, life=life - 1)
+                    children[k] = _show(v, life=life - 1, path=path)
                 elif isinstance(v, (list, tuple)):
-                    children[k] = _show(v, life=life)  # -1?
+                    children[k] = _show(v, life=life - 1, path=path)
                 else:
                     keys.append(f"{k}:{_describe_type(v)}")
-            r = {}
+                path.pop()
+            rep = {}
             if keys:
-                r["$keys"] = keys
+                rep["$keys"] = keys
             if children:
-                r["$children"] = children
-            return r
+                rep["$children"] = children
+            sig = json.dumps(rep, sort_keys=True, default=str)
+            if sig in sigmap:
+                return sigmap[sig]
+            sigmap[sig] = path_to_json_pointer(path)
+            return rep
         elif isinstance(d, (list, tuple)):
             seen = {}
             members = []
+            path.append("[]")
+
+            csigmap = {}
             for x in d:
-                rep = _show(x, life=life - 1)
-                members.append(rep)
+                rep = _show(x, life=life - 1, path=path)
                 sig = json.dumps(rep, sort_keys=True, default=str)
+
                 if sig in seen:
+                    members.append(csigmap[sig])
                     continue
                 seen[sig] = rep
-            r = {"$len": len(d)}
+                csigmap[sig] = f"{path_to_json_pointer(path)}/$cases/{len(csigmap)}"
+                members.append(csigmap[sig])
+            rep = {"$len": len(d)}
             if seen:
-                r["$cases"] = list(seen.values())
+                rep["$cases"] = list(seen.values())
             if members:
-                r["$members"] = members
-            return r
+                rep["$members"] = members
+            path.pop()
+            sig = json.dumps(rep, sort_keys=True, default=str)
+            if sig in sigmap:
+                return sigmap[sig]
+            sigmap[sig] = path_to_json_pointer(path)
+            return rep
         else:
-            return d
+            return _describe_type(v)
+
     if life is None:
         life = int(os.environ.get("LIFE") or "0")
-    return _show(d, life=life)
+    rep = _show(d, life=life, path=["#"])
+    return rep
 
 
 def p(d):
