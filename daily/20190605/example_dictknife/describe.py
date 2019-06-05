@@ -1,5 +1,8 @@
 import json
 import os
+import copy
+from dictknife import DictWalker, Or
+from dictknife.langhelpers import make_dict
 from dictknife.jsonknife import path_to_json_pointer
 from dictknife import loading
 
@@ -8,6 +11,7 @@ from dictknife import loading
 
 def describe_dict(d, *, life=None, showzero_callable=None):
     sigmap = {}
+    walker = DictWalker([Or(["$len", "$members"])])
 
     def _describe_type(v):
         if hasattr(v, "keys"):
@@ -16,8 +20,8 @@ def describe_dict(d, *, life=None, showzero_callable=None):
 
     def _show_on_lifezero(d, *, path):
         if hasattr(d, "keys"):
-            rep = {}
-            for k, v in sorted(d.items()):
+            rep = make_dict()
+            for k, v in d.items():
                 if hasattr(v, "keys"):
                     rep[k] = f"{_describe_type(v)}@{len(v)}"
                 elif isinstance(v, (list, tuple)):
@@ -40,17 +44,17 @@ def describe_dict(d, *, life=None, showzero_callable=None):
                 seen[sig] = rep
             return {"$len": len(d), "$cases": list(seen.values())}
         else:
-            return _describe_type(v)
+            return _describe_type(d)
 
     def _show(
         d, *, path, life, showzero_callable=showzero_callable or _show_on_lifezero
     ):
-        if life <= 0:
+        if life == 0:  # -1 is full expand
             return showzero_callable(d, path=path)
 
         if hasattr(d, "keys"):
-            rep = {}
-            for k, v in sorted(d.items()):
+            rep = make_dict()
+            for k, v in d.items():
                 path.append(k)
                 if hasattr(v, "__len__") and len(v) == 0:
                     rep[k] = f"{_describe_type(v)}@{len(v)}"
@@ -79,6 +83,9 @@ def describe_dict(d, *, life=None, showzero_callable=None):
                 if sig in seen:
                     members.append(csigmap[sig])
                     continue
+                rep = copy.deepcopy(rep)
+                for ks, sd in walker.walk(rep):
+                    sd.pop(ks[-1])
                 seen[sig] = rep
                 csigmap[sig] = f"{path_to_json_pointer(path)}/$cases/{len(csigmap)}"
                 members.append(csigmap[sig])
@@ -94,7 +101,7 @@ def describe_dict(d, *, life=None, showzero_callable=None):
             sigmap[sig] = path_to_json_pointer(path)
             return rep
         else:
-            return _describe_type(v)
+            return _describe_type(d)
 
     if life is None:
         life = int(os.environ.get("LIFE") or "0")
