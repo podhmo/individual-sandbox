@@ -16,15 +16,14 @@ def describe_dict(d, *, life=None, showzero_callable=None):
 
     def _show_on_lifezero(d, *, path):
         if hasattr(d, "keys"):
-            keys = []
+            rep = {}
             for k, v in sorted(d.items()):
                 if hasattr(v, "keys"):
-                    keys.append(f"{k}:{_describe_type(v)}@{len(v)}")
+                    rep[k] = f"{_describe_type(v)}@{len(v)}"
                 elif isinstance(v, (list, tuple)):
-                    keys.append(f"{k}:{_describe_type(v)}@{len(v)}")
+                    rep[k] = f"{_describe_type(v)}@{len(v)}"
                 else:
-                    keys.append(f"{k}:{_describe_type(v)}")
-            rep = {"$keys": keys}
+                    rep[k] = f"{_describe_type(v)}"
             sig = json.dumps(rep, sort_keys=True, default=str)
             if sig in sigmap:
                 return sigmap[sig]
@@ -50,24 +49,18 @@ def describe_dict(d, *, life=None, showzero_callable=None):
             return showzero_callable(d, path=path)
 
         if hasattr(d, "keys"):
-            keys = []
-            children = {}
+            rep = {}
             for k, v in sorted(d.items()):
                 path.append(k)
                 if hasattr(v, "__len__") and len(v) == 0:
-                    keys.append(f"{k}:{_describe_type(v)}@{len(v)}")
+                    rep[k] = f"{_describe_type(v)}@{len(v)}"
                 elif hasattr(v, "keys"):
-                    children[k] = _show(v, life=life - 1, path=path)
+                    rep[k] = _show(v, life=life - 1, path=path)
                 elif isinstance(v, (list, tuple)):
-                    children[k] = _show(v, life=life - 1, path=path)
+                    rep[k] = _show(v, life=life - 1, path=path)
                 else:
-                    keys.append(f"{k}:{_describe_type(v)}")
+                    rep[k] = f"{_describe_type(v)}"
                 path.pop()
-            rep = {}
-            if keys:
-                rep["$keys"] = keys
-            if children:
-                rep["$children"] = children
             sig = json.dumps(rep, sort_keys=True, default=str)
             if sig in sigmap:
                 return sigmap[sig]
