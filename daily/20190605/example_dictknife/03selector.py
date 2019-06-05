@@ -4,7 +4,7 @@ from dictknife import loading
 
 
 def get_selector(filename: str, *, r=None) -> Selector:
-    return Selector(get_resolver(filename), wrap=True, r=r)
+    return Selector(get_resolver(filename), wrap=False, r=r)
 
 
 def main():
