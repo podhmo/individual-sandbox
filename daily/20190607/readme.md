@@ -4,6 +4,11 @@
 
 - https://github.com/rougier/numpy-100/blob/master/100_Numpy_exercises.md
 
+この辺とかも触ってみると良いのかも
+
+
+- https://github.com/lettier/3d-game-shaders-for-beginners/tree/3d720fae5b19894ce560351591c960398d8e5e61
+
 ## 社会に求められる系の記事の体裁
 
 - https://qiita.com/KanNishida/items/98a04646998d43796833
