@@ -4,3 +4,6 @@
 	python 01*.py
 02:
 	python 02*.py
+
+gen-lock:
+	cat requirements.txt | pipdeptidy > requirements.lock
