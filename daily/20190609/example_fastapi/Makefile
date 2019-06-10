@@ -8,5 +8,10 @@
 	mypy --strict 03*.py
 	python 03*.py
 
+see-docs: OPEN ?= $(shell which xdg-open 2>/dev/null || open)
+see-docs:
+	$(OPEN) http://localhost:8080/docs
+	# http :8080/openapi.json
+
 gen-lock:
 	cat requirements.txt | pipdeptidy > requirements.lock
