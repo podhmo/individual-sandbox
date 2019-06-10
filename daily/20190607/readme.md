@@ -1,3 +1,42 @@
+## pycomment 良い感じにしたい
+
+## python moduleからresourceを取り出すのどうやるんだっけ？
+
+相対パスを指定して物理ファイルにアクセスしたい。
+
+[`pkg_resources.resource_string()`](https://setuptools.readthedocs.io/en/latest/pkg_resources.html#basic-resource-access) とかあるっぽい？
+
+:warning: いや、これは古い。使うにしても、標準ライブラリに [`importlib.resources`](https://docs.python.org/ja/3/library/importlib.html#module-importlib.resources) がある
+
+> This module provides functionality similar to pkg_resources Basic Resource Access without the performance overhead of that package. This makes reading resources included in packages easier, with more stable and consistent semantics.
+>
+> The standalone backport of this module provides more information on using importlib.resources and migrating from pkg_resources to importlib.resources.
+
+まぁ3.7で追加されたものなのだけれど。
+
+```python
+from importlib.resources import read_text
+
+print(read_text("lib2to3", "Grammar.txt"))
+```
+
+なかったらpkg_resourcesを見ても良いんじゃ。。
+
+```python
+from importlib.util import find_spec
+
+spec = find_spec("lib2to3")
+print(spec.loader.open_resource("Grammar.txt").read())
+```
+
+結局importlib_resourcesを使う方が良いかも。
+
+## python importlib relative
+
+importlib.util.resolve_name で相対的なモジュール名を変えられる。
+(pyinspectとか自力で作ってなかったっけ？)
+
+
 ## python numpy 100
 
 この辺そういえばやってみたことないな。
