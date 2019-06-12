@@ -1,3 +1,53 @@
+## python tweenのuploadで以下の様なメッセージがでる
+
+```console
+$ twine upload --verbose dist/kamidana-0.8.0-py2.py3-none-any.whl
+Uploading distributions to https://upload.pypi.org/legacy/
+Uploading kamidana-0.8.0-py2.py3-none-any.whl
+ 25%|█████████████████▌                                                    | 8.00k/32.0k [00:0100%|█████████████████████████████████████████████████████ █████████████████| 32.0k/32.0k [00:01<00:00, 19.5kB/s]
+Content received from server:
+<html>
+ <head>
+  <title>400 The description failed to render in the default format of reStructuredText. See https://pypi.org/help/#description-content-type for more information.</title>
+ </head>
+ <body>
+  <h1>400 The description failed to render in the default format of reStructuredText. See https://pypi.org/help/#description-content-type for more information.</h1>
+  The server could not comply with the request since it is either malformed or otherwise incorrect.<br/><br/>
+The description failed to render in the default format of reStructuredText. See https://pypi.org/help/#description-content-type for more information.
+
+
+ </body>
+</html>
+HTTPError: 400 Client Error: The description failed to render in the default format of reStructuredText. See https://pypi.org/help/#description-content-type for more information. for url: https://upload.pypi.org/legacy/
+```
+
+renderに失敗しているということなので、特に[ヘルプメッセージの指すリンク先](https://pypi.org/help/#description-content-type)をみて`description-content-type`を指定しても意味がない。
+
+ちなみに、`text/x-rst`に変えた場合のメッセージは以下の様になる。
+
+```
+HTTPError: 400 Client Error: The description failed to render for 'text/x-rst'. See https://pypi.org/help/#description-content-type for more information. for url: https://upload.pypi.org/legacy/
+```
+
+解決にはこのPRが参考になった。
+
+https://github.com/zalando-incubator/Transformer/pull/60/files
+
+```console
+$ pip freeze | grep -i readme
+readme-renderer==24.0
+```
+
+これだけのwarningでもだめ。
+
+```console
+$ python -m readme_renderer README.rst
+<string>:417: (WARNING/2) Title underline too short.
+
+available info (extensions and additional modules)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```
+
 ## python cookiecutter
 
 - https://github.com/audreyr/cookiecutter
