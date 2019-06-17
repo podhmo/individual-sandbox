@@ -14,3 +14,7 @@
 03:
 	rm -rf ${outdir}
 	cookiecutter -v with_additional_modules2 --no-input -o ${outdir}
+04: outdir = 04out
+04:
+	rm -rf ${outdir}
+	cookiecutter -v with_additional_modules3 --no-input -o ${outdir}
