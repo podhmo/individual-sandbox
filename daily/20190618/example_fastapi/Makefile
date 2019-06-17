@@ -5,3 +5,5 @@
 
 01:
 	python 01*.py | tee 01openapi.yaml
+02:
+	python 02*.py
