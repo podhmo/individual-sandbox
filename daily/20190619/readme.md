@@ -1,3 +1,8 @@
+## too 良い感じのinterface
+
+- consumerの部分の定義はasync generatorを受け取るような形になっていると良い
+- 
+
 ## asyncio shutdown
 
 - https://gist.github.com/nvgoldin/30cea3c04ee0796ebd0489aa62bcf00a
