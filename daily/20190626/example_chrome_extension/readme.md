@@ -15,4 +15,12 @@
 
 ## url colors
 
-from https://github.com/fej-snikduj/URLColors
+- https://github.com/fej-snikduj/URLColors
+
+## color-hash
+
+- https://zenozeng.github.io/color-hash/demo/
+
+## webpack for browser extension
+
+- https://qiita.com/wtetsu/items/ae009e70d1ee04c15836
