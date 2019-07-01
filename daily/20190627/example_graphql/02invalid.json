@@ -1,0 +1,13 @@
+{"query": "query {
+  viewer{
+    name
+      repositories(first: 100,  orderBy:  {field: UPDATED_AT, direction: DESC}){
+      nodes {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+    }
+  }
+}"}
