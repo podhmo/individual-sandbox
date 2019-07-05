@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.0.0, py-1.8.0, pluggy-0.12.0
+rootdir: VENV/individual-sandbox/daily/20190705/example_fastapi
+
+----------------------------- live log collection ------------------------------
+WARNING  fastapi:models.py:17 email-validator not installed, email fields will be treated as str.
+                              To install, run: pip install email-validator
+collected 1 item
+
+test_serial_speed.py::test_routes 
+-------------------------------- live log call ---------------------------------
+INFO     test_serial_speed:test_serial_speed.py:48 route1: 0.031699180603027344
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route1, 3.013596296310425, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route1, 3.0087300000000003, ['http_status:200', 'http_method:GET', 'time:cpu']
+INFO     test_serial_speed:test_serial_speed.py:68 route1: 0.03342390060424805
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route2, 3.3414907455444336, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route2, 3.3380379999999996, ['http_status:200', 'http_method:GET', 'time:cpu']
+INFO     test_serial_speed:test_serial_speed.py:85 route1: 0.03099203109741211
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route3, 3.8277525901794434, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route3, 3.812259000000001, ['http_status:200', 'http_method:GET', 'time:cpu']
+PASSED                                                                   [100%]
+
+========================== 1 passed in 10.43 seconds ===========================
