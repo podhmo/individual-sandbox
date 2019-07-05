@@ -31,6 +31,9 @@ def route():
     return bigdata
 
 
-def test_routes():
-    response = client.get("/route")
-    assert response.status_code == 200
+import time
+
+st = time.time()
+response = client.get("/route")
+assert response.status_code == 200
+print("@@@@@@@@@@", time.time() - st)

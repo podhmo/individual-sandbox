@@ -18,8 +18,8 @@ class BigData(BaseModel):
         return super().validate(value)
 
 
-@app.get("/route", response_model=BigData)
-def route():
+@profile
+def run():
     bigdata = {
         "key": [
             [fake.email for i in range(X)],
@@ -28,9 +28,12 @@ def route():
             [fake.password for i in range(X)],
         ]
     }
-    return bigdata
+    s = BigData(**bigdata)
+    return s.dict()
 
 
-def test_routes():
-    response = client.get("/route")
-    assert response.status_code == 200
+def main():
+    print(len(run()))
+
+
+main()

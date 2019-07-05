@@ -1,0 +1,153 @@
+kernprof -l convert11.py
+@@@@@@@@@@ 4.888762712478638
+Wrote profile results to convert11.py.lprof
+python -m line_profiler convert11.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 2.47786 s
+File: /home/nao/venvs/fastapi/lib/python3.7/site-packages/fastapi/encoders.py
+Function: jsonable_encoder at line 8
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     8                                           @profile
+     9                                           def jsonable_encoder(
+    10                                               obj: Any,
+    11                                               include: Set[str] = None,
+    12                                               exclude: Set[str] = set(),
+    13                                               by_alias: bool = True,
+    14                                               skip_defaults: bool = False,
+    15                                               include_none: bool = True,
+    16                                               custom_encoder: dict = {},
+    17                                               sqlalchemy_safe: bool = True,
+    18                                           ) -> Any:
+    19    130008      85523.0      0.7      3.5      if include is not None and not isinstance(include, set):
+    20                                                   include = set(include)
+    21    130008      97039.0      0.7      3.9      if exclude is not None and not isinstance(exclude, set):
+    22                                                   exclude = set(exclude)
+    23    130008     172094.0      1.3      6.9      if isinstance(obj, BaseModel):
+    24         1          2.0      2.0      0.0          encoder = getattr(obj.Config, "json_encoders", custom_encoder)
+    25         1          1.0      1.0      0.0          return jsonable_encoder(
+    26         1          1.0      1.0      0.0              obj.dict(
+    27         1          0.0      0.0      0.0                  include=include,
+    28         1          1.0      1.0      0.0                  exclude=exclude,
+    29         1          1.0      1.0      0.0                  by_alias=by_alias,
+    30         1      22756.0  22756.0      0.9                  skip_defaults=skip_defaults,
+    31                                                       ),
+    32         1          1.0      1.0      0.0              include_none=include_none,
+    33         1          1.0      1.0      0.0              custom_encoder=encoder,
+    34         1          6.0      6.0      0.0              sqlalchemy_safe=sqlalchemy_safe,
+    35                                                   )
+    36    130007     116806.0      0.9      4.7      if isinstance(obj, Enum):
+    37                                                   return obj.value
+    38    130007     136911.0      1.1      5.5      if isinstance(obj, (str, int, float, type(None))):
+    39     30001      18834.0      0.6      0.8          return obj
+    40    100006      76767.0      0.8      3.1      if isinstance(obj, dict):
+    41     50001      59332.0      1.2      2.4          encoded_dict = {}
+    42     70002      77972.0      1.1      3.1          for key, value in obj.items():
+    43                                                       if (
+    44                                                           (
+    45     20001      13416.0      0.7      0.5                      not sqlalchemy_safe
+    46     20001      15464.0      0.8      0.6                      or (not isinstance(key, str))
+    47     20001      18121.0      0.9      0.7                      or (not key.startswith("_sa"))
+    48                                                           )
+    49     20001      13778.0      0.7      0.6                  and (value is not None or include_none)
+    50     20001      14021.0      0.7      0.6                  and ((include and key in include) or key not in exclude)
+    51                                                       ):
+    52     20001      13916.0      0.7      0.6                  encoded_key = jsonable_encoder(
+    53     20001      12987.0      0.6      0.5                      key,
+    54     20001      13242.0      0.7      0.5                      by_alias=by_alias,
+    55     20001      13011.0      0.7      0.5                      skip_defaults=skip_defaults,
+    56     20001      13224.0      0.7      0.5                      include_none=include_none,
+    57     20001      12971.0      0.6      0.5                      custom_encoder=custom_encoder,
+    58     20001      33429.0      1.7      1.3                      sqlalchemy_safe=sqlalchemy_safe,
+    59                                                           )
+    60     20001      14937.0      0.7      0.6                  encoded_value = jsonable_encoder(
+    61     20001      13204.0      0.7      0.5                      value,
+    62     20001      13382.0      0.7      0.5                      by_alias=by_alias,
+    63     20001      13164.0      0.7      0.5                      skip_defaults=skip_defaults,
+    64     20001      12975.0      0.6      0.5                      include_none=include_none,
+    65     20001      13333.0      0.7      0.5                      custom_encoder=custom_encoder,
+    66     20001      27140.0      1.4      1.1                      sqlalchemy_safe=sqlalchemy_safe,
+    67                                                           )
+    68     20001      15872.0      0.8      0.6                  encoded_dict[encoded_key] = encoded_value
+    69     50001      32725.0      0.7      1.3          return encoded_dict
+    70     50005      54024.0      1.1      2.2      if isinstance(obj, (list, set, frozenset, GeneratorType, tuple)):
+    71         5          3.0      0.6      0.0          encoded_list = []
+    72     40009      30858.0      0.8      1.2          for item in obj:
+    73     40004      29258.0      0.7      1.2              encoded_list.append(
+    74     40004      29604.0      0.7      1.2                  jsonable_encoder(
+    75     40004      28551.0      0.7      1.2                      item,
+    76     40004      26669.0      0.7      1.1                      include=include,
+    77     40004      27325.0      0.7      1.1                      exclude=exclude,
+    78     40004      26618.0      0.7      1.1                      by_alias=by_alias,
+    79     40004      26593.0      0.7      1.1                      skip_defaults=skip_defaults,
+    80     40004      26568.0      0.7      1.1                      include_none=include_none,
+    81     40004      27065.0      0.7      1.1                      custom_encoder=custom_encoder,
+    82     40004      60135.0      1.5      2.4                      sqlalchemy_safe=sqlalchemy_safe,
+    83                                                           )
+    84                                                       )
+    85         5          1.0      0.2      0.0          return encoded_list
+    86     50000      36219.0      0.7      1.5      errors: List[Exception] = []
+    87     50000      37246.0      0.7      1.5      try:
+    88     50000      36024.0      0.7      1.5          if custom_encoder and type(obj) in custom_encoder:
+    89                                                       encoder = custom_encoder[type(obj)]
+    90                                                   else:
+    91     50000      66823.0      1.3      2.7              encoder = ENCODERS_BY_TYPE[type(obj)]
+    92                                                   return encoder(obj)
+    93     50000      38776.0      0.8      1.6      except KeyError as e:
+    94     50000      43301.0      0.9      1.7          errors.append(e)
+    95     50000      37506.0      0.8      1.5          try:
+    96     50000     114909.0      2.3      4.6              data = dict(obj)
+    97     50000      38964.0      0.8      1.6          except Exception as e:
+    98     50000      41277.0      0.8      1.7              errors.append(e)
+    99     50000      37823.0      0.8      1.5              try:
+   100     50000      54317.0      1.1      2.2                  data = vars(obj)
+   101                                                       except Exception as e:
+   102                                                           errors.append(e)
+   103                                                           raise ValueError(errors)
+   104     50000      37823.0      0.8      1.5      return jsonable_encoder(
+   105     50000      38198.0      0.8      1.5          data,
+   106     50000      36241.0      0.7      1.5          by_alias=by_alias,
+   107     50000      35441.0      0.7      1.4          skip_defaults=skip_defaults,
+   108     50000      34936.0      0.7      1.4          include_none=include_none,
+   109     50000      34819.0      0.7      1.4          custom_encoder=custom_encoder,
+   110     50000      75581.0      1.5      3.1          sqlalchemy_safe=sqlalchemy_safe,
+   111                                               )
+
+Total time: 4.87313 s
+File: /home/nao/venvs/fastapi/lib/python3.7/site-packages/fastapi/routing.py
+Function: serialize_response at line 37
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    37                                           @profile
+    38                                           def serialize_response(
+    39                                               *,
+    40                                               field: Field = None,
+    41                                               response: Response,
+    42                                               include: Set[str] = None,
+    43                                               exclude: Set[str] = set(),
+    44                                               by_alias: bool = True,
+    45                                               skip_defaults: bool = False,
+    46                                           ) -> Any:
+    47         1          1.0      1.0      0.0      if field:
+    48         1          1.0      1.0      0.0          errors = []
+    49         1       8834.0   8834.0      0.2          value, errors_ = field.validate(response, {}, loc=("response",))
+    50         1          1.0      1.0      0.0          if isinstance(errors_, ErrorWrapper):
+    51                                                       errors.append(errors_)
+    52         1          0.0      0.0      0.0          elif isinstance(errors_, list):
+    53                                                       errors.extend(errors_)
+    54         1          0.0      0.0      0.0          if errors:
+    55                                                       raise ValidationError(errors)
+    56         1          0.0      0.0      0.0          r = jsonable_encoder(
+    57         1          0.0      0.0      0.0              value,
+    58         1          0.0      0.0      0.0              include=include,
+    59         1          0.0      0.0      0.0              exclude=exclude,
+    60         1          0.0      0.0      0.0              by_alias=by_alias,
+    61         1    4864294.0 4864294.0     99.8              skip_defaults=skip_defaults,
+    62                                                   )
+    63         1          0.0      0.0      0.0          return r
+    64                                               else:
+    65                                                   return jsonable_encoder(response)
+
