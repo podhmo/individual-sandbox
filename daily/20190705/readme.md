@@ -55,6 +55,134 @@ PASSED                                                                   [100%]
 =========================== 1 passed in 9.99 seconds ===========================
 ```
 
+### 中をまじめに覗いてみる
+
+diff routing1 -> routing2
+
+```diff
+--- test_route01.py	2019-07-05 16:50:33.875049986 +0900
++++ test_route02.py	2019-07-05 16:51:24.298501750 +0900
+@@ -1,5 +1,7 @@
++from typing import List, Any
+ import time
+ from starlette.testclient import TestClient
++from pydantic import BaseModel
+ from faker import Faker
+ from app import app
+ 
+@@ -9,7 +11,11 @@
+ client = TestClient(app)
+ 
+ 
+-@app.get("/route")
++class BigData(BaseModel):
++    key: List[List[Any]]
++
++
++@app.get("/route", response_model=BigData)
+ def route():
+     bigdata = {
+         "key": [
+```
+
+diff routing1 -> routing3
+
+```diff
+--- test_route01.py	2019-07-05 16:50:33.875049986 +0900
++++ test_route03.py	2019-07-05 16:52:08.605272468 +0900
+@@ -1,5 +1,7 @@
++from typing import List, Any
+ import time
+ from starlette.testclient import TestClient
++from pydantic import BaseModel
+ from faker import Faker
+ from app import app
+ 
+@@ -9,8 +11,12 @@
+ client = TestClient(app)
+ 
+ 
+-@app.get("/route")
+-def route():
++class BigData(BaseModel):
++    key: List[List[Any]]
++
++
++@app.get("/route", response_model=BigData)
++def route3():
+     bigdata = {
+         "key": [
+             [fake.email for i in range(X)],
+@@ -19,7 +25,7 @@
+             [fake.password for i in range(X)],
+         ]
+     }
+-    return bigdata
++    return BigData(**bigdata)
+ 
+ 
+ def test_routes():
+```
+
+そもそもこれはpydanticのはなしじゃない？
+
+### response_modelの実装
+
+routing.py
+
+```python
+class APIRoute(routing.Route):
+# ...
+        if self.response_model:
+            assert lenient_issubclass(
+                response_class, JSONResponse
+            ), "To declare a type the response must be a JSON response"
+            response_name = "Response_" + self.name
+            self.response_field: Optional[Field] = Field(
+                name=response_name,
+                type_=self.response_model,
+                class_validators={},
+                default=None,
+                required=False,
+                model_config=BaseConfig,
+                schema=Schema(None),
+            )
+        else:
+            self.response_field = None
+```
+
+実際にはココらへんで使われている。
+
+```python
+def serialize_response(
+    *,
+    field: Field = None,
+    response: Response,
+    include: Set[str] = None,
+    exclude: Set[str] = set(),
+    by_alias: bool = True,
+    skip_defaults: bool = False,
+) -> Any:
+    if field:
+        errors = []
+        value, errors_ = field.validate(response, {}, loc=("response",))
+        if isinstance(errors_, ErrorWrapper):
+            errors.append(errors_)
+        elif isinstance(errors_, list):
+            errors.extend(errors_)
+        if errors:
+            raise ValidationError(errors)
+        return jsonable_encoder(
+            value,
+            include=include,
+            exclude=exclude,
+            by_alias=by_alias,
+            skip_defaults=skip_defaults,
+        )
+    else:
+        return jsonable_encoder(response)
+```
+
 ## python timing-asgiってなに？
 
 https://github.com/steinnes/timing-asgi

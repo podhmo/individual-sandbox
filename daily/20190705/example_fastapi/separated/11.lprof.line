@@ -1,11 +1,4 @@
-kernprof -l convert11.py
-@@@@@@@@@@ 4.888762712478638
-Wrote profile results to convert11.py.lprof
-python -m line_profiler convert11.py.lprof
-Timer unit: 1e-06 s
-
-Total time: 2.47786 s
-File: /home/nao/venvs/fastapi/lib/python3.7/site-packages/fastapi/encoders.py
+File: /home/me/venvs/fastapi/lib/python3.7/site-packages/fastapi/encoders.py
 Function: jsonable_encoder at line 8
 
 Line #      Hits         Time  Per Hit   % Time  Line Contents
@@ -116,7 +109,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    111                                               )
 
 Total time: 4.87313 s
-File: /home/nao/venvs/fastapi/lib/python3.7/site-packages/fastapi/routing.py
+File: /home/me/venvs/fastapi/lib/python3.7/site-packages/fastapi/routing.py
 Function: serialize_response at line 37
 
 Line #      Hits         Time  Per Hit   % Time  Line Contents

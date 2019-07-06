@@ -1,7 +1,10 @@
 from parse import parse_string, PyTreeVisitor
 
 code = """\
+# toplevel comments
+
 def  f(x:int) -> int:
+    # condition, (inner comments)
     if x == 0:
         return 1
     else:

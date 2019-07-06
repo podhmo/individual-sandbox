@@ -5,7 +5,7 @@ from faker import Faker
 from app import app
 
 
-X = 10000
+X = 100
 fake = Faker()
 client = TestClient(app)
 

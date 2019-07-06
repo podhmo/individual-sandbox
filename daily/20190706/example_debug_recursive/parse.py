@@ -29,6 +29,14 @@ def node_value(node):
 
 class PyTreeVisitor:
     def visit(self, node):
+        import traceback
+
+        print(
+            " " * (len(traceback.extract_stack()) - 2),
+            "@",
+            node_name(node),
+            node_value(node),
+        )
         method = "visit_{0}".format(node_name(node))
         if hasattr(self, method):
             # Found a specific visitor for this node

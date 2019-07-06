@@ -30,7 +30,7 @@ app.add_middleware(
     metric_namer=StarletteScopeToName(prefix="app", starlette_app=app),
 )
 
-X = 10000
+X = 100000
 
 
 @app.get("/route1")
