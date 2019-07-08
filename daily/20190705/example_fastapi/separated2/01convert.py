@@ -1,4 +1,5 @@
 import time
+import os
 from faker import Faker
 from typing import List, Any
 from pydantic import BaseModel
@@ -137,7 +138,7 @@ def _jsonable_encoder(
     )
 
 
-X = 10000
+X = int(os.environ.get("X") or "10000")
 fake = Faker()
 
 

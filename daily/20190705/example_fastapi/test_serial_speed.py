@@ -86,10 +86,28 @@ def route3():
     return BigData(**bigdata)
 
 
+@app.get("/route4", response_model=BigData)
+def route4():
+    t0 = time.time()
+    bigdata = {
+        "key": [
+            [fake.email()] * X,
+            [fake.name] * X,
+            [fake.random] * X,
+            [fake.password] * X,
+        ]
+    }
+    t1 = time.time()
+    logger.info(f"route1: {t1-t0}")
+    return bigdata
+
+
 def test_routes():
     response = client.get("/route1")
     assert response.status_code == 200
     response = client.get("/route2")
     assert response.status_code == 200
     response = client.get("/route3")
+    assert response.status_code == 200
+    response = client.get("/route4")
     assert response.status_code == 200

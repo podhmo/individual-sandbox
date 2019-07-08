@@ -127,10 +127,10 @@ class BigData(BaseModel):
 def route():
     bigdata = {
         "key": [
-            [fake.email for i in range(X)],
-            [fake.name for i in range(X)],
-            [fake.random for i in range(X)],
-            [fake.password for i in range(X)],
+            [fake.email()] * X,
+            [fake.name()] * X,
+            [fake.random.random()] * X,
+            [fake.password()] * X,
         ]
     }
     return BigData(**bigdata)
