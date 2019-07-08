@@ -1,0 +1,9 @@
+{'code': 'f()', 'filename': '00traceback.py', 'line': 21, 'where': '<module>'}
+{'code': 'g()', 'filename': '00traceback.py', 'line': 13, 'where': 'f'}
+{'code': 'logger.info("hello")', 'filename': '00traceback.py', 'line': 17, 'where': 'g'}
+{'code': 'self._log(INFO, msg, args, **kwargs)', 'filename': '/usr/lib/python3.7/logging/__init__.py', 'line': 1383, 'where': 'info'}
+{'code': 'self.handle(record)', 'filename': '/usr/lib/python3.7/logging/__init__.py', 'line': 1519, 'where': '_log'}
+{'code': 'self.callHandlers(record)', 'filename': '/usr/lib/python3.7/logging/__init__.py', 'line': 1529, 'where': 'handle'}
+{'code': 'hdlr.handle(record)', 'filename': '/usr/lib/python3.7/logging/__init__.py', 'line': 1591, 'where': 'callHandlers'}
+{'code': 'self.emit(record)', 'filename': '/usr/lib/python3.7/logging/__init__.py', 'line': 905, 'where': 'handle'}
+{'code': 'traceback.print_stack()', 'filename': '00traceback.py', 'line': 8, 'where': 'emit'}

@@ -1,0 +1,19 @@
+  File "00traceback.py", line 21, in <module>
+    f()
+  File "00traceback.py", line 13, in f
+    g()
+  File "00traceback.py", line 17, in g
+    logger.info("hello")
+  File "/usr/lib/python3.7/logging/__init__.py", line 1383, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "/usr/lib/python3.7/logging/__init__.py", line 1519, in _log
+    self.handle(record)
+  File "/usr/lib/python3.7/logging/__init__.py", line 1529, in handle
+    self.callHandlers(record)
+  File "/usr/lib/python3.7/logging/__init__.py", line 1591, in callHandlers
+    hdlr.handle(record)
+  File "/usr/lib/python3.7/logging/__init__.py", line 905, in handle
+    self.emit(record)
+  File "00traceback.py", line 8, in emit
+    traceback.print_stack()
+INFO:__main__:hello
