@@ -1,3 +1,8 @@
+## python yamlのloadした値と物理的な行数を対応付けたい
+
+- pyyamlの場合はConstructorをイジる
+- weakreferenceを使うと良いのでは？
+
 ## ranking pypi
 
 簡単に確認する方法

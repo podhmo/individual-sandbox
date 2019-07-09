@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.7.3, pytest-5.0.1, py-1.8.0, pluggy-0.12.0
+rootdir: ~/venvs/my/individual-sandbox/daily/20190708/example_fastapi
+plugins: cov-2.7.1
+collected 1 item
+
+test_serial_speed.py::test_routes 
+-------------------------------- live log call ---------------------------------
+INFO     test_serial_speed:test_serial_speed.py:48 route1: 0.028229475021362305
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route1, 2.472881555557251, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route1, 2.470255, ['http_status:200', 'http_method:GET', 'time:cpu']
+INFO     test_serial_speed:test_serial_speed.py:68 route1: 0.028539657592773438
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route2, 2.8032283782958984, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route2, 2.8006270000000004, ['http_status:200', 'http_method:GET', 'time:cpu']
+INFO     test_serial_speed:test_serial_speed.py:84 route1: 0.0012717247009277344
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route4, 1.7373604774475098, ['http_status:200', 'http_method:GET', 'time:wall']
+INFO     test_serial_speed:test_serial_speed.py:19 app.test_serial_speed.route4, 1.7358149999999997, ['http_status:200', 'http_method:GET', 'time:cpu']
+PASSED
+
+=========================== 1 passed in 7.26 seconds ===========================

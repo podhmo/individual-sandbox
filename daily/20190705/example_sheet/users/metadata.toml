@@ -1,0 +1,15 @@
+resource_type = 'spreadsheet'
+url = 'https://docs.google.com/spreadsheets/d/1I3m4fyCb2nXX8AEVBPrsBv2_L1OIoZQ2iFd_sL9Jn8Y/edit#gid=0'
+
+[db]
+id = '1I3m4fyCb2nXX8AEVBPrsBv2_L1OIoZQ2iFd_sL9Jn8Y'
+name = 'users'
+
+[[db.tables]]
+id = 0
+name = 'Sheet1'
+
+[[db.tables]]
+id = 599032686
+name = 'users'
+

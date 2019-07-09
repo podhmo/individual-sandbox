@@ -1,0 +1,4 @@
+dictknife[spreadsheet]
+gspread
+handofcats
+ipydb

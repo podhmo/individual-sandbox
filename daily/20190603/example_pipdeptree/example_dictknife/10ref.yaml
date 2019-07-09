@@ -1,0 +1,9 @@
+definitions:
+  father:
+    name: f
+    age: 40
+name: foo
+age: 20
+father:
+  $ref: "#/definitions/father"
+

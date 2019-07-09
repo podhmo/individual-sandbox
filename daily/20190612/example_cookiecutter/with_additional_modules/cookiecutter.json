@@ -1,0 +1,7 @@
+{
+  "directory_name": "Hello",
+  "project_name": "defaultProject",
+  "_extensions": [
+    "kamidana.extensions.NamingModuleExtension"
+  ]
+}

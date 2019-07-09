@@ -1,0 +1,10 @@
+flask
+peewee
+wtforms
+
+pyramid
+mako
+sqlalchemy
+
+pipdeptree
+

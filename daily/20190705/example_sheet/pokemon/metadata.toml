@@ -1,0 +1,15 @@
+resource_type = 'spreadsheet'
+url = 'https://docs.google.com/spreadsheets/d/1e0CRSZyKD97x55kSKjnDYnYrFFLwVVJoxGutGftWhwg/edit#gid=0'
+
+[db]
+id = '1e0CRSZyKD97x55kSKjnDYnYrFFLwVVJoxGutGftWhwg'
+name = 'pokemon'
+
+[[db.tables]]
+id = 0
+name = 'Sheet1'
+
+[[db.tables]]
+id = 1592855078
+name = 'Pokomen'
+

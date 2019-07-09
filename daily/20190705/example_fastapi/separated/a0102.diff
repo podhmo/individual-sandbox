@@ -1,0 +1,23 @@
+--- test_route01.py	2019-07-05 16:50:33.875049986 +0900
++++ test_route02.py	2019-07-05 16:51:24.298501750 +0900
+@@ -1,5 +1,7 @@
++from typing import List, Any
+ import time
+ from starlette.testclient import TestClient
++from pydantic import BaseModel
+ from faker import Faker
+ from app import app
+ 
+@@ -9,7 +11,11 @@
+ client = TestClient(app)
+ 
+ 
+-@app.get("/route")
++class BigData(BaseModel):
++    key: List[List[Any]]
++
++
++@app.get("/route", response_model=BigData)
+ def route():
+     bigdata = {
+         "key": [

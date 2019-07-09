@@ -1,0 +1,16 @@
+resource_type = 'spreadsheet'
+url = 'https://docs.google.com/spreadsheets/d/1dQEdrv0cSzBt0q4XmV3TMyVhxgpKhszy9QctZYK2juA/edit#gid=0'
+
+[db]
+id = '1dQEdrv0cSzBt0q4XmV3TMyVhxgpKhszy9QctZYK2juA'
+name = 'populations'
+
+[[db.tables]]
+id = 0
+name = 'Sheet1'
+
+[[db.tables]]
+id = 1601447104
+name = 'c02'
+file = 'c02.csv'
+

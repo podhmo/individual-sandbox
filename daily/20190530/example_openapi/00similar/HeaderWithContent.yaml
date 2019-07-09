@@ -1,0 +1,31 @@
+definitions:
+  HeaderWithContent:
+    type: object
+    required:
+    - content
+    properties:
+      description:
+        type: string
+      required:
+        type: boolean
+        default: false
+      deprecated:
+        type: boolean
+        default: false
+      allowEmptyValue:
+        type: boolean
+        default: false
+      content:
+        type: object
+        additionalProperties:
+          $ref: 'MediaType.yaml#/definitions/MediaType'
+        minProperties: 1
+        maxProperties: 1
+    patternProperties:
+      ^x-: {}
+    additionalProperties: false
+    description: 'The Header Object follows the structure of the Parameter Object,
+      with the following changes:  1. `name` MUST NOT be specified, it is given in
+      the Headers Object. 1. `in` MUST NOT be specified, it is implicitly in `header`.
+      1. All traits that are affected by the location MUST be applicable to a location
+      of `header` (for example, `style`).'

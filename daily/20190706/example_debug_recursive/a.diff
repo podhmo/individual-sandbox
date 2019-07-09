@@ -1,0 +1,19 @@
+diff --git a/daily/20190706/example_debug_recursive/parse.py b/daily/20190706/example_debug_recursive/parse.py
+index d80d55f..82ad566 100644
+--- a/daily/20190706/example_debug_recursive/parse.py
++++ b/daily/20190706/example_debug_recursive/parse.py
+@@ -29,6 +29,14 @@ def node_value(node):
+ 
+ class PyTreeVisitor:
+     def visit(self, node):
++        import traceback
++
++        print(
++            " " * (len(traceback.extract_stack()) - 2),
++            "@",
++            node_name(node),
++            node_value(node),
++        )
+         method = "visit_{0}".format(node_name(node))
+         if hasattr(self, method):
+             # Found a specific visitor for this node

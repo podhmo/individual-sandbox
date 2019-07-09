@@ -1,0 +1,8 @@
+definitions:
+  service:
+    pass
+properties:
+  services:
+    type: object
+    additionalProperties:
+      $ref: "#/definitions/service"

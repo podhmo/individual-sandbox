@@ -1,0 +1,30 @@
+from fastapi import FastAPI, APIRouter
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    id: str = None
+    name: str
+    createdAt: str = None  # datetime
+
+
+route = APIRouter()
+
+
+@route.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@route.post("/users")
+async def create_user(user: User):
+    return user
+
+
+app = FastAPI()
+app.include_router(route)
+
+if __name__ == "__main__":
+    from dictknife import loading
+
+    loading.dumpfile(app.openapi())
