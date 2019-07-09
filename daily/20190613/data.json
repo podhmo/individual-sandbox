@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "person": {"name": "foo"}
+  },
+  {
+    "id": 2
+  },
+  {
+    "id": 3,
+    "person": {"name": "boo", "age": 20}
+  }
+]
