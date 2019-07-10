@@ -1,0 +1,174 @@
+DEBUG:pycomment.parse:  visit_file_input (prefix='\n', value=None, type=256)
+DEBUG:pycomment.parse:    visit_funcdef (prefix='\n', value=None, type=295)
+DEBUG:pycomment.parse:      visit_NAME (prefix='\n', value='def', type=1)
+DEBUG:pycomment.parse:      visit_NAME (prefix=' ', value='f', type=1)
+DEBUG:pycomment.parse:      visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:        visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:        visit_NAME (prefix='', value='x', type=1)
+DEBUG:pycomment.parse:        visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:      visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:      visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:        visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_INDENT (prefix='', value='    ', type=5)
+DEBUG:pycomment.parse:        visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:          visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:          visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_DEDENT (prefix='', value='', type=6)
+DEBUG:pycomment.parse:    visit_ENDMARKER (prefix='', value='', type=0)
+DEBUG:pycomment.parse:  visit_file_input (prefix='\n', value=None, type=256)
+DEBUG:pycomment.parse:    visit_decorated (prefix='\n', value=None, type=277)
+DEBUG:pycomment.parse:      visit_decorator (prefix='\n', value=None, type=278)
+DEBUG:pycomment.parse:        visit_AT (prefix='\n', value='@', type=50)
+DEBUG:pycomment.parse:        visit_NAME (prefix='', value='xxx', type=1)
+DEBUG:pycomment.parse:        visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:      visit_funcdef (prefix='', value=None, type=295)
+DEBUG:pycomment.parse:        visit_NAME (prefix='', value='def', type=1)
+DEBUG:pycomment.parse:        visit_NAME (prefix=' ', value='f', type=1)
+DEBUG:pycomment.parse:        visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:          visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:          visit_NAME (prefix='', value='x', type=1)
+DEBUG:pycomment.parse:          visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:        visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:        visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:          visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:          visit_INDENT (prefix='', value='    ', type=5)
+DEBUG:pycomment.parse:          visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:            visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:            visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:          visit_DEDENT (prefix='', value='', type=6)
+DEBUG:pycomment.parse:    visit_ENDMARKER (prefix='', value='', type=0)
+DEBUG:pycomment.parse:  visit_file_input (prefix='\n', value=None, type=256)
+DEBUG:pycomment.parse:    visit_funcdef (prefix='\n', value=None, type=295)
+DEBUG:pycomment.parse:      visit_NAME (prefix='\n', value='def', type=1)
+DEBUG:pycomment.parse:      visit_NAME (prefix=' ', value='f', type=1)
+DEBUG:pycomment.parse:      visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:        visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:        visit_NAME (prefix='', value='x', type=1)
+DEBUG:pycomment.parse:        visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:      visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:      visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:        visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_INDENT (prefix='', value='    ', type=5)
+DEBUG:pycomment.parse:        visit_funcdef (prefix='', value=None, type=295)
+DEBUG:pycomment.parse:          visit_NAME (prefix='', value='def', type=1)
+DEBUG:pycomment.parse:          visit_NAME (prefix=' ', value='g', type=1)
+DEBUG:pycomment.parse:          visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:            visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:            visit_NAME (prefix='', value='y', type=1)
+DEBUG:pycomment.parse:            visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:          visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:          visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:            visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_INDENT (prefix='', value='        ', type=5)
+DEBUG:pycomment.parse:            visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:              visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:              visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_DEDENT (prefix='    ', value='', type=6)
+DEBUG:pycomment.parse:        visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:          visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:          visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_DEDENT (prefix='', value='', type=6)
+DEBUG:pycomment.parse:    visit_ENDMARKER (prefix='', value='', type=0)
+DEBUG:pycomment.parse:  visit_file_input (prefix='\n', value=None, type=256)
+DEBUG:pycomment.parse:    visit_funcdef (prefix='\n', value=None, type=295)
+DEBUG:pycomment.parse:      visit_NAME (prefix='\n', value='def', type=1)
+DEBUG:pycomment.parse:      visit_NAME (prefix=' ', value='f', type=1)
+DEBUG:pycomment.parse:      visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:        visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:        visit_NAME (prefix='', value='x', type=1)
+DEBUG:pycomment.parse:        visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:      visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:      visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:        visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_INDENT (prefix='', value='    ', type=5)
+DEBUG:pycomment.parse:        visit_funcdef (prefix='', value=None, type=295)
+DEBUG:pycomment.parse:          visit_NAME (prefix='', value='def', type=1)
+DEBUG:pycomment.parse:          visit_NAME (prefix=' ', value='g', type=1)
+DEBUG:pycomment.parse:          visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:            visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:            visit_NAME (prefix='', value='y', type=1)
+DEBUG:pycomment.parse:            visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:          visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:          visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:            visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_INDENT (prefix='', value='        ', type=5)
+DEBUG:pycomment.parse:            visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:              visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:              visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_DEDENT (prefix='\n    ', value='', type=6)
+DEBUG:pycomment.parse:        visit_funcdef (prefix='', value=None, type=295)
+DEBUG:pycomment.parse:          visit_NAME (prefix='', value='def', type=1)
+DEBUG:pycomment.parse:          visit_NAME (prefix=' ', value='h', type=1)
+DEBUG:pycomment.parse:          visit_parameters (prefix='', value=None, type=309)
+DEBUG:pycomment.parse:            visit_LPAR (prefix='', value='(', type=7)
+DEBUG:pycomment.parse:            visit_NAME (prefix='', value='y', type=1)
+DEBUG:pycomment.parse:            visit_RPAR (prefix='', value=')', type=8)
+DEBUG:pycomment.parse:          visit_COLON (prefix='', value=':', type=11)
+DEBUG:pycomment.parse:          visit_suite (prefix='', value=None, type=324)
+DEBUG:pycomment.parse:            visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_INDENT (prefix='', value='        ', type=5)
+DEBUG:pycomment.parse:            visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:              visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:              visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:            visit_DEDENT (prefix='    ', value='', type=6)
+DEBUG:pycomment.parse:        visit_simple_stmt (prefix='', value=None, type=316)
+DEBUG:pycomment.parse:          visit_return_stmt (prefix='', value=None, type=314)
+DEBUG:pycomment.parse:          visit_NEWLINE (prefix='', value='\n', type=4)
+DEBUG:pycomment.parse:        visit_DEDENT (prefix='', value='', type=6)
+DEBUG:pycomment.parse:    visit_ENDMARKER (prefix='', value='', type=0)
+----------------------------------------
+
+def f(x):
+    return x + 1
+
+@profile
+def f(x):
+    return x + 1
+
+----------------------------------------
+
+@xxx
+def f(x):
+    return x + 1
+
+
+@xxx
+@profile
+def f(x):
+    return x + 1
+
+----------------------------------------
+
+def f(x):
+    def g(y):
+        return y + y
+    return g(x + 1)
+
+@profile
+def f(x):
+    @profile
+    def g(y):
+        return y + y
+    return g(x + 1)
+
+----------------------------------------
+
+def f(x):
+    def g(y):
+        return y + y
+
+    def h(y):
+        return y - y
+    return g(h(x) + 1)
+
+@profile
+def f(x):
+    @profile
+    def g(y):
+        return y + y
+
+    @profile
+    def h(y):
+        return y - y
+    return g(h(x) + 1)
+
