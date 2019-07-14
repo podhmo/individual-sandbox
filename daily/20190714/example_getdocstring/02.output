@@ -1,0 +1,11 @@
+_get_fields	Get fields from a class. If ordered=True, fields will sorted by creation index.
+_get_fields_by_mro	Collect fields from a class, following its method resolution order. The
+class itself is excluded from the search; only its parents are checked. Get
+fields from ``_declared_fields`` if available, else use ``__dict__``.
+SchemaMeta	Metaclass for the Schema class. Binds the declared fields to
+a ``_declared_fields`` attribute, which is a dictionary mapping attribute
+names to field objects. Also sets the ``opts`` class attribute, which is
+the Schema class's ``class Meta`` options.
+SchemaOpts	class Meta options for the :class:`Schema`. Defines defaults.
+BaseSchema	Base schema class with which to define custom schemas.
+Schema	Base schema class with which to define custom schemas.

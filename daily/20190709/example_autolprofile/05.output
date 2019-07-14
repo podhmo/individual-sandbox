@@ -1,0 +1,73 @@
+----------------------------------------
+def f(x):
+    return x + 1
+
+----------------------------------------
+def f2(x):
+    def g(x):
+        return x * x
+
+----------------------------------------
+class StreamHandler(Handler):
+    """
+    A handler class which writes logging records, appropriately formatted,
+# ...
+    terminator = '\n'
+
+    def __init__(self, stream=None):
+----------------------------------------
+class StreamHandler(Handler):
+    """
+    A handler class which writes logging records, appropriately formatted,
+# ...
+    def __init__(self, stream=None):
+        """
+        Initialize the handler.
+# ...
+        if stream is None:
+            stream = sys.stderr
+        self.stream = stream
+----------------------------------------
+class ArgumentParser(_AttributeHolder, _ActionsContainer):
+    """Object for parsing command line strings into Python objects.
+
+# ...
+    def _parse_known_args(self, arg_strings, namespace):
+        # replace arg strings that are file references
+        if self.fromfile_prefix_chars is not None:
+# ...
+        for action in self._actions:
+            if action not in seen_actions:
+                if action.required:
+----------------------------------------
+class ArgumentParser(_AttributeHolder, _ActionsContainer):
+    """Object for parsing command line strings into Python objects.
+
+# ...
+    def _parse_known_args(self, arg_strings, namespace):
+        # replace arg strings that are file references
+        if self.fromfile_prefix_chars is not None:
+# ...
+        def consume_optional(start_index):
+
+            # get the optional identified at this index
+# ...
+                    # successfully matched the option; exit the loop
+                    elif arg_count == 1:
+                        stop = start_index + 1
+----------------------------------------
+1600: class ArgumentParser(_AttributeHolder, _ActionsContainer):
+1601:     """Object for parsing command line strings into Python objects.
+1602: 
+...
+1790:     def _parse_known_args(self, arg_strings, namespace):
+1791:         # replace arg strings that are file references
+1792:         if self.fromfile_prefix_chars is not None:
+...
+1858:         def consume_optional(start_index):
+1859: 
+1860:             # get the optional identified at this index
+...
+1898:                     # successfully matched the option; exit the loop
+1899:                     elif arg_count == 1:
+1900:                         stop = start_index + 1

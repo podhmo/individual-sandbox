@@ -1,0 +1,281 @@
+uvicorn:
+  Config: null
+  Server: null
+  run: null
+uvicorn.config:
+  ImportFromStringError: Common base class for all non-exit exceptions.
+  import_from_string: null
+  ASGI2Middleware: null
+  DebugMiddleware: null
+  MessageLoggerMiddleware: null
+  ProxyHeadersMiddleware: null
+  WSGIMiddleware: null
+  get_logger: null
+  create_ssl_context: null
+  Config: null
+uvicorn.importer:
+  ImportFromStringError: Common base class for all non-exit exceptions.
+  import_from_string: null
+uvicorn.lifespan.off:
+  LifespanOff: null
+uvicorn.lifespan.on:
+  LifespanOn: null
+uvicorn.loops.asyncio:
+  asyncio_setup: null
+uvicorn.loops.auto:
+  auto_loop_setup: null
+uvicorn.loops.uvloop:
+  uvloop_setup: null
+uvicorn.main:
+  formatdate: |-
+    Returns a date string as specified by RFC 2822, e.g.:
+
+    Fri, 09 Nov 2001 01:08:47 -0000
+
+    Optional timeval if given is a floating point time value as accepted by
+    gmtime() and localtime(), otherwise the current time is used.
+
+    Optional localtime is a flag that when True, interprets timeval, and
+    returns a date relative to the local timezone instead of UTC, properly
+    taking daylight savings time into account.
+
+    Optional argument usegmt means that the timezone is written out as
+    an ascii string, not numeric one (so "GMT" instead of "+0000"). This
+    is needed for HTTP, and is only used when localtime==False.
+  Config: null
+  get_logger: null
+  Multiprocess: null
+  StatReload: null
+  run: null
+  ServerState: Shared servers state that is available between all protocol instances.
+  Server: null
+uvicorn.middleware.asgi2:
+  ASGI2Middleware: null
+uvicorn.middleware.debug:
+  HTMLResponse: null
+  PlainTextResponse: null
+  get_accept_header: null
+  DebugMiddleware: null
+uvicorn.middleware.message_logger:
+  message_with_placeholders: |-
+    Return an ASGI message, with any body-type content omitted and replaced
+    with a placeholder.
+  MessageLoggerMiddleware: null
+uvicorn.middleware.proxy_headers:
+  ProxyHeadersMiddleware: null
+uvicorn.middleware.wsgi:
+  build_environ: Builds a scope and request message into a WSGI environ object.
+  WSGIMiddleware: null
+  WSGIResponder: null
+uvicorn.protocols.http.auto:
+  HttpToolsProtocol: |-
+    Interface for stream protocol.
+
+    The user should implement this interface.  They can inherit from
+    this class but don't need to.  The implementations here do
+    nothing (they don't raise exceptions).
+
+    When the user wants to requests a transport, they pass a protocol
+    factory to a utility function (e.g., EventLoop.create_connection()).
+
+    When the connection is made successfully, connection_made() is
+    called with a suitable transport object.  Then data_received()
+    will be called 0 or more times with data (bytes) received from the
+    transport; finally, connection_lost() will be called exactly once
+    with either an exception object or None as an argument.
+
+    State machine of calls:
+
+      start -> CM [-> DR*] [-> ER?] -> CL -> end
+
+    * CM: connection_made()
+    * DR: data_received()
+    * ER: eof_received()
+    * CL: connection_lost()
+  AutoHTTPProtocol: |-
+    Interface for stream protocol.
+
+    The user should implement this interface.  They can inherit from
+    this class but don't need to.  The implementations here do
+    nothing (they don't raise exceptions).
+
+    When the user wants to requests a transport, they pass a protocol
+    factory to a utility function (e.g., EventLoop.create_connection()).
+
+    When the connection is made successfully, connection_made() is
+    called with a suitable transport object.  Then data_received()
+    will be called 0 or more times with data (bytes) received from the
+    transport; finally, connection_lost() will be called exactly once
+    with either an exception object or None as an argument.
+
+    State machine of calls:
+
+      start -> CM [-> DR*] [-> ER?] -> CL -> end
+
+    * CM: connection_made()
+    * DR: data_received()
+    * ER: eof_received()
+    * CL: connection_lost()
+uvicorn.protocols.http.h11_impl:
+  unquote: |-
+    Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'.
+  get_local_addr: null
+  get_remote_addr: null
+  is_ssl: null
+  _get_status_phrase: null
+  FlowControl: null
+  service_unavailable: null
+  H11Protocol: |-
+    Interface for stream protocol.
+
+    The user should implement this interface.  They can inherit from
+    this class but don't need to.  The implementations here do
+    nothing (they don't raise exceptions).
+
+    When the user wants to requests a transport, they pass a protocol
+    factory to a utility function (e.g., EventLoop.create_connection()).
+
+    When the connection is made successfully, connection_made() is
+    called with a suitable transport object.  Then data_received()
+    will be called 0 or more times with data (bytes) received from the
+    transport; finally, connection_lost() will be called exactly once
+    with either an exception object or None as an argument.
+
+    State machine of calls:
+
+      start -> CM [-> DR*] [-> ER?] -> CL -> end
+
+    * CM: connection_made()
+    * DR: data_received()
+    * ER: eof_received()
+    * CL: connection_lost()
+  RequestResponseCycle: null
+uvicorn.protocols.http.httptools_impl:
+  get_local_addr: null
+  get_remote_addr: null
+  is_ssl: null
+  _get_status_line: null
+  FlowControl: null
+  service_unavailable: null
+  HttpToolsProtocol: |-
+    Interface for stream protocol.
+
+    The user should implement this interface.  They can inherit from
+    this class but don't need to.  The implementations here do
+    nothing (they don't raise exceptions).
+
+    When the user wants to requests a transport, they pass a protocol
+    factory to a utility function (e.g., EventLoop.create_connection()).
+
+    When the connection is made successfully, connection_made() is
+    called with a suitable transport object.  Then data_received()
+    will be called 0 or more times with data (bytes) received from the
+    transport; finally, connection_lost() will be called exactly once
+    with either an exception object or None as an argument.
+
+    State machine of calls:
+
+      start -> CM [-> DR*] [-> ER?] -> CL -> end
+
+    * CM: connection_made()
+    * DR: data_received()
+    * ER: eof_received()
+    * CL: connection_lost()
+  RequestResponseCycle: null
+uvicorn.protocols.utils:
+  get_remote_addr: null
+  get_local_addr: null
+  is_ssl: null
+uvicorn.protocols.websockets.auto:
+  WebSocketProtocol: |-
+    Complete WebSocket server implementation as an :class:`asyncio.Protocol`.
+
+    This class inherits most of its methods from
+    :class:`~websockets.protocol.WebSocketCommonProtocol`.
+
+    For the sake of simplicity, it doesn't rely on a full HTTP implementation.
+    Its support for HTTP responses is very limited.
+  AutoWebSocketsProtocol: |-
+    Complete WebSocket server implementation as an :class:`asyncio.Protocol`.
+
+    This class inherits most of its methods from
+    :class:`~websockets.protocol.WebSocketCommonProtocol`.
+
+    For the sake of simplicity, it doesn't rely on a full HTTP implementation.
+    Its support for HTTP responses is very limited.
+uvicorn.protocols.websockets.websockets_impl:
+  unquote: |-
+    Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'.
+  get_local_addr: null
+  get_remote_addr: null
+  is_ssl: null
+  Server: null
+  WebSocketProtocol: |-
+    Complete WebSocket server implementation as an :class:`asyncio.Protocol`.
+
+    This class inherits most of its methods from
+    :class:`~websockets.protocol.WebSocketCommonProtocol`.
+
+    For the sake of simplicity, it doesn't rely on a full HTTP implementation.
+    Its support for HTTP responses is very limited.
+uvicorn.protocols.websockets.wsproto_impl:
+  unquote: |-
+    Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'.
+  get_local_addr: null
+  get_remote_addr: null
+  is_ssl: null
+  Server: null
+  WebSocketProtocol: |-
+    Complete WebSocket server implementation as an :class:`asyncio.Protocol`.
+
+    This class inherits most of its methods from
+    :class:`~websockets.protocol.WebSocketCommonProtocol`.
+
+    For the sake of simplicity, it doesn't rely on a full HTTP implementation.
+    Its support for HTTP responses is very limited.
+uvicorn.supervisors:
+  Multiprocess: null
+  StatReload: null
+uvicorn.supervisors.multiprocess:
+  Multiprocess: null
+uvicorn.supervisors.statreload:
+  Path: |-
+    PurePath subclass that can make system calls.
+
+    Path represents a filesystem path but unlike PurePath, also offers
+    methods to do system calls on path objects. Depending on your system,
+    instantiating a Path will return either a PosixPath or a WindowsPath
+    object. You can also instantiate a PosixPath or WindowsPath directly,
+    but cannot instantiate a WindowsPath on a POSIX system or vice versa.
+  StatReload: null
+uvicorn.workers:
+  Worker: null
+  Config: null
+  Server: null
+  UvicornWorker: |-
+    A worker class for Gunicorn that interfaces with an ASGI consumer callable,
+    rather than a WSGI callable.
+  UvicornH11Worker: |-
+    A worker class for Gunicorn that interfaces with an ASGI consumer callable,
+    rather than a WSGI callable.

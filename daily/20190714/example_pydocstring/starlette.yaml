@@ -1,0 +1,607 @@
+starlette.applications:
+  URLPath: |-
+    A URL path string that may also hold an associated protocol and/or host.
+    Used by the routing to return `url_path_for` matches.
+  ExceptionMiddleware: null
+  BaseHTTPMiddleware: null
+  ServerErrorMiddleware: |-
+    Handles returning 500 responses when a server error occurs.
+
+    If 'debug' is set, then traceback responses will be returned,
+    otherwise the designated 'handler' will be called.
+
+    This middleware class should generally be used to wrap *everything*
+    else up, so that unhandled exceptions anywhere in the stack
+    always result in an appropriate 500 response.
+  BaseRoute: null
+  Router: null
+  Starlette: null
+starlette.authentication:
+  HTTPException: Common base class for all non-exit exceptions.
+  HTTPConnection: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  RedirectResponse: null
+  Response: null
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  has_required_scope: null
+  requires: null
+  AuthenticationError: Common base class for all non-exit exceptions.
+  AuthenticationBackend: null
+  AuthCredentials: null
+  BaseUser: null
+  SimpleUser: null
+  UnauthenticatedUser: null
+starlette.background:
+  run_in_threadpool: null
+  BackgroundTask: null
+  BackgroundTasks: null
+starlette.concurrency:
+  run_in_threadpool: null
+  _StopIteration: Common base class for all non-exit exceptions.
+  _next: null
+  iterate_in_threadpool: null
+starlette.config:
+  MutableMapping: null
+  undefined: null
+  EnvironError: Common base class for all non-exit exceptions.
+  Environ: null
+  Config: null
+starlette.convertors:
+  Convertor: null
+  StringConvertor: null
+  PathConvertor: null
+  IntegerConvertor: null
+  FloatConvertor: null
+starlette.datastructures:
+  namedtuple: |-
+    Returns a new subclass of tuple with named fields.
+
+    >>> Point = namedtuple('Point', ['x', 'y'])
+    >>> Point.__doc__                   # docstring for the new class
+    'Point(x, y)'
+    >>> p = Point(11, y=22)             # instantiate with positional args or keywords
+    >>> p[0] + p[1]                     # indexable like a plain tuple
+    33
+    >>> x, y = p                        # unpack like a regular tuple
+    >>> x, y
+    (11, 22)
+    >>> p.x + p.y                       # fields also accessible by name
+    33
+    >>> d = p._asdict()                 # convert to a dictionary
+    >>> d['x']
+    11
+    >>> Point(**d)                      # convert from a dictionary
+    Point(x=11, y=22)
+    >>> p._replace(x=100)               # _replace() is like str.replace() but targets named fields
+    Point(x=100, y=22)
+  Sequence: |-
+    All the operations on a read-only sequence.
+
+    Concrete subclasses must override __new__ or __init__,
+    __getitem__, and __len__.
+  shlex: A lexical analyzer class for simple shell-like syntaxes.
+  SplitResult: |-
+    SplitResult(scheme, netloc, path, query, fragment)
+
+    A 5-tuple that contains the different components of a URL. Similar to
+    ParseResult, but does not split params.
+  parse_qsl: |-
+    Parse a query given as a string argument.
+
+    Arguments:
+
+    qs: percent-encoded query string to be parsed
+
+    keep_blank_values: flag indicating whether blank values in
+        percent-encoded queries should be treated as blank strings.
+        A true value indicates that blanks should be retained as blank
+        strings.  The default false value indicates that blank values
+        are to be ignored and treated as if they were  not included.
+
+    strict_parsing: flag indicating what to do with parsing errors. If
+        false (the default), errors are silently ignored. If true,
+        errors raise a ValueError exception.
+
+    encoding and errors: specify how to decode percent-encoded sequences
+        into Unicode characters, as accepted by the bytes.decode() method.
+
+    max_num_fields: int. If set, then throws a ValueError
+        if there are more than n fields read by parse_qsl().
+
+    Returns a list, as G-d intended.
+  urlencode: |-
+    Encode a dict or sequence of two-element tuples into a URL query string.
+
+    If any values in the query arg are sequences and doseq is true, each
+    sequence element is converted to a separate parameter.
+
+    If the query arg is a sequence of two-element tuples, the order of the
+    parameters in the output will match the order of parameters in the
+    input.
+
+    The components of a query arg may each be either a string or a bytes type.
+
+    The safe, encoding, and errors parameters are passed down to the function
+    specified by quote_via (encoding and errors only if a component is a str).
+  urlsplit: |-
+    Parse a URL into 5 components:
+    <scheme>://<netloc>/<path>?<query>#<fragment>
+    Return a 5-tuple: (scheme, netloc, path, query, fragment).
+    Note that we don't break the components up in smaller bits
+    (e.g. netloc is a single string) and we don't expand % escapes.
+  run_in_threadpool: null
+  Address: Address(host, port)
+  URL: null
+  URLPath: |-
+    A URL path string that may also hold an associated protocol and/or host.
+    Used by the routing to return `url_path_for` matches.
+  Secret: |-
+    Holds a string value that should not be revealed in tracebacks etc.
+    You should cast the value to `str` at the point it is required.
+  CommaSeparatedStrings: |-
+    All the operations on a read-only sequence.
+
+    Concrete subclasses must override __new__ or __init__,
+    __getitem__, and __len__.
+  ImmutableMultiDict: |-
+    Abstract base class for generic types.
+
+    A generic type is typically declared by inheriting from
+    this class parameterized with one or more type variables.
+    For example, a generic mapping type might be defined as::
+
+      class Mapping(Generic[KT, VT]):
+          def __getitem__(self, key: KT) -> VT:
+              ...
+          # Etc.
+
+    This class can then be used as follows::
+
+      def lookup_name(mapping: Mapping[KT, VT], key: KT, default: VT) -> VT:
+          try:
+              return mapping[key]
+          except KeyError:
+              return default
+  MultiDict: |-
+    Abstract base class for generic types.
+
+    A generic type is typically declared by inheriting from
+    this class parameterized with one or more type variables.
+    For example, a generic mapping type might be defined as::
+
+      class Mapping(Generic[KT, VT]):
+          def __getitem__(self, key: KT) -> VT:
+              ...
+          # Etc.
+
+    This class can then be used as follows::
+
+      def lookup_name(mapping: Mapping[KT, VT], key: KT, default: VT) -> VT:
+          try:
+              return mapping[key]
+          except KeyError:
+              return default
+  QueryParams: An immutable multidict.
+  UploadFile: An uploaded file included as part of the request data.
+  FormData: An immutable multidict, containing both file uploads and text input.
+  Headers: An immutable, case-insensitive multidict.
+  MutableHeaders: An immutable, case-insensitive multidict.
+starlette.endpoints:
+  run_in_threadpool: null
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  PlainTextResponse: null
+  Response: null
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  HTTPEndpoint: null
+  WebSocketEndpoint: null
+starlette.exceptions:
+  run_in_threadpool: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  PlainTextResponse: null
+  Response: null
+  HTTPException: Common base class for all non-exit exceptions.
+  ExceptionMiddleware: null
+starlette.formparsers:
+  Enum: |-
+    Generic enumeration.
+
+    Derive from this class to define new enumerations.
+  unquote_plus: |-
+    Like unquote(), but also replace plus signs by spaces, as required for
+    unquoting HTML form values.
+
+    unquote_plus('%7e/abc+def') -> '~/abc def'
+  FormData: An immutable multidict, containing both file uploads and text input.
+  Headers: An immutable, case-insensitive multidict.
+  UploadFile: An uploaded file included as part of the request data.
+  FormMessage: An enumeration.
+  MultiPartMessage: An enumeration.
+  FormParser: null
+  MultiPartParser: null
+starlette.graphql:
+  BackgroundTasks: null
+  run_in_threadpool: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  HTMLResponse: null
+  JSONResponse: null
+  PlainTextResponse: null
+  Response: null
+  GraphQLApp: null
+starlette.middleware.authentication:
+  AuthCredentials: null
+  AuthenticationBackend: null
+  AuthenticationError: Common base class for all non-exit exceptions.
+  UnauthenticatedUser: null
+  HTTPConnection: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  PlainTextResponse: null
+  Response: null
+  AuthenticationMiddleware: null
+starlette.middleware.base:
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  Response: null
+  StreamingResponse: null
+  BaseHTTPMiddleware: null
+starlette.middleware.cors:
+  Headers: An immutable, case-insensitive multidict.
+  MutableHeaders: An immutable, case-insensitive multidict.
+  PlainTextResponse: null
+  Response: null
+  CORSMiddleware: null
+starlette.middleware.errors:
+  run_in_threadpool: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  HTMLResponse: null
+  PlainTextResponse: null
+  Response: null
+  ServerErrorMiddleware: |-
+    Handles returning 500 responses when a server error occurs.
+
+    If 'debug' is set, then traceback responses will be returned,
+    otherwise the designated 'handler' will be called.
+
+    This middleware class should generally be used to wrap *everything*
+    else up, so that unhandled exceptions anywhere in the stack
+    always result in an appropriate 500 response.
+starlette.middleware.gzip:
+  Headers: An immutable, case-insensitive multidict.
+  MutableHeaders: An immutable, case-insensitive multidict.
+  GZipMiddleware: null
+  GZipResponder: null
+  unattached_send: null
+starlette.middleware.httpsredirect:
+  URL: null
+  RedirectResponse: null
+  HTTPSRedirectMiddleware: null
+starlette.middleware.sessions:
+  URL: null
+  RedirectResponse: null
+  HTTPSRedirectMiddleware: null
+starlette.middleware.trustedhost:
+  URL: null
+  Headers: An immutable, case-insensitive multidict.
+  PlainTextResponse: null
+  RedirectResponse: null
+  Response: null
+  TrustedHostMiddleware: null
+starlette.middleware.wsgi:
+  run_in_threadpool: null
+  build_environ: Builds a scope and request body into a WSGI environ object.
+  WSGIMiddleware: null
+  WSGIResponder: null
+starlette.requests:
+  Mapping: null
+  URL: null
+  Address: Address(host, port)
+  FormData: An immutable multidict, containing both file uploads and text input.
+  Headers: An immutable, case-insensitive multidict.
+  QueryParams: An immutable multidict.
+  FormParser: null
+  MultiPartParser: null
+  ClientDisconnect: Common base class for all non-exit exceptions.
+  State: null
+  HTTPConnection: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  empty_receive: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+starlette.responses:
+  formatdate: |-
+    Returns a date string as specified by RFC 2822, e.g.:
+
+    Fri, 09 Nov 2001 01:08:47 -0000
+
+    Optional timeval if given is a floating point time value as accepted by
+    gmtime() and localtime(), otherwise the current time is used.
+
+    Optional localtime is a flag that when True, interprets timeval, and
+    returns a date relative to the local timezone instead of UTC, properly
+    taking daylight savings time into account.
+
+    Optional argument usegmt means that the timezone is written out as
+    an ascii string, not numeric one (so "GMT" instead of "+0000"). This
+    is needed for HTTP, and is only used when localtime==False.
+  guess_type: |-
+    Guess the type of a file based on its URL.
+
+    Return value is a tuple (type, encoding) where type is None if the
+    type can't be guessed (no or unknown suffix) or a string of the
+    form type/subtype, usable for a MIME Content-type header; and
+    encoding is None for no encoding or the name of the program used
+    to encode (e.g. compress or gzip).  The mappings are table
+    driven.  Encoding suffixes are case sensitive; type suffixes are
+    first tried case sensitive, then case insensitive.
+
+    The suffixes .tgz, .taz and .tz (case sensitive!) are all mapped
+    to ".tar.gz".  (This is table-driven too, using the dictionary
+    suffix_map).
+
+    Optional `strict' argument when false adds a bunch of commonly found, but
+    non-standard types.
+  quote_plus: |-
+    Like quote(), but also replace ' ' with '+', as required for quoting
+    HTML form values. Plus signs in the original string are escaped unless
+    they are included in safe. It also does not have safe default to '/'.
+  BackgroundTask: null
+  iterate_in_threadpool: null
+  URL: null
+  MutableHeaders: An immutable, case-insensitive multidict.
+  aio_stat: |-
+    Perform a stat system call on the given path.
+
+      path
+        Path to be examined; can be string, bytes, a path-like object or
+        open-file-descriptor int.
+      dir_fd
+        If not None, it should be a file descriptor open to a directory,
+        and path should be a relative string; path will then be relative to
+        that directory.
+      follow_symlinks
+        If False, and the last element of the path is a symbolic link,
+        stat will examine the symbolic link itself instead of the file
+        the link points to.
+
+    dir_fd and follow_symlinks may not be implemented
+      on your platform.  If they are unavailable, using them will raise a
+      NotImplementedError.
+
+    It's an error to use dir_fd or follow_symlinks when specifying path as
+      an open file descriptor.
+  Response: null
+  HTMLResponse: null
+  PlainTextResponse: null
+  JSONResponse: null
+  UJSONResponse: null
+  RedirectResponse: null
+  StreamingResponse: null
+  FileResponse: null
+starlette.routing:
+  Enum: |-
+    Generic enumeration.
+
+    Derive from this class to define new enumerations.
+  run_in_threadpool: null
+  Convertor: null
+  URL: null
+  Headers: An immutable, case-insensitive multidict.
+  URLPath: |-
+    A URL path string that may also hold an associated protocol and/or host.
+    Used by the routing to return `url_path_for` matches.
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  PlainTextResponse: null
+  RedirectResponse: null
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  WebSocketClose: null
+  NoMatchFound: |-
+    Raised by `.url_for(name, **path_params)` and `.url_path_for(name, **path_params)`
+    if no matching route exists.
+  Match: An enumeration.
+  request_response: |-
+    Takes a function or coroutine `func(request) -> response`,
+    and returns an ASGI application.
+  websocket_session: Takes a coroutine `func(session)`, and returns an ASGI application.
+  get_name: null
+  replace_params: null
+  compile_path: |-
+    Given a path string, like: "/{username:str}", return a three-tuple
+    of (regex, format, {param_name:convertor}).
+
+    regex:      "/(?P<username>[^/]+)"
+    format:     "/{username}"
+    convertors: {"username": StringConvertor()}
+  BaseRoute: null
+  Route: null
+  WebSocketRoute: null
+  Mount: null
+  Host: null
+  Lifespan: null
+  Router: null
+starlette.schemas:
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  Response: null
+  BaseRoute: null
+  Mount: null
+  Route: null
+  OpenAPIResponse: null
+  EndpointInfo: EndpointInfo(path, http_method, func)
+  BaseSchemaGenerator: null
+  SchemaGenerator: null
+starlette.staticfiles:
+  parsedate: Convert a time string to a time tuple.
+  aio_stat: |-
+    Perform a stat system call on the given path.
+
+      path
+        Path to be examined; can be string, bytes, a path-like object or
+        open-file-descriptor int.
+      dir_fd
+        If not None, it should be a file descriptor open to a directory,
+        and path should be a relative string; path will then be relative to
+        that directory.
+      follow_symlinks
+        If False, and the last element of the path is a symbolic link,
+        stat will examine the symbolic link itself instead of the file
+        the link points to.
+
+    dir_fd and follow_symlinks may not be implemented
+      on your platform.  If they are unavailable, using them will raise a
+      NotImplementedError.
+
+    It's an error to use dir_fd or follow_symlinks when specifying path as
+      an open file descriptor.
+  URL: null
+  Headers: An immutable, case-insensitive multidict.
+  FileResponse: null
+  PlainTextResponse: null
+  RedirectResponse: null
+  Response: null
+  NotModifiedResponse: null
+  StaticFiles: null
+starlette.templating:
+  BackgroundTask: null
+  Response: null
+  _TemplateResponse: null
+  Jinja2Templates: |-
+    templates = Jinja2Templates("templates")
+
+    return templates.TemplateResponse("index.html", {"request": request})
+starlette.testclient:
+  unquote: |-
+    Replace %xx escapes by their single-character equivalent. The optional
+    encoding and errors parameters specify how to decode percent-encoded
+    sequences into Unicode characters, as accepted by the bytes.decode()
+    method.
+    By default, percent-encoded sequences are decoded with UTF-8, and invalid
+    sequences are replaced by a placeholder character.
+
+    unquote('abc%20def') -> 'abc def'.
+  urljoin: |-
+    Join a base URL and a possibly relative URL to form an absolute
+    interpretation of the latter.
+  urlsplit: |-
+    Parse a URL into 5 components:
+    <scheme>://<netloc>/<path>?<query>#<fragment>
+    Return a 5-tuple: (scheme, netloc, path, query, fragment).
+    Note that we don't break the components up in smaller bits
+    (e.g. netloc is a single string) and we don't expand % escapes.
+  WebSocketDisconnect: Common base class for all non-exit exceptions.
+  _HeaderDict: |-
+    :param headers:
+        An iterable of field-value pairs. Must not contain multiple field names
+        when compared case-insensitively.
+
+    :param kwargs:
+        Additional field-value pairs to pass in to ``dict.update``.
+
+    A ``dict`` like container for storing HTTP Headers.
+
+    Field names are stored and compared case-insensitively in compliance with
+    RFC 7230. Iteration provides the first case-sensitive key seen for each
+    case-insensitive pair.
+
+    Using ``__setitem__`` syntax overwrites fields that compare equal
+    case-insensitively in order to maintain ``dict``'s api. For fields that
+    compare equal, instead create a new ``HTTPHeaderDict`` and use ``.add``
+    in a loop.
+
+    If multiple fields that are equal case-insensitively are passed to the
+    constructor or ``.update``, the behavior is undefined and some will be
+    lost.
+
+    >>> headers = HTTPHeaderDict()
+    >>> headers.add('Set-Cookie', 'foo=bar')
+    >>> headers.add('set-cookie', 'baz=quxx')
+    >>> headers['content-length'] = '7'
+    >>> headers['SET-cookie']
+    'foo=bar, baz=quxx'
+    >>> headers['Content-Length']
+    '7'
+  _MockOriginalResponse: |-
+    We have to jump through some hoops to present the response as if
+    it was made using urllib3.
+  _Upgrade: Common base class for all non-exit exceptions.
+  _get_reason_phrase: null
+  _is_asgi3: null
+  _WrapASGI2: Provide an ASGI3 interface onto an ASGI2 app.
+  _ASGIAdapter: |-
+    The built-in HTTP Adapter for urllib3.
+
+    Provides a general-case interface for Requests sessions to contact HTTP and
+    HTTPS urls by implementing the Transport Adapter interface. This class will
+    usually be created by the :class:`Session <Session>` class under the
+    covers.
+
+    :param pool_connections: The number of urllib3 connection pools to cache.
+    :param pool_maxsize: The maximum number of connections to save in the pool.
+    :param max_retries: The maximum number of retries each connection
+        should attempt. Note, this applies only to failed DNS lookups, socket
+        connections and connection timeouts, never to requests where data has
+        made it to the server. By default, Requests does not retry failed
+        connections. If you need granular control over the conditions under
+        which we retry a request, import urllib3's ``Retry`` class and pass
+        that instead.
+    :param pool_block: Whether the connection pool should block for connections.
+
+    Usage::
+
+      >>> import requests
+      >>> s = requests.Session()
+      >>> a = requests.adapters.HTTPAdapter(max_retries=3)
+      >>> s.mount('http://', a)
+  WebSocketTestSession: null
+  TestClient: |-
+    A Requests session.
+
+    Provides cookie persistence, connection-pooling, and configuration.
+
+    Basic Usage::
+
+      >>> import requests
+      >>> s = requests.Session()
+      >>> s.get('http://httpbin.org/get')
+      <Response [200]>
+
+    Or as a context manager::
+
+      >>> with requests.Session() as s:
+      >>>     s.get('http://httpbin.org/get')
+      <Response [200]>
+starlette.websockets:
+  HTTPConnection: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  WebSocketState: An enumeration.
+  WebSocketDisconnect: Common base class for all non-exit exceptions.
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  WebSocketClose: null

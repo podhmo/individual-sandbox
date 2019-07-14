@@ -1,0 +1,14 @@
+Address	Address(host, port)
+URL	
+URLPath	A URL path string that may also hold an associated protocol and/or host.
+Used by the routing to return `url_path_for` matches.
+Secret	Holds a string value that should not be revealed in tracebacks etc.
+You should cast the value to `str` at the point it is required.
+CommaSeparatedStrings	All the operations on a read-only sequence.
+ImmutableMultiDict	Abstract base class for generic types.
+MultiDict	Abstract base class for generic types.
+QueryParams	An immutable multidict.
+UploadFile	An uploaded file included as part of the request data.
+FormData	An immutable multidict, containing both file uploads and text input.
+Headers	An immutable, case-insensitive multidict.
+MutableHeaders	An immutable, case-insensitive multidict.

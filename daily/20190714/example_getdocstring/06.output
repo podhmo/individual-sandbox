@@ -1,0 +1,28 @@
+_AttributeHolder	Abstract base class that provides __repr__.
+_copy_items	
+HelpFormatter	Formatter for generating usage messages and argument help strings.
+RawDescriptionHelpFormatter	Help message formatter which retains any formatting in descriptions.
+RawTextHelpFormatter	Help message formatter which retains formatting of all help text.
+ArgumentDefaultsHelpFormatter	Help message formatter which adds default values to argument help.
+MetavarTypeHelpFormatter	Help message formatter which uses the argument 'type' as the default
+metavar value (instead of the argument 'dest')
+_get_action_name	
+ArgumentError	An error from creating or using an argument (optional or positional).
+ArgumentTypeError	An error from trying to convert a command line string to a type.
+Action	Information about how to convert command line strings to Python objects.
+_StoreAction	Information about how to convert command line strings to Python objects.
+_StoreConstAction	Information about how to convert command line strings to Python objects.
+_StoreTrueAction	Information about how to convert command line strings to Python objects.
+_StoreFalseAction	Information about how to convert command line strings to Python objects.
+_AppendAction	Information about how to convert command line strings to Python objects.
+_AppendConstAction	Information about how to convert command line strings to Python objects.
+_CountAction	Information about how to convert command line strings to Python objects.
+_HelpAction	Information about how to convert command line strings to Python objects.
+_VersionAction	Information about how to convert command line strings to Python objects.
+_SubParsersAction	Information about how to convert command line strings to Python objects.
+FileType	Factory for creating file object types
+Namespace	Simple object for storing attributes.
+_ActionsContainer	
+_ArgumentGroup	
+_MutuallyExclusiveGroup	
+ArgumentParser	Object for parsing command line strings into Python objects.

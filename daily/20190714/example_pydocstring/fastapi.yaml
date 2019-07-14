@@ -1,0 +1,888 @@
+fastapi:
+  BackgroundTasks: null
+  FastAPI: null
+  UploadFile: An uploaded file included as part of the request data.
+  HTTPException: Common base class for all non-exit exceptions.
+  Body: null
+  Cookie: null
+  Depends: null
+  File: null
+  Form: null
+  Header: null
+  Path: null
+  Query: null
+  Security: null
+  APIRouter: null
+fastapi.applications:
+  http_exception_handler: null
+  request_validation_exception_handler: null
+  RequestValidationError: Inappropriate argument value (of correct type).
+  get_redoc_html: null
+  get_swagger_ui_html: null
+  get_swagger_ui_oauth2_redirect_html: null
+  get_openapi: null
+  Depends: null
+  Starlette: null
+  ExceptionMiddleware: null
+  HTTPException: Common base class for all non-exit exceptions.
+  ServerErrorMiddleware: |-
+    Handles returning 500 responses when a server error occurs.
+
+    If 'debug' is set, then traceback responses will be returned,
+    otherwise the designated 'handler' will be called.
+
+    This middleware class should generally be used to wrap *everything*
+    else up, so that unhandled exceptions anywhere in the stack
+    always result in an appropriate 500 response.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  HTMLResponse: null
+  JSONResponse: null
+  Response: null
+  BaseRoute: null
+  FastAPI: null
+fastapi.datastructures:
+  StarletteUploadFile: An uploaded file included as part of the request data.
+  UploadFile: An uploaded file included as part of the request data.
+fastapi.dependencies.models:
+  SecurityBase: null
+  Field: null
+  SecurityRequirement: null
+  Dependant: null
+fastapi.dependencies.utils:
+  deepcopy: |-
+    Deep copy operation on arbitrary Python objects.
+
+    See the module's __doc__ string for more info.
+  cast: |-
+    Cast a value to a type.
+
+    This returns the value unchanged.  To the type checker this
+    signals that the return value has the designated type, but at
+    runtime we intentionally don't check anything (we want this
+    to be as fast as possible).
+  Dependant: null
+  SecurityRequirement: null
+  SecurityBase: null
+  OAuth2: null
+  SecurityScopes: null
+  OpenIdConnect: null
+  get_path_param_names: null
+  BaseConfig: null
+  BaseModel: null
+  Schema: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  ErrorWrapper: null
+  MissingError: Inappropriate argument value (of correct type).
+  Field: null
+  Shape: An enumeration.
+  BackgroundTasks: null
+  run_in_threadpool: null
+  FormData: An immutable multidict, containing both file uploads and text input.
+  Headers: An immutable, case-insensitive multidict.
+  QueryParams: An immutable multidict.
+  UploadFile: An uploaded file included as part of the request data.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  Response: null
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  get_param_sub_dependant: null
+  get_parameterless_sub_dependant: null
+  get_sub_dependant: null
+  get_flat_dependant: null
+  is_scalar_field: null
+  is_scalar_sequence_field: null
+  get_dependant: null
+  add_non_field_param_to_dependency: null
+  get_param_field: null
+  add_param_to_fields: null
+  is_coroutine_callable: null
+  solve_dependencies: null
+  request_params_to_args: null
+  request_body_to_args: null
+  get_schema_compatible_field: null
+  get_body_field: null
+fastapi.encoders:
+  Enum: |-
+    Generic enumeration.
+
+    Derive from this class to define new enumerations.
+  GeneratorType: null
+  BaseModel: null
+  jsonable_encoder: null
+fastapi.exception_handlers:
+  RequestValidationError: Inappropriate argument value (of correct type).
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  JSONResponse: null
+  http_exception_handler: null
+  request_validation_exception_handler: null
+fastapi.exceptions:
+  ValidationError: Inappropriate argument value (of correct type).
+  StarletteHTTPException: Common base class for all non-exit exceptions.
+  HTTPException: Common base class for all non-exit exceptions.
+  RequestValidationError: Inappropriate argument value (of correct type).
+  WebSocketRequestValidationError: Inappropriate argument value (of correct type).
+fastapi.openapi.docs:
+  HTMLResponse: null
+  get_swagger_ui_html: null
+  get_redoc_html: null
+  get_swagger_ui_oauth2_redirect_html: null
+fastapi.openapi.models:
+  Enum: |-
+    Generic enumeration.
+
+    Derive from this class to define new enumerations.
+  BaseModel: null
+  PSchema: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  UrlStr: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  EmailStr: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  Contact: null
+  License: null
+  Info: null
+  ServerVariable: null
+  Server: null
+  Reference: null
+  Discriminator: null
+  XML: null
+  ExternalDocumentation: null
+  SchemaBase: null
+  Schema: null
+  Example: null
+  ParameterInType: An enumeration.
+  Encoding: null
+  MediaType: null
+  ParameterBase: null
+  Parameter: null
+  Header: null
+  EncodingWithHeaders: null
+  RequestBody: null
+  Link: null
+  Response: null
+  Responses: null
+  Operation: null
+  PathItem: null
+  OperationWithCallbacks: null
+  SecuritySchemeType: An enumeration.
+  SecurityBase: null
+  APIKeyIn: An enumeration.
+  APIKey: null
+  HTTPBase: null
+  HTTPBearer: null
+  OAuthFlow: null
+  OAuthFlowImplicit: null
+  OAuthFlowPassword: null
+  OAuthFlowClientCredentials: null
+  OAuthFlowAuthorizationCode: null
+  OAuthFlows: null
+  OAuth2: null
+  OpenIdConnect: null
+  Components: null
+  Tag: null
+  OpenAPI: null
+fastapi.openapi.utils:
+  cast: |-
+    Cast a value to a type.
+
+    This returns the value unchanged.  To the type checker this
+    signals that the return value has the designated type, but at
+    runtime we intentionally don't check anything (we want this
+    to be as fast as possible).
+  Dependant: null
+  get_flat_dependant: null
+  jsonable_encoder: null
+  OpenAPI: null
+  Body: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Param: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  get_flat_models_from_routes: null
+  get_model_definitions: null
+  Field: null
+  JSONResponse: null
+  BaseRoute: null
+  get_openapi_params: null
+  get_openapi_security_definitions: null
+  get_openapi_operation_parameters: null
+  get_openapi_operation_request_body: null
+  generate_operation_id: null
+  generate_operation_summary: null
+  get_openapi_operation_metadata: null
+  get_openapi_path: null
+  get_openapi: null
+fastapi.param_functions:
+  Path: null
+  Query: null
+  Header: null
+  Cookie: null
+  Body: null
+  Form: null
+  File: null
+  Depends: null
+  Security: null
+fastapi.params:
+  Enum: |-
+    Generic enumeration.
+
+    Derive from this class to define new enumerations.
+  Schema: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  ParamTypes: An enumeration.
+  Param: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Path: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Query: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Header: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Cookie: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Body: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Form: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  File: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  Depends: null
+  Security: null
+fastapi.routing:
+  Dependant: null
+  get_body_field: null
+  get_dependant: null
+  get_parameterless_sub_dependant: null
+  solve_dependencies: null
+  jsonable_encoder: null
+  RequestValidationError: Inappropriate argument value (of correct type).
+  WebSocketRequestValidationError: Inappropriate argument value (of correct type).
+  BaseConfig: null
+  BaseModel: null
+  Schema: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  ErrorWrapper: null
+  ValidationError: Inappropriate argument value (of correct type).
+  Field: null
+  run_in_threadpool: null
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  JSONResponse: null
+  Response: null
+  compile_path: |-
+    Given a path string, like: "/{username:str}", return a three-tuple
+    of (regex, format, {param_name:convertor}).
+
+    regex:      "/(?P<username>[^/]+)"
+    format:     "/{username}"
+    convertors: {"username": StringConvertor()}
+  get_name: null
+  request_response: |-
+    Takes a function or coroutine `func(request) -> response`,
+    and returns an ASGI application.
+  websocket_session: Takes a coroutine `func(session)`, and returns an ASGI application.
+  WebSocket: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  serialize_response: null
+  get_app: null
+  get_websocket_app: null
+  APIWebSocketRoute: null
+  APIRoute: null
+  APIRouter: null
+fastapi.security:
+  APIKeyCookie: null
+  APIKeyHeader: null
+  APIKeyQuery: null
+  HTTPAuthorizationCredentials: null
+  HTTPBasic: null
+  HTTPBasicCredentials: null
+  HTTPBearer: null
+  HTTPDigest: null
+  OAuth2: null
+  OAuth2PasswordBearer: null
+  OAuth2PasswordRequestForm: |-
+    This is a dependency class, use it like:
+
+        @app.post("/login")
+        def login(form_data: Oauth2PasswordRequestForm = Depends()):
+            data = form_data.parse()
+            print(data.username)
+            print(data.password)
+            for scope in data.scopes:
+                print(scope)
+            if data.client_id:
+                print(data.client_id)
+            if data.client_secret:
+                print(data.client_secret)
+            return data
+
+
+    It creates the following Form request parameters in your endpoint:
+
+    grant_type: the OAuth2 spec says it is required and MUST be the fixed string "password".
+        Nevertheless, this dependency class is permissive and allows not passing it. If you want to enforce it,
+        use instead the OAuth2PasswordRequestFormStrict dependency.
+    username: username string. The OAuth2 spec requires the exact field name "username".
+    password: password string. The OAuth2 spec requires the exact field name "password".
+    scope: Optional string. Several scopes (each one a string) separated by spaces. E.g.
+        "items:read items:write users:read profile openid"
+    client_id: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+    client_secret: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+  SecurityScopes: null
+  OpenIdConnect: null
+fastapi.security.api_key:
+  APIKey: null
+  APIKeyIn: An enumeration.
+  SecurityBase: null
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  APIKeyBase: null
+  APIKeyQuery: null
+  APIKeyHeader: null
+  APIKeyCookie: null
+fastapi.security.base:
+  SecurityBaseModel: null
+  SecurityBase: null
+fastapi.security.http:
+  b64decode: |-
+    Decode the Base64 encoded bytes-like object or ASCII string s.
+
+    Optional altchars must be a bytes-like object or ASCII string of length 2
+    which specifies the alternative alphabet used instead of the '+' and '/'
+    characters.
+
+    The result is returned as a bytes object.  A binascii.Error is raised if
+    s is incorrectly padded.
+
+    If validate is False (the default), characters that are neither in the
+    normal base-64 alphabet nor the alternative alphabet are discarded prior
+    to the padding check.  If validate is True, these non-alphabet characters
+    in the input result in a binascii.Error.
+  HTTPException: Common base class for all non-exit exceptions.
+  HTTPBaseModel: null
+  HTTPBearerModel: null
+  SecurityBase: null
+  get_authorization_scheme_param: null
+  BaseModel: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  HTTPBasicCredentials: null
+  HTTPAuthorizationCredentials: null
+  HTTPBase: null
+  HTTPBasic: null
+  HTTPBearer: null
+  HTTPDigest: null
+fastapi.security.oauth2:
+  HTTPException: Common base class for all non-exit exceptions.
+  OAuth2Model: null
+  OAuthFlowsModel: null
+  Form: |-
+    Used to provide extra information about a field in a model schema. The parameters will be
+    converted to validations and will add annotations to the generated JSON Schema. Some arguments
+    apply only to number fields (``int``, ``float``, ``Decimal``) and some apply only to ``str``
+
+    :param default: since the Schema is replacing the field’s default, its first argument is used
+      to set the default, use ellipsis (``...``) to indicate the field is required
+    :param alias: the public name of the field
+    :param title: can be any string, used in the schema
+    :param description: can be any string, used in the schema
+    :param const: this field is required and *must* take it's default value
+    :param gt: only applies to numbers, requires the field to be "greater than". The schema
+      will have an ``exclusiveMinimum`` validation keyword
+    :param ge: only applies to numbers, requires the field to be "greater than or equal to". The
+      schema will have a ``minimum`` validation keyword
+    :param lt: only applies to numbers, requires the field to be "less than". The schema
+      will have an ``exclusiveMaximum`` validation keyword
+    :param le: only applies to numbers, requires the field to be "less than or equal to". The
+      schema will have a ``maximum`` validation keyword
+    :param multiple_of: only applies to numbers, requires the field to be "a multiple of". The
+      schema will have a ``multipleOf`` validation keyword
+    :param min_length: only applies to strings, requires the field to have a minimum length. The
+      schema will have a ``maximum`` validation keyword
+    :param max_length: only applies to strings, requires the field to have a maximum length. The
+      schema will have a ``maxLength`` validation keyword
+    :param regex: only applies to strings, requires the field match agains a regular expression
+      pattern string. The schema will have a ``pattern`` validation keyword
+    :param **extra: any additional keyword arguments will be added as is to the schema
+  SecurityBase: null
+  get_authorization_scheme_param: null
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  OAuth2PasswordRequestForm: |-
+    This is a dependency class, use it like:
+
+        @app.post("/login")
+        def login(form_data: Oauth2PasswordRequestForm = Depends()):
+            data = form_data.parse()
+            print(data.username)
+            print(data.password)
+            for scope in data.scopes:
+                print(scope)
+            if data.client_id:
+                print(data.client_id)
+            if data.client_secret:
+                print(data.client_secret)
+            return data
+
+
+    It creates the following Form request parameters in your endpoint:
+
+    grant_type: the OAuth2 spec says it is required and MUST be the fixed string "password".
+        Nevertheless, this dependency class is permissive and allows not passing it. If you want to enforce it,
+        use instead the OAuth2PasswordRequestFormStrict dependency.
+    username: username string. The OAuth2 spec requires the exact field name "username".
+    password: password string. The OAuth2 spec requires the exact field name "password".
+    scope: Optional string. Several scopes (each one a string) separated by spaces. E.g.
+        "items:read items:write users:read profile openid"
+    client_id: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+    client_secret: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+  OAuth2PasswordRequestFormStrict: |-
+    This is a dependency class, use it like:
+
+        @app.post("/login")
+        def login(form_data: Oauth2PasswordRequestFormStrict = Depends()):
+            data = form_data.parse()
+            print(data.username)
+            print(data.password)
+            for scope in data.scopes:
+                print(scope)
+            if data.client_id:
+                print(data.client_id)
+            if data.client_secret:
+                print(data.client_secret)
+            return data
+
+
+    It creates the following Form request parameters in your endpoint:
+
+    grant_type: the OAuth2 spec says it is required and MUST be the fixed string "password".
+        This dependency is strict about it. If you want to be permissive, use instead the
+        OAuth2PasswordRequestFormStrict dependency class.
+    username: username string. The OAuth2 spec requires the exact field name "username".
+    password: password string. The OAuth2 spec requires the exact field name "password".
+    scope: Optional string. Several scopes (each one a string) separated by spaces. E.g.
+        "items:read items:write users:read profile openid"
+    client_id: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+    client_secret: optional string. OAuth2 recommends sending the client_id and client_secret (if any)
+        using HTTP Basic auth, as: client_id:client_secret
+  OAuth2: null
+  OAuth2PasswordBearer: null
+  SecurityScopes: null
+fastapi.security.open_id_connect_url:
+  OpenIdConnectModel: null
+  SecurityBase: null
+  HTTPException: Common base class for all non-exit exceptions.
+  Request: |-
+    A base class for incoming HTTP connections, that is used to provide
+    any functionality that is common to both `Request` and `WebSocket`.
+  OpenIdConnect: null
+fastapi.security.utils:
+  get_authorization_scheme_param: null
+fastapi.utils:
+  BaseModel: null
+  Field: null
+  BaseRoute: null
+  get_flat_models_from_routes: null
+  get_model_definitions: null
+  get_path_param_names: null

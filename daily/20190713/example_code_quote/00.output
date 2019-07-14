@@ -1,0 +1,1 @@
+lineno:4	code:return "[]"	node:Node(simple_stmt, [Node(return_stmt, [Leaf(1, 'return'), Leaf(3, '"[]"')]), Leaf(4, '\n')])

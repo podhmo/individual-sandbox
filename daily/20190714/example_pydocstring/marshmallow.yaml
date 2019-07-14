@@ -1,0 +1,1318 @@
+marshmallow:
+  Schema: |-
+    Base schema class with which to define custom schemas.
+
+    Example usage:
+
+    .. code-block:: python
+
+        import datetime as dt
+        from marshmallow import Schema, fields
+
+        class Album(object):
+            def __init__(self, title, release_date):
+                self.title = title
+                self.release_date = release_date
+
+        class AlbumSchema(Schema):
+            title = fields.Str()
+            release_date = fields.Date()
+
+        # Or, equivalently
+        class AlbumSchema2(Schema):
+            class Meta:
+                fields = ("title", "release_date")
+
+        album = Album("Beggars Banquet", dt.date(1968, 12, 6))
+        schema = AlbumSchema()
+        data = schema.dump(album)
+        data  # {'release_date': '1968-12-06', 'title': 'Beggars Banquet'}
+
+    :param tuple|list only: Whitelist of the declared fields to select when
+        instantiating the Schema. If None, all fields are used. Nested fields
+        can be represented with dot delimiters.
+    :param tuple|list exclude: Blacklist of the declared fields to exclude
+        when instantiating the Schema. If a field appears in both `only` and
+        `exclude`, it is not used. Nested fields can be represented with dot
+        delimiters.
+    :param bool many: Should be set to `True` if ``obj`` is a collection
+        so that the object will be serialized to a list.
+    :param dict context: Optional context passed to :class:`fields.Method` and
+        :class:`fields.Function` fields.
+    :param tuple|list load_only: Fields to skip during serialization (write-only fields)
+    :param tuple|list dump_only: Fields to skip during deserialization (read-only fields)
+    :param bool|tuple partial: Whether to ignore missing fields. If its value
+        is an iterable, only missing fields listed in that iterable will be
+        ignored.
+    :param unknown: Whether to exclude, include, or raise an error for unknown
+        fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
+
+    .. versionchanged:: 3.0.0
+        `prefix` parameter removed.
+
+    .. versionchanged:: 2.0.0
+        `__validators__`, `__preprocessors__`, and `__data_handlers__` are removed in favor of
+        `marshmallow.decorators.validates_schema`,
+        `marshmallow.decorators.pre_load` and `marshmallow.decorators.post_dump`.
+        `__accessor__` and `__error_handler__` are deprecated. Implement the
+        `handle_error` and `get_attribute` methods instead.
+  SchemaOpts: 'class Meta options for the :class:`Schema`. Defines defaults.'
+  pre_dump: |-
+    Register a method to invoke before serializing an object. The method
+    receives the object to be serialized and returns the processed object.
+
+    By default, receives a single object at a time, regardless of whether ``many=True``
+    is passed to the `Schema`. If ``pass_many=True``, the raw data (which may be a collection)
+    and the value for ``many`` is passed.
+  post_dump: |-
+    Register a method to invoke after serializing an object. The method
+    receives the serialized object and returns the processed object.
+
+    By default, receives a single object at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before serializing) will be passed as
+    an additional argument to the method.
+  pre_load: |-
+    Register a method to invoke before deserializing an object. The method
+    receives the data to be deserialized and returns the processed data.
+
+    By default, receives a single datum at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+  post_load: |-
+    Register a method to invoke after deserializing an object. The method
+    receives the deserialized data and returns the processed data.
+
+    By default, receives a single datum at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before deserializing) will be passed as
+    an additional argument to the method.
+  validates: |-
+    Register a field validator.
+
+    :param str field_name: Name of the field that the method validates.
+  validates_schema: |-
+    Register a schema-level validator.
+
+    By default, receives a single object at a time, regardless of whether ``many=True``
+    is passed to the `Schema`. If ``pass_many=True``, the raw data (which may be a collection)
+    and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before unmarshalling) will be passed as
+    an additional argument to the method.
+
+    If ``skip_on_field_errors=True``, this validation method will be skipped whenever
+    validation errors have been detected when validating fields.
+
+    .. versionchanged:: 3.0.0b1
+        ``skip_on_field_errors`` defaults to `True`.
+  pprint: |-
+    Pretty-printing function that can pretty-print OrderedDicts
+    like regular dictionaries. Useful for printing the output of
+    :meth:`marshmallow.Schema.dump`.
+  ValidationError: |-
+    Raised when validation fails on a field or schema.
+
+    Validators and custom fields should raise this exception.
+
+    :param str|list|dict message: An error message, list of error messages, or dict of
+        error messages. If a dict, the keys are subitems and the values are error messages.
+    :param str field_name: Field name to store the error on.
+        If `None`, the error is stored as schema-level error.
+    :param list fields: `Field` objects to which the error applies.
+    :param dict data: Raw input data.
+    :param dict valid_data: Valid (de)serialized data.
+  LooseVersion: |-
+    Version numbering for anarchists and software realists.
+    Implements the standard interface for version number classes as
+    described above.  A version number consists of a series of numbers,
+    separated by either periods or strings of letters.  When comparing
+    version numbers, the numeric components will be compared
+    numerically, and the alphabetic components lexically.  The following
+    are all valid version numbers, in no particular order:
+
+        1.5.1
+        1.5.2b2
+        161
+        3.10a
+        8.02
+        3.4j
+        1996.07.12
+        3.2.pl0
+        3.1.1.6
+        2g6
+        11g
+        0.960923
+        2.2beta29
+        1.13++
+        5.5.kw
+        2.0b1pl0
+
+    In fact, there is no such thing as an invalid version number under
+    this scheme; the rules for comparison are simple and predictable,
+    but may not always give the results you want (for some definition
+    of "want").
+marshmallow.base:
+  FieldABC: "Abstract base class from which all Field classes inherit.\n    "
+  SchemaABC: Abstract base class from which all Schemas inherit.
+marshmallow.class_registry:
+  RegistryError: |-
+    Raised when an invalid operation is performed on the serializer
+    class registry.
+  register: |-
+    Add a class to the registry of serializer classes. When a class is
+    registered, an entry for both its classname and its full, module-qualified
+    path are added to the registry.
+
+    Example: ::
+
+        class MyClass:
+            pass
+
+        register('MyClass', MyClass)
+        # Registry:
+        # {
+        #   'MyClass': [path.to.MyClass],
+        #   'path.to.MyClass': [path.to.MyClass],
+        # }
+  get_class: |-
+    Retrieve a class from the registry.
+
+    :raises: marshmallow.exceptions.RegistryError if the class cannot be found
+        or if there are multiple entries for the given class name.
+marshmallow.compat:
+  Mapping: null
+  Iterable: null
+  MutableSet: |-
+    A mutable set is a finite, iterable container.
+
+    This class provides concrete generic implementations of all
+    methods except for __contains__, __iter__, __len__,
+    add(), and discard().
+
+    To override the comparisons (presumably for speed, as the
+    semantics are fixed), all you have to do is redefine __le__ and
+    then the other operations will automatically follow suit.
+  text_type: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  binary_type: |-
+    bytes(iterable_of_ints) -> bytes
+    bytes(string, encoding[, errors]) -> bytes
+    bytes(bytes_or_buffer) -> immutable copy of bytes_or_buffer
+    bytes(int) -> bytes object of size given by the parameter initialized with null bytes
+    bytes() -> empty bytes object
+
+    Construct an immutable array of bytes from:
+      - an iterable yielding integers in range(256)
+      - a text string encoded using the specified encoding
+      - any object implementing the buffer API.
+      - an integer
+  unicode: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  iterkeys: null
+  itervalues: null
+  iteritems: null
+  zip_longest: |-
+    zip_longest(iter1 [,iter2 [...]], [fillvalue=None]) --> zip_longest object
+
+    Return a zip_longest object whose .__next__() method returns a tuple where
+    the i-th element comes from the i-th iterable argument.  The .__next__()
+    method continues until the longest iterable in the argument sequence
+    is exhausted and then it raises StopIteration.  When the shorter iterables
+    are exhausted, the fillvalue is substituted in their place.  The fillvalue
+    defaults to None or can be specified by a keyword argument.
+  with_metaclass: Create a base class with a metaclass.
+marshmallow.decorators:
+  validates: |-
+    Register a field validator.
+
+    :param str field_name: Name of the field that the method validates.
+  validates_schema: |-
+    Register a schema-level validator.
+
+    By default, receives a single object at a time, regardless of whether ``many=True``
+    is passed to the `Schema`. If ``pass_many=True``, the raw data (which may be a collection)
+    and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before unmarshalling) will be passed as
+    an additional argument to the method.
+
+    If ``skip_on_field_errors=True``, this validation method will be skipped whenever
+    validation errors have been detected when validating fields.
+
+    .. versionchanged:: 3.0.0b1
+        ``skip_on_field_errors`` defaults to `True`.
+  pre_dump: |-
+    Register a method to invoke before serializing an object. The method
+    receives the object to be serialized and returns the processed object.
+
+    By default, receives a single object at a time, regardless of whether ``many=True``
+    is passed to the `Schema`. If ``pass_many=True``, the raw data (which may be a collection)
+    and the value for ``many`` is passed.
+  post_dump: |-
+    Register a method to invoke after serializing an object. The method
+    receives the serialized object and returns the processed object.
+
+    By default, receives a single object at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before serializing) will be passed as
+    an additional argument to the method.
+  pre_load: |-
+    Register a method to invoke before deserializing an object. The method
+    receives the data to be deserialized and returns the processed data.
+
+    By default, receives a single datum at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+  post_load: |-
+    Register a method to invoke after deserializing an object. The method
+    receives the deserialized data and returns the processed data.
+
+    By default, receives a single datum at a time, transparently handling the ``many``
+    argument passed to the Schema. If ``pass_many=True``, the raw data
+    (which may be a collection) and the value for ``many`` is passed.
+
+    If ``pass_original=True``, the original data (before deserializing) will be passed as
+    an additional argument to the method.
+  set_hook: |-
+    Mark decorated function as a hook to be picked up later.
+
+    .. note::
+        Currently only works with functions and instance methods. Class and
+        static methods are not supported.
+
+    :return: Decorated function if supplied, else this decorator with its args
+        bound.
+marshmallow.error_store:
+  iteritems: null
+  ErrorStore: null
+  merge_errors: |-
+    Deeply merge two error messages.
+
+    The format of ``errors1`` and ``errors2`` matches the ``message``
+    parameter of :exc:`marshmallow.exceptions.ValidationError`.
+marshmallow.exceptions:
+  MarshmallowError: Base class for all marshmallow-related errors.
+  ValidationError: |-
+    Raised when validation fails on a field or schema.
+
+    Validators and custom fields should raise this exception.
+
+    :param str|list|dict message: An error message, list of error messages, or dict of
+        error messages. If a dict, the keys are subitems and the values are error messages.
+    :param str field_name: Field name to store the error on.
+        If `None`, the error is stored as schema-level error.
+    :param list fields: `Field` objects to which the error applies.
+    :param dict data: Raw input data.
+    :param dict valid_data: Valid (de)serialized data.
+  RegistryError: |-
+    Raised when an invalid operation is performed on the serializer
+    class registry.
+  StringNotCollectionError: Raised when a string is passed when a list of strings
+    is expected.
+  FieldInstanceResolutionError: Raised when schema to instantiate is neither a Schema
+    class nor an instance.
+marshmallow.fields:
+  FieldABC: "Abstract base class from which all Field classes inherit.\n    "
+  SchemaABC: Abstract base class from which all Schemas inherit.
+  is_collection: Return True if ``obj`` is a collection type, e.g list, tuple, queryset.
+  resolve_field_instance: |-
+    Return a Schema instance from a Schema class or instance.
+
+    :param type|Schema cls_or_instance: Marshmallow Schema class or instance.
+  text_type: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  _Mapping: null
+  iteritems: null
+  ValidationError: |-
+    Raised when validation fails on a field or schema.
+
+    Validators and custom fields should raise this exception.
+
+    :param str|list|dict message: An error message, list of error messages, or dict of
+        error messages. If a dict, the keys are subitems and the values are error messages.
+    :param str field_name: Field name to store the error on.
+        If `None`, the error is stored as schema-level error.
+    :param list fields: `Field` objects to which the error applies.
+    :param dict data: Raw input data.
+    :param dict valid_data: Valid (de)serialized data.
+  StringNotCollectionError: Raised when a string is passed when a list of strings
+    is expected.
+  FieldInstanceResolutionError: Raised when schema to instantiate is neither a Schema
+    class nor an instance.
+  Validator: |-
+    Base abstract class for validators.
+
+    .. note::
+        This class does not provide any behavior. It is only used to
+        add a useful `__repr__` implementation for validators.
+  Length: |-
+    Validator which succeeds if the value passed to it has a
+    length between a minimum and maximum. Uses len(), so it
+    can work for strings, lists, or anything with length.
+
+    :param int min: The minimum length. If not provided, minimum length
+        will not be checked.
+    :param int max: The maximum length. If not provided, maximum length
+        will not be checked.
+    :param int equal: The exact length. If provided, maximum and minimum
+        length will not be checked.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}`, `{min}` and `{max}`.
+  Field: |-
+    Basic field from which other fields should extend. It applies no
+    formatting by default, and should only be used in cases where
+    data does not need to be formatted before being serialized or deserialized.
+    On error, the name of the field will be returned.
+
+    :param default: If set, this value will be used during serialization if the input value
+        is missing. If not set, the field will be excluded from the serialized output if the
+        input value is missing. May be a value or a callable.
+    :param str attribute: The name of the attribute to get the value from when serializing.
+        If `None`, assumes the attribute has the same name as the field.
+    :param str data_key: The name of the key to get the value from when deserializing.
+        If `None`, assumes the key has the same name as the field.
+    :param callable validate: Validator or collection of validators that are called
+        during deserialization. Validator takes a field's input value as
+        its only parameter and returns a boolean.
+        If it returns `False`, an :exc:`ValidationError` is raised.
+    :param required: Raise a :exc:`ValidationError` if the field value
+        is not supplied during deserialization.
+    :param allow_none: Set this to `True` if `None` should be considered a valid value during
+        validation/deserialization. If ``missing=None`` and ``allow_none`` is unset,
+        will default to ``True``. Otherwise, the default is ``False``.
+    :param bool load_only: If `True` skip this field during serialization, otherwise
+        its value will be present in the serialized data.
+    :param bool dump_only: If `True` skip this field during deserialization, otherwise
+        its value will be present in the deserialized object. In the context of an
+        HTTP API, this effectively marks the field as "read-only".
+    :param missing: Default deserialization value for the field if the field is not
+        found in the input data. May be a value or a callable.
+    :param dict error_messages: Overrides for `Field.default_error_messages`.
+    :param metadata: Extra arguments to be stored as metadata.
+
+    .. versionchanged:: 2.0.0
+        Removed `error` parameter. Use ``error_messages`` instead.
+
+    .. versionchanged:: 2.0.0
+        Added `allow_none` parameter, which makes validation/deserialization of `None`
+        consistent across fields.
+
+    .. versionchanged:: 2.0.0
+        Added `load_only` and `dump_only` parameters, which allow field skipping
+        during the (de)serialization process.
+
+    .. versionchanged:: 2.0.0
+        Added `missing` parameter, which indicates the value for a field if the field
+        is not found during deserialization.
+
+    .. versionchanged:: 2.0.0
+        ``default`` value is only used if explicitly set. Otherwise, missing values
+        inputs are excluded from serialized output.
+
+    .. versionchanged:: 3.0.0b8
+        Add ``data_key`` parameter for the specifying the key in the input and
+        output data. This parameter replaced both ``load_from`` and ``dump_to``.
+  Raw: Field that applies no formatting or validation.
+  Nested: |-
+    Allows you to nest a :class:`Schema <marshmallow.Schema>`
+    inside a field.
+
+    Examples: ::
+
+        user = fields.Nested(UserSchema)
+        user2 = fields.Nested('UserSchema')  # Equivalent to above
+        collaborators = fields.Nested(UserSchema, many=True, only=('id',))
+        parent = fields.Nested('self')
+
+    When passing a `Schema <marshmallow.Schema>` instance as the first argument,
+    the instance's ``exclude``, ``only``, and ``many`` attributes will be respected.
+
+    Therefore, when passing the ``exclude``, ``only``, or ``many`` arguments to `fields.Nested`,
+    you should pass a `Schema <marshmallow.Schema>` class (not an instance) as the first argument.
+
+    ::
+
+        # Yes
+        author = fields.Nested(UserSchema, only=('id', 'name'))
+
+        # No
+        author = fields.Nested(UserSchema(), only=('id', 'name'))
+
+    :param Schema nested: The Schema class or class name (string)
+        to nest, or ``"self"`` to nest the :class:`Schema` within itself.
+    :param tuple exclude: A list or tuple of fields to exclude.
+    :param only: A tuple or string of the field(s) to marshal. If `None`, all fields
+        will be marshalled. If a field name (string) is given, only a single
+        value will be returned as output instead of a dictionary.
+        This parameter takes precedence over ``exclude``.
+    :param bool many: Whether the field is a collection of objects.
+    :param unknown: Whether to exclude, include, or raise an error for unknown
+        fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  Pluck: |-
+    Allows you to replace nested data with one of the data's fields.
+
+    Examples: ::
+
+        user = fields.Pluck(UserSchema, 'name')
+        collaborators = fields.Pluck(UserSchema, 'id', many=True)
+        parent = fields.Pluck('self', 'name')
+
+    :param Schema nested: The Schema class or class name (string)
+        to nest, or ``"self"`` to nest the :class:`Schema` within itself.
+    :param str field_name:
+    :param kwargs: The same keyword arguments that :class:`Nested` receives.
+  List: |-
+    A list field, composed with another `Field` class or
+    instance.
+
+    Example: ::
+
+        numbers = fields.List(fields.Float())
+
+    :param Field cls_or_instance: A field class or instance.
+    :param bool default: Default value for serialization.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+
+    .. versionchanged:: 2.0.0
+        The ``allow_none`` parameter now applies to deserialization and
+        has the same semantics as the other fields.
+  Tuple: |-
+    A tuple field, composed of a fixed number of other `Field` classes or
+    instances
+
+    Example: ::
+
+        row = Tuple((fields.String(), fields.Integer(), fields.Float()))
+
+    .. note::
+        Because of the structured nature of `collections.namedtuple` and
+        `typing.NamedTuple`, using a Schema within a Nested field for them is
+        more appropriate than using a `Tuple` field.
+
+    :param Iterable[Field] tuple_fields: An iterable of field classes or
+        instances.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+
+    .. versionadded:: 3.0.0rc4
+  String: |-
+    A string field.
+
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  UUID: A UUID field.
+  Number: |-
+    Base class for number fields.
+
+    :param bool as_string: If True, format the serialized value as a string.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  Integer: |-
+    An integer field.
+
+    :param kwargs: The same keyword arguments that :class:`Number` receives.
+  Float: |-
+    A double as IEEE-754 double precision string.
+
+    :param bool allow_nan: If `True`, `NaN`, `Infinity` and `-Infinity` are allowed,
+        even though they are illegal according to the JSON specification.
+    :param bool as_string: If True, format the value as a string.
+    :param kwargs: The same keyword arguments that :class:`Number` receives.
+  Decimal: |-
+    A field that (de)serializes to the Python ``decimal.Decimal`` type.
+    It's safe to use when dealing with money values, percentages, ratios
+    or other numbers where precision is critical.
+
+    .. warning::
+
+        This field serializes to a `decimal.Decimal` object by default. If you need
+        to render your data as JSON, keep in mind that the `json` module from the
+        standard library does not encode `decimal.Decimal`. Therefore, you must use
+        a JSON library that can handle decimals, such as `simplejson`, or serialize
+        to a string by passing ``as_string=True``.
+
+    .. warning::
+
+        If a JSON `float` value is passed to this field for deserialization it will
+        first be cast to its corresponding `string` value before being deserialized
+        to a `decimal.Decimal` object. The default `__str__` implementation of the
+        built-in Python `float` type may apply a destructive transformation upon
+        its input data and therefore cannot be relied upon to preserve precision.
+        To avoid this, you can instead pass a JSON `string` to be deserialized
+        directly.
+
+    :param int places: How many decimal places to quantize the value. If `None`, does
+        not quantize the value.
+    :param rounding: How to round the value during quantize, for example
+        `decimal.ROUND_UP`. If None, uses the rounding value from
+        the current thread's context.
+    :param bool allow_nan: If `True`, `NaN`, `Infinity` and `-Infinity` are allowed,
+        even though they are illegal according to the JSON specification.
+    :param bool as_string: If True, serialize to a string instead of a Python
+        `decimal.Decimal` type.
+    :param kwargs: The same keyword arguments that :class:`Number` receives.
+
+    .. versionadded:: 1.2.0
+  Boolean: |-
+    A boolean field.
+
+    :param set truthy: Values that will (de)serialize to `True`. If an empty
+        set, any non-falsy value will deserialize to `True`. If `None`,
+        `marshmallow.fields.Boolean.truthy` will be used.
+    :param set falsy: Values that will (de)serialize to `False`. If `None`,
+        `marshmallow.fields.Boolean.falsy` will be used.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  FormattedString: |-
+    Interpolate other values from the object into this field. The syntax for
+    the source string is the same as the string `str.format` method
+    from the python stdlib.
+    ::
+
+        class UserSchema(Schema):
+            name = fields.String()
+            greeting = fields.FormattedString('Hello {name}')
+
+        ser = UserSchema()
+        res = ser.dump(user)
+        res.data  # => {'name': 'Monty', 'greeting': 'Hello Monty'}
+  DateTime: |-
+    A formatted datetime string in UTC.
+
+    Example: ``'2014-12-22T03:12:58.019077+00:00'``
+
+    Timezone-naive `datetime` objects are converted to
+    UTC (+00:00) by :meth:`Schema.dump <marshmallow.Schema.dump>`.
+    :meth:`Schema.load <marshmallow.Schema.load>` returns `datetime`
+    objects that are timezone-aware.
+
+    :param str format: Either ``"rfc"`` (for RFC822), ``"iso"`` (for ISO8601),
+        or a date format string. If `None`, defaults to "iso".
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  LocalDateTime: |-
+    A formatted datetime string in localized time, relative to UTC.
+
+        ex. ``"Sun, 10 Nov 2013 08:23:45 -0600"``
+
+    Takes the same arguments as :class:`DateTime <marshmallow.fields.DateTime>`.
+  Time: |-
+    ISO8601-formatted time string.
+
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  Date: |-
+    ISO8601-formatted date string.
+
+    :param format: Either ``"iso"`` (for ISO8601) or a date format string.
+        If `None`, defaults to "iso".
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  TimeDelta: |-
+    A field that (de)serializes a :class:`datetime.timedelta` object to an
+    integer and vice versa. The integer can represent the number of days,
+    seconds or microseconds.
+
+    :param str precision: Influences how the integer is interpreted during
+        (de)serialization. Must be 'days', 'seconds', 'microseconds',
+        'milliseconds', 'minutes', 'hours' or 'weeks'.
+    :param str error: Error message stored upon validation failure.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+
+    .. versionchanged:: 2.0.0
+        Always serializes to an integer value to avoid rounding errors.
+        Add `precision` parameter.
+  Mapping: |-
+    An abstract class for objects with key-value pairs.
+
+    :param Field keys: A field class or instance for dict keys.
+    :param Field values: A field class or instance for dict values.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+
+    .. note::
+        When the structure of nested data is not known, you may omit the
+        `keys` and `values` arguments to prevent content validation.
+
+    .. versionadded:: 3.0.0rc4
+  Dict: |-
+    A dict field. Supports dicts and dict-like objects. Extends
+    Mapping with dict as the mapping_type.
+
+    Example: ::
+
+        numbers = fields.Dict(keys=fields.Str(), values=fields.Float())
+
+    :param kwargs: The same keyword arguments that :class:`Mapping` receives.
+
+    .. versionadded:: 2.1.0
+  Url: |-
+    A validated URL field. Validation occurs during both serialization and
+    deserialization.
+
+    :param default: Default value for the field if the attribute is not set.
+    :param str attribute: The name of the attribute to get the value from. If
+        `None`, assumes the attribute has the same name as the field.
+    :param bool relative: Allow relative URLs.
+    :param kwargs: The same keyword arguments that :class:`String` receives.
+  Email: |-
+    A validated email field. Validation occurs during both serialization and
+    deserialization.
+
+    :param args: The same positional arguments that :class:`String` receives.
+    :param kwargs: The same keyword arguments that :class:`String` receives.
+  Method: |-
+    A field that takes the value returned by a `Schema` method.
+
+    :param str serialize: The name of the Schema method from which
+        to retrieve the value. The method must take an argument ``obj``
+        (in addition to self) that is the object to be serialized.
+    :param str deserialize: Optional name of the Schema method for deserializing
+        a value The method must take a single argument ``value``, which is the
+        value to deserialize.
+
+    .. versionchanged:: 2.0.0
+        Removed optional ``context`` parameter on methods. Use ``self.context`` instead.
+    .. versionchanged:: 2.3.0
+        Deprecated ``method_name`` parameter in favor of ``serialize`` and allow
+        ``serialize`` to not be passed at all.
+    .. versionchanged:: 3.0.0
+        Removed ``method_name`` parameter.
+  Function: |-
+    A field that takes the value returned by a function.
+
+    :param callable serialize: A callable from which to retrieve the value.
+        The function must take a single argument ``obj`` which is the object
+        to be serialized. It can also optionally take a ``context`` argument,
+        which is a dictionary of context variables passed to the serializer.
+        If no callable is provided then the ```load_only``` flag will be set
+        to True.
+    :param callable deserialize: A callable from which to retrieve the value.
+        The function must take a single argument ``value`` which is the value
+        to be deserialized. It can also optionally take a ``context`` argument,
+        which is a dictionary of context variables passed to the deserializer.
+        If no callable is provided then ```value``` will be passed through
+        unchanged.
+
+    .. versionchanged:: 2.3.0
+        Deprecated ``func`` parameter in favor of ``serialize``.
+    .. versionchanged:: 3.0.0a1
+        Removed ``func`` parameter.
+  Constant: |-
+    A field that (de)serializes to a preset constant.  If you only want the
+    constant added for serialization or deserialization, you should use
+    ``dump_only=True`` or ``load_only=True`` respectively.
+
+    :param constant: The constant to return for the field attribute.
+
+    .. versionadded:: 2.0.0
+  Inferred: |-
+    A field that infers how to serialize, based on the value type.
+
+    .. warning::
+
+        This class is treated as private API.
+        Users should not need to use this class directly.
+  URL: |-
+    A validated URL field. Validation occurs during both serialization and
+    deserialization.
+
+    :param default: Default value for the field if the attribute is not set.
+    :param str attribute: The name of the attribute to get the value from. If
+        `None`, assumes the attribute has the same name as the field.
+    :param bool relative: Allow relative URLs.
+    :param kwargs: The same keyword arguments that :class:`String` receives.
+  Str: |-
+    A string field.
+
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  Bool: |-
+    A boolean field.
+
+    :param set truthy: Values that will (de)serialize to `True`. If an empty
+        set, any non-falsy value will deserialize to `True`. If `None`,
+        `marshmallow.fields.Boolean.truthy` will be used.
+    :param set falsy: Values that will (de)serialize to `False`. If `None`,
+        `marshmallow.fields.Boolean.falsy` will be used.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  Int: |-
+    An integer field.
+
+    :param kwargs: The same keyword arguments that :class:`Number` receives.
+marshmallow.orderedset:
+  MutableSet: |-
+    A mutable set is a finite, iterable container.
+
+    This class provides concrete generic implementations of all
+    methods except for __contains__, __iter__, __len__,
+    add(), and discard().
+
+    To override the comparisons (presumably for speed, as the
+    semantics are fixed), all you have to do is redefine __le__ and
+    then the other operations will automatically follow suit.
+  OrderedSet: |-
+    A mutable set is a finite, iterable container.
+
+    This class provides concrete generic implementations of all
+    methods except for __contains__, __iter__, __len__,
+    add(), and discard().
+
+    To override the comparisons (presumably for speed, as the
+    semantics are fixed), all you have to do is redefine __le__ and
+    then the other operations will automatically follow suit.
+marshmallow.schema:
+  defaultdict: |-
+    defaultdict(default_factory[, ...]) --> dict with default factory
+
+    The default factory is called without arguments to produce
+    a new value when a key is not present, in __getitem__ only.
+    A defaultdict compares equal to a dict with the same items.
+    All remaining arguments are treated the same as if they were
+    passed to the dict constructor, including keyword arguments.
+  OrderedDict: Dictionary that remembers insertion order
+  ErrorStore: null
+  Nested: |-
+    Allows you to nest a :class:`Schema <marshmallow.Schema>`
+    inside a field.
+
+    Examples: ::
+
+        user = fields.Nested(UserSchema)
+        user2 = fields.Nested('UserSchema')  # Equivalent to above
+        collaborators = fields.Nested(UserSchema, many=True, only=('id',))
+        parent = fields.Nested('self')
+
+    When passing a `Schema <marshmallow.Schema>` instance as the first argument,
+    the instance's ``exclude``, ``only``, and ``many`` attributes will be respected.
+
+    Therefore, when passing the ``exclude``, ``only``, or ``many`` arguments to `fields.Nested`,
+    you should pass a `Schema <marshmallow.Schema>` class (not an instance) as the first argument.
+
+    ::
+
+        # Yes
+        author = fields.Nested(UserSchema, only=('id', 'name'))
+
+        # No
+        author = fields.Nested(UserSchema(), only=('id', 'name'))
+
+    :param Schema nested: The Schema class or class name (string)
+        to nest, or ``"self"`` to nest the :class:`Schema` within itself.
+    :param tuple exclude: A list or tuple of fields to exclude.
+    :param only: A tuple or string of the field(s) to marshal. If `None`, all fields
+        will be marshalled. If a field name (string) is given, only a single
+        value will be returned as output instead of a dictionary.
+        This parameter takes precedence over ``exclude``.
+    :param bool many: Whether the field is a collection of objects.
+    :param unknown: Whether to exclude, include, or raise an error for unknown
+        fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
+    :param kwargs: The same keyword arguments that :class:`Field` receives.
+  iteritems: null
+  iterkeys: null
+  with_metaclass: Create a base class with a metaclass.
+  text_type: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  binary_type: |-
+    bytes(iterable_of_ints) -> bytes
+    bytes(string, encoding[, errors]) -> bytes
+    bytes(bytes_or_buffer) -> immutable copy of bytes_or_buffer
+    bytes(int) -> bytes object of size given by the parameter initialized with null bytes
+    bytes() -> empty bytes object
+
+    Construct an immutable array of bytes from:
+      - an iterable yielding integers in range(256)
+      - a text string encoded using the specified encoding
+      - any object implementing the buffer API.
+      - an integer
+  Mapping: null
+  ValidationError: |-
+    Raised when validation fails on a field or schema.
+
+    Validators and custom fields should raise this exception.
+
+    :param str|list|dict message: An error message, list of error messages, or dict of
+        error messages. If a dict, the keys are subitems and the values are error messages.
+    :param str field_name: Field name to store the error on.
+        If `None`, the error is stored as schema-level error.
+    :param list fields: `Field` objects to which the error applies.
+    :param dict data: Raw input data.
+    :param dict valid_data: Valid (de)serialized data.
+  StringNotCollectionError: Raised when a string is passed when a list of strings
+    is expected.
+  OrderedSet: |-
+    A mutable set is a finite, iterable container.
+
+    This class provides concrete generic implementations of all
+    methods except for __contains__, __iter__, __len__,
+    add(), and discard().
+
+    To override the comparisons (presumably for speed, as the
+    semantics are fixed), all you have to do is redefine __le__ and
+    then the other operations will automatically follow suit.
+  set_value: |-
+    Set a value in a dict. If `key` contains a '.', it is assumed
+    be a path (i.e. dot-delimited string) to the value's location.
+
+    ::
+
+        >>> d = {}
+        >>> set_value(d, 'foo.bar', 42)
+        >>> d
+        {'foo': {'bar': 42}}
+  get_value: |-
+    Helper for pulling a keyed value off various types of objects. Fields use
+    this method by default to access attributes of the source object. For object `x`
+    and attribute `i`, this method first tries to access `x[i]`, and then falls back to
+    `x.i` if an exception is raised.
+
+    .. warning::
+        If an object `x` does not raise an exception when `x[i]` does not exist,
+        `get_value` will never check the value `x.i`. Consider overriding
+        `marshmallow.fields.Field.get_value` in this case.
+  is_collection: Return True if ``obj`` is a collection type, e.g list, tuple, queryset.
+  is_instance_or_subclass: Return True if ``val`` is either a subclass or instance
+    of ``class_``.
+  is_iterable_but_not_string: Return True if ``obj`` is an iterable object that isn't
+    a string.
+  _get_fields: |-
+    Get fields from a class. If ordered=True, fields will sorted by creation index.
+
+    :param attrs: Mapping of class attributes
+    :param type field_class: Base field class
+    :param bool pop: Remove matching fields
+  _get_fields_by_mro: |-
+    Collect fields from a class, following its method resolution order. The
+    class itself is excluded from the search; only its parents are checked. Get
+    fields from ``_declared_fields`` if available, else use ``__dict__``.
+
+    :param type klass: Class whose fields to retrieve
+    :param type field_class: Base field class
+  SchemaMeta: |-
+    Metaclass for the Schema class. Binds the declared fields to
+    a ``_declared_fields`` attribute, which is a dictionary mapping attribute
+    names to field objects. Also sets the ``opts`` class attribute, which is
+    the Schema class's ``class Meta`` options.
+  SchemaOpts: 'class Meta options for the :class:`Schema`. Defines defaults.'
+  BaseSchema: |-
+    Base schema class with which to define custom schemas.
+
+    Example usage:
+
+    .. code-block:: python
+
+        import datetime as dt
+        from marshmallow import Schema, fields
+
+        class Album(object):
+            def __init__(self, title, release_date):
+                self.title = title
+                self.release_date = release_date
+
+        class AlbumSchema(Schema):
+            title = fields.Str()
+            release_date = fields.Date()
+
+        # Or, equivalently
+        class AlbumSchema2(Schema):
+            class Meta:
+                fields = ("title", "release_date")
+
+        album = Album("Beggars Banquet", dt.date(1968, 12, 6))
+        schema = AlbumSchema()
+        data = schema.dump(album)
+        data  # {'release_date': '1968-12-06', 'title': 'Beggars Banquet'}
+
+    :param tuple|list only: Whitelist of the declared fields to select when
+        instantiating the Schema. If None, all fields are used. Nested fields
+        can be represented with dot delimiters.
+    :param tuple|list exclude: Blacklist of the declared fields to exclude
+        when instantiating the Schema. If a field appears in both `only` and
+        `exclude`, it is not used. Nested fields can be represented with dot
+        delimiters.
+    :param bool many: Should be set to `True` if ``obj`` is a collection
+        so that the object will be serialized to a list.
+    :param dict context: Optional context passed to :class:`fields.Method` and
+        :class:`fields.Function` fields.
+    :param tuple|list load_only: Fields to skip during serialization (write-only fields)
+    :param tuple|list dump_only: Fields to skip during deserialization (read-only fields)
+    :param bool|tuple partial: Whether to ignore missing fields. If its value
+        is an iterable, only missing fields listed in that iterable will be
+        ignored.
+    :param unknown: Whether to exclude, include, or raise an error for unknown
+        fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
+
+    .. versionchanged:: 3.0.0
+        `prefix` parameter removed.
+
+    .. versionchanged:: 2.0.0
+        `__validators__`, `__preprocessors__`, and `__data_handlers__` are removed in favor of
+        `marshmallow.decorators.validates_schema`,
+        `marshmallow.decorators.pre_load` and `marshmallow.decorators.post_dump`.
+        `__accessor__` and `__error_handler__` are deprecated. Implement the
+        `handle_error` and `get_attribute` methods instead.
+  Schema: |-
+    Base schema class with which to define custom schemas.
+
+    Example usage:
+
+    .. code-block:: python
+
+        import datetime as dt
+        from marshmallow import Schema, fields
+
+        class Album(object):
+            def __init__(self, title, release_date):
+                self.title = title
+                self.release_date = release_date
+
+        class AlbumSchema(Schema):
+            title = fields.Str()
+            release_date = fields.Date()
+
+        # Or, equivalently
+        class AlbumSchema2(Schema):
+            class Meta:
+                fields = ("title", "release_date")
+
+        album = Album("Beggars Banquet", dt.date(1968, 12, 6))
+        schema = AlbumSchema()
+        data = schema.dump(album)
+        data  # {'release_date': '1968-12-06', 'title': 'Beggars Banquet'}
+
+    :param tuple|list only: Whitelist of the declared fields to select when
+        instantiating the Schema. If None, all fields are used. Nested fields
+        can be represented with dot delimiters.
+    :param tuple|list exclude: Blacklist of the declared fields to exclude
+        when instantiating the Schema. If a field appears in both `only` and
+        `exclude`, it is not used. Nested fields can be represented with dot
+        delimiters.
+    :param bool many: Should be set to `True` if ``obj`` is a collection
+        so that the object will be serialized to a list.
+    :param dict context: Optional context passed to :class:`fields.Method` and
+        :class:`fields.Function` fields.
+    :param tuple|list load_only: Fields to skip during serialization (write-only fields)
+    :param tuple|list dump_only: Fields to skip during deserialization (read-only fields)
+    :param bool|tuple partial: Whether to ignore missing fields. If its value
+        is an iterable, only missing fields listed in that iterable will be
+        ignored.
+    :param unknown: Whether to exclude, include, or raise an error for unknown
+        fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.
+
+    .. versionchanged:: 3.0.0
+        `prefix` parameter removed.
+
+    .. versionchanged:: 2.0.0
+        `__validators__`, `__preprocessors__`, and `__data_handlers__` are removed in favor of
+        `marshmallow.decorators.validates_schema`,
+        `marshmallow.decorators.pre_load` and `marshmallow.decorators.post_dump`.
+        `__accessor__` and `__error_handler__` are deprecated. Implement the
+        `handle_error` and `get_attribute` methods instead.
+marshmallow.utils:
+  timegm: Unrelated but handy function to calculate Unix timestamp from GMT.
+  formatdate: |-
+    Returns a date string as specified by RFC 2822, e.g.:
+
+    Fri, 09 Nov 2001 01:08:47 -0000
+
+    Optional timeval if given is a floating point time value as accepted by
+    gmtime() and localtime(), otherwise the current time is used.
+
+    Optional localtime is a flag that when True, interprets timeval, and
+    returns a date relative to the local timezone instead of UTC, properly
+    taking daylight savings time into account.
+
+    Optional argument usegmt means that the timezone is written out as
+    an ascii string, not numeric one (so "GMT" instead of "+0000"). This
+    is needed for HTTP, and is only used when localtime==False.
+  parsedate: Convert a time string to a time tuple.
+  py_pprint: Pretty-print a Python object to a stream [default is sys.stdout].
+  FieldABC: "Abstract base class from which all Field classes inherit.\n    "
+  binary_type: |-
+    bytes(iterable_of_ints) -> bytes
+    bytes(string, encoding[, errors]) -> bytes
+    bytes(bytes_or_buffer) -> immutable copy of bytes_or_buffer
+    bytes(int) -> bytes object of size given by the parameter initialized with null bytes
+    bytes() -> empty bytes object
+
+    Construct an immutable array of bytes from:
+      - an iterable yielding integers in range(256)
+      - a text string encoded using the specified encoding
+      - any object implementing the buffer API.
+      - an integer
+  text_type: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  Mapping: null
+  Iterable: null
+  FieldInstanceResolutionError: Raised when schema to instantiate is neither a Schema
+    class nor an instance.
+  _Missing: null
+  is_generator: "Return True if ``obj`` is a generator\n    "
+  is_iterable_but_not_string: Return True if ``obj`` is an iterable object that isn't
+    a string.
+  is_collection: Return True if ``obj`` is a collection type, e.g list, tuple, queryset.
+  is_instance_or_subclass: Return True if ``val`` is either a subclass or instance
+    of ``class_``.
+  is_keyed_tuple: |-
+    Return True if ``obj`` has keyed tuple behavior, such as
+    namedtuples or SQLAlchemy's KeyedTuples.
+  to_marshallable_type: |-
+    Helper for converting an object to a dictionary only if it is not
+    dictionary already or an indexable object nor a simple type
+  pprint: |-
+    Pretty-printing function that can pretty-print OrderedDicts
+    like regular dictionaries. Useful for printing the output of
+    :meth:`marshmallow.Schema.dump`.
+  local_rfcformat: |-
+    Return the RFC822-formatted representation of a timezone-aware datetime
+    with the UTC offset.
+  rfcformat: |-
+    Return the RFC822-formatted representation of a datetime object.
+
+    :param datetime dt: The datetime.
+    :param bool localtime: If ``True``, return the date relative to the local
+        timezone instead of UTC, displaying the proper offset,
+        e.g. "Sun, 10 Nov 2013 08:23:45 -0600"
+  isoformat: Return the ISO8601-formatted UTC representation of a datetime object.
+  from_rfc: |-
+    Parse a RFC822-formatted datetime string and return a datetime object.
+
+    Use dateutil's parser if possible.
+
+    https://stackoverflow.com/questions/885015/how-to-parse-a-rfc-2822-date-time-into-a-python-datetime
+  from_iso_datetime: |-
+    Parse an ISO8601-formatted datetime string and return a datetime object.
+
+    Use dateutil's parser if possible and return a timezone-aware datetime.
+  from_iso_time: |-
+    Parse an ISO8601-formatted datetime string and return a datetime.time
+    object.
+  from_iso_date: null
+  to_iso_date: null
+  ensure_text_type: null
+  pluck: |-
+    Extracts a list of dictionary values from a list of dictionaries.
+    ::
+
+        >>> dlist = [{'id': 1, 'name': 'foo'}, {'id': 2, 'name': 'bar'}]
+        >>> pluck(dlist, 'id')
+        [1, 2]
+  get_value: |-
+    Helper for pulling a keyed value off various types of objects. Fields use
+    this method by default to access attributes of the source object. For object `x`
+    and attribute `i`, this method first tries to access `x[i]`, and then falls back to
+    `x.i` if an exception is raised.
+
+    .. warning::
+        If an object `x` does not raise an exception when `x[i]` does not exist,
+        `get_value` will never check the value `x.i`. Consider overriding
+        `marshmallow.fields.Field.get_value` in this case.
+  _get_value_for_keys: null
+  _get_value_for_key: null
+  set_value: |-
+    Set a value in a dict. If `key` contains a '.', it is assumed
+    be a path (i.e. dot-delimited string) to the value's location.
+
+    ::
+
+        >>> d = {}
+        >>> set_value(d, 'foo.bar', 42)
+        >>> d
+        {'foo': {'bar': 42}}
+  callable_or_raise: "Check that an object is callable, else raise a :exc:`ValueError`.\n\
+    \    "
+  _signature: null
+  get_func_args: |-
+    Given a callable, return a tuple of argument names. Handles
+    `functools.partial` objects and class-based callables.
+
+    .. versionchanged:: 3.0.0a1
+        Do not return bound arguments, eg. ``self``.
+  resolve_field_instance: |-
+    Return a Schema instance from a Schema class or instance.
+
+    :param type|Schema cls_or_instance: Marshmallow Schema class or instance.
+marshmallow.validate:
+  attrgetter: |-
+    attrgetter(attr, ...) --> attrgetter object
+
+    Return a callable object that fetches the given attribute(s) from its operand.
+    After f = attrgetter('name'), the call f(r) returns r.name.
+    After g = attrgetter('name', 'date'), the call g(r) returns (r.name, r.date).
+    After h = attrgetter('name.first', 'name.last'), the call h(r) returns
+    (r.name.first, r.name.last).
+  text_type: |-
+    str(object='') -> str
+    str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+    Create a new string object from the given object. If encoding or
+    errors is specified, then the object must expose a data buffer
+    that will be decoded using the given encoding and error handler.
+    Otherwise, returns the result of object.__str__() (if defined)
+    or repr(object).
+    encoding defaults to sys.getdefaultencoding().
+    errors defaults to 'strict'.
+  zip_longest: |-
+    zip_longest(iter1 [,iter2 [...]], [fillvalue=None]) --> zip_longest object
+
+    Return a zip_longest object whose .__next__() method returns a tuple where
+    the i-th element comes from the i-th iterable argument.  The .__next__()
+    method continues until the longest iterable in the argument sequence
+    is exhausted and then it raises StopIteration.  When the shorter iterables
+    are exhausted, the fillvalue is substituted in their place.  The fillvalue
+    defaults to None or can be specified by a keyword argument.
+  ValidationError: |-
+    Raised when validation fails on a field or schema.
+
+    Validators and custom fields should raise this exception.
+
+    :param str|list|dict message: An error message, list of error messages, or dict of
+        error messages. If a dict, the keys are subitems and the values are error messages.
+    :param str field_name: Field name to store the error on.
+        If `None`, the error is stored as schema-level error.
+    :param list fields: `Field` objects to which the error applies.
+    :param dict data: Raw input data.
+    :param dict valid_data: Valid (de)serialized data.
+  Validator: |-
+    Base abstract class for validators.
+
+    .. note::
+        This class does not provide any behavior. It is only used to
+        add a useful `__repr__` implementation for validators.
+  URL: |-
+    Validate a URL.
+
+    :param bool relative: Whether to allow relative URLs.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}`.
+    :param set schemes: Valid schemes. By default, ``http``, ``https``,
+        ``ftp``, and ``ftps`` are allowed.
+    :param bool require_tld: Whether to reject non-FQDN hostnames
+  Email: |-
+    Validate an email address.
+
+    :param str error: Error message to raise in case of a validation error. Can be
+        interpolated with `{input}`.
+  Range: |-
+    Validator which succeeds if the value it is passed is greater
+    or equal to ``min`` and less than or equal to ``max``. If ``min``
+    is not specified, or is specified as `None`, no lower bound
+    exists. If ``max`` is not specified, or is specified as `None`,
+    no upper bound exists.
+
+    :param min: The minimum value (lower bound). If not provided, minimum
+        value will not be checked.
+    :param max: The maximum value (upper bound). If not provided, maximum
+        value will not be checked.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}`, `{min}` and `{max}`.
+  Length: |-
+    Validator which succeeds if the value passed to it has a
+    length between a minimum and maximum. Uses len(), so it
+    can work for strings, lists, or anything with length.
+
+    :param int min: The minimum length. If not provided, minimum length
+        will not be checked.
+    :param int max: The maximum length. If not provided, maximum length
+        will not be checked.
+    :param int equal: The exact length. If provided, maximum and minimum
+        length will not be checked.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}`, `{min}` and `{max}`.
+  Equal: |-
+    Validator which succeeds if the ``value`` passed to it is
+    equal to ``comparable``.
+
+    :param comparable: The object to compare to.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}` and `{other}`.
+  Regexp: |-
+    Validate ``value`` against the provided regex.
+
+    :param regex: The regular expression string to use. Can also be a compiled
+        regular expression pattern.
+    :param flags: The regexp flags to use, for example re.IGNORECASE. Ignored
+        if ``regex`` is not a string.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}` and `{regex}`.
+  Predicate: |-
+    Call the specified ``method`` of the ``value`` object. The
+    validator succeeds if the invoked method returns an object that
+    evaluates to True in a Boolean context. Any additional keyword
+    argument will be passed to the method.
+
+    :param str method: The name of the method to invoke.
+    :param str error: Error message to raise in case of a validation error.
+        Can be interpolated with `{input}` and `{method}`.
+    :param kwargs: Additional keyword arguments to pass to the method.
+  NoneOf: |-
+    Validator which fails if ``value`` is a member of ``iterable``.
+
+    :param iterable iterable: A sequence of invalid values.
+    :param str error: Error message to raise in case of a validation error. Can be
+        interpolated using `{input}` and `{values}`.
+  OneOf: |-
+    Validator which succeeds if ``value`` is a member of ``choices``.
+
+    :param iterable choices: A sequence of valid values.
+    :param iterable labels: Optional sequence of labels to pair with the choices.
+    :param str error: Error message to raise in case of a validation error. Can be
+        interpolated with `{input}`, `{choices}` and `{labels}`.
+  ContainsOnly: |-
+    Validator which succeeds if ``value`` is a sequence and each element
+    in the sequence is also in the sequence passed as ``choices``. Empty input
+    is considered valid.
+
+    :param iterable choices: Same as :class:`OneOf`.
+    :param iterable labels: Same as :class:`OneOf`.
+    :param str error: Same as :class:`OneOf`.
+
+    .. versionchanged:: 3.0.0b2
+        Duplicate values are considered valid.
+    .. versionchanged:: 3.0.0b2
+        Empty input is considered valid. Use `validate.Length(min=1) <marshmallow.validate.Length>`
+        to validate against empty inputs.

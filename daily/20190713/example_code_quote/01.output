@@ -1,0 +1,8 @@
+lineno:1	node:classdef	value:A
+lineno:2	node:funcdef	value:f
+lineno:4	node:simple_stmt	value:
+
+----------------------------------------
+01:class A:
+02:    def f(self, x):
+04:            return "[]"

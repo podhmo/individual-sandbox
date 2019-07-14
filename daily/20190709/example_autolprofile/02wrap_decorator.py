@@ -1,4 +1,3 @@
-import sys
 import logging
 from pycomment.parse import parse_string, node_name, PyTreeVisitor
 from lib2to3.pgen2 import token

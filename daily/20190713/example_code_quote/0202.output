@@ -1,0 +1,13 @@
+class WebSocketEndpoint:
+
+    encoding = None  # May be "text", "bytes", or "json".
+# ...
+    async def decode(self, websocket: WebSocket, message: Message) -> typing.Any:
+
+        if self.encoding == "text":
+# ...
+
+            try:
+                return json.loads(text)
+            except json.decoder.JSONDecodeError:
+                await websocket.close(code=status.WS_1003_UNSUPPORTED_DATA)
