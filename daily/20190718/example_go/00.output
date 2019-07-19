@@ -1,0 +1,13 @@
+go run 00*/main.go person.json
+{
+  "wrap": {
+    "name": "foo",
+    "age": 20
+  }
+}
+go run 00*/main.go signal.json
+{
+  "wrap": {
+    "color": "red"
+  }
+}
