@@ -1,0 +1,12 @@
+load 00.mk
+load 01.mk .json
+make _run00
+load 00.mk
+load 01.mk .json
+echo @--debug@
+@--debug@
+make _run00 production=1
+load 00.mk
+load 01.mk .json
+echo @-o@
+@-o@

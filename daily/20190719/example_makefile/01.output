@@ -1,0 +1,12 @@
+load 00.mk
+load 01.mk .json
+make _run01
+load 00.mk
+load 01.mk .json
+echo config.json
+config.json
+make _run01 env=dev
+load 00.mk
+load 01.mk -dev.json
+echo config-dev.json
+config-dev.json
