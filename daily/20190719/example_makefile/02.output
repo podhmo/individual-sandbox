@@ -1,4 +1,4 @@
 load 00.mk
 load 01.mk .json
 @ boo/ foo/ @
-@ 00.mk 01.mk 02.mk
+@ 00.mk 01.mk 02.mk @

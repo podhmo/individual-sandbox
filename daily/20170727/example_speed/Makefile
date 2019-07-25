@@ -6,3 +6,7 @@ default:
 
 01:
 	python 01concurrent.py
+
+02: # contextual
+	kernprof 02base.py
+	python -m line_profiler 02base.py.prof

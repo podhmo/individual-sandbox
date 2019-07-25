@@ -1,0 +1,35 @@
+# importlib.machinery:SourceFileLoader
+
+_frozen_importlib_external:SourceFileLoader <- _frozen_importlib_external:FileLoader <- _frozen_importlib_external:SourceLoader <- _frozen_importlib_external:_LoaderBasics <- builtins:object
+    [method, OVERRIDE] _cache_bytecode(self, source_path, bytecode_path, data)
+    [method, OVERRIDE] path_stats(self, path)
+    [method, OVERRIDE] set_data(self, path, data, *, _mode=438)
+
+_frozen_importlib_external:FileLoader <- builtins:object
+    [method, OVERRIDE] __eq__(self, other)
+    [method, OVERRIDE] __hash__(self)
+    [method, OVERRIDE] __init__(self, fullname, path)
+    [method] contents(self)
+    [method] get_data(self, path)
+    [method] get_filename(self, name=None, *args, **kwargs)
+    [method] get_resource_reader(self, name=None, *args, **kwargs)
+    [method] is_resource(self, name)
+    [method] load_module(self, name=None, *args, **kwargs)
+    [method] open_resource(self, resource)
+    [method] resource_path(self, resource)
+
+_frozen_importlib_external:SourceLoader <- _frozen_importlib_external:_LoaderBasics <- builtins:object
+    [method] _cache_bytecode(self, source_path, cache_path, data)
+    [method] get_code(self, fullname)
+    [method] get_source(self, fullname)
+    [method] path_mtime(self, path)
+    [method] path_stats(self, path)
+    [method] set_data(self, path, data)
+    [method] source_to_code(self, data, path, *, _optimize=-1)
+
+_frozen_importlib_external:_LoaderBasics <- builtins:object
+    [method] create_module(self, spec)
+    [method] exec_module(self, module)
+    [method] is_package(self, fullname)
+    [method] load_module(self, fullname)
+

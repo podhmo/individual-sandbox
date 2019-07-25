@@ -1,6 +1,6 @@
 Timer unit: 1e-06 s
 
-Total time: 0.011087 s
+Total time: 0.011267 s
 File: 00base.py
 Function: tfidf at line 5
 
@@ -8,19 +8,19 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
      5                                           @profile
      6                                           def tfidf(word):
-     7         1       2801.0   2801.0     25.3      collection = nltk.TextCollection(word)
+     7         1       2984.0   2984.0     26.5      collection = nltk.TextCollection(word)
      8         1          1.0      1.0      0.0      doc = []
-     9       277        158.0      0.6      1.4      for do in word:
-    10       276        176.0      0.6      1.6          wo = []
-    11      1580        966.0      0.6      8.7          for term in set(do):
-    12      1304       3929.0      3.0     35.4              a = collection.tf_idf(term, do)
-    13      1304        760.0      0.6      6.9              if (a > 0):
-    14      1304        800.0      0.6      7.2                  wo.append([term, a])
-    15       276        510.0      1.8      4.6          wo.sort(key=lambda x: x[1])
-    16       276        158.0      0.6      1.4          wo.reverse()
-    17       276        411.0      1.5      3.7          slice1 = [i[0] for i in wo]
-    18       276        180.0      0.7      1.6          lists = slice1[:20]
-    19       276        236.0      0.9      2.1          doc.append(list(lists))
+     9       277        134.0      0.5      1.2      for do in word:
+    10       276        174.0      0.6      1.5          wo = []
+    11      1580        960.0      0.6      8.5          for term in set(do):
+    12      1304       3854.0      3.0     34.2              a = collection.tf_idf(term, do)
+    13      1304        882.0      0.7      7.8              if (a > 0):
+    14      1304        798.0      0.6      7.1                  wo.append([term, a])
+    15       276        508.0      1.8      4.5          wo.sort(key=lambda x: x[1])
+    16       276        164.0      0.6      1.5          wo.reverse()
+    17       276        406.0      1.5      3.6          slice1 = [i[0] for i in wo]
+    18       276        193.0      0.7      1.7          lists = slice1[:20]
+    19       276        208.0      0.8      1.8          doc.append(list(lists))
     20                                           
     21         1          1.0      1.0      0.0      return doc
 

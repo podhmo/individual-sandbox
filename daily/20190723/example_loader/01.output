@@ -1,0 +1,38 @@
+>> BuiltinImporter find_spec ('re', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('re', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('re', None, None) {}
+<< PathFinder ModuleSpec(name='re', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069cdfb240>, origin='/usr/lib/python3.7/re.py')
+>> BuiltinImporter find_spec ('enum', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('enum', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('enum', None, None) {}
+<< PathFinder ModuleSpec(name='enum', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069cdfbc88>, origin='/usr/lib/python3.7/enum.py')
+>> BuiltinImporter find_spec ('sre_compile', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('sre_compile', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('sre_compile', None, None) {}
+<< PathFinder ModuleSpec(name='sre_compile', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069ce0ae80>, origin='/usr/lib/python3.7/sre_compile.py')
+>> BuiltinImporter find_spec ('_sre', None, None) {}
+<< BuiltinImporter ModuleSpec(name='_sre', loader=<class '_frozen_importlib.BuiltinImporter'>, origin='built-in')
+>> BuiltinImporter find_spec ('sre_parse', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('sre_parse', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('sre_parse', None, None) {}
+<< PathFinder ModuleSpec(name='sre_parse', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069cd96518>, origin='/usr/lib/python3.7/sre_parse.py')
+>> BuiltinImporter find_spec ('sre_constants', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('sre_constants', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('sre_constants', None, None) {}
+<< PathFinder ModuleSpec(name='sre_constants', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069cd9def0>, origin='/usr/lib/python3.7/sre_constants.py')
+>> BuiltinImporter find_spec ('copyreg', None, None) {}
+<< BuiltinImporter None
+>> FrozenImporter find_spec ('copyreg', None, None) {}
+<< FrozenImporter None
+>> PathFinder find_spec ('copyreg', None, None) {}
+<< PathFinder ModuleSpec(name='copyreg', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f069cdb2588>, origin='/usr/lib/python3.7/copyreg.py')

@@ -1,0 +1,23 @@
+# importlib.machinery:PathFinder
+
+_frozen_importlib_external:PathFinder <- builtins:object
+    [class method] _get_spec(fullname, path, target=None)
+    [class method] _legacy_get_spec(fullname, finder)
+    [class method] _path_hooks(path)
+    [class method] _path_importer_cache(path)
+    [class method] find_module(fullname, path=None)
+    [class method] find_spec(fullname, path=None, target=None)
+    [class method] invalidate_caches()
+
+# importlib.machinery:FileFinder
+
+_frozen_importlib_external:FileFinder <- builtins:object
+    [method, OVERRIDE] __init__(self, path, *loader_details)
+    [method, OVERRIDE] __repr__(self)
+    [method] _fill_cache(self)
+    [method] _get_spec(self, loader_class, fullname, path, smsl, target)
+    [method] find_loader(self, fullname)
+    [method] find_module(self, fullname)
+    [method] find_spec(self, fullname, target=None)
+    [method] invalidate_caches(self)
+    [class method] path_hook(*loader_details)
