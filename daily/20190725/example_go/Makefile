@@ -6,3 +6,5 @@ URL ?= https://httpbin.org/json
 	go run $@*/main.go $(URL)
 02:
 	go run $@*/main.go $(URL)
+03:
+	go run $@*/main.go
