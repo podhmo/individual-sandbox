@@ -1,20 +1,23 @@
 package main
 
 import (
-	"m/storegolden"
+	"m/replay"
 	"testing"
-
-	"github.com/k0kubun/pp"
 )
 
 // GetData :
 func GetData() string {
-	return "Hello"
+	return "Heloo"
 }
 
 func Test(t *testing.T) {
+	replayCheck := replay.ReplayWith(replay.WithUpdateByEnvvar("X"))
+
 	got := GetData()
-	storegolden.NewJSONRecorder().RecordAndReplay(t, got, func(got, want interface{}) {
-		pp.Println(want, got)
+	var want string
+	replayCheck(t, got, &want, func() {
+		if want != got {
+			t.Errorf("want %v, but %v", want, got)
+		}
 	})
 }
