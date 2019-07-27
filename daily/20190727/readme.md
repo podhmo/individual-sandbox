@@ -55,6 +55,23 @@ https://github.com/podhmo/go-webtest/jsonqeual
 go get -v github.com/xeipuuv/gojsonpointer
 ```
 
+#### 追記
+
+テキトーにそれっぽいものは作ったけれど。名前が思いつかない。
+とりあえず関数はReplaceの方が正しそう。
+
+あと、可能ならReplaceをsnapshotに組み込みたい。
+
+### ci 設定
+
+テキトーにci設定とかした
+
+- https://circleci.com/gh/podhmo/go-webtest
+
+### go modules
+
+ふつうに使っていた。go modules
+
 ## jsonpointer
 
 そう言えばarrayの部分の仕様忘れがち。
@@ -93,5 +110,3 @@ https://github.com/podhmo/go-rfc3339
 
 - ci
 - go modules 対応
-
-
