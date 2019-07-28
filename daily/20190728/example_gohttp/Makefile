@@ -1,2 +1,3 @@
 00:
-	go run 00*/main.go
+#	go run $@*/main.go
+	go test ./$@*

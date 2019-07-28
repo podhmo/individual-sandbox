@@ -31,4 +31,12 @@ main.goを増やしていく感じ。ある程度上手く言ったら移動し�
 [1,2,3]
 ```
 
-あたり
+`snapshot.WithReplaceMap()` というなまえは悪くないかも。
+
+
+### 実際に繋げてみる
+
+- [./example_gohttp](./example_gohttp)
+
+なるほど。responseから取りたいのは `io.Reader` ではなく `io.ReadCloser` かも。
+
