@@ -51,10 +51,6 @@ https://github.com/podhmo/go-webtest/jsonqeual
 
 - https://github.com/xeipuuv/gojsonpointer
 
-```
-go get -v github.com/xeipuuv/gojsonpointer
-```
-
 #### 追記
 
 テキトーにそれっぽいものは作ったけれど。名前が思いつかない。
