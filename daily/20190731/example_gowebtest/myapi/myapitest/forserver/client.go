@@ -6,6 +6,7 @@ import (
 	"myapi/myapitest/internal"
 	"net/http"
 	"net/http/httptest"
+	"sync"
 )
 
 // Client :
@@ -21,9 +22,25 @@ func (c *Client) Do(req *http.Request) (interfaces.Response, error, func()) {
 	if c.client == nil {
 		client = http.DefaultClient
 	}
-	res, err := client.Do(req)
-	wres := &Response{response: res}
-	return wres, err, wres.Close
+
+	var adapter *internal.ResponseAdapter
+	var raw *http.Response
+	var once sync.Once
+
+	raw, err := client.Do(req)
+	if err != nil {
+		return nil, err, nil
+	}
+
+	adapter = internal.NewResponseAdapter(
+		func() *http.Response {
+			once.Do(func() {
+				adapter.AddTeardown(raw.Body.Close)
+			})
+			return raw
+		},
+	)
+	return adapter, err, adapter.Close
 }
 
 // Get :

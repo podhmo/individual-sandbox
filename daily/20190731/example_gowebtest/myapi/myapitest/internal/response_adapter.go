@@ -1,32 +1,39 @@
-package forrecorder
+package internal
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"myapi/myapitest/internal"
 	"net/http"
-	"net/http/httptest"
 	"sync"
 )
 
-// Response :
-type Response struct {
-	recorder *httptest.ResponseRecorder
+// NewResponseAdapter :
+func NewResponseAdapter(get func() *http.Response) *ResponseAdapter {
+	return &ResponseAdapter{
+		GetResponse: get,
+	}
+}
+
+// ResponseAdapter :
+type ResponseAdapter struct {
+	GetResponse func() *http.Response
 
 	bytes []byte // not bet
 	bOnce sync.Once
-
-	response *http.Response
-	rOnce    sync.Once
 
 	m         sync.Mutex
 	teardowns []func() error
 }
 
+// Response :
+func (res *ResponseAdapter) Response() *http.Response {
+	return res.GetResponse()
+}
+
 // Close :
-func (res *Response) Close() {
+func (res *ResponseAdapter) Close() {
 	res.m.Lock()
 	defer res.m.Unlock()
 	for _, teardown := range res.teardowns {
@@ -37,23 +44,14 @@ func (res *Response) Close() {
 	res.teardowns = nil
 }
 
-func (res *Response) addTeardown(fn func() error) {
+func (res *ResponseAdapter) AddTeardown(fn func() error) {
 	res.m.Lock()
 	defer res.m.Unlock()
 	res.teardowns = append(res.teardowns, fn)
 }
 
-// Response :
-func (res *Response) Response() *http.Response {
-	res.rOnce.Do(func() {
-		res.response = res.recorder.Result()
-		res.addTeardown(res.response.Body.Close)
-	})
-	return res.response
-}
-
 // Buffer : (TODO: rename)
-func (res *Response) Buffer() *bytes.Buffer {
+func (res *ResponseAdapter) Buffer() *bytes.Buffer {
 	res.bOnce.Do(func() {
 		var b bytes.Buffer
 		if _, err := io.Copy(&b, res.Response().Body); err != nil {
@@ -65,18 +63,18 @@ func (res *Response) Buffer() *bytes.Buffer {
 }
 
 // StatusCode :
-func (res *Response) StatusCode() int {
+func (res *ResponseAdapter) StatusCode() int {
 	return res.Response().StatusCode
 }
 
 // ParseData :
-func (res *Response) ParseData(val interface{}) error {
+func (res *ResponseAdapter) ParseData(val interface{}) error {
 	decoder := json.NewDecoder(res.Buffer()) // TODO: decoder interface
 	return decoder.Decode(val)
 }
 
 // Data :
-func (res *Response) Data() interface{} {
+func (res *ResponseAdapter) Data() interface{} {
 	var val interface{}
 	if err := res.ParseData(&val); err != nil {
 		panic(err) // xxx:
@@ -85,13 +83,13 @@ func (res *Response) Data() interface{} {
 }
 
 // Body :
-func (res *Response) Body() []byte {
+func (res *ResponseAdapter) Body() []byte {
 	return res.Buffer().Bytes()
 }
 
 // LazyBodyString :
-func (res *Response) LazyBodyString() fmt.Stringer {
-	return internal.NewLazyString(
+func (res *ResponseAdapter) LazyBodyString() fmt.Stringer {
+	return NewLazyString(
 		func() string {
 			return res.Buffer().String()
 		},

@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"myapi/myapitest"
 	"testing"
-
-	"github.com/k0kubun/pp"
 )
 
 func TestIt(t *testing.T) {
@@ -20,7 +18,6 @@ func TestIt(t *testing.T) {
 	t.Run("200", func(t *testing.T) {
 		got, err, teardown := client.Get("/200")
 		if err != nil {
-			pp.Println(err)
 			t.Fatalf("%+v", err) // add more contextual information?
 		}
 		defer teardown()

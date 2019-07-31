@@ -6,6 +6,7 @@ import (
 	"myapi/myapitest/internal"
 	"net/http"
 	"net/http/httptest"
+	"sync"
 )
 
 // Client :
@@ -16,10 +17,23 @@ type Client struct {
 
 // Do :
 func (c *Client) Do(req *http.Request) (interfaces.Response, error, func()) {
+	var adapter *internal.ResponseAdapter
+	var raw *http.Response
+	var once sync.Once
+
 	w := httptest.NewRecorder()
 	c.HandlerFunc(w, req)
-	res := &Response{recorder: w}
-	return res, nil, res.Close
+
+	adapter = internal.NewResponseAdapter(
+		func() *http.Response {
+			once.Do(func() {
+				raw = w.Result()
+				adapter.AddTeardown(raw.Body.Close)
+			})
+			return raw
+		},
+	)
+	return adapter, nil, adapter.Close
 }
 
 // Get :
