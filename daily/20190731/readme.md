@@ -7,8 +7,6 @@ https://github.com/podhmo/go-webtest を更新するために色々整理して�
 - recorderを使ったもの
 - serverを使ったもの
 
-追記: [とりあえずで書いてみた結果](https://github.com/podhmo/individual-sandbox/tree/master/daily/20190731/example_gowebtest/myapi)
-
 そこまではできるとして次に気にするのは何だろう？
 
 - methodを変える
@@ -48,6 +46,19 @@ https://github.com/podhmo/go-webtest を更新するために色々整理して�
 
 CIなど回すときに同時に実行したい。これはパッケージ単位で並行に実行できれば十分なのでは？
 
+### 追記
+
+[とりあえずで書いてみた結果](https://github.com/podhmo/individual-sandbox/tree/master/daily/20190731/example_gowebtest/myapi)
+
+### 追記
+
+全体像ははあくした。次は何をしようかな。この辺りを気にする必要があるかもしれない。
+
+> 何をappのコードに書いて何をlibraryのコードに書くか的な話
+
+myapiの部分にmyapitest的な概念を設けてそれを試してみる？テストコードがちょっと変わるかも。
+(同一のパッケージでは無理なのでgo.modを生成することになるかも？)
+
 ### http
 
 - handler (router)
@@ -63,7 +74,7 @@ CIなど回すときに同時に実行したい。これはパッケージ単位
 
 ### router
 
-https//github.com/go-chi/chi 辺りを使おう。
+https://github.com/go-chi/chi 辺りを使おう。
 
 - handlerの登録とhandler内の関数が遠のくのは不便かも？
 
