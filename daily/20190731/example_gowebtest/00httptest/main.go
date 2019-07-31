@@ -8,5 +8,5 @@ import (
 
 func main() {
 	url := os.Args[1]
-	log.Fatalf("!%+v", myapi.Run(url, myapi.Handler()))
+	log.Fatalf("!%+v", myapi.Run(url, myapi.Router()))
 }

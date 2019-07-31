@@ -7,6 +7,8 @@ https://github.com/podhmo/go-webtest を更新するために色々整理して�
 - recorderを使ったもの
 - serverを使ったもの
 
+追記: [とりあえずで書いてみた結果](https://github.com/podhmo/individual-sandbox/tree/master/daily/20190731/example_gowebtest/myapi)
+
 そこまではできるとして次に気にするのは何だろう？
 
 - methodを変える
@@ -49,10 +51,53 @@ CIなど回すときに同時に実行したい。これはパッケージ単位
 ### http
 
 - handler (router)
-- middleware
 - persistent
 - authentication / authorization
+- middleware
+
+  - panic recovery
+  - logging
+  - 外部APIの利用
+  - 外部のmiddlewareの利用
+  - sqsとかjob queueの利用
 
 ### router
 
 https//github.com/go-chi/chi 辺りを使おう。
+
+- handlerの登録とhandler内の関数が遠のくのは不便かも？
+
+まぁ本題はそこではないので。
+
+#### memo
+
+httptest.Recorderにそのままgo-chiを使ったHandlerFuncを使おうとすると以下の様なエラーが出る。
+
+```
+panic: interface conversion: interface {} is nil, not *chi.Context [recovered]
+        panic: interface conversion: interface {} is nil, not *chi.Context
+```
+
+### その他周辺の情報
+
+- 何をappのコードに書いて何をlibraryのコードに書くか的な話
+
+  - loggerやpanic recoveryのテスト
+  - confからのcomponent(component factory)の生成
+  - DI的な話
+
+- 提供するデータの形の変更
+
+  - graphQL対応
+  - (後から) api documentへの対応 (e.g. openapi doc)
+  - 古い(負債になった) api documentのフレームワークの廃止
+
+- 実行形態の変更
+
+  - FaaS対応
+  - CLI対応
+  - grpc/grpc-web 的な話
+
+- openTracing的な話
+- monitoring的な話
+- deploy (provisioning, orchestration) 的な話
