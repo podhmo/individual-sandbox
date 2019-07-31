@@ -2,11 +2,10 @@ package myapitest
 
 import (
 	"fmt"
+	"myapi"
 	"net/http"
 	"net/http/httptest"
 	"strings"
-
-	"myapi"
 
 	"github.com/go-chi/chi"
 )
