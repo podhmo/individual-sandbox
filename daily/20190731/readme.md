@@ -76,6 +76,35 @@ myapiの部分にmyapitest的な概念を設けてそれを試してみる？テ
 - 特定のhandlerだけを利用してテストみたいなことしたくなることある？
 - APIサーバーは共有した方が楽なんだろうか？
 
+### 追記
+
+だいぶどちらで実装するべきか区別が付くようになってきたかも。
+httptest.Serverのようなserver側の実装は全部app側の持ち物なきがする。
+素直にclient用のwrapperを作ってあげてそれはlibraryになって良さそう。
+
+#### ctxhttp
+
+そう言えばctxhttpってあったな。
+
+https://godoc.org/golang.org/x/net/context/ctxhttp
+
+#### out of context
+
+fooパッケージのXXXAとYYYAをパッケージを分けてxxx/Aとyyy/Bにした時にけっこうめんどくさいことが起きるな。
+
+```
+foo
+```
+
+循環importを避けるためにfoo/interfacesも必要になる(fooパッケージでnewXXXAとnewYYYAを提供した場合)。
+
+```
+foo
+foo/xxx
+foo/yyy
+foo/interfaces
+```
+
 ### http
 
 - handler (router)

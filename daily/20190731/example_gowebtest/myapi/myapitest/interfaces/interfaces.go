@@ -7,8 +7,8 @@ import (
 
 // Client :
 type Client interface {
-	Do(req *http.Request) (Response, func())
-	Get(path string) (Response, func())
+	Do(req *http.Request) (Response, error, func())
+	Get(path string) (Response, error, func())
 }
 
 // Response :

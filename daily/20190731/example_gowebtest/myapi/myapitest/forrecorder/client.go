@@ -15,15 +15,15 @@ type Client struct {
 }
 
 // Do :
-func (c *Client) Do(req *http.Request) (interfaces.Response, func()) {
+func (c *Client) Do(req *http.Request) (interfaces.Response, error, func()) {
 	w := httptest.NewRecorder()
 	c.HandlerFunc(w, req)
 	res := &Response{recorder: w}
-	return res, res.Close
+	return res, nil, res.Close
 }
 
 // Get :
-func (c *Client) Get(path string) (interfaces.Response, func()) {
+func (c *Client) Get(path string) (interfaces.Response, error, func()) {
 	url := internal.URLJoin(c.BasePath, path)
 	var body io.Reader // xxx (TODO: functional options)
 	req := httptest.NewRequest("GET", url, body)

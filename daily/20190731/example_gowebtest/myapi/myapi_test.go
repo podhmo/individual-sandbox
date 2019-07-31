@@ -1,33 +1,41 @@
 package myapi_test
 
 import (
-	"encoding/json"
 	"fmt"
 	"myapi/myapitest"
-	"net/http"
 	"testing"
+
+	"github.com/k0kubun/pp"
 )
 
 func TestIt(t *testing.T) {
 	ts, teardown := myapitest.NewTestAPIServer()
 	defer teardown()
-	basepath := "/status"
+
+	client := myapitest.NewClientForServer(
+		ts,
+		myapitest.WithBasePath("/status"),
+	)
 
 	t.Run("200", func(t *testing.T) {
-		res, err := http.Get(fmt.Sprintf("%s%s/200", ts.URL, basepath))
+		got, err, teardown := client.Get("/200")
 		if err != nil {
-			t.Fatalf("%v", err) // todo: show response
+			pp.Println(err)
+			t.Fatalf("%+v", err) // add more contextual information?
+		}
+		defer teardown()
+
+		if got.StatusCode() != 200 {
+			t.Fatalf("status expect 200, but %d\n response: %s", got.StatusCode(), got.LazyBodyString())
 		}
 
 		data := map[string]interface{}{}
-		decoder := json.NewDecoder(res.Body)
-		if err := decoder.Decode(&data); err != nil {
-			t.Fatalf("%v", err) // todo: show ???
+		if err := got.ParseData(&data); err != nil {
+			t.Fatalf("parse error %+v\n response:%s", err, got.LazyBodyString()) // todo: show ???
 		}
-		defer res.Body.Close()
 
 		// todo: assertion response
-		fmt.Printf("body: %+v", data)
+		fmt.Printf("body: %#+v", data)
 
 		// todo: assertion db check
 	})
@@ -40,7 +48,10 @@ func TestUnit(t *testing.T) {
 	)
 
 	t.Run("200", func(t *testing.T) {
-		got, teardown := client.Get("/200")
+		got, err, teardown := client.Get("/200")
+		if err != nil {
+			t.Fatalf("%+v", err) // add more contextual information?
+		}
 		defer teardown()
 
 		if got.StatusCode() != 200 {
