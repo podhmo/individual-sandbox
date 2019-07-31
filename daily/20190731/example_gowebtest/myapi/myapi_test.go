@@ -34,8 +34,10 @@ func TestIt(t *testing.T) {
 }
 
 func TestUnit(t *testing.T) {
-	handler := myapitest.NewTestHandler()
-	client := myapitest.Client{HandlerFunc: handler, BasePath: "/status"}
+	client := myapitest.NewClientForRecorder(
+		myapitest.NewTestHandler(),
+		myapitest.WithBasePath("/status"),
+	)
 
 	t.Run("200", func(t *testing.T) {
 		got, teardown := client.Get("/200")
