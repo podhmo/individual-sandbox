@@ -105,6 +105,25 @@ foo/yyy
 foo/interfaces
 ```
 
+### 追記
+
+Adapterを定義してあげたらほとんどresponse生成をwrapするclosureだけの違いになった。
+
+### 追記
+
+あと気になるところはどこだろう？
+
+- postDataなどをfunctional optionsで扱うようにする
+- errorの扱いを丁寧にする感じ
+- ctxhttpを気にしなくて大丈夫？
+- middlewareの追加などを考えなくて大丈夫？
+
+そしてようやく
+
+- snapshot.Take()などとの兼ね合いを考える
+
+にたどり着く
+
 ### http
 
 - handler (router)
