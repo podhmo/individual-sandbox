@@ -1,19 +1,21 @@
-package myapi
+package myapi_test
 
 import (
 	"encoding/json"
 	"fmt"
+	"myapi/myapitest"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 func TestIt(t *testing.T) {
-	ts := httptest.NewServer(Handler())
-	defer ts.Close()
+	ts, teardown := myapitest.NewTestAPIServer()
+	defer teardown()
+	basepath := "/status"
 
 	t.Run("200", func(t *testing.T) {
-		res, err := http.Get(fmt.Sprintf("%s/200", ts.URL))
+		res, err := http.Get(fmt.Sprintf("%s%s/200", ts.URL, basepath))
 		if err != nil {
 			t.Fatalf("%v", err) // todo: show response
 		}
@@ -33,9 +35,11 @@ func TestIt(t *testing.T) {
 }
 
 func TestUnit(t *testing.T) {
-	handler := Handler().ServeHTTP
+	handler := myapitest.NewTestHandler()
+	basepath := "/status"
+
 	t.Run("200", func(t *testing.T) {
-		req := httptest.NewRequest("GET", "/200", nil)
+		req := httptest.NewRequest("GET", fmt.Sprintf("%s/200", basepath), nil)
 		w := httptest.NewRecorder()
 		handler(w, req)
 

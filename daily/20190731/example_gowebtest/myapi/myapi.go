@@ -17,7 +17,7 @@ func Handler() http.Handler {
 
 // BindHandlers :
 func BindHandlers(r chi.Router) {
-	r.Get("/{status}", Status)
+	r.Get("/status/{status}", Status)
 }
 
 // Router :
