@@ -58,6 +58,31 @@ func TestIt(t *testing.T) {
 
 		// todo: assertion db check
 	})
+
+	t.Run("200,handy,block", func(t *testing.T) {
+		got, err, teardown := client.Get("/200")
+
+		{
+			handy.Must(t, handy.Equal(nil).Actual(err),
+				"response:", got.LazyBodyString(),
+			)
+			defer teardown()
+			handy.Must(t, handy.Equal(200).Actual(got.StatusCode()).Describe("status"))
+		}
+
+		{
+
+			data := map[string]interface{}{}
+			handy.Must(t, handy.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
+				"response:", got.LazyBodyString(),
+			)
+
+			// todo: assertion response
+			fmt.Printf("body: %#+v", data)
+
+			// todo: assertion db check
+		}
+	})
 }
 
 func TestUnit(t *testing.T) {
