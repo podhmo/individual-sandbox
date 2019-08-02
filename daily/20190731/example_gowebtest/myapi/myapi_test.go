@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"myapi/myapitest"
 	"testing"
+
+	"github.com/podhmo/handy"
 )
 
 func TestIt(t *testing.T) {
@@ -30,6 +32,26 @@ func TestIt(t *testing.T) {
 		if err := got.ParseData(&data); err != nil {
 			t.Fatalf("parse error %+v\n response:%s", err, got.LazyBodyString()) // todo: show ???
 		}
+
+		// todo: assertion response
+		fmt.Printf("body: %#+v", data)
+
+		// todo: assertion db check
+	})
+
+	t.Run("200,handy", func(t *testing.T) {
+		got, err, teardown := client.Get("/200")
+
+		handy.Must(t, handy.Equal(nil).Actual(err),
+			"response:", got.LazyBodyString(),
+		)
+		defer teardown()
+		handy.Must(t, handy.Equal(200).Actual(got.StatusCode()).Describe("status"))
+
+		data := map[string]interface{}{}
+		handy.Must(t, handy.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
+			"response:", got.LazyBodyString(),
+		)
 
 		// todo: assertion response
 		fmt.Printf("body: %#+v", data)
