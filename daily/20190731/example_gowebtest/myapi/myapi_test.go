@@ -42,11 +42,12 @@ func TestIt(t *testing.T) {
 	t.Run("200,handy", func(t *testing.T) {
 		got, err, teardown := client.Get("/200")
 
-		handy.Must(t, handy.Equal(nil).Actual(err),
+		handy.Must(t, handy.Equal(nil).Actual(err)) // add more contextual information?
+		defer teardown()
+		handy.Must(t,
+			handy.Equal(200).Actual(got.StatusCode()).Describe("status"),
 			"response:", got.LazyBodyString(),
 		)
-		defer teardown()
-		handy.Must(t, handy.Equal(200).Actual(got.StatusCode()).Describe("status"))
 
 		data := map[string]interface{}{}
 		handy.Must(t, handy.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
@@ -63,11 +64,12 @@ func TestIt(t *testing.T) {
 		got, err, teardown := client.Get("/200")
 
 		{
-			handy.Must(t, handy.Equal(nil).Actual(err),
+			handy.Must(t, handy.Equal(nil).Actual(err)) // add more contextual information?
+			defer teardown()
+			handy.Must(t,
+				handy.Equal(200).Actual(got.StatusCode()).Describe("status"),
 				"response:", got.LazyBodyString(),
 			)
-			defer teardown()
-			handy.Must(t, handy.Equal(200).Actual(got.StatusCode()).Describe("status"))
 		}
 
 		{
