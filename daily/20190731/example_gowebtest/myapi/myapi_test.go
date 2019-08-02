@@ -5,7 +5,7 @@ import (
 	"myapi/myapitest"
 	"testing"
 
-	"github.com/podhmo/handy"
+	"github.com/podhmo/noerror"
 )
 
 func TestIt(t *testing.T) {
@@ -39,18 +39,19 @@ func TestIt(t *testing.T) {
 		// todo: assertion db check
 	})
 
-	t.Run("200,handy", func(t *testing.T) {
+	t.Run("200,noerror", func(t *testing.T) {
 		got, err, teardown := client.Get("/200")
 
-		handy.Must(t, handy.Equal(nil).Actual(err)) // add more contextual information?
+		noerror.Must(t, noerror.Equal(nil).Actual(err)) // add more contextual information?
 		defer teardown()
-		handy.Must(t,
-			handy.Equal(200).Actual(got.StatusCode()).Describe("status"),
+		noerror.Must(t,
+			noerror.Equal(200).Actual(got.StatusCode()).Describe("status"),
 			"response:", got.LazyBodyString(),
 		)
 
 		data := map[string]interface{}{}
-		handy.Must(t, handy.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
+		noerror.Must(t,
+			noerror.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
 			"response:", got.LazyBodyString(),
 		)
 
@@ -60,14 +61,14 @@ func TestIt(t *testing.T) {
 		// todo: assertion db check
 	})
 
-	t.Run("200,handy,block", func(t *testing.T) {
+	t.Run("200,noerror,block", func(t *testing.T) {
 		got, err, teardown := client.Get("/200")
 
 		{
-			handy.Must(t, handy.Equal(nil).Actual(err)) // add more contextual information?
+			noerror.Must(t, noerror.Equal(nil).Actual(err)) // add more contextual information?
 			defer teardown()
-			handy.Must(t,
-				handy.Equal(200).Actual(got.StatusCode()).Describe("status"),
+			noerror.Must(t,
+				noerror.Equal(200).Actual(got.StatusCode()).Describe("status"),
 				"response:", got.LazyBodyString(),
 			)
 		}
@@ -75,7 +76,7 @@ func TestIt(t *testing.T) {
 		{
 
 			data := map[string]interface{}{}
-			handy.Must(t, handy.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
+			noerror.Must(t, noerror.Equal(nil).Actual(got.ParseData(&data)).Describe("parse error"),
 				"response:", got.LazyBodyString(),
 			)
 
