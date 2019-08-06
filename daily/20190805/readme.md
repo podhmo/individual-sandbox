@@ -6,7 +6,6 @@
 
 - https://github.com/google/wire
 
-
 ```
 go get github.com/google/wire/cmd/wire
 ```

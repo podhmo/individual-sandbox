@@ -1,0 +1,2 @@
+go run main.go
+ioknife --logging=DEBUG delayed -n 1 http :8080/go/tos.html
