@@ -1,0 +1,2 @@
+python -u check-pid.py --loop 1000
+make check-pid LOOP=100

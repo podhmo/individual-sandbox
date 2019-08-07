@@ -4,5 +4,5 @@ default:
 client:
 	sleep 1
 	http GET :8080/go/tos.html
-	pkill -TERM -g $$(ps -o pgid -p $$(cat x.pid) | tail -n 1) || echo ok
+	pkill -TERM -g $$(ps -o pgid -p $$(cat x.pid) | ioknife rest) || echo ok
 

@@ -1,0 +1,2 @@
+python -u input-with-tick.py
+python -u -c 'import time; print("st"); time.sleep(2); print("end")'

@@ -1,0 +1,2 @@
+python -u input-with-tick.py
+python -u check-pid.py --loop 1000
