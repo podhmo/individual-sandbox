@@ -3,10 +3,10 @@ package main
 import (
 	"time"
 
-	"github.com/podhmo/ctxlog/zapctxlog"
+	"github.com/podhmo/ctxlog/stdctxlog"
 )
 
 func main() {
-	log, _ := zapctxlog.New()
+	log := stdctxlog.New()
 	log.With("now", time.Now()).Info("hai")
 }

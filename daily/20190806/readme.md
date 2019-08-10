@@ -132,7 +132,7 @@ https://github.com/go-chi/chi/tree/master/_examples
 - [ ] 8.0K	custom-handler -- newTypeでerror対応を付加したServeHTTP()を実装してる
 - [ ] 8.0K	custom-method -- これはただGETとか以外のメソッドを追加するだけ
 - [ ] 16K	fileserver -- そういえば[fileserver](https://golang.org/pkg/net/http/#example_FileServer)を使った何かをやったことがないな
-- [ ] 8.0K	graceful
+- [ ] 8.0K	graceful -- http.Server()のShutdownとgoroutine, 
 - [ ] 8.0K	hello-world
 - [ ] 8.0K	limits
 - [ ] 12K	logging
