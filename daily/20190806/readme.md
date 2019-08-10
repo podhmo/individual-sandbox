@@ -132,13 +132,13 @@ https://github.com/go-chi/chi/tree/master/_examples
 - [ ] 8.0K	custom-handler -- newTypeでerror対応を付加したServeHTTP()を実装してる
 - [ ] 8.0K	custom-method -- これはただGETとか以外のメソッドを追加するだけ
 - [ ] 16K	fileserver -- そういえば[fileserver](https://golang.org/pkg/net/http/#example_FileServer)を使った何かをやったことがないな
-- [ ] 8.0K	graceful -- http.Server()のShutdownとgoroutine, 
-- [ ] 8.0K	hello-world
-- [ ] 8.0K	limits
-- [ ] 12K	logging
-- [ ] 40K	rest
-- [ ] 8.0K	router-walk
-- [ ] 16K	todos-resource
+- [ ] 8.0K	graceful -- http.Server()のShutdownとgoroutine
+- [ ] 8.0K	hello-world -- ふつうのhello world。 loggingだけどうしようかというところ。
+- [ ] 8.0K	limits -- throttleとかlimitとかそういうやつ
+- [ ] 12K	logging -- 自作のロガー
+- [ ] 40K	rest -- docgenとrenderのサンプル, mapをdb代りに使っている
+- [ ] 8.0K	router-walk -- routerに対するwalker関数が存在していてそれが捜査するというサンプル
+- [ ] 16K	todos-resource -- 
 - [ ] 48K	versions
 
 ## docker-compose imageをrecreate

@@ -3,6 +3,7 @@ module github.com/podhmo/individual-sandbox
 go 1.12
 
 require (
+	github.com/99designs/gqlgen v0.9.2 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
 	github.com/google/wire v0.3.0 // indirect
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
