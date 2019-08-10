@@ -1,3 +1,20 @@
+## flutter widget
+
+- https://flutter.dev/docs/development/ui/widgets
+- https://qiita.com/matsukatsu/items/e289e30231fffb1e4502
+- https://qiita.com/coka__01/items/dedb569f6357f1b503fd
+
+### performance considerations
+
+- https://medium.com/flutter-jp/dive-into-flutter-4add38741d07
+- https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html#performance-considerations
+
+
+## go gqlgen
+
+- https://gqlgen.com/reference/dataloaders/
+- https://github.com/99designs/gqlgen/tree/master/example/dataloader
+
 ## eglot 全てのserverをshutdownさせたい
 
 - shutdownはeglot-shutdown
@@ -22,7 +39,7 @@
 misc
 
 - https://qiita.com/k-motoyan/items/f37d1348efd3f40e9096
-- https://arata.hatenadiary.com/entry/2017/08/31/201940
+- https://snippets.aktagon.com/snippets/757-how-to-join-two-tables-with-jmoiron-sqlx
 - https://qiita.com/rihofujino/items/b69e6a23e7cef1d692c4
 
 ### sqlite3 trace log
