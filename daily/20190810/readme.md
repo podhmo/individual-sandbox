@@ -1,3 +1,60 @@
+## eglot 全てのserverをshutdownさせたい
+
+- shutdownはeglot-shutdown
+
+```
+(cl-loop for servers
+  being hash-values of eglot--servers-by-project
+  do (cl-loop for s in servers do (eglot-shutdown s)))
+```
+
+## go sqlxの素振り的なことをしないと？
+
+- https://jmoiron.github.io/sqlx/
+- sqlite3のinmemory dbを利用する？
+- query logだす？
+- context対応したコードはどういうやつ？
+
+使いかたはここを見れば良さそう
+
+- https://github.com/jmoiron/sqlx/blob/master/sqlx_test.go
+
+misc
+
+- https://qiita.com/k-motoyan/items/f37d1348efd3f40e9096
+- https://arata.hatenadiary.com/entry/2017/08/31/201940
+- https://qiita.com/rihofujino/items/b69e6a23e7cef1d692c4
+
+### sqlite3 trace log
+
+pythonのはこれだけど何かあるはず。
+
+- https://stackoverflow.com/questions/6941992/how-can-i-log-queries-in-sqlite3-with-python
+
+どうやらタグ付きでbuildすれば良いらしい？
+
+- https://github.com/mattn/go-sqlite3/wiki/Features#usage
+
+そういえばgo getでタグ付きでbuildするのどうやるんだろ？
+
+ - https://stackoverflow.com/questions/30188499/how-to-do-go-get-on-a-specific-tag-of-a-github-repository
+
+無理？結構めんどくさそう？
+
+### sqlx tips
+
+- ctxを使っている方の関数を使いたい
+- QueryRowxを使うと便利
+
+```go
+var p Place
+err := db.QueryRowx("SELECT city, telcode FROM place LIMIT 1").StructScan(&p)
+```
+
+## coveralls?
+
+なにもの？
+
 ## そういえば
 
 - graphqlのformatterがないな
@@ -37,6 +94,9 @@
 - Group()は
 
 ## go modules
+
+- stableは@latest
+- nightlyは@master
 
 ### sub packages
 
