@@ -1,0 +1,22 @@
+## graphqlのこと
+
+やること
+
+- graphqlに親しむ
+- graphqlのparserと親しむ
+
+## 00 gqlgenのtodo
+
+- graphqlと親しんだ
+- https://github.com/graphql/graphql-spec これ覗いたほうが早くない？（追記)
+
+## 01 parser
+
+- docs https://graphql-core-next.readthedocs.io/en/latest/
+- github https://github.com/graphql-python/graphql-core-next/blob/7649646cb1530a9dfdb76e53ec2313830ca94899/src/graphql/language/parser.py
+```console
+$ pip install graphql-core-next
+```
+
+- https://github.com/graphql-python/graphql-core-next/blob/7649646cb1530a9dfdb76e53ec2313830ca94899/src/graphql/language/parser.py
+

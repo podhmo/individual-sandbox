@@ -1,0 +1,3 @@
+query myQuery {
+	todo(id: 10){id,text}
+}

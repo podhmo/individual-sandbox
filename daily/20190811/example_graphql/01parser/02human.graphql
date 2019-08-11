@@ -1,0 +1,7 @@
+{
+  human(id: NEWHOPE) {
+    name
+    homeTown
+    friends
+  }
+}

@@ -1,0 +1,3 @@
+{
+	todo(id: 10){id,text}
+}
