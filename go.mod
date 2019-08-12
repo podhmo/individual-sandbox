@@ -5,10 +5,11 @@ go 1.12
 require (
 	github.com/99designs/gqlgen v0.9.2 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
+	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/google/wire v0.3.0 // indirect
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
-	github.com/k0kubun/pp v3.0.1+incompatible // indirect
+	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/lib/pq v1.0.0
 	github.com/mattn/go-sqlite3 v1.9.0
 	github.com/pkg/errors v0.8.1

@@ -7,6 +7,11 @@
 - graphqlのparser周りと親しむ
 - yet anotehr language server
 
+## go database/sql
+
+- NamedArgって何者？
+- NullBoolとか使う？
+
 ## emacs use-package python
 
 pythonの設定が正しい感じがしないかも？
