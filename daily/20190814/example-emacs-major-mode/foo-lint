@@ -1,0 +1,4 @@
+#!/bin/sh
+cat -n $1 | grep @ | sed "s@^ *\([0-9][0-9]*\)@$1:\1:@g" || exit 0
+# <filename>:<lineno>:<message>
+# 01ng.foo:2:	(define f@@ = 100) # ng

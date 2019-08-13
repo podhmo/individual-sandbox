@@ -1,0 +1,2 @@
+(define foo = 0)
+(define f = 1) # ng
