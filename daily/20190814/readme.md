@@ -10,24 +10,26 @@
 
 ## Emacsのlint
 
-- 簡単なminor-modeを作る
+- 簡単なmajor-modeを作る
 - このときのlintを用意してみる
 - @を含んだ行はエラーとかの仕様でコマンドを作ってみる
 
-### 追記
+### major-mode
+
+#### 追記
 
 - flycheckなどに渡せるのはmajor-modeだけだっけ?
 
 なんか忘れてしまった。どういう方法があったのだっけ? [./about-emacs-major-mode.md](about-emacs-major-mode.md)
 
-### 追記
+#### 追記
 
 とりあえずテキトウにmajor-modeを作ってみた
 
 - [./example-emacs-major-mode](./example-emacs-major-mode)
 - faceなどを調べる方法を忘れがち (describe-text-properties)
 
-### 追記
+#### 追記
 
 flycheckでのエラーを作ってみる？[flycheck-pyflakes.el](https://github.com/Wilfred/flycheck-pyflakes/blob/master/flycheck-pyflakes.el)でも参考にすれば良い？
 
@@ -58,7 +60,7 @@ x =
 
 flycheck-set-checker-executable という存在を知ってしまった。
 
-### 謎のエラー
+#### 謎のエラー
 
 何か126で終了しているっぽい？
 
@@ -107,11 +109,7 @@ Suspicious state from syntax checker foo-lint: Flycheck checker foo-lint returne
      `flycheck-def-executable-var' to define this variable.
 ```
 
-### 追記
-
-flymakeにもlistingが
-
-- flymake-show-diagnostics-buffer
+#### 追記
 
 新しくなったflymakeへの対応が無い気がする？
 
@@ -189,6 +187,35 @@ flymake-diagnostic-functions
 
 hmm 動かない。
 
+あー、ファイル名が表示されていなかった
+
+### 追記 minor-mode
+
+[../20160904/readme.md](../20160904/readme.md)
+
+```lisp
+(defvar  htodo-font-lock-keywords `((,(regexp-opt (list "todo" "ToDo" "Todo" "TODO")) . font-lock-warning-face)))
+
+(defun htodo-turn-on ()
+  (font-lock-add-keywords nil `(,@htodo-font-lock-keywords) t)
+  )
+
+(defun htodo-turn-off ()
+  (font-lock-remove-keywords nil `(,@htodo-font-lock-keywords))
+  )
+
+(define-minor-mode htodo-mode
+  "htodo-mode (minor version)" :lighter " htodo"
+  (progn
+    (if htodo-mode (htodo-turn-on) (htodo-turn-off))
+    (font-lock-mode 1)
+    )
+  )
+```
+
+- https://ayatakesi.github.io/emacs/24.5/elisp_html/Defining-Minor-Modes.html
+- https://ayatakesi.github.io/emacs/24.5/elisp_html/Keymaps-and-Minor-Modes.html#Keymaps-and-Minor-Modes
+
 ## emacs which-key
 
 - https://github.com/justbur/emacs-which-key
@@ -233,3 +260,13 @@ https://www.flycheck.org/en/latest/user/flycheck-versus-flymake.html
 ```
 
 flymake-after-change-functionsを止めたくなるかも。
+
+```lisp
+  (setq flymake-start-on-newline nil)
+  (setq flymake-no-changes-timeout nil)
+```
+
+
+flymakeにもlistingが
+
+- flymake-show-diagnostics-buffer
