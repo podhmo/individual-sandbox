@@ -8,6 +8,20 @@
 - Emacsのlint,completion (flymake, eglot)
 - flutterのwidget全体を眺める
 
+## emacs 色々なhook
+
+- after-save-hook
+- after-change-functions
+- window-configuration-change-hook
+- post-command-hook
+- kill-buffer-hook
+- change-major-mode-hook
+- before-revert-hook
+- focus-in-hook
+- focus-out-hook
+- post-command-hook
+- next-error-hook
+
 ## Emacsのlint
 
 - 簡単なmajor-modeを作る
@@ -189,6 +203,128 @@ hmm 動かない。
 
 あー、ファイル名が表示されていなかった
 
+### 追記 flymakeの実行のtriggerの設定
+
+以下の３つがある(4つ)
+
+- flymake-start-on-newline
+- flymake-start-on-save-buffer
+- flymake-start-on-flymake-mode
+- flymake-no-changes-timeout
+
+
+### 追記 謎のflymakeのデフォルトの設定
+
+flymake-proc-allowed-file-name-masks -> nilにしても良さそう。
+
+```
+flymake-proc-allowed-file-name-masks is a variable defined in ‘flymake-proc.el’.
+```
+
+例えば以下のような設定があるけれど。これobosletedな機能っぽい気がする。
+
+```
+ ("\\.xml\\'" flymake-proc-xml-init)
+ ("\\.html?\\'" flymake-proc-xml-init)
+
+ ("\\.java\\'" flymake-proc-simple-make-java-init flymake-proc-simple-java-cleanup)
+```
+
+そして flymake-proc.elに
+
+```
+;;;; xml-specific init-cleanup routines
+(defun flymake-proc-xml-init ()
+  (list flymake-proc-xml-program
+        (list "val" (flymake-proc-init-create-temp-buffer-copy
+                     'flymake-proc-create-temp-inplace))))
+
+(define-obsolete-variable-alias 'flymake-xml-program
+  'flymake-proc-xml-program "26.1")
+
+(defcustom flymake-proc-xml-program
+  (if (executable-find "xmlstarlet") "xmlstarlet" "xml")
+  "Program to use for XML validation."
+  :type 'file
+  :group 'flymake
+  :version "24.4")
+```
+
+#### 追記 flycheckの方も
+
+- logの表示どうやるんだろう？
+- それぞれのタイミングで呼ばれるものはどうなっているんだろう？
+
+flycheck-buffer-automatically の部分を見れば良いと言えばよいのだけれど。
+
+adviceとか付ければ良くない？
+
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html#Advising-Functions
+
+```lisp
+(defun my:flycheck-trace (&rest args)
+    (with-current-buffer (get-buffer-create "*FLYCHECK TRACE*")
+      (goto-char (point-max))
+      (let ((time (format-time-string "%Y-%m-%dT%H:%M:%S" (current-time))))
+        (insert (format "%s:	start flycheck	with	%s\n" time args))
+        )))
+
+(advice-add 'flycheck-buffer-automatically :before #'my:flycheck-trace)
+;; (advice-remove 'flycheck-buffer-automatically #'my:flycheck-trace)
+```
+
+こんな感じで調べられる
+
+実際には以下の部分の設定を変えれば良い。
+
+```lisp
+;; default (save idle-change new-line mode-enabled)
+(setq flycheck-check-syntax-automatically '(save mode-enabled idle-change))
+```
+
+概ね分かったんだけど。なぜか (newline force-deferred) が殺せないな。
+
+flycheck-handle-change経由っぽいな。これはafter-change-functionsに登録さているっぽい。
+
+flycheck-hooks-alistで。これそもそも重たくない？
+
+```lisp
+(defconst flycheck-hooks-alist
+  '(
+    ;; Handle events that may start automatic syntax checks
+    (after-save-hook        . flycheck-handle-save)
+    (after-change-functions . flycheck-handle-change)
+    ;; Handle events that may triggered pending deferred checks
+    (window-configuration-change-hook . flycheck-perform-deferred-syntax-check)
+    (post-command-hook                . flycheck-perform-deferred-syntax-check)
+    ;; Teardown Flycheck whenever the buffer state is about to get lost, to
+    ;; clean up temporary files and directories.
+    (kill-buffer-hook       . flycheck-teardown)
+    (change-major-mode-hook . flycheck-teardown)
+    (before-revert-hook     . flycheck-teardown)
+    ;; Update the error list if necessary
+    (post-command-hook . flycheck-error-list-update-source)
+    (post-command-hook . flycheck-error-list-highlight-errors)
+    ;; Display errors.  Show errors at point after commands (like movements) and
+    ;; when Emacs gets focus.  Cancel the display timer when Emacs looses focus
+    ;; (as there's no need to display errors if the user can't see them), and
+    ;; hide the error buffer (for large error messages) if necessary.  Note that
+    ;; the focus hooks only work on Emacs 24.4 and upwards, but since undefined
+    ;; hooks are perfectly ok we don't need a version guard here.  They'll just
+    ;; not work silently.
+    (post-command-hook . flycheck-display-error-at-point-soon)
+    (focus-in-hook     . flycheck-display-error-at-point-soon)
+    (focus-out-hook    . flycheck-cancel-error-display-error-at-point-timer)
+    (post-command-hook . flycheck-hide-error-buffer)
+    ;; Immediately show error popups when navigating to an error
+    (next-error-hook . flycheck-display-error-at-point))
+  "Hooks which Flycheck needs to hook in.
+
+The `car' of each pair is a hook variable, the `cdr' a function
+to be added or removed from the hook variable if Flycheck mode is
+enabled and disabled respectively.")
+```
+
 ### 追記 minor-mode
 
 [../20160904/readme.md](../20160904/readme.md)
@@ -270,3 +406,19 @@ flymake-after-change-functionsを止めたくなるかも。
 flymakeにもlistingが
 
 - flymake-show-diagnostics-buffer
+
+## emacs volatile-highlights
+
+undo/redoに付けるのはすごく便利
+
+本当はreplace-stringみたいなやつにも付けたい。これではダメそうだった。
+
+```lisp
+(vhl/define-extension 'replace-something 'replace-string 'replace-regexp)
+(vhl/install-extension 'replace-something)
+```
+
+## 追記
+
+- sweeperの候補の数が多すぎるかも
+- した２行位もみたい

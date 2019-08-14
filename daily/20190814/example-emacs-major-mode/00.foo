@@ -4,8 +4,8 @@
 (define z = x + y)
 
 (define x = 10 ; define y = 20)
-
 # see: M-x describe-text-properties
 #
 # (message "%s" (my:collect-faces-in-buffer))
-# => (font-lock-comment-delimiter-face font-lock-builtin-face font-lock-variable-name-face font-lock-keyword-face font-lock-comment-face)
+# => (font-lock-comment-delimiter-face font-lock-builtin-face font-lock-variable-name-face font-lock-keyword-face font-lock-comment-face)echo hello
+hello
