@@ -53,12 +53,67 @@ linterという言葉は適切ではないかも？正確に言うとvalidation�
 
 余計なことをしなそうなのとstableなのでpyyamlにしようかな。
 
-## 追記
+## 追記 行位置を覚えておくコードの整理
 
 やっていくか。とりあえず以前に行位置を覚えておくコードをキレイにしよう。闇雲にadaptしていた記憶。
 
 テキトーなテストデータも欲しいかも。。
 
-## 追記
+### 追記
 
 load時の処理自体も分解していたのか。結構調整しないとダメかも。
+あと、dict,listだけ位置が存在していれば十分？めんどくさいのは最終的にloadされた後のデータとの参照を持たないといけない点。そしてpythonのidをkeyに取得する処理は地味に怖いかも。
+
+### 追記
+
+とりあえず何も考えずに行の位置を覚える部分をきれいにしていこう。
+その前にどういう風に呼ばれているかを可視化しておこう。
+
+document,mapping,sequenceだけをwrapすれば良い気がする。
+
+```
+wrap  construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap      construct_object
+wrap   construct_mapping
+wrap      construct_object
+wrap      construct_object
+wrap   construct_sequence
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap   construct_mapping
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap         construct_scalar
+wrap      construct_object
+wrap   construct_mapping
+wrap construct_document
+```
+
+### 追記
+
+とりあえず必要なメソッドのwrapは判明した。特別な記述への対応を減らすだけでなくBaseLoader辺りを継承するようにしたほうが良いかもしれない？
+
+## 追記
+
+loaderをLoaderとして使えるようにインターフェイスを揃えるとかしたほうが良さそう。
+

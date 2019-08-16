@@ -1,10 +1,7 @@
 import subprocess
 import sys
-import logging
 from yaml.loader import Reader, Scanner, Parser, Composer, Constructor, Resolver
 from dictknife.langhelpers import reify
-
-logger = logging.getLogger(__name__)
 
 
 class Store:
@@ -19,7 +16,6 @@ class WrappedConstructor(Constructor):
         return Store()
 
     def wrap(self, path, name, node, r):
-        logger.debug("wrap %s", name)
         if r is None:
             return r
         self.store.node_cache[id(r)] = node
@@ -39,13 +35,6 @@ class WrappedConstructor(Constructor):
         self.store.path.pop()
         return r
 
-    # def construct_scalar(self, node):
-    #     self.store.path.append(node)
-    #     r = super().construct_scalar(node)
-    #     self.wrap(self.store.path, "construct_scalar", node, r)
-    #     self.store.path.pop()
-    #     return r
-
     def construct_sequence(self, node, deep=False):
         self.store.path.append(node)
         r = super().construct_sequence(node, deep=deep)
@@ -57,6 +46,55 @@ class WrappedConstructor(Constructor):
         self.store.path.append(node)
         r = super().construct_mapping(node, deep=deep)
         self.wrap(self.store.path, "construct_mapping", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_pairs(self, node, deep=False):
+        self.store.path.append(node)
+        r = super().construct_pairs(node, deep=deep)
+        self.wrap(self.store.path, "construct_pairs", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_omap(self, node):
+        self.store.path.append(node)
+        r = super().construct_yaml_omap(node)
+        self.wrap(self.store.path, "construct_yaml_omap", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_pairs(self, node):
+        self.store.path.append(node)
+        r = super().construct_yaml_pairs(node)
+        self.wrap(self.store.path, "construct_yaml_pairs", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_set(self, node):
+        self.store.path.append(node)
+        r = super().construct_yaml_set(node)
+        self.wrap(self.store.path, "construct_yaml_set", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_seq(self, node):
+        self.store.path.append(node)
+        r = super().construct_yaml_seq(node)
+        self.wrap(self.store.path, "construct_yaml_seq", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_map(self, node):
+        self.store.path.append(node)
+        r = super().construct_yaml_map(node)
+        self.wrap(self.store.path, "construct_yaml_map", node, r)
+        self.store.path.pop()
+        return r
+
+    def construct_yaml_object(self, node, cls):
+        self.store.path.append(node)
+        r = super().construct_yaml_object(node, cls)
+        self.wrap(self.store.path, "construct_yaml_object", node, r)
         self.store.path.pop()
         return r
 
@@ -78,7 +116,7 @@ class Loader(Reader, Scanner, Parser, Composer, WrappedConstructor, Resolver):
 # - compose
 
 
-def main():
+if __name__ == "__main__":
     filename = sys.argv[1]
     with open(filename) as rf:
         loader = Loader(rf)
@@ -104,8 +142,3 @@ def main():
             subprocess.run(["cat", "-n", sys.argv[1]])
         finally:
             loader.dispose()
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(message)s")
-    main()
