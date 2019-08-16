@@ -1,0 +1,12 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        contact_info:
+          $ref: './contact_info.yaml#/components/schemas/ContactInfo'
+

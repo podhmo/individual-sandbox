@@ -1,0 +1,10 @@
+components:
+  schemas:
+   ContactInfo:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string

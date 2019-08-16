@@ -11,14 +11,7 @@ logger = logging.getLogger(__name__)
 class Store:
     def __init__(self):
         self.node_cache = {}  # weak reference?
-        # need path ?
-
-    def add_node(self, name, node, r):
-        logger.debug("add_node %s", name)
-        if r is None:
-            return r
-        self.node_cache[id(r)] = node
-        return r
+        self.path = []
 
 
 class WrappedConstructor(SafeConstructor):
@@ -26,19 +19,32 @@ class WrappedConstructor(SafeConstructor):
     def store(self):
         return Store()
 
+    def wrap(self, path, name, node, r):
+        logger.debug("wrap %s", name)
+        if r is None:
+            return r
+        self.store.node_cache[id(r)] = node
+        return r
+
     def construct_object(self, node, deep=False):
+        self.store.path.append(node)
         r = super().construct_object(node, deep=deep)
-        self.store.add_node("construct_object", node, r)
+        self.wrap(self.store.path, "construct_object", node, r)
+        self.store.path.pop()
         return r
 
     def construct_sequence(self, node, deep=False):
+        self.store.path.append(node)
         r = super().construct_sequence(node, deep=deep)
-        self.store.add_node("construct_sequence", node, r)
+        self.wrap(self.store.path, "construct_sequence", node, r)
+        self.store.path.pop()
         return r
 
     def construct_mapping(self, node, deep=False):
+        self.store.path.append(node)
         r = super().construct_mapping(node, deep=deep)
-        self.store.add_node("construct_mapping", node, r)
+        self.wrap(self.store.path, "construct_mapping", node, r)
+        self.store.path.pop()
         return r
 
 

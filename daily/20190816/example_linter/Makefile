@@ -11,3 +11,9 @@ default:
 	python $@*.py person.json
 04:
 	python $@*.py person.json
+05:
+	python $@*.py person.json
+06:
+	python $@*.py person.json
+07:
+	python $@*.py user.yaml

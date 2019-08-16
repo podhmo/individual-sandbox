@@ -14,7 +14,7 @@ class Store:
         self.path = []
 
 
-class WrappedConstructor(Constructor):
+class WrappedConstructor(FullConstructor):
     @reify
     def store(self):
         return Store()
