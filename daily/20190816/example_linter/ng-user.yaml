@@ -7,5 +7,6 @@ components:
           type: integer
         name:
           type: string
-        contact_info:
-          $ref: './contact_info.yaml#/components/schemas/ContactInfo'
+        contact_info
+          $ref: './contact_info.yaml#/components/schemas/ContactInf'
+

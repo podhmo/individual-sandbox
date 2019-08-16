@@ -1,0 +1,4 @@
+components:
+  schemas:
+    User:
+      $ref: "./user.yaml#/components/schemas/User"

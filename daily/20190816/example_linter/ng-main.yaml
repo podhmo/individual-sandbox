@@ -1,0 +1,4 @@
+components:
+  schemas:
+    User:
+      $ref: "./ng-user.yaml#/components/schemas/User"

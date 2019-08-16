@@ -1,5 +1,5 @@
 default:
-	python parse.py person.json
+	python parse.py a0.yaml
 
 00:
 	python $@*.py person.json
@@ -16,4 +16,8 @@ default:
 06:
 	python $@*.py person.json
 07:
-	python $@*.py user.yaml
+	python $@*.py a0.yaml
+08:
+	python $@*.py a0.yaml
+09:
+	python $@*.py a0.yaml

@@ -1,0 +1,16 @@
+--- /tmp/before2	2019-08-17 02:07:58.961071756 +0900
++++ /tmp/after2	2019-08-17 02:09:09.074544235 +0900
+@@ -1,3 +1,4 @@
++docker-compose run --rm python python 03*.py 00ng.j2
+ python <module>
+ python run
+ python load
+@@ -8,7 +9,7 @@
+ python compile
+ python handle_exception
+ python reraise
+-jinja2 template
++python <module>
+ python _parse
+ python parse
+ python subparse

@@ -128,3 +128,116 @@ loaderをLoaderとして使えるようにインターフェイスを揃える�
 
 とりあえずコードをシンプルにした。実行時のpathが状態として欲しくなる気がするのだけれど一旦消した。
 今度は複数ファイルの読み込みの対応するのが良いかも(`$ref` のサポート)。
+
+## 追記
+
+一旦戻って複数ファイルに対応するだけのコードを書いてみる。
+それができたら存在するエラーを集める。
+
+- FileNotFoundError (ref)
+- KeyError (ref)
+- yaml.scanner.ScannerError (syntax)
+
+そういう意味ではpyyamlのエラーの内容を整理する必要もあるのか。
+
+### 追記 pyyamlのerror
+
+たぶんvalidation error以外は全部nodeが取れる？
+
+```
+yaml.scanner:ScannerError <- yaml.error:MarkedYAMLError <- yaml.error:YAMLError <- builtins:Exception <- builtins:BaseException <- builtins:object
+
+yaml.error:MarkedYAMLError <- yaml.error:YAMLError <- builtins:Exception <- builtins:BaseException <- builtins:object
+    [method, OVERRIDE] __init__(self, context=None, context_mark=None, problem=None, problem_mark=None, note=None)
+    [method, OVERRIDE] __str__(self)
+
+yaml.error:YAMLError <- builtins:Exception <- builtins:BaseException <- builtins:object
+```
+
+💭 本当は部分的に壊れても読み込みたいけれどsyntax errorてきなものはさすがに無理なような気がする。
+
+エラーの一覧
+
+```
+class YAMLError(Exception):
+
+class EmitterError(YAMLError):
+class MarkedYAMLError(YAMLError):
+class ReaderError(YAMLError):
+class RepresenterError(YAMLError):
+class ResolverError(YAMLError):
+class SerializerError(YAMLError):
+
+class ComposerError(MarkedYAMLError):
+class ConstructorError(MarkedYAMLError):
+class ParserError(MarkedYAMLError):
+class ScannerError(MarkedYAMLError):
+```
+
+まぁMarkedYAMLErrorを取り出せれば良いような気がする？
+
+## 追記
+
+MarkedYAMLErrorのcontext_markとproblem_markが欲しい感じ。
+
+```python
+class Mark:
+
+    def __init__(self, name, index, line, column, buffer, pointer):
+        self.name = name
+        self.index = index
+        self.line = line
+        self.column = column
+        self.buffer = buffer
+        self.pointer = pointer
+
+
+class MarkedYAMLError(YAMLError):
+
+    def __init__(self, context=None, context_mark=None,
+            problem=None, problem_mark=None, note=None):
+        self.context = context
+        self.context_mark = context_mark
+        self.problem = problem
+        self.problem_mark = problem_mark
+        self.note = note
+```
+
+### 追記
+
+contextとproblemではproblemを優先したいかもerror messageは。どちらも表示するのが正しいかも？
+
+```
+problem could not find expected ':'   in "user.yaml", line 20, column 15
+context while scanning a simple key   in "user.yaml", line 19, column 9
+```
+
+```
+----------------------------------------
+     1  components:
+     2    schemas:
+...
+    12      UserNG:
+    13        type: object
+    14        properties:
+    15          id:
+    16            type: integer
+    17          name:
+    18            type: string
+    19          contact_info
+    20            $ref: './contact_info.yaml#/components/schemas/ContactInf'
+```
+
+## 追記
+
+そう言えば、読み込んだ先のファイルでエラーになった部分のところはどういう表示が嬉しいんだろう？
+少なくとも、`$ref`行にエラーが出て欲しい。理想としてはツールチップで全てのstackが見えて欲しい。
+
+少なくともファイルの遷移のhistoryは欲しいかもしれない。
+
+jsonknifeのbundlerを使う必要な無くてもう少しかんたんなもので良いはず？
+expanderが必要そうだった。expanderのaccessorを見るのはめんどくさそうだな。。
+
+## 追記
+
+とりあえず繋げた。だるい。
