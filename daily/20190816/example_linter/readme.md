@@ -374,6 +374,7 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 
 - 各propertyのrefは必ず一回はscanする
 - データを引っ張って来る必要があるのはファイルが異なる場合だけ
+- 考えてみると、データを引っ張ってくる必要があるのはdeep checkのときだけ
 
 ## 追記
 

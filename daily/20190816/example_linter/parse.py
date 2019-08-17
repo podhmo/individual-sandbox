@@ -207,9 +207,9 @@ def main():
     scaner = Scaner(resolver, store=yaml_loader_factory.store)
     doc = scaner.scan()
     print("----------------------------------------")
-    from dictknife import loading
-    loading.dumpfile(doc)
-    # subprocess.run(["cat", "-n", filename])
+    subprocess.run(["cat", "-n", filename])
+    # from dictknife import loading
+    # loading.dumpfile(doc)
 
     if scaner.errors:
         print("?", len(scaner.errors))
