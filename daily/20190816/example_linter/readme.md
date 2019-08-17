@@ -363,3 +363,7 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 - status codeを良い感じに決める
 - validation errorの追加
 - 複数行エラーをtooltipで表示（ちょっとこのlinterから離れる)
+
+## 追記
+
+その前に今たぶん無限再帰して死ぬかも。
