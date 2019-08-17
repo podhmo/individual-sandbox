@@ -273,8 +273,26 @@ ResoutionError辺りでWrapすると良い？（少なくともpythonに限っ�
 
 ### 追記
 
-FileNotFoundErrorの場合も作る
+FileNotFoundErrorの場合も作る。
 
 ### 追記
 
-ReferenceErrorを作った
+厳密に言うと、以下がReferenceError ?
+
+- KeyError かつ keyが $ref の valueを参照
+- FileNotFoundError (これは絞らなくて良いでしょう)
+
+### 追記
+
+ReferenceErrorを追加した。
+ちょっとStoreに機能をもたせた。以下の様な表示になってうるさい。
+
+```
+FileNotFoundError("[Errno 2] No such file or directory: 'cwd/example_linter/right.yaml' (where=cwd/example_linter/right.yaml) (where=cwd/example_linter/ng-pair.yaml)")
+```
+
+よく考えたらWrappedErrorみたいなものを用意するべきかも。。
+
+https://github.com/podhmo/dictknife/issues/165
+
+

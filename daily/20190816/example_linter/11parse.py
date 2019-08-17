@@ -27,6 +27,9 @@ class Store:
         self.node_cache[id(r)] = node
         return r
 
+    def lookup_node(self, data):
+        return self.node_cache[id(data)]
+
 
 class WrappedConstructor(SafeConstructor):
     @reify
@@ -71,6 +74,25 @@ class LoaderFactory:
         return loader
 
 
+class ReferenceError(Exception):
+    def __init__(self, inner: Exception, *, path: list, data: dict) -> None:
+        self.inner = inner
+        self.path = path
+        self.data = data
+        super().__init__(repr(inner))
+
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.inner}"
+
+    def lookup_node(self, store):  # todo: rename
+        return store.lookup_node(self.data)
+
+    def lookup_kvpair(self, node):  # todo: rename
+        for knode, vnode in node.value:
+            if knode.value == self.path[-1]:
+                return knode, vnode
+
+
 class Expander:
     def __init__(self, resolver):
         self.resolver = resolver
@@ -98,7 +120,7 @@ class Expander:
                         container.update(new_sd)
                     self.accessing.assign(doc, path[:-1], container)
                 except Exception as e:
-                    self.errors.append((path[:], e, sd))
+                    self.errors.append(ReferenceError(e, path=path[:], data=sd))
             return doc
 
 
@@ -135,26 +157,23 @@ def main():
         print(padding, "context", e.context, "@", e.context_mark)
         print("")
 
-    node_cache = yaml_loader_factory.store.node_cache
+    store = yaml_loader_factory.store
     if expander.errors:
-        path, e, sd = expander.errors[0]
+        print("?", len(expander.errors))
+        for err in expander.errors:  # type: ReferenceError
+            map_node = err.lookup_node(store)
+            knode, vnode = err.lookup_kvpair(map_node)
+            print(
+                "!!",
+                knode.start_mark,
+                knode.end_mark,
+                "x",
+                vnode.start_mark,
+                vnode.end_mark,
+            )
 
-        for knode, vnode in node_cache[id(sd)].value:
-            print("!", knode.value, path[-1])
-            if knode.value == path[-1]:
-                print(
-                    "!!",
-                    knode.start_mark,
-                    knode.end_mark,
-                    "x",
-                    vnode.start_mark,
-                    vnode.end_mark,
-                )
     print("----------------------------------------")
     subprocess.run(["cat", "-n", filename])
-
-    # print("@", node.start_mark)
-    # print("@", node.end_mark)
 
 
 if __name__ == "__main__":
