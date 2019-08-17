@@ -378,6 +378,10 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 
 ## 追記
 
+ちょっと名前を整理した。ResolverやScannerなども名前が被って1ファイルがだいぶツライ。
+
+## 追記
+
 もう少しエラーの内容を整理しよう。
 
 - syntax error (target file) -> ERROR

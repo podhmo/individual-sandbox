@@ -3,7 +3,7 @@ import os.path
 import subprocess
 import logging
 import yaml
-from yaml.error import MarkedYAMLError, Mark
+from yaml.error import MarkedYAMLError
 from yaml.loader import Reader, Scanner, Parser, Composer, SafeConstructor, Resolver
 from collections import ChainMap
 from dictknife import DictWalker, Accessor
@@ -84,12 +84,10 @@ class LintError(Exception):
 
 
 class ParseError(LintError):
-    # usually, inner is MarkedYAMLError
     pass
 
 
 class ResolutionError(LintError):
-    # usually, inner is KeyError or FileNotFoundError
     pass
 
 
@@ -110,7 +108,6 @@ class DataScanner:  # todo: rename
         except MarkedYAMLError as e:
             if e.problem_mark is not None:
                 self.errors.append(ParseError(e))
-            e.stack = [resolver.filename]  # xxx
             if doc is None:
                 doc = {}
         doc, _ = self._scan(doc, resolver=resolver, seen={})
@@ -138,16 +135,9 @@ class DataScanner:  # todo: rename
                             container = ChainMap(make_dict(), container)
                             container.update(new_sd)
                         self.accessing.assign(doc, path[:-1], container)
-                except FileNotFoundError as e:
-                    stack = self.accessor.stack[:]
-                    stack.pop()
-                    e.stack = list(reversed([r.filename for r in stack]))
-                    self.errors.append(ResolutionError(e, path=path[:], data=sd))
-                except KeyError as e:
-                    e.stack = list(reversed([r.filename for r in self.accessor.stack]))
+                except (KeyError, FileNotFoundError) as e:
                     self.errors.append(ResolutionError(e, path=path[:], data=sd))
                 except MarkedYAMLError as e:
-                    e.stack = list(reversed([r.filename for r in self.accessor.stack]))
                     if e.problem_mark is not None:
                         self.errors.append(ParseError(e, path=path[:], data=sd))
             return doc, resolver
@@ -162,36 +152,37 @@ class _Adapter:
             return yaml.load(rf, Loader=self.yamlloader_factory)
 
 
-class Detector:
-    def __init__(self, filename: str, *, store: NodeStore):
-        self.filename = filename  # root file
+class Describer:
+    def __init__(self, store: NodeStore):
         self.store = store
 
-    def has_error_point(self, err: LintError):
-        return getattr(err, "problem_mark", None) is not None
-
-    def detect_status(self, filename):
-        if self.filename == filename:
-            return "ERROR"
+    def describe(self, err: LintError) -> str:
+        if err.data is not None:
+            return self.describe_by_node(err)
         else:
-            return "WARNING"
+            return self.describe_by_inner(err)  # original
 
-    def detect_scanning_start_point(self, err: LintError) -> (Mark, Mark):
-        if err.data is None:
-            return self.detect_error_point(err)
+    def describe_by_inner(self, err: LintError) -> str:
+        status = "Error"  # xxx
+        if hasattr(err.inner, "problem"):
+            msg = f"{err.inner.problem} ({err.inner.context})"
+        else:
+            msg = repr(err.inner)
+        mark = err.inner.problem_mark
+        filename = os.path.relpath(mark.name, start=".")
+        return f"status:{status}	cls:{err.__class__.__name__}	filename:{filename}	start:{mark.line}@0	end:{mark.line}@-1	msg:{msg}	where:{tuple(os.path.relpath(name) for name in reversed(err.inner.stack))}"
+
+    def describe_by_node(self, err: LintError) -> str:
         map_node = self.store.lookup_node(err.data)
         knode, vnode = self.lookup_kvpair(map_node, err.path[-1])
-        return knode.start_mark, vnode.end_mark
 
-    def detect_error_point(self, err: LintError) -> Mark:
-        mark = getattr(err.inner, "context_mark")
-        import copy
-
-        start_mark = copy.deepcopy(mark)
-        start_mark.column = 0
-        end_mark = copy.deepcopy(mark)
-        end_mark.column = -1
-        return (start_mark, end_mark)
+        status = "Error"  # xxx
+        filename = os.path.relpath(knode.start_mark.name, start=".")
+        if hasattr(err.inner, "problem"):
+            msg = f"{err.inner.problem} ({err.inner.context})"
+        else:
+            msg = repr(err.inner)
+        return f"status:{status}	cls:{err.__class__.__name__}	filename:{filename}	start:{knode.start_mark.line+1}@{vnode.start_mark.column}	end:{vnode.end_mark.line+1}@{vnode.end_mark.column}	msg:{msg}	where:{tuple(os.path.relpath(name) for name in reversed(err.inner.stack))}"
 
     def lookup_kvpair(self, node, k):  # todo: rename
         for knode, vnode in node.value:
@@ -199,53 +190,8 @@ class Detector:
                 return knode, vnode
 
 
-class Describer:
-    def __init__(self, filename: str, *, store: NodeStore):
-        self.filename = filename
-        self.store = store
-        self.detector = Detector(filename, store=store)
-
-    def describe(self, err: LintError) -> str:
-        if isinstance(err, ParseError):
-            return self.describe_parse_error(err)
-        elif isinstance(err, ResolutionError):
-            return self.describe_resolution_error(err)
-        else:
-            raise err
-
-    def describe_parse_error(self, err: ParseError) -> str:
-        status = self.detector.detect_status(err.inner.stack[0])
-        if hasattr(err.inner, "problem"):
-            msg = f"{err.inner.problem} ({err.inner.context})"
-        else:
-            msg = repr(err.inner)
-
-        start_mark, end_mark = self.detector.detect_scanning_start_point(err)
-        filename = os.path.relpath(start_mark.name, start=".")
-
-        where = [os.path.relpath(name) for name in reversed(err.inner.stack)]
-        where[0] = f"{where[0]}:{start_mark.line+1}"
-        if self.detector.has_error_point(err):
-            where[-1] = f"{where[-1]}:{err.inner.problem_mark.line+1}"
-
-        return f"status:{status}	cls:{err.__class__.__name__}	filename:{filename}	start:{start_mark.line+1}@{start_mark.column}	end:{end_mark.line+1}@{end_mark.column}	msg:{msg}	where:{where}"
-
-    def describe_resolution_error(self, err: ResolutionError) -> str:
-        start_mark, end_mark = self.detector.detect_scanning_start_point(err)
-        filename = os.path.relpath(start_mark.name, start=".")
-        status = self.detector.detect_status(err.inner.stack[0])
-        msg = repr(err.inner)
-
-        where = [os.path.relpath(name) for name in reversed(err.inner.stack)]
-        where[0] = f"{where[0]}:{start_mark.line+1}"
-        if self.detector.has_error_point(err):
-            where[-1] = f"{where[-1]}:{err.inner.problem_mark.line+1}"
-        return f"status:{status}	cls:{err.__class__.__name__}	filename:{filename}	start:{start_mark.line+1}@{start_mark.column}	end:{end_mark.line+1}@{end_mark.column}	msg:{msg}	where:{where}"
-
-
 def main():
     filename = sys.argv[1]
-    filename = os.path.abspath(filename)
     yaml_loader_factory = YAMLLoaderFactory(YAMLLoader)
 
     resolver = get_resolver(filename, loader=_Adapter(yaml_loader_factory))
@@ -257,7 +203,7 @@ def main():
     # loading.dumpfile(doc)
 
     if scanner.errors:
-        describer = Describer(filename, store=yaml_loader_factory.store)
+        describer = Describer(yaml_loader_factory.store)
         print("?", len(scanner.errors))
         for err in scanner.errors:
             print(describer.describe(err))

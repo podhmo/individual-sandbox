@@ -36,3 +36,12 @@ default:
 	python $@*.py ng-user.yaml
 	python $@*.py a1.yaml
 	python $@*.py ng-pair.yaml
+14:
+	python $@*.py ng-main.yaml
+15:
+	python $@*.py rec.yaml
+	python $@*.py ng-main.yaml
+	python $@*.py ng-user.yaml
+	python $@*.py a1.yaml
+	python $@*.py ng-pair.yaml
+
