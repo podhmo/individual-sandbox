@@ -1,0 +1,9 @@
+components:
+  schemas:
+    Pair:
+      type: object
+      properties:
+        left:
+          $ref: "#/components/schemas/Left" # key error
+        right:
+          $ref: "right.yaml#/components/schemas/Right" # file not found error

@@ -137,19 +137,19 @@ def main():
 
     node_cache = yaml_loader_factory.store.node_cache
     if expander.errors:
-        path, e, sd = expander.errors[0]
-
-        for knode, vnode in node_cache[id(sd)].value:
-            print("!", knode.value, path[-1])
-            if knode.value == path[-1]:
-                print(
-                    "!!",
-                    knode.start_mark,
-                    knode.end_mark,
-                    "x",
-                    vnode.start_mark,
-                    vnode.end_mark,
-                )
+        print("?", len(expander.errors))
+        for path, e, sd in expander.errors:
+            for knode, vnode in node_cache[id(sd)].value:
+                print("!", repr(e), knode.value, path[-1])
+                if knode.value == path[-1]:
+                    print(
+                        "!!",
+                        knode.start_mark,
+                        knode.end_mark,
+                        "x",
+                        vnode.start_mark,
+                        vnode.end_mark,
+                    )
     print("----------------------------------------")
     subprocess.run(["cat", "-n", filename])
 

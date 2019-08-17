@@ -241,3 +241,40 @@ expanderが必要そうだった。expanderのaccessorを見るのはめんど�
 ## 追記
 
 とりあえず繋げた。だるい。
+
+## 追記
+
+あとやらなくちゃいけない事は何だろう？
+
+- 複数のエラーに対応
+- lintでの表示に対応
+- jsonschemaでのvalidationに対応
+- shallow/deep validation
+- remoteからresourceを取ってきたりupdateしたり
+- pair部分の行位置を取得
+- error対応
+
+  - MarkedYAMLError
+
+    - たぶんこのエラーはParserErrorなので処理が継続できない
+  - KeyError
+
+    - (NodeからMarkにする？)
+    - valueに情報を持っていた(KeyError -> Value -> MapingNode -> ScalarNode)
+
+  - validation error
+
+### 追記
+
+↑でのkeyErrorはReferenceErrorというとことかも。あとFileNotFoundErrorの場合がありそう。
+
+ReferenceErrorに関してはfailfast的なオプションを持っていてその値ですぐraiseするかを決める。
+ResoutionError辺りでWrapすると良い？（少なくともpythonに限って言うなら例外の体で集めるのが良い？）
+
+### 追記
+
+FileNotFoundErrorの場合も作る
+
+### 追記
+
+ReferenceErrorを作った
