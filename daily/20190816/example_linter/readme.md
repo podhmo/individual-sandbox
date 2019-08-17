@@ -389,3 +389,13 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 - syntax error (referenced file) -> WARNING
 - reference error (referenced file) -> WARNING
 - (validation)
+
+### 追記
+
+- ↑のエラーの発生箇所によってWARNINGとERRORを出し分ける処理追加した
+- (stackの部分の扱いが地味に微妙かもしれない)
+- Describerというオブジェクトを追加した（まだキレイではない)
+
+## 追記
+
+- 💭 失敗時に全ての遷移先の表示を見たいなー。

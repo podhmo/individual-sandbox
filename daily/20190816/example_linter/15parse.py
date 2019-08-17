@@ -73,9 +73,12 @@ class YAMLLoaderFactory:
 
 
 class LintError(Exception):
-    def __init__(self, inner: str, *, path: list = None, data: dict = None):
+    def __init__(
+        self, inner: str, *, history: list, path: list = None, data: dict = None
+    ):
         super().__init__(repr(inner))
         self.inner = inner
+        self.history = history
         self.path = path
         self.data = data
 
@@ -109,8 +112,7 @@ class DataScanner:  # todo: rename
             doc = doc or resolver.doc
         except MarkedYAMLError as e:
             if e.problem_mark is not None:
-                self.errors.append(ParseError(e))
-            e.stack = [resolver.filename]  # xxx
+                self.errors.append(ParseError(e, history=[resolver.filename]))
             if doc is None:
                 doc = {}
         doc, _ = self._scan(doc, resolver=resolver, seen={})
@@ -139,17 +141,33 @@ class DataScanner:  # todo: rename
                             container.update(new_sd)
                         self.accessing.assign(doc, path[:-1], container)
                 except FileNotFoundError as e:
-                    stack = self.accessor.stack[:]
-                    stack.pop()
-                    e.stack = list(reversed([r.filename for r in stack]))
-                    self.errors.append(ResolutionError(e, path=path[:], data=sd))
+                    self.errors.append(
+                        ResolutionError(
+                            e,
+                            path=path[:],
+                            data=sd,
+                            history=[r.filename for r in self.accessor.stack[:-1]],
+                        )
+                    )
                 except KeyError as e:
-                    e.stack = list(reversed([r.filename for r in self.accessor.stack]))
-                    self.errors.append(ResolutionError(e, path=path[:], data=sd))
+                    self.errors.append(
+                        ResolutionError(
+                            e,
+                            path=path[:],
+                            data=sd,
+                            history=[r.filename for r in self.accessor.stack],
+                        )
+                    )
                 except MarkedYAMLError as e:
-                    e.stack = list(reversed([r.filename for r in self.accessor.stack]))
                     if e.problem_mark is not None:
-                        self.errors.append(ParseError(e, path=path[:], data=sd))
+                        self.errors.append(
+                            ParseError(
+                                e,
+                                path=path[:],
+                                data=sd,
+                                history=[r.filename for r in self.accessor.stack],
+                            )
+                        )
             return doc, resolver
 
 
@@ -214,7 +232,7 @@ class Describer:
             raise err
 
     def describe_parse_error(self, err: ParseError) -> str:
-        status = self.detector.detect_status(err.inner.stack[0])
+        status = self.detector.detect_status(err.history[-1])
         if hasattr(err.inner, "problem"):
             msg = f"{err.inner.problem} ({err.inner.context})"
         else:
@@ -223,7 +241,7 @@ class Describer:
         start_mark, end_mark = self.detector.detect_scanning_start_point(err)
         filename = os.path.relpath(start_mark.name, start=".")
 
-        where = [os.path.relpath(name) for name in reversed(err.inner.stack)]
+        where = [os.path.relpath(name) for name in err.history]
         where[0] = f"{where[0]}:{start_mark.line+1}"
         if self.detector.has_error_point(err):
             where[-1] = f"{where[-1]}:{err.inner.problem_mark.line+1}"
@@ -233,10 +251,10 @@ class Describer:
     def describe_resolution_error(self, err: ResolutionError) -> str:
         start_mark, end_mark = self.detector.detect_scanning_start_point(err)
         filename = os.path.relpath(start_mark.name, start=".")
-        status = self.detector.detect_status(err.inner.stack[0])
+        status = self.detector.detect_status(err.history[-1])
         msg = repr(err.inner)
 
-        where = [os.path.relpath(name) for name in reversed(err.inner.stack)]
+        where = [os.path.relpath(name) for name in err.history]
         where[0] = f"{where[0]}:{start_mark.line+1}"
         if self.detector.has_error_point(err):
             where[-1] = f"{where[-1]}:{err.inner.problem_mark.line+1}"

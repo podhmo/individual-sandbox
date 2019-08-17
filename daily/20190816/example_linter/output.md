@@ -48,21 +48,11 @@ after (ng)
 
 ```console
 $ python parse.py a0.yaml
-   a0.yaml
-     a1.yaml
-       a2.yaml
-         a3.yaml
-           problem mapping values are not allowed here @   in "a3.yaml", line 7, column 15
-           context None @ None
-
 ----------------------------------------
-     1	components:
-     2	  schemas:
-     3	    a:
-     4	      type: object
-     5	      properties:
-     6	        name
-     7	          type: string
-@   in "a0.yaml", line 4, column 7
-@   in "a0.yaml", line 5, column 1
+     1  components:
+     2    schemas:
+     3      a:
+     4        $ref: "a1.yaml#/components/schemas/a"
+? 1
+status:WARNING  cls:ParseError  filename:a0.yaml        start:4@6       end:4@43     msg:mapping values are not allowed here (None)   where:['a0.yaml:4', 'a1.yaml', 'a2.yaml', 'a3.yaml']
 ```
