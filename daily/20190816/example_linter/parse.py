@@ -8,7 +8,7 @@ from yaml.loader import Reader, Scanner, Parser, Composer, SafeConstructor, Reso
 from collections import ChainMap
 from dictknife import DictWalker, Accessor
 from dictknife.jsonknife import get_resolver
-from dictknife.jsonknife.accessor import StackedAccessor
+from dictknife.jsonknife.accessor import StackedAccessor, path_to_json_pointer, is_ref
 from dictknife.langhelpers import make_dict, reify
 
 logger = logging.getLogger(__name__)
@@ -139,10 +139,12 @@ class Scaner:
 
         self.accessor = StackedAccessor(resolver)
         self.accessing = Accessor()
-        self.ref_walking = DictWalker(["$ref"])
+        self.ref_walking = DictWalker([is_ref])
         self.errors = []
 
-    def scan(self, doc=None, resolver=None, ctx=None):
+    def scan(self, doc=None, resolver=None):
+        if not doc and doc is not None:
+            return doc
         resolver = resolver or self.resolver
         try:
             doc = doc or resolver.doc
@@ -151,21 +153,31 @@ class Scaner:
                 self.errors.append(ParseError(e, store=self.store))
             if doc is None:
                 doc = {}
+        doc, _ = self._scan(doc, resolver=resolver, seen={})
+        return doc
 
+    def _scan(self, doc, *, resolver, seen: dict):
         if "$ref" in doc:
             original = self.accessor.access(doc["$ref"])
-            new_doc = self.scan(original, resolver=self.accessor.resolver, ctx=ctx)
-            self.accessor.pop_stack()
-            return new_doc
+            new_doc, _ = self._scan(
+                original, resolver=self.accessor.resolver, seen=seen
+            )
+            return new_doc, self.accessor.pop_stack()
         else:
             for path, sd in self.ref_walking.iterate(doc):
                 try:
-                    new_sd = self.scan(sd, resolver=resolver, ctx=ctx)
-                    container = self.accessing.access(doc, path[:-1])
-                    if not hasattr(container, "parents"):
-                        container = ChainMap(make_dict(), container)
-                        container.update(new_sd)
-                    self.accessing.assign(doc, path[:-1], container)
+                    uid = id(sd)
+                    if uid in seen:
+                        continue
+
+                    seen[uid] = sd
+                    new_sd, sresolver = self._scan(sd, resolver=resolver, seen=seen)
+                    if resolver.filename != sresolver.filename:
+                        container = self.accessing.access(doc, path[:-1])
+                        if not hasattr(container, "parents"):
+                            container = ChainMap(make_dict(), container)
+                            container.update(new_sd)
+                        self.accessing.assign(doc, path[:-1], container)
                 except (KeyError, FileNotFoundError) as e:
                     self.errors.append(
                         ReferenceError(e, store=self.store, path=path[:], data=sd)
@@ -175,7 +187,7 @@ class Scaner:
                         self.errors.append(
                             ParseError(e, store=self.store, path=path[:], data=sd)
                         )
-            return doc
+            return doc, resolver
 
 
 class _Adapter:
@@ -194,17 +206,15 @@ def main():
     resolver = get_resolver(filename, loader=_Adapter(yaml_loader_factory))
     scaner = Scaner(resolver, store=yaml_loader_factory.store)
     doc = scaner.scan()
-    # loading.dumpfile(doc)  # with $ref
+    print("----------------------------------------")
+    from dictknife import loading
+    loading.dumpfile(doc)
+    # subprocess.run(["cat", "-n", filename])
 
     if scaner.errors:
-        # status := ERROR | WARNING | NOTE
-        # <status>, <filename>, <start>, <end>, <msg>
         print("?", len(scaner.errors))
         for err in scaner.errors:  # type: ReferenceError
             print(err.describe())
-
-    print("----------------------------------------")
-    subprocess.run(["cat", "-n", filename])
 
 
 if __name__ == "__main__":

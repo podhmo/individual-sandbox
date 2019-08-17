@@ -367,3 +367,20 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 ## 追記
 
 その前に今たぶん無限再帰して死ぬかも。
+
+### 追記
+
+無限再帰直した。
+
+- 各propertyのrefは必ず一回はscanする
+- データを引っ張って来る必要があるのはファイルが異なる場合だけ
+
+## 追記
+
+もう少しエラーの内容を整理しよう。
+
+- syntax error (target file) -> ERROR
+- reference error (target file) -> ERROR
+- syntax error (referenced file) -> WARNING
+- reference error (referenced file) -> WARNING
+- (validation)
