@@ -295,4 +295,71 @@ FileNotFoundError("[Errno 2] No such file or directory: 'cwd/example_linter/righ
 
 https://github.com/podhmo/dictknife/issues/165
 
+## 追記
 
+次はlint表示をどうにかしよう。
+💭 テキトーにLTSVあたりで出力することを考えようかな。
+
+## 追記
+
+とりあえずそれっぽい感じで表示するようにしてみた。
+
+
+```console
+$ python parse.py ng-main.yaml
+status:Error    cls:ParseError  filename:ng-main.yaml   start:4@12      end:4@53     msg:could not find expected ':' (while scanning a simple key)    where:('ng-main.yaml', 'ng-user.yaml')
+----------------------------------------
+     1  components:
+     2    schemas:
+     3      User:
+     4        $ref: "./ng-user.yaml#/components/schemas/User"
+```
+
+```console
+$ python parse.py a1.yaml
+status:Error    cls:ReferenceError      filename:a1.yaml        start:6@12      end:6@43      msg:ExFileNotFoundError(2, 'No such file or directory') where:('a2.yaml', 'b.yaml')
+----------------------------------------
+     1  components:
+     2    schemas:
+     3      a:
+     4        $ref: "a2.yaml#/components/schemas/a"
+     5      b:
+     6        $ref: "a2.yaml#/components/schemas/b"
+```
+
+```console
+$ python parse.py a2.yaml
+status:Error    cls:ReferenceError      filename:a2.yaml        start:6@12      end:6@42      msg:ExFileNotFoundError(2, 'No such file or directory') where:('a2.yaml', 'b.yaml')
+----------------------------------------
+     1  components:
+     2    schemas:
+     3      a:
+     4        $ref: "a3.yaml#/components/schemas/a"
+     5      b:
+     6        $ref: "b.yaml#/components/schemas/b"
+```
+
+```console
+$ python parse.py ng-pair.yaml
+status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:7@16      end:7@43      msg:ExKeyError('/components/schemas/Left')      where:('ng-pair.yaml',)
+status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      end:9@54      msg:ExFileNotFoundError(2, 'No such file or directory') where:('ng-pair.yaml', 'right.yaml')
+----------------------------------------
+     1  components:
+     2    schemas:
+     3      Pair:
+     4        type: object
+     5        properties:
+     6          left:
+     7            $ref: "#/components/schemas/Left" # key error
+     8          right:
+     9            $ref: "right.yaml#/components/schemas/Right" # file not found error
+```
+
+## 追記
+
+次どの辺りをしようかな
+
+- コードをキレイに
+- status codeを良い感じに決める
+- validation errorの追加
+- 複数行エラーをtooltipで表示（ちょっとこのlinterから離れる)

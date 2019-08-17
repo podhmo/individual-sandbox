@@ -25,3 +25,8 @@ default:
 	python $@*.py ng-pair.yaml
 11:
 	python $@*.py ng-pair.yaml
+12:
+#	python $@*.py ng-main.yaml
+#	python $@*.py ng-user.yaml
+#	python $@*.py a1.yaml
+	python $@*.py ng-pair.yaml

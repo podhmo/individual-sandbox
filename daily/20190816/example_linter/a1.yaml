@@ -2,3 +2,5 @@ components:
   schemas:
     a:
       $ref: "a2.yaml#/components/schemas/a"
+    b:
+      $ref: "a2.yaml#/components/schemas/b"
