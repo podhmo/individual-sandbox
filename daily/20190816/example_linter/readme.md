@@ -399,3 +399,59 @@ status:Error    cls:ReferenceError      filename:ng-pair.yaml   start:9@16      
 ## 追記
 
 - 💭 失敗時に全ての遷移先の表示を見たいなー。
+
+## 追記 jsonschema
+
+そもそもエラーの意味がわからないのだよなー。
+
+```
+{'cause': None,
+ 'context': [],
+ 'instance': 'invalid',
+ 'message': "'invalid' is not of type 'number'",
+ 'parent': None,
+ 'path': deque(['price']),
+ 'relative_path': deque(['price']),
+ 'relative_schema_path': deque(['properties', 'price', 'type']),
+ 'schema': {'type': 'number'},
+ 'schema_path': deque(['properties', 'price', 'type']),
+ 'validator': 'type',
+ 'validator_value': 'number'}
+```
+
+https://python-jsonschema.readthedocs.io/en/stable/errors/
+
+relative_pathとpathの違い。同じだった。。
+
+> path
+>    Same as relative_path.
+
+💭 とりあえず、pathとmessageだけあれば良いかな。。
+
+
+```
+Traceback (most recent call last):
+  File "16schema-validation.py", line 13, in <module>
+    jsonschema.validate(instance=instance, schema=schema)
+  File "VENV/lib/python3.7/site-packages/jsonschema/validators.py", line 899, in validate
+    raise error
+jsonschema.exceptions.ValidationError: 'invalid' is not of type 'number'
+
+Failed validating 'type' in schema['properties']['price']:
+    {'type': 'number'}
+
+On instance['price']:
+    'invalid'
+```
+
+### 追記
+
+意外と良い感じに動いていそう。
+
+- https://gist.github.com/podhmo/903ebb5c2a1f2e36b4eb7b5b6b50eccb
+
+あとはどうやってschemaを選択するかかな。
+
+## 追記
+
+⚠ fullのschemaを指定した場合にはmain.yaml(main.json)しかlintの対象にできないかも。これはふつうに避けたいかも。

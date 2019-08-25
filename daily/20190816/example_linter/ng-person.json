@@ -2,11 +2,10 @@
   "name": "foo",
   "age": 20,
   "father": {
-    "name": "A",
     "age": 40
   },
   "mother": {
     "name": "B",
-    "age": 40
+    "age": "invalid"
   }
 }

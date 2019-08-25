@@ -44,4 +44,8 @@ default:
 	python $@*.py ng-user.yaml
 	python $@*.py a1.yaml
 	python $@*.py ng-pair.yaml
-
+16:
+	python $@*.py
+17:
+	python $@*.py person.json person-schema.yaml
+	python $@*.py ng-person.json person-schema.yaml
