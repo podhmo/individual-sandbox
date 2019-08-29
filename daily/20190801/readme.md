@@ -180,3 +180,45 @@ https://github.com/podhmo/handy
 - argsを直接取る
 - WithErrorでは？
 
+## vscode
+
+```
+$ brew cask install visual-studio-code
+```
+
+- https://qiita.com/sensuikan1973/items/74cf5383c02dbcd82234
+
+  - https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2
+  - https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons
+  - https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight
+  - https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete
+  - https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces
+
+- vscode-go
+
+  - go-importsにするのどうするんだろう？
+  - https://github.com/golang/go/wiki/gopls#vscode
+
+- emacsのkeybindで
+
+  - https://ganaware.hatenadiary.jp/entry/2019/01/02/235708
+  - https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx
+
+### 操作
+
+- Ctrl + shift + p
+- option + x -- show all commands
+
+### commands
+
+- open settings (JSON) -- settings.json
+- toggle autoSave -- ?
+
+### hmm
+
+- go-outline ってなに？
+
+###
+
+- https://code.visualstudio.com/docs?start=true
+- https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference
