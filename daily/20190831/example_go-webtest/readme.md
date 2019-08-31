@@ -62,3 +62,41 @@ go-chiでquery parameterを取る方法はどうやるんだっけ？という�
   - chiはrouterライブラリなので範囲外
   - req.Bodyをparse
   - (まじめにやるならmethodをしらべて,content-typeを調べて)
+
+## 追記
+
+ようやくechoのhandlerをwebtestで使えそう。
+とりあえずrecorderを使う方からと思ったけれど。HandlerFuncを期待していて微妙かも？
+
+## 追記
+
+clientのなまえを変えたい
+
+## 追記
+
+通信をtraceしたい。
+httptestのrequestを透過的に使いたい
+環境変数でtraceを調整したい。
+
+### 以下の操作ができて欲しい
+
+- header付加
+- JSONをpost
+
+### だるいこと
+
+- teardownがだるい
+- componentsの切り替えはどうすれば良いんだろう？
+- やっぱりDoはだるいのでは？
+- contextにwrapする方法が無い
+- querystringを手軽に追加できない？
+- MustDo()とか使いたくない
+
+## やりたいこと
+
+- trace的な何か
+- testの比較対象をコード側に書きたい(?)
+- table driven test
+- exというパッケージ名前は止めたい
+- ex.SnapshotTest()という名前は止めたい
+- noerror(?) jsonequalの表示を良い感じに

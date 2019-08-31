@@ -4,7 +4,9 @@ go 1.12
 
 require (
 	github.com/99designs/gqlgen v0.9.2 // indirect
+	github.com/Cside/jsondiff v0.0.0-20180209072652-0e50d980b458 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/google/wire v0.3.0 // indirect
@@ -18,8 +20,8 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/podhmo/ctxlog v0.2.0
 	github.com/podhmo/ctxlog/zapctxlog v0.1.0
-	github.com/podhmo/go-rfc3339 v0.0.0-20190727145742-e821cd8c86bb
-	github.com/podhmo/go-webtest v0.0.0-20190804120102-e25117dce95b // indirect
+	github.com/podhmo/go-rfc3339 v0.1.0
+	github.com/podhmo/go-webtest v0.0.0-20190831043821-5775aef05002 // indirect
 	github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d
 	github.com/podhmo/noerror v0.2.0
 	github.com/ztrue/tracerr v0.3.0 // indirect
