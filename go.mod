@@ -21,7 +21,7 @@ require (
 	github.com/podhmo/ctxlog v0.2.0
 	github.com/podhmo/ctxlog/zapctxlog v0.1.0
 	github.com/podhmo/go-rfc3339 v0.1.0
-	github.com/podhmo/go-webtest v0.0.0-20190831043821-5775aef05002 // indirect
+	github.com/podhmo/go-webtest v0.0.0-20190831074216-de8d41440e07 // indirect
 	github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d
 	github.com/podhmo/noerror v0.2.0
 	github.com/ztrue/tracerr v0.3.0 // indirect

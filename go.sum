@@ -81,6 +81,9 @@ github.com/podhmo/go-webtest v0.0.0-20190804120102-e25117dce95b h1:hzTlRcGu2pDpe
 github.com/podhmo/go-webtest v0.0.0-20190804120102-e25117dce95b/go.mod h1:X3lq5l8LlenWPi54U8fu/vx1gFwPgF3+3fAI0SexSgE=
 github.com/podhmo/go-webtest v0.0.0-20190831043821-5775aef05002 h1:dxmkkK+7bX8/XJR22VJgOKW1y0aP1jR6Yc4u34WWkZg=
 github.com/podhmo/go-webtest v0.0.0-20190831043821-5775aef05002/go.mod h1:m8nh3973ZwS57A2/kCqoRGTYfeDMQWIYhS8sXlJxsyQ=
+github.com/podhmo/go-webtest v0.0.0-20190831074216-de8d41440e07 h1:mc/Xhr3/jRK61R+r7aTfbns5Q0vQSknjm5qMbPCOcrs=
+github.com/podhmo/go-webtest v0.0.0-20190831074216-de8d41440e07/go.mod h1:m8nh3973ZwS57A2/kCqoRGTYfeDMQWIYhS8sXlJxsyQ=
+github.com/podhmo/go-webtest v0.1.0 h1:tEaHRqhWMyHqKQRUjCsABGXcVF+yjOVcA/CyQFPCMVw=
 github.com/podhmo/handy v0.0.0-20190801205909-57c4f6359312 h1:g8TXhWVoACeihyWPk16mK2M9j4wJT8+zcX9nNGhlFzg=
 github.com/podhmo/handy v0.0.0-20190801205909-57c4f6359312/go.mod h1:TJZpCkmP7Ofz5fO43pjTYVsoeVaGD0hZ9nPM1sW1k0Y=
 github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d h1:OGKcxcMyRI2RE2r2wHVM0Y76Jh9GLaYmj86xHDJXViU=
@@ -88,6 +91,7 @@ github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d/go.mod h1:TJZpCkmP7Of
 github.com/podhmo/individual-sandbox/daily/20190810/example_gglgen/00getting-started v0.0.0-20190810120810-b12bf0ffdabc h1:eS7bHiSz8RAJrIO8K1ZmfSjS4UhevihwKEc62+iuQQY=
 github.com/podhmo/individual-sandbox/daily/20190810/example_sqlx v0.0.0-20190810120810-b12bf0ffdabc h1:/704UuKSOqXQfcqJmWTU2ryGj5xVm7T9D81AbkCb2jc=
 github.com/podhmo/individual-sandbox/daily/20190831/example_go-webtest v0.0.0-20190830215141-f14da834b396 h1:rO/AeXpqZlJY5FK4tGeCSbV9YFuhALi5fqj1BYlQfuc=
+github.com/podhmo/individual-sandbox/daily/20190831/example_go-webtest v0.0.0-20190831072736-c08e3474dc02 h1:h6jvI9CYm3zLZW/aMVdrRMla73Na74UjYHWz3HDLLBQ=
 github.com/podhmo/noerror v0.0.0-20190802222420-29b2190da710 h1:U1XJL0BTcknZ6zufk/75jOHhJ1ifTe8QAa9rtsCR9oo=
 github.com/podhmo/noerror v0.0.0-20190802222420-29b2190da710/go.mod h1:Cvb4ZKdIo4pLuGL8CrHihkDODevHdjnA4LdnltJtTew=
 github.com/podhmo/noerror v0.2.0 h1:xrfLTcQenO8JrNEdfEv2NkzRERx5mWdYmO0+GMZXCrE=

@@ -97,6 +97,22 @@ httptestのrequestを透過的に使いたい
 - trace的な何か
 - testの比較対象をコード側に書きたい(?)
 - table driven test
-- exというパッケージ名前は止めたい
-- ex.SnapshotTest()という名前は止めたい
+- ok exというパッケージ名前は止めたい
+- ok ex.SnapshotTest()という名前は止めたい
 - noerror(?) jsonequalの表示を良い感じに
+
+  - 少なくとも順序は一致させたい
+  - https://github.com/gavv/httpexpect
+
+- 記述だるくない？
+
+
+## 追記
+
+とりあえずtraceをやるか。
+stderrでhttptestが見れれば。とりあえず。
+RoundTripperが使えるのはTestServerのときだけか。。
+
+## 追記
+
+decoratorを作った。内部的なConfigが欲しくなったし。NewRequestなどもこれを使うのが正解かもしれない。

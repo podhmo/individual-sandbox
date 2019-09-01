@@ -7,7 +7,8 @@ import (
 
 	"github.com/labstack/echo"
 	webtest "github.com/podhmo/go-webtest"
-	"github.com/podhmo/go-webtest/ex"
+	"github.com/podhmo/go-webtest/hook"
+	"github.com/podhmo/go-webtest/jsonequal"
 	"github.com/podhmo/noerror"
 )
 
@@ -29,17 +30,21 @@ func TestCreateUser(t *testing.T) {
 
 	var want interface{}
 	userJSON := `{"name":"Jon Snow","email":"jon@labstack.com"}`
-	got, err, teardown := client.Do(t, "/users",
-		webtest.WithMethod("POST"),
+	got, err, teardown := client.POST(t, "/users",
 		webtest.WithJSON(strings.NewReader(userJSON)),
-		ex.ExpectCode(201),
-		ex.SnapshotTesting(&want),
+		hook.ExpectCode(201),
+		hook.GetExpectedDataFromSnapshot(&want),
 	)
 
 	// Assertions
 	noerror.Must(t, err)
 	defer teardown()
-	noerror.Should(t, noerror.JSONEqual(want).Actual(got.JSONData()))
+	noerror.Should(t,
+		jsonequal.ShouldBeSame(
+			jsonequal.FromRaw(want),
+			jsonequal.FromRawWithBytes(got.JSONData(), got.Body()),
+		),
+	)
 }
 
 func TestGetUser(t *testing.T) {
@@ -47,13 +52,18 @@ func TestGetUser(t *testing.T) {
 	client := webtest.NewClientFromHandler(setupHandler())
 
 	var want interface{}
-	got, err, teardown := client.Do(t, "/users/jon@labstack.com",
-		ex.ExpectCode(200),
-		ex.SnapshotTesting(&want),
+	got, err, teardown := client.GET(t, "/users/jon@labstack.com",
+		hook.ExpectCode(200),
+		hook.GetExpectedDataFromSnapshot(&want),
 	)
 
 	// Assertions
 	noerror.Must(t, err)
 	defer teardown()
-	noerror.Should(t, noerror.JSONEqual(want).Actual(got.JSONData()))
+	noerror.Should(t,
+		jsonequal.ShouldBeSame(
+			jsonequal.FromRaw(want),
+			jsonequal.FromRawWithBytes(got.JSONData(), got.Body()),
+		),
+	)
 }

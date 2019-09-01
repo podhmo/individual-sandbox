@@ -7,7 +7,7 @@ import (
 
 	"github.com/labstack/echo"
 	webtest "github.com/podhmo/go-webtest"
-	"github.com/podhmo/go-webtest/ex"
+	"github.com/podhmo/go-webtest/hook"
 	"github.com/podhmo/noerror"
 )
 
@@ -32,10 +32,9 @@ func TestCreateUser(t *testing.T) {
 	// Setup
 	client := webtest.NewClientFromHandler(setupHandler())
 
-	got, err, teardown := client.Do(t, "/users",
-		webtest.WithMethod("POST"),
+	got, err, teardown := client.POST(t, "/users",
 		webtest.WithJSON(strings.NewReader(userJSON)),
-		ex.ExpectCode(201),
+		hook.ExpectCode(201),
 	)
 
 	// Assertions
@@ -48,8 +47,8 @@ func TestGetUser(t *testing.T) {
 	// Setup
 	client := webtest.NewClientFromHandler(setupHandler())
 
-	got, err, teardown := client.Do(t, "/users/jon@labstack.com",
-		ex.ExpectCode(200),
+	got, err, teardown := client.GET(t, "/users/jon@labstack.com",
+		hook.ExpectCode(200),
 	)
 
 	// Assertions
