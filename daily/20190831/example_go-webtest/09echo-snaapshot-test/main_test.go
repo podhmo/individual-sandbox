@@ -30,10 +30,10 @@ func TestCreateUser(t *testing.T) {
 
 	var want interface{}
 	userJSON := `{"name":"Jon Snow","email":"jon@labstack.com"}`
-	got, err, teardown := client.POST(t, "/users",
+	got, err, teardown := client.POST("/users",
 		webtest.WithJSON(strings.NewReader(userJSON)),
-		hook.ExpectCode(201),
-		hook.GetExpectedDataFromSnapshot(&want),
+		hook.ExpectCode(t, 201),
+		hook.GetExpectedDataFromSnapshot(t, &want),
 	)
 
 	// Assertions
@@ -52,9 +52,9 @@ func TestGetUser(t *testing.T) {
 	client := webtest.NewClientFromHandler(setupHandler())
 
 	var want interface{}
-	got, err, teardown := client.GET(t, "/users/jon@labstack.com",
-		hook.ExpectCode(200),
-		hook.GetExpectedDataFromSnapshot(&want),
+	got, err, teardown := client.GET("/users/jon@labstack.com",
+		hook.ExpectCode(t, 200),
+		hook.GetExpectedDataFromSnapshot(t, &want),
 	)
 
 	// Assertions

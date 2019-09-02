@@ -32,9 +32,9 @@ func TestCreateUser(t *testing.T) {
 	// Setup
 	client := webtest.NewClientFromHandler(setupHandler())
 
-	got, err, teardown := client.POST(t, "/users",
+	got, err, teardown := client.POST("/users",
 		webtest.WithJSON(strings.NewReader(userJSON)),
-		hook.ExpectCode(201),
+		hook.ExpectCode(t, 201),
 	)
 
 	// Assertions
@@ -47,8 +47,8 @@ func TestGetUser(t *testing.T) {
 	// Setup
 	client := webtest.NewClientFromHandler(setupHandler())
 
-	got, err, teardown := client.GET(t, "/users/jon@labstack.com",
-		hook.ExpectCode(200),
+	got, err, teardown := client.GET("/users/jon@labstack.com",
+		hook.ExpectCode(t, 200),
 	)
 
 	// Assertions

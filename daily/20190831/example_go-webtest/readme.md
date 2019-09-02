@@ -94,7 +94,7 @@ httptestのrequestを透過的に使いたい
 
 ## やりたいこと
 
-- trace的な何か
+- ok trace的な何か
 - testの比較対象をコード側に書きたい(?)
 - table driven test
 - ok exというパッケージ名前は止めたい
@@ -103,9 +103,11 @@ httptestのrequestを透過的に使いたい
 
   - 少なくとも順序は一致させたい
   - https://github.com/gavv/httpexpect
+  - jsonequalでは？
 
 - 記述だるくない？
 
+  - ok GET(),POST()...とか作る
 
 ## 追記
 
@@ -116,3 +118,18 @@ RoundTripperが使えるのはTestServerのときだけか。。
 ## 追記
 
 decoratorを作った。内部的なConfigが欲しくなったし。NewRequestなどもこれを使うのが正解かもしれない。
+
+## 追記
+
+query stringに対応していなかった
+
+## 追記
+
+考えてみればURLを指定してclientを生成しているだけなのか。
+
+## 追記
+
+- WithQuery()に対して MustParseQuery()
+- WithJSON()に対して MustJSON()
+
+

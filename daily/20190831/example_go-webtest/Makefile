@@ -33,3 +33,15 @@
 	go run $@*/main.go
 06-client:
 	http :8080/
+07:
+	(cd $@* && go test)
+08:
+	(cd $@* && go test)
+09:
+	(cd $@* && go test)
+10:
+	(cd $@* && DEBUG=1 go test -v)
+11:
+	go run $@*/main.go
+12:
+	go run $@*/main.go
