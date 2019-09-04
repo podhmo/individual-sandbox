@@ -1,0 +1,13 @@
+definitions:
+  data:
+    type: object
+    properties:
+      products:
+        type: array
+        items:
+          $ref: "#/definitions/product"
+  product:
+    type: object
+    properties:
+      name:
+        type: string

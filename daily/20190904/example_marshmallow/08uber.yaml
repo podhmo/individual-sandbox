@@ -1,0 +1,15 @@
+definitions:
+  Product:
+    properties:
+      name:
+        type: string
+      price:
+        type: integer
+  ProductList:
+    properties:
+      products:
+        description: Contains the list of products
+        type: array
+        items: 
+          $ref: "#/definitions/Product"
+ 

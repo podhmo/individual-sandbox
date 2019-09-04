@@ -1,0 +1,20 @@
+definitions:
+  Product:
+    type: object
+    properties:
+      name:
+        type: string
+
+paths:
+  /products:
+    get:
+      summary: Product Types
+      description: The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.
+      parameters:
+      responses:  
+        "200":
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
