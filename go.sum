@@ -53,6 +53,8 @@ github.com/podhmo/ctxlog/zapctxlog v0.1.0/go.mod h1:w0dvohfidVhNF8ms6Wp+DhkKkrn6
 github.com/podhmo/go-rfc3339 v0.1.0/go.mod h1:5PYkvjhiNW8FGe6R79OkEz+sjbGrZATFkKnlYrd37Yg=
 github.com/podhmo/go-webtest v0.4.0 h1:pRFLXeTteaTg0Y2SdwbTYCgsjfWrXI6fBynxcD++Izc=
 github.com/podhmo/go-webtest v0.4.0/go.mod h1:m8nh3973ZwS57A2/kCqoRGTYfeDMQWIYhS8sXlJxsyQ=
+github.com/podhmo/go-webtest v0.4.3 h1:pqr+5hwVk1U0Aaom0dWMXFMyrIlRwAyORxvT2vRUVTo=
+github.com/podhmo/go-webtest v0.4.3/go.mod h1:m8nh3973ZwS57A2/kCqoRGTYfeDMQWIYhS8sXlJxsyQ=
 github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d/go.mod h1:TJZpCkmP7Ofz5fO43pjTYVsoeVaGD0hZ9nPM1sW1k0Y=
 github.com/podhmo/individual-sandbox/daily/20190831/example_go-webtest v0.0.0-20190901105626-a93c2186e342 h1:vOwAlD8hUQwku1ur+vcN3YHSHgxDmZ+/j2tN6V6mddI=
 github.com/podhmo/noerror v0.2.0 h1:xrfLTcQenO8JrNEdfEv2NkzRERx5mWdYmO0+GMZXCrE=

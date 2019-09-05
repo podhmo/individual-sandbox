@@ -19,3 +19,7 @@
 09:
 	swagger-marshmallow-codegen $@*.yaml > _$@.py
 	python _$@.py
+10:
+	python $@*.py
+11:
+	python $@*.py
