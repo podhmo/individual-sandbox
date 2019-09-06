@@ -1,0 +1,16 @@
+{
+  "modifiedAt": "2019-08-31T16:27:01.819283658+09:00",
+  "data": {
+    "request": {
+      "method": "GET",
+      "path": "/users/jon@labstack.com"
+    },
+    "response": {
+      "data": {
+        "email": "jon@labstack.com",
+        "name": "Jon Snow"
+      },
+      "statusCode": 200
+    }
+  }
+}
