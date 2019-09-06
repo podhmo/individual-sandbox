@@ -12,10 +12,18 @@ interfaceを使うバージョン
 - https://frasco.io/reusable-and-type-safe-options-for-go-apis-6b51d431df5d
 - https://github.com/googleapis/google-api-go-client/blob/master/option/option.go
 
-interfaceにしておくメリット
+Optionのように型を与えておくメリット(type aliasも同様)
 
 - 型のsignatureを変えたときにも利用するがわの関数の定義を変えなくて済む？
-- (ただしこれは型のaliasやnew typeを付けたときも同様)
-- メソッドを定義して特定の状況にだけ有効なoptionを作れる
+
+
+interfaceにしておくメリット
+
+- メソッドを定義して特定の状況にだけ有効なoptionを作れる(制約)
+
+interfaceにしておくメリット2
+
+- 異なる形状へのOptionを提供できる(柔軟性)
+- http.HandlerFunc が Handlerを実装する様な話(関数がメソッドを実装する話
 
 

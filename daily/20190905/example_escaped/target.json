@@ -1,0 +1,4 @@
+{
+  "definition": "users::condition::ga:transactions>0;sequence::ga:productName=~2881|2934|2935;perProduct::ga:itemQuantity>0;sessions::condition::ga:pagePath=@reading/articles/92",
+  "name": "ï¼»ç¤¾é·ã¤ã³ã¿ãã¥ã¼æ¤è¨¼ï¼½ãã«ãº"
+}
