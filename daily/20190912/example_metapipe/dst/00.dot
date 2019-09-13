@@ -1,0 +1,8 @@
+digraph {
+  g0 [label="x", shape="box"];
+  g1 [label="y", shape="box"];
+  g2 [label="z", shape="box"];
+
+  g0 -> g1;
+  g1 -> g2;
+}

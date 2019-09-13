@@ -1,0 +1,22 @@
+{
+  "modifiedAt": "2019-09-07T18:22:31.069934432+09:00",
+  "data": {
+    "request": {
+      "body": {
+        "values": [
+          1,
+          2,
+          3
+        ]
+      },
+      "method": "POST",
+      "path": "/"
+    },
+    "response": {
+      "data": {
+        "result": 6
+      },
+      "statusCode": 200
+    }
+  }
+}
