@@ -1,0 +1,8 @@
+digraph {
+  x [shape=box];
+  y [shape=box];
+  z [shape=box];
+
+  x -> y;
+  y -> z;
+}
