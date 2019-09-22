@@ -1,0 +1,7 @@
+# syntax error
+
+name: foo
+age: 20
+father
+  name: bar
+  age: 40

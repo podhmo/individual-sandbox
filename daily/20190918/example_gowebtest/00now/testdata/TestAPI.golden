@@ -1,0 +1,15 @@
+{
+  "modifiedAt": "2019-09-18T18:04:51.954951138+09:00",
+  "data": {
+    "request": {
+      "method": "GET",
+      "path": "/now"
+    },
+    "response": {
+      "data": {
+        "now": "2000-01-01T00:00:00Z"
+      },
+      "statusCode": 200
+    }
+  }
+}

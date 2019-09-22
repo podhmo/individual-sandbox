@@ -1,0 +1,15 @@
+{
+  "modifiedAt": "2019-09-18T01:37:25.031411883+09:00",
+  "data": {
+    "request": {
+      "method": "GET",
+      "path": "/api/addx=10&y=20"
+    },
+    "response": {
+      "data": {
+        "ans": 30
+      },
+      "statusCode": 200
+    }
+  }
+}

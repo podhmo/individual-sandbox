@@ -1,0 +1,16 @@
+definitions:
+  Person:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+      father:
+        $ref: "#/definitions/Person"
+      mother:
+        $ref: "#/definitions/Person"
+    required:
+      - name
+      - age
+$ref: "#/definitions/Person"

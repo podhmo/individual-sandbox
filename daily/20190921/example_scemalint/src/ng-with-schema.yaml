@@ -1,0 +1,7 @@
+name: foo
+age: 20
+father:
+  age: 40
+mother:
+  name: B
+  age: invalid
