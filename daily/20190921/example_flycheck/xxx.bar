@@ -1,0 +1,4 @@
+DEBUG debug msg
+INFO info msg
+WARNING warn msg
+ERROR error msg
