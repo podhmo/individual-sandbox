@@ -1,0 +1,25 @@
+--- target/user.go	2019-10-03 00:19:25.024205240 +0900
++++ dst/user.go	2019-10-03 00:24:57.935042881 +0900
+@@ -5,10 +5,13 @@
+ }
+ 
+ // Hello :
++// - 1
++// - 2
+ func (u *User) Hello() string {
+ 	return "Hello"
+ }
+ 
++// Bye :**
+ func (u *User) Bye() string {
+ 	return "Bye"
+ }
+@@ -18,6 +21,8 @@
+ // - yyy
+ //
+ // hmm
++// - 1
++// - 2
+ func (u *User) Oops() string {
+ 	return "Bye"
+ }

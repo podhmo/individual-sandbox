@@ -46,6 +46,14 @@ importの依存も含めて読み込むならVisitが便利そうだった。
 
 godocの実装を覗くか。
 
+format.Node()をbodyをnilにして実行していた
+
+### 実際の適用
+
+go/packagesは依存を自動で読み込もうとするのが邪魔に感じるときもあるな。
+Modeである程度制御できるのだけれど。。
+
+
 
 ## python schemalint
 
