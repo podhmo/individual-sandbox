@@ -49,9 +49,6 @@ func run(args []string) error {
 
 			for method := range ch {
 				tname := typeName(method.Recv.List[0].Type)
-				// if tname != "*T" && tname != "*common" {
-				// 	continue
-				// }
 
 				c := method.Name.Name[0]
 				if !(c >= 'A' && c <= 'Z') {
@@ -184,8 +181,6 @@ func typeName(t ast.Expr) string {
 		panic(fmt.Sprintf("unexpected type %T", t))
 	}
 }
-
-// todo: signature
 
 func AllMethods(f *ast.File) <-chan *ast.FuncDecl {
 	ch := make(chan *ast.FuncDecl, 1)
