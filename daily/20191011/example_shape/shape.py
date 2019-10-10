@@ -99,11 +99,22 @@ class OpenAPI:
         self.repository = repository
         self.output = make_dict()  # xxx
         self.output["components"] = make_dict()
-        self.output["components"]["members"] = make_dict()
+        self.output["components"]["schemas"] = make_dict()
 
     def emit(self, member: Member) -> None:
-        name = self.resolver.resolve_name(member)
-        self.output["components"]["members"][name] = {}
+        typename = self.resolver.resolve_name(member)
+        schema = make_dict()
+
+        schema["properties"] = make_dict()
+        required = []
+        for fieldname, fieldtype in member.__annotations__.items():  # xxx
+            # TODO: detect python type to openapi
+            schema["properties"][fieldname] = {"type": fieldtype.__name__}
+            # TODO: optional support
+            required.append(fieldname)
+        if len(required) > 0:
+            schema["required"] = required
+        self.output["components"]["schemas"][typename] = schema
 
 
 def render(repository: Repository, resolver: t.Optional[Resolver] = None) -> str:
