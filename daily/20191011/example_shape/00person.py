@@ -8,4 +8,10 @@ class Person:
 
 
 # main
-print(shape.render(shape.FakeRepository([Person])))
+print(
+    shape.translate(
+        shape.Accessor(
+            resolver=shape.FakeResolver(), repository=shape.FakeRepository([Person])
+        )
+    )
+)

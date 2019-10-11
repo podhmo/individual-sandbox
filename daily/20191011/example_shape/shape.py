@@ -39,15 +39,7 @@ class Member(tx.Protocol):
     _shape_mark: bool
 
 
-# renderer
-class Strategy(tx.Protocol):
-    def render(self, ob: t.Type[T]) -> None:
-        ...
-
-    def resolve(self, ob: t.Type[T]) -> None:
-        ...
-
-
+# emiter
 class Repository(tx.Protocol):
     @property
     def members(self) -> t.List[Member]:  # support also instance variable...
@@ -91,18 +83,28 @@ class FakeRepository(Repository):
         return self._members
 
 
+class Accessor:
+    resolver: Resolver
+    respository: Repository
+
+    def __init__(self, *, resolver: Resolver, repository: Repository):
+        self.resolver = resolver
+        self.repository = repository
+
+
 class OpenAPI:
     output: t.Dict[str, t.Any]  # xxx
 
-    def __init__(self, resolver: Resolver, repository: Repository) -> None:
-        self.resolver = resolver
-        self.repository = repository
+    def __init__(self, accessor: Accessor) -> None:
+        self.accessor = accessor
         self.output = make_dict()  # xxx
         self.output["components"] = make_dict()
         self.output["components"]["schemas"] = make_dict()
 
     def emit(self, member: Member) -> None:
-        typename = self.resolver.resolve_name(member)
+        resolver = self.accessor.resolver
+
+        typename = resolver.resolve_name(member)
         schema = make_dict()
 
         schema["properties"] = make_dict()
@@ -117,9 +119,9 @@ class OpenAPI:
         self.output["components"]["schemas"][typename] = schema
 
 
-def render(repository: Repository, resolver: t.Optional[Resolver] = None) -> str:
-    resolver = resolver or FakeResolver()
-    emitter = OpenAPI(resolver, repository)
+def translate(accessor: Accessor) -> str:
+    repository = accessor.repository
+    emitter = OpenAPI(accessor)
     logger.debug("collect members: %d", len(repository.members))
     for m in repository.members:
         emitter.emit(m)
@@ -137,9 +139,12 @@ def run(
     m = import_module(filename)
     if aggressive:
         is_member = lambda x: hasattr(x, "__name__")  # noqa
+
     resolver = FakeResolver(is_member=is_member)
-    repository = resolver.resolve_repository(m.__dict__)
-    print(render(repository, resolver=resolver))
+    accessor = Accessor(
+        resolver=resolver, repository=resolver.resolve_repository(m.__dict__)
+    )
+    print(translate(accessor))
 
 
 def main(*, argv: t.Optional[t.List[str]] = None) -> None:
