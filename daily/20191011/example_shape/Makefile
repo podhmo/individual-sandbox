@@ -6,4 +6,5 @@ typing:
 01:
 	python shape.py $@*.py
 02:
-	python shape.py --aggressive $@*.py
+
+python shape.py --aggressive $@*.py

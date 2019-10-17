@@ -1,0 +1,13 @@
+components:
+  schemas:
+    Person:
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+        nickname:
+          type: string
+      required:
+      - name
+      - age
