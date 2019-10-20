@@ -1,0 +1,2 @@
+default:
+	pytest
