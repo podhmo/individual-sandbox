@@ -1,0 +1,7 @@
+graphql-core>=3a
+graphene
+ariadne
+uvicorn
+async-asgi-testclient
+pytest
+pytest-asyncio

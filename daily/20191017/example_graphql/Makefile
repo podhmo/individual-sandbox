@@ -7,7 +7,11 @@
 # graphene
 03:
 	python $@*/main.py
+# ariadne with asyncio test
 04:
 	pytest --show-capture=all  -vv $@*/test*.py
 05:
 	pytest --show-capture=all -vv $@*/test*.py
+# ariadne
+06:
+	python $@*/main.py

@@ -63,5 +63,14 @@ def pytest_pycollect_makeitem(collector, name, obj):
             )
 ```
 
+## 追記
+
+asgiとしてテストは書けた。
+ariadneももう少し手軽にasgi以外のものとしてテストは書ける？
+`ariadne.graphql:graphql` 辺りを使えば良さそう。
+
+resolveの関数って何があるんだろう？
+
+
 ## graphql-relay?
 
