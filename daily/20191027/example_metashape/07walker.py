@@ -7,7 +7,7 @@ class _Sentinel:
         self.name = name
 
     def __str__(self):
-        return "<{self.name}>"
+        return "<{self.name}>".format(self=self)
 
 
 # types

@@ -8,7 +8,7 @@ class _Sentinel:
         self.name = name
 
     def __str__(self):
-        return "<{self.name}>"
+        return "<{self.name}>".format(self=self)
 
 
 # types
@@ -168,9 +168,7 @@ list(glob(d, "projects/*.py"))  # => [('projects/xx.py', 'ok')]
 list(glob(d, "projects/*.txt"))  # => [('projects/yy.txt', 'ng')]
 list(glob(d, "*/*.py"))  # => [('projects/xx.py', 'ok')]
 list(glob(d, "*/*.txt"))  # => [('projects/yy.txt', 'ng')]
-list(
-    glob(d, "**/*.py")
-)  # => [('projects/xx.py', 'ok'), ('projects/sub/b.py', 'bbb')]
+list(glob(d, "**/*.py"))  # => [('projects/xx.py', 'ok'), ('projects/sub/b.py', 'bbb')]
 list(
     glob(d, "**/*.txt")
 )  # => [('projects/yy.txt', 'ng'), ('projects/sub/a.txt', 'aaa')]

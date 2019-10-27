@@ -14,5 +14,10 @@
 	pycomment --inplace $@*.py
 09:
 	python $@*.py
+10:
+	python $@*.py
+11:
+	python $@*.py
+
 setup:
 	pip install -r requirements.txt
