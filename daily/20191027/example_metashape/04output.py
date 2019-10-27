@@ -1,15 +1,17 @@
-from output import SeparatedOutput
+import logging
+from output import FS, Option, PrestringResolver
 from prestring.python import Module
 
-# context manager
+logging.basicConfig(level=logging.DEBUG)
 
+option = Option(prefix="gen_", root="./04output")
+r = PrestringResolver(module_factory=Module)
 
-o = SeparatedOutput("./04output", prefix="gen_", module_factory=Module)
-with o:
-    with o.open("x.py", "w") as f:
-        with f.m.def_("hello()"):
-            f.m.stmt("print('x')")
+with FS(option) as fs:
+    with fs.file(r.resolve("x.py")) as m:
+        with m.def_("hello()"):
+            m.stmt("print('x')")
 
-    with o.open("y.py", "w") as f:
-        with f.m.def_("hello()"):
-            f.m.stmt("print('y')")
+    with fs.file(r.resolve("y.py")) as m:
+        with m.def_("hello()"):
+            m.stmt("print('y')")

@@ -1,80 +1,97 @@
 import logging
 import os.path
 import glob
-from collections import defaultdict
-
+import dataclasses
 
 logger = logging.getLogger(__name__)
 
 
+@dataclasses.dataclass(frozen=False, unsafe_hash=False)
+class Option:
+    root: str
+    files: dict = dataclasses.field(default_factory=dict)
+    prefix: str = "autogen_"
+    suffix: str = ".py"
+
+
 class File:
     name: str
-    m: object  # xxx
 
-    def __init__(self, name: str, m, *, fs):
+    def __init__(self, name: str, content):
         self.name = name
-        self.m = m
-        self._fs = fs
+        self.content = content
 
     def __enter__(self):
-        return self
+        return self.content
 
     def __exit__(self, typ, val, tb):
-        self._fs.output_file(self)
+        pass
+
+    def write(self, wf):
+        wf.write(str(self.content))
 
 
 # TODO:
 # cleanup option
-# context manager
+# option manager
 # separate class
 # option
+def cleanup_pyfile(option: Option):
+    # TODO: recursive?
+    for f in glob.glob(os.path.join(option.root, f"{option.prefix}*{option.suffix}")):
+        logger.info("remove file path=%s", f)
+        os.remove(f)
 
 
-class SeparatedOutput:
-    @staticmethod
-    def module_factory():
-        raise NotImplementedError("e.g. python.PythonModule()")
+class Writer:
+    def __init__(self, option: Option):
+        self.option = option
 
-    def __init__(self, dirname, prefix="autogen_", module_factory=None):
-        self.dirname = dirname
-        self.prefix = prefix
-        self.arrived = set()
-        self.files = {}
-        self.module_factory = module_factory or self.__class__.module_factory
+    def write_all(self):
+        for name, f in self.option.files.items():
+            self.write(name, f)
 
-    def open(self, file_name, mode, m=None):
-        dirname, basename = os.path.split(file_name)
-        fname = "{}{}".format(self.prefix, basename)
+    def write(self, name, file, *, _retry=False):
+        dirname, basename = os.path.split(name)
+        fname = "{}{}".format(self.option.prefix, basename)
+        fullpath = os.path.join(self.option.root, os.path.join(dirname, fname))
+
+        logger.info("touch file path=%s", fullpath)
+
+        try:
+            with open(fullpath, "w") as wf:
+                file.write(wf)
+        except FileNotFoundError:
+            if _retry:
+                raise
+            logger.info("touch directory path=%s", os.fullpath.dirname(fullpath))
+            os.makedirs(os.fullpath.dirname(fullpath), exist_ok=True)
+            return self.write(file, _retry=True)
+
+
+class PrestringResolver:
+    def __init__(self, module_factory):
+        self.module_factory = module_factory
+
+    def resolve(self, name, *, m=None):
         m = m or self.module_factory()
-        f = File(os.path.join(dirname, fname), m=m, fs=self)
-        self.files[f.name] = f
+        return File(name, m)
+
+
+class FS:
+    def __init__(self, option: Option, *, cleanup=cleanup_pyfile):
+        self.option = option
+        self.cleanup = cleanup
+
+    def file(self, f):
+        self.option.files[f.name] = f  # xxx:
         return f
-
-    def prepare(self, f):
-        dirname = os.path.dirname(os.path.join(self.dirname, f.name))
-        if dirname in self.arrived:
-            return
-        self.arrived.add(dirname)
-        logger.info("touch directory path=%s", dirname)
-        os.makedirs(dirname, exist_ok=True)
-        if self.prefix:
-            for f in glob.glob(os.path.join(dirname, "{}*.py".format(self.prefix))):
-                os.remove(f)
-
-    def output(self):
-        for file in self.files.values():
-            self.output_file(file)
-
-    def output_file(self, file):
-        self.prepare(file)
-
-        path = os.path.join(self.dirname, file.name)
-        logger.info("touch file path=%s", path)
-        with open(path, "w") as wf:
-            wf.write(str(file.m))
 
     def __enter__(self):
         return self
 
     def __exit__(self, typ, val, tb):
-        self.output()
+        if self.cleanup is not None:
+            self.cleanup(self.option)
+        w = Writer(self.option)
+        w.write_all()

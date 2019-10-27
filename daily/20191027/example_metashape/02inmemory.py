@@ -5,10 +5,10 @@ from fs.memoryfs import MemoryFS
 # TODO: logging (trace) ?
 
 
-def create() -> MemoryFS:
+def create(prefix="") -> MemoryFS:
     my_fs = fs.open_fs("mem://root")
 
-    with my_fs.makedir("projects") as d:
+    with my_fs.makedir(f"{prefix}projects") as d:
         with d.open("xxx.txt", "w") as f:
             f.write("xxx")
 

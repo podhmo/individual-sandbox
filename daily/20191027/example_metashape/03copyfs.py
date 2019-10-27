@@ -6,7 +6,7 @@ from magicalimport import import_symbol
 create_fs = import_symbol("./02inmemory.py:create")
 
 
-with create_fs() as my_fs:
+with create_fs("03copyfs") as my_fs:
 
     # copy filesystem
     from fs.copy import copy_fs  # noqa
