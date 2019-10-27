@@ -1,0 +1,374 @@
+digraph g {
+    g0 [label="pkg_resources"]
+    g1 [label="zipfile"]
+    g2 [label="pkgutil"]
+    g3 [label="tempfile"]
+    g4 [label="inspect"]
+    g5 [label="ntpath"]
+    g6 [label="pkg_resources.py31compat"]
+    g7 [label="pkg_resources._vendor.packaging.requirements"]
+    g8 [label="sysconfig"]
+    g9 [label="platform"]
+    g10 [label="email"]
+    g11 [label="__future__"]
+    g12 [label="pkg_resources._vendor.packaging.specifiers"]
+    g13 [label="plistlib"]
+    g14 [label="email.parser"]
+    g15 [label="pkg_resources.extern"]
+    g16 [label="pkg_resources._vendor.packaging.version"]
+    g17 [label="textwrap"]
+    g18 [label="shutil"]
+    g19 [label="bz2"]
+    g20 [label="lzma"]
+    g21 [label="fnmatch"]
+    g22 [label="_compression"]
+    g23 [label="struct"]
+    g24 [label="subprocess"]
+    g25 [label="selectors"]
+    g26 [label="signal"]
+    g27 [label="xml.parsers.expat"]
+    g28 [label="datetime"]
+    g29 [label="xml.parsers"]
+    g30 [label="xml"]
+    g31 [label="email.feedparser"]
+    g32 [label="email.errors"]
+    g33 [label="email._policybase"]
+    g34 [label="email.message"]
+    g35 [label="email.header"]
+    g36 [label="email.charset"]
+    g37 [label="email.quoprimime"]
+    g38 [label="email.base64mime"]
+    g39 [label="base64"]
+    g40 [label="email.encoders"]
+    g41 [label="quopri"]
+    g42 [label="email.utils"]
+    g43 [label="random"]
+    g44 [label="hashlib"]
+    g45 [label="bisect"]
+    g46 [label="socket"]
+    g47 [label="email._parseaddr"]
+    g48 [label="urllib"]
+    g49 [label="urllib.parse"]
+    g50 [label="calendar"]
+    g51 [label="dis"]
+    g52 [label="opcode"]
+    g53 [label="pkg_resources._vendor.packaging"]
+    g54 [label="pkg_resources._vendor"]
+    g55 [label="pkg_resources._vendor.appdirs"]
+    g56 [label="pkg_resources._vendor.six"]
+    g57 [label="pkg_resources._vendor.pyparsing"]
+    g58 [label="pkg_resources._vendor.packaging.__about__"]
+    g59 [label="pkg_resources._vendor.packaging._structures"]
+    g60 [label="pkg_resources._vendor.packaging._compat"]
+    g61 [label="pprint"]
+    g62 [label="copy"]
+    g63 [label="pkg_resources._vendor.packaging.markers"]
+    g64 [label="uu"]
+    g65 [label="email.iterators"]
+    g66 [label="email._encoded_words"]
+    g67 [label="fs"]
+    g68 [label="fs.path"]
+    g69 [label="fs.opener"]
+    g70 [label="fs.enums"]
+    g71 [label="fs._version"]
+    g72 [label="fs._fscompat"]
+    g73 [label="fs.opener.base"]
+    g74 [label="six"]
+    g75 [label="typing"]
+    g76 [label="fs.opener.zipfs"]
+    g77 [label="fs.opener.memoryfs"]
+    g78 [label="fs.opener.osfs"]
+    g79 [label="fs.opener.ftpfs"]
+    g80 [label="fs.opener.parse"]
+    g81 [label="fs.opener.tarfs"]
+    g82 [label="fs.opener.tempfs"]
+    g83 [label="fs.opener.registry"]
+    g84 [label="fs.opener.appfs"]
+    g85 [label="fs.opener.errors"]
+    g86 [label="fs.errors"]
+    g87 [label="03copyfs"]
+    g88 [label="magicalimport"]
+    g89 [label="magicalimport.compat"]
+    g90 [label="fs.copy"]
+    g91 [label="fs.tools"]
+    g92 [label="fs._bulk"]
+    g93 [label="fs.walk"]
+    g94 [label="fs._repr"]
+    g95 [label="fs.base"]
+    g96 [label="fs.iotools"]
+    g97 [label="fs.move"]
+    g98 [label="fs.wildcard"]
+    g99 [label="fs.time"]
+    g100 [label="fs.glob"]
+    g101 [label="fs.subfs"]
+    g102 [label="fs.mode"]
+    g103 [label="fs._typing"]
+    g104 [label="fs.lrucache"]
+    g105 [label="pytz"]
+    g106 [label="pytz.lazy"]
+    g107 [label="pytz.tzinfo"]
+    g108 [label="pytz.tzfile"]
+    g109 [label="pytz.exceptions"]
+    g110 [label="fs.memoryfs"]
+    g111 [label="fs.info"]
+    g112 [label="fs.permissions"]
+    g113 [label="..02inmemory"]
+    g114 [label="fs.wrapfs"]
+    g115 [label="fs.error_tools"]
+    g116 [label="fs.osfs"]
+    g117 [label="fs._url_tools"]
+    g118 [label="queue"]
+    g0 -> g1 [label="0.00307s"]
+    g0 -> g2 [label="0.00031s"]
+    g0 -> g3 [label="0.00034s"]
+    g0 -> g4 [label="0.00224s"]
+    g0 -> g5 [label="0.00112s"]
+    g0 -> g6 [label="5e-05s"]
+    g0 -> g7 [label="0.02065s"]
+    g0 -> g8 [label="0.00066s"]
+    g0 -> g9 [label="0.00473s"]
+    g0 -> g10 [label="6e-05s"]
+    g0 -> g11 [label="9e-05s"]
+    g0 -> g12 [label="0.00468s"]
+    g0 -> g13 [label="0.00278s"]
+    g0 -> g14 [label="0.01105s"]
+    g0 -> g15 [label="8e-05s"]
+    g0 -> g16 [label="0.00218s"]
+    g0 -> g17 [label="0.00111s"]
+    g18 -> g19 [label="0.00044s"]
+    g18 -> g20 [label="0.00028s"]
+    g18 -> g21 [label="0.0001s"]
+    g19 -> g22 [label="0.00013s"]
+    g1 -> g23 [label="0.00025s"]
+    g1 -> g18 [label="0.00185s"]
+    g24 -> g25 [label="0.00064s"]
+    g24 -> g26 [label="0.00079s"]
+    g9 -> g24 [label="0.00235s"]
+    g13 -> g27 [label="0.00035s"]
+    g13 -> g28 [label="0.00099s"]
+    g13 -> g29 [label="4e-05s"]
+    g13 -> g30 [label="5e-05s"]
+    g31 -> g32 [label="0.00106s"]
+    g31 -> g33 [label="0.00908s"]
+    g31 -> g34 [label="0.0013s"]
+    g35 -> g36 [label="0.00048s"]
+    g35 -> g37 [label="0.00015s"]
+    g35 -> g38 [label="0.00027s"]
+    g38 -> g39 [label="0.00012s"]
+    g40 -> g41 [label="9e-05s"]
+    g36 -> g40 [label="0.00024s"]
+    g33 -> g42 [label="0.00697s"]
+    g33 -> g35 [label="0.00174s"]
+    g43 -> g44 [label="0.00156s"]
+    g43 -> g45 [label="0.0002s"]
+    g42 -> g43 [label="0.0024s"]
+    g42 -> g46 [label="0.00209s"]
+    g42 -> g47 [label="0.00066s"]
+    g42 -> g48 [label="5e-05s"]
+    g42 -> g49 [label="0.00082s"]
+    g47 -> g50 [label="0.00035s"]
+    g14 -> g31 [label="0.01083s"]
+    g51 -> g52 [label="0.00024s"]
+    g4 -> g51 [label="0.00064s"]
+    g15 -> g53 [label="0.00024s"]
+    g15 -> g54 [label="4e-05s"]
+    g15 -> g55 [label="0.00012s"]
+    g15 -> g56 [label="0.00061s"]
+    g15 -> g57 [label="0.01298s"]
+    g53 -> g58 [label="4e-05s"]
+    g16 -> g59 [label="7e-05s"]
+    g12 -> g60 [label="5e-05s"]
+    g57 -> g61 [label="0.0002s"]
+    g57 -> g62 [label="0.00052s"]
+    g7 -> g63 [label="0.00098s"]
+    g34 -> g64 [label="0.00011s"]
+    g34 -> g65 [label="7e-05s"]
+    g34 -> g66 [label="0.00038s"]
+    g67 -> g68 [label="0.00023s"]
+    g67 -> g69 [label="0.0053s"]
+    g67 -> g70 [label="0.00032s"]
+    g67 -> g71 [label="5e-05s"]
+    g67 -> g72 [label="5e-05s"]
+    g67 -> g0 [label="0.20339s"]
+    g73 -> g74 [label="0.0007s"]
+    g73 -> g75 [label="0.00121s"]
+    g69 -> g76 [label="8e-05s"]
+    g69 -> g73 [label="0.00223s"]
+    g69 -> g77 [label="8e-05s"]
+    g69 -> g78 [label="8e-05s"]
+    g69 -> g79 [label="0.00062s"]
+    g69 -> g80 [label="0.00068s"]
+    g69 -> g81 [label="8e-05s"]
+    g69 -> g82 [label="7e-05s"]
+    g69 -> g83 [label="0.00012s"]
+    g69 -> g84 [label="9e-05s"]
+    g80 -> g85 [label="0.0001s"]
+    g79 -> g86 [label="0.00045s"]
+    g87 -> g67 [label="0.21065s"]
+    g87 -> g88 [label="0.00022s"]
+    g88 -> g89 [label="7e-05s"]
+    g90 -> g91 [label="8e-05s"]
+    g90 -> g92 [label="0.00085s"]
+    g90 -> g93 [label="0.00045s"]
+    g93 -> g94 [label="4e-05s"]
+    g95 -> g96 [label="0.00051s"]
+    g95 -> g90 [label="0.0008s"]
+    g95 -> g97 [label="0.00025s"]
+    g95 -> g98 [label="0.00046s"]
+    g95 -> g99 [label="0.01222s"]
+    g95 -> g100 [label="0.00063s"]
+    g95 -> g101 [label="0.00563s"]
+    g102 -> g103 [label="4e-05s"]
+    g96 -> g102 [label="0.00029s"]
+    g98 -> g104 [label="0.00017s"]
+    g105 -> g106 [label="0.00022s"]
+    g105 -> g107 [label="0.00022s"]
+    g105 -> g108 [label="9e-05s"]
+    g105 -> g109 [label="0.00012s"]
+    g99 -> g105 [label="0.01175s"]
+    g110 -> g111 [label="0.00046s"]
+    g110 -> g95 [label="0.01606s"]
+    g111 -> g112 [label="0.00016s"]
+    g113 -> g110 [label="0.01708s"]
+    g114 -> g115 [label="0.00454s"]
+    g101 -> g114 [label="0.00522s"]
+    g116 -> g117 [label="8e-05s"]
+    g78 -> g116 [label="0.00077s"]
+    g74 -> g118 [label="0.00048s"]
+}
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/__init__.py ... 0.2106482982635498s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/__init__.py ... 0.20339417457580566s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/requirements.py ... 0.020648717880249023s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/memoryfs.py ... 0.017078161239624023s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/base.py ... 0.016057968139648438s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/pyparsing.py ... 0.012977361679077148s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/time.py ... 0.012222528457641602s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pytz/__init__.py ... 0.011748790740966797s
+// load /usr/lib/python3.7/email/parser.py ... 0.011045694351196289s
+// load /usr/lib/python3.7/email/feedparser.py ... 0.010834217071533203s
+// load /usr/lib/python3.7/email/_policybase.py ... 0.009079217910766602s
+// load /usr/lib/python3.7/email/utils.py ... 0.006971597671508789s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/subfs.py ... 0.005627870559692383s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/__init__.py ... 0.005298614501953125s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/wrapfs.py ... 0.005221843719482422s
+// load /usr/lib/python3.7/platform.py ... 0.004727840423583984s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/specifiers.py ... 0.004682779312133789s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/error_tools.py ... 0.004541635513305664s
+// load /usr/lib/python3.7/zipfile.py ... 0.003074169158935547s
+// load /usr/lib/python3.7/plistlib.py ... 0.0027799606323242188s
+// load /usr/lib/python3.7/random.py ... 0.0024025440216064453s
+// load /usr/lib/python3.7/subprocess.py ... 0.0023474693298339844s
+// load /usr/lib/python3.7/inspect.py ... 0.0022416114807128906s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/base.py ... 0.0022296905517578125s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/version.py ... 0.0021779537200927734s
+// load /usr/lib/python3.7/socket.py ... 0.0020864009857177734s
+// load /usr/lib/python3.7/shutil.py ... 0.0018534660339355469s
+// load /usr/lib/python3.7/email/header.py ... 0.0017383098602294922s
+// load /usr/lib/python3.7/hashlib.py ... 0.0015633106231689453s
+// load /usr/lib/python3.7/email/message.py ... 0.0013027191162109375s
+// load /usr/lib/python3.7/typing.py ... 0.0012097358703613281s
+// load /usr/lib/python3.7/ntpath.py ... 0.0011200904846191406s
+// load /usr/lib/python3.7/textwrap.py ... 0.001111745834350586s
+// load /usr/lib/python3.7/email/errors.py ... 0.0010561943054199219s
+// load /usr/lib/python3.7/datetime.py ... 0.000989675521850586s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/markers.py ... 0.0009818077087402344s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_bulk.py ... 0.0008502006530761719s
+// load /usr/lib/python3.7/urllib/parse.py ... 0.0008203983306884766s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/copy.py ... 0.0008027553558349609s
+// load /usr/lib/python3.7/signal.py ... 0.0007901191711425781s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/osfs.py ... 0.0007748603820800781s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/six.py ... 0.0007042884826660156s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/parse.py ... 0.0006797313690185547s
+// load /usr/lib/python3.7/email/_parseaddr.py ... 0.0006601810455322266s
+// load /usr/lib/python3.7/sysconfig.py ... 0.0006570816040039062s
+// load /usr/lib/python3.7/selectors.py ... 0.000640869140625s
+// load /usr/lib/python3.7/dis.py ... 0.0006403923034667969s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/glob.py ... 0.0006260871887207031s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/ftpfs.py ... 0.0006182193756103516s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/six.py ... 0.0006127357482910156s
+// load /usr/lib/python3.7/copy.py ... 0.0005242824554443359s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/iotools.py ... 0.0005123615264892578s
+// load /usr/lib/python3.7/email/charset.py ... 0.00048065185546875s
+// load /usr/lib/python3.7/queue.py ... 0.0004794597625732422s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/wildcard.py ... 0.0004627704620361328s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/info.py ... 0.0004589557647705078s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/errors.py ... 0.00044989585876464844s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/walk.py ... 0.0004494190216064453s
+// load /usr/lib/python3.7/bz2.py ... 0.0004448890686035156s
+// load /usr/lib/python3.7/email/_encoded_words.py ... 0.00038361549377441406s
+// load /usr/lib/python3.7/calendar.py ... 0.00035262107849121094s
+// load /usr/lib/python3.7/xml/parsers/expat.py ... 0.00034999847412109375s
+// load /usr/lib/python3.7/tempfile.py ... 0.0003437995910644531s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/enums.py ... 0.00032067298889160156s
+// load /usr/lib/python3.7/pkgutil.py ... 0.00031495094299316406s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/mode.py ... 0.0002872943878173828s
+// load /usr/lib/python3.7/lzma.py ... 0.00028228759765625s
+// load /usr/lib/python3.7/email/base64mime.py ... 0.0002684593200683594s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/move.py ... 0.000247955322265625s
+// load /usr/lib/python3.7/struct.py ... 0.0002474784851074219s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/__init__.py ... 0.00024199485778808594s
+// load /usr/lib/python3.7/email/encoders.py ... 0.00024127960205078125s
+// load /usr/lib/python3.7/opcode.py ... 0.00023674964904785156s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/path.py ... 0.00023436546325683594s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pytz/tzinfo.py ... 0.00021910667419433594s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pytz/lazy.py ... 0.00021886825561523438s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/magicalimport/__init__.py ... 0.0002155303955078125s
+// load /usr/lib/python3.7/bisect.py ... 0.00020051002502441406s
+// load /usr/lib/python3.7/pprint.py ... 0.00020003318786621094s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/lrucache.py ... 0.00016808509826660156s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/permissions.py ... 0.00015997886657714844s
+// load /usr/lib/python3.7/email/quoprimime.py ... 0.0001518726348876953s
+// load /usr/lib/python3.7/_compression.py ... 0.0001270771026611328s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pytz/exceptions.py ... 0.00012350082397460938s
+// load /usr/lib/python3.7/base64.py ... 0.00011920928955078125s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/appdirs.py ... 0.00011849403381347656s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/registry.py ... 0.00011563301086425781s
+// load /usr/lib/python3.7/uu.py ... 0.00010967254638671875s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/errors.py ... 9.918212890625e-05s
+// load /usr/lib/python3.7/fnmatch.py ... 9.846687316894531e-05s
+// load /usr/lib/python3.7/quopri.py ... 9.465217590332031e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pytz/tzfile.py ... 9.083747863769531e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/appfs.py ... 9.036064147949219e-05s
+// load /usr/lib/python3.7/__future__.py ... 8.678436279296875e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/tarfs.py ... 8.225440979003906e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/tools.py ... 8.106231689453125e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_url_tools.py ... 7.987022399902344e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/zipfs.py ... 7.748603820800781e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/osfs.py ... 7.677078247070312e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/memoryfs.py ... 7.677078247070312e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/extern/__init__.py ... 7.62939453125e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/_structures.py ... 7.271766662597656e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/opener/tempfs.py ... 7.05718994140625e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/magicalimport/compat.py ... 6.747245788574219e-05s
+// load /usr/lib/python3.7/email/iterators.py ... 6.532669067382812e-05s
+// load /usr/lib/python3.7/email/__init__.py ... 6.222724914550781e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/py31compat.py ... 5.245208740234375e-05s
+// load /usr/lib/python3.7/urllib/__init__.py ... 5.030632019042969e-05s
+// load /usr/lib/python3.7/xml/__init__.py ... 4.8160552978515625e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_version.py ... 4.7206878662109375e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_fscompat.py ... 4.601478576660156e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/_compat.py ... 4.553794860839844e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/__init__.py ... 4.410743713378906e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_repr.py ... 4.410743713378906e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/fs/_typing.py ... 4.076957702636719e-05s
+// load /usr/lib/python3.7/xml/parsers/__init__.py ... 4.0531158447265625e-05s
+// load /home/nao/venvs/my/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/__about__.py ... 4.029273986816406e-05s
+// load /usr/lib/python3.7/lib-dynload/_queue.cpython-37m-x86_64-linux-gnu.so ... 5.7220458984375e-06s
+// load /usr/lib/python3.7/lib-dynload/_hashlib.cpython-37m-x86_64-linux-gnu.so ... 4.5299530029296875e-06s
+// load /usr/lib/python3.7/lib-dynload/_datetime.cpython-37m-x86_64-linux-gnu.so ... 4.0531158447265625e-06s
+// load /usr/lib/python3.7/lib-dynload/pyexpat.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/math.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/_random.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/_blake2.cpython-37m-x86_64-linux-gnu.so ... 3.5762786865234375e-06s
+// load /usr/lib/python3.7/lib-dynload/_struct.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/_socket.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/_posixsubprocess.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/_opcode.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/_bisect.cpython-37m-x86_64-linux-gnu.so ... 3.337860107421875e-06s
+// load /usr/lib/python3.7/lib-dynload/zlib.cpython-37m-x86_64-linux-gnu.so ... 3.0994415283203125e-06s
+// load /usr/lib/python3.7/lib-dynload/select.cpython-37m-x86_64-linux-gnu.so ... 3.0994415283203125e-06s
+// load /usr/lib/python3.7/lib-dynload/_sha3.cpython-37m-x86_64-linux-gnu.so ... 3.0994415283203125e-06s
+// load /usr/lib/python3.7/lib-dynload/_bz2.cpython-37m-x86_64-linux-gnu.so ... 3.0994415283203125e-06s
+// load /usr/lib/python3.7/lib-dynload/binascii.cpython-37m-x86_64-linux-gnu.so ... 2.86102294921875e-06s
+// load /usr/lib/python3.7/lib-dynload/_lzma.cpython-37m-x86_64-linux-gnu.so ... 2.86102294921875e-06s
+// load /usr/lib/python3.7/lib-dynload/grp.cpython-37m-x86_64-linux-gnu.so ... 2.6226043701171875e-06s

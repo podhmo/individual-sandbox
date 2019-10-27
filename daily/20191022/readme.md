@@ -59,6 +59,7 @@ make: *** [Makefile:8: 02] Error 1
 - relationshipが取れていない
 - staff_list (sqlacodegenだとtable)の情報が取れない
 
+そうなってくると、現状の話では正規表現
 
 
 ### そういえば

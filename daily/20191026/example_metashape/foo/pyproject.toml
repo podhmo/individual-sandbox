@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "foo"
+version = "0.1.0"
+description = ""
+authors = ["podhmo <ababjam61+github@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+json2python-models = "^0.1.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
