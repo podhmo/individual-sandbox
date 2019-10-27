@@ -58,7 +58,6 @@ def dig(
     if tk == DBSTAR:
         yield from dig(d, rest_tks, path=path)
         for path, val, ok in _dig_next(d, tk, path):
-            yield from dig(val, rest_tks, path=path)
             yield from dig(val, tokens, path=path)
     else:
         for path, val, ok in _dig_next(d, tk, path):

@@ -55,7 +55,6 @@ def dig(
     if tk == DBSTAR:
         yield from dig(d, rest_tks, path=path)
         for path, val, ok in _dig_next(d, tk, path):
-            yield from dig(val, rest_tks, path=path)
             yield from dig(val, tokens, path=path)
     else:
         for path, val, ok in _dig_next(d, tk, path):
@@ -137,9 +136,7 @@ list(glob(d, "a/*/c"))  # => [('a/b/c', {'d': 'ok'})]
 list(glob(d, "a/*/d"))  # => [('a/z/d', 'zok')]
 list(glob(d, "a/*/*"))  # => [('a/b/c', {'d': 'ok'}), ('a/z/d', 'zok')]
 
-list(
-    glob(d, "a/**/d")
-)  # => [('a/b/c/d', 'ok'), ('a/z/d', 'zok')]
+list(glob(d, "a/**/d"))  # => [('a/b/c/d', 'ok'), ('a/z/d', 'zok')]
 list(
     glob(d, "a/**/*")
 )  # => [('a/b', {'c': {'d': 'ok'}}), ('a/z', {'d': 'zok'}), ('a/b/c', {'d': 'ok'}), ('a/b/c/d', 'ok'), ('a/z/d', 'zok')]
