@@ -1,4 +1,6 @@
 import typing as t
+import re
+import fnmatch
 from collections import namedtuple
 
 
@@ -12,20 +14,22 @@ class _Sentinel:
 
 # types
 Key = t.Union[int, str]
-Token = t.Union[_Sentinel, str, int]
+Token = t.Union[_Sentinel, str, int, t.Callable[[str], bool]]
 
 # constants
 STAR = _Sentinel("*")
 DBSTAR = _Sentinel("**")
 
 
-def parse(query: str, *, sep="/") -> t.Sequence[str]:
+def parse(query: str, *, sep="/") -> t.Sequence[Token]:
     r = []
     for tk in query.split(sep):  # todo: shlex?
         if tk == "**":
             r.append(DBSTAR)
         elif tk == "*":
             r.append(STAR)
+        elif "*" in tk or "?" in tk:
+            r.append(re.compile(fnmatch.translate(tk)).match)
         else:
             r.append(tk)
     if r:
@@ -72,6 +76,16 @@ def _dig_next(
             path.append(k)
             yield path, v, True
             path.pop()
+    elif callable(tk):
+        exists = False
+        for k, v in d.items():
+            if tk(k):
+                exists = True
+                path.append(k)
+                yield path, d[k], True
+                path.pop()
+        if not exists:
+            yield path, d, False
     else:
         if tk in d:
             path.append(tk)
@@ -136,9 +150,26 @@ list(glob(d, "a/*/c"))  # => [(('a', 'b', 'c'), {'d': 'ok'})]
 list(glob(d, "a/*/d"))  # => [(('a', 'z', 'd'), 'zok')]
 list(glob(d, "a/*/*"))  # => [(('a', 'b', 'c'), {'d': 'ok'}), (('a', 'z', 'd'), 'zok')]
 
-list(
-    glob(d, "a/**/d")
-)  # => [(('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
+list(glob(d, "a/**/d"))  # => [(('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
 list(
     glob(d, "a/**/*")
-)  # => [(('a', 'b'), {'c': {'d': 'ok'}}), (('a', 'z'), {'d': 'zok'}), (('a', 'b', 'c'), {'d': 'ok'}), (('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
+)  # => [(('a', 'b', 'c'), {'d': 'ok'}), (('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
+
+# glob
+d = {"xx.py": "ok", "yy.txt": "ng"}
+list(glob(d, "*.py"))  # => [(('xx.py',), 'ok')]
+list(glob(d, "*.txt"))  # => [(('yy.txt',), 'ng')]
+
+d = {
+    "projects": {"xx.py": "ok", "yy.txt": "ng", "sub": {"a.txt": "aaa", "b.py": "bbb"}}
+}
+list(glob(d, "*.py"))  # => []
+list(glob(d, "*.txt"))  # => []
+list(glob(d, "projects/*.py"))  # => [(('projects', 'xx.py'), 'ok')]
+list(glob(d, "projects/*.txt"))  # => [(('projects', 'yy.txt'), 'ng')]
+list(glob(d, "*/*.py"))  # => [(('projects', 'xx.py'), 'ok')]
+list(glob(d, "*/*.txt"))  # => [(('projects', 'yy.txt'), 'ng')]
+list(glob(d, "**/*.py"))  # => [(('projects', 'xx.py'), 'ok'), (('projects', 'sub', 'b.py'), 'bbb')]
+list(glob(d, "**/*.txt"))  # => [(('projects', 'yy.txt'), 'ng'), (('projects', 'sub', 'a.txt'), 'aaa')]
+list(glob(d, "projects/**/*.py"))  # => [(('projects', 'sub', 'b.py'), 'bbb')]
+list(glob(d, "projects/**/*.txt"))  # => [(('projects', 'sub', 'a.txt'), 'aaa')]
