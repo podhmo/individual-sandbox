@@ -39,10 +39,10 @@ def dig(
     *,
     path: t.Optional[t.List[Key]] = None,
 ) -> t.Iterable[t.Tuple[t.List[Key], t.Any, bool]]:  # (path, value, ok)
-    if not d:
-        return
     if not tokens:
         yield path, d, True
+        return
+    if not d:
         return
     path = path or []
     tk = tokens[0]
@@ -53,6 +53,7 @@ def dig(
         return
 
     if tk == DBSTAR:
+        yield from dig(d, rest_tks, path=path)
         for path, val, ok in _dig_next(d, tk, path):
             yield from dig(val, rest_tks, path=path)
             yield from dig(val, tokens, path=path)
@@ -91,7 +92,7 @@ def glob(d: t.Dict[str, t.Any], pattern: str, *, sep: str = "/"):
     for path, sd, ok in dig(d, tokens):
         if not ok:
             continue
-        name = tuple(path[:])
+        name = sep.join(path[:])
         if name in seen:
             continue
         seen.add(name)
@@ -123,22 +124,22 @@ fix(
 
 ### glob
 
-list(glob(d, "a"))  # => [(('a',), {'b': {'c': {'d': 'ok'}}, 'z': {'d': 'zok'}})]
-list(glob(d, "a/b"))  # => [(('a', 'b'), {'c': {'d': 'ok'}})]
-list(glob(d, "a/b/c"))  # => [(('a', 'b', 'c'), {'d': 'ok'})]
-list(glob(d, "a/b/c/d"))  # => [(('a', 'b', 'c', 'd'), 'ok')]
+list(glob(d, "a"))  # => [('a', {'b': {'c': {'d': 'ok'}}, 'z': {'d': 'zok'}})]
+list(glob(d, "a/b"))  # => [('a/b', {'c': {'d': 'ok'}})]
+list(glob(d, "a/b/c"))  # => [('a/b/c', {'d': 'ok'})]
+list(glob(d, "a/b/c/d"))  # => [('a/b/c/d', 'ok')]
 
 list(glob(d, "a/b/c/e"))  # => []
 list(glob(d, "a/x"))  # => []
 
-list(glob(d, "a/b/*/d"))  # => [(('a', 'b', 'c', 'd'), 'ok')]
-list(glob(d, "a/*/c"))  # => [(('a', 'b', 'c'), {'d': 'ok'})]
-list(glob(d, "a/*/d"))  # => [(('a', 'z', 'd'), 'zok')]
-list(glob(d, "a/*/*"))  # => [(('a', 'b', 'c'), {'d': 'ok'}), (('a', 'z', 'd'), 'zok')]
+list(glob(d, "a/b/*/d"))  # => [('a/b/c/d', 'ok')]
+list(glob(d, "a/*/c"))  # => [('a/b/c', {'d': 'ok'})]
+list(glob(d, "a/*/d"))  # => [('a/z/d', 'zok')]
+list(glob(d, "a/*/*"))  # => [('a/b/c', {'d': 'ok'}), ('a/z/d', 'zok')]
 
 list(
     glob(d, "a/**/d")
-)  # => [(('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
+)  # => [('a/b/c/d', 'ok'), ('a/z/d', 'zok')]
 list(
     glob(d, "a/**/*")
-)  # => [(('a', 'b'), {'c': {'d': 'ok'}}), (('a', 'z'), {'d': 'zok'}), (('a', 'b', 'c'), {'d': 'ok'}), (('a', 'b', 'c', 'd'), 'ok'), (('a', 'z', 'd'), 'zok')]
+)  # => [('a/b', {'c': {'d': 'ok'}}), ('a/z', {'d': 'zok'}), ('a/b/c', {'d': 'ok'}), ('a/b/c/d', 'ok'), ('a/z/d', 'zok')]

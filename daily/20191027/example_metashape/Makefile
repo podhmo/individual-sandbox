@@ -8,5 +8,11 @@
 	python $@*.py
 04:
 	python $@*.py
+07:
+	pycomment --inplace $@*.py
+08:
+	pycomment --inplace $@*.py
+09:
+	python $@*.py
 setup:
 	pip install -r requirements.txt

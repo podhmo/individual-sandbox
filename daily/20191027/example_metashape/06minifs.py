@@ -13,9 +13,6 @@ class MiniFS(t.Generic[T]):
         self._store = store or {}
         self.sep = sep
 
-    def glob(self, query: str) -> t.Dict[str, T]:
-        pass
-
     def create_file(self, name: str) -> T:
         pass
 
