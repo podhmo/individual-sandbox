@@ -15,11 +15,10 @@ class Option:
 
 
 class File:
-    name: str
-
-    def __init__(self, name: str, content):
+    def __init__(self, name: str, *, consume, content):
         self.name = name
         self.content = content
+        self.consume = consume
 
     def __enter__(self):
         return self.content
@@ -28,12 +27,21 @@ class File:
         pass
 
     def write(self, wf):
-        wf.write(str(self.content))
+        self.consume(wf, self.content)
+
+
+class PrestringResolver:
+    def __init__(self, *, module_factory):
+        self.module_factory = module_factory
+
+    def resolve(self, name):
+        return File(name, content=self.module_factory(), consume=self.consume)
+
+    def consume(self, wf, content):
+        wf.write(str(content))
 
 
 # TODO:
-# cleanup option
-# option manager
 # separate class
 # option
 def cleanup_pyfile(option: Option):
@@ -67,15 +75,6 @@ class Writer:
             logger.info("touch directory path=%s", os.fullpath.dirname(fullpath))
             os.makedirs(os.fullpath.dirname(fullpath), exist_ok=True)
             return self.write(file, _retry=True)
-
-
-class PrestringResolver:
-    def __init__(self, module_factory):
-        self.module_factory = module_factory
-
-    def resolve(self, name, *, m=None):
-        m = m or self.module_factory()
-        return File(name, m)
 
 
 class FS:
