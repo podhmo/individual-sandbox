@@ -30,7 +30,7 @@ schema単体の書き心地はpydanticが一番楽だった。あとmypyフレ�
 試した場所は
 
 - [00pydantic](00pydantic)
-
+- [03dataclasses](03dataclasses)
 
 ### typesystem
 
