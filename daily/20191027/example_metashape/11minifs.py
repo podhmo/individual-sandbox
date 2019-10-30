@@ -4,7 +4,7 @@ from prestring.output import output, cleanup_all  # noqa
 
 logging.basicConfig(level=logging.DEBUG)
 
-with output(root="11minifs") as fs:
+with output(root="11minifs", cleanup=cleanup_all) as fs:
     with fs.open("projects/x.txt", "w") as wf:
         print("hello x", file=wf)
         print("bye x", file=wf)

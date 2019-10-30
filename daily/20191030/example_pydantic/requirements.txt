@@ -1,0 +1,7 @@
+typing_extensions
+pydantic
+dictknife
+handofcats
+typesystem
+marshmallow
+marshmallow-jsonschema

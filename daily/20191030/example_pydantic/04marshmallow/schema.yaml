@@ -1,0 +1,24 @@
+$schema: 'http://json-schema.org/draft-07/schema#'
+definitions:
+  Config:
+    required:
+    - logLevel
+    - port
+    type: object
+    properties:
+      logLevel:
+        title: logLevel
+        type: string
+        enum:
+        - debug
+        - info
+        - warn
+        - error
+        - critical
+        enumNames: []
+      port:
+        title: port
+        type: number
+        format: integer
+    additionalProperties: false
+$ref: '#/definitions/Config'

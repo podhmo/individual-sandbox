@@ -1,0 +1,25 @@
+title: App Config
+definitions:
+  Config:
+    title: Config
+    type: object
+    properties:
+      port:
+        title: Port
+        type: integer
+      log_level:
+        title: Log Level
+        anyOf:
+        - const: debug
+          type: string
+        - const: info
+          type: string
+        - const: warn
+          type: string
+        - const: error
+          type: string
+        - const: critical
+          type: string
+    required:
+    - port
+    - log_level

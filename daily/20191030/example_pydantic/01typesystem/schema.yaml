@@ -1,0 +1,14 @@
+type: object
+properties:
+  port:
+    type: integer
+  logLevel:
+    enum:
+    - debug
+    - info
+    - warn
+    - error
+    - critical
+required:
+- port
+- logLevel
