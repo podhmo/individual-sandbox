@@ -1,5 +1,14 @@
 title: App Config
 definitions:
+  XXXAPI:
+    title: XXXAPI
+    type: object
+    properties:
+      token:
+        title: Token
+        type: string
+    required:
+    - token
   Config:
     title: Config
     type: object
@@ -20,6 +29,10 @@ definitions:
           type: string
         - const: critical
           type: string
+      secondary:
+        $ref: '#/definitions/Config'
+      xxxAPI:
+        $ref: '#/definitions/XXXAPI'
     required:
     - port
     - logLevel

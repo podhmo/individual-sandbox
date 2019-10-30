@@ -1,10 +1,19 @@
 $schema: 'http://json-schema.org/draft-07/schema#'
 definitions:
+  XXXAPI:
+    type: object
+    required:
+    - token
+    properties:
+      token:
+        title: token
+        type: string
+    additionalProperties: false
   Config:
+    type: object
     required:
     - logLevel
     - port
-    type: object
     properties:
       logLevel:
         title: logLevel
@@ -20,5 +29,11 @@ definitions:
         title: port
         type: number
         format: integer
+      secondary:
+        type: object
+        $ref: '#/definitions/Config'
+      xxxAPI:
+        type: object
+        $ref: '#/definitions/XXXAPI'
     additionalProperties: false
 $ref: '#/definitions/Config'
