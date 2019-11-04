@@ -20,3 +20,5 @@
 - open時にpath objectも有効にしたい
 - 表示をせっかくだからmarkdownにする？
 - logging部分を `[f]`と`[d]` にする？
+
+一応この辺りは対応した。

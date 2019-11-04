@@ -12,3 +12,5 @@ setup:
 	python $@*.py | tee $@text/gen.py
 	python $@text/gen.py | tee $@text/output.go
 	diff -u $@text/main.go.template $@text/output.go
+04:
+	python $@*.py --indent=1 --tab 03text/main.go.template
