@@ -1,0 +1,2024 @@
+{
+  "name": "estore.sqlite",
+  "tables": [
+    {
+      "name": "Category",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_Category_1",
+          "def": "UNIQUE (name)",
+          "table": "Category",
+          "columns": [
+            "name"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "id",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "Category",
+          "reference_table": null,
+          "columns": [
+            "id"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "sqlite_autoindex_Category_1",
+          "type": "UNIQUE",
+          "def": "UNIQUE (name)",
+          "table": "Category",
+          "reference_table": null,
+          "columns": [
+            "name"
+          ],
+          "reference_columns": null
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"Category\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT UNIQUE NOT NULL\n)"
+    },
+    {
+      "name": "Customer",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "email",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "password",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "country",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "address",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "sqlite_autoindex_Customer_1",
+          "def": "UNIQUE (email)",
+          "table": "Customer",
+          "columns": [
+            "email"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "id",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "Customer",
+          "reference_table": null,
+          "columns": [
+            "id"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "sqlite_autoindex_Customer_1",
+          "type": "UNIQUE",
+          "def": "UNIQUE (email)",
+          "table": "Customer",
+          "reference_table": null,
+          "columns": [
+            "email"
+          ],
+          "reference_columns": null
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"Customer\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"email\" TEXT UNIQUE NOT NULL,\n  \"password\" TEXT NOT NULL,\n  \"name\" TEXT NOT NULL,\n  \"country\" TEXT NOT NULL,\n  \"address\" TEXT NOT NULL\n)"
+    },
+    {
+      "name": "Order",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "state",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "date_created",
+          "type": "DATETIME",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "date_shipped",
+          "type": "DATETIME",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "date_delivered",
+          "type": "DATETIME",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "total_price",
+          "type": "DECIMAL(12, 2)",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "customer",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_order__customer",
+          "def": "CREATE INDEX \"idx_order__customer\" ON \"Order\" (\"customer\")",
+          "table": "Order",
+          "columns": [
+            "customer"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "id",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "Order",
+          "reference_table": null,
+          "columns": [
+            "id"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "- (Foreign key ID: 0)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "Order",
+          "reference_table": "Customer",
+          "columns": [
+            "customer"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"Order\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"state\" TEXT NOT NULL,\n  \"date_created\" DATETIME NOT NULL,\n  \"date_shipped\" DATETIME,\n  \"date_delivered\" DATETIME,\n  \"total_price\" DECIMAL(12, 2) NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE\n)"
+    },
+    {
+      "name": "Product",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "picture",
+          "type": "BLOB",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "price",
+          "type": "DECIMAL(12, 2)",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [],
+      "constraints": [
+        {
+          "name": "id",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "Product",
+          "reference_table": null,
+          "columns": [
+            "id"
+          ],
+          "reference_columns": null
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"Product\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT NOT NULL,\n  \"description\" TEXT NOT NULL,\n  \"picture\" BLOB,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"quantity\" INTEGER NOT NULL\n)"
+    },
+    {
+      "name": "CartItem",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "customer",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_cartitem__product",
+          "def": "CREATE INDEX \"idx_cartitem__product\" ON \"CartItem\" (\"product\")",
+          "table": "CartItem",
+          "columns": [
+            "product"
+          ]
+        },
+        {
+          "name": "idx_cartitem__customer",
+          "def": "CREATE INDEX \"idx_cartitem__customer\" ON \"CartItem\" (\"customer\")",
+          "table": "CartItem",
+          "columns": [
+            "customer"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "id",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (id)",
+          "table": "CartItem",
+          "reference_table": null,
+          "columns": [
+            "id"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "- (Foreign key ID: 0)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "CartItem",
+          "reference_table": "Product",
+          "columns": [
+            "product"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "- (Foreign key ID: 1)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "CartItem",
+          "reference_table": "Customer",
+          "columns": [
+            "customer"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"CartItem\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"quantity\" INTEGER NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE\n)"
+    },
+    {
+      "name": "Category_Product",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "category",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_category_product",
+          "def": "CREATE INDEX \"idx_category_product\" ON \"Category_Product\" (\"product\")",
+          "table": "Category_Product",
+          "columns": [
+            "product"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_Category_Product_1",
+          "def": "PRIMARY KEY (category, product)",
+          "table": "Category_Product",
+          "columns": [
+            "category",
+            "product"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "category",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (category)",
+          "table": "Category_Product",
+          "reference_table": null,
+          "columns": [
+            "category"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "product",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (product)",
+          "table": "Category_Product",
+          "reference_table": null,
+          "columns": [
+            "product"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "- (Foreign key ID: 0)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "Category_Product",
+          "reference_table": "Product",
+          "columns": [
+            "product"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "- (Foreign key ID: 1)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (category) REFERENCES Category (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "Category_Product",
+          "reference_table": "Category",
+          "columns": [
+            "category"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_Category_Product_1",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (category, product)",
+          "table": "Category_Product",
+          "reference_table": null,
+          "columns": [
+            "category",
+            "product"
+          ],
+          "reference_columns": null
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"Category_Product\" (\n  \"category\" INTEGER NOT NULL REFERENCES \"Category\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"category\", \"product\")\n)"
+    },
+    {
+      "name": "OrderItem",
+      "type": "table",
+      "comment": "",
+      "columns": [
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "price",
+          "type": "DECIMAL(12, 2)",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "order",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_orderitem__product",
+          "def": "CREATE INDEX \"idx_orderitem__product\" ON \"OrderItem\" (\"product\")",
+          "table": "OrderItem",
+          "columns": [
+            "product"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_OrderItem_1",
+          "def": "PRIMARY KEY (order, product)",
+          "table": "OrderItem",
+          "columns": [
+            "order",
+            "product"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "name": "order",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (order)",
+          "table": "OrderItem",
+          "reference_table": null,
+          "columns": [
+            "order"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "product",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (product)",
+          "table": "OrderItem",
+          "reference_table": null,
+          "columns": [
+            "product"
+          ],
+          "reference_columns": null
+        },
+        {
+          "name": "- (Foreign key ID: 0)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "OrderItem",
+          "reference_table": "Product",
+          "columns": [
+            "product"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "- (Foreign key ID: 1)",
+          "type": "FOREIGN KEY",
+          "def": "FOREIGN KEY (order) REFERENCES Order (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+          "table": "OrderItem",
+          "reference_table": "Order",
+          "columns": [
+            "order"
+          ],
+          "reference_columns": [
+            "id"
+          ]
+        },
+        {
+          "name": "sqlite_autoindex_OrderItem_1",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (order, product)",
+          "table": "OrderItem",
+          "reference_table": null,
+          "columns": [
+            "order",
+            "product"
+          ],
+          "reference_columns": null
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE \"OrderItem\" (\n  \"quantity\" INTEGER NOT NULL,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"order\" INTEGER NOT NULL REFERENCES \"Order\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"order\", \"product\")\n)"
+    }
+  ],
+  "relations": [
+    {
+      "table": {
+        "name": "Order",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "state",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_created",
+            "type": "DATETIME",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_shipped",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_delivered",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "total_price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "customer",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_order__customer",
+            "def": "CREATE INDEX \"idx_order__customer\" ON \"Order\" (\"customer\")",
+            "table": "Order",
+            "columns": [
+              "customer"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Order",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Order",
+            "reference_table": "Customer",
+            "columns": [
+              "customer"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Order\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"state\" TEXT NOT NULL,\n  \"date_created\" DATETIME NOT NULL,\n  \"date_shipped\" DATETIME,\n  \"date_delivered\" DATETIME,\n  \"total_price\" DECIMAL(12, 2) NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE\n)"
+      },
+      "columns": [
+        {
+          "name": "customer",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Customer",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "email",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "password",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "country",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "address",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sqlite_autoindex_Customer_1",
+            "def": "UNIQUE (email)",
+            "table": "Customer",
+            "columns": [
+              "email"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Customer",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "sqlite_autoindex_Customer_1",
+            "type": "UNIQUE",
+            "def": "UNIQUE (email)",
+            "table": "Customer",
+            "reference_table": null,
+            "columns": [
+              "email"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Customer\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"email\" TEXT UNIQUE NOT NULL,\n  \"password\" TEXT NOT NULL,\n  \"name\" TEXT NOT NULL,\n  \"country\" TEXT NOT NULL,\n  \"address\" TEXT NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "CartItem",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "customer",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_cartitem__product",
+            "def": "CREATE INDEX \"idx_cartitem__product\" ON \"CartItem\" (\"product\")",
+            "table": "CartItem",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "idx_cartitem__customer",
+            "def": "CREATE INDEX \"idx_cartitem__customer\" ON \"CartItem\" (\"customer\")",
+            "table": "CartItem",
+            "columns": [
+              "customer"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "CartItem",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "CartItem",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "CartItem",
+            "reference_table": "Customer",
+            "columns": [
+              "customer"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"CartItem\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"quantity\" INTEGER NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE\n)"
+      },
+      "columns": [
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Product",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "picture",
+            "type": "BLOB",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Product",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Product\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT NOT NULL,\n  \"description\" TEXT NOT NULL,\n  \"picture\" BLOB,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"quantity\" INTEGER NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "CartItem",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "customer",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_cartitem__product",
+            "def": "CREATE INDEX \"idx_cartitem__product\" ON \"CartItem\" (\"product\")",
+            "table": "CartItem",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "idx_cartitem__customer",
+            "def": "CREATE INDEX \"idx_cartitem__customer\" ON \"CartItem\" (\"customer\")",
+            "table": "CartItem",
+            "columns": [
+              "customer"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "CartItem",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "CartItem",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "CartItem",
+            "reference_table": "Customer",
+            "columns": [
+              "customer"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"CartItem\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"quantity\" INTEGER NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE\n)"
+      },
+      "columns": [
+        {
+          "name": "customer",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Customer",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "email",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "password",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "country",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "address",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sqlite_autoindex_Customer_1",
+            "def": "UNIQUE (email)",
+            "table": "Customer",
+            "columns": [
+              "email"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Customer",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "sqlite_autoindex_Customer_1",
+            "type": "UNIQUE",
+            "def": "UNIQUE (email)",
+            "table": "Customer",
+            "reference_table": null,
+            "columns": [
+              "email"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Customer\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"email\" TEXT UNIQUE NOT NULL,\n  \"password\" TEXT NOT NULL,\n  \"name\" TEXT NOT NULL,\n  \"country\" TEXT NOT NULL,\n  \"address\" TEXT NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "Category_Product",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "category",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_category_product",
+            "def": "CREATE INDEX \"idx_category_product\" ON \"Category_Product\" (\"product\")",
+            "table": "Category_Product",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_Category_Product_1",
+            "def": "PRIMARY KEY (category, product)",
+            "table": "Category_Product",
+            "columns": [
+              "category",
+              "product"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "category",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (category)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "category"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "product",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (product)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "product"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Category_Product",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (category) REFERENCES Category (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Category_Product",
+            "reference_table": "Category",
+            "columns": [
+              "category"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_Category_Product_1",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (category, product)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "category",
+              "product"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Category_Product\" (\n  \"category\" INTEGER NOT NULL REFERENCES \"Category\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"category\", \"product\")\n)"
+      },
+      "columns": [
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Product",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "picture",
+            "type": "BLOB",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Product",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Product\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT NOT NULL,\n  \"description\" TEXT NOT NULL,\n  \"picture\" BLOB,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"quantity\" INTEGER NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "Category_Product",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "category",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_category_product",
+            "def": "CREATE INDEX \"idx_category_product\" ON \"Category_Product\" (\"product\")",
+            "table": "Category_Product",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_Category_Product_1",
+            "def": "PRIMARY KEY (category, product)",
+            "table": "Category_Product",
+            "columns": [
+              "category",
+              "product"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "category",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (category)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "category"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "product",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (product)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "product"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Category_Product",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (category) REFERENCES Category (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Category_Product",
+            "reference_table": "Category",
+            "columns": [
+              "category"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_Category_Product_1",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (category, product)",
+            "table": "Category_Product",
+            "reference_table": null,
+            "columns": [
+              "category",
+              "product"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Category_Product\" (\n  \"category\" INTEGER NOT NULL REFERENCES \"Category\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"category\", \"product\")\n)"
+      },
+      "columns": [
+        {
+          "name": "category",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Category",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sqlite_autoindex_Category_1",
+            "def": "UNIQUE (name)",
+            "table": "Category",
+            "columns": [
+              "name"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Category",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "sqlite_autoindex_Category_1",
+            "type": "UNIQUE",
+            "def": "UNIQUE (name)",
+            "table": "Category",
+            "reference_table": null,
+            "columns": [
+              "name"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Category\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT UNIQUE NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (category) REFERENCES Category (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "OrderItem",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "order",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_orderitem__product",
+            "def": "CREATE INDEX \"idx_orderitem__product\" ON \"OrderItem\" (\"product\")",
+            "table": "OrderItem",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_OrderItem_1",
+            "def": "PRIMARY KEY (order, product)",
+            "table": "OrderItem",
+            "columns": [
+              "order",
+              "product"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "order",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (order)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "order"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "product",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (product)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "product"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "OrderItem",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (order) REFERENCES Order (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "OrderItem",
+            "reference_table": "Order",
+            "columns": [
+              "order"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_OrderItem_1",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (order, product)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "order",
+              "product"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"OrderItem\" (\n  \"quantity\" INTEGER NOT NULL,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"order\" INTEGER NOT NULL REFERENCES \"Order\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"order\", \"product\")\n)"
+      },
+      "columns": [
+        {
+          "name": "product",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Product",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "description",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "picture",
+            "type": "BLOB",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Product",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Product\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"name\" TEXT NOT NULL,\n  \"description\" TEXT NOT NULL,\n  \"picture\" BLOB,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"quantity\" INTEGER NOT NULL\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    },
+    {
+      "table": {
+        "name": "OrderItem",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "quantity",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "order",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "product",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_orderitem__product",
+            "def": "CREATE INDEX \"idx_orderitem__product\" ON \"OrderItem\" (\"product\")",
+            "table": "OrderItem",
+            "columns": [
+              "product"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_OrderItem_1",
+            "def": "PRIMARY KEY (order, product)",
+            "table": "OrderItem",
+            "columns": [
+              "order",
+              "product"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "order",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (order)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "order"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "product",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (product)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "product"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (product) REFERENCES Product (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "OrderItem",
+            "reference_table": "Product",
+            "columns": [
+              "product"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "- (Foreign key ID: 1)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (order) REFERENCES Order (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "OrderItem",
+            "reference_table": "Order",
+            "columns": [
+              "order"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          },
+          {
+            "name": "sqlite_autoindex_OrderItem_1",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (order, product)",
+            "table": "OrderItem",
+            "reference_table": null,
+            "columns": [
+              "order",
+              "product"
+            ],
+            "reference_columns": null
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"OrderItem\" (\n  \"quantity\" INTEGER NOT NULL,\n  \"price\" DECIMAL(12, 2) NOT NULL,\n  \"order\" INTEGER NOT NULL REFERENCES \"Order\" (\"id\") ON DELETE CASCADE,\n  \"product\" INTEGER NOT NULL REFERENCES \"Product\" (\"id\") ON DELETE CASCADE,\n  PRIMARY KEY (\"order\", \"product\")\n)"
+      },
+      "columns": [
+        {
+          "name": "order",
+          "type": "INTEGER",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "parent_table": {
+        "name": "Order",
+        "type": "table",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "state",
+            "type": "TEXT",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_created",
+            "type": "DATETIME",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_shipped",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "date_delivered",
+            "type": "DATETIME",
+            "nullable": true,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "total_price",
+            "type": "DECIMAL(12, 2)",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          },
+          {
+            "name": "customer",
+            "type": "INTEGER",
+            "nullable": false,
+            "default": null,
+            "comment": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_order__customer",
+            "def": "CREATE INDEX \"idx_order__customer\" ON \"Order\" (\"customer\")",
+            "table": "Order",
+            "columns": [
+              "customer"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "name": "id",
+            "type": "PRIMARY KEY",
+            "def": "PRIMARY KEY (id)",
+            "table": "Order",
+            "reference_table": null,
+            "columns": [
+              "id"
+            ],
+            "reference_columns": null
+          },
+          {
+            "name": "- (Foreign key ID: 0)",
+            "type": "FOREIGN KEY",
+            "def": "FOREIGN KEY (customer) REFERENCES Customer (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+            "table": "Order",
+            "reference_table": "Customer",
+            "columns": [
+              "customer"
+            ],
+            "reference_columns": [
+              "id"
+            ]
+          }
+        ],
+        "triggers": [],
+        "def": "CREATE TABLE \"Order\" (\n  \"id\" INTEGER PRIMARY KEY AUTOINCREMENT,\n  \"state\" TEXT NOT NULL,\n  \"date_created\" DATETIME NOT NULL,\n  \"date_shipped\" DATETIME,\n  \"date_delivered\" DATETIME,\n  \"total_price\" DECIMAL(12, 2) NOT NULL,\n  \"customer\" INTEGER NOT NULL REFERENCES \"Customer\" (\"id\") ON DELETE CASCADE\n)"
+      },
+      "parent_columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "def": "FOREIGN KEY (order) REFERENCES Order (id) ON UPDATE NO ACTION ON DELETE CASCADE MATCH NONE",
+      "is_additional": false
+    }
+  ],
+  "driver": {
+    "name": "sqlite",
+    "database_version": "3.29.0"
+  }
+}

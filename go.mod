@@ -37,6 +37,7 @@ require (
 	github.com/vektah/dataloaden v0.3.0 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	go.uber.org/zap v1.10.0
+	golang.org/x/tools v0.0.0-20191101200257-8dbcdeb83d3f
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )
