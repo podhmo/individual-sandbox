@@ -1,0 +1,6 @@
+# DSN (Database Source Name) to connect database
+dsn: sqlite:../../20191104/example_pony/00example/estore.sqlite
+
+# Path to generate document
+# Default is `dbdoc`
+docPath: doc/schema

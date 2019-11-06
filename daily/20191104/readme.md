@@ -1,3 +1,13 @@
+## sqlalchemy
+
+この辺りの流れが分かっていないかも？automapのrelationshipは不要
+
+- metadata
+- automap
+- [inspect](https://docs.sqlalchemy.org/en/13/core/inspection.html) -- 既存のモデルなどにアクセスするための公開API?
+
+Inspector.from_engine()などもあるので嘘かも？
+
 ## sqlite3 使いかたわすれたなー。
 
 とりあえず `.help` しておけば良さそう。
@@ -32,6 +42,10 @@ relationなどを調べるのにponyのドキュメントが悪くなかった�
 
 - https://editor.ponyorm.com/
 
+### むかしさわったもの
+
+../20190414/db-examples/
+
 ## python metashape
 
 そろそろ使いやすさのフェイズに入っていきたい。
@@ -39,5 +53,5 @@ relationなどを調べるのにponyのドキュメントが悪くなかった�
 
 ## python prestring
 
-とりあえず複数入出力の機能を付けた
+とりあえず複数出力の機能を付けた
 次はなんなのだろう？一旦こちらはおきで良い気がする。
