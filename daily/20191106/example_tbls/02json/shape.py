@@ -1,6 +1,6 @@
 from __future__ import annotations
 import typing as t
-
+from metashape.declarative import field, ORIGINAL_NAME
 # from: https://github.com/k1LoW/tbls/blob/master/schema/schema.go
 
 
@@ -8,8 +8,8 @@ class Index:
     """Index is the struct for database index"""
 
     name: str
-    def_: str  # def
-    table: t.Optional[str]  # pointer
+    def_: str = field("", metadata={ORIGINAL_NAME: "def"})
+    table: t.Optional[str]
     columns: t.List[str]
 
 
@@ -18,7 +18,7 @@ class Constraint:
 
     name: str
     type: str  # type
-    def_: str  # def_
+    def_: str = field("", metadata={ORIGINAL_NAME: "def"})_
     table: t.Optional[str]
     reference_table: t.Optional[str]
     columns: t.List[str]
@@ -29,7 +29,7 @@ class Trigger:
     """ Trigger is the struct for database trigger"""
 
     name: str
-    def_: str  # def_
+    def_: str = field("", metadata={ORIGINAL_NAME: "def"})_
 
 
 class Column:
@@ -54,7 +54,7 @@ class Table:
     indexes: t.List[Index]
     constraints: t.List[Constraint]
     triggers: t.List[Trigger]
-    def_: str  # def
+    def_: str = field("", metadata={ORIGINAL_NAME: "def"})
 
 
 class Relation:
@@ -64,7 +64,7 @@ class Relation:
     columns: t.List[Column]
     parent_table: t.Optional[Table]
     parent_columns: t.List[Column]
-    def_: str  # def
+    def_: str = field("", metadata={ORIGINAL_NAME: "def"})
     is_additional: bool
 
 
