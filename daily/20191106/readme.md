@@ -37,3 +37,10 @@ go get -v github.com/k1LoW/tbls
 
 - shape -- 型
 - resource -- shapeの構造を持ったdataset (CSVとか想像してもらえれば良い)
+
+## 追記
+
+自分自身のmodule以外は除外したいかも？
+
+- onlyを追加
+- onlyがなくモジュールを渡した場合にはそれだけを対象に変更
