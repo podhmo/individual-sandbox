@@ -11,10 +11,10 @@ def boo(x) -> int:
 class A:
     """after"""
 
-    def f(self, x):
+    def f(self, x):  # oyoyo
         """after"""
         pass
 
-    def g(self, *args, **kwargs):
+    def g(self, *args, **kwargs):  # oyoyo
         """after"""
         pass

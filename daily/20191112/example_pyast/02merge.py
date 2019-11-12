@@ -5,6 +5,9 @@ from lib2to3.pytree import Node
 from pycomment.langhelpers import reify
 from pycomment.parse import parse_file, PyTreeVisitor, token, node_name
 
+# TODO: update docstring
+# TODO: comment handling
+
 
 class Visitor(PyTreeVisitor):
     @reify
@@ -27,6 +30,41 @@ class Visitor(PyTreeVisitor):
         return False
 
 
+def merge(t0, t1):
+    for name, node1 in v1.defs.items():
+        node0 = v0.defs.get(name)
+        if node0 is None:  # insert
+            node1.prefix = "\n\n"
+            t0.append_child(node1)
+        else:  # update
+            suite0 = node0.children[-1]
+            assert node_name(suite0) == "suite"
+            for i, x in enumerate(suite0.children):
+                if node_name(x) == "simple_stmt" and x.children[0].type == token.STRING:
+                    break
+            has_comment0 = i < (len(suite0.children) - 1)
+
+            suite1 = node1.children[-1]
+            assert node_name(suite1) == "suite"
+            before_comments1 = []
+            for j, x in enumerate(suite1.children):
+                before_comments1.append(x)
+                if node_name(x) == "simple_stmt" and x.children[0].type == token.STRING:
+                    break
+            has_comment1 = j < (len(suite1.children) - 1)
+
+            if has_comment1:
+                if has_comment0:
+                    suite0.children[i] = suite1.children[j]
+                else:
+                    assert suite0.children[0].type == token.NEWLINE
+                    assert suite0.children[1].type == token.INDENT
+                    suite0.children = before_comments1 + suite0.children[1:]
+                suite0.parent.changed()
+            node0.children = [*node1.children[:-1], node0.children[-1]]
+            node0.parent.changed()
+    return t0
+
 # logging.basicConfig(level=logging.DEBUG)
 t0 = parse_file("./before.py")
 v0 = Visitor()
@@ -39,19 +77,4 @@ v1.visit(t1)
 print(t0)
 print("--")
 
-
-def _parse(node: Node):
-    children = node.children
-    # [before-colon, ':' after-colon]
-
-
-for name, node1 in v1.defs.items():
-    node0 = v0.defs.get(name)
-    if node0 is None:  # insert
-        node1.prefix = "\n\n"
-        t0.append_child(node1)
-    else:  # update
-        node0.children = [*node1.children[:-1], node0.children[-1]]
-        node0.parent.changed()
-
-print(t0)
+print(merge(t0, t1))

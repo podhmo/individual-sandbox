@@ -15,12 +15,13 @@ class A:
         """before"""
         pass
 
-    def g(self):
+    # hmm
+    def g(self):  # hoho
         pass
 
 --
 def foo(x, y, z) -> int:
-    """before"""
+    """after"""
     pass
 
 
@@ -30,13 +31,15 @@ def bar(x) -> int:
 
 
 class A:
-    """before"""
+    """after"""
 
     def f(self, x):
-        """before"""
+        """after"""
         pass
 
-    def g(self, *args, **kwargs):
+    # hmm
+    def g(self, *args, **kwargs):  # oyoyo
+        """after"""
         pass
 
 

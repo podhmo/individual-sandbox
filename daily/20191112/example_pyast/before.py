@@ -15,5 +15,6 @@ class A:
         """before"""
         pass
 
-    def g(self):
+    # hmm
+    def g(self):  # hoho
         pass
