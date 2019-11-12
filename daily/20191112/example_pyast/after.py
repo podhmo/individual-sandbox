@@ -1,3 +1,4 @@
+@decorator("after")
 def foo(x, y, z) -> int:
     """after"""
     pass

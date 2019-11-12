@@ -1,3 +1,4 @@
+@decorator("before")
 def foo(x, y) -> int:
     """before"""
     pass

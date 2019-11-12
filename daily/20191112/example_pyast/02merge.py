@@ -7,6 +7,7 @@ from pycomment.parse import parse_file, PyTreeVisitor, token, node_name
 
 # TODO: update docstring
 # TODO: comment handling
+# TODO: support method (insert)
 
 
 class Visitor(PyTreeVisitor):
@@ -31,6 +32,7 @@ class Visitor(PyTreeVisitor):
 
 
 def merge(t0, t1):
+    """update parameters and docstring by t1, if not existed, inserted"""
     for name, node1 in v1.defs.items():
         node0 = v0.defs.get(name)
         if node0 is None:  # insert
@@ -64,6 +66,7 @@ def merge(t0, t1):
             node0.children = [*node1.children[:-1], node0.children[-1]]
             node0.parent.changed()
     return t0
+
 
 # logging.basicConfig(level=logging.DEBUG)
 t0 = parse_file("./before.py")
