@@ -1,0 +1,48 @@
+def foo(x, y) -> int:
+    """before"""
+    pass
+
+
+def bar(x) -> int:
+    """before"""
+    pass
+
+
+class A:
+    """before"""
+
+    def f(self):
+        """before"""
+        pass
+
+    def g(self):
+        pass
+
+--
+def foo(x, y, z) -> int:
+    """before"""
+    pass
+
+
+def bar(x) -> int:
+    """before"""
+    pass
+
+
+class A:
+    """before"""
+
+    def f(self, x):
+        """before"""
+        pass
+
+    def g(self, *args, **kwargs):
+        pass
+
+
+def boo(x) -> int:
+    """after"""
+    pass
+
+
+

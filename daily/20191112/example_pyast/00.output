@@ -1,0 +1,6 @@
+def foo(x, y) -> int:
+    pass
+
+
+def bar(x) -> int:
+    pass
