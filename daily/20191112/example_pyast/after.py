@@ -19,3 +19,9 @@ class A:
     def g(self, *args, **kwargs):  # oyoyo
         """after"""
         pass
+
+
+if x == "hmm":
+
+    def hidden():
+        pass

@@ -36,6 +36,16 @@ def merge(t0, t1):
     for name, node1 in v1.defs.items():
         node0 = v0.defs.get(name)
         if node0 is None:  # insert
+            ancestors = []
+            target = node1
+            while target is not None:
+                ancestors.append(node_name(target))
+                target = target.parent
+
+            assert ancestors[-1] == "file_input"
+            is_toplevel_def = ancestors[-2] in ("funcdef", "classdef", "async_funcdef")
+            if not is_toplevel_def:
+                continue
             node1.prefix = "\n\n"
             t0.append_child(node1)
         else:  # update
