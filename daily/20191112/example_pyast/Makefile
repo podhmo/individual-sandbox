@@ -4,3 +4,5 @@
 	python $@*.py |& tee $@.output
 02:
 	python $@*.py |& tee $@.output
+03:
+	python $@*.py |& tee $@.output

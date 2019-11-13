@@ -1,0 +1,30 @@
+@decorator("before")
+def foo(x, y, z) -> int:
+    """after"""
+    pass
+
+
+def bar(x) -> int:
+    """before"""
+    pass
+
+
+class A:
+    """after"""
+
+    def f(self, x):
+        """after"""
+        pass
+
+    # hmm
+    def g(self, *args, **kwargs):  # oyoyo
+        """after"""
+        pass
+
+
+def boo(x) -> int:
+    """after"""
+    pass
+
+
+
