@@ -1,6 +1,6 @@
-import typing as t
-import logging
+from handofcats import as_command
 from lib2to3.pytree import Node
+from lib2to3.fixer_util import find_indentation
 from pycomment.langhelpers import reify
 from pycomment.parse import parse_string, PyTreeVisitor, token, node_name
 
@@ -10,26 +10,41 @@ class Visitor(PyTreeVisitor):
     def defs(self):
         return {}
 
+    @reify
+    def path(self):
+        return []
+
+    def visit(self, node):
+        try:
+            super().visit(node)
+            if self.path and node_name(node) in ("funcdef", "classdef"):
+                if self.path[-1] == node.children[1].value:
+                    self.path.pop()
+        finally:
+            self.level -= 1
+
     def visit_funcdef(self, node: Node):
         # 'def' <name> ['(' <argument>,* ')'] ':'
         # 'def' <name> ['(' <argument>,* ')'] -> [] ':'
         name = node.children[1].value
         assert node.children[1].type == token.NAME
-        self.defs[name] = node
+        self.path.append(name)
+        self.defs[tuple(self.path)] = node
         return False
 
     def visit_classdef(self, node: Node):
         # 'class' <name>
         name = node.children[1].value
         assert node.children[1].type == token.NAME
-        self.defs[name] = node
+        self.path.append(name)
+        self.defs[tuple(self.path)] = node
         return False
 
 
 def replace_code_by_skeleton(base: str, skeleton: str) -> str:
     t0 = parse_string(base)
     t1 = parse_string(skeleton)
-    return str(replace_ast_by_skeleton(t0, t1))
+    return str(replace_ast_by_skeleton(t0, t1)).rstrip()
 
 
 def replace_ast_by_skeleton(t0, t1) -> Node:
@@ -40,12 +55,19 @@ def replace_ast_by_skeleton(t0, t1) -> Node:
     v0.visit(t0)
     v1.visit(t1)
 
-    for name, node1 in v1.defs.items():
-        node0 = v0.defs.get(name)
-        if node0 is None:  # insert
-            _insert_node(t0, node1)
-        else:  # update
+    for path, node1 in sorted(v1.defs.items(), key=len):
+        node0 = v0.defs.get(path)
+        if node0 is not None:  # update
             _replace_node(node0, node1)
+            continue
+
+        # insert
+        if len(path) == 1:
+            _insert_node(t0, node1)
+            continue
+        parent0 = v0.defs.get(path[:-1])
+        if parent0 is not None:
+            _insert_node(parent0, node1)
     return t0
 
 
@@ -60,7 +82,12 @@ def _insert_node(t0, node) -> None:
     is_toplevel_def = ancestors[-2] in ("funcdef", "classdef", "async_funcdef")
     if not is_toplevel_def:
         return
-    node.prefix = "\n\n"
+
+    indentation = find_indentation(node)
+    if indentation == "":
+        node.prefix = "\n\n"
+    else:
+        node.prefix = f"\n{indentation}"
     t0.append_child(node)
 
 
@@ -93,10 +120,12 @@ def _replace_node(node0: Node, node1: Node) -> None:
     node0.parent.changed()
 
 
-# logging.basicConfig(level=logging.DEBUG)
-with open("./before.py") as rf:
-    s0 = rf.read()
-with open("./after.py") as rf:
-    s1 = rf.read()
-t0 = replace_code_by_skeleton(s0, s1)
-print(t0)
+@as_command
+def run(*, left: str, right: str):
+    # logging.basicConfig(level=logging.DEBUG)
+    with open(left) as rf:
+        s0 = rf.read()
+    with open(right) as rf:
+        s1 = rf.read()
+    t0 = replace_code_by_skeleton(s0, s1)
+    print(t0)

@@ -1,0 +1,51 @@
+{
+  "components": {
+    "schemas": {
+      "Team": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "members"
+        ]
+      },
+      "Person": {
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/Team"
+          },
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "nickname": {
+            "type": "string"
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          }
+        },
+        "required": [
+          "team",
+          "name",
+          "age",
+          "parents"
+        ]
+      }
+    }
+  }
+}

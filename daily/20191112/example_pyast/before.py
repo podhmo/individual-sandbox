@@ -1,7 +1,11 @@
 @decorator("before")
 def foo(x, y) -> int:
     """before"""
-    pass
+
+    def _internal(x, y, z):
+        return x + y + z
+
+    return _internal(x, y, y)
 
 
 def bar(x) -> int:

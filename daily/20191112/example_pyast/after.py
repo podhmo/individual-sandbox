@@ -1,5 +1,8 @@
+import typing as t
+
+
 @decorator("after")
-def foo(x, y, z) -> int:
+def foo(x, y, z) -> t.Optional[int]:
     """after"""
     pass
 
@@ -17,6 +20,10 @@ class A:
         pass
 
     def g(self, *args, **kwargs):  # oyoyo
+        """after"""
+        pass
+
+    def h(self, x):
         """after"""
         pass
 

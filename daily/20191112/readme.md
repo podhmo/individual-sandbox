@@ -1,3 +1,7 @@
+## python 関数のsignatureとdocstringを変更したい
+
+できた
+
 ## ariadneを触っていると関数の雛形だけ生成する機能が欲しい気がする
 
 ## metashape python

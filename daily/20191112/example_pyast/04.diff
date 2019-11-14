@@ -1,0 +1,40 @@
+--- before.py	2019-11-13 20:51:17.423695345 +0900
++++ 04.output	2019-11-13 21:00:43.038989526 +0900
+@@ -1,6 +1,6 @@
+ @decorator("before")
+-def foo(x, y) -> int:
+-    """before"""
++def foo(x, y, z) -> int:
++    """after"""
+     pass
+ 
+ 
+@@ -10,12 +10,24 @@
+ 
+ 
+ class A:
+-    """before"""
++    """after"""
+ 
+-    def f(self):
+-        """before"""
++    def f(self, x):
++        """after"""
+         pass
+ 
+     # hmm
+-    def g(self):  # hoho
++    def g(self, *args, **kwargs):  # oyoyo
++        """after"""
+         pass
++
++    def h(self, x):
++        """after"""
++        pass
++
++
++
++
++def boo(x) -> int:
++    """after"""
++    pass

@@ -1,7 +1,11 @@
 @decorator("before")
-def foo(x, y, z) -> int:
+def foo(x, y, z) -> t.Optional[int]:
     """after"""
-    pass
+
+    def _internal(x, y, z):
+        return x + y + z
+
+    return _internal(x, y, y)
 
 
 def bar(x) -> int:
@@ -21,17 +25,13 @@ class A:
         """after"""
         pass
 
-
-def boo(x) -> int:
-    """after"""
-    pass
-
-
-
-
-def h(self, x):
+    def h(self, x):
         """after"""
         pass
 
 
 
+
+def boo(x) -> int:
+    """after"""
+    pass
