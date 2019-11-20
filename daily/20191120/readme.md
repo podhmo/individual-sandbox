@@ -7,6 +7,14 @@
 - 何かのvisualizeを？
 - react -> ひさしぶりにふくしゅうしてみる？
 
+## mypy Annotatedはまだ未実装っぽい
+
+pep593のやつ。
+
+https://www.python.org/dev/peps/pep-0593/
+
+typing_extensionsを使って利用はできるがmypyはエラーを出す。
+
 ## go-plugin
 
 - https://github.com/hashicorp/go-plugin
