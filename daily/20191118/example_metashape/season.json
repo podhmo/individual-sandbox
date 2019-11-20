@@ -1,0 +1,22 @@
+{
+  "categories": [
+    {
+      "en_name": "spring",
+      "ja_name": "春"
+    },
+    {
+      "en_name": "summer",
+      "ja_name": "夏"
+    },
+    {
+      "en_name": "autumn",
+      "ja_name": "秋"
+    },
+    {
+      "en_name": "winter",
+      "ja_name": "冬"
+    }
+  ],
+  "en_name": "season",
+  "ja_name": "四季"
+}

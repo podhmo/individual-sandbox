@@ -1,0 +1,28 @@
+definitions:
+  {{ en_name|titleize }}:
+    description: {{ ja_name }}の種類
+    type: string
+    enum:
+    {%- for c in categories %}
+      - {{ c.en_name }}
+    {%- endfor %}
+    x-ja-enum:
+    {%- for c in categories %}
+      - {{ c.ja_name }}
+    {%- endfor %}
+
+
+parameters:
+  {{ en_name|titleize }}:
+    name: {{ en_name }}
+    in: query
+    description: {{ ja_name }}の種類
+    type: string
+    enum:
+    {%- for c in categories %}
+      - {{ c.en_name }}
+    {%- endfor %}
+    x-ja-enum:
+    {%- for c in categories %}
+      - {{ c.ja_name }}
+    {%- endfor %}
