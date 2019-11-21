@@ -7,6 +7,35 @@
 - 何かのvisualizeを？
 - react -> ひさしぶりにふくしゅうしてみる？
 
+## arch yay -Syu
+
+- emacs上でのIMの変換候補の表示が戻った
+- alacrittyのフォントの見た目がひどくなった
+
+### emacs
+
+- そう言えば文字入力中の変換候補がでなくなっていたのが直ったな。
+- flake8が効かなくなった。flycheckで。
+- これは flycheck-verify-checker をすれば良い
+
+### pipがない
+
+https://docs.python.org/ja/3/library/ensurepip.html
+
+```console
+$ python -m pip
+/usr/bin/python: No module named pip
+
+# hmm
+$ python -m ensurepip --user
+$ python -m ensurepip --user --upgrade
+$ python -m pip install flake8 --user
+```
+
+## alacritty
+
+- fontが崩れるのを直したい
+
 ## mypy Annotatedはまだ未実装っぽい
 
 pep593のやつ。
