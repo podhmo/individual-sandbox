@@ -1,0 +1,8 @@
+top
+{%- block head %}
+head
+{%- endblock %}
+body
+{%- block tail %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{%- endblock %}

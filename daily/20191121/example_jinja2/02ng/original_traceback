@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "VENV/jinja/jinja2/environment.py", line 1013, in render
+    return concat(self.root_render_func(self.new_context(vars)))
+  File "02ng/main.j2", line 15, in root
+  File "02ng/base.j2", line 14, in root
+  File "02ng/base.j2", line 32, in block_tail
+  File "VENV/jinja/jinja2/runtime.py", line 255, in call
+    if getattr(__obj, 'contextfunction', 0):
+  File "VENV/jinja/jinja2/runtime.py", line 697, in __getattr__
+    return self._fail_with_undefined_error()
+  File "VENV/jinja/jinja2/runtime.py", line 691, in _fail_with_undefined_error
+    raise self._undefined_exception(hint)
+jinja2.exceptions.UndefinedError: 'url_for' is undefined
