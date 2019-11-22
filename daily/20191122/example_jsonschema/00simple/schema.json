@@ -1,0 +1,17 @@
+{
+  "$ref": "#/definitions/root",
+  "definitions": {
+    "root": {
+      "additionalProperties": false,
+      "properties": {
+        "age": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
