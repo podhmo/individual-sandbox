@@ -1,0 +1,48 @@
+DEBUG:semver:range ^1 Trueparse_range:767
+DEBUG:semver:hyphen replace ^1parse_range:775
+DEBUG:semver:comparator trim ^1, re.compile('(\\s*)((?:<|>)?=?)\\s*([v=\\s]*([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-?((?:[0-9]+|\\d*[a-zA-Z-][a-zA-Z0-9-]*)(?:\\.(?:[0-9]+|\\d*[a-zA-Z-][a-zA-Z0-9-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?|[v, re.MULTILINE)parse_range:779
+DEBUG:semver:comp ^1parse_comparator:827
+DEBUG:semver:caret ^1 ^1 1 None None Nonerepl:905
+DEBUG:semver:caret return >=1.0.0 <2.0.0repl:935
+DEBUG:semver:caret >=1.0.0 <2.0.0parse_comparator:829
+DEBUG:semver:tildes >=1.0.0 <2.0.0parse_comparator:831
+DEBUG:semver:replaceXRanges >=1.0.0 <2.0.0 Truereplace_xranges:942
+DEBUG:semver:xrange >=1.0.0 >=1.0.0 >= 1 0 0 Nonerepl:958
+DEBUG:semver:xrange gtlt=>= any_x=Falserepl:968
+DEBUG:semver:xRange return >=1.0.0repl:1008
+DEBUG:semver:xrange <2.0.0 <2.0.0 < 2 0 0 Nonerepl:958
+DEBUG:semver:xrange gtlt=< any_x=Falserepl:968
+DEBUG:semver:xRange return <2.0.0repl:1008
+DEBUG:semver:xrange >=1.0.0 <2.0.0parse_comparator:833
+DEBUG:semver:replaceStars >=1.0.0 <2.0.0 Truereplace_stars:1017
+DEBUG:semver:stars >=1.0.0 <2.0.0parse_comparator:835
+DEBUG:semver:comparator: >=1.0.0 True__init__:689
+DEBUG:semver:parse comp=>=1.0.0parse:703
+DEBUG:semver:SemVer 1.0.0, True__init__:311
+DEBUG:semver:comparator: <2.0.0 True__init__:689
+DEBUG:semver:parse comp=<2.0.0parse:703
+DEBUG:semver:SemVer 2.0.0, True__init__:311
+DEBUG:semver:Range format >=1.0.0 <2.0.0format:759
+DEBUG:semver:SemVer 1.1.1.1, True__init__:311
+DEBUG:semver:Comparator, test 1.1.1.1, Truetest:723
+DEBUG:semver:cmp: >=cmp:647
+DEBUG:semver:SemVer.compare 1.1.1.1 True 1.0.0compare:391
+DEBUG:semver:compare result 1compare:395
+DEBUG:semver:Comparator, test 1.1.1.1, Truetest:723
+DEBUG:semver:cmp: <cmp:647
+DEBUG:semver:SemVer.compare 1.1.1.1 True 2.0.0compare:391
+DEBUG:semver:compare result -1compare:395
+DEBUG:semver:SemVer 1.1.1.1, True__init__:311
+DEBUG:semver:SemVer 1.1.1.2, True__init__:311
+DEBUG:semver:Comparator, test 1.1.1.2, Truetest:723
+DEBUG:semver:cmp: >=cmp:647
+DEBUG:semver:SemVer.compare 1.1.1.2 True 1.0.0compare:391
+DEBUG:semver:compare result 1compare:395
+DEBUG:semver:Comparator, test 1.1.1.2, Truetest:723
+DEBUG:semver:cmp: <cmp:647
+DEBUG:semver:SemVer.compare 1.1.1.2 True 2.0.0compare:391
+DEBUG:semver:compare result -1compare:395
+DEBUG:semver:SemVer.compare 1.1.1.1 True 1.1.1.2compare:391
+DEBUG:semver:SemVer 1.1.1.2, True__init__:311
+DEBUG:semver:compare result 0compare:395
+1.1.1.1
