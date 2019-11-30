@@ -1,4 +1,4 @@
-from handofcats.parsers.expose import CallbackArgumentParser
+from capturedmock import CapturedMock, compile, scan
 
 
 def foo(*, x: str, y: str) -> None:
@@ -14,7 +14,7 @@ def print_argparse_code(fn: callable, history: list, *, outname: str = "main"):
     pass
 
 
-parser = CallbackArgumentParser(print_argparse_code, None)
+parser = CapturedMock()
 subparsers = parser.add_subparsers(required=True, title="actions")
 
 foo_parser = subparsers.add_parser("foo")
@@ -25,3 +25,6 @@ foo_parser.set_defaults(action=foo)
 bar_parser = subparsers.add_parser("bar")
 bar_parser.add_argument("-z")
 bar_parser.set_defaults(action=bar)
+
+for line in compile(scan(parser), root_name="parser"):
+    print(line)
