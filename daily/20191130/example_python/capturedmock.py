@@ -11,6 +11,7 @@ class Act:
     c: int = 0  # logical time
     id: int = 0
     parent_id: int = 0
+    called: bool = False
 
 
 @dataclasses.dataclass(frozen=False)
@@ -28,8 +29,8 @@ class CapturedMock:
 
     @property
     def c(self):
-        self._c += 1
-        return self._c
+        self.__class__._c += 1
+        return self.__class__._c
 
     def __init__(self, *args, **kwargs):
         self.history = [
@@ -45,6 +46,8 @@ class CapturedMock:
             child.history = self.history
             child.children = {}
             child.parent = self
+            child._c = self._c
+
         self.history.append(
             Act(
                 name=name,
@@ -66,6 +69,7 @@ class CapturedMock:
                 c=self.c,
                 id=id(self),
                 parent_id=id(self.parent),
+                called=True,
             )
         )
         return self
@@ -134,7 +138,7 @@ def scan(x: CapturedMock):
 
         if status == not_changed and act.name == "__call__":
             prev = line.args.pop()
-            modified = dataclasses.replace(prev, args=act.args, kwargs=act.kwargs)
+            modified = dataclasses.replace(prev, args=act.args, kwargs=act.kwargs, called=True)
             line.args.append(modified)
         else:
             line.args.append(act)
@@ -157,25 +161,25 @@ def compile(lines: t.List[Line], *, root_name: str = "ROOT"):
 
         if args[0].name == "__init__":
             nodes.append(root_name)
-            nodes.append("(")
+            if args[0].called:
+                nodes.append("(")
             if args[0].args:
                 nodes.append(str(args[0].args))  # xxx
             if args[0].kwargs:
                 nodes.append(str(args[0].kwargs))  # xxx
-            nodes.append(")")
+            if args[0].called:
+                nodes.append(")")
         else:
             nodes.append(f"g{args[0].id}")
         for x in args[1:]:
-            if not x.args and not x.kwargs:
-                nodes.append(".")
-                nodes.append(x.name)
-            else:
-                nodes.append(".")
-                nodes.append(x.name)
+            nodes.append(".")
+            nodes.append(x.name)
+            if x.called:
                 nodes.append("(")
-                if x.args:
-                    nodes.append(str(x.args))  # xxx
-                if x.kwargs:
-                    nodes.append(str(x.kwargs))  # xxx
+            if x.args:
+                nodes.append(str(x.args))  # xxx
+            if x.kwargs:
+                nodes.append(str(x.kwargs))  # xxx
+            if x.called:
                 nodes.append(")")
         yield "".join(nodes)

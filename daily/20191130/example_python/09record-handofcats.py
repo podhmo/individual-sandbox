@@ -14,7 +14,8 @@ def print_argparse_code(fn: callable, history: list, *, outname: str = "main"):
     pass
 
 
-parser = CapturedMock()
+argparse = CapturedMock()
+parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(required=True, title="actions")
 
 foo_parser = subparsers.add_parser("foo")
@@ -26,5 +27,5 @@ bar_parser = subparsers.add_parser("bar")
 bar_parser.add_argument("-z")
 bar_parser.set_defaults(action=bar)
 
-for line in compile(scan(parser), root_name="parser"):
+for line in compile(scan(parser)):
     print(line)
