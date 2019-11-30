@@ -1,4 +1,4 @@
-from capturedmock import CapturedMock, compile, scan
+from capturedmock import CapturedMock, compile, scan, squash
 import logging
 import contextlib
 
@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 @contextlib.contextmanager
 def use(x):
     yield x
-    scanned = scan(x)
+    scanned = scan(squash(x))
     for line in scanned:
         logger.debug(line)
     for code in compile(scanned):

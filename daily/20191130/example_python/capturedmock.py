@@ -82,7 +82,21 @@ class CapturedMock:
 # [method call] :: '.' <name> '(' ')'
 
 
-def scan(x: CapturedMock):
+def squash(m: CapturedMock) -> t.List[Act]:
+    history = []
+    for act in m.history:
+        if act.name == "__call__" and history and act.id == history[-1].id:
+            prev = history.pop()
+            modified = dataclasses.replace(
+                prev, args=act.args, kwargs=act.kwargs, called=True
+            )
+            history.append(modified)
+            continue
+        history.append(act)
+    return history
+
+
+def scan(history: t.List[Act]) -> t.List[Line]:
     """aggregated as oneline-action"""
 
     seen: t.Dict[int, Line] = {}  # act.id -> line
@@ -95,7 +109,7 @@ def scan(x: CapturedMock):
     i = 0
     line = Line(lineno=i)
 
-    for act in x.history:
+    for act in history:
         if current_id == act.id:
             status = not_changed
         elif act.id in seen:
@@ -137,12 +151,7 @@ def scan(x: CapturedMock):
                     for x in right_line.args:
                         seen[x.id] = right_line
 
-        if status == not_changed and act.name == "__call__":
-            prev = line.args.pop()
-            modified = dataclasses.replace(prev, args=act.args, kwargs=act.kwargs, called=True)
-            line.args.append(modified)
-        else:
-            line.args.append(act)
+        line.args.append(act)
         if status == created:
             seen[act.id] = line
         current_id = act.id

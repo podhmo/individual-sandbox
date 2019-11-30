@@ -1,4 +1,4 @@
-from capturedmock import CapturedMock, compile, scan
+from capturedmock import CapturedMock, compile, scan, squash
 
 
 def foo(*, x: str, y: str) -> None:
@@ -27,5 +27,5 @@ bar_parser = subparsers.add_parser("bar")
 bar_parser.add_argument("-z")
 bar_parser.set_defaults(action=bar)
 
-for line in compile(scan(parser)):
+for line in compile(scan(squash(parser))):
     print(line)
