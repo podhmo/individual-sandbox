@@ -31,3 +31,9 @@ with use(CapturedMock()) as x:
     y = x.y
     y.z0.m(20)
     y.z1.m(30)
+
+print("-")
+with use(CapturedMock()) as x:
+    y = x.y
+    y.f(20)
+    y.f(30)
