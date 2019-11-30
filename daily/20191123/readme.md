@@ -5,8 +5,6 @@
 - db indexのdiff
 - schemalint
 - metashape
-- pyodideそれ自体ではなくその内部の動きを
-
 ## metashape
 
 - 軽くで良いのでopenapi3などをparseしたい

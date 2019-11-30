@@ -1,3 +1,4 @@
+import sys
 from metashape.runtime import get_walker
 from metashape.outputs.jsonschema import scan, emit
 
@@ -8,7 +9,5 @@ class Person:
 
 
 ctx = scan(get_walker(aggressive=True))
-import json
+emit(ctx, output=sys.stdout)
 
-print(json.dumps(ctx.result.result, indent=2))
-# emit()
