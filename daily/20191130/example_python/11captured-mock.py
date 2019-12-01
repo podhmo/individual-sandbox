@@ -10,7 +10,7 @@ import contextlib
 logger = logging.getLogger(__name__)
 
 
-def group(history: t.List[Act]) -> t.List[t.List[Act]]:
+def group(history: t.List[Act]) -> t.List[Line]:
     """ grouping tokens
 
     - trim <return-value> node
@@ -37,23 +37,23 @@ def group(history: t.List[Act]) -> t.List[t.List[Act]]:
             act = dataclasses.replace(act, parent_id=prev.parent_id)
             chunk.append(act)
         else:
-            r.append(chunk)
+            r.append(Line(lineno=len(r), args=chunk))
             chunk = []
             chunk.append(act)
         prev = act
     if chunk:
-        r.append(chunk)
+        r.append(Line(lineno=len(r), args=chunk))
 
     # debug
     for line in r:
-        prev = line[0]
-        for act in line[1:]:
+        prev = line.args[0]
+        for act in line.args[1:]:
             assert act.parent_id == prev.id, (prev, act)
             prev = act
     return r
 
 
-def arrange(grouped: t.List[t.List[Act]]) -> t.List[Line]:
+def arrange(grouped: t.List[Line]) -> t.List[Line]:
     """ arange tokens (grouped)
 
     - correct as sentence
@@ -104,15 +104,15 @@ with use() as x:
 #     x.foo(10).bar(20)
 #     x.foo(10)
 
-# with use() as argparse:
-#     parser = argparse.ArgumentParser()
-#     subparsers = parser.add_subparsers(required=True, title="actions")
+with use() as argparse:
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(required=True, title="actions")
 
-#     foo_parser = subparsers.add_parser("foo")
-#     foo_parser.add_argument("-x")
-#     foo_parser.add_argument("-y")
-#     foo_parser.set_defaults(action="foo")
+    foo_parser = subparsers.add_parser("foo")
+    foo_parser.add_argument("-x")
+    foo_parser.add_argument("-y")
+    foo_parser.set_defaults(action="foo")
 
-#     bar_parser = subparsers.add_parser("bar")
-#     bar_parser.add_argument("-z")
-#     bar_parser.set_defaults(action="bar")
+    bar_parser = subparsers.add_parser("bar")
+    bar_parser.add_argument("-z")
+    bar_parser.set_defaults(action="bar")
