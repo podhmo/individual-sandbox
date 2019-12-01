@@ -59,6 +59,16 @@ def arrange(grouped: t.List[Line]) -> t.List[Line]:
     - correct as sentence
     - check as assign or not
     """
+    seen = {}
+    for line in grouped:
+        for x in line.args:
+            seen[x.id] = line
+        print("@", line)
+
+    for line in grouped:
+        if line.args[0].parent_id in seen:
+            breakpoint()
+            print("hoi")
     pass
 
 
@@ -75,6 +85,10 @@ def use():
     for e in grouped:
         logger.debug("group: %s", e)
     print("------", file=sys.stderr)
+    arranged = arrange(grouped)
+    for e in arranged:
+        logger.debug("arrange: %s", e)
+    print("------", file=sys.stderr)
     # scanned = scan(squashed)
     # for e in scanned:
     #     logger.debug("scan: %s", e)
@@ -90,10 +104,10 @@ logging.basicConfig(level=logging.DEBUG)
 #     parser = x.ArgumentParser()
 #     parser.add_argument("-x")
 
-with use() as x:
-    parser = x.ArgumentParser()
-    parser.add_argument("-x")
-    parser.add_argument("-y")
+# with use() as x:
+#     parser = x.ArgumentParser()
+#     parser.add_argument("-x")
+#     parser.add_argument("-y")
 
 # with use() as x:
 #     parser = x.ArgumentParser()
