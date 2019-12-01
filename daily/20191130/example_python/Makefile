@@ -31,3 +31,5 @@
 	python $@*.py
 10:
 	python $@*.py
+11:
+	python $@*.py

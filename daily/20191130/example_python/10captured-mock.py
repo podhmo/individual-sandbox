@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 @contextlib.contextmanager
 def use(x):
     yield x
-    scanned = scan(squash(x))
+    scanned = scan(squash(x.history))
     for line in scanned:
         logger.debug(line)
     for code in compile(scanned):

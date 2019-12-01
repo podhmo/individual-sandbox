@@ -72,7 +72,7 @@ class CapturedMock:
                 called=True,
             )
         )
-        return self
+        return getattr(self, "<return-value>")  # sentinel
 
 
 # [sentence] :: [assign]  | [no-assign]
@@ -82,9 +82,13 @@ class CapturedMock:
 # [method call] :: '.' <name> '(' ')'
 
 
-def squash(m: CapturedMock) -> t.List[Act]:
+def squash(acts: t.List[Act]) -> t.List[Act]:
+    """squash tokens
+
+    - squash <getattr> + <__call__> pair to method call
+    """
     history = []
-    for act in m.history:
+    for act in acts:
         if act.name == "__call__" and history and act.id == history[-1].id:
             prev = history.pop()
             modified = dataclasses.replace(
@@ -124,7 +128,6 @@ def scan(history: t.List[Act]) -> t.List[Line]:
             line = Line(lineno=i)
 
             if act.parent_id in seen:
-                # something wrong
                 past_line = seen[act.parent_id]
                 if past_line.args[0].id == act.parent_id:
                     line.args.append((past_line.args[0]))
@@ -182,6 +185,8 @@ def compile(lines: t.List[Line], *, root_name: str = "ROOT"):
         else:
             nodes.append(f"g{args[0].id}")
         for x in args[1:]:
+            if x.name == "<return-value>":
+                continue
             nodes.append(".")
             nodes.append(x.name)
             if x.called:
