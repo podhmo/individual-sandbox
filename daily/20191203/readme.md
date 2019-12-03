@@ -1,3 +1,26 @@
+## morphdom
+
+- https://github.com/patrick-steele-idem/morphdom
+
+なんかいつの間にか内部でvdomつかうようになっているのか？
+
+### omi
+
+何かomiやomimと言うやつを発見した。
+
+https://github.com/Tencent/omi
+
+## mkdocs mkdocs-material触ってみた
+
+newしてserve剃る感じ。
+
+## diff highlightと似たような出力を手にしたかった
+
+```python
+print("\x1b[31m-\x1b[7mhello\x1b[0m\x1b[31m world\x1b[0m")
+print("\x1b[32m+\x1b[7mbye-bye\x1b[0m\x1b[32m world\x1b[0m")
+```
+
 ## git diff highlight
 
 macでは持ってこないとダメ。
