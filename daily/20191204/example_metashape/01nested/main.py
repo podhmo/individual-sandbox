@@ -1,5 +1,4 @@
 import typing as t
-import sys
 from dictknife import loading
 from metashape.runtime import get_walker
 from magicalimport import import_symbol
@@ -14,15 +13,15 @@ def collect(
 ) -> t.Union[t.Dict[str, t.Any], t.List[t.Dict[str, t.Any]]]:
     props = {}
     for name, typeinfo, metadata in w.for_type(cls).walk():
+        fieldname = w.resolver.metadata.resolve_name(metadata, default=name)
         if w.resolver.typeinfo.get_custom(typeinfo) is not None:
-            props[name] = collect(getattr(cls, name))
+            props[fieldname] = collect(getattr(cls, name))
         else:
             val = getattr(cls, name)
-            name = w.resolver.metadata.resolve_name(metadata, default=name)
             if isinstance(val, (list, tuple)):
-                props[name] = [collect(x) for x in val]
+                props[fieldname] = [collect(x) for x in val]
             else:
-                props[name] = val
+                props[fieldname] = val
     return props
 
 

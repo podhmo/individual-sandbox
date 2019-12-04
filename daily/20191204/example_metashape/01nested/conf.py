@@ -1,13 +1,18 @@
-# from __future__ import annotations
+from __future__ import annotations
 from typing import List
 import dataclasses
 from metashape.constants import ORIGINAL_NAME
 
 
+def deco(cls):
+    breakpoint()
+    return cls
+
+
 @dataclasses.dataclass
 class Extra:
     manifest: str
-    social: List["Social"]
+    social: List[Social]
 
 
 @dataclasses.dataclass
@@ -37,7 +42,7 @@ class Toplevel:
             primary: str = "indigo"
             accent: str = "indigo"
 
-        palette: Palette = Palette
+        palette: "Palette" = Palette
 
         class Font:
             text: str = "Roboto"

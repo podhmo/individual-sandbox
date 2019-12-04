@@ -25,3 +25,16 @@ snakecaseなどへの変換とかどうすると良いんだろうなー(した�
 - 予約語の対応がだるい
 - ネストしたクラスだとクラス定義とフィールドへの代入が必要になる
 - リストへの対応がだるいかも
+
+### hmm
+
+まだもうちょっとダメ
+
+- magicalimport.import_symbol で type.__module__ が None
+- importlib.import_moduleもなんかおかしい
+- ふつうのimportでもおかしい
+
+### 追記
+
+原因が分かった。１つはmagicalimport経由だとexec_moduleの前にsys.modulesに追加していない。
+もう１つはdataclassのobjectが渡っていてTypeErrorになっていた。TypeErrorの時に無視されていた。
