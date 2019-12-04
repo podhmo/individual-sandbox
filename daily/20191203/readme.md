@@ -1,3 +1,10 @@
+## metashape? prestring?
+
+良い感じにimportしていきたい感じ。
+とはいえコード上でソレそのものを記述するのではない感じ。
+strすると良い感じにimportされて、callすると自分自身が記述される。
+
+
 ## morphdom
 
 - https://github.com/patrick-steele-idem/morphdom

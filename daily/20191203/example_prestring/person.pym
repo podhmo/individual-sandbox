@@ -1,0 +1,2 @@
+with m.class_("Person"):
+    m.stmt("name: str")
