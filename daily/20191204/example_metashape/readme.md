@@ -38,3 +38,10 @@ snakecaseなどへの変換とかどうすると良いんだろうなー(した�
 
 原因が分かった。１つはmagicalimport経由だとexec_moduleの前にsys.modulesに追加していない。
 もう１つはdataclassのobjectが渡っていてTypeErrorになっていた。TypeErrorの時に無視されていた。
+
+### 追記
+
+やること
+
+- 全部値のdataclassでの確認
+- fieldのmissingを利用する様に書き換え

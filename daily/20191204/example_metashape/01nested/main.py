@@ -3,8 +3,8 @@ from dictknife import loading
 from metashape.runtime import get_walker
 from magicalimport import import_symbol
 
-
 cls = import_symbol("./conf.py:Toplevel", here=__file__)
+cls = import_symbol("../03nested-dataclass/conf.py:toplevel", here=__file__)
 w = get_walker(cls)
 
 
@@ -28,6 +28,4 @@ def collect(
 d = {}
 for cls in w.walk():
     d.update(collect(cls))
-
-
 loading.dumpfile(d, format="yaml")

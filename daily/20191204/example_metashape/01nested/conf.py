@@ -4,11 +4,6 @@ import dataclasses
 from metashape.constants import ORIGINAL_NAME
 
 
-def deco(cls):
-    breakpoint()
-    return cls
-
-
 @dataclasses.dataclass
 class Extra:
     manifest: str
