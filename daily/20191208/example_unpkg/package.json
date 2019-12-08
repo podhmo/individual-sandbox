@@ -1,0 +1,14 @@
+{
+  "name": "example_unpkg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/unpkg-server/server.js --PORT=44444 --NODE_TLS_REJECT_UNAUTHORIZED=0 --DEBUG=1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "unpkg-server": "0.0.4"
+  }
+}
