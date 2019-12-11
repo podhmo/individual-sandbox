@@ -25,7 +25,6 @@ func main() {
 	mux := http.DefaultServeMux
 	mux.Handle("/", httputil.NewSingleHostReverseProxy(rpURL))
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
-
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", port), mux); err != nil {
 		log.Fatal(err)
 	}

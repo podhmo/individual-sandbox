@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <script type="module" defer>
+    console.log("loaded");
+    import("./sub.js").then((m) => {
+      console.log("fetched");
+      const sub = new m.Sub();
+      sub.subMethod();
+    }).then((err) => {
+      console.error(err);
+    })
+  </script>
+</head>
+<body>
+  hello
+</body>

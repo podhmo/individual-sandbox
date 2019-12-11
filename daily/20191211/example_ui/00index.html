@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+          padding: 5rem;
+      }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@tableau/tableau-ui"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel" defer data-presets="es2015,react">
+const Button = TableauUI.Button;
+
+function App(){
+  return <div>
+    <section><h2>enabled</h2>
+    <Button>I am using tableau-ui</Button>
+    <Button kind="primary">I am using tableau-ui</Button>
+    <Button kind="outline">I am using tableau-ui</Button>
+    <Button kind="destructive">I am using tableau-ui</Button>
+    </section>
+    <section><h2>disabled</h2>
+    <Button disabled>I am using tableau-ui</Button>
+    <Button disabled kind="primary">I am using tableau-ui</Button>
+    <Button disabled kind="outline">I am using tableau-ui</Button>
+    <Button disabled kind="destructive">I am using tableau-ui</Button>
+    </section>
+</div>
+}
+
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+)
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
