@@ -1,0 +1,6 @@
+fastapi
+magicalimport
+async-asgi-testclient
+dictknife
+pydantic
+uvicorn
