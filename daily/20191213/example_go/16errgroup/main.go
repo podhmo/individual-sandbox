@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"m/findcaller2"
 	"os"
-	"sync"
+
+	"golang.org/x/sync/errgroup"
 )
 
 func main() {
@@ -14,17 +16,15 @@ func main() {
 	}
 }
 
-func run() (err error) {
-	var wg sync.WaitGroup
-	wg.Add(1)
-	go func() {
+func run() error {
+	g, _ := errgroup.WithContext(context.Background())
+	g.Go(func() (err error) {
 		recoverer := findcaller2.Recoverer(&err)
 		defer recoverer()
-		defer wg.Done()
 		foo()
-	}()
-	wg.Wait()
-	return
+		return
+	})
+	return g.Wait()
 }
 
 type person struct {

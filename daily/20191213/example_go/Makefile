@@ -1,4 +1,6 @@
-default: 00 01 02 03 04 05 13 14 15
+default: \
+ 00 01 02 03 04 05 \
+ 14 15 16
 
 run: TARGET ?= xx
 run:
@@ -27,3 +29,8 @@ run:
 	$(MAKE) run TARGET=$@
 15:
 	$(MAKE) run TARGET=$@
+16:
+	$(MAKE) run TARGET=$@
+
+20:
+	go run $@*/main.go
