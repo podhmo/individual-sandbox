@@ -15,7 +15,7 @@ func Recoverer(p *error) func() {
 
 		switch r := r.(type) {
 		case error:
-			*p = r.(error)
+			*p = r
 		default:
 			*p = fmt.Errorf("%v", r)
 		}
