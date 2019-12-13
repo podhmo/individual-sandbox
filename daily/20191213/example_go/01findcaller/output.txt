@@ -1,0 +1,1 @@
+22:/home/nao/venvs/my/individual-sandbox/daily/20191213/example_go/01findcaller/main.go
