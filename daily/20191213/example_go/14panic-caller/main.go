@@ -2,25 +2,27 @@ package main
 
 import (
 	"fmt"
-	"m/findcaller"
+	"m/findcaller2"
+	"os"
 )
 
 func main() {
-	foo()
+	fmt.Fprintln(os.Stderr, "!", foo())
 }
 
-func foo() {
-	bar()
+func foo() error {
+	return bar()
 }
 
 type person struct {
 	Name string
 }
 
-func bar() {
-	recoverer := findcaller.Recoverer()
+func bar() (err error) {
+	recoverer := findcaller2.Recoverer(&err)
 	defer recoverer()
 
 	var p *person
 	fmt.Println(p.Name) // nil panic
+	return
 }
