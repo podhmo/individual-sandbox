@@ -87,7 +87,7 @@ func Recoverer(p *error) func() {
 }
 ```
 
-利用する側はこう。
+利用する側はこういうかんじ。
 
 ```go
 func run() (err error) {
@@ -104,7 +104,8 @@ func run() (err error) {
 }
 ```
 
-(厳密に言えば、errgroupのGo()のようなもので作られた関数の中でのnamed returnは `return nil` とも書ける。deferの使われているscopeと同じscopeなら `return nil` でも大丈夫)
+errgroupのGo()で使うような関数の中でのnamed returnは `return nil` でも大丈夫。deferの使われているscopeと同じscopeなら大丈夫
+
 
 ```go
 func run() error {
@@ -119,4 +120,4 @@ func run() error {
 }
 ```
 
-例えばコレは `return` ではなく `return nil` でも動く。
+例えばコレは `return` ではなく `return nil` でも動く。これはrecoverの挙動というよりはdeferの挙動の話。
