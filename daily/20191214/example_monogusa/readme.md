@@ -66,3 +66,26 @@ defaultのままだとけっこうymlの方にやることを書いてしまう�
 - webの方にtodo app的なexamplesを作る
 - webの方のpydantic modelの生成部分を作る (引数のsignatureからあれこれする)
 - slack,discordあたりと繋げる？
+
+## とりあえずCRUDを作るか
+
+- https://www.encode.io/databases/#databases
+
+テキトウにstarletteのdatabaseのやつを見てみたらこれがそのままtodo appの最もミニマムバージョンじゃん。コレで良さそう。
+
+- https://www.starlette.io/database/
+
+### 追記
+
+fastapiでも作るか。。
+
+概ね存在していた。。
+
+- https://fastapi.tiangolo.com/tutorial/async-sql-databases/
+
+transactionsのことは気にしないとかも
+
+- https://www.encode.io/databases/connections_and_transactions/
+
+色々似たようなものを作らないとダメそうな感じはあるかも?
+

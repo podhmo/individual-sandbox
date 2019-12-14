@@ -23,3 +23,7 @@
 	python -m webbrowser -t http://localhost:44444/docs
 02-show-doc:
 	python 02*/web.py --show-doc
+06:
+	python -m monogusa.cli $(shell echo $@*/)commands.py hello
+07:
+	python $(shell echo $@*/)web.py --port 44444
