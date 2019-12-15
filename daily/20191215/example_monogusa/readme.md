@@ -1,6 +1,7 @@
 # monogusa
 
-[昨日の続き](../../20191214/example_monogusa/readme.md)をしよう
+- https://github.com/podhmo/monogusa
+- [昨日の続き](../../20191214/example_monogusa/readme.md)をしよう
 
 ## 思い出す
 
@@ -22,4 +23,10 @@ pytestに寄せて引数名と同名の関数を手繰り寄せて依存を構�
 - terminal以外への入出力を考えてみる (e.g. slack, discord)
 - 保存先のことも本当は考えたい (e.g. sqlite (RDBMS), spreadsheet?)
 
+## とりあえずは
+
+設定ファイルの読み込みと依存への対応辺りをやるか。
+少なくともtodo appの例が動けたらversion 0.0.0ぽい感じにできるような気はする。
+
+この２つは地味に依存しているような気がする。設定ファイルというか.envの生成には依存のフルスキャンみたいなコマンドが欲しくなる。そういう意味では `python -m monogusa.tool` みたいなこまんどを用意しても良いかもなー。
 
