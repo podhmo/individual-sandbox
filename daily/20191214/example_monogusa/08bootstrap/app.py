@@ -21,10 +21,15 @@ fixture = import_symbol("bootstrap.py:fixture", here=__file__)
 
 
 @fixture
-def engine():
+def database_url() -> str:
+    return DATABASE_URL
+
+
+@fixture
+def engine(database_url: str):
     # TODO: teardown
     return sqlalchemy.create_engine(
-        DATABASE_URL, connect_args={"check_same_thread": False}
+        database_url, connect_args={"check_same_thread": False}
     )
 
 
@@ -36,6 +41,14 @@ def init_db(engine: Engine, *, debug: bool, message: str = "hmm"):
     engine.dispose()
     print(f"** init_db {debug=} {message=} **")
 
+
+from handofcats.injector import Injector
+import argparse
+
+parser = argparse.ArgumentParser()
+injector = Injector(init_db)
+injector.inject(parser, ignore_arguments=True)
+parser.print_help()
 
 resolve_args = import_symbol("bootstrap.py:resolve_args", here=__file__)
 args = resolve_args(init_db)

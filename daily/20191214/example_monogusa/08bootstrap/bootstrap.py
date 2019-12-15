@@ -19,7 +19,9 @@ class Resolver:
         self.marker = marker
         self.registry: t.Dict[str, t.Any] = {}
 
-    def resolve_args(self, fn: t.Callable[..., t.Any]) -> t.List[t.Any]:
+    def resolve_args(
+        self, fn: t.Callable[..., t.Any], *, strict: bool = True
+    ) -> t.List[t.Any]:
         argspec = inspect.getfullargspec(fn)
         g = self.marker.registry
 
@@ -43,6 +45,9 @@ class Resolver:
 
             self.registry[name] = val
             args.append(val)
+
+            if strict:
+                assert isinstance(val, argspec.annotations[name])
 
         return args
 
