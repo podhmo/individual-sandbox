@@ -51,3 +51,35 @@ pytestに寄せて引数名と同名の関数を手繰り寄せて依存を構�
 例えばdbを利用しないコマンドなども取り扱うことになるかもなんだけれど。その場合には例えばsqlalchemyなどへのimportが一切走らないようにしたい。やろうと思えばインターフェイスを定義することでできると言えばできる。
 
 mypy的にはtyping_extensions.Protocolが便利なんだけれど。これはisinstanceができないかもしれない。そうなるとABCのクラスを作ってregisterというのが良いのかもしれない。とはいえそれを書くのは地味に負担になってくるような気はしていて、それはもう立派なアプリケーションじゃんという感覚もある。
+
+## :warning: hmm
+
+やっぱり、magicalimportを使う上で同階層のmoduleは直接importしたくなるかもしれない。
+任意のrelative importを許すようにしようとしたらだいぶカオスになったのだけれど。
+同階層だけ許すことにしようかな。書き換えがだるい。 (out of context)
+
+## 依存の組み込み
+
+とりあえず依存の組み込みをしたい。考えることはなんだろう？
+
+- 名前の調整
+- `__future__ from import annotations` の対応
+- component部分をコマンドの対象から除外
+- markerを単に値にmarkingするだけにする？
+
+## :bug: magicalimport
+
+- same modules
+- relative import
+- without here
+
+とりあえずやっつけた。本当は `__init__.py` なしにfake moduleを作りたい所だけれど。無理だった。
+
+:warning: `from .di import comcomponent` と `from di import comcomponent` が違うのはちょっと面倒だなー。
+
+## 追記
+
+それっぽい感じで実装した。とりあえずCLIは動く。
+ただ、startupイベントが欲しくなったかも。
+
+:dizzy: ほとんどmagicalimportの変更に時間を使ってしまった。。
