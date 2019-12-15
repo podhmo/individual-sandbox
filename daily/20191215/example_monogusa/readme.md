@@ -77,9 +77,18 @@ mypy的にはtyping_extensions.Protocolが便利なんだけれど。これはis
 
 :warning: `from .di import comcomponent` と `from di import comcomponent` が違うのはちょっと面倒だなー。
 
-## 追記
+### 追記
+
+これはpythonの挙動に合わせるべき。トップレベルのモジュールならimportできるがrelative importをしようとすると失敗。という挙動が正しい。
+
+やった。
+
+## dependencies
 
 それっぽい感じで実装した。とりあえずCLIは動く。
 ただ、startupイベントが欲しくなったかも。
 
 :dizzy: ほとんどmagicalimportの変更に時間を使ってしまった。。
+
+- 本当にdiの動作チェックのためだけのもの [03](03hai/)
+- 昨日のtodoっぽい機能を動かすもの [04](04notes/)
