@@ -1,0 +1,21 @@
+00:
+	# as cli
+	python $(shell echo $@*/)commands.py hello
+	# as web
+	python $(shell echo $@*/)web.py --show-doc
+00-serve:
+	python 00*/web.py --port 55555
+00-client:
+	echo '{}' | http --json POST :55555/hello
+01:
+	python $(shell echo $@*/)gen.py
+02:
+	python $@*.py
+03:
+	python $@*.py
+04:
+	python $@*.py
+05:
+	python $@*.py
+06:
+	python $@*.py
