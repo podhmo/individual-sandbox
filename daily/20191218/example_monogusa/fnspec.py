@@ -55,9 +55,7 @@ def fnspec(fn: t.Callable[..., t.Any]) -> FuncSpec:
     assert len(argspec.annotations) == len(annotations)
     argspec.annotations.update(annotations)
     spec = FuncSpec(fn, argspec=argspec)
-    if not t.TYPE_CHECKING:
-        # INTERNAL ERROR -- Please try using mypy master on Github:
-        update_wrapper(spec, fn)
+    update_wrapper(spec, fn)  # type: ignore
     return spec
 
 

@@ -29,6 +29,11 @@ class Emittable(tx.Protocol):
         ...
 
 
+class Stringer(tx.Protocol):
+    def __str__(self) -> str:
+        ...
+
+
 def is_class(co) -> bool:
     return co._args is None and co._kwargs is None
 
@@ -76,7 +81,7 @@ class Object(Emittable):
     def emit(self, *, m: Module) -> Module:
         return self._emit(m, name=self.name)
 
-    def __getattr__(self, name: str) -> t.Any:
+    def __getattr__(self, name: str) -> Attr:
         if self._use_count > 1:
             raise RuntimeError("assign to a variable")
         self._use_count += 1
@@ -84,7 +89,7 @@ class Object(Emittable):
 
 
 class Assign(Emittable):
-    def __init__(self, name: str, co: Emittable) -> None:
+    def __init__(self, name: str, co: Stringer) -> None:
         self.name = name
         self._co = co
 
@@ -102,35 +107,20 @@ class Assign(Emittable):
 class Attr:
     emit = None  # for stmt
 
-    def __init__(self, name: str, co: Emittable) -> None:
+    def __init__(self, name: str, co: Stringer) -> None:
         self.name = name
         self._co = co
 
     def __str__(self) -> str:
         return f"{self._co}.{self.name}"
 
-    if t.TYPE_CHECKING:
-        # INTERNAL ERROR -- Please try using mypy master on Github:
-        def __call__(self, *args, **kwargs) -> Call:
-            ...
+    def __call__(self, *args, **kwargs) -> Call:
+        return Call(self.name, co=self, args=args, kwargs=kwargs)
 
-    else:
-
-        def __call__(self, *args, **kwargs) -> Call:
-            return Call(self.name, co=self, args=args, kwargs=kwargs)
-
-    if t.TYPE_CHECKING:
-
-        def __getattr__(self, name: str) -> Attr:
-            ...
-            # INTERNAL ERROR -- Please try using mypy master on Github:
-
-    else:
-
-        def __getattr__(self, name: str) -> Attr:
-            # if name == "emit":
-            #     raise AttributeError(name)
-            return Attr(name, co=self)
+    def __getattr__(self, name: str) -> Attr:
+        # if name == "emit":
+        #     raise AttributeError(name)
+        return Attr(name, co=self)
 
 
 class Call:
@@ -140,7 +130,7 @@ class Call:
         self,
         name: str,
         *,
-        co: Emittable,
+        co: Stringer,
         args: t.Tuple[t.Any, ...],
         kwargs: t.Dict[str, t.Any],
     ) -> None:
@@ -156,38 +146,20 @@ class Call:
         lparams = LazyArgumentsAndKeywords(args, kwargs)
         return f"{self._co}({lparams})"
 
-    if t.TYPE_CHECKING:
-
-        def __getattr__(self, name: str) -> Attr:
-            ...
-            # INTERNAL ERROR -- Please try using mypy master on Github:
-
-    else:
-
-        def __getattr__(self, name: str) -> Attr:
-            # if name == "emit":
-            #     raise AttributeError(name)
-            return Attr(name, co=self)
+    def __getattr__(self, name: str) -> Attr:
+        # if name == "emit":
+        #     raise AttributeError(name)
+        return Attr(name, co=self)
 
     @property
     def name(self):
         return str(self._co)
 
 
-if t.TYPE_CHECKING:
-    # INTERNAL ERROR -- Please try using mypy master on Github:
-    def codeobject(
-        emit: t.Callable[[Module, str], Module], *, name: t.Optional[str] = None
-    ) -> Object:
-        ...
-
-
-else:
-
-    def codeobject(
-        emit: t.Callable[[Module, str], Module], *, name: t.Optional[str] = None
-    ) -> Object:
-        name = name or emit.__name__
-        ob = Object(name, emit=emit)
-        update_wrapper(ob, emit)
-        return ob
+def codeobject(
+    emit: t.Callable[[Module, str], Module], *, name: t.Optional[str] = None
+) -> Object:
+    name = name or emit.__name__
+    ob = Object(name, emit=emit)
+    update_wrapper(ob, emit)
+    return ob
