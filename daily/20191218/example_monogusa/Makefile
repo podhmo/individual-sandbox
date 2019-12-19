@@ -27,3 +27,7 @@
 	python $@*.py
 10:
 	python $@*.py
+11:
+	python $(shell echo $@*/)codegen.py | tee $(shell echo $@*/)routers.py
+12:
+	python -m monogusa.web $(shell echo $@*/)commands.py | tee $(shell echo $@*/)web.py
