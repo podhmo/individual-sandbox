@@ -7,9 +7,12 @@ from prestring.utils import LazyArgumentsAndKeywords, UnRepr
 
 
 class Module(_Module):
-    def stmt(
-        self, fmt_or_emittable: t.Any, *args: t.Any, **kwargs: t.Any
-    ) -> t.Iterable[t.Any]:
+    def import_(self, module: str, as_: t.Optional[str] = None) -> Symbol:
+        sym = Symbol(as_ or module)
+        super().import_(module, as_=as_)
+        return sym
+
+    def stmt(self, fmt_or_emittable: t.Any, *args: t.Any, **kwargs: t.Any) -> Module:
         if getattr(fmt_or_emittable, "emit", None) is not None:  # Emittable
             assert not args
             assert not kwargs
@@ -49,34 +52,23 @@ def as_string(val: t.Any) -> t.Union[t.Dict[str, t.Any], t.List[t.Any], str]:
         return [as_string(v) for v in val]
     elif hasattr(val, "emit"):
         return UnRepr(val)
+    elif callable(val) and hasattr(val, "__name__"):
+        return val.__name__  # todo: fullname
     else:
         return repr(val)
 
 
 class Object(Emittable):
-    def __init__(
-        self,
-        name: str,
-        *,
-        emit: t.Callable[..., Module],
-        args: t.Optional[t.List[t.Any]] = None,
-        kwargs: t.Optional[t.Dict[str, t.Any]] = None,
-    ) -> None:
+    def __init__(self, name: str, *, emit: t.Callable[..., Module]) -> None:
         self.name = name
         self._emit = emit
-
-        self._args = args
-        self._kwargs = kwargs
         self._use_count = 0
 
     def __str__(self) -> str:
-        if is_class(self):
-            return self.name
-        else:
-            return f"{self.name}({LazyArgumentsAndKeywords(self._args, self._kwargs)})"
+        return self.name
 
     def __call__(self, *args, **kwargs):
-        return self.__class__(name=self.name, emit=self._emit, args=args, kwargs=kwargs)
+        return Call(name=self.name, co=self, args=args, kwargs=kwargs)
 
     def emit(self, *, m: Module) -> Module:
         return self._emit(m, name=self.name)
@@ -101,6 +93,24 @@ class Assign(Emittable):
         return self.name
 
     def __getattr__(self, name: str) -> Attr:
+        return Attr(name, co=self)
+
+
+class Symbol:
+    emit = None  # for stmt
+
+    def __init__(self, name: str):
+        self.name = name
+
+    def __str__(self) -> str:
+        return self.name
+
+    def __call__(self, *args, **kwargs) -> Call:
+        return Call(self.name, co=self, args=args, kwargs=kwargs)
+
+    def __getattr__(self, name: str) -> Attr:
+        # if name == "emit":
+        #     raise AttributeError(name)
         return Attr(name, co=self)
 
 

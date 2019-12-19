@@ -19,3 +19,11 @@
 	python $@*.py
 06:
 	python $@*.py
+07:
+	python $@*.py
+08:
+	python $@*.py
+09:
+	python $@*.py
+10:
+	python $@*.py
