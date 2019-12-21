@@ -13,6 +13,8 @@
 
 ちょっとだけ未来の話。
 
+(追記: しかしwebばかりに閉じた話になってしまっているけれど。web interfaceを作りたいだけではないのだよなー)
+
 ### on_startup, on_shutdown event
 
 あと不足している部分はon_startup, on_shutdown的なevent (setup, teardownと見做しても良い)。なんで欲しくなるかというと例えばcomponentのconnect,disconnectのような処理を間にはさみたいから。コレがあるとCRUD的なインターフェイスのモジュールをそのままコマンドとして提供できるようになる。
