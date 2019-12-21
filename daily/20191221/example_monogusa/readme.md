@@ -108,3 +108,19 @@ $ cat commands.txt | python -m monogusa.cli crud.py
 parseだけするようなdry-runオプションもあっても良いかもしれない。
 
 まぁ本音を言えばIPython Kernel的なものを立ち上げてRPCしたい。
+
+## prestring.output
+
+組み込み自体はできたけれど。コード生成周りのコードが綺麗にならないな。。
+
+### refactoring
+
+少しstarlette的な感じを意識してコードを書いてみるか。
+ようやく組み込めた。まぁ綺麗じゃないけど許容範囲内くらいの感じ。
+
+### web with DI
+
+fastAPIのDI的なものへの変換を書く必要があった。忘れてた。
+あと、せっかくだしcliの方もコード生成しても良いような気がしてきた。
+あと、どう認識されたかのscanができると嬉しいかもしれない。
+
