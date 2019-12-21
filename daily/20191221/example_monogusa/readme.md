@@ -124,7 +124,27 @@ fastAPIのDI的なものへの変換を書く必要があった。忘れてた�
 あと、せっかくだしcliの方もコード生成しても良いような気がしてきた。
 あと、どう認識されたかのscanができると嬉しいかもしれない。
 
+### depends
+
+コレ手軽にやる方法ないかな。後一部挙動を勘違いしているかもしれない？
+ContextVarを使う例辺りを参考にしてみると良さそう。
+
+- https://fastapi.tiangolo.com/tutorial/sql-databases-peewee/
+
+hmm..そういえばyield fixtureに対応していないな。。
+そしてpytestのscope的なものが欲しいかも？
+
+- session -> on_startup, on_shutdown
+- module -> ?
+- function -> depends (each request) with contextvars
+
+とりあえずやること
+
+- 同期で全部関数を定義し直す
+- 同期で引数0個のものは直接使う
+- importエラーを起こさない様に対応する
+- 非同期対応
+
 ## componentのキーワード引数
 
 componentのキーワード引数もパラメーターとして露出できると便利なんだろうか？
-

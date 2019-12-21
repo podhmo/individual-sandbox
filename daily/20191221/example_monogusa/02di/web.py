@@ -12,6 +12,10 @@ from monogusa.web import (
 )
 
 
+def db(database_url: str=Depends(commands.database_url)) -> commands.DB:
+    return commands.db(database_url)
+
+
 router = APIRouter()
 
 
@@ -20,20 +24,20 @@ class HelloInput(BaseModel):
 
 
 @router.post("/hello", response_model=runtime.CommandOutput)
-def hello(input: HelloInput) -> t.Dict[str, t.Any]:
+def hello(input: HelloInput, db: commands.DB=Depends(db)) -> t.Dict[str, t.Any]:
     with runtime.handle() as s:
-        commands.hello(**input.dict())
+        commands.hello(db, **input.dict())
         return s.dict()
 
 
 class ByebyeInput(BaseModel):
-    name: str
+    pass
 
 
 @router.post("/byebye", response_model=runtime.CommandOutput)
-def byebye(input: ByebyeInput) -> t.Dict[str, t.Any]:
+def byebye(input: ByebyeInput, db: commands.DB=Depends(db)) -> t.Dict[str, t.Any]:
     with runtime.handle() as s:
-        commands.byebye(**input.dict())
+        commands.byebye(db, **input.dict())
         return s.dict()
 
 
