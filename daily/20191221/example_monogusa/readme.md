@@ -2,6 +2,19 @@
 
 - https://github.com/podhmo/monogusa
 
+## 最近のmonogusa
+
+```
+$ git ls-files ../../ | xargs dirname | grep -oP ".*example_monogusa$" | sort -u | tac
+```
+
+- [../../20191218/example_monogusa](../../20191218/example_monogusa)
+- [../../20191217/example_monogusa](../../20191217/example_monogusa)
+- [../../20191216/example_monogusa](../../20191216/example_monogusa)
+- [../../20191215/example_monogusa](../../20191215/example_monogusa)
+- [../../20191214/example_monogusa](../../20191214/example_monogusa)
+- [../../20191211/example_monogusa](../../20191211/example_monogusa)
+
 ## また少しずつ調整をしていく
 
 たしか前回でかんたんなweb用のコードは出力できるようになった。
