@@ -68,6 +68,9 @@ async def list(db: Database, *, completed_only:bool=True) -> List[Note]
 
 あるいは `--format=json` みたいなオプションを勝手にはやしても良いかもしれない。
 
+ただ、暗黙のデフォルト動作を増やしすぎて挙動の理解が困難になるのは避けたい所。全ての動作が記述されたコードが生成される `--expose` 的なオプションがあっても良いのかもしれない。
+
+
 ### bulk action
 
 あと地味に嫌なのがimportが重い系の処理を複数の対象に対して実行する必要が出てきた時。処理時間のほとんどはimportなどのload time。かなしい。
