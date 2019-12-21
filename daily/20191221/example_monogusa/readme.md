@@ -90,3 +90,5 @@ $ cat commands.txt | python -m monogusa.cli crud.py
 ```
 
 parseだけするようなdry-runオプションもあっても良いかもしれない。
+
+まぁ本音を言えばIPython Kernel的なものを立ち上げてRPCしたい。
