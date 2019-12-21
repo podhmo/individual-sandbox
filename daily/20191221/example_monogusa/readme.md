@@ -7,7 +7,13 @@
 たしか前回でかんたんなweb用のコードは出力できるようになった。
 ただ出力関係がまだ標準出力ベースでこれは後々きつくなっていくことが予想される感じだった。
 
-## on_startup, on_shutdown event
+とりあえずprestring.output経由で出力して複数ファイルの出力ができるようにしておきたい。
+
+## 未来の話
+
+ちょっとだけ未来の話。
+
+### on_startup, on_shutdown event
 
 あと不足している部分はon_startup, on_shutdown的なevent (setup, teardownと見做しても良い)。なんで欲しくなるかというと例えばcomponentのconnect,disconnectのような処理を間にはさみたいから。コレがあるとCRUD的なインターフェイスのモジュールをそのままコマンドとして提供できるようになる。
 
