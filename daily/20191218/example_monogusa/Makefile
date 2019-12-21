@@ -30,4 +30,5 @@
 11:
 	python $(shell echo $@*/)codegen.py | tee $(shell echo $@*/)routers.py
 12:
-	python -m monogusa.web $(shell echo $@*/)commands.py | tee $(shell echo $@*/)web.py
+	python -m monogusa.web --with-main $(shell echo $@*/)commands.py | sed "s@$(shell pwd)/@@g" | tee $(shell echo $@*/)web.py
+	# python $(shell echo $@*/)web.py --show-doc
