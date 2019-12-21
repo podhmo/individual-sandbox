@@ -39,6 +39,16 @@ async def list(db: Database) -> None:
 @app.get("/notes/", response_model=t.List[Note])
 async def read_notes():
     return await crud.read_notes(db)
+
+# 現状ではすべてcommand likeな処理のシェル実行をシミュレートしているので以下
+from fastapi import Depends
+from monogusa.web import runtime
+
+@app.get("/notes/", response_model=runtime.CommandOutput)
+async def read_notes(db: Database = Depends()):
+    with runtime.handle() as s:
+        await crud.read_notes(db)
+        return s.dict()
 ```
 
 ### callback action
