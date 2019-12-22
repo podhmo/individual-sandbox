@@ -30,14 +30,10 @@ def hello(input: HelloInput, db: commands.DB=Depends(db)) -> t.Dict[str, t.Any]:
         return s.dict()
 
 
-class ByebyeInput(BaseModel):
-    pass
-
-
 @router.post("/byebye", response_model=runtime.CommandOutput)
-def byebye(input: ByebyeInput, db: commands.DB=Depends(db)) -> t.Dict[str, t.Any]:
+def byebye(db: commands.DB=Depends(db)) -> t.Dict[str, t.Any]:
     with runtime.handle() as s:
-        commands.byebye(db, **input.dict())
+        commands.byebye(db)
         return s.dict()
 
 
