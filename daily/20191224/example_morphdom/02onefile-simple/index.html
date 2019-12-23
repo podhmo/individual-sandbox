@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+* {
+    font-size: 1.5rem;
+}
+
+body {
+    margin: 0 2.5rem;
+}
+div {
+    padding: .5rem;
+}
+
+.animated {
+    transition: all 0.3s ease-in-out;
+    width: 300px;
+    height: 100px;
+    background-color: #2ecc71;
+    overflow: auto;
+}
+
+.animated.after {
+    width: 600px;
+    height: 100px;
+    background-color: #f1c40f;
+}
+    </style>
+    <script src="https://unpkg.com/morphdom@2.5/dist/morphdom-umd.js" crossorigin></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <button onclick="toggle()">toggle</button>
+  </body>
+  <script>
+
+const templates = [
+`<div id="container">
+  <h2>This is the <emphasis>before</emphasis> DOM</h2>
+  <div class="animated before" - This DIV uses CSS transitions</div>
+</div>`,
+`<div id="container">
+  <h2>This is the <emphasis>after</emphasis> DOM</h2>
+  <div class="animated after" - This DIV uses CSS transitions</div>
+</div>`,
+];
+
+let i = 0;
+function toggle(){
+  morphdom(document.getElementById("container"), templates[i++ % 2]);
+}
+    toggle();
+  </script>
+</html>

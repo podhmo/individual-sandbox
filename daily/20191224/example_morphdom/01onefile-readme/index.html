@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
+    <script src="https://unpkg.com/morphdom@2.5/dist/morphdom-umd.js" crossorigin></script>
+  </head>
+  <body>
+  </body>
+  <script>
+    var el1 = document.createElement('div');
+    el1.className = 'foo';
+    el1.innerHTML = 'Hello John';
+    document.querySelector("body").appendChild(el1);
+
+    morphdom(el1, '<div class="bar">Hello Frank</div>');
+
+   </script>
+</html>
