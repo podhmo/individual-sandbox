@@ -1,1 +1,2 @@
 slackbot
+monogusa[slack]

@@ -22,3 +22,9 @@
 	python $@*.py
 11:
 	python $@*.py
+12:
+	python $@*.py
+13:
+	python $@*.py
+14:
+	python -m monogusa.chatbot.slackchat $@*.py

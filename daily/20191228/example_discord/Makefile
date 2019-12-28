@@ -10,3 +10,9 @@
 	python $@*.py
 05:
 	python $@*.py
+06:
+	python $@*.py
+07:
+	python $@*.py
+08:
+	python -m monogusa.chatbot.discordchat $@*.py
