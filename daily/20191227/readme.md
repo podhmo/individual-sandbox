@@ -1,0 +1,4 @@
+## go JSON
+
+- NullBool
+- UseNumber

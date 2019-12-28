@@ -1,0 +1,491 @@
+# github.com/podhmo/individual-sandbox/daily/20191227/example_go/03cost/nullbool
+"".NullBool.MarshalJSON STEXT size=273 args=0x30 locals=0x18
+	0x0000 00000 (./nullbool/nullbool.go:9)	TEXT	"".NullBool.MarshalJSON(SB), ABIInternal, $24-48
+	0x0000 00000 (./nullbool/nullbool.go:9)	MOVQ	(TLS), CX
+	0x0009 00009 (./nullbool/nullbool.go:9)	CMPQ	SP, 16(CX)
+	0x000d 00013 (./nullbool/nullbool.go:9)	JLS	263
+	0x0013 00019 (./nullbool/nullbool.go:9)	SUBQ	$24, SP
+	0x0017 00023 (./nullbool/nullbool.go:9)	MOVQ	BP, 16(SP)
+	0x001c 00028 (./nullbool/nullbool.go:9)	LEAQ	16(SP), BP
+	0x0021 00033 (./nullbool/nullbool.go:9)	FUNCDATA	$0, gclocals·f8244a831147876f4bf2671362211914(SB)
+	0x0021 00033 (./nullbool/nullbool.go:9)	FUNCDATA	$1, gclocals·7d2d5fca80364273fb07d5820a76fef4(SB)
+	0x0021 00033 (./nullbool/nullbool.go:9)	FUNCDATA	$2, gclocals·9fb7f0986f647f17cb53dda1484e0f7a(SB)
+	0x0021 00033 (./nullbool/nullbool.go:9)	PCDATA	$0, $0
+	0x0021 00033 (./nullbool/nullbool.go:9)	PCDATA	$1, $0
+	0x0021 00033 (./nullbool/nullbool.go:9)	MOVBLZX	"".v+33(SP), AX
+	0x0026 00038 (./nullbool/nullbool.go:9)	TESTB	AL, AL
+	0x0028 00040 (./nullbool/nullbool.go:10)	JEQ	195
+	0x002e 00046 (./nullbool/nullbool.go:9)	MOVBLZX	"".v+32(SP), AX
+	0x0033 00051 (./nullbool/nullbool.go:9)	TESTB	AL, AL
+	0x0035 00053 (./nullbool/nullbool.go:13)	JEQ	123
+	0x0037 00055 (./nullbool/nullbool.go:14)	PCDATA	$0, $1
+	0x0037 00055 (./nullbool/nullbool.go:14)	LEAQ	type.[4]uint8(SB), AX
+	0x003e 00062 (./nullbool/nullbool.go:14)	PCDATA	$0, $0
+	0x003e 00062 (./nullbool/nullbool.go:14)	MOVQ	AX, (SP)
+	0x0042 00066 (./nullbool/nullbool.go:14)	CALL	runtime.newobject(SB)
+	0x0047 00071 (./nullbool/nullbool.go:14)	PCDATA	$0, $1
+	0x0047 00071 (./nullbool/nullbool.go:14)	MOVQ	8(SP), AX
+	0x004c 00076 (./nullbool/nullbool.go:14)	MOVL	$1702195828, (AX)
+	0x0052 00082 (./nullbool/nullbool.go:14)	PCDATA	$0, $0
+	0x0052 00082 (./nullbool/nullbool.go:14)	PCDATA	$1, $1
+	0x0052 00082 (./nullbool/nullbool.go:14)	MOVQ	AX, "".~r0+40(SP)
+	0x0057 00087 (./nullbool/nullbool.go:14)	MOVQ	$4, "".~r0+48(SP)
+	0x0060 00096 (./nullbool/nullbool.go:14)	MOVQ	$4, "".~r0+56(SP)
+	0x0069 00105 (./nullbool/nullbool.go:14)	PCDATA	$1, $2
+	0x0069 00105 (./nullbool/nullbool.go:14)	XORPS	X0, X0
+	0x006c 00108 (./nullbool/nullbool.go:14)	MOVUPS	X0, "".~r1+64(SP)
+	0x0071 00113 (./nullbool/nullbool.go:14)	MOVQ	16(SP), BP
+	0x0076 00118 (./nullbool/nullbool.go:14)	ADDQ	$24, SP
+	0x007a 00122 (./nullbool/nullbool.go:14)	RET
+	0x007b 00123 (./nullbool/nullbool.go:16)	PCDATA	$0, $1
+	0x007b 00123 (./nullbool/nullbool.go:16)	PCDATA	$1, $0
+	0x007b 00123 (./nullbool/nullbool.go:16)	LEAQ	type.[5]uint8(SB), AX
+	0x0082 00130 (./nullbool/nullbool.go:16)	PCDATA	$0, $0
+	0x0082 00130 (./nullbool/nullbool.go:16)	MOVQ	AX, (SP)
+	0x0086 00134 (./nullbool/nullbool.go:16)	CALL	runtime.newobject(SB)
+	0x008b 00139 (./nullbool/nullbool.go:16)	PCDATA	$0, $1
+	0x008b 00139 (./nullbool/nullbool.go:16)	MOVQ	8(SP), AX
+	0x0090 00144 (./nullbool/nullbool.go:16)	MOVL	$1936482662, (AX)
+	0x0096 00150 (./nullbool/nullbool.go:16)	MOVB	$101, 4(AX)
+	0x009a 00154 (./nullbool/nullbool.go:16)	PCDATA	$0, $0
+	0x009a 00154 (./nullbool/nullbool.go:16)	PCDATA	$1, $1
+	0x009a 00154 (./nullbool/nullbool.go:16)	MOVQ	AX, "".~r0+40(SP)
+	0x009f 00159 (./nullbool/nullbool.go:16)	MOVQ	$5, "".~r0+48(SP)
+	0x00a8 00168 (./nullbool/nullbool.go:16)	MOVQ	$5, "".~r0+56(SP)
+	0x00b1 00177 (./nullbool/nullbool.go:16)	PCDATA	$1, $2
+	0x00b1 00177 (./nullbool/nullbool.go:16)	XORPS	X0, X0
+	0x00b4 00180 (./nullbool/nullbool.go:16)	MOVUPS	X0, "".~r1+64(SP)
+	0x00b9 00185 (./nullbool/nullbool.go:16)	MOVQ	16(SP), BP
+	0x00be 00190 (./nullbool/nullbool.go:16)	ADDQ	$24, SP
+	0x00c2 00194 (./nullbool/nullbool.go:16)	RET
+	0x00c3 00195 (./nullbool/nullbool.go:11)	PCDATA	$0, $1
+	0x00c3 00195 (./nullbool/nullbool.go:11)	PCDATA	$1, $0
+	0x00c3 00195 (./nullbool/nullbool.go:11)	LEAQ	type.[4]uint8(SB), AX
+	0x00ca 00202 (./nullbool/nullbool.go:11)	PCDATA	$0, $0
+	0x00ca 00202 (./nullbool/nullbool.go:11)	MOVQ	AX, (SP)
+	0x00ce 00206 (./nullbool/nullbool.go:11)	CALL	runtime.newobject(SB)
+	0x00d3 00211 (./nullbool/nullbool.go:11)	PCDATA	$0, $1
+	0x00d3 00211 (./nullbool/nullbool.go:11)	MOVQ	8(SP), AX
+	0x00d8 00216 (./nullbool/nullbool.go:11)	MOVL	$1819047278, (AX)
+	0x00de 00222 (./nullbool/nullbool.go:11)	PCDATA	$0, $0
+	0x00de 00222 (./nullbool/nullbool.go:11)	PCDATA	$1, $1
+	0x00de 00222 (./nullbool/nullbool.go:11)	MOVQ	AX, "".~r0+40(SP)
+	0x00e3 00227 (./nullbool/nullbool.go:11)	MOVQ	$4, "".~r0+48(SP)
+	0x00ec 00236 (./nullbool/nullbool.go:11)	MOVQ	$4, "".~r0+56(SP)
+	0x00f5 00245 (./nullbool/nullbool.go:11)	PCDATA	$1, $2
+	0x00f5 00245 (./nullbool/nullbool.go:11)	XORPS	X0, X0
+	0x00f8 00248 (./nullbool/nullbool.go:11)	MOVUPS	X0, "".~r1+64(SP)
+	0x00fd 00253 (./nullbool/nullbool.go:11)	MOVQ	16(SP), BP
+	0x0102 00258 (./nullbool/nullbool.go:11)	ADDQ	$24, SP
+	0x0106 00262 (./nullbool/nullbool.go:11)	RET
+	0x0107 00263 (./nullbool/nullbool.go:11)	NOP
+	0x0107 00263 (./nullbool/nullbool.go:9)	PCDATA	$1, $-1
+	0x0107 00263 (./nullbool/nullbool.go:9)	PCDATA	$0, $-1
+	0x0107 00263 (./nullbool/nullbool.go:9)	CALL	runtime.morestack_noctxt(SB)
+	0x010c 00268 (./nullbool/nullbool.go:9)	JMP	0
+	0x0000 64 48 8b 0c 25 00 00 00 00 48 3b 61 10 0f 86 f4  dH..%....H;a....
+	0x0010 00 00 00 48 83 ec 18 48 89 6c 24 10 48 8d 6c 24  ...H...H.l$.H.l$
+	0x0020 10 0f b6 44 24 21 84 c0 0f 84 95 00 00 00 0f b6  ...D$!..........
+	0x0030 44 24 20 84 c0 74 44 48 8d 05 00 00 00 00 48 89  D$ ..tDH......H.
+	0x0040 04 24 e8 00 00 00 00 48 8b 44 24 08 c7 00 74 72  .$.....H.D$...tr
+	0x0050 75 65 48 89 44 24 28 48 c7 44 24 30 04 00 00 00  ueH.D$(H.D$0....
+	0x0060 48 c7 44 24 38 04 00 00 00 0f 57 c0 0f 11 44 24  H.D$8.....W...D$
+	0x0070 40 48 8b 6c 24 10 48 83 c4 18 c3 48 8d 05 00 00  @H.l$.H....H....
+	0x0080 00 00 48 89 04 24 e8 00 00 00 00 48 8b 44 24 08  ..H..$.....H.D$.
+	0x0090 c7 00 66 61 6c 73 c6 40 04 65 48 89 44 24 28 48  ..fals.@.eH.D$(H
+	0x00a0 c7 44 24 30 05 00 00 00 48 c7 44 24 38 05 00 00  .D$0....H.D$8...
+	0x00b0 00 0f 57 c0 0f 11 44 24 40 48 8b 6c 24 10 48 83  ..W...D$@H.l$.H.
+	0x00c0 c4 18 c3 48 8d 05 00 00 00 00 48 89 04 24 e8 00  ...H......H..$..
+	0x00d0 00 00 00 48 8b 44 24 08 c7 00 6e 75 6c 6c 48 89  ...H.D$...nullH.
+	0x00e0 44 24 28 48 c7 44 24 30 04 00 00 00 48 c7 44 24  D$(H.D$0....H.D$
+	0x00f0 38 04 00 00 00 0f 57 c0 0f 11 44 24 40 48 8b 6c  8.....W...D$@H.l
+	0x0100 24 10 48 83 c4 18 c3 e8 00 00 00 00 e9 ef fe ff  $.H.............
+	0x0110 ff                                               .
+	rel 5+4 t=16 TLS+0
+	rel 58+4 t=15 type.[4]uint8+0
+	rel 67+4 t=8 runtime.newobject+0
+	rel 126+4 t=15 type.[5]uint8+0
+	rel 135+4 t=8 runtime.newobject+0
+	rel 198+4 t=15 type.[4]uint8+0
+	rel 207+4 t=8 runtime.newobject+0
+	rel 264+4 t=8 runtime.morestack_noctxt+0
+"".(*NullBool).MarshalJSON STEXT dupok size=252 args=0x30 locals=0x18
+	0x0000 00000 (<autogenerated>:1)	TEXT	"".(*NullBool).MarshalJSON(SB), DUPOK|WRAPPER|ABIInternal, $24-48
+	0x0000 00000 (<autogenerated>:1)	MOVQ	(TLS), CX
+	0x0009 00009 (<autogenerated>:1)	CMPQ	SP, 16(CX)
+	0x000d 00013 (<autogenerated>:1)	JLS	220
+	0x0013 00019 (<autogenerated>:1)	SUBQ	$24, SP
+	0x0017 00023 (<autogenerated>:1)	MOVQ	BP, 16(SP)
+	0x001c 00028 (<autogenerated>:1)	LEAQ	16(SP), BP
+	0x0021 00033 (<autogenerated>:1)	MOVQ	32(CX), BX
+	0x0025 00037 (<autogenerated>:1)	TESTQ	BX, BX
+	0x0028 00040 (<autogenerated>:1)	JNE	230
+	0x002e 00046 (<autogenerated>:1)	NOP
+	0x002e 00046 (<autogenerated>:1)	FUNCDATA	$0, gclocals·c5a86c207540bf8a2ca84cf606900906(SB)
+	0x002e 00046 (<autogenerated>:1)	FUNCDATA	$1, gclocals·f6bd6b3389b872033d462029172c8612(SB)
+	0x002e 00046 (<autogenerated>:1)	FUNCDATA	$2, gclocals·9fb7f0986f647f17cb53dda1484e0f7a(SB)
+	0x002e 00046 (<autogenerated>:1)	PCDATA	$0, $1
+	0x002e 00046 (<autogenerated>:1)	PCDATA	$1, $1
+	0x002e 00046 (<autogenerated>:1)	MOVQ	""..this+32(SP), AX
+	0x0033 00051 (<autogenerated>:1)	TESTQ	AX, AX
+	0x0036 00054 (<autogenerated>:1)	JEQ	214
+	0x003c 00060 (<unknown line number>)	NOP
+	0x003c 00060 (<autogenerated>:1)	MOVBLZX	(AX), CX
+	0x003f 00063 (<autogenerated>:1)	CMPB	CL, $0
+	0x0042 00066 (<autogenerated>:1)	PCDATA	$0, $0
+	0x0042 00066 (<autogenerated>:1)	CMPB	1(AX), $0
+	0x0046 00070 (./nullbool/nullbool.go:10)	JEQ	180
+	0x0048 00072 (<autogenerated>:1)	CMPB	CL, $0
+	0x004b 00075 (./nullbool/nullbool.go:13)	JEQ	142
+	0x004d 00077 (./nullbool/nullbool.go:14)	PCDATA	$0, $1
+	0x004d 00077 (./nullbool/nullbool.go:14)	LEAQ	type.[4]uint8(SB), AX
+	0x0054 00084 (./nullbool/nullbool.go:14)	PCDATA	$0, $0
+	0x0054 00084 (./nullbool/nullbool.go:14)	MOVQ	AX, (SP)
+	0x0058 00088 (./nullbool/nullbool.go:14)	CALL	runtime.newobject(SB)
+	0x005d 00093 (./nullbool/nullbool.go:14)	PCDATA	$0, $1
+	0x005d 00093 (./nullbool/nullbool.go:14)	MOVQ	8(SP), AX
+	0x0062 00098 (./nullbool/nullbool.go:14)	MOVL	$1702195828, (AX)
+	0x0068 00104 (./nullbool/nullbool.go:14)	MOVL	$4, CX
+	0x006d 00109 (<autogenerated>:1)	PCDATA	$0, $0
+	0x006d 00109 (<autogenerated>:1)	PCDATA	$1, $2
+	0x006d 00109 (<autogenerated>:1)	MOVQ	AX, "".~r0+40(SP)
+	0x0072 00114 (<autogenerated>:1)	MOVQ	CX, "".~r0+48(SP)
+	0x0077 00119 (<autogenerated>:1)	MOVQ	CX, "".~r0+56(SP)
+	0x007c 00124 (<autogenerated>:1)	PCDATA	$1, $3
+	0x007c 00124 (<autogenerated>:1)	XORPS	X0, X0
+	0x007f 00127 (<autogenerated>:1)	MOVUPS	X0, "".~r1+64(SP)
+	0x0084 00132 (<autogenerated>:1)	MOVQ	16(SP), BP
+	0x0089 00137 (<autogenerated>:1)	ADDQ	$24, SP
+	0x008d 00141 (<autogenerated>:1)	RET
+	0x008e 00142 (./nullbool/nullbool.go:16)	PCDATA	$0, $1
+	0x008e 00142 (./nullbool/nullbool.go:16)	PCDATA	$1, $1
+	0x008e 00142 (./nullbool/nullbool.go:16)	LEAQ	type.[5]uint8(SB), AX
+	0x0095 00149 (./nullbool/nullbool.go:16)	PCDATA	$0, $0
+	0x0095 00149 (./nullbool/nullbool.go:16)	MOVQ	AX, (SP)
+	0x0099 00153 (./nullbool/nullbool.go:16)	CALL	runtime.newobject(SB)
+	0x009e 00158 (./nullbool/nullbool.go:16)	PCDATA	$0, $1
+	0x009e 00158 (./nullbool/nullbool.go:16)	MOVQ	8(SP), AX
+	0x00a3 00163 (./nullbool/nullbool.go:16)	MOVL	$1936482662, (AX)
+	0x00a9 00169 (./nullbool/nullbool.go:16)	MOVB	$101, 4(AX)
+	0x00ad 00173 (./nullbool/nullbool.go:16)	MOVL	$5, CX
+	0x00b2 00178 (<autogenerated>:1)	JMP	109
+	0x00b4 00180 (./nullbool/nullbool.go:11)	LEAQ	type.[4]uint8(SB), AX
+	0x00bb 00187 (./nullbool/nullbool.go:11)	PCDATA	$0, $0
+	0x00bb 00187 (./nullbool/nullbool.go:11)	MOVQ	AX, (SP)
+	0x00bf 00191 (./nullbool/nullbool.go:11)	CALL	runtime.newobject(SB)
+	0x00c4 00196 (./nullbool/nullbool.go:11)	PCDATA	$0, $1
+	0x00c4 00196 (./nullbool/nullbool.go:11)	MOVQ	8(SP), AX
+	0x00c9 00201 (./nullbool/nullbool.go:11)	MOVL	$1819047278, (AX)
+	0x00cf 00207 (./nullbool/nullbool.go:11)	MOVL	$4, CX
+	0x00d4 00212 (<autogenerated>:1)	JMP	109
+	0x00d6 00214 (<autogenerated>:1)	PCDATA	$0, $0
+	0x00d6 00214 (<autogenerated>:1)	CALL	runtime.panicwrap(SB)
+	0x00db 00219 (<autogenerated>:1)	XCHGL	AX, AX
+	0x00dc 00220 (<autogenerated>:1)	NOP
+	0x00dc 00220 (<autogenerated>:1)	PCDATA	$1, $-1
+	0x00dc 00220 (<autogenerated>:1)	PCDATA	$0, $-1
+	0x00dc 00220 (<autogenerated>:1)	CALL	runtime.morestack_noctxt(SB)
+	0x00e1 00225 (<autogenerated>:1)	JMP	0
+	0x00e6 00230 (<autogenerated>:1)	LEAQ	32(SP), DI
+	0x00eb 00235 (<autogenerated>:1)	CMPQ	(BX), DI
+	0x00ee 00238 (<autogenerated>:1)	JNE	46
+	0x00f4 00244 (<autogenerated>:1)	MOVQ	SP, (BX)
+	0x00f7 00247 (<autogenerated>:1)	JMP	46
+	0x0000 64 48 8b 0c 25 00 00 00 00 48 3b 61 10 0f 86 c9  dH..%....H;a....
+	0x0010 00 00 00 48 83 ec 18 48 89 6c 24 10 48 8d 6c 24  ...H...H.l$.H.l$
+	0x0020 10 48 8b 59 20 48 85 db 0f 85 b8 00 00 00 48 8b  .H.Y H........H.
+	0x0030 44 24 20 48 85 c0 0f 84 9a 00 00 00 0f b6 08 80  D$ H............
+	0x0040 f9 00 80 78 01 00 74 6c 80 f9 00 74 41 48 8d 05  ...x..tl...tAH..
+	0x0050 00 00 00 00 48 89 04 24 e8 00 00 00 00 48 8b 44  ....H..$.....H.D
+	0x0060 24 08 c7 00 74 72 75 65 b9 04 00 00 00 48 89 44  $...true.....H.D
+	0x0070 24 28 48 89 4c 24 30 48 89 4c 24 38 0f 57 c0 0f  $(H.L$0H.L$8.W..
+	0x0080 11 44 24 40 48 8b 6c 24 10 48 83 c4 18 c3 48 8d  .D$@H.l$.H....H.
+	0x0090 05 00 00 00 00 48 89 04 24 e8 00 00 00 00 48 8b  .....H..$.....H.
+	0x00a0 44 24 08 c7 00 66 61 6c 73 c6 40 04 65 b9 05 00  D$...fals.@.e...
+	0x00b0 00 00 eb b9 48 8d 05 00 00 00 00 48 89 04 24 e8  ....H......H..$.
+	0x00c0 00 00 00 00 48 8b 44 24 08 c7 00 6e 75 6c 6c b9  ....H.D$...null.
+	0x00d0 04 00 00 00 eb 97 e8 00 00 00 00 90 e8 00 00 00  ................
+	0x00e0 00 e9 1a ff ff ff 48 8d 7c 24 20 48 39 3b 0f 85  ......H.|$ H9;..
+	0x00f0 3a ff ff ff 48 89 23 e9 32 ff ff ff              :...H.#.2...
+	rel 5+4 t=16 TLS+0
+	rel 80+4 t=15 type.[4]uint8+0
+	rel 89+4 t=8 runtime.newobject+0
+	rel 145+4 t=15 type.[5]uint8+0
+	rel 154+4 t=8 runtime.newobject+0
+	rel 183+4 t=15 type.[4]uint8+0
+	rel 192+4 t=8 runtime.newobject+0
+	rel 215+4 t=8 runtime.panicwrap+0
+	rel 221+4 t=8 runtime.morestack_noctxt+0
+go.cuinfo.packagename.github.com/podhmo/individual-sandbox/daily/20191227/example_go/03cost/nullbool SDWARFINFO dupok size=0
+	0x0000 6e 75 6c 6c 62 6f 6f 6c 32                       nullbool
+go.string."null" SRODATA dupok size=4
+	0x0000 6e 75 6c 6c                                      null
+go.string."true" SRODATA dupok size=4
+	0x0000 74 72 75 65                                      true
+go.string."false" SRODATA dupok size=5
+	0x0000 66 61 6c 73 65                                   false
+go.loc."".NullBool.MarshalJSON SDWARFLOC size=57
+	0x0000 ff ff ff ff ff ff ff ff 00 00 00 00 00 00 00 00  ................
+	0x0010 00 00 00 00 00 00 00 00 11 01 00 00 00 00 00 00  ................
+	0x0020 07 00 9c 93 01 91 01 93 01 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00 00                       .........
+	rel 8+8 t=1 "".NullBool.MarshalJSON+0
+go.info."".NullBool.MarshalJSON SDWARFINFO size=86
+	0x0000 03 22 22 2e 4e 75 6c 6c 42 6f 6f 6c 2e 4d 61 72  ."".NullBool.Mar
+	0x0010 73 68 61 6c 4a 53 4f 4e 00 00 00 00 00 00 00 00  shalJSON........
+	0x0020 00 00 00 00 00 00 00 00 00 01 9c 00 00 00 00 01  ................
+	0x0030 10 76 00 00 09 00 00 00 00 00 00 00 00 0f 7e 72  .v............~r
+	0x0040 30 00 01 09 00 00 00 00 00 0f 7e 72 31 00 01 09  0.........~r1...
+	0x0050 00 00 00 00 00 00                                ......
+	rel 25+8 t=1 "".NullBool.MarshalJSON+0
+	rel 33+8 t=1 "".NullBool.MarshalJSON+273
+	rel 43+4 t=29 gofile.../nullbool/nullbool.go+0
+	rel 53+4 t=28 go.info."".NullBool+0
+	rel 57+4 t=28 go.loc."".NullBool.MarshalJSON+0
+	rel 68+4 t=28 go.info.[]uint8+0
+	rel 80+4 t=28 go.info.error+0
+go.range."".NullBool.MarshalJSON SDWARFRANGE size=0
+go.isstmt."".NullBool.MarshalJSON SDWARFMISC size=0
+	0x0000 04 13 04 0e 05 07 02 06 01 07 02 09 01 04 02 05  ................
+	0x0010 01 34 02 07 01 04 02 05 01 38 02 07 01 04 02 05  .4.......8......
+	0x0020 01 34 02 0a 00                                   .4...
+runtime.gcbits.01 SRODATA dupok size=1
+	0x0000 01                                               .
+go.loc."".(*NullBool).MarshalJSON SDWARFLOC dupok size=0
+go.info."".(*NullBool).MarshalJSON SDWARFINFO dupok size=76
+	0x0000 03 22 22 2e 28 2a 4e 75 6c 6c 42 6f 6f 6c 29 2e  ."".(*NullBool).
+	0x0010 4d 61 72 73 68 61 6c 4a 53 4f 4e 00 00 00 00 00  MarshalJSON.....
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 01 9c 00 00  ................
+	0x0030 00 00 01 0f 7e 72 30 00 01 09 00 00 00 00 00 0f  ....~r0.........
+	0x0040 7e 72 31 00 01 09 00 00 00 00 00 00              ~r1.........
+	rel 28+8 t=1 "".(*NullBool).MarshalJSON+0
+	rel 36+8 t=1 "".(*NullBool).MarshalJSON+252
+	rel 46+4 t=29 gofile..<autogenerated>+0
+	rel 58+4 t=28 go.info.[]uint8+0
+	rel 70+4 t=28 go.info.error+0
+go.range."".(*NullBool).MarshalJSON SDWARFRANGE dupok size=0
+go.isstmt."".(*NullBool).MarshalJSON SDWARFMISC dupok size=0
+	0x0000 04 13 04 1b 03 05 01 13 02 02 01 03 02 09 01 04  ................
+	0x0010 02 05 01 10 02 05 01 1c 02 07 01 04 02 05 01 14  ................
+	0x0020 02 09 01 04 02 05 01 10 02 28 00                 .........(.
+type..namedata.*nullbool.NullBool. SRODATA dupok size=22
+	0x0000 01 00 13 2a 6e 75 6c 6c 62 6f 6f 6c 32 2e 4e 75  ...*nullbool.Nu
+	0x0010 6c 6c 42 6f 6f 6c                                llBool
+type..namedata.*[]uint8- SRODATA dupok size=11
+	0x0000 00 00 08 2a 5b 5d 75 69 6e 74 38                 ...*[]uint8
+type.*[]uint8 SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 a5 8e d0 69 00 08 08 36 00 00 00 00 00 00 00 00  ...i...6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*[]uint8-+0
+	rel 48+8 t=1 type.[]uint8+0
+type.[]uint8 SRODATA dupok size=56
+	0x0000 18 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 df 7e 2e 38 02 08 08 17 00 00 00 00 00 00 00 00  .~.8............
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+0
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*[]uint8-+0
+	rel 44+4 t=6 type.*[]uint8+0
+	rel 48+8 t=1 type.uint8+0
+type..namedata.*func(*nullbool.NullBool) ([]uint8, error)- SRODATA dupok size=46
+	0x0000 00 00 2b 2a 66 75 6e 63 28 2a 6e 75 6c 6c 62 6f  ..+*func(*nullbo
+	0x0010 6f 6c 32 2e 4e 75 6c 6c 42 6f 6f 6c 29 20 28 5b  ol2.NullBool) ([
+	0x0020 5d 75 69 6e 74 38 2c 20 65 72 72 6f 72 29        ]uint8, error)
+type.*func(*"".NullBool) ([]uint8, error) SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 a3 fe 13 24 00 08 08 36 00 00 00 00 00 00 00 00  ...$...6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func(*nullbool.NullBool) ([]uint8, error)-+0
+	rel 48+8 t=1 type.func(*"".NullBool) ([]uint8, error)+0
+type.func(*"".NullBool) ([]uint8, error) SRODATA dupok size=80
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 10 0c aa 47 02 08 08 33 00 00 00 00 00 00 00 00  ...G...3........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 01 00 02 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 24+8 t=1 runtime.algarray+0
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func(*nullbool.NullBool) ([]uint8, error)-+0
+	rel 44+4 t=6 type.*func(*"".NullBool) ([]uint8, error)+0
+	rel 56+8 t=1 type.*"".NullBool+0
+	rel 64+8 t=1 type.[]uint8+0
+	rel 72+8 t=1 type.error+0
+type..importpath."". SRODATA dupok size=82
+	0x0000 00 00 4f 67 69 74 68 75 62 2e 63 6f 6d 2f 70 6f  ..Ogithub.com/po
+	0x0010 64 68 6d 6f 2f 69 6e 64 69 76 69 64 75 61 6c 2d  dhmo/individual-
+	0x0020 73 61 6e 64 62 6f 78 2f 64 61 69 6c 79 2f 32 30  sandbox/daily/20
+	0x0030 31 39 31 32 32 37 2f 65 78 61 6d 70 6c 65 5f 67  191227/example_g
+	0x0040 6f 2f 30 33 63 6f 73 74 2f 6e 75 6c 6c 62 6f 6f  o/03cost/nullboo
+	0x0050 6c 32                                            l2
+type..namedata.MarshalJSON. SRODATA dupok size=14
+	0x0000 01 00 0b 4d 61 72 73 68 61 6c 4a 53 4f 4e        ...MarshalJSON
+type..namedata.*func() ([]uint8, error)- SRODATA dupok size=27
+	0x0000 00 00 18 2a 66 75 6e 63 28 29 20 28 5b 5d 75 69  ...*func() ([]ui
+	0x0010 6e 74 38 2c 20 65 72 72 6f 72 29                 nt8, error)
+type.*func() ([]uint8, error) SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 af 2e 0d 9e 00 08 08 36 00 00 00 00 00 00 00 00  .......6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func() ([]uint8, error)-+0
+	rel 48+8 t=1 type.func() ([]uint8, error)+0
+type.func() ([]uint8, error) SRODATA dupok size=72
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 9f ec 78 5d 02 08 08 33 00 00 00 00 00 00 00 00  ..x]...3........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 02 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+0
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func() ([]uint8, error)-+0
+	rel 44+4 t=6 type.*func() ([]uint8, error)+0
+	rel 56+8 t=1 type.[]uint8+0
+	rel 64+8 t=1 type.error+0
+type.*"".NullBool SRODATA size=88
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 1c 6f 83 c5 01 08 08 36 00 00 00 00 00 00 00 00  .o.....6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00 00 00 00 00 01 00 01 00  ................
+	0x0040 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0050 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*nullbool.NullBool.+0
+	rel 48+8 t=1 type."".NullBool+0
+	rel 56+4 t=5 type..importpath."".+0
+	rel 72+4 t=5 type..namedata.MarshalJSON.+0
+	rel 76+4 t=24 type.func() ([]uint8, error)+0
+	rel 80+4 t=24 "".(*NullBool).MarshalJSON+0
+	rel 84+4 t=24 "".(*NullBool).MarshalJSON+0
+runtime.gcbits. SRODATA dupok size=0
+type..namedata.*func(nullbool.NullBool) ([]uint8, error)- SRODATA dupok size=45
+	0x0000 00 00 2a 2a 66 75 6e 63 28 6e 75 6c 6c 62 6f 6f  ..**func(nullboo
+	0x0010 6c 32 2e 4e 75 6c 6c 42 6f 6f 6c 29 20 28 5b 5d  l2.NullBool) ([]
+	0x0020 75 69 6e 74 38 2c 20 65 72 72 6f 72 29           uint8, error)
+type.*func("".NullBool) ([]uint8, error) SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 c0 19 61 f2 00 08 08 36 00 00 00 00 00 00 00 00  ..a....6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func(nullbool.NullBool) ([]uint8, error)-+0
+	rel 48+8 t=1 type.func("".NullBool) ([]uint8, error)+0
+type.func("".NullBool) ([]uint8, error) SRODATA dupok size=80
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 c7 26 01 ad 02 08 08 33 00 00 00 00 00 00 00 00  .&.....3........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 01 00 02 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 24+8 t=1 runtime.algarray+0
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*func(nullbool.NullBool) ([]uint8, error)-+0
+	rel 44+4 t=6 type.*func("".NullBool) ([]uint8, error)+0
+	rel 56+8 t=1 type."".NullBool+0
+	rel 64+8 t=1 type.[]uint8+0
+	rel 72+8 t=1 type.error+0
+type..namedata.Bool. SRODATA dupok size=7
+	0x0000 01 00 04 42 6f 6f 6c                             ...Bool
+type..namedata.Valid. SRODATA dupok size=8
+	0x0000 01 00 05 56 61 6c 69 64                          ...Valid
+type."".NullBool SRODATA size=160
+	0x0000 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0010 b6 34 8a d9 07 01 01 19 00 00 00 00 00 00 00 00  .4..............
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 02 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00  ................
+	0x0050 00 00 00 00 01 00 01 00 40 00 00 00 00 00 00 00  ........@.......
+	0x0060 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0070 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0080 00 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00  ................
+	0x0090 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 24+8 t=1 runtime.algarray+48
+	rel 32+8 t=1 runtime.gcbits.+0
+	rel 40+4 t=5 type..namedata.*nullbool.NullBool.+0
+	rel 44+4 t=5 type.*"".NullBool+0
+	rel 56+8 t=1 type."".NullBool+96
+	rel 80+4 t=5 type..importpath."".+0
+	rel 96+8 t=1 type..namedata.Bool.+0
+	rel 104+8 t=1 type.bool+0
+	rel 120+8 t=1 type..namedata.Valid.+0
+	rel 128+8 t=1 type.bool+0
+	rel 144+4 t=5 type..namedata.MarshalJSON.+0
+	rel 148+4 t=24 type.func() ([]uint8, error)+0
+	rel 152+4 t=24 "".(*NullBool).MarshalJSON+0
+	rel 156+4 t=24 "".NullBool.MarshalJSON+0
+type..namedata.*[4]uint8- SRODATA dupok size=12
+	0x0000 00 00 09 2a 5b 34 5d 75 69 6e 74 38              ...*[4]uint8
+type.*[4]uint8 SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 47 b3 e3 a1 00 08 08 36 00 00 00 00 00 00 00 00  G......6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*[4]uint8-+0
+	rel 48+8 t=1 type.[4]uint8+0
+type.[4]uint8 SRODATA dupok size=72
+	0x0000 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0010 84 42 18 1c 02 01 01 11 00 00 00 00 00 00 00 00  .B..............
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 04 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+64
+	rel 32+8 t=1 runtime.gcbits.+0
+	rel 40+4 t=5 type..namedata.*[4]uint8-+0
+	rel 44+4 t=6 type.*[4]uint8+0
+	rel 48+8 t=1 type.uint8+0
+	rel 56+8 t=1 type.[]uint8+0
+type..hashfunc5 SRODATA dupok size=16
+	0x0000 00 00 00 00 00 00 00 00 05 00 00 00 00 00 00 00  ................
+	rel 0+8 t=1 runtime.memhash_varlen+0
+type..eqfunc5 SRODATA dupok size=16
+	0x0000 00 00 00 00 00 00 00 00 05 00 00 00 00 00 00 00  ................
+	rel 0+8 t=1 runtime.memequal_varlen+0
+type..alg5 SRODATA dupok size=16
+	0x0000 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	rel 0+8 t=1 type..hashfunc5+0
+	rel 8+8 t=1 type..eqfunc5+0
+type..namedata.*[5]uint8- SRODATA dupok size=12
+	0x0000 00 00 09 2a 5b 35 5d 75 69 6e 74 38              ...*[5]uint8
+type.*[5]uint8 SRODATA dupok size=56
+	0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+	0x0010 03 35 03 d6 00 08 08 36 00 00 00 00 00 00 00 00  .5.....6........
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 runtime.algarray+80
+	rel 32+8 t=1 runtime.gcbits.01+0
+	rel 40+4 t=5 type..namedata.*[5]uint8-+0
+	rel 48+8 t=1 type.[5]uint8+0
+type.[5]uint8 SRODATA dupok size=72
+	0x0000 05 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0010 d1 96 ee 87 02 01 01 11 00 00 00 00 00 00 00 00  ................
+	0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+	0x0040 05 00 00 00 00 00 00 00                          ........
+	rel 24+8 t=1 type..alg5+0
+	rel 32+8 t=1 runtime.gcbits.+0
+	rel 40+4 t=5 type..namedata.*[5]uint8-+0
+	rel 44+4 t=6 type.*[5]uint8+0
+	rel 48+8 t=1 type.uint8+0
+	rel 56+8 t=1 type.[]uint8+0
+gclocals·f8244a831147876f4bf2671362211914 SRODATA dupok size=11
+	0x0000 03 00 00 00 06 00 00 00 00 02 22                 .........."
+gclocals·7d2d5fca80364273fb07d5820a76fef4 SRODATA dupok size=8
+	0x0000 03 00 00 00 00 00 00 00                          ........
+gclocals·9fb7f0986f647f17cb53dda1484e0f7a SRODATA dupok size=10
+	0x0000 02 00 00 00 01 00 00 00 00 01                    ..........
+gclocals·c5a86c207540bf8a2ca84cf606900906 SRODATA dupok size=12
+	0x0000 04 00 00 00 06 00 00 00 01 00 02 22              ..........."
+gclocals·f6bd6b3389b872033d462029172c8612 SRODATA dupok size=8
+	0x0000 04 00 00 00 00 00 00 00                          ........
