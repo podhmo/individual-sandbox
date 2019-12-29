@@ -35,4 +35,12 @@ slack用のintegrationのモジュールをmonogusa.chatbot.slackchatにして�
 
 今日はそれができたら記事などを書く？（あまり気が乗らない）。
 
+## module scopeのcomponent
+
 開発という意味ではmodule scopeのDIを追加したいかもしれない (module scopeというのはpytestのfixture的な見立てで)。まぁこの辺りはonceというデコレーターを用意するくらいで良いかも。teardownなしで逃げているけれど、そのうちまじめに実装しなければ行けないかもしれない。
+
+## まじめにtask queue的なものを考える
+
+background taskのもうちょっと良い感じにした版。やっぱり手軽な実行という意味ではsqsやgcpのpub/subみたいな設定が必要なものがいきなり来ては良くないし。elasticmqとかredis経由のものとかdockerが使いたくなるようなものもあっても良いけれど最初の機能ではなさそう。
+
+ちょうど良い感じのinmemory databaseがあると良いのだけれど。
