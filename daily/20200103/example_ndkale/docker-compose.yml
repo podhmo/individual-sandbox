@@ -1,0 +1,8 @@
+version: '3'
+services:
+  elasticmq:
+    image: s12v/elasticmq
+    volumes:
+      - "$PWD:/etc/elasticmq"
+    ports:
+      - "9324:9324"

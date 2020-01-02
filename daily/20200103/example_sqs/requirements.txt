@@ -1,0 +1,3 @@
+jqfpy
+boto3
+dictknife
