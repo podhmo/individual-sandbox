@@ -36,7 +36,7 @@ def retrieve_sqs_messages(sqs_queue_url, num_msgs=1, wait_time=0, visibility_tim
             QueueUrl=sqs_queue_url,
             MaxNumberOfMessages=num_msgs,
             WaitTimeSeconds=wait_time,
-            VisibilityTimeout=visibility_time,
+            VisibilityTimeout=visibility_time, # default is 30
         )
     except ClientError as e:
         logging.error(e)

@@ -19,5 +19,20 @@
 実際のs3ばかりで試せても嬉しくないのでelasticmqとか立ち上げるか。。
 
 
-- 
 - https://hub.docker.com/r/softwaremill/elasticmq/
+
+## aio
+
+一応s3が主というやつだけれど、aio-libsがなんか出しているっぽいな
+
+- https://github.com/aio-libs/aiobotocore
+
+## 本当に常用したい場合のqueue worker
+
+- signal handling (graceful stop)
+- dead letter queueへの保存 (blackhole)
+- exponential backoff
+- retry with specific time (retryAt)
+- concurrent queue
+- hooks for monitoring
+- send messages as batch

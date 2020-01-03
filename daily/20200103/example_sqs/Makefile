@@ -21,9 +21,16 @@ CONFIG_PATH := queue-${NAME}.json
 # receive message
 06:
 	python $@*.py --config-path=${CONFIG_PATH}
+# long polling
+07:
+	python $@*.py --config-path=${CONFIG_PATH}
+# send batch
+08:
+	python $@*.py --config-path=${CONFIG_PATH}
+
 help:
 	aws sqs help
 create:
 	aws sqs create-queue --queue-name ${NAME}
 clean:
-	echo aws sqs delete-queue --queue-url $$(make -s 02)
+	aws sqs delete-queue --queue-url $$(make -s 02)
