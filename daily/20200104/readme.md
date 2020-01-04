@@ -1,3 +1,13 @@
+## aws s3
+
+意外とversioningを有効にしたりする方法でハマる。あとregion指定。
+
+そしてversioningを有効にしているとbucket空にするのが大変。（削除時に空であることを要求される）
+
+### aio
+
+- https://pypi.org/project/aioboto3/
+
 ## aws SAM
 
 - https://docs.aws.amazon.com/ja_jp/serverlessrepo/latest/devguide/using-aws-sam.html
