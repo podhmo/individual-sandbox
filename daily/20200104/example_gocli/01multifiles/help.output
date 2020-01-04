@@ -1,0 +1,19 @@
+usage: multi commands [<flags>] <command> [<args> ...]
+
+multi commands example
+
+Flags:
+  --help     Show context-sensitive help (also try --help-long and --help-man).
+  --version  Show application version.
+
+Commands:
+  help [<command>...]
+    Show help.
+
+  post [<flags>] <channel> [<text>...]
+    Post a message to a channel.
+
+  register [<flags>] <name>
+    Register a new user.
+
+

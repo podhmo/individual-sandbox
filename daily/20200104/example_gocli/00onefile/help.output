@@ -1,0 +1,12 @@
+usage: hello world [<flags>] <name>
+
+hello world example
+
+Flags:
+  --help     Show context-sensitive help (also try --help-long and --help-man).
+  --debug    Enable debug mode.
+  --version  Show application version.
+
+Args:
+  <name>  name
+

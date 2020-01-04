@@ -1,0 +1,24 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "lambda-cli-role",
+        "RoleId": "AROA3NHN6ZQQGN5TE2FYH",
+        "Arn": "arn:aws:iam::784330574880:role/lambda-cli-role",
+        "CreateDate": "2020-01-04T14:19:53Z",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "lambda.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        },
+        "Description": "Allows Lambda functions to call AWS services on your behalf.",
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {}
+    }
+}

@@ -1,0 +1,13 @@
+usage: multi commands register [<flags>] <name>
+
+Register a new user.
+
+Flags:
+  --help                  Show context-sensitive help (also try --help-long and
+                          --help-man).
+  --version               Show application version.
+  --nickname="anonymous"  Nickname for user.
+
+Args:
+  <name>  Name of user.
+

@@ -27,10 +27,10 @@ def run(*, config_path: str) -> None:
     will_be_deleted = []
     for msg in messages:
         print(f"{msg['MessageId']}: {msg['Body']}")
-        will_be_deleted.append({"Id": msg['MessageId'], "ReceiptHandle": msg["ReceiptHandle"]})
+        will_be_deleted.append(
+            {"Id": msg["MessageId"], "ReceiptHandle": msg["ReceiptHandle"]}
+        )
         # delete
     # import inspect
     # print(inspect.getfullargspec(sqs.delete_message_batch))
     print(sqs.delete_message_batch(QueueUrl=queue_url, Entries=will_be_deleted))
-
-
