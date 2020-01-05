@@ -4,9 +4,16 @@
 
 そしてversioningを有効にしているとbucket空にするのが大変。（削除時に空であることを要求される）
 
+
 ### aio
 
 - https://pypi.org/project/aioboto3/
+
+### sqsへsendするとか
+
+API gatewayになりそうだなー。
+
+- https://qiita.com/horit/items/417c8ab2b4667fe310b9
 
 ## aws SAM
 

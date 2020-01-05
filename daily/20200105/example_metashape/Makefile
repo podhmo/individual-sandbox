@@ -8,3 +8,8 @@
 	python $@*.py
 04:
 	python $@*.py
+05:
+	# python $@*.py
+	pycomment $@*.py --inplace
+06:
+	python $@*.py hello

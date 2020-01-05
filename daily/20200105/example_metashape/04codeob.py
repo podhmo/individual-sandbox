@@ -1,7 +1,6 @@
 import typing as t
 from monogusa.web.codegen._fnspec import fnspec, Fnspec
 from monogusa.web.codegen._codeobject import Object, codeobject, Module
-from metashape.analyze.typeinfo import typeinfo
 from prestring.utils import LazyFormat
 from prestring.naming import pascalcase
 
@@ -43,26 +42,27 @@ class X:
     y: int
     z: int = 0
     """
+
     @codeobject
     def code(m: Module, name: str) -> Module:
         with m.class_(name):
             for name, typ, kind in spec.parameters:
                 if typ.__module__ != "builtins":
-                    m.toplevel.import_(typ.__module__)
-
-                info = typeinfo(typ)
-                rhs = spec.type_str_of(info.normalized)
-                if info.is_optional:
-                    rhs = LazyFormat("typing.Optional[{}]", rhs)
+                    m.toplevel.import_(
+                        typ.__module__, as_=spec._aliases.get(typ.__module__)
+                    )
 
                 if kind == "var_kw":
-                    rhs = LazyFormat("typing.Dict[str, {}]", rhs)
+                    rhs = spec.type_str_of(t.Dict[str, typ])
                 elif kind == "var_args":
-                    rhs = LazyFormat("typing.List[{}]", rhs)
-                elif kind == "kw_defaults" or kind == "args_defaults":
-                    rhs = LazyFormat("{} = {}", rhs, spec.default_of(name))
+                    rhs = spec.type_str_of(t.List[typ])
+                else:
+                    rhs = spec.type_str_of(typ)
 
-                m.stmt("{}: {}", name, rhs)
+                if kind == "kw_defaults" or kind == "args_defaults":
+                    rhs = LazyFormat("{} = {}", rhs, spec.default_str_of(name))
+
+                m.stmt("{}: {}  # {}", name, rhs, kind)
         return m
 
     code.name = pascalcase(spec.name)
