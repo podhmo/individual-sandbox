@@ -1,0 +1,4 @@
+gspread
+python-dotenv
+google-auth-oauthlib
+dictknife
