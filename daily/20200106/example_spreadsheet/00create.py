@@ -2,12 +2,13 @@ import os
 import logging
 import pathlib
 from handofcats import as_command
-from dictknife import loading
+
 import dotenv
 from google_auth_oauthlib import flow
 from google.oauth2.credentials import Credentials
 import gspread
 
+# MEMO: google_auth_oauthlibを使う方法は古い？
 
 @as_command
 def run(*, launch_browser: bool = True):
@@ -43,7 +44,6 @@ def run(*, launch_browser: bool = True):
             credentials.to_json()
         )
 
-    # convert to google.oauth2.credentials.Credentials to oauth2client.client.OAuth2Credentials
     from oauth2client.client import OAuth2Credentials
 
     gclient = gspread.authorize(
@@ -58,4 +58,9 @@ def run(*, launch_browser: bool = True):
             scopes=credentials.scopes,
         )
     )
-    wks = gclient.open("Where is the money Lebowski?").sheet1
+    try:
+        wks = gclient.open("Where is the money Lebowski?").sheet1
+    except gspread.SpreadsheetNotFound:
+        wks = gclient.create("Where is the money Lebowski?").sheet1
+    wks.update_acell('B2', "it's down there somewhere, let me take another look.")
+
