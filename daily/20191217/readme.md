@@ -15,3 +15,16 @@ hmm
 - 
 - activate IAM Access
 - IAM user
+
+## mac FD枯渇系
+
+`Too many open files in Unknown on line 0`
+
+```
+$ launchctl limit maxfiles
+        maxfiles    256            unlimited
+$ sudo launchctl limit maxfiles 65536 200000
+Password:
+$ launchctl limit maxfiles
+        maxfiles    65536          200000
+```

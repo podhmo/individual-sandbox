@@ -1,0 +1,11 @@
+# {"message": "this is metadata"}
+[
+{
+  "name": "foo",
+  "age": 20
+},
+{
+  "name": "foo",
+  "age": 20
+}
+]
