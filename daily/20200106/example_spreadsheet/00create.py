@@ -10,6 +10,7 @@ import gspread
 
 # MEMO: google_auth_oauthlibを使う方法は古い？
 
+
 @as_command
 def run(*, launch_browser: bool = True):
     logging.basicConfig(level=logging.DEBUG)
@@ -62,5 +63,4 @@ def run(*, launch_browser: bool = True):
         wks = gclient.open("Where is the money Lebowski?").sheet1
     except gspread.SpreadsheetNotFound:
         wks = gclient.create("Where is the money Lebowski?").sheet1
-    wks.update_acell('B2', "it's down there somewhere, let me take another look.")
-
+    wks.update_acell("B2", "it's down there somewhere, let me take another look.")

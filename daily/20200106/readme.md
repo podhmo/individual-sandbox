@@ -4,7 +4,56 @@
 - protocol buffers, gnostic　https://github.com/googleapis/gnostic
 - grpcで通信の手軽さを確認
 - https://github.com/agronholm/apscheduler の中を読む
+- https://developers.google.com/identity/fido
 
+
+## もう少しだけ丁寧に見ていきたい
+
+- https://stackoverflow.com/questions/50401755/requests-library-with-googleapiclient
+- oauth2clientの置き換えどうする？
+- 認証のタイプは?
+
+  - OAuth2.0 クライアント ID
+  - サービスアカウント キー
+  - https://cloud.google.com/docs/authentication/?hl=ja&_ga=2.126156429.-1432081073.1509175144
+
+- サービスアカウントはbotのようなも
+- ? 公開データにread onlyではapi key
+
+### CLIでaccess tokenの管理をしたい
+
+- authorize
+- revoke
+- token info
+- list
+- use this
+
+### google apiのscopesを一覧したい
+
+- https://developers.google.com/identity/protocols/googlescopes
+
+```
+Google Sheets API, v4
+Scopes
+https://www.googleapis.com/auth/drive	See, edit, create, and delete all of your Google Drive files
+https://www.googleapis.com/auth/drive.file	View and manage Google Drive files and folders that you have opened or created with this app
+https://www.googleapis.com/auth/drive.readonly	See and download all your Google Drive files
+https://www.googleapis.com/auth/spreadsheets	See, edit, create, and delete your spreadsheets in Google Drive
+https://www.googleapis.com/auth/spreadsheets.readonly	View your Google Spreadsheets
+```
+
+こういう情報を機械的に取れないんだろうか？
+
+- https://github.com/googleapis/google-api-go-client/blob/master/bigquery/v2/bigquery-api.json
+- https://github.com/googleapis/google-api-go-client/commit/580a1263e4675cbbc9f1ff7030d35083cc142078#diff-9dd84f33b68940ecef80fba83de14faf
+
+ googleapis-publisher 
+
+### protos
+
+- https://github.com/googleapis/api-common-protos
+- https://pypi.org/project/googleapis-common-protos/
+- https://github.com/googleapis/googleapis
 
 ## python oauthlib
 
