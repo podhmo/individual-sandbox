@@ -7,6 +7,8 @@ def byebye(name):
     print(f"byebye {name}")
 
 
+if __name__ == "__main__":
+    pass
 
 def main(argv=None):
     import argparse
