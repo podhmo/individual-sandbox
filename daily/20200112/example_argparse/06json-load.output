@@ -1,0 +1,6 @@
+import json
+try:
+    with open(filename) as rf:
+        return json.load(rf)
+except Exception as e:
+    raise argparse.ArgumentTypeError(str(e))
