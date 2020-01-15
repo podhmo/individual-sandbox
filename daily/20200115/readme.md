@@ -1,8 +1,23 @@
+## websocket CLI
+
+まだwebsocketがうまく使えていない気がする。
+
+- https://github.com/joewalnes/websocketd
+- https://pypi.org/project/websockets/
+
 ## python import time
 
 ```
 python -X importtime
 ```
+
+もしくは
+
+```
+PYTHONPROFILEIMPORTTIME=1 python
+```
+
+- https://docs.python.org/ja/3/using/cmdline.html#envvar-PYTHONPROFILEIMPORTTIME
 
 ## python typed_astって何か違いあるのだっけ？
 
