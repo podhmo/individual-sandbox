@@ -1,0 +1,23 @@
+<typed_ast._ast3.Module object at 0x102df6370>
+----------------------------------------
+Module(body=[FunctionDef(name='hello', args=arguments(args=[], vararg=None, kwonlyargs=[], kw_defaults=[], kwarg=None, defaults=[]), body=[AnnAssign(target=Name(id='name', ctx=Store()), annotation=Name(id='str', ctx=Load()), value=Str(s='world', kind=''), simple=1), Expr(value=Call(func=Name(id='print', ctx=Load()), args=[JoinedStr(values=[Str(s='hello ', kind='f'), FormattedValue(value=Name(id='world', ctx=Load()), conversion=-1, format_spec=None)])], keywords=[]))], decorator_list=[], returns=NameConstant(value=None), type_comment=None)], type_ignores=[])
+----------------------------------------
+<typed_ast._ast3.Module object at 0x102df6370>
+<typed_ast._ast3.FunctionDef object at 0x102df6340>
+<typed_ast._ast3.arguments object at 0x102df63d0>
+<typed_ast._ast3.AnnAssign object at 0x102df6400>
+<typed_ast._ast3.Expr object at 0x102df6460>
+<typed_ast._ast3.NameConstant object at 0x102e785e0>
+<typed_ast._ast3.Name object at 0x102df6430>
+<typed_ast._ast3.Name object at 0x102e78250>
+<typed_ast._ast3.Str object at 0x102e782b0>
+<typed_ast._ast3.Call object at 0x102e78310>
+<typed_ast._ast3.Store object at 0x102e6d1c0>
+<typed_ast._ast3.Load object at 0x102e6d160>
+<typed_ast._ast3.Name object at 0x102e78340>
+<typed_ast._ast3.JoinedStr object at 0x102e783d0>
+<typed_ast._ast3.Load object at 0x102e6d160>
+<typed_ast._ast3.Str object at 0x102e78400>
+<typed_ast._ast3.FormattedValue object at 0x102e78460>
+<typed_ast._ast3.Name object at 0x102e784c0>
+<typed_ast._ast3.Load object at 0x102e6d160>
