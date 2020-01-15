@@ -5,16 +5,14 @@
 02:
 	python $(shell echo $@*.py)
 03:
-	python -m libcst.tool print 02*.py | tee $@.output
+	python $(shell echo $@*.py)
 04:
 	python $(shell echo $@*.py)
 05:
 	python $(shell echo $@*.py)
 06:
 	python $(shell echo $@*.py)
+	mypy --strict $(shell echo $@*.py)
 07:
 	python $(shell echo $@*.py)
-08:
-	python $(shell echo $@*.py)
-09:
-	python $(shell echo $@*.py)
+	mypy --strict $(shell echo $@*.py)
