@@ -5,6 +5,13 @@
 - https://github.com/joewalnes/websocketd
 - https://pypi.org/project/websockets/
 
+### python subprocess
+
+- subprocess - Popen
+- multiprocessing
+
+いい感じにstdin,stdoutを消費したい。communicateとかブロックしちゃわない？
+
 ## python import time
 
 ```
