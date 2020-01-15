@@ -1,4 +1,5 @@
+PYTHON ?= ../bin/python
 server:
-	python route_guide_server.py
+	$(PYTHON) route_guide_server.py
 client:
-	python route_guide_client.py
+	$(PYTHON) route_guide_client.py
