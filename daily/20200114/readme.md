@@ -58,3 +58,24 @@ with block():
 
 - presetを定義したい
 - frozen=Trueでもできたっけ？
+
+## ファイル監視の良い感じのものが欲しい
+
+- throttlingの機能が欲しい
+- back-pressureの機能も欲しい
+- サービスとして立ち上がって欲しい (sub-process を spawnではなく)
+
+### 念頭にあるもの
+
+- watchdog https://github.com/gorakhargosh/watchdog
+- fsnotify https://github.com/fsnotify/fsnotify
+- chokidar https://github.com/paulmillr/chokidar
+
+ただ最初はmonitoring自体はpoolingでも良い気がしている
+
+#### memo
+
+fsnotifyは再帰的に監視をしてくれないらしい。
+
+- https://github.com/tywkeene/go-fsevents
+
