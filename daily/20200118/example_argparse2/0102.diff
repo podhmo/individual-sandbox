@@ -1,0 +1,30 @@
+--- 01pydantic.py	2020-01-18 19:53:30.000000000 +0900
++++ 02pydantic-with-schema.py	2020-01-18 19:57:50.000000000 +0900
+@@ -22,15 +22,21 @@
+ 
+ 
+ parser = argparse.ArgumentParser()
+-parser.add_argument("--config", type=ConfigType)
+-
++parser.add_argument("--config", type=ConfigType, required=False)
++parser.add_argument("--show-schema", action="store_true")
+ args = parser.parse_args()
+ 
+ 
+-def use(config: Config) -> None:
+-    # ここでconfigがConfigと認識されるのは地味に便利
+-    # t.TYPE_CHECKING and reveal_type(config)
+-    print(args)
++if args.show_schema:
++    from pydantic.schema import schema
++
++    toplevel_schema = schema([Config])
++    print(json.dumps(toplevel_schema, indent=2, ensure_ascii=False))
++    parser.exit()
++
++
++def use(config: "Config") -> None:
++    print(config)
+ 
+ 
+ use(args.config)

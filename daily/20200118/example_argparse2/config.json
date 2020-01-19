@@ -1,0 +1,14 @@
+{
+  "main": {
+    "db": "sqlite://:memory"
+  },
+  "thirdparty": {
+    "xxx": {
+      "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "zzz": {
+      "clientId": "xxxxxxxxxx",
+      "clientSecret": "xxxxxxxxxxxxxxxxxxxx"
+    }
+  }
+}

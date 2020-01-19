@@ -1,0 +1,79 @@
+{
+  "definitions": {
+    "MainConfig": {
+      "title": "MainConfig",
+      "type": "object",
+      "properties": {
+        "db": {
+          "title": "Db",
+          "type": "string"
+        }
+      },
+      "required": [
+        "db"
+      ]
+    },
+    "XXXConfig": {
+      "title": "XXXConfig",
+      "type": "object",
+      "properties": {
+        "token": {
+          "title": "Token",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "ZZZConfig": {
+      "title": "ZZZConfig",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "title": "Clientid",
+          "type": "string"
+        },
+        "clientSecret": {
+          "title": "Clientsecret",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientId",
+        "clientSecret"
+      ]
+    },
+    "ThirdpartyConfig": {
+      "title": "ThirdpartyConfig",
+      "type": "object",
+      "properties": {
+        "xxx": {
+          "$ref": "#/definitions/XXXConfig"
+        },
+        "zzz": {
+          "$ref": "#/definitions/ZZZConfig"
+        }
+      },
+      "required": [
+        "xxx",
+        "zzz"
+      ]
+    },
+    "Config": {
+      "title": "Config",
+      "type": "object",
+      "properties": {
+        "main": {
+          "$ref": "#/definitions/MainConfig"
+        },
+        "thirdparty": {
+          "$ref": "#/definitions/ThirdpartyConfig"
+        }
+      },
+      "required": [
+        "main"
+      ]
+    }
+  }
+}

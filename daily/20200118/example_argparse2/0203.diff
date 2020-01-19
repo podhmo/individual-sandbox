@@ -1,0 +1,48 @@
+--- 02pydantic-with-schema.py	2020-01-18 19:57:50.000000000 +0900
++++ 03pydantic-with-schema.py	2020-01-18 20:06:29.000000000 +0900
+@@ -1,11 +1,15 @@
+ import typing as t
+ import json
+ import argparse
+-from pydantic.error_wrappers import ValidationError
+-from config import Config
+ 
++if t.TYPE_CHECKING:
++    from config import Config
++
++
++def ConfigType(filename_or_content: str, *, prefix: str = "file://") -> "Config":
++    from pydantic.error_wrappers import ValidationError
++    from config import Config
+ 
+-def ConfigType(filename_or_content: str, *, prefix: str = "file://") -> Config:
+     try:
+         if filename_or_content.startswith(prefix):
+             with open(filename_or_content[len(prefix) :]) as rf:
+@@ -21,6 +25,14 @@
+         raise argparse.ArgumentTypeError(str(e))
+ 
+ 
++def show_schema() -> None:
++    from config import Config
++    from pydantic.schema import schema
++
++    toplevel_schema = schema([Config])
++    print(json.dumps(toplevel_schema, indent=2, ensure_ascii=False))
++
++
+ parser = argparse.ArgumentParser()
+ parser.add_argument("--config", type=ConfigType, required=False)
+ parser.add_argument("--show-schema", action="store_true")
+@@ -28,10 +40,7 @@
+ 
+ 
+ if args.show_schema:
+-    from pydantic.schema import schema
+-
+-    toplevel_schema = schema([Config])
+-    print(json.dumps(toplevel_schema, indent=2, ensure_ascii=False))
++    show_schema()
+     parser.exit()
+ 
+ 

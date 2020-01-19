@@ -1,0 +1,18 @@
+pyinspect inspect tinyrpc.dispatch
+
+[function] public(name: str = None) -> Callable
+----------------------------------------
+tinyrpc.dispatch:RPCDispatcher <- builtins:object
+    [method, OVERRIDE] __init__(self) -> None
+    [method] dispatch(self, request: Union[tinyrpc.protocols.RPCRequest, tinyrpc.protocols.RPCBatchRequest], caller: Callable = None) -> Union[tinyrpc.protocols.RPCResponse, tinyrpc.protocols.RPCBatchResponse]
+        [method] _dispatch(self, request, caller)
+            [method] get_method(self, name: str) -> Callable
+            [static method] validator(method: Callable, args: List[Any], kwargs: Dict[str, Any]) -> None
+    [method] public(self, name: str = None) -> Callable
+        [method] add_method(self, f: Callable, name: str = None) -> None
+    [method] register_instance(self, obj: object, prefix: str = '') -> None
+        [method] add_subdispatch(self, dispatcher: 'RPCDispatcher', prefix: str = '')
+    [static method] validate_parameters(method: Callable, args: List[Any], kwargs: Dict[str, Any]) -> None
+
+----------------------------------------
+

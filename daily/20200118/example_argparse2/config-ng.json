@@ -1,0 +1,11 @@
+{
+  "thirdparty": {
+    "xxx": {
+      "token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "zzz": {
+      "clientId": "xxxxxxxxxx",
+      "clientSecret": "xxxxxxxxxxxxxxxxxxxx"
+    }
+  }
+}
