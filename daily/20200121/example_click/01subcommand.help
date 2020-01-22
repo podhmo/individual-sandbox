@@ -1,0 +1,12 @@
+Usage: 01subcommand.py [OPTIONS] COMMAND [ARGS]...
+
+  Subcommand click CLI
+
+Options:
+  -p, --profile TEXT
+  --help              Show this message and exit.
+
+Commands:
+  ec2  EC2 API
+  rds  RDS API
+  s3   S3 API

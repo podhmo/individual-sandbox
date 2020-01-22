@@ -1,0 +1,16 @@
+usage: handofcats [-h] [--expose] [--inplace] [--untyped]
+                  [--logging {CRITICAL,FATAL,ERROR,WARN,WARNING,INFO,DEBUG,NOTSET}]
+                  {ec2,rds,s3} ...
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --expose              dump generated code. with --inplace, eject from handofcats dependency (default: False)
+  --inplace             overwrite file (default: False)
+  --untyped             untyped expression is dumped (default: False)
+  --logging {CRITICAL,FATAL,ERROR,WARN,WARNING,INFO,DEBUG,NOTSET}
+
+subcommands:
+  {ec2,rds,s3}
+    ec2                 EC2 API
+    rds                 RDS API
+    s3                  S3 API

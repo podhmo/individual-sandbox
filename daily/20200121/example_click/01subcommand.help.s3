@@ -1,0 +1,6 @@
+Usage: 01subcommand.py s3 [OPTIONS] COMMAND [ARGS]...
+
+  S3 API
+
+Options:
+  --help  Show this message and exit.

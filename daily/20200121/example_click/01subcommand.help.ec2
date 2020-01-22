@@ -1,0 +1,10 @@
+Usage: 01subcommand.py ec2 [OPTIONS] COMMAND [ARGS]...
+
+  EC2 API
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  describe-instances  EC2 DescribeInstances API
+  run-instances       EC2 RunInstances API
