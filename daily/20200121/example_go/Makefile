@@ -7,4 +7,6 @@
 	# go run ./$(shell echo $@*/)main.go
 	go test -tags mock ./$(shell echo $@*/)
 03:
-	go test ./$(shell echo $@*/)
+	# error
+	# go run ./$(shell echo $@*/)main.go
+	go test -tags mock ./$(shell echo $@*/)
