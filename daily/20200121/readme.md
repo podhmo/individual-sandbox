@@ -1,5 +1,3 @@
-## 
-
 ## python type hints
 
 typeshedの情報ってどうやってアクセスするんだろ？
@@ -29,7 +27,6 @@ hmm
 $ python -c 'import site; print(site.getsitepackages())'
 ['VENV/lib/python3.8/site-packages']
 ```
-
 
 
 ## go テストを書くためにmockを書くのもinterfaceを書くのもめんどくさい

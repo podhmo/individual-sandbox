@@ -1,0 +1,5 @@
+# aiobotocore
+handofcats
+dictknife
+boto3
+botocore
