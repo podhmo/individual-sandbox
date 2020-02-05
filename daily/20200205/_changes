@@ -1,0 +1,1793 @@
+commit 2b2ad5ad9bfe79efb6a39acd67d9d7916fcf4c8f
+Author: podhmo <ababjam61+github@gmail.com>
+Date:   Wed Feb 5 13:45:54 2020 +0900
+
+    fix: reserved word
+
+diff --git a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_schema.py b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_schema.py
+index fef5d37..b330e28 100644
+--- a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_schema.py
++++ b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_schema.py
+@@ -50,7 +50,7 @@ class CommandData(object):
+     if self.command_type == CommandType.WAIT and not async_data:
+       raise util.InvalidSchemaError(
+           'Wait commands must include an async section.')
+-    self.async = Async(async_data) if async_data else None
++    self.async_ = Async(async_data) if async_data else None
+     self.iam = IamData(iam_data) if iam_data else None
+     self.arguments = Arguments(data['arguments'])
+     self.input = Input(self.command_type, data.get('input', {}))
+diff --git a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
+index e260499..9be7d8a 100644
+--- a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
++++ b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
+@@ -233,12 +233,12 @@ class CommandBuilder(object):
+       @staticmethod
+       def Args(parser):
+         self._CommonArgs(parser)
+-        if self.spec.async:
++        if self.spec.async_:
+           base.ASYNC_FLAG.AddToParser(parser)
+ 
+       def Run(self_, args):
+         ref, response = self._CommonRun(args)
+-        if self.spec.async:
++        if self.spec.async_:
+           response = self._HandleAsync(
+               args,
+               ref,
+@@ -279,14 +279,14 @@ class CommandBuilder(object):
+       @staticmethod
+       def Args(parser):
+         self._CommonArgs(parser)
+-        if self.spec.async:
++        if self.spec.async_:
+           base.ASYNC_FLAG.AddToParser(parser)
+ 
+       def Run(self_, args):
+         ref, response = self._CommonRun(args)
+         is_parent_resource = (self.spec.arguments.resource and
+                               self.spec.arguments.resource.is_parent_resource)
+-        if self.spec.async:
++        if self.spec.async_:
+           if ref is not None and not is_parent_resource:
+             request_string = 'Create request issued for: [{{{}}}]'.format(
+                 yaml_command_schema.NAME_FORMAT_KEY)
+@@ -586,12 +586,12 @@ class CommandBuilder(object):
+       @staticmethod
+       def Args(parser):
+         self._CommonArgs(parser)
+-        if self.spec.async:
++        if self.spec.async_:
+           base.ASYNC_FLAG.AddToParser(parser)
+ 
+       def Run(self_, args):
+         ref, response = self._CommonRun(args)
+-        if self.spec.async:
++        if self.spec.async_:
+           request_string = None
+           if ref:
+             request_string = 'Request issued for: [{{{}}}]'.format(
+@@ -626,7 +626,7 @@ class CommandBuilder(object):
+       @staticmethod
+       def Args(parser):
+         self._CommonArgs(parser)
+-        if self.spec.async:
++        if self.spec.async_:
+           base.ASYNC_FLAG.AddToParser(parser)
+ 
+       def Run(self_, args):
+@@ -649,7 +649,7 @@ class CommandBuilder(object):
+             existing_message = self._GetExistingResource(args)
+ 
+         ref, response = self._CommonRun(args, existing_message)
+-        if self.spec.async:
++        if self.spec.async_:
+           request_string = None
+           if ref:
+             request_string = 'Request issued for: [{{{}}}]'.format(
+@@ -847,8 +847,8 @@ class CommandBuilder(object):
+       The response (either the operation or the original resource).
+     """
+     operation_ref = resources.REGISTRY.Parse(
+-        getattr(operation, self.spec.async.response_name_field),
+-        collection=self.spec.async.collection)
++        getattr(operation, self.spec.async_.response_name_field),
++        collection=self.spec.async_.collection)
+     if request_string:
+       log.status.Print(self._Format(request_string, resource_ref,
+                                     self._GetDisplayName(resource_ref, args)))
+@@ -1023,22 +1023,22 @@ class AsyncOperationPoller(waiter.OperationPoller):
+     """
+     self.spec = spec
+     self.resource_ref = resource_ref
+-    if not self.spec.async.extract_resource_result:
++    if not self.spec.async_.extract_resource_result:
+       self.resource_ref = None
+     self.method = registry.GetMethod(
+-        spec.async.collection, spec.async.method,
+-        api_version=spec.async.api_version or spec.request.api_version)
++        spec.async_.collection, spec.async_.method,
++        api_version=spec.async_.api_version or spec.request.api_version)
+ 
+   def IsDone(self, operation):
+     """Overrides."""
+-    result = getattr(operation, self.spec.async.state.field)
++    result = getattr(operation, self.spec.async_.state.field)
+     if isinstance(result, apitools_messages.Enum):
+       result = result.name
+-    if (result in self.spec.async.state.success_values or
+-        result in self.spec.async.state.error_values):
++    if (result in self.spec.async_.state.success_values or
++        result in self.spec.async_.state.error_values):
+       # We found a value that means it is done.
+-      error = getattr(operation, self.spec.async.error.field)
+-      if not error and result in self.spec.async.state.error_values:
++      error = getattr(operation, self.spec.async_.error.field)
++      if not error and result in self.spec.async_.state.error_values:
+         error = 'The operation failed.'
+       # If we succeeded but there is an error, or if an error was detected.
+       if error:
+@@ -1061,7 +1061,7 @@ class AsyncOperationPoller(waiter.OperationPoller):
+     fields = {
+         f.name: getattr(
+             operation_ref,
+-            self.spec.async.operation_get_method_params.get(f.name, f.name),
++            self.spec.async_.operation_get_method_params.get(f.name, f.name),
+             relative_name)
+         for f in request_type.all_fields()}
+     return self.method.Call(request_type(**fields))
+@@ -1081,11 +1081,11 @@ class AsyncOperationPoller(waiter.OperationPoller):
+       request = method.GetRequestType()()
+       arg_utils.ParseResourceIntoMessage(self.resource_ref, method, request)
+       result = method.Call(request)
+-    return _GetAttribute(result, self.spec.async.result_attribute)
++    return _GetAttribute(result, self.spec.async_.result_attribute)
+ 
+   def _ResourceGetMethod(self):
+     return registry.GetMethod(
+-        self.spec.request.collection, self.spec.async.resource_get_method,
++        self.spec.request.collection, self.spec.async_.resource_get_method,
+         api_version=self.spec.request.api_version)
+ 
+ 
+commit 8b4c9b07d0f6712a388470cac2bfbfb175af34fd
+Author: podhmo <ababjam61+github@gmail.com>
+Date:   Wed Feb 5 13:47:40 2020 +0900
+
+    fix: fix for reserved word
+
+diff --git a/lib/googlecloudsdk/api_lib/compute/daisy_utils.py b/lib/googlecloudsdk/api_lib/compute/daisy_utils.py
+index eb94df5..e36b0ab 100644
+--- a/lib/googlecloudsdk/api_lib/compute/daisy_utils.py
++++ b/lib/googlecloudsdk/api_lib/compute/daisy_utils.py
+@@ -484,7 +484,7 @@ def _RunCloudBuild(args,
+   build, build_ref = _CreateCloudBuild(build_config, client, messages)
+ 
+   # If the command is run --async, we just print out a reference to the build.
+-  if args.async:
++  if args.async_:
+     return build
+ 
+   mash_handler = execution.MashHandler(
+diff --git a/lib/googlecloudsdk/command_lib/dataproc/jobs/submitter.py b/lib/googlecloudsdk/command_lib/dataproc/jobs/submitter.py
+index b340d89..9a43f73 100644
+--- a/lib/googlecloudsdk/command_lib/dataproc/jobs/submitter.py
++++ b/lib/googlecloudsdk/command_lib/dataproc/jobs/submitter.py
+@@ -95,7 +95,7 @@ class JobSubmitter(base.Command):
+ 
+     log.status.Print('Job [{0}] submitted.'.format(job_id))
+ 
+-    if not args.async:
++    if not args.async_:
+       job = util.WaitForJobTermination(
+           dataproc,
+           job,
+diff --git a/lib/googlecloudsdk/command_lib/dialogflow/agent/hooks.py b/lib/googlecloudsdk/command_lib/dialogflow/agent/hooks.py
+index 2be6dc2..ec9bd6e 100644
+--- a/lib/googlecloudsdk/command_lib/dialogflow/agent/hooks.py
++++ b/lib/googlecloudsdk/command_lib/dialogflow/agent/hooks.py
+@@ -94,7 +94,7 @@ def ModifyImportOrRestoreRequest(unused_instance_ref, args, request):
+ 
+ def LogImportSuccess(response, args):
+   path = args.source
+-  if not args.async:
++  if not args.async_:
+     if path != '-':
+       log.status.Print('Successfully imported agent from [{}].'.format(path))
+     else:
+diff --git a/lib/googlecloudsdk/command_lib/sql/export_util.py b/lib/googlecloudsdk/command_lib/sql/export_util.py
+index b1c8143..95dfdc4 100644
+--- a/lib/googlecloudsdk/command_lib/sql/export_util.py
++++ b/lib/googlecloudsdk/command_lib/sql/export_util.py
+@@ -83,7 +83,7 @@ def RunExportCommand(args, client, export_context):
+       operation=result_operation.name,
+       project=instance_ref.project)
+ 
+-  if args.async:
++  if args.async_:
+     return sql_client.operations.Get(
+         sql_messages.SqlOperationsGetRequest(
+             project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/googlecloudsdk/command_lib/sql/import_util.py b/lib/googlecloudsdk/command_lib/sql/import_util.py
+index 1dff4f8..509ffad 100644
+--- a/lib/googlecloudsdk/command_lib/sql/import_util.py
++++ b/lib/googlecloudsdk/command_lib/sql/import_util.py
+@@ -87,7 +87,7 @@ def RunImportCommand(args, client, import_context):
+       operation=result_operation.name,
+       project=instance_ref.project)
+ 
+-  if args.async:
++  if args.async_:
+     return sql_client.operations.Get(
+         sql_messages.SqlOperationsGetRequest(
+             project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
+index 9be7d8a..cda6317 100644
+--- a/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
++++ b/lib/googlecloudsdk/command_lib/util/apis/yaml_command_translator.py
+@@ -246,7 +246,7 @@ class CommandBuilder(object):
+               request_string='Delete request issued for: [{{{}}}]'
+               .format(yaml_command_schema.NAME_FORMAT_KEY),
+               extract_resource_result=False)
+-          if args.async:
++          if args.async_:
+             return self._HandleResponse(response, args)
+ 
+         response = self._HandleResponse(response, args)
+@@ -295,7 +295,7 @@ class CommandBuilder(object):
+           response = self._HandleAsync(
+               args, ref, response,
+               request_string=request_string)
+-          if args.async:
++          if args.async_:
+             return self._HandleResponse(response, args)
+ 
+         if is_parent_resource:
+@@ -852,7 +852,7 @@ class CommandBuilder(object):
+     if request_string:
+       log.status.Print(self._Format(request_string, resource_ref,
+                                     self._GetDisplayName(resource_ref, args)))
+-    if args.async:
++    if args.async_:
+       log.status.Print(self._Format(
+           'Check operation [{{{}}}] for status.'
+           .format(yaml_command_schema.NAME_FORMAT_KEY), operation_ref))
+diff --git a/lib/surface/ai_platform/jobs/submit/training.py b/lib/surface/ai_platform/jobs/submit/training.py
+index 20743dd..c1bedd2 100644
+--- a/lib/surface/ai_platform/jobs/submit/training.py
++++ b/lib/surface/ai_platform/jobs/submit/training.py
+@@ -76,7 +76,7 @@ class Train(base.Command):
+ 
+   def _Run(self, args, supports_container_training=False,
+            supports_custom_container=False):
+-    stream_logs = jobs_util.GetStreamLogs(args.async, args.stream_logs)
++    stream_logs = jobs_util.GetStreamLogs(args.async_, args.stream_logs)
+     scale_tier = jobs_util.ScaleTierFlagMap().GetEnumForChoice(args.scale_tier)
+     scale_tier_name = scale_tier.name if scale_tier else None
+     jobs_client = jobs.JobsClient()
+diff --git a/lib/surface/ai_platform/versions/create.py b/lib/surface/ai_platform/versions/create.py
+index d0165cd..395f3f5 100644
+--- a/lib/surface/ai_platform/versions/create.py
++++ b/lib/surface/ai_platform/versions/create.py
+@@ -112,7 +112,7 @@ class CreateGA(base.CreateCommand):
+         staging_bucket=args.staging_bucket,
+         runtime_version=args.runtime_version,
+         config_file=args.config,
+-        asyncronous=args.async,
++        asyncronous=args.async_,
+         description=args.description,
+         labels=labels,
+         framework=framework,
+@@ -148,7 +148,7 @@ class CreateBeta(CreateGA):
+         staging_bucket=args.staging_bucket,
+         runtime_version=args.runtime_version,
+         config_file=args.config,
+-        asyncronous=args.async,
++        asyncronous=args.async_,
+         description=args.description,
+         labels=labels,
+         machine_type=args.machine_type,
+@@ -189,7 +189,7 @@ class CreateAlpha(base.CreateCommand):
+                                 staging_bucket=args.staging_bucket,
+                                 runtime_version=args.runtime_version,
+                                 config_file=args.config,
+-                                asyncronous=args.async,
++                                asyncronous=args.async_,
+                                 labels=labels,
+                                 description=args.description,
+                                 machine_type=args.machine_type,
+diff --git a/lib/surface/bigtable/app_profiles/update.py b/lib/surface/bigtable/app_profiles/update.py
+index f908518..6f63a8e 100644
+--- a/lib/surface/bigtable/app_profiles/update.py
++++ b/lib/surface/bigtable/app_profiles/update.py
+@@ -64,7 +64,7 @@ class UpdateAppProfile(base.CreateCommand):
+     else:
+       operation_ref = util.GetOperationRef(result)
+ 
+-      if args.async:
++      if args.async_:
+         log.UpdatedResource(
+             operation_ref,
+             kind='bigtable app profile {0}'.format(app_profile_ref.Name()),
+diff --git a/lib/surface/bigtable/clusters/create.py b/lib/surface/bigtable/clusters/create.py
+index 86090d4..1518e84 100644
+--- a/lib/surface/bigtable/clusters/create.py
++++ b/lib/surface/bigtable/clusters/create.py
+@@ -49,7 +49,7 @@ class CreateCluster(base.CreateCommand):
+     operation = clusters.Create(
+         cluster_ref, args.zone, serve_nodes=args.num_nodes)
+     operation_ref = util.GetOperationRef(operation)
+-    if args.async:
++    if args.async_:
+       log.CreatedResource(
+           operation_ref,
+           kind='bigtable cluster {0}'.format(cluster_ref.Name()),
+diff --git a/lib/surface/bigtable/clusters/update.py b/lib/surface/bigtable/clusters/update.py
+index ab073eb..5189312 100644
+--- a/lib/surface/bigtable/clusters/update.py
++++ b/lib/surface/bigtable/clusters/update.py
+@@ -46,11 +46,11 @@ class UpdateCluster(base.UpdateCommand):
+     """
+     cluster_ref = args.CONCEPTS.cluster.Parse()
+     operation = clusters.Update(cluster_ref, args.num_nodes)
+-    if not args.async:
++    if not args.async_:
+       operation_ref = util.GetOperationRef(operation)
+       return util.AwaitCluster(
+           operation_ref,
+           'Updating bigtable cluster {0}'.format(cluster_ref.Name()))
+ 
+-    log.UpdatedResource(cluster_ref.Name(), kind='cluster', is_async=args.async)
++    log.UpdatedResource(cluster_ref.Name(), kind='cluster', is_async=args.async_)
+     return None
+diff --git a/lib/surface/bigtable/instances/create.py b/lib/surface/bigtable/instances/create.py
+index 61d7a7b..aec12aa 100644
+--- a/lib/surface/bigtable/instances/create.py
++++ b/lib/surface/bigtable/instances/create.py
+@@ -80,7 +80,7 @@ class CreateInstance(base.CreateCommand):
+     result = cli.projects_instances.Create(msg)
+     operation_ref = bigtable_util.GetOperationRef(result)
+ 
+-    if args.async:
++    if args.async_:
+       log.CreatedResource(
+           operation_ref,
+           kind='bigtable instance {0}'.format(ref.Name()),
+diff --git a/lib/surface/bigtable/instances/upgrade.py b/lib/surface/bigtable/instances/upgrade.py
+index 778d029..0cdb894 100644
+--- a/lib/surface/bigtable/instances/upgrade.py
++++ b/lib/surface/bigtable/instances/upgrade.py
+@@ -46,7 +46,7 @@ class UpgradeInstance(base.UpdateCommand):
+       Some value that we want to have printed later.
+     """
+     op = instances.Upgrade(args.instance)
+-    if args.async:
++    if args.async_:
+       result = op
+     else:
+       op_ref = resources.REGISTRY.ParseRelativeName(
+@@ -54,5 +54,5 @@ class UpgradeInstance(base.UpdateCommand):
+       message = 'Upgrading bigtable instance {0}'.format(args.instance)
+       result = util.AwaitInstance(op_ref, message)
+ 
+-    log.UpdatedResource(args.instance, kind='instance', is_async=args.async)
++    log.UpdatedResource(args.instance, kind='instance', is_async=args.async_)
+     return result
+diff --git a/lib/surface/bq/tables/copy.py b/lib/surface/bq/tables/copy.py
+index f994589..3fcfe57 100644
+--- a/lib/surface/bq/tables/copy.py
++++ b/lib/surface/bq/tables/copy.py
+@@ -84,7 +84,7 @@ class Copy(base.Command):
+         source_ref.Parent().Name(), source_ref.Name(),
+         destination_ref.Parent().Name(), destination_ref.Name())
+ 
+-    if not args.async:
++    if not args.async_:
+       log.CreatedResource(job.id, kind='Job', details=copy_message)
+       return job
+ 
+diff --git a/lib/surface/builds/submit.py b/lib/surface/builds/submit.py
+index 017bf7e..8c76d5b 100644
+--- a/lib/surface/builds/submit.py
++++ b/lib/surface/builds/submit.py
+@@ -471,7 +471,7 @@ https://cloud.google.com/cloud-build/docs/api/build-requests#substitutions
+       log.status.Print('Logs are available in the Cloud Console.')
+ 
+     # If the command is run --async, we just print out a reference to the build.
+-    if args.async:
++    if args.async_:
+       return build
+ 
+     mash_handler = execution.MashHandler(
+diff --git a/lib/surface/composer/environments/create.py b/lib/surface/composer/environments/create.py
+index b9d1c67..8824c6c 100644
+--- a/lib/surface/composer/environments/create.py
++++ b/lib/surface/composer/environments/create.py
+@@ -211,7 +211,7 @@ class Create(base.Command):
+     operation = self.GetOperationMessage(args)
+ 
+     details = 'with operation [{0}]'.format(operation.name)
+-    if args.async:
++    if args.async_:
+       log.CreatedResource(
+           self.env_ref.RelativeName(),
+           kind='environment',
+diff --git a/lib/surface/composer/environments/delete.py b/lib/surface/composer/environments/delete.py
+index cfb5fad..a68d840 100644
+--- a/lib/surface/composer/environments/delete.py
++++ b/lib/surface/composer/environments/delete.py
+@@ -89,7 +89,7 @@ class Delete(base.DeleteCommand):
+             details=details,
+             failed=failed)
+ 
+-    if not args.async:
++    if not args.async_:
+       encountered_errors = waiter.Wait() or encountered_errors
+     if encountered_errors:
+       raise command_util.EnvironmentDeleteError(
+diff --git a/lib/surface/composer/environments/update.py b/lib/surface/composer/environments/update.py
+index 8eaf904..520c4aa 100644
+--- a/lib/surface/composer/environments/update.py
++++ b/lib/surface/composer/environments/update.py
+@@ -77,7 +77,7 @@ class Update(base.Command):
+         env_ref,
+         field_mask,
+         patch,
+-        args.async,
++        args.async_,
+         release_track=self.ReleaseTrack())
+ 
+ 
+@@ -117,7 +117,7 @@ class UpdateBeta(Update):
+         env_ref,
+         field_mask,
+         patch,
+-        args.async,
++        args.async_,
+         release_track=self.ReleaseTrack())
+ 
+ 
+diff --git a/lib/surface/compute/disks/move.py b/lib/surface/compute/disks/move.py
+index 3e1969e..288a9fe 100644
+--- a/lib/surface/compute/disks/move.py
++++ b/lib/surface/compute/disks/move.py
+@@ -79,7 +79,7 @@ class Move(base.SilentCommand):
+         },
+         collection='compute.globalOperations')
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='disk {0}'.format(target_disk.Name()),
+diff --git a/lib/surface/compute/disks/snapshot.py b/lib/surface/compute/disks/snapshot.py
+index 727002e..e62a0fb 100644
+--- a/lib/surface/compute/disks/snapshot.py
++++ b/lib/surface/compute/disks/snapshot.py
+@@ -185,7 +185,7 @@ class SnapshotDisks(base.SilentCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for operation_ref in operation_refs:
+         log.status.Print('Disk snapshot in progress for [{}].'
+                          .format(operation_ref.SelfLink()))
+diff --git a/lib/surface/compute/images/import.py b/lib/surface/compute/images/import.py
+index 2684628..25ec37e 100644
+--- a/lib/surface/compute/images/import.py
++++ b/lib/surface/compute/images/import.py
+@@ -438,7 +438,7 @@ class ImportFromLocalFileStager(BaseImportFromFileStager):
+ 
+   def _CopySourceFileToScratchBucket(self):
+     return self._UploadToGcs(
+-        self.args.async, self.args.source_file, self.daisy_bucket, uuid.uuid4())
++        self.args.async_, self.args.source_file, self.daisy_bucket, uuid.uuid4())
+ 
+   def _UploadToGcs(self, is_async, local_path, daisy_bucket, image_uuid):
+     """Uploads a local file to GCS. Returns the gs:// URI to that file."""
+diff --git a/lib/surface/compute/instances/create.py b/lib/surface/compute/instances/create.py
+index e7974cf..215c7d8 100644
+--- a/lib/surface/compute/instances/create.py
++++ b/lib/surface/compute/instances/create.py
+@@ -479,7 +479,7 @@ class Create(base.CreateCommand):
+     requests = self._CreateRequests(
+         args, instance_refs, compute_client, resource_parser, holder)
+ 
+-    if not args.async:
++    if not args.async_:
+       # TODO(b/63664449): Replace this with poller + progress tracker.
+       try:
+         # Using legacy MakeRequests (which also does polling) here until
+diff --git a/lib/surface/compute/instances/move.py b/lib/surface/compute/instances/move.py
+index 21fba74..b8e4c6d 100644
+--- a/lib/surface/compute/instances/move.py
++++ b/lib/surface/compute/instances/move.py
+@@ -70,7 +70,7 @@ class Move(base.SilentCommand):
+         params={'project': target_instance.project},
+         collection='compute.globalOperations')
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='gce instance {0}'.format(target_instance.Name()),
+diff --git a/lib/surface/compute/instances/resume.py b/lib/surface/compute/instances/resume.py
+index 482e60b..7f8e1ed 100644
+--- a/lib/surface/compute/instances/resume.py
++++ b/lib/surface/compute/instances/resume.py
+@@ -120,7 +120,7 @@ class Resume(base.SilentCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for operation_ref in operation_refs:
+         log.status.Print('Resume instance in progress for [{}].'.format(
+             operation_ref.SelfLink()))
+diff --git a/lib/surface/compute/instances/set_min_cpu_platform.py b/lib/surface/compute/instances/set_min_cpu_platform.py
+index 40f62ab..1c9d34e 100644
+--- a/lib/surface/compute/instances/set_min_cpu_platform.py
++++ b/lib/surface/compute/instances/set_min_cpu_platform.py
+@@ -65,7 +65,7 @@ class SetMinCpuPlatform(base.UpdateCommand):
+     operation_ref = holder.resources.Parse(
+         operation.selfLink, collection='compute.zoneOperations')
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='gce instance [{0}]'.format(instance_ref.Name()),
+diff --git a/lib/surface/compute/instances/simulate_maintenance_event.py b/lib/surface/compute/instances/simulate_maintenance_event.py
+index 36f94f8..7c475b3 100644
+--- a/lib/surface/compute/instances/simulate_maintenance_event.py
++++ b/lib/surface/compute/instances/simulate_maintenance_event.py
+@@ -68,7 +68,7 @@ class SimulateMaintenanceEvent(base.UpdateCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for i, operation_ref in enumerate(operation_refs):
+         log.UpdatedResource(
+             operation_ref,
+diff --git a/lib/surface/compute/instances/start.py b/lib/surface/compute/instances/start.py
+index 993e513..68edbf8 100644
+--- a/lib/surface/compute/instances/start.py
++++ b/lib/surface/compute/instances/start.py
+@@ -128,7 +128,7 @@ class Start(base.SilentCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for operation_ref in operation_refs:
+         log.status.Print('Start instance in progress for [{}].'.format(
+             operation_ref.SelfLink()))
+diff --git a/lib/surface/compute/instances/stop.py b/lib/surface/compute/instances/stop.py
+index 266326f..3c593be 100644
+--- a/lib/surface/compute/instances/stop.py
++++ b/lib/surface/compute/instances/stop.py
+@@ -71,7 +71,7 @@ class Stop(base.SilentCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for operation_ref in operation_refs:
+         log.status.Print('Stop instance in progress for [{}].'.format(
+             operation_ref.SelfLink()))
+diff --git a/lib/surface/compute/instances/suspend.py b/lib/surface/compute/instances/suspend.py
+index f489b88..3479411 100644
+--- a/lib/surface/compute/instances/suspend.py
++++ b/lib/surface/compute/instances/suspend.py
+@@ -85,7 +85,7 @@ class Suspend(base.SilentCommand):
+ 
+     operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+ 
+-    if args.async:
++    if args.async_:
+       for operation_ref in operation_refs:
+         log.status.Print('Suspend instance in progress for [{}].'.format(
+             operation_ref.SelfLink()))
+diff --git a/lib/surface/compute/networks/peerings/create.py b/lib/surface/compute/networks/peerings/create.py
+index 903c1f5..2f51aad 100644
+--- a/lib/surface/compute/networks/peerings/create.py
++++ b/lib/surface/compute/networks/peerings/create.py
+@@ -114,7 +114,7 @@ class Create(base.Command):
+         project=properties.VALUES.core.project.GetOrFail())
+ 
+     requests = [(client.apitools_client.networks, 'AddPeering', request)]
+-    return _MakeRequests(client, requests, args.async)
++    return _MakeRequests(client, requests, args.async_)
+ 
+ 
+ @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
+@@ -166,4 +166,4 @@ class CreateAlphaBeta(Create):
+         project=properties.VALUES.core.project.GetOrFail())
+ 
+     requests = [(client.apitools_client.networks, 'AddPeering', request)]
+-    return _MakeRequests(client, requests, args.async)
++    return _MakeRequests(client, requests, args.async_)
+diff --git a/lib/surface/compute/os_config/patch_jobs/execute.py b/lib/surface/compute/os_config/patch_jobs/execute.py
+index e4b8b46..81986bf 100644
+--- a/lib/surface/compute/os_config/patch_jobs/execute.py
++++ b/lib/surface/compute/os_config/patch_jobs/execute.py
+@@ -290,7 +290,7 @@ class Execute(base.Command):
+ 
+     patch_job_name = osconfig_utils.GetPatchJobName(async_response.name)
+ 
+-    if args.async:
++    if args.async_:
+       log.status.Print(
+           'Execution in progress for patch job [{}]'.format(patch_job_name))
+       log.status.Print(
+diff --git a/lib/surface/compute/routers/add_bgp_peer.py b/lib/surface/compute/routers/add_bgp_peer.py
+index e7c8614..2dfade5 100644
+--- a/lib/surface/compute/routers/add_bgp_peer.py
++++ b/lib/surface/compute/routers/add_bgp_peer.py
+@@ -93,7 +93,7 @@ class AddBgpPeer(base.UpdateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='router [{0}] to add peer [{1}]'.format(router_ref.Name(),
+diff --git a/lib/surface/compute/routers/create.py b/lib/surface/compute/routers/create.py
+index a0059b2..5f98aab 100644
+--- a/lib/surface/compute/routers/create.py
++++ b/lib/surface/compute/routers/create.py
+@@ -114,7 +114,7 @@ class Create(base.CreateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       # Override the networks list format with the default operations format
+       if not args.IsSpecified('format'):
+         args.format = 'none'
+diff --git a/lib/surface/compute/routers/nats/create.py b/lib/surface/compute/routers/nats/create.py
+index 8c0275d..4e6fe9a 100644
+--- a/lib/surface/compute/routers/nats/create.py
++++ b/lib/surface/compute/routers/nats/create.py
+@@ -81,7 +81,7 @@ class Create(base.CreateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       log.CreatedResource(
+           operation_ref,
+           kind='nat [{0}] in router [{1}]'.format(nat.name, router_ref.Name()),
+diff --git a/lib/surface/compute/routers/nats/update.py b/lib/surface/compute/routers/nats/update.py
+index 5af3fbf..51e444a 100644
+--- a/lib/surface/compute/routers/nats/update.py
++++ b/lib/surface/compute/routers/nats/update.py
+@@ -97,7 +97,7 @@ class Update(base.UpdateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='nat [{0}] in router [{1}]'.format(nat.name, router_ref.Name()),
+diff --git a/lib/surface/compute/routers/update.py b/lib/surface/compute/routers/update.py
+index 9ed832c..86cc30f 100644
+--- a/lib/surface/compute/routers/update.py
++++ b/lib/surface/compute/routers/update.py
+@@ -145,7 +145,7 @@ class Update(base.UpdateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='router [{0}]'.format(router_ref.Name()),
+diff --git a/lib/surface/compute/routers/update_bgp_peer.py b/lib/surface/compute/routers/update_bgp_peer.py
+index 2a8f2d7..adf8ff0 100644
+--- a/lib/surface/compute/routers/update_bgp_peer.py
++++ b/lib/surface/compute/routers/update_bgp_peer.py
+@@ -142,7 +142,7 @@ class UpdateBgpPeer(base.UpdateCommand):
+             'region': router_ref.region,
+         })
+ 
+-    if args.async:
++    if args.async_:
+       log.UpdatedResource(
+           operation_ref,
+           kind='peer [{0}] in router [{1}]'.format(peer.name,
+diff --git a/lib/surface/compute/url_maps/invalidate_cdn_cache.py b/lib/surface/compute/url_maps/invalidate_cdn_cache.py
+index 3e55802..7eb86e4 100644
+--- a/lib/surface/compute/url_maps/invalidate_cdn_cache.py
++++ b/lib/surface/compute/url_maps/invalidate_cdn_cache.py
+@@ -115,7 +115,7 @@ class InvalidateCdnCacheGA(base.SilentCommand):
+       requests.append((client.apitools_client.urlMaps, 'InvalidateCache',
+                        request))
+ 
+-    if args.async:
++    if args.async_:
+       resources, errors = batch_helper.MakeRequests(
+           requests=requests,
+           http=client.apitools_client.http,
+@@ -186,7 +186,7 @@ class InvalidateCdnCacheAlpha(InvalidateCdnCacheGA):
+     client = holder.client
+ 
+     requests = self.CreateRequests(holder, args)
+-    if args.async:
++    if args.async_:
+       resources, errors = batch_helper.MakeRequests(
+           requests=requests,
+           http=client.apitools_client.http,
+diff --git a/lib/surface/container/clusters/create.py b/lib/surface/container/clusters/create.py
+index 1fe4286..894c1dd 100644
+--- a/lib/surface/container/clusters/create.py
++++ b/lib/surface/container/clusters/create.py
+@@ -326,7 +326,7 @@ class Create(base.CreateCommand):
+     Raises:
+       util.Error, if creation failed.
+     """
+-    if args.async and not args.IsSpecified('format'):
++    if args.async_ and not args.IsSpecified('format'):
+       args.format = util.OPERATIONS_FORMAT
+ 
+     util.CheckKubectlInstalled()
+@@ -388,7 +388,7 @@ class Create(base.CreateCommand):
+     operation = None
+     try:
+       operation_ref = adapter.CreateCluster(cluster_ref, options)
+-      if args.async:
++      if args.async_:
+         return adapter.GetCluster(cluster_ref)
+ 
+       operation = adapter.WaitForOperation(
+diff --git a/lib/surface/container/clusters/delete.py b/lib/surface/container/clusters/delete.py
+index 4080670..7ba9f95 100644
+--- a/lib/surface/container/clusters/delete.py
++++ b/lib/surface/container/clusters/delete.py
+@@ -106,7 +106,7 @@ class Delete(base.DeleteCommand):
+             str(exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)))
+       except util.Error as error:
+         errors.append(error)
+-    if not args.async:
++    if not args.async_:
+       # Poll each operation for completion
+       for operation_ref, cluster_ref in operations:
+         try:
+diff --git a/lib/surface/container/clusters/resize.py b/lib/surface/container/clusters/resize.py
+index 50e660a..d1f91e6 100644
+--- a/lib/surface/container/clusters/resize.py
++++ b/lib/surface/container/clusters/resize.py
+@@ -89,7 +89,7 @@ class Resize(base.Command):
+ 
+     op_ref = adapter.ResizeNodePool(cluster_ref, pool_name, args.num_nodes)
+ 
+-    if not args.async:
++    if not args.async_:
+       adapter.WaitForOperation(op_ref,
+                                'Resizing {0}'.format(cluster_ref.clusterId))
+     log.UpdatedResource(cluster_ref)
+diff --git a/lib/surface/container/clusters/update.py b/lib/surface/container/clusters/update.py
+index 56820b4..83e1096 100644
+--- a/lib/surface/container/clusters/update.py
++++ b/lib/surface/container/clusters/update.py
+@@ -379,7 +379,7 @@ to completion."""
+         options = self.ParseUpdateOptions(args, locations)
+         op_ref = adapter.UpdateCluster(cluster_ref, options)
+ 
+-    if not args.async:
++    if not args.async_:
+       adapter.WaitForOperation(op_ref,
+                                'Updating {0}'.format(cluster_ref.clusterId),
+                                timeout_s=1800)
+diff --git a/lib/surface/container/clusters/upgrade.py b/lib/surface/container/clusters/upgrade.py
+index bbe1bb8..70eaf6b 100644
+--- a/lib/surface/container/clusters/upgrade.py
++++ b/lib/surface/container/clusters/upgrade.py
+@@ -194,7 +194,7 @@ class Upgrade(base.Command):
+     except apitools_exceptions.HttpError as error:
+       raise exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)
+ 
+-    if not args.async:
++    if not args.async_:
+       adapter.WaitForOperation(
+           op_ref,
+           'Upgrading {0}'.format(cluster_ref.clusterId),
+diff --git a/lib/surface/container/node_pools/delete.py b/lib/surface/container/node_pools/delete.py
+index 066f6a6..bf34a04 100644
+--- a/lib/surface/container/node_pools/delete.py
++++ b/lib/surface/container/node_pools/delete.py
+@@ -98,7 +98,7 @@ class Delete(base.DeleteCommand):
+       adapter.GetNodePool(pool_ref)
+ 
+       op_ref = adapter.DeleteNodePool(pool_ref)
+-      if not args.async:
++      if not args.async_:
+         adapter.WaitForOperation(
+             op_ref,
+             'Deleting node pool {0}'.format(pool_ref.nodePoolId),
+diff --git a/lib/surface/container/node_pools/rollback.py b/lib/surface/container/node_pools/rollback.py
+index d65ec58..9b1c12c 100644
+--- a/lib/surface/container/node_pools/rollback.py
++++ b/lib/surface/container/node_pools/rollback.py
+@@ -85,7 +85,7 @@ class Rollback(base.Command):
+ 
+       op_ref = adapter.RollbackUpgrade(pool_ref)
+ 
+-      if not args.async:
++      if not args.async_:
+         adapter.WaitForOperation(
+             op_ref,
+             'Rolling back {0}'.format(pool_ref.nodePoolId),
+diff --git a/lib/surface/dataproc/clusters/create.py b/lib/surface/dataproc/clusters/create.py
+index a03af80..13d3ee1 100644
+--- a/lib/surface/dataproc/clusters/create.py
++++ b/lib/surface/dataproc/clusters/create.py
+@@ -102,7 +102,7 @@ class Create(base.CreateCommand):
+ 
+     self.ConfigureCluster(dataproc.messages, args, cluster)
+ 
+-    return clusters.CreateCluster(dataproc, cluster, args.async, args.timeout)
++    return clusters.CreateCluster(dataproc, cluster, args.async_, args.timeout)
+ 
+   @staticmethod
+   def ConfigureCluster(messages, args, cluster):
+diff --git a/lib/surface/dataproc/clusters/create_from_file.py b/lib/surface/dataproc/clusters/create_from_file.py
+index 206924d..ec50ea3 100644
+--- a/lib/surface/dataproc/clusters/create_from_file.py
++++ b/lib/surface/dataproc/clusters/create_from_file.py
+@@ -51,4 +51,4 @@ class CreateFromFile(base.CreateCommand):
+     data = console_io.ReadFromFileOrStdin(args.file or '-', binary=False)
+     cluster = export_util.Import(message_type=dataproc.messages.Cluster,
+                                  stream=data)
+-    return clusters.CreateCluster(dataproc, cluster, args.async, args.timeout)
++    return clusters.CreateCluster(dataproc, cluster, args.async_, args.timeout)
+diff --git a/lib/surface/dataproc/clusters/delete.py b/lib/surface/dataproc/clusters/delete.py
+index c6727a5..37b784f 100644
+--- a/lib/surface/dataproc/clusters/delete.py
++++ b/lib/surface/dataproc/clusters/delete.py
+@@ -63,7 +63,7 @@ class Delete(base.DeleteCommand):
+ 
+     operation = dataproc.client.projects_regions_clusters.Delete(request)
+ 
+-    if args.async:
++    if args.async_:
+       log.status.write(
+           'Deleting [{0}] with operation [{1}].'.format(
+               cluster_ref, operation.name))
+diff --git a/lib/surface/dataproc/clusters/import.py b/lib/surface/dataproc/clusters/import.py
+index 9319780..7c7aeae 100644
+--- a/lib/surface/dataproc/clusters/import.py
++++ b/lib/surface/dataproc/clusters/import.py
+@@ -76,4 +76,4 @@ class Import(base.UpdateCommand):
+     cluster.projectId = cluster_ref.projectId
+ 
+     # Import only supports create, not update (for now).
+-    return clusters.CreateCluster(dataproc, cluster, args.async, args.timeout)
++    return clusters.CreateCluster(dataproc, cluster, args.async_, args.timeout)
+diff --git a/lib/surface/dataproc/clusters/update.py b/lib/surface/dataproc/clusters/update.py
+index 59b2da0..d01b463 100644
+--- a/lib/surface/dataproc/clusters/update.py
++++ b/lib/surface/dataproc/clusters/update.py
+@@ -205,7 +205,7 @@ class Update(base.UpdateCommand):
+ 
+     operation = dataproc.client.projects_regions_clusters.Patch(request)
+ 
+-    if args.async:
++    if args.async_:
+       log.status.write(
+           'Updating [{0}] with operation [{1}].'.format(
+               cluster_ref, operation.name))
+diff --git a/lib/surface/dataproc/workflow_templates/instantiate.py b/lib/surface/dataproc/workflow_templates/instantiate.py
+index 9e6bb52..afd6989 100644
+--- a/lib/surface/dataproc/workflow_templates/instantiate.py
++++ b/lib/surface/dataproc/workflow_templates/instantiate.py
+@@ -63,7 +63,7 @@ class Instantiate(base.CreateCommand):
+ 
+     operation = dataproc.client.projects_regions_workflowTemplates.Instantiate(
+         request)
+-    if args.async:
++    if args.async_:
+       log.status.Print('Instantiating [{0}] with operation [{1}].'.format(
+           template_ref.Name(), operation.name))
+       return
+@@ -100,7 +100,7 @@ class InstantiateBeta(Instantiate):
+ 
+     operation = dataproc.client.projects_regions_workflowTemplates.Instantiate(
+         request)
+-    if args.async:
++    if args.async_:
+       log.status.Print('Instantiating [{0}] with operation [{1}].'.format(
+           template_ref.Name(), operation.name))
+       return
+diff --git a/lib/surface/dataproc/workflow_templates/instantiate_from_file.py b/lib/surface/dataproc/workflow_templates/instantiate_from_file.py
+index 788d366..a512375 100644
+--- a/lib/surface/dataproc/workflow_templates/instantiate_from_file.py
++++ b/lib/surface/dataproc/workflow_templates/instantiate_from_file.py
+@@ -70,7 +70,7 @@ class InstantiateFromFile(base.CreateCommand):
+     operation = \
+       dataproc.client.projects_regions_workflowTemplates.InstantiateInline(
+           request)
+-    if args.async:
++    if args.async_:
+       log.status.Print('Instantiating with operation [{0}].'.format(
+           operation.name))
+       return
+@@ -118,7 +118,7 @@ class InstantiateFromFileBeta(base.CreateCommand):
+     operation = \
+       dataproc.client.projects_regions_workflowTemplates.InstantiateInline(
+           request)
+-    if args.async:
++    if args.async_:
+       log.status.Print('Instantiating with operation [{0}].'.format(
+           operation.name))
+       return
+diff --git a/lib/surface/dataproc/workflow_templates/run.py b/lib/surface/dataproc/workflow_templates/run.py
+index d28adba..d7f86ab 100644
+--- a/lib/surface/dataproc/workflow_templates/run.py
++++ b/lib/surface/dataproc/workflow_templates/run.py
+@@ -56,7 +56,7 @@ class Run(base.CreateCommand):
+ 
+     operation = dataproc.client.projects_regions_workflowTemplates.Instantiate(
+         request)
+-    if args.async:
++    if args.async_:
+       log.status.Print('Running [{0}].'.format(template_ref.Name()))
+       return
+ 
+diff --git a/lib/surface/datastore/export.py b/lib/surface/datastore/export.py
+index 7bdfe75..c9b36ef 100644
+--- a/lib/surface/datastore/export.py
++++ b/lib/surface/datastore/export.py
+@@ -69,7 +69,7 @@ class Export(base.Command):
+         namespaces=args.namespaces,
+         labels=args.operation_labels)
+ 
+-    if not args.async:
++    if not args.async_:
+       operations.WaitForOperation(response)
+ 
+     return response
+diff --git a/lib/surface/datastore/import.py b/lib/surface/datastore/import.py
+index 372e9d8..39553a8 100644
+--- a/lib/surface/datastore/import.py
++++ b/lib/surface/datastore/import.py
+@@ -65,7 +65,7 @@ class Import(base.Command):
+         namespaces=args.namespaces,
+         labels=args.operation_labels)
+ 
+-    if not args.async:
++    if not args.async_:
+       operations.WaitForOperation(response)
+ 
+     return response
+diff --git a/lib/surface/deployment_manager/deployments/cancel_preview.py b/lib/surface/deployment_manager/deployments/cancel_preview.py
+index ee588d4..6c50645 100644
+--- a/lib/surface/deployment_manager/deployments/cancel_preview.py
++++ b/lib/surface/deployment_manager/deployments/cancel_preview.py
+@@ -124,7 +124,7 @@ class CancelPreview(base.Command, dm_base.DmCommand):
+       dm_util.PrintFingerprint(new_fingerprint)
+     except apitools_exceptions.HttpError as error:
+       raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       op_name = operation.name
+diff --git a/lib/surface/deployment_manager/deployments/create.py b/lib/surface/deployment_manager/deployments/create.py
+index 2134408..1d89103 100644
+--- a/lib/surface/deployment_manager/deployments/create.py
++++ b/lib/surface/deployment_manager/deployments/create.py
+@@ -163,7 +163,7 @@ class Create(base.CreateCommand, dm_base.DmCommand):
+         args.deployment_name,
+         params={'project': properties.VALUES.core.project.GetOrFail},
+         collection='deploymentmanager.deployments')
+-    if (not args.IsSpecified('format')) and (args.async):
++    if (not args.IsSpecified('format')) and (args.async_):
+       args.format = flags.OPERATION_FORMAT
+ 
+     deployment = self.messages.Deployment(
+@@ -193,7 +193,7 @@ class Create(base.CreateCommand, dm_base.DmCommand):
+ 
+     except apitools_exceptions.HttpError as error:
+       raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       op_name = operation.name
+diff --git a/lib/surface/deployment_manager/deployments/delete.py b/lib/surface/deployment_manager/deployments/delete.py
+index a3c0b76..e343409 100644
+--- a/lib/surface/deployment_manager/deployments/delete.py
++++ b/lib/surface/deployment_manager/deployments/delete.py
+@@ -120,7 +120,7 @@ class Delete(base.DeleteCommand, dm_base.DmCommand):
+                               GetEnumForChoice(args.delete_policy)),
+             )
+         )
+-        if args.async:
++        if args.async_:
+           operations.append(operation)
+         else:
+           op_name = operation.name
+diff --git a/lib/surface/deployment_manager/deployments/stop.py b/lib/surface/deployment_manager/deployments/stop.py
+index bc7be0c..0b4c00a 100644
+--- a/lib/surface/deployment_manager/deployments/stop.py
++++ b/lib/surface/deployment_manager/deployments/stop.py
+@@ -109,7 +109,7 @@ class Stop(base.Command, dm_base.DmCommand):
+       )
+     except apitools_exceptions.HttpError as error:
+       raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       op_name = operation.name
+diff --git a/lib/surface/deployment_manager/deployments/update.py b/lib/surface/deployment_manager/deployments/update.py
+index 01b6236..89a9351 100644
+--- a/lib/surface/deployment_manager/deployments/update.py
++++ b/lib/surface/deployment_manager/deployments/update.py
+@@ -190,7 +190,7 @@ class Update(base.UpdateCommand, dm_base.DmCommand):
+         args.deployment_name,
+         params={'project': properties.VALUES.core.project.GetOrFail},
+         collection='deploymentmanager.deployments')
+-    if not args.IsSpecified('format') and args.async:
++    if not args.IsSpecified('format') and args.async_:
+       args.format = flags.OPERATION_FORMAT
+ 
+     patch_request = False
+@@ -290,7 +290,7 @@ class Update(base.UpdateCommand, dm_base.DmCommand):
+           self.client, self.messages, dm_base.GetProject(),
+           deployment_ref.deployment)
+       if patch_request:
+-        if args.async:
++        if args.async_:
+           log.warning(
+               'Updating Deployment metadata is synchronous, --async flag '
+               'is ignored.')
+@@ -299,7 +299,7 @@ class Update(base.UpdateCommand, dm_base.DmCommand):
+       dm_util.PrintFingerprint(updated_deployment.fingerprint)
+     except apitools_exceptions.HttpError as error:
+       raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       op_name = operation.name
+diff --git a/lib/surface/deployment_manager/type_providers/create.py b/lib/surface/deployment_manager/type_providers/create.py
+index c280072..dc485a6 100644
+--- a/lib/surface/deployment_manager/type_providers/create.py
++++ b/lib/surface/deployment_manager/type_providers/create.py
+@@ -106,6 +106,6 @@ class Create(base.CreateCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      request,
+-                     args.async,
++                     args.async_,
+                      self.client.typeProviders.Insert,
+                      LogResource)
+diff --git a/lib/surface/deployment_manager/type_providers/delete.py b/lib/surface/deployment_manager/type_providers/delete.py
+index 3820df8..4bb141f 100644
+--- a/lib/surface/deployment_manager/type_providers/delete.py
++++ b/lib/surface/deployment_manager/type_providers/delete.py
+@@ -90,6 +90,6 @@ class Delete(base.DeleteCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      request,
+-                     args.async,
++                     args.async_,
+                      self.client.typeProviders.Delete,
+                      LogResource)
+diff --git a/lib/surface/deployment_manager/type_providers/update.py b/lib/surface/deployment_manager/type_providers/update.py
+index 3b2453f..5d2d457 100644
+--- a/lib/surface/deployment_manager/type_providers/update.py
++++ b/lib/surface/deployment_manager/type_providers/update.py
+@@ -111,6 +111,6 @@ class Update(base.UpdateCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      update_request,
+-                     args.async,
++                     args.async_,
+                      self.client.typeProviders.Update,
+                      LogResource)
+diff --git a/lib/surface/deployment_manager/types/create.py b/lib/surface/deployment_manager/types/create.py
+index 7509212..d54816d 100644
+--- a/lib/surface/deployment_manager/types/create.py
++++ b/lib/surface/deployment_manager/types/create.py
+@@ -101,7 +101,7 @@ class Create(base.CreateCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      request,
+-                     args.async,
++                     args.async_,
+                      self.client.compositeTypes.Insert,
+                      LogResource)
+ 
+diff --git a/lib/surface/deployment_manager/types/delete.py b/lib/surface/deployment_manager/types/delete.py
+index a11b967..6cf3dec 100644
+--- a/lib/surface/deployment_manager/types/delete.py
++++ b/lib/surface/deployment_manager/types/delete.py
+@@ -87,7 +87,7 @@ class Delete(base.DeleteCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      request,
+-                     args.async,
++                     args.async_,
+                      self.client.compositeTypes.Delete,
+                      LogResource)
+ 
+diff --git a/lib/surface/deployment_manager/types/update.py b/lib/surface/deployment_manager/types/update.py
+index 78d3090..7b9afa1 100644
+--- a/lib/surface/deployment_manager/types/update.py
++++ b/lib/surface/deployment_manager/types/update.py
+@@ -102,7 +102,7 @@ class Update(base.UpdateCommand, dm_base.DmCommand):
+                      self.messages,
+                      self.resources,
+                      update_request,
+-                     args.async,
++                     args.async_,
+                      self.client.compositeTypes.Update,
+                      LogResource)
+ 
+diff --git a/lib/surface/domains/registrations/create.py b/lib/surface/domains/registrations/create.py
+index b967966..0ef115c 100644
+--- a/lib/surface/domains/registrations/create.py
++++ b/lib/surface/domains/registrations/create.py
+@@ -119,7 +119,7 @@ class Create(base.CreateCommand):
+       # TODO(b/110077203): Log something sensible.
+       return
+ 
+-    if args.async:
++    if args.async_:
+       # TODO(b/110077203): Log something sensible.
+       return response
+ 
+diff --git a/lib/surface/domains/registrations/detach.py b/lib/surface/domains/registrations/detach.py
+index c5c482e..e9ca0d0 100644
+--- a/lib/surface/domains/registrations/detach.py
++++ b/lib/surface/domains/registrations/detach.py
+@@ -64,7 +64,7 @@ class Detach(base.DeleteCommand):
+ 
+     response = client.Detach(registration_ref)
+ 
+-    if args.async:
++    if args.async_:
+       # TODO(b/110077203): Log something sensible.
+       return response
+ 
+diff --git a/lib/surface/domains/registrations/update.py b/lib/surface/domains/registrations/update.py
+index 938034e..187d8a8 100644
+--- a/lib/surface/domains/registrations/update.py
++++ b/lib/surface/domains/registrations/update.py
+@@ -82,7 +82,7 @@ class Update(base.UpdateCommand):
+       # TODO(b/110077203): Log something sensible.
+       return
+ 
+-    if args.async:
++    if args.async_:
+       # TODO(b/110077203): Log something sensible.
+       return response
+ 
+diff --git a/lib/surface/endpoints/services/delete.py b/lib/surface/endpoints/services/delete.py
+index 059be5a..14187c8 100644
+--- a/lib/surface/endpoints/services/delete.py
++++ b/lib/surface/endpoints/services/delete.py
+@@ -92,4 +92,4 @@ class Delete(base.DeleteCommand):
+ 
+     operation = client.services.Delete(request)
+ 
+-    return services_util.ProcessOperationResult(operation, args.async)
++    return services_util.ProcessOperationResult(operation, args.async_)
+diff --git a/lib/surface/endpoints/services/deploy.py b/lib/surface/endpoints/services/deploy.py
+index e80f997..47a4e43 100644
+--- a/lib/surface/endpoints/services/deploy.py
++++ b/lib/surface/endpoints/services/deploy.py
+@@ -353,7 +353,7 @@ class _BaseDeploy(object):
+ 
+     if config_files:
+       push_config_result = services_util.PushMultipleServiceConfigFiles(
+-          self.service_name, config_files, args.async,
++          self.service_name, config_files, args.async_,
+           validate_only=self.validate_only)
+       self.service_config_id = (
+           services_util.GetServiceConfigIdFromSubmitConfigSourceResponse(
+@@ -391,12 +391,12 @@ class _BaseDeploy(object):
+           serviceName=self.service_name,
+       )
+       rollout_operation = client.services_rollouts.Create(rollout_create)
+-      services_util.ProcessOperationResult(rollout_operation, args.async)
++      services_util.ProcessOperationResult(rollout_operation, args.async_)
+ 
+       if was_service_created:
+         self.AttemptToEnableService(
+-            services_util.GetEndpointsServiceName(), args.async)
+-        self.AttemptToEnableService(self.service_name, args.async)
++            services_util.GetEndpointsServiceName(), args.async_)
++        self.AttemptToEnableService(self.service_name, args.async_)
+ 
+     return push_config_result
+ 
+diff --git a/lib/surface/endpoints/services/undelete.py b/lib/surface/endpoints/services/undelete.py
+index 11d564e..b2f1b01 100644
+--- a/lib/surface/endpoints/services/undelete.py
++++ b/lib/surface/endpoints/services/undelete.py
+@@ -79,4 +79,4 @@ class Undelete(base.Command):
+ 
+     operation = client.services.Undelete(request)
+ 
+-    return services_util.ProcessOperationResult(operation, args.async)
++    return services_util.ProcessOperationResult(operation, args.async_)
+diff --git a/lib/surface/filestore/instances/create.py b/lib/surface/filestore/instances/create.py
+index 29db171..076ef2c 100644
+--- a/lib/surface/filestore/instances/create.py
++++ b/lib/surface/filestore/instances/create.py
+@@ -60,8 +60,8 @@ class Create(base.CreateCommand):
+     except filestore_client.InvalidCapacityError as e:
+       raise exceptions.InvalidArgumentException('--file-share',
+                                                 six.text_type(e))
+-    result = client.CreateInstance(instance_ref, args.async, instance)
+-    if args.async:
++    result = client.CreateInstance(instance_ref, args.async_, instance)
++    if args.async_:
+       command = properties.VALUES.metrics.command_name.Get().split('.')
+       if command:
+         command[-1] = 'list'
+diff --git a/lib/surface/filestore/instances/delete.py b/lib/surface/filestore/instances/delete.py
+index 1f74bb1..31060bc 100644
+--- a/lib/surface/filestore/instances/delete.py
++++ b/lib/surface/filestore/instances/delete.py
+@@ -51,8 +51,8 @@ class Delete(base.DeleteCommand):
+       return None
+     client = filestore_client.FilestoreClient(version=self._API_VERSION)
+     result = client.DeleteInstance(
+-        instance_ref, args.async)
+-    if args.async:
++        instance_ref, args.async_)
++    if args.async_:
+       command = properties.VALUES.metrics.command_name.Get().split('.')
+       if command:
+         command[-1] = 'list'
+diff --git a/lib/surface/filestore/instances/update.py b/lib/surface/filestore/instances/update.py
+index d04868b..7a7bfb5 100644
+--- a/lib/surface/filestore/instances/update.py
++++ b/lib/surface/filestore/instances/update.py
+@@ -71,8 +71,8 @@ class Update(base.CreateCommand):
+     update_mask = ','.join(updated_fields)
+ 
+     result = client.UpdateInstance(
+-        instance_ref, instance, update_mask, args.async)
+-    if args.async:
++        instance_ref, instance, update_mask, args.async_)
++    if args.async_:
+       if self._API_VERSION == 'V1':
+         log.status.Print(
+             'To check the status of the operation, run `gcloud filestore '
+diff --git a/lib/surface/firebase/test/android/run.py b/lib/surface/firebase/test/android/run.py
+index d1ebbf1..f758b34 100644
+--- a/lib/surface/firebase/test/android/run.py
++++ b/lib/surface/firebase/test/android/run.py
+@@ -183,7 +183,7 @@ class _BaseRun(object):
+         - a list of TestOutcome tuples (if ToolResults are available).
+         - a URL string pointing to the user's results in ToolResults or GCS.
+     """
+-    if args.async and not args.IsSpecified('format'):
++    if args.async_ and not args.IsSpecified('format'):
+       args.format = """
+           value(format(
+             'Final test results will be available at [{0}].', [])
+@@ -233,7 +233,7 @@ class _BaseRun(object):
+ 
+       url = tool_results.CreateToolResultsUiUrl(project, tr_ids)
+       log.status.Print('')
+-      if args.async:
++      if args.async_:
+         return url
+       log.status.Print('Test results will be streamed to [{0}].'.format(url))
+ 
+diff --git a/lib/surface/firebase/test/ios/run.py b/lib/surface/firebase/test/ios/run.py
+index 9cda408..78afaec 100644
+--- a/lib/surface/firebase/test/ios/run.py
++++ b/lib/surface/firebase/test/ios/run.py
+@@ -121,7 +121,7 @@ class Run(base.ListCommand):
+         - a URL string pointing to the user's results in ToolResults or GCS.
+     """
+     # TODO(b/79369595): expand libs to share more code with android run command.
+-    if args.async and not args.IsSpecified('format'):
++    if args.async_ and not args.IsSpecified('format'):
+       args.format = """
+           value(format('Final test results will be available at [{0}].', []))
+       """
+@@ -160,7 +160,7 @@ class Run(base.ListCommand):
+ 
+       url = tool_results.CreateToolResultsUiUrl(project, tr_ids)
+       log.status.Print('')
+-      if args.async:
++      if args.async_:
+         return url
+       log.status.Print('Test results will be streamed to [{0}].'.format(url))
+ 
+diff --git a/lib/surface/firestore/export.py b/lib/surface/firestore/export.py
+index 306d055..cb1ef44 100644
+--- a/lib/surface/firestore/export.py
++++ b/lib/surface/firestore/export.py
+@@ -59,7 +59,7 @@ class Export(base.Command):
+         object_ref.ToUrl().rstrip('/'),
+         collection_ids=args.collection_ids)
+ 
+-    if not args.async:
++    if not args.async_:
+       operations.WaitForOperation(response)
+ 
+     return response
+diff --git a/lib/surface/firestore/import.py b/lib/surface/firestore/import.py
+index a782100..145689d 100644
+--- a/lib/surface/firestore/import.py
++++ b/lib/surface/firestore/import.py
+@@ -53,7 +53,7 @@ class Import(base.Command):
+         object_ref.ToUrl().rstrip('/'),
+         collection_ids=args.collection_ids)
+ 
+-    if not args.async:
++    if not args.async_:
+       operations.WaitForOperation(response)
+ 
+     return response
+diff --git a/lib/surface/resource_manager/folders/create.py b/lib/surface/resource_manager/folders/create.py
+index 7610ee9..08e28fb 100644
+--- a/lib/surface/resource_manager/folders/create.py
++++ b/lib/surface/resource_manager/folders/create.py
+@@ -63,7 +63,7 @@ class Create(base.CreateCommand):
+             parent=flags.GetParentFromFlags(args),
+             folder=messages.Folder(
+                 displayName=args.display_name)))
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       finished_operation = operations.WaitForOperation(operation)
+diff --git a/lib/surface/resource_manager/folders/move.py b/lib/surface/resource_manager/folders/move.py
+index 368a21b..fc5d6e4 100644
+--- a/lib/surface/resource_manager/folders/move.py
++++ b/lib/surface/resource_manager/folders/move.py
+@@ -66,7 +66,7 @@ class Move(base.UpdateCommand):
+         moveFolderRequest=messages.MoveFolderRequest(
+             destinationParent=flags.GetParentFromFlags(args)))
+     operation = folders.FoldersService().Move(move_request)
+-    if args.async:
++    if args.async_:
+       return operation
+     else:
+       if operation.done and not operation.name:
+diff --git a/lib/surface/run/deploy.py b/lib/surface/run/deploy.py
+index 4859aa6..37f8c7a 100644
+--- a/lib/surface/run/deploy.py
++++ b/lib/surface/run/deploy.py
+@@ -168,15 +168,15 @@ class Deploy(base.Command):
+           header,
+           deployment_stages,
+           failure_message='Deployment failed',
+-          suppress_output=args.async) as tracker:
++          suppress_output=args.async_) as tracker:
+         operations.ReleaseService(
+             service_ref,
+             changes,
+             tracker,
+-            asyn=args.async,
++            asyn=args.async_,
+             private_endpoint=private_endpoint,
+             allow_unauthenticated=allow_unauth or args.allow_unauthenticated)
+-      if args.async:
++      if args.async_:
+         pretty_print.Success(
+             'Service [{{bold}}{serv}{{reset}}] is deploying '
+             'asynchronously.'.format(serv=service_ref.servicesId))
+diff --git a/lib/surface/run/services/update.py b/lib/surface/run/services/update.py
+index 0a4d1be..2049d7c 100644
+--- a/lib/surface/run/services/update.py
++++ b/lib/surface/run/services/update.py
+@@ -97,9 +97,9 @@ class Update(base.Command):
+           'Deploying...',
+           deployment_stages,
+           failure_message='Deployment failed',
+-          suppress_output=args.async) as tracker:
+-        client.ReleaseService(service_ref, changes, tracker, args.async)
+-      if args.async:
++          suppress_output=args.async_) as tracker:
++        client.ReleaseService(service_ref, changes, tracker, args.async_)
++      if args.async_:
+         pretty_print.Success(
+             'Deploying asynchronously.')
+       else:
+diff --git a/lib/surface/runtime_config/configs/waiters/create.py b/lib/surface/runtime_config/configs/waiters/create.py
+index e8dc7ae..09ca8b7 100644
+--- a/lib/surface/runtime_config/configs/waiters/create.py
++++ b/lib/surface/runtime_config/configs/waiters/create.py
+@@ -150,7 +150,7 @@ class Create(base.CreateCommand):
+ 
+     log.CreatedResource(waiter_resource)
+ 
+-    if args.async:
++    if args.async_:
+       # In async mode, we return the current waiter representation.
+       # The waiter resource exists immediately after creation; the
+       # operation resource returned from CreateWaiter only tracks the
+diff --git a/lib/surface/services/disable.py b/lib/surface/services/disable.py
+index f9cde9d..d868f54 100644
+--- a/lib/surface/services/disable.py
++++ b/lib/surface/services/disable.py
+@@ -92,7 +92,7 @@ class Disable(base.SilentCommand):
+       op = serviceusage.DisableApiCall(project, service_name, args.force)
+       if op.done:
+         return
+-      if args.async:
++      if args.async_:
+         cmd = OP_WAIT_CMD.format(op.name)
+         log.status.Print('Asynchronous operation is in progress... '
+                          'Use the following command to wait for its '
+diff --git a/lib/surface/services/enable.py b/lib/surface/services/enable.py
+index a67d456..4a267fe 100644
+--- a/lib/surface/services/enable.py
++++ b/lib/surface/services/enable.py
+@@ -94,7 +94,7 @@ class Enable(base.SilentCommand):
+       op = serviceusage.BatchEnableApiCall(project, args.service)
+     if op.done:
+       return
+-    if args.async:
++    if args.async_:
+       cmd = _OP_WAIT_CMD.format(op.name)
+       log.status.Print('Asynchronous operation is in progress... '
+                        'Use the following command to wait for its '
+diff --git a/lib/surface/services/vpc_peerings/connect.py b/lib/surface/services/vpc_peerings/connect.py
+index 6759bd4..bbd0559 100644
+--- a/lib/surface/services/vpc_peerings/connect.py
++++ b/lib/surface/services/vpc_peerings/connect.py
+@@ -96,7 +96,7 @@ class Connect(base.SilentCommand):
+     ranges = args.ranges.split(',')
+     op = peering.CreateConnection(project_number, args.service, args.network,
+                                   ranges)
+-    if args.async:
++    if args.async_:
+       cmd = OP_WAIT_CMD.format(op.name)
+       log.status.Print('Asynchronous operation is in progress... '
+                        'Use the following command to wait for its '
+diff --git a/lib/surface/services/vpc_peerings/update.py b/lib/surface/services/vpc_peerings/update.py
+index bd1227b..319ae51 100644
+--- a/lib/surface/services/vpc_peerings/update.py
++++ b/lib/surface/services/vpc_peerings/update.py
+@@ -96,7 +96,7 @@ class Update(base.SilentCommand):
+     ranges = args.ranges.split(',')
+     op = peering.UpdateConnection(project_number, args.service, args.network,
+                                   ranges, args.force)
+-    if args.async:
++    if args.async_:
+       cmd = OP_WAIT_CMD.format(op.name)
+       log.status.Print('Asynchronous operation is in progress... '
+                        'Use the following command to wait for its '
+diff --git a/lib/surface/spanner/databases/create.py b/lib/surface/spanner/databases/create.py
+index 14bd2b3..bc95fa4 100644
+--- a/lib/surface/spanner/databases/create.py
++++ b/lib/surface/spanner/databases/create.py
+@@ -55,6 +55,6 @@ class Create(base.CreateCommand):
+     instance_ref = database_ref.Parent()
+     op = databases.Create(instance_ref, args.database,
+                           flags.SplitDdlIntoStatements(args.ddl or []))
+-    if args.async:
++    if args.async_:
+       return op
+     return database_operations.Await(op, 'Creating database')
+diff --git a/lib/surface/spanner/databases/ddl/update.py b/lib/surface/spanner/databases/ddl/update.py
+index 8405053..5cb784a 100644
+--- a/lib/surface/spanner/databases/ddl/update.py
++++ b/lib/surface/spanner/databases/ddl/update.py
+@@ -52,7 +52,7 @@ class Update(base.UpdateCommand):
+     """
+     op = databases.UpdateDdl(args.CONCEPTS.database.Parse(),
+                              flags.SplitDdlIntoStatements(args.ddl or []))
+-    if args.async:
++    if args.async_:
+       return log.status.Print(
+           'Schema update in progress. Operation name={}'.format(op.name))
+     return database_operations.Await(op, 'Schema updating')
+diff --git a/lib/surface/spanner/instances/create.py b/lib/surface/spanner/instances/create.py
+index 93f91ee..f2c5612 100644
+--- a/lib/surface/spanner/instances/create.py
++++ b/lib/surface/spanner/instances/create.py
+@@ -57,6 +57,6 @@ class Create(base.CreateCommand):
+     """
+     op = instances.Create(
+         args.instance, args.config, args.description, args.nodes)
+-    if args.async:
++    if args.async_:
+       return op
+     instance_operations.Await(op, 'Creating instance')
+diff --git a/lib/surface/spanner/instances/update.py b/lib/surface/spanner/instances/update.py
+index c5ed4ef..3477049 100644
+--- a/lib/surface/spanner/instances/update.py
++++ b/lib/surface/spanner/instances/update.py
+@@ -56,6 +56,6 @@ class Update(base.Command):
+     """
+     op = instances.Patch(
+         args.instance, description=args.description, nodes=args.nodes)
+-    if args.async:
++    if args.async_:
+       return op
+     instance_operations.Await(op, 'Updating instance')
+diff --git a/lib/surface/sql/backups/create.py b/lib/surface/sql/backups/create.py
+index e4c1216..2c0d533 100644
+--- a/lib/surface/sql/backups/create.py
++++ b/lib/surface/sql/backups/create.py
+@@ -86,7 +86,7 @@ class CreateBackup(base.CreateCommand):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/backups/delete.py b/lib/surface/sql/backups/delete.py
+index d4700ba..d947384 100644
+--- a/lib/surface/sql/backups/delete.py
++++ b/lib/surface/sql/backups/delete.py
+@@ -94,7 +94,7 @@ class Delete(base.DeleteCommand):
+     operation_ref = client.resource_parser.Create(
+         'sql.operations', operation=result.name, project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       # Don't wait for the running operation to complete when async is used.
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+diff --git a/lib/surface/sql/backups/restore.py b/lib/surface/sql/backups/restore.py
+index 006c8a3..1337ce0 100644
+--- a/lib/surface/sql/backups/restore.py
++++ b/lib/surface/sql/backups/restore.py
+@@ -101,7 +101,7 @@ class RestoreBackup(base.RestoreCommand):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project,
+diff --git a/lib/surface/sql/databases/create.py b/lib/surface/sql/databases/create.py
+index 7afbd45..3d1e116 100644
+--- a/lib/surface/sql/databases/create.py
++++ b/lib/surface/sql/databases/create.py
+@@ -84,7 +84,7 @@ class AddDatabase(base.Command):
+         'sql.operations',
+         operation=result_operation.name,
+         project=instance_ref.project)
+-    if args.async:
++    if args.async_:
+       result = sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+@@ -101,6 +101,6 @@ class AddDatabase(base.Command):
+         raise
+       result = new_database
+ 
+-    log.CreatedResource(args.database, kind='database', is_async=args.async)
++    log.CreatedResource(args.database, kind='database', is_async=args.async_)
+ 
+     return result
+diff --git a/lib/surface/sql/instances/clone.py b/lib/surface/sql/instances/clone.py
+index 5b17535..b995863 100644
+--- a/lib/surface/sql/instances/clone.py
++++ b/lib/surface/sql/instances/clone.py
+@@ -167,7 +167,7 @@ class Clone(base.CreateCommand):
+         operation=result.name,
+         project=destination_instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       if not args.IsSpecified('format'):
+         args.format = 'default'
+       return sql_client.operations.Get(
+diff --git a/lib/surface/sql/instances/create.py b/lib/surface/sql/instances/create.py
+index 47be3aa..b74e181 100644
+--- a/lib/surface/sql/instances/create.py
++++ b/lib/surface/sql/instances/create.py
+@@ -220,7 +220,7 @@ def RunBaseCreateCommand(args, release_track):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       if not args.IsSpecified('format'):
+         args.format = 'default'
+       return sql_client.operations.Get(
+diff --git a/lib/surface/sql/instances/delete.py b/lib/surface/sql/instances/delete.py
+index 0c71abb..1519782 100644
+--- a/lib/surface/sql/instances/delete.py
++++ b/lib/surface/sql/instances/delete.py
+@@ -83,7 +83,7 @@ class Delete(base.Command):
+       operation_ref = client.resource_parser.Create(
+           'sql.operations', operation=result.name, project=instance_ref.project)
+ 
+-      if args.async:
++      if args.async_:
+         return sql_client.operations.Get(
+             sql_messages.SqlOperationsGetRequest(
+                 project=operation_ref.project,
+diff --git a/lib/surface/sql/instances/export.py b/lib/surface/sql/instances/export.py
+index fbb4481..2611dde 100644
+--- a/lib/surface/sql/instances/export.py
++++ b/lib/surface/sql/instances/export.py
+@@ -125,7 +125,7 @@ class Export(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/failover.py b/lib/surface/sql/instances/failover.py
+index 4e06b6a..1b1751a 100644
+--- a/lib/surface/sql/instances/failover.py
++++ b/lib/surface/sql/instances/failover.py
+@@ -91,7 +91,7 @@ class Failover(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project,
+diff --git a/lib/surface/sql/instances/import.py b/lib/surface/sql/instances/import.py
+index 9e29fac..90bd854 100644
+--- a/lib/surface/sql/instances/import.py
++++ b/lib/surface/sql/instances/import.py
+@@ -125,7 +125,7 @@ class Import(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/patch.py b/lib/surface/sql/instances/patch.py
+index ad59755..3eb4e57 100644
+--- a/lib/surface/sql/instances/patch.py
++++ b/lib/surface/sql/instances/patch.py
+@@ -252,7 +252,7 @@ def RunBasePatchCommand(args, release_track):
+       operation=result_operation.name,
+       project=instance_ref.project)
+ 
+-  if args.async:
++  if args.async_:
+     return sql_client.operations.Get(
+         sql_messages.SqlOperationsGetRequest(
+             project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/promote_replica.py b/lib/surface/sql/instances/promote_replica.py
+index 045c311..5939f28 100644
+--- a/lib/surface/sql/instances/promote_replica.py
++++ b/lib/surface/sql/instances/promote_replica.py
+@@ -81,7 +81,7 @@ class PromoteReplica(base.Command):
+     operation_ref = client.resource_parser.Create(
+         'sql.operations', operation=result.name, project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/reset_ssl_config.py b/lib/surface/sql/instances/reset_ssl_config.py
+index fbe69bf..cd989e0 100644
+--- a/lib/surface/sql/instances/reset_ssl_config.py
++++ b/lib/surface/sql/instances/reset_ssl_config.py
+@@ -84,7 +84,7 @@ class ResetSslConfig(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/restart.py b/lib/surface/sql/instances/restart.py
+index 1e80b88..f86103a 100644
+--- a/lib/surface/sql/instances/restart.py
++++ b/lib/surface/sql/instances/restart.py
+@@ -85,7 +85,7 @@ class Restart(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/instances/restore_backup.py b/lib/surface/sql/instances/restore_backup.py
+index ca619cb..26b25c7 100644
+--- a/lib/surface/sql/instances/restore_backup.py
++++ b/lib/surface/sql/instances/restore_backup.py
+@@ -121,7 +121,7 @@ class RestoreBackup(base.Command):
+         operation=result_operation.name,
+         project=instance_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/ssl/client_certs/delete.py b/lib/surface/sql/ssl/client_certs/delete.py
+index 2f865c0..f7d16ed 100644
+--- a/lib/surface/sql/ssl/client_certs/delete.py
++++ b/lib/surface/sql/ssl/client_certs/delete.py
+@@ -104,7 +104,7 @@ class Delete(_BaseDelete, base.Command):
+     operation_ref = client.resource_parser.Create(
+         'sql.operations', operation=result.name, project=cert_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project,
+diff --git a/lib/surface/sql/ssl_certs/delete.py b/lib/surface/sql/ssl_certs/delete.py
+index 8461bd1..92ec753 100644
+--- a/lib/surface/sql/ssl_certs/delete.py
++++ b/lib/surface/sql/ssl_certs/delete.py
+@@ -104,7 +104,7 @@ class Delete(_BaseDelete, base.Command):
+     operation_ref = client.resource_parser.Create(
+         'sql.operations', operation=result.name, project=cert_ref.project)
+ 
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project,
+diff --git a/lib/surface/sql/users/create.py b/lib/surface/sql/users/create.py
+index a504b55..c3fd0ae 100644
+--- a/lib/surface/sql/users/create.py
++++ b/lib/surface/sql/users/create.py
+@@ -80,7 +80,7 @@ class Create(base.CreateCommand):
+         'sql.operations',
+         operation=result_operation.name,
+         project=instance_ref.project)
+-    if args.async:
++    if args.async_:
+       result = sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+@@ -89,6 +89,6 @@ class Create(base.CreateCommand):
+                                                     'Creating Cloud SQL user')
+       result = new_user
+ 
+-    log.CreatedResource(args.username, kind='user', is_async=args.async)
++    log.CreatedResource(args.username, kind='user', is_async=args.async_)
+ 
+     return result
+diff --git a/lib/surface/sql/users/delete.py b/lib/surface/sql/users/delete.py
+index a1657b8..8aed801 100644
+--- a/lib/surface/sql/users/delete.py
++++ b/lib/surface/sql/users/delete.py
+@@ -85,7 +85,7 @@ class Delete(base.DeleteCommand):
+         'sql.operations',
+         operation=result_operation.name,
+         project=instance_ref.project)
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))
+diff --git a/lib/surface/sql/users/set_password.py b/lib/surface/sql/users/set_password.py
+index a382baa..140e828 100644
+--- a/lib/surface/sql/users/set_password.py
++++ b/lib/surface/sql/users/set_password.py
+@@ -98,7 +98,7 @@ class SetPassword(base.CreateCommand):
+         'sql.operations',
+         operation=result_operation.name,
+         project=instance_ref.project)
+-    if args.async:
++    if args.async_:
+       return sql_client.operations.Get(
+           sql_messages.SqlOperationsGetRequest(
+               project=operation_ref.project, operation=operation_ref.operation))

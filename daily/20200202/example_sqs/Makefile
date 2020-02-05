@@ -4,6 +4,12 @@ NAME ?= hello
 	python $(shell echo $@*.py) --queue-url $$(make -s get)
 01:
 	python $(shell echo $@*.py) --queue-url $$(make -s get)
+02:
+	python $(shell echo $@*.py) --queue-url $$(make -s get)
+03:
+	LOGGING_LEVEL=INFO DEBUG=1 python $(shell echo $@*.py) --queue-url $$(make -s get)
+04:
+	LOGGING_LEVEL=INFO DEBUG=1 python $(shell echo $@*.py) --queue-url $$(make -s get)
 
 setup:
 	aws sqs create-queue --queue-name ${NAME}

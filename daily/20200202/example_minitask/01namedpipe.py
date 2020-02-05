@@ -1,4 +1,4 @@
-from minitask.worker.subprocessworker import Manager
+from minitask.worker.namedpipeworker import Manager
 from handofcats import as_command
 
 
@@ -18,4 +18,4 @@ def run():
         with m.open_writer_queue(uid) as q:
             for i in range(5):
                 q.put(i)
-            q.put(None)
+            # q.put(None)

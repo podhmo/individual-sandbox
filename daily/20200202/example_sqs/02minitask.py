@@ -4,6 +4,7 @@ import typing_extensions as tx
 import contextlib
 import threading
 import time
+import dataclasses
 from functools import partial
 import subprocess
 
@@ -18,39 +19,45 @@ from minitask.worker._subprocess import spawn_worker_process
 from minitask.worker._subprocess import wait_processes
 
 
+@dataclasses.dataclass
+class Config:
+    QueueUrl: str
+    AttributeNames: t.List[str] = dataclasses.field(
+        default_factory=lambda: ["SentTimestamp"]
+    )
+    MaxNumberOfMessages: int = 1
+    MessageAttributeNames: t.List[str] = dataclasses.field(
+        default_factory=lambda: ["All"]
+    )
+    WaitTimeSeconds: int = 5  # これを長めにする?
+    VisibilityTimeout: int = 1
+
+
 # TODO: aioboto3?
 class SQSQueue:
-    def __init__(self, queue_url: str):
-        self.queue_url = queue_url
+    def __init__(self, config: Config):
+        self.config = config
 
     @reify
     def sqs_client(self):
-        import boto3
-
         return boto3.client("sqs")
 
     def put(self, body):
         return self.sqs_client.send_message(QueueUrl=self.queue_url, MessageBody=body)
 
     def get(self) -> t.Tuple[t.Any, t.Callable[[], None]]:
-        # TODO: defaultの設定を変えられるように
-        response = self.sqs_client.receive_message(
-            QueueUrl=self.queue_url,
-            AttributeNames=["SentTimestamp"],
-            MaxNumberOfMessages=1,
-            MessageAttributeNames=["All"],
-            WaitTimeSeconds=5,  # これを長めにする?
-            VisibilityTimeout=1,
-        )
+        response = self.sqs_client.receive_message(**dataclasses.asdict(self.config))
+
         messages = response.get("Messages")  # xxx
         if messages is None:
             return None, lambda: None
+
         assert len(messages) == 1
         msg = messages[0]
 
         def _task_done():
             self.sqs_client.delete_message_batch(
-                QueueUrl=self.queue_url,
+                QueueUrl=self.config.QueueUrl,
                 Entries=[
                     {"Id": msg["MessageId"], "ReceiptHandle": msg["ReceiptHandle"]}
                 ],
@@ -60,30 +67,16 @@ class SQSQueue:
 
 
 class Manager:
-    class OptionDict(tx.TypedDict):
-        queue_url: str
-
-    @classmethod
-    def from_dict(cls, kwargs: Manager.OptionDict) -> Manager:
-
-        return cls(**kwargs)
-
-    def __init__(self, queue_url: str):
-        self.queue_url = queue_url
-        self.processes: t.List[subprocess.Popen[bytes]] = []
+    def __init__(self, config: t.Optional[Config]):
+        self.config = config or Config()
 
     def spawn(self, target: WorkerCallable, *, uid: str) -> subprocess.Popen[bytes]:
-        p = spawn_worker_process(
-            self, target, uid=uid, option_type=self.__class__.OptionDict
-        )
+        p = spawn_worker_process(self, target, uid=uid, config=self.config)
         self.processes.append(p)
         return p
 
     def __len__(self) -> int:
         return len(self.processes)
-
-    def wait(self, *, check: bool = True) -> None:
-        wait_processes(self.processes)
 
     def __enter__(self) -> Manager:
         return self
@@ -100,8 +93,15 @@ class Manager:
     def open_reader_queue(self, uid: str):
         from minitask.q import Q
 
-        internal = SQSQueue(self.queue_url)
+        internal = SQSQueue(self.config)
         yield Q(internal, adapter=None)
+
+    def wait(self, *, check: bool = True) -> None:
+        wait_processes(self.processes)
+
+    @reify
+    def processes(self) -> t.List[subprocess.Popen[bytes]]:
+        return []
 
 
 def use(m: Manager, uid: str) -> None:
@@ -124,6 +124,5 @@ def run(*, queue_url: str):
 
     th = threading.Thread(target=partial(provider, queue_url))
     th.start()
-
-    with Manager(queue_url) as m:
+    with Manager(Config(QueueUrl=queue_url)) as m:
         m.spawn(use, uid=queue_url)
