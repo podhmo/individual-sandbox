@@ -1,0 +1,10 @@
+{
+  "type": "structure",
+  "members": {
+    "QueueUrl": {
+      "shape": "String",
+      "documentation": "<p>The URL of the created Amazon SQS queue.</p>"
+    }
+  },
+  "documentation": "<p>Returns the <code>QueueUrl</code> attribute of the created queue.</p>"
+}

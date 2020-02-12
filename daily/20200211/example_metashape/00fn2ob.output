@@ -1,0 +1,4 @@
+class Hello:
+    name: str
+    age: int
+    nickname: t.Optional[str] = None

@@ -1,0 +1,324 @@
+[
+  {
+    "type": "hello"
+  },
+  {
+    "event_ts": "1581485792.000900",
+    "item": {
+      "channel": "C02M87T2E",
+      "ts": "1581485405.000500",
+      "type": "message"
+    },
+    "item_user": "U02M87T1J",
+    "reaction": "+1",
+    "ts": "1581485792.000900",
+    "type": "reaction_added",
+    "user": "U02M87T1J"
+  },
+  {
+    "event_ts": "1581485796.001000",
+    "item": {
+      "channel": "C02M87T2E",
+      "ts": "1581485405.000500",
+      "type": "message"
+    },
+    "item_user": "U02M87T1J",
+    "reaction": "eyes",
+    "ts": "1581485796.001000",
+    "type": "reaction_added",
+    "user": "U02M87T1J"
+  },
+  {
+    "channel": "C02M87T2E",
+    "event_ts": "1581485816.001200",
+    "hidden": true,
+    "message": {
+      "blocks": [
+        {
+          "block_id": "+gBlU",
+          "elements": [
+            {
+              "elements": [
+                {
+                  "type": "user",
+                  "user_id": "US5M2F9RV"
+                },
+                {
+                  "text": " ho yo",
+                  "type": "text"
+                }
+              ],
+              "type": "rich_text_section"
+            }
+          ],
+          "type": "rich_text"
+        }
+      ],
+      "client_msg_id": "b7525155-70c3-45a3-a5e8-09e22969cc8c",
+      "latest_reply": "1581485816.001100",
+      "replies": [
+        {
+          "ts": "1581485816.001100",
+          "user": "U02M87T1J"
+        }
+      ],
+      "reply_count": 1,
+      "reply_users": [
+        "U02M87T1J"
+      ],
+      "reply_users_count": 1,
+      "team": "T02M87T1A",
+      "text": "<@US5M2F9RV> ho yo",
+      "thread_ts": "1581485405.000500",
+      "ts": "1581485405.000500",
+      "type": "message",
+      "user": "U02M87T1J"
+    },
+    "subtype": "message_replied",
+    "ts": "1581485816.001200",
+    "type": "message"
+  },
+  {
+    "blocks": [
+      {
+        "block_id": "i0y8",
+        "elements": [
+          {
+            "elements": [
+              {
+                "text": "ok",
+                "type": "text"
+              }
+            ],
+            "type": "rich_text_section"
+          }
+        ],
+        "type": "rich_text"
+      }
+    ],
+    "channel": "C02M87T2E",
+    "client_msg_id": "d1694fcf-bcd4-4a43-8090-8be2464a486c",
+    "event_ts": "1581485816.001100",
+    "root": {
+      "blocks": [
+        {
+          "block_id": "+gBlU",
+          "elements": [
+            {
+              "elements": [
+                {
+                  "type": "user",
+                  "user_id": "US5M2F9RV"
+                },
+                {
+                  "text": " ho yo",
+                  "type": "text"
+                }
+              ],
+              "type": "rich_text_section"
+            }
+          ],
+          "type": "rich_text"
+        }
+      ],
+      "client_msg_id": "b7525155-70c3-45a3-a5e8-09e22969cc8c",
+      "team": "T02M87T1A",
+      "text": "<@US5M2F9RV> ho yo",
+      "ts": "1581485405.000500",
+      "type": "message",
+      "user": "U02M87T1J"
+    },
+    "source_team": "T02M87T1A",
+    "subtype": "thread_broadcast",
+    "text": "ok",
+    "thread_ts": "1581485405.000500",
+    "ts": "1581485816.001100",
+    "type": "message",
+    "user": "U02M87T1J",
+    "user_team": "T02M87T1A"
+  },
+  {
+    "channel": "C02M87T2E",
+    "event_ts": "1581485817.001300",
+    "hidden": true,
+    "message": {
+      "blocks": [
+        {
+          "block_id": "i0y8",
+          "elements": [
+            {
+              "elements": [
+                {
+                  "text": "ok",
+                  "type": "text"
+                }
+              ],
+              "type": "rich_text_section"
+            }
+          ],
+          "type": "rich_text"
+        }
+      ],
+      "client_msg_id": "d1694fcf-bcd4-4a43-8090-8be2464a486c",
+      "root": {
+        "blocks": [
+          {
+            "block_id": "+gBlU",
+            "elements": [
+              {
+                "elements": [
+                  {
+                    "type": "user",
+                    "user_id": "US5M2F9RV"
+                  },
+                  {
+                    "text": " ho yo",
+                    "type": "text"
+                  }
+                ],
+                "type": "rich_text_section"
+              }
+            ],
+            "type": "rich_text"
+          }
+        ],
+        "client_msg_id": "b7525155-70c3-45a3-a5e8-09e22969cc8c",
+        "latest_reply": "1581485816.001100",
+        "replies": [
+          {
+            "ts": "1581485816.001100",
+            "user": "U02M87T1J"
+          }
+        ],
+        "reply_count": 1,
+        "reply_users": [
+          "U02M87T1J"
+        ],
+        "reply_users_count": 1,
+        "team": "T02M87T1A",
+        "text": "<@US5M2F9RV> ho yo",
+        "thread_ts": "1581485405.000500",
+        "ts": "1581485405.000500",
+        "type": "message",
+        "user": "U02M87T1J"
+      },
+      "subtype": "thread_broadcast",
+      "text": "ok",
+      "thread_ts": "1581485405.000500",
+      "ts": "1581485816.001100",
+      "type": "message",
+      "user": "U02M87T1J"
+    },
+    "previous_message": {
+      "blocks": [
+        {
+          "block_id": "i0y8",
+          "elements": [
+            {
+              "elements": [
+                {
+                  "text": "ok",
+                  "type": "text"
+                }
+              ],
+              "type": "rich_text_section"
+            }
+          ],
+          "type": "rich_text"
+        }
+      ],
+      "client_msg_id": "d1694fcf-bcd4-4a43-8090-8be2464a486c",
+      "root": {
+        "blocks": [
+          {
+            "block_id": "+gBlU",
+            "elements": [
+              {
+                "elements": [
+                  {
+                    "type": "user",
+                    "user_id": "US5M2F9RV"
+                  },
+                  {
+                    "text": " ho yo",
+                    "type": "text"
+                  }
+                ],
+                "type": "rich_text_section"
+              }
+            ],
+            "type": "rich_text"
+          }
+        ],
+        "client_msg_id": "b7525155-70c3-45a3-a5e8-09e22969cc8c",
+        "latest_reply": "1581485816.001100",
+        "replies": [
+          {
+            "ts": "1581485816.001100",
+            "user": "U02M87T1J"
+          }
+        ],
+        "reply_count": 1,
+        "reply_users": [
+          "U02M87T1J"
+        ],
+        "reply_users_count": 1,
+        "team": "T02M87T1A",
+        "text": "<@US5M2F9RV> ho yo",
+        "thread_ts": "1581485405.000500",
+        "ts": "1581485405.000500",
+        "type": "message",
+        "user": "U02M87T1J"
+      },
+      "subtype": "thread_broadcast",
+      "text": "ok",
+      "thread_ts": "1581485405.000500",
+      "ts": "1581485816.001100",
+      "type": "message",
+      "user": "U02M87T1J"
+    },
+    "subtype": "message_changed",
+    "ts": "1581485817.001300",
+    "type": "message"
+  },
+  {
+    "channel": "C02M87T2E",
+    "type": "user_typing",
+    "user": "U02M87T1J"
+  },
+  {
+    "channel": "C02M87T2E",
+    "type": "user_typing",
+    "user": "U02M87T1J"
+  },
+  {
+    "blocks": [
+      {
+        "block_id": "Rps",
+        "elements": [
+          {
+            "elements": [
+              {
+                "text": "hoi",
+                "type": "text"
+              }
+            ],
+            "type": "rich_text_section"
+          }
+        ],
+        "type": "rich_text"
+      }
+    ],
+    "channel": "C02M87T2E",
+    "client_msg_id": "946c2563-5fa6-4e1b-8b84-8e6107f6624b",
+    "event_ts": "1581485826.001600",
+    "source_team": "T02M87T1A",
+    "suppress_notification": false,
+    "team": "T02M87T1A",
+    "text": "hoi",
+    "ts": "1581485826.001600",
+    "type": "message",
+    "user": "U02M87T1J",
+    "user_team": "T02M87T1A"
+  }
+]

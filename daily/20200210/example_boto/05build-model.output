@@ -1,0 +1,332 @@
+from __future__ import annotations
+
+
+# operations
+class SQS:
+    def AddPermission(input: AddPermissionRequest):
+        ...
+
+    def ChangeMessageVisibility(input: ChangeMessageVisibilityRequest):
+        ...
+
+    def ChangeMessageVisibilityBatch(input: ChangeMessageVisibilityBatchRequest) -> ChangeMessageVisibilityBatchResult:
+        ...
+
+    def CreateQueue(input: CreateQueueRequest) -> CreateQueueResult:
+        ...
+
+    def DeleteMessage(input: DeleteMessageRequest):
+        ...
+
+    def DeleteMessageBatch(input: DeleteMessageBatchRequest) -> DeleteMessageBatchResult:
+        ...
+
+    def DeleteQueue(input: DeleteQueueRequest):
+        ...
+
+    def GetQueueAttributes(input: GetQueueAttributesRequest) -> GetQueueAttributesResult:
+        ...
+
+    def GetQueueUrl(input: GetQueueUrlRequest) -> GetQueueUrlResult:
+        ...
+
+    def ListDeadLetterSourceQueues(input: ListDeadLetterSourceQueuesRequest) -> ListDeadLetterSourceQueuesResult:
+        ...
+
+    def ListQueueTags(input: ListQueueTagsRequest) -> ListQueueTagsResult:
+        ...
+
+    def ListQueues(input: ListQueuesRequest) -> ListQueuesResult:
+        ...
+
+    def PurgeQueue(input: PurgeQueueRequest):
+        ...
+
+    def ReceiveMessage(input: ReceiveMessageRequest) -> ReceiveMessageResult:
+        ...
+
+    def RemovePermission(input: RemovePermissionRequest):
+        ...
+
+    def SendMessage(input: SendMessageRequest) -> SendMessageResult:
+        ...
+
+    def SendMessageBatch(input: SendMessageBatchRequest) -> SendMessageBatchResult:
+        ...
+
+    def SetQueueAttributes(input: SetQueueAttributesRequest):
+        ...
+
+    def TagQueue(input: TagQueueRequest):
+        ...
+
+    def UntagQueue(input: UntagQueueRequest):
+        ...
+
+
+
+# shapes
+class SQS:
+    class AWSAccountIdList:
+        pass
+
+    class ActionNameList:
+        pass
+
+    class AddPermissionRequest:
+        pass
+
+    class AttributeNameList:
+        pass
+
+    class BatchEntryIdsNotDistinct:
+        pass
+
+    class BatchRequestTooLong:
+        pass
+
+    class BatchResultErrorEntry:
+        pass
+
+    class BatchResultErrorEntryList:
+        pass
+
+    class Binary:
+        pass
+
+    class BinaryList:
+        pass
+
+    class Boolean:
+        pass
+
+    class ChangeMessageVisibilityBatchRequest:
+        pass
+
+    class ChangeMessageVisibilityBatchRequestEntry:
+        pass
+
+    class ChangeMessageVisibilityBatchRequestEntryList:
+        pass
+
+    class ChangeMessageVisibilityBatchResult:
+        pass
+
+    class ChangeMessageVisibilityBatchResultEntry:
+        pass
+
+    class ChangeMessageVisibilityBatchResultEntryList:
+        pass
+
+    class ChangeMessageVisibilityRequest:
+        pass
+
+    class CreateQueueRequest:
+        pass
+
+    class CreateQueueResult:
+        pass
+
+    class DeleteMessageBatchRequest:
+        pass
+
+    class DeleteMessageBatchRequestEntry:
+        pass
+
+    class DeleteMessageBatchRequestEntryList:
+        pass
+
+    class DeleteMessageBatchResult:
+        pass
+
+    class DeleteMessageBatchResultEntry:
+        pass
+
+    class DeleteMessageBatchResultEntryList:
+        pass
+
+    class DeleteMessageRequest:
+        pass
+
+    class DeleteQueueRequest:
+        pass
+
+    class EmptyBatchRequest:
+        pass
+
+    class GetQueueAttributesRequest:
+        pass
+
+    class GetQueueAttributesResult:
+        pass
+
+    class GetQueueUrlRequest:
+        pass
+
+    class GetQueueUrlResult:
+        pass
+
+    class Integer:
+        pass
+
+    class InvalidAttributeName:
+        pass
+
+    class InvalidBatchEntryId:
+        pass
+
+    class InvalidIdFormat:
+        pass
+
+    class InvalidMessageContents:
+        pass
+
+    class ListDeadLetterSourceQueuesRequest:
+        pass
+
+    class ListDeadLetterSourceQueuesResult:
+        pass
+
+    class ListQueueTagsRequest:
+        pass
+
+    class ListQueueTagsResult:
+        pass
+
+    class ListQueuesRequest:
+        pass
+
+    class ListQueuesResult:
+        pass
+
+    class Message:
+        pass
+
+    class MessageAttributeName:
+        pass
+
+    class MessageAttributeNameList:
+        pass
+
+    class MessageAttributeValue:
+        pass
+
+    class MessageBodyAttributeMap:
+        pass
+
+    class MessageBodySystemAttributeMap:
+        pass
+
+    class MessageList:
+        pass
+
+    class MessageNotInflight:
+        pass
+
+    class MessageSystemAttributeMap:
+        pass
+
+    class MessageSystemAttributeName:
+        pass
+
+    class MessageSystemAttributeNameForSends:
+        pass
+
+    class MessageSystemAttributeValue:
+        pass
+
+    class OverLimit:
+        pass
+
+    class PurgeQueueInProgress:
+        pass
+
+    class PurgeQueueRequest:
+        pass
+
+    class QueueAttributeMap:
+        pass
+
+    class QueueAttributeName:
+        pass
+
+    class QueueDeletedRecently:
+        pass
+
+    class QueueDoesNotExist:
+        pass
+
+    class QueueNameExists:
+        pass
+
+    class QueueUrlList:
+        pass
+
+    class ReceiptHandleIsInvalid:
+        pass
+
+    class ReceiveMessageRequest:
+        pass
+
+    class ReceiveMessageResult:
+        pass
+
+    class RemovePermissionRequest:
+        pass
+
+    class SendMessageBatchRequest:
+        pass
+
+    class SendMessageBatchRequestEntry:
+        pass
+
+    class SendMessageBatchRequestEntryList:
+        pass
+
+    class SendMessageBatchResult:
+        pass
+
+    class SendMessageBatchResultEntry:
+        pass
+
+    class SendMessageBatchResultEntryList:
+        pass
+
+    class SendMessageRequest:
+        pass
+
+    class SendMessageResult:
+        pass
+
+    class SetQueueAttributesRequest:
+        pass
+
+    class String:
+        pass
+
+    class StringList:
+        pass
+
+    class TagKey:
+        pass
+
+    class TagKeyList:
+        pass
+
+    class TagMap:
+        pass
+
+    class TagQueueRequest:
+        pass
+
+    class TagValue:
+        pass
+
+    class TooManyEntriesInBatchRequest:
+        pass
+
+    class UnsupportedOperation:
+        pass
+
+    class UntagQueueRequest:
+        pass
