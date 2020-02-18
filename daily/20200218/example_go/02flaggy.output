@@ -1,0 +1,8 @@
+main
+
+  Flags: 
+       --version   Displays the program version string.
+    -h --help      Displays help with available flag, subcommand, and positional value parameters.
+    -n           number of something (default: 0)
+       --name      name of something
+

@@ -1,0 +1,13 @@
+main: error: [33munknown short flag '-h'[0m
+usage: main [<flags>]
+
+-
+
+Flags:
+      --help      Show context-sensitive help (also try --help-long and
+                  --help-man).
+  -n, --number=0  number of something
+      --name=""   name of something
+      --version   Show application version.
+
+exit status 1
