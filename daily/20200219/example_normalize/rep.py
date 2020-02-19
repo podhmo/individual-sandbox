@@ -8,4 +8,4 @@ for line in sys.stdin:
     m = rx.search(line)
     if m is None:
         continue
-    print(f"git mv {line} {rx.sub('@', line)}")
+    print(f"git mv '{line}' '{rx.sub('@', line)}'")
