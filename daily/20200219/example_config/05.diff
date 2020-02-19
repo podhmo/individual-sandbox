@@ -1,0 +1,20 @@
+--- 03config/output.txt	2020-02-19 20:07:00.000000000 +0900
++++ 04overwrite-config/output.txt	2020-02-19 20:07:05.000000000 +0900
+@@ -3,7 +3,7 @@
+   wordpress:
+     image: wordpress
+     ports:
+-    - '8080:80'
++    - '9090:80'
+     networks:
+     - overlay
+     deploy:
+@@ -18,7 +18,7 @@
+     - overlay
+     deploy:
+       mode: replicated
+-      replicas: 2
++      replicas: 5
+       endpoint_mode: dnsrr
+ volumes:
+   db-data: null

@@ -1,0 +1,24 @@
+--- 00config/output.txt	2020-02-19 20:01:01.000000000 +0900
++++ 01overwrite-config/output.txt	2020-02-19 20:01:01.000000000 +0900
+@@ -1,10 +1,10 @@
+-conf.Config{
++&conf.Config{
+   Version:  "3.7",
+   Services: conf.Services{
+     Wordpress: conf.Wordpress{
+       Image: "wordpress",
+       Ports: []string{
+-        "8080:80",
++        "9090:80",
+       },
+       Networks: []string{
+         "overlay",
+@@ -25,7 +25,7 @@
+       },
+       Deploy: conf.Deploy{
+         Mode:         "replicated",
+-        Replicas:     2,
++        Replicas:     5,
+         EndpointMode: "dnsrr",
+       },
+     },

@@ -1,0 +1,14 @@
+{
+  "services": {
+    "wordpress": {
+      "ports": [
+        "9090:80"
+      ]
+    },
+    "mysql": {
+      "deploy": {
+        "replicas": 5
+      }
+    }
+  }
+}

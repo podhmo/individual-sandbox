@@ -1,0 +1,39 @@
+&conf.Config{
+  Version:  "3.7",
+  Services: conf.Services{
+    Wordpress: conf.Wordpress{
+      Image: "wordpress",
+      Ports: []string{
+        "9090:80",
+      },
+      Networks: []string{
+        "overlay",
+      },
+      Deploy: conf.Deploy{
+        Mode:         "replicated",
+        Replicas:     2,
+        EndpointMode: "vip",
+      },
+    },
+    Mysql: conf.Mysql{
+      Image:   "mysql",
+      Volumes: []string{
+        "db-data:/var/lib/mysql/data",
+      },
+      Networks: []string{
+        "overlay",
+      },
+      Deploy: conf.Deploy{
+        Mode:         "replicated",
+        Replicas:     5,
+        EndpointMode: "dnsrr",
+      },
+    },
+  },
+  Volumes: conf.Volumes{
+    DbData: nil,
+  },
+  Networks: conf.Networks{
+    Overlay: nil,
+  },
+}
