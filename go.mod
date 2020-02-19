@@ -5,7 +5,10 @@ go 1.12
 require (
 	github.com/99designs/gqlgen v0.9.3 // indirect
 	github.com/Cside/jsondiff v0.0.0-20180209072652-0e50d980b458 // indirect
+	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/agnivade/levenshtein v1.0.2 // indirect
+	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
+	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
@@ -20,6 +23,7 @@ require (
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
 	github.com/hashicorp/yamux v0.0.0-20190923154419-df201c70410d // indirect
 	github.com/heroku/x v0.0.11
+	github.com/integrii/flaggy v1.4.4 // indirect
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/k0kubun/pp v3.0.1+incompatible
@@ -29,6 +33,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
 	github.com/opentracing/opentracing-go v1.1.0 // indirect
+	github.com/osamingo/jsonrpc v0.0.0-20200201080245-1cc375279e6f // indirect
 	github.com/pkg/errors v0.8.2-0.20190227000051-27936f6d90f9
 	github.com/podhmo/ctxlog/zapctxlog v0.3.0 // indirect
 	github.com/podhmo/go-rfc3339 v0.1.0
@@ -46,6 +51,7 @@ require (
 	golang.org/x/tools v0.0.0-20191101200257-8dbcdeb83d3f
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
+	gopkg.in/alecthomas/kingpin.v2 v2.2.6 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )

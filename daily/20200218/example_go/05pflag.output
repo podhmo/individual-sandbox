@@ -1,0 +1,5 @@
+Usage of /var/folders/b7/2rk7xp2d0hb2r21zbzjwxb_m0000gn/T/go-build945806911/b001/exe/main:
+  -n, --- int         number of something
+      --name string   name of something
+pflag: help requested
+exit status 2
