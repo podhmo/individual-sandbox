@@ -1,0 +1,25 @@
+from prestring.python import PythonModule
+
+
+def gen(*, m=None, indent='    '):
+    m = m or PythonModule(indent=indent)
+
+    m.import_('asyncio')
+    m.import_('logging')
+    m.from_('handofcats', 'as_command')
+    m.stmt('logger = logging.getLogger(__name__)')
+    m.stmt('@as_command')
+    with m.def_('run'):
+        with m.def_('run', async_=True):
+            m.stmt('logger.info("hello ...")')
+            m.stmt('await asyncio.sleep(0.1)')
+            m.stmt('logger.info("... world")')
+
+        m.stmt('asyncio.get_event_loop().run_until_complete(run())')
+
+    return m
+
+
+if __name__ == "__main__":
+    m = gen(indent='    ')
+    print(m)

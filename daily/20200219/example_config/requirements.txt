@@ -1,2 +1,3 @@
 dictknife[yaml]
 handofcats
+hydra-core

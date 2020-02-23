@@ -1,0 +1,8 @@
+import dataclasses
+@dataclasses.dataclass
+class Person:
+    name: str
+    age: int
+
+
+Person(name='foo', age=20)

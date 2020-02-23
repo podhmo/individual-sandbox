@@ -1,0 +1,27 @@
+--- 03use-import.py	2020-02-23 13:37:24.000000000 +0900
++++ 04use-import-symbol.py	2020-02-23 13:36:11.000000000 +0900
+@@ -2,15 +2,19 @@
+ 
+ m = Module()
+ 
+-m.import_("re")
+-m.import_("sys")
++re = m.import_("re")
++sys = m.import_("sys")
++
+ m.sep()
+ m.stmt(
+-    "pattern = re.compile({!r}, re.IGNORECASE)",
+-    r"^(?P<label>DEBUG|INFO|WARNING|ERROR|CRITICAL):\s*(?P<message>\S+)",
++    "pattern = {}",
++    re.compile(
++        r"^(?P<label>DEBUG|INFO|WARNING|ERROR|CRITICAL):\s*(?P<message>\S+)",
++        re.IGNORECASE,
++    ),
+ )
+ 
+-with m.for_("line", "sys.stdin"):
++with m.for_("line", sys.stdin):
+     m.stmt("m = pattern.search(line)")
+     with m.if_("m is not None"):
+         m.stmt("print(m.groupdict())")

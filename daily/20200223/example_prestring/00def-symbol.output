@@ -1,0 +1,6 @@
+def hello(name):
+    print('hello')
+
+
+hello('foo')
+hello('bar')

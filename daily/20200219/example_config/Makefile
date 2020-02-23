@@ -18,3 +18,7 @@
 
 05:
 	diff -u $(shell echo 03*/)output.txt $(shell echo 04*/)output.txt > $@.diff || exit 0
+
+06:
+	python $(shell echo $@*/main.py)
+	python $(shell echo $@*/main.py) db.pass=oyoyo
