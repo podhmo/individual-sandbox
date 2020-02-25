@@ -14,8 +14,9 @@ $ go build -n
 
 - linkshared
 - buildmode shared
-- https://docs.google.com/document/d/1nr-TQHw_er6GOQRsF6T43GGhFDelrAP0NqSS_00RgZQ/edit
 - https://www.slideshare.net/david74chou/golang-execution-modes
+- https://docs.google.com/document/d/1nr-TQHw_er6GOQRsF6T43GGhFDelrAP0NqSS_00RgZQ/edit
+
 
 ```
 go build -buildmode shared -linkshared
