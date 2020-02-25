@@ -29,3 +29,26 @@ monogusaのと起動してたっけ？
 ## python aws
 
 - receiveのときにgroupIDは見れないのだっけ？そうっぽい
+
+## flutter web
+
+久しぶりに環境作成を
+- https://flutter.dev/docs/get-started/install
+- https://flutter.dev/docs/get-started/web
+
+```
+unzip ~/Downloads/flutter_macos_v1.12.13+hotfix.7-stable.zip
+export PATH="$PATH:`pwd`/flutter/bin"
+
+flutter doctor
+flutter precache
+
+flutter channel beta
+flutter upgrade
+flutter config --enable-web
+```
+
+## openapi docのURLをいい感じに
+
+やりたい
+
