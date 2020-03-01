@@ -1,0 +1,12 @@
+--- 01update_check.py	2020-03-01 15:37:07.000000000 +0900
++++ 02update_check.py	2020-03-01 15:37:22.000000000 +0900
+@@ -31,7 +31,8 @@
+ def main():
+     async def run():
+         fut = asyncio.ensure_future(update_check())
+-        run_main()
++        loop = asyncio.get_event_loop()
++        await loop.run_in_executor(None, run_main)
+         update_version = await fut
+         if update_version is not None:
+             print(f"A new release of gh is available: xxx → {update_version}")
