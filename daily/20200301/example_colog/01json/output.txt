@@ -1,0 +1,5 @@
+{"level":"debug","time":"2020-03-01T20:38:57+09:00","file":"main.go","line":22,"message":"logging this to json"}
+{"level":"info","time":"2020-03-01T20:38:57+09:00","file":"main.go","line":23,"message":"logging this to json"}
+{"level":"warning","time":"2020-03-01T20:38:57+09:00","file":"main.go","line":24,"message":"with fields","fields":{"foo":"bar"}}
+{"level":"error","time":"2020-03-01T20:38:57+09:00","file":"main.go","line":25,"message":"with fields","fields":{"foo":"bar"}}
+{"level":"alert","time":"2020-03-01T20:38:57+09:00","file":"main.go","line":26,"message":"with fields","fields":{"foo":"bar"}}

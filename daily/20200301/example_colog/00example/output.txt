@@ -1,0 +1,6 @@
+[ trace ] 2020/03/01 main.go:18: logging this to stdout
+[ debug ] 2020/03/01 main.go:19: logging this to stdout
+[  info ] 2020/03/01 main.go:20: logging this to stdout
+[  warn ] 2020/03/01 main.go:21: with fields  foo=bar
+[ error ] 2020/03/01 main.go:22: with fields  foo=bar
+[ alert ] 2020/03/01 main.go:23: with fields  foo=bar
