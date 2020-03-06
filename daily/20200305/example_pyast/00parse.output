@@ -1,0 +1,13 @@
+1
+Traceback (most recent call last):
+  File "00parse.py", line 4, in <module>
+    print(ast.literal_eval("1 + 2"))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ast.py", line 96, in literal_eval
+    return _convert(node_or_string)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ast.py", line 95, in _convert
+    return _convert_signed_num(node)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ast.py", line 74, in _convert_signed_num
+    return _convert_num(node)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/ast.py", line 66, in _convert_num
+    raise ValueError('malformed node or string: ' + repr(node))
+ValueError: malformed node or string: <_ast.BinOp object at 0x10a1b04f0>

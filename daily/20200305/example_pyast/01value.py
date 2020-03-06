@@ -9,7 +9,7 @@ class StrictVisitor(ast.NodeVisitor):
         self.env = env or {}
 
     # override
-    def generic_visit(self, node):
+    def generic_visit(self, node: ast.AST):
         method = "visit_" + node.__class__.__name__
         raise NotImplementedError(method)
 
@@ -38,6 +38,7 @@ class StrictVisitor(ast.NodeVisitor):
         self.visit(node.left)
         self.visit(node.right)
         left, right = self.stack.pop()
+
         if isinstance(node.op, ast.Add):
             self.stack[-1].append(left + right)
         elif isinstance(node.op, ast.Mult):
@@ -45,8 +46,33 @@ class StrictVisitor(ast.NodeVisitor):
         else:
             raise NotImplementedError(f"{node.op}")
 
+    def visit_BoolOp(self, node: ast.BoolOp):
+        # short circuit?
+        debug(
+            f"""trace: {"   " * len(self.stack)} ({_repr(node)} {_repr(node.op)} {[_repr(v) for v in node.values]})"""
+        )
+        self.stack.append([])
+        self.visit(node.values[0])
+        l_value = self.stack[-1].pop()
+
+        if isinstance(node.op, ast.And):
+            op = lambda x, y: x and y
+        elif isinstance(node.op, ast.Or):
+            op = lambda x, y: x or y
+        else:
+            raise NotImplementedError(f"{node.op}")
+
+        for v in node.values[1:]:
+            self.visit(v)
+            r_value = self.stack[-1].pop()
+            l_value = op(l_value, r_value)
+
+        assert not self.stack.pop()  # empty list
+        self.stack[-1].append(l_value)
+
     def visit_Compare(self, node: ast.Compare):
-        # todo:
+        # short circuit?
+
         debug(
             f"""trace: {"   " * len(self.stack)} ({_repr(node)} {[_repr(x) for x in node.ops]} {[_repr(x) for x in node.comparators]})"""
         )
@@ -79,8 +105,59 @@ class StrictVisitor(ast.NodeVisitor):
             else:
                 raise NotImplementedError(f"{op}")
             l_val = r_val
-        # short circuit?
+
+        assert not self.stack.pop()  # empty list
         self.stack[-1].append(all(result))
+
+    def visit_Subscript(self, node: ast.Subscript):
+        debug(
+            f"""trace: {"   " * len(self.stack)} ({_repr(node)} {_repr(node.value)} {_repr(node.slice)})"""
+        )
+
+        # e.g. d["x"]
+        self.stack.append([])
+        self.visit(node.value)
+        c = self.stack[-1].pop()
+        self.visit(node.slice.value)
+        k = self.stack[-1].pop()
+
+        assert not self.stack.pop()
+        self.stack[-1].append(c[k])
+
+    def visit_Attribute(self, node: ast.Attribute):
+        debug(
+            f"""trace: {"   " * len(self.stack)} ({_repr(node)} {_repr(node.value)} {_repr(node.attr)})"""
+        )
+
+        # e.g. ob.x
+        self.stack.append([])
+        self.visit(node.value)
+        ob = self.stack[-1].pop()
+
+        assert not self.stack.pop()
+        self.stack[-1].append(getattr(ob, node.attr))
+
+    def visit_Call(self, node: ast.Call):
+        debug(
+            f"""trace: {"   " * len(self.stack)} ({_repr(node)} {_repr(node.func)} {_repr(node.args)} {_repr(node.keywords)})"""
+        )
+        self.stack.append([])
+        self.visit(node.func)
+        fn = self.stack[-1].pop()
+
+        for x in node.args:
+            self.visit(x)
+        args = self.stack.pop()
+
+        self.stack.append([])
+        for keyword in node.keywords:
+            # keyword
+            self.visit(keyword.value)
+            v = self.stack[-1].pop()
+            self.stack[-1].append((keyword.arg, v))
+        kwargs = dict(self.stack.pop())
+
+        self.stack[-1].append(fn(*args, **kwargs))
 
 
 def _repr(node: ast.AST):
@@ -116,4 +193,21 @@ def main():
     run("0 < x < 10", env={"x": 10})
     run("10 < x <= 100", env={"x": 10})
     # BoolOp
-    # run("0 < x and x <= 10", env={"x": 10})
+    run("True and True")
+    run("True and False")
+    run("False or True")
+    run("False or False")
+    run("0 < x and x <= 10", env={"x": 10})
+    # dict
+    run("d['x'] + d['y']", env={"d": {"x": 10, "y": 20}})
+
+    # object
+    class ob:
+        x = 10
+        y = 20
+
+    run("ob.x * ob.y", env={"ob": ob})
+
+    # call
+    run("x.center(10)", env={"x": "foo"})
+    run("x.split(sep='/')", env={"x": "foo/bar/boo"})

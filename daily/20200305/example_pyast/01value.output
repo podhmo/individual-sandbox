@@ -1,0 +1,201 @@
+----------------------------------------
+input : 1
+trace:     (Module)
+trace:     (Expr)
+trace:     (Constant)
+output: [[1]]
+----------------------------------------
+input : 1 + 1
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Constant Constant)
+trace:        (Constant)
+trace:        (Constant)
+output: [[2]]
+----------------------------------------
+input : 2 * 3
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Constant Constant)
+trace:        (Constant)
+trace:        (Constant)
+output: [[6]]
+----------------------------------------
+input : 2 * (3 + 1)
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Constant BinOp)
+trace:        (Constant)
+trace:        (BinOp Constant Constant)
+trace:           (Constant)
+trace:           (Constant)
+output: [[8]]
+----------------------------------------
+input : (2 * 3) + 1
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp BinOp Constant)
+trace:        (BinOp Constant Constant)
+trace:           (Constant)
+trace:           (Constant)
+trace:        (Constant)
+output: [[7]]
+----------------------------------------
+input : x
+trace:     (Module)
+trace:     (Expr)
+trace:     (Name)
+output: [[10]]
+----------------------------------------
+input : x + 1
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Name Constant)
+trace:        (Name)
+trace:        (Constant)
+output: [[11]]
+----------------------------------------
+input : (x + 1) * x
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp BinOp Name)
+trace:        (BinOp Name Constant)
+trace:           (Name)
+trace:           (Constant)
+trace:        (Name)
+output: [[110]]
+----------------------------------------
+input : x * 3
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Name Constant)
+trace:        (Name)
+trace:        (Constant)
+output: [['foofoofoo']]
+----------------------------------------
+input : x > 10
+trace:     (Module)
+trace:     (Expr)
+trace:     (Compare ['Gt'] ['Constant'])
+trace:        (Name)
+trace:        (Constant)
+output: [[False]]
+----------------------------------------
+input : x >= 10
+trace:     (Module)
+trace:     (Expr)
+trace:     (Compare ['GtE'] ['Constant'])
+trace:        (Name)
+trace:        (Constant)
+output: [[True]]
+----------------------------------------
+input : 0 < x <= 10
+trace:     (Module)
+trace:     (Expr)
+trace:     (Compare ['Lt', 'LtE'] ['Name', 'Constant'])
+trace:        (Constant)
+trace:        (Name)
+trace:        (Constant)
+output: [[True]]
+----------------------------------------
+input : 0 < x < 10
+trace:     (Module)
+trace:     (Expr)
+trace:     (Compare ['Lt', 'Lt'] ['Name', 'Constant'])
+trace:        (Constant)
+trace:        (Name)
+trace:        (Constant)
+output: [[False]]
+----------------------------------------
+input : 10 < x <= 100
+trace:     (Module)
+trace:     (Expr)
+trace:     (Compare ['Lt', 'LtE'] ['Name', 'Constant'])
+trace:        (Constant)
+trace:        (Name)
+trace:        (Constant)
+output: [[False]]
+----------------------------------------
+input : True and True
+trace:     (Module)
+trace:     (Expr)
+trace:     (BoolOp And ['Constant', 'Constant'])
+trace:        (Constant)
+trace:        (Constant)
+output: [[True]]
+----------------------------------------
+input : True and False
+trace:     (Module)
+trace:     (Expr)
+trace:     (BoolOp And ['Constant', 'Constant'])
+trace:        (Constant)
+trace:        (Constant)
+output: [[False]]
+----------------------------------------
+input : False or True
+trace:     (Module)
+trace:     (Expr)
+trace:     (BoolOp Or ['Constant', 'Constant'])
+trace:        (Constant)
+trace:        (Constant)
+output: [[True]]
+----------------------------------------
+input : False or False
+trace:     (Module)
+trace:     (Expr)
+trace:     (BoolOp Or ['Constant', 'Constant'])
+trace:        (Constant)
+trace:        (Constant)
+output: [[False]]
+----------------------------------------
+input : 0 < x and x <= 10
+trace:     (Module)
+trace:     (Expr)
+trace:     (BoolOp And ['Compare', 'Compare'])
+trace:        (Compare ['Lt'] ['Name'])
+trace:           (Constant)
+trace:           (Name)
+trace:        (Compare ['LtE'] ['Constant'])
+trace:           (Name)
+trace:           (Constant)
+output: [[True]]
+----------------------------------------
+input : d['x'] + d['y']
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Subscript Subscript)
+trace:        (Subscript Name Index)
+trace:           (Name)
+trace:           (Constant)
+trace:        (Subscript Name Index)
+trace:           (Name)
+trace:           (Constant)
+output: [[30]]
+----------------------------------------
+input : ob.x * ob.y
+trace:     (Module)
+trace:     (Expr)
+trace:     (BinOp Attribute Attribute)
+trace:        (Attribute Name str)
+trace:           (Name)
+trace:        (Attribute Name str)
+trace:           (Name)
+output: [[200]]
+----------------------------------------
+input : x.center(10)
+trace:     (Module)
+trace:     (Expr)
+trace:     (Call Attribute list list)
+trace:        (Attribute Name str)
+trace:           (Name)
+trace:        (Constant)
+output: [['   foo    ']]
+----------------------------------------
+input : x.split(sep='/')
+trace:     (Module)
+trace:     (Expr)
+trace:     (Call Attribute list list)
+trace:        (Attribute Name str)
+trace:           (Name)
+trace:        (Constant)
+output: [[['foo', 'bar', 'boo']]]
