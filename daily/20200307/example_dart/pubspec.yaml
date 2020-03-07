@@ -1,0 +1,4 @@
+name: m
+dependencies:
+  test:
+# dev dependencies (for test)
