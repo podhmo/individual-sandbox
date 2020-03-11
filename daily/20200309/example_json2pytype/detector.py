@@ -1,5 +1,5 @@
 import typing as t
-from functools import singledispatchmethod
+from functools import partial
 from collections import defaultdict
 
 # todo: nullable
@@ -22,6 +22,11 @@ class Object:
         self.props = props
         self._raw = raw
         self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
+
+    def clone(self) -> "Object":
+        new = self.__class__(self.sig, path=self.path, props=self.props, raw=self._raw)
+        new._others = self._others
+        return new
 
     @property
     def size(self):
@@ -52,8 +57,19 @@ class Container:
     def size(self):
         return len(self._raw)
 
+    def clone(self) -> "Container":
+        new = self.__class__(
+            self.sig, path=self.path, base=self.base, item=self.item, raw=self._raw
+        )
+        new._others = self._others
+        return new
+
     def __repr__(self):
         return f"<Container base={self.base} size={self.size} path={self.path!r}>"
+
+
+ListC = partial(Container, base=t.List)
+OptionalC = partial(Container, base=t.Optional)
 
 
 class Primitive:
@@ -69,10 +85,16 @@ class Primitive:
         self.path = path
         self.type = type_
         self._raw = raw
+        self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
 
     @property
     def size(self):
         return 0
+
+    def clone(self) -> "Primitive":
+        new = self.__class__(self.sig, path=self.path, type_=self.type, raw=self._raw)
+        new._others = self._others
+        return new
 
     def __repr__(self):
         return f"<Primitive type={self.type!r} path={self.path!r}>"
@@ -112,6 +134,60 @@ class Detector:
             return self.detect_list(d, path=path, result=result)
         else:
             return self.detect_primitive(d, path=path, result=result)
+
+    def detect_dict_many(
+        self,
+        xs: t.Collection[t.Dict[JSONType, JSONType]],
+        *,
+        path: Path,
+        result: Result,
+    ) -> TypeInfo:
+        seen = set()
+
+        modified = False
+        ma = ZERO
+
+        # TODO: update signature?
+        # TODO: union
+        if len(xs) > 0:
+            ma = self.detect_dict(xs[0], path=path, result=result)
+            seen.add(id(ma))
+
+        for x in xs[1:]:
+            info = self.detect_dict(x, path=path, result=result)
+
+            if id(info) in seen:
+                continue
+            seen.add(id(info))
+
+            if not modified:
+                modified = True
+                ma = ma.clone()
+
+            if not isinstance(info, Object):
+                raise RuntimeError(f"{type(info)} is not Object")
+
+            for k, val in info.props.items():
+                ma_val = ma.props.get(k)
+
+                if ma_val is None:
+                    ma.props[k] = OptionalC(None, path=val.path, item=val, raw=val._raw)
+                elif getattr(val, "base", None) is t.Optional:  # OptionalC
+                    if getattr(ma_val, "base", None) is None:
+                        assert ma_val == val.item
+                        ma.props[k] = val
+            for k, ma_val in ma.props.items():
+                val = info.props.get(k)
+                if val is None:
+                    if getattr(ma_val, "base", None) is None:
+                        ma.props[k] = OptionalC(
+                            None, path=ma_val.path, item=ma_val, raw=ma_val._raw
+                        )
+
+        if modified:
+            uid = result._uid_map[ma.sig]
+            result.add(uid, ma)
+        return ma
 
     def detect_dict(
         self, d: t.Dict[JSONType, JSONType], *, path: Path, result: Result
@@ -164,7 +240,15 @@ class Detector:
         sig = type(d)
         uid = result._uid_map[sig]
         if uid in result:
-            return result.registry[uid]
+            cached = result.registry[uid]
+            if cached.path == path:
+                return cached
+            else:
+                # todo: performance improvement
+                new = cached.clone()
+                new._others.append(d)
+                new.path = path[:]
+                return new
 
         return result.add(uid, Primitive(sig, path=path[:], raw=d, type_=type(d)))
 

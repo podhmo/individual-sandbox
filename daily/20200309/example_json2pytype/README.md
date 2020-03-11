@@ -32,8 +32,8 @@ $ emit data.json --with-annotations=annotations.json
 
 以下の機能もやっぱり標準で欲しいなー。
 
-- required,unrequired
-- union
+- required,unrequired -- オブジェクトに階層関係
+- union -- オブジェクトに分岐
 
 とりあえずunionは置いておいてrequired,unrequiredはほしい
 
@@ -41,6 +41,17 @@ $ emit data.json --with-annotations=annotations.json
 
 方針としてはフィールドの統計値を取れば良いはず。
 nullをどう扱うかは話としてあるかもしれない。
+
+真面目に考えるとこういう階層関係。
+
+- `(?x, y) > (x, y) > (x,)`
+- `(x, y)`, `(x, z)` から `(x, ?y, ?z)` をつくる
+
+maxと常に比較していけば良い。
+
+#### primitive typeや container typeがやってきた場合
+
+これがめんどくさいな。一旦はruntime errorにしちゃうか。
 
 ### 巨大なデータ
 
@@ -50,7 +61,6 @@ head,tailの数値を付けたいかも？
 ## detectという関数にしたい
 
 一部分だけをテスト可能にしたい。
-
 
 ## many
 

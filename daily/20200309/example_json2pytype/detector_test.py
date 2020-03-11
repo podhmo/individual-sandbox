@@ -14,3 +14,59 @@ def test_detect_dict():
     assert info.props["age"].type == int
 
 
+def test_detect_dict_many():
+    import typing as t
+    from detector import Object
+
+    d0 = {"name": "foo", "age": 20}
+    d1 = {"name": "boo", "age": 20, "nickname": "B"}
+    d2 = {"name": "bar", "age": 20}
+    candidates = [d0, d1, d2]
+
+    detector = Detector()
+    info = detector.detect_dict_many(candidates, path=[], result=Result())
+
+    assert isinstance(info, Object)
+    assert info.size == 3
+    assert info.props["name"].type == str
+    assert info.props["age"].type == int
+    assert info.props["nickname"].base == t.Optional
+    assert info.props["nickname"].item.type == str
+
+
+def test_detect_dict_many2():
+    import typing as t
+    from detector import Object
+
+    d0 = {"x": "X", "y": "Y"}
+    d1 = {"x": "X", "z": "Z"}
+    candidates = [d0, d1]
+
+    detector = Detector()
+    info = detector.detect_dict_many(candidates, path=[], result=Result())
+
+    assert isinstance(info, Object)
+    assert info.size == 3
+    assert info.props["x"].type == str
+    assert info.props["y"].item.type == str
+    assert info.props["y"].base == t.Optional
+    assert info.props["z"].item.type == str
+    assert info.props["z"].base == t.Optional
+
+
+def test_detect_dict_many3():
+    import typing as t
+    from detector import Object
+
+    d0 = {"x": "X", "y": "Y"}
+    d1 = {"x": "X"}
+    candidates = [d0, d1]
+
+    detector = Detector()
+    info = detector.detect_dict_many(candidates, path=[], result=Result())
+
+    assert isinstance(info, Object)
+    assert info.size == 2
+    assert info.props["x"].type == str
+    assert info.props["y"].item.type == str
+    assert info.props["y"].base == t.Optional
