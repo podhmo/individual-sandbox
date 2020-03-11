@@ -1,4 +1,5 @@
 import typing as t
+from functools import singledispatchmethod
 from collections import defaultdict
 
 # todo: nullable
@@ -22,8 +23,12 @@ class Object:
         self._raw = raw
         self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
 
+    @property
+    def size(self):
+        return len(self.props)
+
     def __repr__(self):
-        return f"<Object size={len(self.props)} path={self.path!r}>"
+        return f"<Object size={self.size} path={self.path!r}>"
 
 
 class Container:
@@ -43,8 +48,12 @@ class Container:
         self._raw = raw
         self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
 
+    @property
+    def size(self):
+        return len(self._raw)
+
     def __repr__(self):
-        return f"<Container base={self.base} size={len(self._raw)} path={self.path!r}>"
+        return f"<Container base={self.base} size={self.size} path={self.path!r}>"
 
 
 class Primitive:
@@ -60,6 +69,10 @@ class Primitive:
         self.path = path
         self.type = type_
         self._raw = raw
+
+    @property
+    def size(self):
+        return 0
 
     def __repr__(self):
         return f"<Primitive type={self.type!r} path={self.path!r}>"
@@ -94,53 +107,66 @@ class Detector:
     # todo: many
     def detect(self, d: JSONType, *, path: Path, result: Result) -> TypeInfo:
         if isinstance(d, dict):
-            props = {}
-            sigs = []
-
-            for k, v in d.items():
-                path.append(k)
-                subinfo = props[k] = self.detect(v, path=path, result=result)
-                sigs.append((k, subinfo.sig))
-                path.pop()
-
-            sig = frozenset(sigs)
-            uid = result._uid_map[sig]
-            info = result.get(uid, default=SENTINEL)
-
-            if info is not SENTINEL:
-                info._others.append((path[:], d))
-                return result.registry[uid]
-
-            return result.add(uid, Object(sig, path=path[:], raw=d, props=props))
+            return self.detect_dict(d, path=path, result=result)
         elif isinstance(d, (list, tuple)):
-            # TODO: zero
-            # TODO: optional/union
-            members = set()
-            for i, x in enumerate(d):
-                path.append(str(i))
-                members.add(self.detect(x, path=path, result=result))
-                path.pop()
-
-            if len(members) == 0:
-                item = ZERO
-            elif len(members) == 1:
-                item = members.pop()
-            else:
-                item = Union(members)  # xxx:
-
-            base = list
-            sig = tuple([base, item.sig])
-            uid = result._uid_map[sig]
-            return result.add(
-                uid, Container(sig, base=base, item=item, path=path[:], raw=d)
-            )
+            return self.detect_list(d, path=path, result=result)
         else:
-            sig = type(d)
-            uid = result._uid_map[sig]
-            if uid in result:
-                return result.registry[uid]
+            return self.detect_primitive(d, path=path, result=result)
 
-            return result.add(uid, Primitive(sig, path=path[:], raw=d, type_=type(d)))
+    def detect_dict(
+        self, d: t.Dict[JSONType, JSONType], *, path: Path, result: Result
+    ) -> TypeInfo:
+        props = {}
+        sigs = []
+
+        for k, v in d.items():
+            path.append(k)
+            subinfo = props[k] = self.detect(v, path=path, result=result)
+            sigs.append((k, subinfo.sig))
+            path.pop()
+
+        sig = frozenset(sigs)
+        uid = result._uid_map[sig]
+        info = result.get(uid, default=SENTINEL)
+
+        if info is not SENTINEL:
+            info._others.append((path[:], d))
+            return result.registry[uid]
+
+        return result.add(uid, Object(sig, path=path[:], raw=d, props=props))
+
+    def detect_list(
+        self, d: t.List[JSONType], *, path: Path, result: Result
+    ) -> TypeInfo:
+        # TODO: zero
+        # TODO: optional/union
+        members = set()
+        for i, x in enumerate(d):
+            path.append(str(i))
+            members.add(self.detect(x, path=path, result=result))
+            path.pop()
+
+        if len(members) == 0:
+            item = ZERO
+        elif len(members) == 1:
+            item = members.pop()
+        else:
+            item = Union(members)  # xxx:
+
+        base = list
+        sig = tuple([base, item.sig])
+        uid = result._uid_map[sig]
+        return result.add(
+            uid, Container(sig, base=base, item=item, path=path[:], raw=d)
+        )
+
+    def detect_primitive(self, d: t.Any, *, path: Path, result: Result) -> TypeInfo:
+        sig = type(d)
+        uid = result._uid_map[sig]
+        if uid in result:
+            return result.registry[uid]
+
+        return result.add(uid, Primitive(sig, path=path[:], raw=d, type_=type(d)))
 
 
 def detect(d: JSONType, *, detector=Detector()):

@@ -6,3 +6,5 @@
 02: DATA ?= data/config.json
 02:
 	python json_to_x.py scan $(DATA)
+test:
+	pytest -s .
