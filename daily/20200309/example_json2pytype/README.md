@@ -65,3 +65,9 @@ head,tailの数値を付けたいかも？
 ## many
 
 複数のデータ例を渡して、作られるnodeをより精密にしたい
+
+## list対応
+
+## nodeとtypeを分ける
+
+typeがPathを持っている形が変

@@ -214,26 +214,11 @@ class Detector:
     def detect_list(
         self, d: t.List[JSONType], *, path: Path, result: Result
     ) -> TypeInfo:
-        # TODO: zero
-        # TODO: optional/union
-        members = set()
-        for i, x in enumerate(d):
-            path.append(str(i))
-            members.add(self.detect(x, path=path, result=result))
-            path.pop()
-
-        if len(members) == 0:
-            item = ZERO
-        elif len(members) == 1:
-            item = members.pop()
-        else:
-            item = Union(members)  # xxx:
-
-        base = list
-        sig = tuple([base, item.sig])
-        uid = result._uid_map[sig]
+        path.append(":item:")
+        inner_info = self.detect_dict_many(d, path=path, result=result)
+        path.pop()
         return result.add(
-            uid, Container(sig, base=base, item=item, path=path[:], raw=d)
+            uid, ListC((list, inner_info.sig), item=inner_info, path=path[:], raw=d)
         )
 
     def detect_primitive(self, d: t.Any, *, path: Path, result: Result) -> TypeInfo:
