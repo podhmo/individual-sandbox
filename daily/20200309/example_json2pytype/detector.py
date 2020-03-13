@@ -8,6 +8,7 @@ from collections import defaultdict
 # todo: zero
 
 uid = str
+Signature = t.Any
 TypeInfo = t.Union["Object", "Container", "Primitive"]
 Path = t.List[str]
 JSONType = t.Union[int, float, str, bool, t.List["JSONType"], t.Dict[str, "JSONType"]]
@@ -107,16 +108,21 @@ ZERO = Object(tuple(), path=":zero:", props={}, raw={})
 class Result:
     def __init__(self):
         self.registry: t.Dict[uid, TypeInfo] = {}
-        self.history: t.List[TypeInfo] = []
-        self._uid_map: t.Dict[t.Any, uid] = defaultdict(lambda: len(self._uid_map))
+        self._uid_map: t.Dict[Signature, uid] = defaultdict(lambda: len(self._uid_map))
+        self._dead_set: t.Set[Signature] = set()
 
     def __repr__(self):
         return f"<Result size={len(self.history)}>"
 
     def add(self, uid: uid, info: TypeInfo) -> TypeInfo:
-        self.registry[uid] = info
-        self.history.append(info)  # xxx
+        self.registry[uid] = info  # ordered
         return info
+
+    @property
+    def history(self) -> t.List[TypeInfo]:
+        return [
+            info for info in self.registry.values() if info.sig not in self._dead_set
+        ]
 
     def __contains__(self, uid: uid):
         return uid in self.registry
@@ -142,7 +148,7 @@ class Detector:
         path: Path,
         result: Result,
     ) -> TypeInfo:
-        seen = set()
+        seen: t.Dict[int, TypeInfo] = {}
 
         modified = False
         ma = ZERO
@@ -151,14 +157,14 @@ class Detector:
         # TODO: union
         if len(xs) > 0:
             ma = self.detect_dict(xs[0], path=path, result=result)
-            seen.add(id(ma))
+            seen[id(ma)] = ma
 
         for x in xs[1:]:
             info = self.detect_dict(x, path=path, result=result)
 
             if id(info) in seen:
                 continue
-            seen.add(id(info))
+            seen[id(info)] = info
 
             if not modified:
                 modified = True
@@ -186,6 +192,9 @@ class Detector:
 
         if modified:
             uid = result._uid_map[ma.sig]
+            for other in seen.values():
+                if other.sig != ma.sig and other.sig not in result._dead_set:
+                    result._dead_set.add(other.sig)
             result.add(uid, ma)
         return ma
 
@@ -249,5 +258,6 @@ def show(d):
     print("-")
     r = detect(d)
     print(r)
+
     for info in r.history:
         print(" ", info)
