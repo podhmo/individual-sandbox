@@ -10,11 +10,11 @@ class ContextForBuilding:
         self.env = env
         self.builder = QBuilder()
 
-    def create_from_name(self, node: ast.Name) -> Q:
-        return q(node.id, builder=self.builder)
+    def Name(self, name: str) -> Q:
+        return q(name, builder=self.builder)
 
-    def create_from_value(self, node: ast.Constant) -> Q:
-        return q(repr(ast.literal_eval(node)), builder=self.builder)
+    def Value(self, value: object) -> Q:
+        return q(repr(value), builder=self.builder)
 
     def Tuple(self, xs) -> Q:
         return q("({args})", args=QArgs(self.builder, xs, {}))
@@ -36,11 +36,11 @@ class ContextForEvaluation:
         self.env = env
         self.builder = QEvaluator()
 
-    def create_from_name(self, node: ast.Name) -> Q:
-        return q(self.env[node.id], builder=self.builder)
+    def Name(self, name: str) -> Q:
+        return q(self.env[name], builder=self.builder)
 
-    def create_from_value(self, node: ast.Constant) -> Q:
-        return q(ast.literal_eval(node), builder=self.builder)
+    def Value(self, value: object) -> Q:
+        return q(value, builder=self.builder)
 
     def Tuple(self, xs) -> Q:
         return q(tuple(getattr(x, "val", x) for x in xs))

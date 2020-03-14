@@ -32,11 +32,11 @@ class ContextForBuilding:
         self.env = env
         self.builder = QMongoBuilder()
 
-    def create_from_name(self, node: ast.Name) -> Q:
-        return q(node.id, builder=self.builder)
+    def Name(self, name: str) -> Q:
+        return q(name, builder=self.builder)
 
-    def create_from_value(self, node: ast.Constant) -> Q:
-        return q(repr(ast.literal_eval(node)), builder=self.builder)
+    def Value(self, value: object) -> Q:
+        return q(repr(value), builder=self.builder)
 
     def List(self, xs: t.List[Q]) -> Q:
         return q("[{args}]", args=QArgs(self.builder, xs, {}))
@@ -54,6 +54,7 @@ def run(code: str, *, create_ctx, env=None):
 @as_command
 def main():
     _run = partial(run, create_ctx=ContextForBuilding)
+
     _run("1")
     _run("x")
     _run('name == "foo"')
