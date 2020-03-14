@@ -12,6 +12,9 @@ require (
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
+	github.com/go-openapi/errors v0.19.4
+	github.com/go-openapi/strfmt v0.19.5
+	github.com/go-openapi/swag v0.19.8
 	github.com/gogo/protobuf v1.3.0 // indirect
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/google/wire v0.3.0 // indirect
@@ -42,7 +45,6 @@ require (
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd // indirect
-	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/vektah/dataloaden v0.3.0 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	go.uber.org/zap v1.10.0
