@@ -123,21 +123,17 @@ class QArgs:
 
 
 class QBuilder:
-    uop_mapping: t.ClassVar[t.Dict[str, t.Union[str, t.Callable[..., t.Any]]]] = {}
-    bop_mapping: t.ClassVar[t.Dict[str, t.Union[str, t.Callable[..., t.Any]]]] = {}
+    uop_mapping: t.ClassVar[t.Dict[str, str]] = {}
+    bop_mapping: t.ClassVar[t.Dict[str, str]] = {}
 
     def uop(self, q, name):
         fmt = "({op} {value})"
         name = self.uop_mapping.get(name, name)
-        if callable(name):
-            return name(self, q, name)
         return q.__class__(self, fmt, kwargs=dict(op=name, value=q))
 
     def bop(self, q, name, right):
         fmt = "({left} {op} {right})"
         name = self.bop_mapping.get(name, name)
-        if callable(name):
-            return name(self, q, name, right)
         return q.__class__(self, fmt, kwargs=dict(op=name, left=q, right=right))
 
     def getattr(self, q, name):
