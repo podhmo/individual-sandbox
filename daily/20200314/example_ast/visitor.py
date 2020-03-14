@@ -83,14 +83,19 @@ class StrictVisitor(ast.NodeVisitor):
         l_val = self.stack[-1].pop()
 
         assert len(node.ops) == len(node.comparators)
+        acc = None
         for i, (op, right) in enumerate(zip(node.ops, node.comparators)):
             self.visit(right)
             r_val = self.stack[-1].pop()
             method = getattr(l_val, op.__class__.__name__)
-            l_val = method(r_val)
+            if acc is None:
+                acc = method(r_val)
+            else:
+                acc = acc.And(method(r_val))
+            l_val = r_val
 
         assert not self.stack.pop()  # empty list
-        self.stack[-1].append(l_val)
+        self.stack[-1].append(acc)
 
     def visit_Subscript(self, node: ast.Subscript):
         logger.debug(

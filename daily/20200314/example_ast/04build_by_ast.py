@@ -85,6 +85,8 @@ def main():
         _run("0 < x <= 10", env={"x": 10})
         _run("0 < x < 10", env={"x": 10})
         _run("10 < x <= 100", env={"x": 10})
+        _run("0 < x <= 10 < y < 20", env={"x": 10, "y": 20})
+        _run("0 < x <= 10 < y <= 20", env={"x": 10, "y": 20})
         # BoolOp
         _run("True and True")
         _run("True and False")
