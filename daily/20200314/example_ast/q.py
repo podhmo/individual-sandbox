@@ -1,3 +1,4 @@
+import typing as t
 import operator
 
 
@@ -120,12 +121,21 @@ class QArgs:
 
 
 class QBuilder:
+    uop_mapping: t.ClassVar[t.Dict[str, t.Union[str, t.Callable[..., t.Any]]]] = {}
+    bop_mapping: t.ClassVar[t.Dict[str, t.Union[str, t.Callable[..., t.Any]]]] = {}
+
     def uop(self, q, name):
         fmt = "({op} {value})"
+        name = self.uop_mapping.get(name, name)
+        if callable(name):
+            return name(self, q, name)
         return q.__class__(self, fmt, kwargs=dict(op=name, value=q))
 
     def bop(self, q, name, right):
         fmt = "({left} {op} {right})"
+        name = self.bop_mapping.get(name, name)
+        if callable(name):
+            return name(self, q, name, right)
         return q.__class__(self, fmt, kwargs=dict(op=name, left=q, right=right))
 
     def getattr(self, q, name):
@@ -144,6 +154,20 @@ class QBuilder:
 
     def build(self, q):
         return q.__to_string__(self)
+
+
+class QJSBuilder(QBuilder):
+    uop_mapping = {
+        "not": "!",
+    }
+    bop_mapping = {
+        "and": "&&",
+        "or": "||",
+        "is": "===",
+        "is not": "!==",
+        # "in": operator.contains,
+        # "not in": lambda x, y: x not in y,
+    }
 
 
 class QEvaluator:

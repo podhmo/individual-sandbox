@@ -33,6 +33,10 @@ class Builder:
         return m
 
 
+# from q import QJSBuilder
+# from functools import partial
+# q = partial(q, builder=QJSBuilder())
+
 print(q("x"), q("x").And("y"), q("x").Lt(q("y").Not()))
 print(q("x").startswith("y"), q("x").foo.bar(q("z"), "xx").boo())
 print(q("x").IsNot("y"), q("x").In(q("y")))
