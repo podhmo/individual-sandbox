@@ -44,6 +44,7 @@ class ContextForBuilding:
 
 def run(code: str, *, create_ctx, env=None):
     print("----------------------------------------")
+    print(f"env   : {env}")
     print(f"input : {code}")
     t = ast.parse(code)
     v = StrictVisitor(create_ctx(env))

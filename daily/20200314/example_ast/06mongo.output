@@ -1,27 +1,36 @@
 ----------------------------------------
+env   : None
 input : 1
 output: 1
 ----------------------------------------
+env   : None
 input : x
 output: x
 ----------------------------------------
+env   : None
 input : name == "foo"
 output: {"name": {"$eq": 'foo'}}
 ----------------------------------------
+env   : None
 input : age >= 20
 output: {"age": {"$gte": 20}}
 ----------------------------------------
+env   : None
 input : name == "foo" and age >= 20
 output: {"$and": [{"name": {"$eq": 'foo'}}, {"age": {"$gte": 20}}]}
 ----------------------------------------
+env   : None
 input : (name == "foo" or name == "boo") and age >= 20
 output: {"$and": [{"$or": [{"name": {"$eq": 'foo'}}, {"name": {"$eq": 'boo'}}]}, {"age": {"$gte": 20}}]}
 ----------------------------------------
+env   : None
 input : name == "foo" or (name == "boo" and age >= 20)
 output: {"$or": [{"name": {"$eq": 'foo'}}, {"$and": [{"name": {"$eq": 'boo'}}, {"age": {"$gte": 20}}]}]}
 ----------------------------------------
+env   : None
 input : name == "foo" or name == "boo" and age >= 20
 output: {"$or": [{"name": {"$eq": 'foo'}}, {"$and": [{"name": {"$eq": 'boo'}}, {"age": {"$gte": 20}}]}]}
 ----------------------------------------
+env   : None
 input : name in [1, 2, 3, 4, 5]
 output: {"name": {"$in": [1, 2, 3, 4, 5]}}
