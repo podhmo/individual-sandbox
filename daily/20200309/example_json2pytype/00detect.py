@@ -1,8 +1,6 @@
 from detector import show
 
 
-
-
 d = {"name": "foo", "age": 20}
 show(d)
 d = {"name": "boo", "age": 0, "father": {"name": "foo", "age": 20}}

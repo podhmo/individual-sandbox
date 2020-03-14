@@ -30,7 +30,7 @@ class Object:
         return new
 
     @property
-    def size(self):
+    def size(self) -> int:
         return len(self.props)
 
     def __repr__(self):
@@ -55,8 +55,10 @@ class Container:
         self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
 
     @property
-    def size(self):
-        return len(self._raw)
+    def size(self) -> int:
+        if hasattr(self._raw, "__len__"):
+            return len(self._raw)
+        return self.item.size
 
     def clone(self) -> "Container":
         new = self.__class__(
@@ -89,7 +91,7 @@ class Primitive:
         self._others: t.List[t.Tuple[Path], t.Dict[t.Any, t.Any]] = []
 
     @property
-    def size(self):
+    def size(self) -> int:
         return 0
 
     def clone(self) -> "Primitive":
@@ -261,3 +263,34 @@ def show(d):
 
     for info in r.history:
         print(" ", info)
+
+
+def generate_annotations(
+    result: Result, *, use_fullname: bool = False, toplevel_name: str = "Toplevel"
+) -> t.Dict[str, t.Dict[str, t.Any]]:
+    from prestring.utils import NameStore
+    from inflection import pluralize, singularize, camelize
+
+    ns = NameStore()
+    r = {}
+
+    for info in result.history:
+        if isinstance(info, Object):
+            if use_fullname:
+                path = info.path[:]
+                if path and path[-1].startswith(":"):
+                    path = path[:-1]
+                if path and pluralize(path[-1]) == path[-1]:
+                    path[-1] = singularize(path[-1])
+                r["/".join(info.path)] = {
+                    "before": {"name": "_".join(camelize(x) for x in path)}
+                }
+            else:
+                name = info.path[-1] if info.path else toplevel_name
+                if name.startswith(":"):
+                    name = info.path[-2]
+                if pluralize(name) == name:
+                    name = singularize(name)
+                ns[info] = name
+                r["/".join(info.path)] = {"before": {"name": camelize(ns[info])}}
+    return r

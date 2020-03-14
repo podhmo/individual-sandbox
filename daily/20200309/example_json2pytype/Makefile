@@ -15,5 +15,10 @@
 04:
 	python json_to_x.py emit $(DATA)
 
+05: DATA ?= data/name-conflict.json
+05:
+	python json_to_x.py emit $(DATA)
+	python json_to_x.py annotate $(DATA)
+	python json_to_x.py annotate $(DATA) --use-fullname
 test:
 	pytest -s .

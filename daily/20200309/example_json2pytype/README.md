@@ -68,6 +68,14 @@ head,tailの数値を付けたいかも？
 
 ## list対応
 
-## nodeとtypeを分ける
+manyを使うだけ？
 
-typeがPathを持っている形が変
+## pythonのクラスを返す
+
+type化が面倒。まぁgraphqlをいじるだけなら。
+
+## 名前の衝突を気にしたい
+
+prestringのNameStore使いにくいね。
+あと衝突したときにfullnameがほしいかも？
+
