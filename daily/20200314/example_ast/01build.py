@@ -33,10 +33,10 @@ class Builder:
         return m
 
 
-print(q("x"), q("x").and_("y"), q("x").lt(q("y").not_()))
+print(q("x"), q("x").And("y"), q("x").Lt(q("y").Not()))
 print(q("x").startswith("y"), q("x").foo.bar(q("z"), "xx").boo())
-print(q("x").is_not("y"), q("x").contains(q("y")))
-print(q("x").add("y").neg().add(q("int")(True)))
+print(q("x").IsNot("y"), q("x").In(q("y")))
+print(q("x").Add("y").neg().add(q("int")(True)))
 
 b = Builder(q("name").startswith("o"))
 b.var_names.add("name")

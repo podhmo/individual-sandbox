@@ -13,56 +13,58 @@ class Q:
     def __call__(self, *args, **kwargs):
         return self.builder.call(self, args, kwargs)
 
-    def and_(self, right):
+    # name from ast modules's node class name
+
+    def And(self, right):
         return self.builder.bop(self, "and", right)
 
-    def or_(self, right):
+    def Or(self, right):
         return self.builder.bop(self, "or", right)
 
-    def gt(self, right):
+    def Gt(self, right):
         return self.builder.bop(self, ">", right)
 
-    def ge(self, right):
+    def GtE(self, right):
         return self.builder.bop(self, ">=", right)
 
-    def lt(self, right):
+    def Lt(self, right):
         return self.builder.bop(self, "<", right)
 
-    def le(self, right):
+    def LtE(self, right):
         return self.builder.bop(self, "<=", right)
 
-    def eq(self, right):
+    def Eq(self, right):
         return self.builder.bop(self, "==", right)
 
-    def ne(self, right):
+    def NotEq(self, right):
         return self.builder.bop(self, "!=", right)
 
-    def not_(self):
+    def Not(self):
         return self.builder.uop(self, "not")
 
-    def is_(self, right):
+    def Is(self, right):
         return self.builder.bop(self, "is", right)
 
-    def is_not(self, right):
+    def IsNot(self, right):
         return self.builder.bop(self, "is not", right)
 
-    def contains(self, right):
+    def In(self, right):
         return self.builder.bop(self, "in", right)
 
-    def not_contains(self, right):
+    def NotIn(self, right):
         return self.builder.bop(self, "not in", right)
 
     #
-    def add(self, right):
+    def Add(self, right):
         return self.builder.bop(self, "+", right)
 
-    def sub(self, right):
+    def Sub(self, right):
         return self.builder.bop(self, "-", right)
 
-    def mul(self, right):
+    def Mult(self, right):
         return self.builder.bop(self, "*", right)
 
-    def div(self, right):
+    def Div(self, right):
         return self.builder.bop(self, "/", right)
 
     def neg(self):
