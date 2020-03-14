@@ -83,41 +83,12 @@ class Q:
         return self.val.format(**kwargs)
 
     def __getattr__(self, name):
+        if name.startswith("_"):
+            raise AttributeError(name)
         return self.builder.getattr(self, name)
 
     def __getitem__(self, name):
         return self.builder.getindex(self, name)
-
-
-class QAttr:
-    __slots__ = ("builder", "name", "_q")
-
-    def __init__(self, builder, name, q):
-        self.builder = builder
-        self.name = name
-        self._q = q
-
-    def __call__(self, *args, **kwargs):
-        return self._q.__class__(
-            self.builder,
-            "{inner}.{methodname}({args})",
-            kwargs=dict(
-                inner=self._q,
-                methodname=self.name,
-                args=QArgs(self.builder, args, kwargs),
-            ),
-        )
-
-    def __getattr__(self, name):
-        if name.startswith("_"):
-            raise AttributeError(name)
-        q = self._q.__class__(self.builder, "{inner}", dict(inner=self))
-        return getattr(q, name)
-
-    def __to_string__(self, builder) -> str:
-        q = self._q
-        inner = q.__to_string__(builder) if hasattr(q, "__to_string__") else q
-        return "{}.{}".format(inner, self.name)
 
 
 class QArgs:
@@ -149,8 +120,6 @@ class QArgs:
 
 
 class QBuilder:
-    ATTR_CLASS = QAttr
-
     def uop(self, q, name):
         fmt = "({op} {value})"
         return q.__class__(self, fmt, kwargs=dict(op=name, value=q))
@@ -160,7 +129,8 @@ class QBuilder:
         return q.__class__(self, fmt, kwargs=dict(op=name, left=q, right=right))
 
     def getattr(self, q, name):
-        return self.ATTR_CLASS(self, name, q)
+        fmt = "{inner}.{name}"
+        return q.__class__(self, fmt, kwargs=dict(inner=q, name=name))
 
     def getindex(self, q, name):
         return q.__class__(self, "{inner}[{name}]", kwargs=dict(inner=q, name=name))
