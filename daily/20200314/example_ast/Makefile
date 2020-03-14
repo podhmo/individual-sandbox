@@ -9,3 +9,7 @@ export DEBUG ?=
 	python $(shell echo $@*.py) | tee $(patsubst %.py,%.output,$(shell echo $@*.py))
 04:
 	python $(shell echo $@*.py) | tee $(patsubst %.py,%.output,$(shell echo $@*.py))
+05:
+	python $(shell echo $@*.py) | tee $(patsubst %.py,%.output,$(shell echo $@*.py))
+06:
+	python $(shell echo $@*.py) | tee $(patsubst %.py,%.output,$(shell echo $@*.py))

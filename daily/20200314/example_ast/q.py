@@ -93,12 +93,13 @@ class Q:
 
 
 class QArgs:
-    __slots__ = ("builder", "args", "kwargs")
+    __slots__ = ("builder", "args", "kwargs", "sep")
 
-    def __init__(self, builder, args, kwargs):
+    def __init__(self, builder, args, kwargs, *, sep="="):
         self.builder = builder
         self.args = args
         self.kwargs = kwargs
+        self.sep = sep
 
     def __to_string__(self, builder) -> str:
         new_args = [
@@ -106,8 +107,9 @@ class QArgs:
             for x in self.args
         ]
         new_kwargs = [
-            "{}={}".format(
+            "{}{}{}".format(
                 k,
+                self.sep,
                 (x.__to_string__(builder) if hasattr(x, "__to_string__") else repr(x)),
             )
             for k, x in self.kwargs.items()
@@ -143,6 +145,7 @@ class QBuilder:
         return q.__class__(self, fmt, kwargs=dict(inner=q, name=name))
 
     def getindex(self, q, name):
+        name = name if hasattr(name, "builder") else repr(name)
         return q.__class__(self, "{inner}[{name}]", kwargs=dict(inner=q, name=name))
 
     def call(self, q, args, kwargs):
