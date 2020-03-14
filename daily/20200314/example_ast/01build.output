@@ -1,0 +1,8 @@
+True
+x (x and y) (x < (not y))
+x.startswith('y') x.foo.bar(z, 'xx').boo()
+(x is not y) (x in y)
+((- (x + y)) + int(True))
+def _(d):
+    name = d.get('name')
+    return name.startswith('o')

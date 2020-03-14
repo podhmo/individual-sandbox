@@ -79,3 +79,6 @@ type化が面倒。まぁgraphqlをいじるだけなら。
 prestringのNameStore使いにくいね。
 あと衝突したときにfullnameがほしいかも？
 
+一旦は置いておいてgraphqlとつなげる事を考えてみる？
+
+

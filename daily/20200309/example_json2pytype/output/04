@@ -1,0 +1,26 @@
+import typing as t
+
+
+# from: db
+class Db:
+    pass: str
+    user: str
+
+
+# from: server/slave/:item:
+class Slave:
+    ip: str
+    weight: t.Optional[int]
+
+
+# from: server
+class Server:
+    host: str
+    port: str
+    slave: t.List[Slave]
+
+
+# from: 
+class Toplevel:
+    db: Db
+    server: Server

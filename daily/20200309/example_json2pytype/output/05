@@ -1,0 +1,28 @@
+
+
+# from: area/target/start
+class Start:
+    x: int
+    y: int
+
+
+# from: area/target
+class Target:
+    start: Start
+    end: Start
+
+
+# from: area
+class Area:
+    target: Target
+
+
+# from: target
+class TargetDup1:
+    name: str
+
+
+# from: 
+class Toplevel:
+    area: Area
+    target: TargetDup1

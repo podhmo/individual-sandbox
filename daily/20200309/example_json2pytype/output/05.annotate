@@ -1,0 +1,15 @@
+area/target/start:
+  before:
+    name: Start
+area/target:
+  before:
+    name: Target
+area:
+  before:
+    name: Area
+target:
+  before:
+    name: TargetDup1
+? ''
+: before:
+    name: Toplevel

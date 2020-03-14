@@ -1,0 +1,24 @@
+-
+<Result size=3>
+  <Primitive type=<class 'str'> path=['name']>
+  <Primitive type=<class 'int'> path=['age']>
+  <Object size=2 path=[]>
+-
+<Result size=4>
+  <Primitive type=<class 'str'> path=['name']>
+  <Primitive type=<class 'int'> path=['age']>
+  <Object size=2 path=['father']>
+  <Object size=3 path=[]>
+-
+<Result size=4>
+  <Primitive type=<class 'str'> path=['name']>
+  <Primitive type=<class 'int'> path=['age']>
+  <Object size=2 path=['father']>
+  <Object size=4 path=[]>
+-
+<Result size=5>
+  <Primitive type=<class 'str'> path=['name']>
+  <Primitive type=<class 'int'> path=['age']>
+  <Object size=2 path=['parents', ':item:']>
+  <Container base=typing.List size=2 path=['parents']>
+  <Object size=3 path=[]>

@@ -1,0 +1,9 @@
+-
+<Result size=7>
+  <Primitive type=<class 'str'> path=['db', 'pass']>
+  <Object size=2 path=['db']>
+  <Object size=2 path=['server', 'slave', ':item:']>
+  <Primitive type=<class 'int'> path=['server', 'slave', ':item:', 'weight']>
+  <Container base=typing.List size=4 path=['server', 'slave']>
+  <Object size=3 path=['server']>
+  <Object size=2 path=[]>

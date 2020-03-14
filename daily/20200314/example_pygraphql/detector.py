@@ -4,10 +4,8 @@ from functools import partial
 import dataclasses
 from collections import defaultdict
 
-# todo: nullable
 # todo: hetero list
 # todo: many=True
-# todo: zero
 
 uid = str
 Signature = t.Any
@@ -219,6 +217,7 @@ class Detector:
         # FIXME: union support
         if union_members:
             import sys
+
             print(f"ignored: {union_members}", file=sys.stderr)
         #     for x in union_members:
         #         print("@", id(x), x)

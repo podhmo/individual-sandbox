@@ -1,0 +1,489 @@
+import typing as t
+
+
+# from: info
+class Info:
+    title: str
+    description: str
+    version: str
+
+
+# from: securityDefinitions/basic
+class Basic:
+    type: str
+
+
+# from: securityDefinitions/api_key
+class ApiKey:
+    type: str
+    description: str
+    name: str
+    in: str
+
+
+# from: securityDefinitions
+class SecurityDefinition:
+    basic: Basic
+    api_key: ApiKey
+
+
+# from: security/:item:
+class Security:
+    api_key: t.List[t.Any]
+    basic: t.Optional[t.List[t.Any]]
+
+
+# from: paths//auth/token/obtain//post/parameters/:item:/schema
+class Schema:
+    $ref: str
+
+
+# from: paths//auth/token/obtain//post/parameters/:item:
+class Parameter:
+    name: str
+    in: str
+    required: bool
+    schema: Schema
+
+
+# from: paths//auth/token/obtain//post/responses/201
+class 201:
+    description: str
+    schema: Schema
+
+
+# from: paths//auth/token/obtain//post/responses
+class Response:
+    201: 201
+
+
+# from: paths//auth/token/obtain//post
+class Post:
+    operationId: str
+    description: str
+    parameters: t.List[Parameter]
+    responses: Response
+    tags: t.List[str]
+
+
+# from: paths//auth/token/obtain/
+class /auth/token/obtain/:
+    post: Post
+    parameters: t.List[t.Any]
+
+
+# from: paths//debug/500//get/responses/200
+class 200:
+    description: str
+
+
+# from: paths//debug/500//get/responses
+class ResponseDup1:
+    200: 200
+
+
+# from: paths//debug/500//get
+class Get:
+    operationId: str
+    description: str
+    parameters: t.List[t.Any]
+    responses: ResponseDup1
+    tags: t.List[str]
+
+
+# from: paths//debug/500/
+class /debug/500/:
+    get: Get
+    parameters: t.List[t.Any]
+
+
+# from: paths//tests//get/parameters/:item:
+class ParameterDup1:
+    name: str
+    in: str
+    description: t.Optional[str]
+    required: bool
+    type: str
+
+
+# from: paths//tests//get/responses/200/schema/properties/next
+class Next:
+    type: str
+    format: str
+    x-nullable: bool
+
+
+# from: paths//tests//get/responses/200/schema/properties/results
+class Result:
+    type: str
+    items: Schema
+
+
+# from: paths//tests//get/responses/200/schema/properties
+class Property:
+    count: Basic
+    next: Next
+    previous: Next
+    results: Result
+
+
+# from: paths//tests//get/responses/200/schema
+class SchemaDup1:
+    required: t.List[str]
+    type: str
+    properties: Property
+
+
+# from: paths//tests//get/responses/200
+class 200Dup1:
+    description: str
+    schema: SchemaDup1
+
+
+# from: paths//tests//get/responses
+class ResponseDup2:
+    200: 200Dup1
+
+
+# from: paths//tests//get
+class GetDup1:
+    operationId: str
+    description: str
+    parameters: t.List[UNKNOWN]
+    responses: ResponseDup2
+    tags: t.List[str]
+
+
+# from: paths//tests/
+class /tests/:
+    get: GetDup1
+    post: Post
+    parameters: t.List[t.Any]
+
+
+# from: paths//tests/{hash}//get/responses
+class ResponseDup3:
+    200: 201
+
+
+# from: paths//tests/{hash}//get
+class GetDup2:
+    operationId: str
+    description: str
+    parameters: t.List[t.Any]
+    responses: ResponseDup3
+    tags: t.List[str]
+
+
+# from: paths//tests/{hash}//put
+class Put:
+    operationId: str
+    description: str
+    parameters: t.List[Parameter]
+    responses: ResponseDup3
+    tags: t.List[str]
+
+
+# from: paths//tests/{hash}//delete/responses
+class ResponseDup4:
+    204: 200
+
+
+# from: paths//tests/{hash}//delete
+class Delete:
+    operationId: str
+    description: str
+    parameters: t.List[t.Any]
+    responses: ResponseDup4
+    tags: t.List[str]
+
+
+# from: paths//tests/{hash}/
+class /tests/{hash}/:
+    get: GetDup2
+    put: Put
+    patch: Put
+    delete: Delete
+    parameters: t.List[UNKNOWN]
+
+
+# from: paths//tests/{test_hash}/questions/
+class /tests/{testHash}/questions/:
+    get: GetDup1
+    post: Post
+    parameters: t.List[UNKNOWN]
+
+
+# from: paths//tests/{test_hash}/questions/{id}/
+class /tests/{testHash}/questions/{id}/:
+    get: GetDup2
+    put: Put
+    patch: Put
+    delete: Delete
+    parameters: t.List[UNKNOWN]
+
+
+# from: paths
+class Path:
+    /auth/token/obtain/: /auth/token/obtain/
+    /auth/token/refresh/: /auth/token/obtain/
+    /auth/token/verify/: /auth/token/obtain/
+    /debug/500/: /debug/500/
+    /debug/echo/: /debug/500/
+    /debug/info/: /debug/500/
+    /tests/: /tests/
+    /tests/{hash}/: /tests/{hash}/
+    /tests/{test_hash}/questions/: /tests/{testHash}/questions/
+    /tests/{test_hash}/questions/{id}/: /tests/{testHash}/questions/{id}/
+    /tests/{test_hash}/questions/{question_pk}/answers/: /tests/{testHash}/questions/
+    /tests/{test_hash}/questions/{question_pk}/answers/{id}/: /tests/{testHash}/questions/{id}/
+
+
+# from: definitions/TokenObtainPair/properties/username
+class Username:
+    title: str
+    type: str
+    minLength: int
+
+
+# from: definitions/TokenObtainPair/properties
+class PropertyDup1:
+    username: Username
+    password: Username
+
+
+# from: definitions/TokenObtainPair
+class TokenObtainPair:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup1
+
+
+# from: definitions/TokenRefresh/properties
+class PropertyDup2:
+    refresh: Username
+
+
+# from: definitions/TokenRefresh
+class TokenRefresh:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup2
+
+
+# from: definitions/TokenVerify/properties
+class PropertyDup3:
+    token: Username
+
+
+# from: definitions/TokenVerify
+class TokenVerify:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup3
+
+
+# from: definitions/TestReadOnlyShort/properties/id
+class Id:
+    title: str
+    type: str
+    readOnly: bool
+
+
+# from: definitions/TestReadOnlyShort/properties/url
+class Url:
+    title: str
+    type: str
+    format: str
+    readOnly: bool
+
+
+# from: definitions/TestReadOnlyShort/properties/hash
+class Hash:
+    title: str
+    type: str
+    maxLength: int
+    minLength: int
+
+
+# from: definitions/TestReadOnlyShort/properties/params
+class Param:
+    type: str
+    items: Hash
+
+
+# from: definitions/TestReadOnlyShort/properties/stats_restriction
+class StatsRestriction:
+    title: str
+    type: str
+    enum: t.List[str]
+
+
+# from: definitions/TestReadOnlyShort/properties
+class PropertyDup4:
+    id: Id
+    url: Url
+    hash: Hash
+    title: Hash
+    params: Param
+    stats_restriction: StatsRestriction
+    owner: Id
+
+
+# from: definitions/TestReadOnlyShort
+class TestReadOnlyShort:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup4
+
+
+# from: definitions/Answer/properties/position
+class Position:
+    title: str
+    type: str
+    maximum: int
+    minimum: int
+
+
+# from: definitions/Answer/properties/params_value/items
+class Item:
+    title: str
+    type: str
+
+
+# from: definitions/Answer/properties/params_value
+class ParamsValue:
+    type: str
+    items: Item
+
+
+# from: definitions/Answer/properties
+class PropertyDup5:
+    id: Id
+    position: Position
+    params_value: ParamsValue
+
+
+# from: definitions/Answer
+class Answer:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup5
+
+
+# from: definitions/Question/properties
+class PropertyDup6:
+    id: Id
+    position: Position
+    text: Username
+    answers: Result
+
+
+# from: definitions/Question
+class Question:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup6
+
+
+# from: definitions/Test/properties/hash
+class HashDup1:
+    title: str
+    type: str
+    readOnly: bool
+    minLength: int
+
+
+# from: definitions/Test/properties
+class PropertyDup7:
+    id: Id
+    hash: HashDup1
+    title: Hash
+    description: Username
+    is_private: Item
+    params: Param
+    params_defaults: ParamsValue
+    stats_restriction: StatsRestriction
+    stats_restriction_display: HashDup1
+    owner: Id
+    questions: Result
+
+
+# from: definitions/Test
+class Test:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup7
+
+
+# from: definitions/QuestionReadOnly/properties/answers
+class Answer:
+    type: str
+    items: Schema
+    readOnly: bool
+
+
+# from: definitions/QuestionReadOnly/properties
+class PropertyDup8:
+    id: Id
+    position: Position
+    text: Username
+    answers: Answer
+
+
+# from: definitions/QuestionReadOnly
+class QuestionReadOnly:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup8
+
+
+# from: definitions/TestReadOnly/properties
+class PropertyDup9:
+    id: Id
+    hash: Hash
+    title: Hash
+    description: Username
+    is_private: Item
+    params: Param
+    params_defaults: ParamsValue
+    stats_restriction: StatsRestriction
+    stats_restriction_display: Username
+    owner: Item
+    questions: Answer
+
+
+# from: definitions/TestReadOnly
+class TestReadOnly:
+    required: t.List[str]
+    type: str
+    properties: PropertyDup9
+
+
+# from: definitions
+class Definition:
+    TokenObtainPair: TokenObtainPair
+    TokenRefresh: TokenRefresh
+    TokenVerify: TokenVerify
+    TestReadOnlyShort: TestReadOnlyShort
+    Answer: Answer
+    Question: Question
+    Test: Test
+    AnswerReadOnly: Answer
+    QuestionReadOnly: QuestionReadOnly
+    TestReadOnly: TestReadOnly
+
+
+# from: 
+class Toplevel:
+    swagger: str
+    info: Info
+    host: str
+    schemes: t.List[str]
+    basePath: str
+    consumes: t.List[str]
+    produces: t.List[str]
+    securityDefinitions: SecurityDefinition
+    security: t.List[Security]
+    paths: Path
+    definitions: Definition

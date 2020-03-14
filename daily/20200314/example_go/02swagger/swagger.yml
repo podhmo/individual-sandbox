@@ -1,0 +1,20 @@
+consumes:
+- application/json
+info:
+  title: 02swagger
+  version: 0.1.0
+paths: {}
+definitions:
+  data:
+    type: object
+    properties:
+      name:
+        type: string
+      age:
+        type: integer
+    additionalProperties: string
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
