@@ -1,14 +1,16 @@
 import ast
 import logging
 from handofcats import as_command
-from q import q
+from functools import partial
+from q import q, Q, QBuilder, QEvaluator
 
 logger = logging.getLogger(__name__)
 
 
 class StrictVisitor(ast.NodeVisitor):
-    def __init__(self) -> None:
+    def __init__(self, ctx) -> None:
         self.stack = [[]]
+        self.ctx = ctx
 
     # override
     def generic_visit(self, node: ast.AST):
@@ -26,11 +28,11 @@ class StrictVisitor(ast.NodeVisitor):
 
     def visit_Name(self, node: ast.Name):
         logger.debug("trace Name depth=%d %s", len(self.stack), node)
-        self.stack[-1].append(q(node.id))
+        self.stack[-1].append(self.ctx.create_from_name(node))
 
     def visit_Constant(self, node: ast.Constant):
         logger.debug("trace Constant depth=%d %s", len(self.stack), node)
-        self.stack[-1].append(q(repr(ast.literal_eval(node))))
+        self.stack[-1].append(self.ctx.create_from_value(node))
 
     def visit_BinOp(self, node: ast.BinOp):
         logger.debug(
@@ -110,7 +112,7 @@ class StrictVisitor(ast.NodeVisitor):
         k = self.stack[-1].pop()
 
         assert not self.stack.pop()
-        self.stack[-1].append(c.__getitem__(k))
+        self.stack[-1].append(c[k])
 
     def visit_Attribute(self, node: ast.Attribute):
         logger.debug(
@@ -158,49 +160,92 @@ class StrictVisitor(ast.NodeVisitor):
         self.stack[-1].append(fn(*args, **kwargs))
 
 
-def run(code: str, *, env=None):
+class CtxForBuild:
+    def __init__(self, env):
+        self.env = env
+        self.builder = QBuilder()
+
+    def create_from_name(self, node: ast.Name) -> Q:
+        return q(node.id, builder=self.builder)
+
+    def create_from_value(self, node: ast.Constant) -> Q:
+        return q(repr(ast.literal_eval(node)), builder=self.builder)
+
+
+class ContextForBuilding:
+    def __init__(self, env):
+        self.env = env
+        self.builder = QBuilder()
+
+    def create_from_name(self, node: ast.Name) -> Q:
+        return q(node.id, builder=self.builder)
+
+    def create_from_value(self, node: ast.Constant) -> Q:
+        return q(repr(ast.literal_eval(node)), builder=self.builder)
+
+
+class ContextForEvaluation:
+    def __init__(self, env):
+        self.env = env
+        self.builder = QEvaluator()
+
+    def create_from_name(self, node: ast.Name) -> Q:
+        return q(self.env[node.id], builder=self.builder)
+
+    def create_from_value(self, node: ast.Constant) -> Q:
+        return q(ast.literal_eval(node), builder=self.builder)
+
+
+def run(code: str, *, create_ctx, env=None):
     print("----------------------------------------")
     print(f"input : {code}")
     t = ast.parse(code)
-    v = StrictVisitor()
+    v = StrictVisitor(create_ctx(env))
     v.visit(t)
     print(f"output: {v.stack[-1][-1]}")
 
 
 @as_command
 def main():
-    # run("1")
-    # # BinOp
-    # run("1 + 1")
-    # run("2 * 3")
-    # run("2 * (3 + 1)")
-    # run("(2 * 3) + 1")
-    # # Name
-    # run("x", env={"x": 10})
-    # run("x + 1", env={"x": 10})
-    # run("(x + 1) * x", env={"x": 10})
-    # run("x * 3", env={"x": "foo"})
-    # # Compare
-    # run("x > 10", env={"x": 10})
-    # run("x >= 10", env={"x": 10})
-    # run("0 < x <= 10", env={"x": 10})
-    # run("0 < x < 10", env={"x": 10})
-    # run("10 < x <= 100", env={"x": 10})
-    # # BoolOp
-    # run("True and True")
-    # run("True and False")
-    # run("False or True")
-    # run("False or False")
-    # run("0 < x and x <= 10", env={"x": 10})
-    # # dict
-    # run("d['x'] + d['y']", env={"d": {"x": 10, "y": 20}})
-    # object
-    class ob:
-        x = 10
-        y = 20
+    def do_all(_run):
+        _run("1")
+        # BinOp
+        _run("1 + 1")
+        _run("2 * 3")
+        _run("2 * (3 + 1)")
+        _run("(2 * 3) + 1")
+        # Name
+        _run("x", env={"x": 10})
+        _run("x + 1", env={"x": 10})
+        _run("(x + 1) * x", env={"x": 10})
+        _run("x * 3", env={"x": "foo"})
+        # Compare
+        _run("x > 10", env={"x": 10})
+        _run("x >= 10", env={"x": 10})
+        _run("0 < x <= 10", env={"x": 10})
+        _run("0 < x < 10", env={"x": 10})
+        _run("10 < x <= 100", env={"x": 10})
+        # BoolOp
+        _run("True and True")
+        _run("True and False")
+        _run("False or True")
+        _run("False or False")
+        _run("0 < x and x <= 10", env={"x": 10})
+        # dict
+        _run("d['x'] + d['y']", env={"d": {"x": 10, "y": 20}})
+        # object
+        class ob:
+            x = 10
+            y = 20
 
-    run("ob.x * ob.y", env={"ob": ob})
+        _run("ob.x * ob.y", env={"ob": ob})
 
-    # # call
-    # run("x.center(10)", env={"x": "foo"})
-    # run("x.split(sep='/')", env={"x": "foo/bar/boo"})
+        # call
+        _run("x.center(10)", env={"x": "foo"})
+        _run("x.split(sep='/')", env={"x": "foo/bar/boo"})
+
+    do_all(partial(run, create_ctx=ContextForBuilding))
+    print("")
+    print("****")
+    print("")
+    do_all(partial(run, create_ctx=ContextForEvaluation))

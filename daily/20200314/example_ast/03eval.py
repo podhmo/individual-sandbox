@@ -6,4 +6,6 @@ def q(val, builder=QEvaluator(), **kwargs):
 
 
 print(q(10).val, q(10).Add(20).Add(30))
+print(q(10).Add(20).bit_length().Add(30))
 print(q("foo").upper())
+print(q({"x": "xxxx"})["x"])

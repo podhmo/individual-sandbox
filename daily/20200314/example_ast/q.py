@@ -1,5 +1,4 @@
 import operator
-from prestring.utils import LazyArgumentsAndKeywords
 
 
 class Q:
@@ -74,8 +73,20 @@ class Q:
     def __str__(self):
         return str(self.builder.build(self))
 
+    def __to_string__(self, builder) -> str:
+        if not self.kwargs:
+            return self.val
+        kwargs = {
+            k: (v.__to_string__(builder) if hasattr(v, "__to_string__") else v)
+            for k, v in self.kwargs.items()
+        }
+        return self.val.format(**kwargs)
+
     def __getattr__(self, name):
-        return self.builder.attr(self, name)
+        return self.builder.getattr(self, name)
+
+    def __getitem__(self, name):
+        return self.builder.getindex(self, name)
 
 
 class QAttr:
@@ -87,24 +98,54 @@ class QAttr:
         self._q = q
 
     def __call__(self, *args, **kwargs):
-        new_args = [(x if hasattr(x, "builder") else repr(x)) for x in args]
-        new_kwargs = {
-            k: (x if hasattr(x, "builder") else repr(x)) for k, x in kwargs.items()
-        }
         return self._q.__class__(
             self.builder,
             "{inner}.{methodname}({args})",
             kwargs=dict(
                 inner=self._q,
                 methodname=self.name,
-                args=LazyArgumentsAndKeywords(new_args, new_kwargs),  # xxx
+                args=QArgs(self.builder, args, kwargs),
             ),
         )
 
     def __getattr__(self, name):
         if name.startswith("_"):
             raise AttributeError(name)
-        return self.__class__(self.builder, f"{self.name}.{name}", self._q)
+        q = self._q.__class__(self.builder, "{inner}", dict(inner=self))
+        return getattr(q, name)
+
+    def __to_string__(self, builder) -> str:
+        q = self._q
+        inner = q.__to_string__(builder) if hasattr(q, "__to_string__") else q
+        return "{}.{}".format(inner, self.name)
+
+
+class QArgs:
+    __slots__ = ("builder", "args", "kwargs")
+
+    def __init__(self, builder, args, kwargs):
+        self.builder = builder
+        self.args = args
+        self.kwargs = kwargs
+
+    def __to_string__(self, builder) -> str:
+        new_args = [
+            (x.__to_string__(builder) if hasattr(x, "__to_string__") else repr(x))
+            for x in self.args
+        ]
+        new_kwargs = [
+            "{}={}".format(
+                k,
+                (x.__to_string__(builder) if hasattr(x, "__to_string__") else repr(x)),
+            )
+            for k, x in self.kwargs.items()
+        ]
+        r = []
+        if new_args:
+            r.extend(new_args)
+        if new_kwargs:
+            r.extend(new_kwargs)
+        return ", ".join(r)
 
 
 class QBuilder:
@@ -118,56 +159,24 @@ class QBuilder:
         fmt = "({left} {op} {right})"
         return q.__class__(self, fmt, kwargs=dict(op=name, left=q, right=right))
 
-    def attr(self, q, name):
+    def getattr(self, q, name):
         return self.ATTR_CLASS(self, name, q)
 
+    def getindex(self, q, name):
+        return q.__class__(self, "{inner}[{name}]", kwargs=dict(inner=q, name=name))
+
     def call(self, q, args, kwargs):
-        new_args = [(x if hasattr(x, "builder") else repr(x)) for x in args]
-        new_kwargs = {
-            k: (x if hasattr(x, "builder") else repr(x)) for k, x in kwargs.items()
-        }
         return q.__class__(
             self,
             "{inner}({args})",
-            kwargs=dict(
-                inner=q, args=LazyArgumentsAndKeywords(new_args, new_kwargs),  # xxx
-            ),
+            kwargs=dict(inner=q, args=QArgs(self, args, kwargs)),
         )
 
     def build(self, q):
-        if not q.kwargs:
-            return q.val
-
-        kwargs = {
-            k: (v.builder.build(v) if hasattr(v, "builder") else v)
-            for k, v in q.kwargs.items()
-        }
-        return q.val.format(**kwargs)
-
-
-class QEvalAttr:
-    __slots__ = ("builder", "name", "_q")
-
-    def __init__(self, builder, name, q):
-        self.builder = builder
-        self.name = name
-        self._q = q
-
-    def __call__(self, *args, **kwargs):
-        new_args = [getattr(x, "val", x) for x in args]
-        new_kwargs = {k: getattr(x, "val", x) for k, x in kwargs.items()}
-        ob = getattr(self._q, "val", self._q)
-        return getattr(ob, self.name)(*new_args, **new_kwargs)
-
-    def __getattr__(self, name):
-        if name.startswith("_"):
-            raise AttributeError(name)
-        return self.__class__(self.builder, f"{self.name}.{name}", self._q)
+        return q.__to_string__(self)
 
 
 class QEvaluator:
-    ATTR_CLASS = QEvalAttr
-
     uop_mapping = {
         "-": operator.neg,
         "not": operator.not_,
@@ -203,8 +212,18 @@ class QEvaluator:
         val = op(left_val, right_val)
         return q.__class__(self, val, kwargs=None)
 
-    def attr(self, q, name):
-        return self.ATTR_CLASS(self, name, q)
+    def getattr(self, q, name):
+        ob = getattr(q, "val", q)
+        return q.__class__(self, getattr(ob, name), kwargs=None)
+
+    def getindex(self, q, name):
+        ob = getattr(q, "val", q)
+        return q.__class__(self, ob[getattr(name, "val", name)], kwargs=None)
+
+    def call(self, q, args, kwargs):
+        args = [getattr(x, "val", x) for x in args]
+        kwargs = {k: getattr(x, "val", x) for k, x in kwargs.items()}
+        return q.__class__(self, q.val(*args, **kwargs), kwargs=None,)
 
     def build(self, q):
         return q.val

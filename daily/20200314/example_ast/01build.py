@@ -37,6 +37,7 @@ print(q("x"), q("x").And("y"), q("x").Lt(q("y").Not()))
 print(q("x").startswith("y"), q("x").foo.bar(q("z"), "xx").boo())
 print(q("x").IsNot("y"), q("x").In(q("y")))
 print(q("x").Add("y").neg().add(q("int")(True)))
+print(q("ob").x.Mult(q("ob").y))
 
 b = Builder(q("name").startswith("o"))
 b.var_names.add("name")
