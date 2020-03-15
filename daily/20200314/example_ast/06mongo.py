@@ -65,3 +65,6 @@ def main():
     _run('name == "foo" or (name == "boo" and age >= 20)')
     _run('name == "foo" or name == "boo" and age >= 20')
     _run("name in [1, 2, 3, 4, 5]")
+    _run("0 < x <= 10 < y < 20", env={"x": 10, "y": 20})
+
+
