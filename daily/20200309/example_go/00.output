@@ -1,0 +1,56 @@
+main.Result{
+  Input:  "https://foo.bar.jp/xxx/yyy",
+  Output: &url.URL{
+    Scheme:     "https",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "foo.bar.jp",
+    Path:       "/xxx/yyy",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "",
+    Fragment:   "",
+  },
+}
+main.Result{
+  Input:  "foo.bar.jp/xxx/yyy",
+  Output: &url.URL{
+    Scheme:     "",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "",
+    Path:       "foo.bar.jp/xxx/yyy",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "",
+    Fragment:   "",
+  },
+}
+main.Result{
+  Input:  "/xxx/yyy",
+  Output: &url.URL{
+    Scheme:     "",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "",
+    Path:       "/xxx/yyy",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "",
+    Fragment:   "",
+  },
+}
+main.Result{
+  Input:  "xxx/yyy",
+  Output: &url.URL{
+    Scheme:     "",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "",
+    Path:       "xxx/yyy",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "",
+    Fragment:   "",
+  },
+}

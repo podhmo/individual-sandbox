@@ -1,0 +1,28 @@
+main.Result{
+  Input:  "https://foo.bar.jp/xxx/?yyy=1&zzz=2",
+  Output: &url.URL{
+    Scheme:     "https",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "foo.bar.jp",
+    Path:       "/xxx/",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "yyy=1&zzz=2",
+    Fragment:   "",
+  },
+}
+main.Result{
+  Input:  "https://foo.bar.jp/xxx/?zzz=2&yyy=1",
+  Output: &url.URL{
+    Scheme:     "https",
+    Opaque:     "",
+    User:       (*url.Userinfo)(nil),
+    Host:       "foo.bar.jp",
+    Path:       "/xxx/",
+    RawPath:    "",
+    ForceQuery: false,
+    RawQuery:   "zzz=2&yyy=1",
+    Fragment:   "",
+  },
+}

@@ -8,15 +8,13 @@ mapping = {
     "INFO": "[  \x1b[0;32minfo\x1b[0m ]",
     "WARNING": "[  \x1b[0;33mwarn\x1b[0m ]",
     "WARN": "[  \x1b[0;33mwarn\x1b[0m ]",
-    "ERROR": "\x1b[0;31m[ error ]",
-    "ALERT": "\x1b[0;37;41m[ alert ]",
-    "CRITICAL": "\x1b[0;37;41m[ alert ]",
+    "ERROR": "\x1b[0;31m[ error ]\x1b[0m",
+    "ALERT": "\x1b[0;37;41m[ alert ]\x1b[0m",
+    "CRITICAL": "\x1b[0;37;41m[ alert ]\x1b[0m",
 }
 
 
 class ColorfulHandler(logging.StreamHandler):
-    terminator = "\x1b[0m\n"
-
     def emit(self, record: logging.LogRecord) -> None:
         record.levelname = mapping[record.levelname]
         super().emit(record)
