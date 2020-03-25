@@ -185,7 +185,7 @@ class QEvaluator:
         "!=": operator.ne,
         "is": operator.is_,
         "is not": operator.is_not,
-        "in": operator.contains,
+        "in": lambda x, y: x in y,
         "not in": lambda x, y: x not in y,
         "+": operator.add,
         "-": operator.sub,

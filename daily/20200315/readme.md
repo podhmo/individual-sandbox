@@ -1,3 +1,17 @@
+## python graphql ariadne
+
+ariadneを使うとどれくらいシンプルになるんだろう？
+ちょっとやってみる
+
+### `__typename`
+
+これ便利だな。
+
+### `resolve type`
+
+これはinterfaceのときに使う。
+
+
 ## python graphql
 
 - どうもgraphql-core-nextから正式にgraphql-core3に変わったっぽい

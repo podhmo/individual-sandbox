@@ -12,3 +12,9 @@
 	python $(shell echo $@*.py)
 06:
 	python $(shell echo $@*.py)
+07:
+	python $(shell echo $@*.py)
+08:
+	python $(shell echo $@*.py)
+09:
+	python $(shell echo $@*.py)
