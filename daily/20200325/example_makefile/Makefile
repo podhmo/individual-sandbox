@@ -23,5 +23,3 @@ SHELL := $(shell which bash)
 	$(MAKE) -f <(cat $@.mk dummies.mk) || exit 0
 	@echo ----------------------------------------
 	$(MAKE) -f <(cat $@.mk <(printf "base:\n\t:\n")) || exit 0
-
-
