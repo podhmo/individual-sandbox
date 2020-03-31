@@ -1,0 +1,287 @@
+definitions:
+  headers:
+    type: object
+    properties:
+      Date:
+        type: string
+        example: 'Wed, 25 Mar 2020 16:53:48 GMT'
+      Content-Type:
+        type: string
+        example: application/json; charset=utf-8
+      Transfer-Encoding:
+        type: string
+        example: chunked
+      Connection:
+        type: string
+        example: keep-alive
+      Server:
+        type: string
+        example: nginx
+      X-Frame-Options:
+        type: string
+        example: SAMEORIGIN
+      X-XSS-Protection:
+        type: string
+        example: 1; mode=block
+      X-Content-Type-Options:
+        type: string
+        example: nosniff
+      X-Download-Options:
+        type: string
+        example: noopen
+      X-Permitted-Cross-Domain-Policies:
+        type: string
+        example: none
+      Referrer-Policy:
+        type: string
+        example: strict-origin-when-cross-origin
+      Link:
+        type: string
+        example: '<https://qiita.com/api/v2/authenticated_user/items?page=1&per_page=100>;
+          rel="first", <https://qiita.com/api/v2/authenticated_user/items?page=1&per_page=100>;
+          rel="last"'
+      Total-Count:
+        type: string
+        example: '71'
+      ETag:
+        type: string
+        example: W/"101f48f251fca402824a11c02b8d8660"
+      Cache-Control:
+        type: string
+        example: max-age=0, private, must-revalidate
+      Rate-Limit:
+        type: string
+        example: '1000'
+      Rate-Remaining:
+        type: string
+        example: '989'
+      Rate-Reset:
+        type: string
+        example: '1585156721'
+      Vary:
+        type: string
+        example: Origin
+      X-Runtime:
+        type: string
+        example: '0.436552'
+      Strict-Transport-Security:
+        type: string
+        example: max-age=2592000
+      X-Request-Id:
+        type: string
+        example: bc754cdc-cd70-49c6-88c1-46e34b3700be
+    required:
+    - Date
+    - Content-Type
+    - Transfer-Encoding
+    - Connection
+    - Server
+    - X-Frame-Options
+    - X-XSS-Protection
+    - X-Content-Type-Options
+    - X-Download-Options
+    - X-Permitted-Cross-Domain-Policies
+    - Referrer-Policy
+    - Link
+    - Total-Count
+    - ETag
+    - Cache-Control
+    - Rate-Limit
+    - Rate-Remaining
+    - Rate-Reset
+    - Vary
+    - X-Runtime
+    - Strict-Transport-Security
+    - X-Request-Id
+  versions:
+    type: array
+    items:
+      type: any
+  tagsItem:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Go
+      versions:
+        $ref: '#/definitions/versions'
+    required:
+    - name
+    - versions
+  tags:
+    type: array
+    items:
+      $ref: '#/definitions/tagsItem'
+  user:
+    type: object
+    properties:
+      description:
+        type: string
+        example: ''
+      facebook_id:
+        type: string
+        example: ''
+      followees_count:
+        type: integer
+        example: 43
+      followers_count:
+        type: integer
+        example: 51
+      github_login_name:
+        type: string
+        example: podhmo
+      id:
+        type: string
+        example: podhmo
+      items_count:
+        type: integer
+        example: 70
+      linkedin_id:
+        type: string
+        example: ''
+      location:
+        type: string
+        example: ''
+      name:
+        type: string
+        example: ''
+      organization:
+        type: string
+        example: ''
+      permanent_id:
+        type: integer
+        example: 2384
+      profile_image_url:
+        type: string
+        example: 'https://qiita-image-store.s3.amazonaws.com/0/2384/profile-images/1473681473'
+      team_only:
+        type: boolean
+        example: false
+      twitter_screen_name:
+        type: string
+        example: podhmo
+      website_url:
+        type: string
+        example: ''
+    required:
+    - description
+    - facebook_id
+    - followees_count
+    - followers_count
+    - github_login_name
+    - id
+    - items_count
+    - linkedin_id
+    - location
+    - name
+    - organization
+    - permanent_id
+    - profile_image_url
+    - team_only
+    - twitter_screen_name
+    - website_url
+  contentItem:
+    type: object
+    properties:
+      rendered_body:
+        type: string
+        example: |2-
+
+          <h2>
+          <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla
+      body:
+        type: string
+        example: |-
+          ## はじめに
+
+          この記事は[Goアドベントカレンダー](
+          https://qiita.com/advent-calendar/2018/go)
+          の５日目の記事です。
+
+          ### 自己紹介
+
+          ちょっとだ
+      coediting:
+        type: boolean
+        example: false
+      comments_count:
+        type: integer
+        example: 0
+      created_at:
+        type: string
+        example: '2018-12-04T22:09:04+09:00'
+      group:
+        type: any
+        x-nullable: true
+      id:
+        type: string
+        example: b4056243699388b41133
+      likes_count:
+        type: integer
+        example: 16
+      private:
+        type: boolean
+        example: false
+      reactions_count:
+        type: integer
+        example: 0
+      tags:
+        $ref: '#/definitions/tags'
+      title:
+        type: string
+        example: go runの実行をwrapしてhttp/httpsのrequestを手軽にtraceしたい
+      updated_at:
+        type: string
+        example: '2018-12-09T18:15:26+09:00'
+      url:
+        type: string
+        example: 'https://qiita.com/podhmo/items/b4056243699388b41133'
+      user:
+        $ref: '#/definitions/user'
+      page_views_count:
+        type: any
+        x-nullable: true
+    required:
+    - rendered_body
+    - body
+    - coediting
+    - comments_count
+    - created_at
+    - id
+    - likes_count
+    - private
+    - reactions_count
+    - tags
+    - title
+    - updated_at
+    - url
+    - user
+  content:
+    type: array
+    items:
+      $ref: '#/definitions/contentItem'
+  response:
+    type: object
+    properties:
+      url:
+        type: string
+        example: 'https://qiita.com/api/v2/authenticated_user/items?per_page=100'
+      status_code:
+        type: integer
+        example: 200
+      content:
+        $ref: '#/definitions/content'
+    required:
+    - url
+    - status_code
+    - content
+  top:
+    type: object
+    properties:
+      headers:
+        $ref: '#/definitions/headers'
+      response:
+        $ref: '#/definitions/response'
+    required:
+    - headers
+    - response

@@ -1,0 +1,2977 @@
+{
+  "description": "In this schema file, we represents the public interface of Qiita API v2 in JSON Hyper Schema draft v4.",
+  "properties": {
+    "access_token": {
+      "description": "Access token for Qiita API v2",
+      "links": [
+        {
+          "description": "Create a new access token.",
+          "href": "/api/v2/access_tokens",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "client_id": {
+                "description": "An unique ID to identify a registered client",
+                "example": "a91f0396a0968ff593eafdd194e3d17d32c41b1da7b25e873b42e9058058cd9d",
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              "client_secret": {
+                "description": "A secret key to authenticate a registered API client",
+                "example": "01fc259c31fe39e72c8ef911c3432a33d51e9337ff34c4fac86c491a0d37251f",
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              "code": {
+                "description": "A temporary secret code to exchange with an access token",
+                "example": "fefef5f067171f247fb415e38cb0631797b82f4141dcdee66db846c3ade57a03",
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "client_id",
+              "client_secret",
+              "code"
+            ]
+          },
+          "title": "create_access_token"
+        },
+        {
+          "description": "Deactivate an access token.",
+          "href": "/api/v2/access_tokens/:access_token",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_access_token"
+        }
+      ],
+      "properties": {
+        "client_id": {
+          "description": "An unique ID to identify a registered client",
+          "example": "a91f0396a0968ff593eafdd194e3d17d32c41b1da7b25e873b42e9058058cd9d",
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        "scopes": {
+          "description": "Authorized action scopes of the access token",
+          "items": {
+            "example": "read_qiita",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "token": {
+          "description": "Access token identifier string",
+          "example": "ea5d0a593b2655e9568f144fb1826342292f5c6b7d406fda00577b8d1530d8a5",
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_id",
+        "scopes",
+        "token"
+      ],
+      "title": "Access token"
+    },
+    "authenticated_user": {
+      "description": "An user currently authenticated by a given access token. This resources has more detailed information than normal User resource.",
+      "links": [
+        {
+          "description": "Get a user associated to the current access token.",
+          "href": "/api/v2/authenticated_user",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_authenticated_user"
+        }
+      ],
+      "properties": {
+        "description": {
+          "description": "self-description",
+          "example": "Hello, world.",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "facebook_id": {
+          "description": "Facebook ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "followees_count": {
+          "description": "Followees count",
+          "example": 100,
+          "type": "integer"
+        },
+        "followers_count": {
+          "description": "Followers count",
+          "example": 200,
+          "type": "integer"
+        },
+        "github_login_name": {
+          "description": "GitHub ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "id": {
+          "description": "User ID",
+          "example": "yaotti",
+          "type": "string"
+        },
+        "items_count": {
+          "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+          "example": 300,
+          "type": "integer"
+        },
+        "linkedin_id": {
+          "description": "LinkedIn ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "location": {
+          "description": "Location",
+          "example": "Tokyo, Japan",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "name": {
+          "description": "Customized user name",
+          "example": "Hiroshige Umino",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "organization": {
+          "description": "Organization which a user belongs to",
+          "example": "Increments Inc",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "permanent_id": {
+          "description": "Unique integer ID",
+          "example": 1,
+          "type": "integer"
+        },
+        "profile_image_url": {
+          "description": "Profile image URL",
+          "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+          "type": "string"
+        },
+        "team_only": {
+          "description": "A flag whether this user is configured as team-only",
+          "example": false,
+          "type": "boolean"
+        },
+        "twitter_screen_name": {
+          "description": "Twitter screen name",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "website_url": {
+          "description": "Website URL",
+          "example": "http://yaotti.hatenablog.com",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "image_monthly_upload_limit": {
+          "description": "Monthly image upload limit",
+          "example": 1048576,
+          "type": "integer"
+        },
+        "image_monthly_upload_remaining": {
+          "description": "Monthly remaining image upload size",
+          "example": 524288,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "description",
+        "facebook_id",
+        "followees_count",
+        "followers_count",
+        "github_login_name",
+        "id",
+        "items_count",
+        "linkedin_id",
+        "location",
+        "name",
+        "organization",
+        "permanent_id",
+        "profile_image_url",
+        "team_only",
+        "twitter_screen_name",
+        "website_url",
+        "image_monthly_upload_limit",
+        "image_monthly_upload_remaining"
+      ],
+      "title": "Authenticated user"
+    },
+    "comment": {
+      "description": "A comment posted on an item or a project. A comment on a project is available only on Qiita Team.",
+      "links": [
+        {
+          "description": "Delete a comment.",
+          "href": "/api/v2/comments/:comment_id",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_comment"
+        },
+        {
+          "description": "Get a comment.",
+          "href": "/api/v2/comments/:comment_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_comment"
+        },
+        {
+          "description": "Update a comment.",
+          "href": "/api/v2/comments/:comment_id",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Comment body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body"
+            ]
+          },
+          "title": "update_comment"
+        },
+        {
+          "description": "<strong>DELETE /api/v2/comments/:comment_id/thank has been deprecated since Nov 16 2016</strong> Delete like from a comment.",
+          "href": "/api/v2/comments/:comment_id/thank",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "unthank_comment"
+        },
+        {
+          "description": "<strong>PUT /api/v2/comments/:comment_id/thank has been deprecated since Nov 16 2016</strong> Add like to a comment.",
+          "href": "/api/v2/comments/:comment_id/thank",
+          "method": "PUT",
+          "rel": "create",
+          "title": "thank_comment"
+        },
+        {
+          "description": "List comments on an item in newest order.",
+          "href": "/api/v2/items/:item_id/comments",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_item_comments"
+        },
+        {
+          "description": "Post a comment on an item.",
+          "href": "/api/v2/items/:item_id/comments",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Comment body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body"
+            ]
+          },
+          "title": "create_item_comment"
+        },
+        {
+          "description": "Create a comment by a specific user (only available on Qiita Team. administrative privileges required).",
+          "href": "/api/v2/items/:item_id/imported_comments",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Comment body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "user_id": {
+                "description": "User ID",
+                "example": "yaotti",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Date-time when this data was created",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "description": "Date-time when this data was updated",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "user_id"
+            ]
+          },
+          "title": "import_item_comment"
+        },
+        {
+          "description": "List comments on a project in newest order.",
+          "href": "/api/v2/projects/:project_id/comments",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_project_comments"
+        },
+        {
+          "description": "Post a comment on a project.",
+          "href": "/api/v2/projects/:project_id/comments",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Comment body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body"
+            ]
+          },
+          "title": "create_project_comment"
+        },
+        {
+          "description": "Create a comment to a project by a specific user (only available on Qiita Team. administrative privileges required).",
+          "href": "/api/v2/projects/:project_id/imported_comments",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Comment body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "user_id": {
+                "description": "User ID",
+                "example": "yaotti",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Date-time when this data was created",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "description": "Date-time when this data was updated",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "user_id"
+            ]
+          },
+          "title": "import_project_comment"
+        }
+      ],
+      "properties": {
+        "body": {
+          "description": "Comment body in Markdown",
+          "example": "# Example",
+          "type": "string"
+        },
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "Comment unique ID",
+          "example": "3391f50c35f953abfc4f",
+          "pattern": "^[0-9a-f]{20}$",
+          "type": "string"
+        },
+        "rendered_body": {
+          "description": "Comment body in HTML",
+          "example": "<h1>Example</h1>",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Date-time when this data was updated",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "user": {
+          "description": "A Qiita user (a.k.a. account)",
+          "properties": {
+            "description": {
+              "description": "self-description",
+              "example": "Hello, world.",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "facebook_id": {
+              "description": "Facebook ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "followees_count": {
+              "description": "Followees count",
+              "example": 100,
+              "type": "integer"
+            },
+            "followers_count": {
+              "description": "Followers count",
+              "example": 200,
+              "type": "integer"
+            },
+            "github_login_name": {
+              "description": "GitHub ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "id": {
+              "description": "User ID",
+              "example": "yaotti",
+              "type": "string"
+            },
+            "items_count": {
+              "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+              "example": 300,
+              "type": "integer"
+            },
+            "linkedin_id": {
+              "description": "LinkedIn ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "location": {
+              "description": "Location",
+              "example": "Tokyo, Japan",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "description": "Customized user name",
+              "example": "Hiroshige Umino",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "organization": {
+              "description": "Organization which a user belongs to",
+              "example": "Increments Inc",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "permanent_id": {
+              "description": "Unique integer ID",
+              "example": 1,
+              "type": "integer"
+            },
+            "profile_image_url": {
+              "description": "Profile image URL",
+              "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+              "type": "string"
+            },
+            "team_only": {
+              "description": "A flag whether this user is configured as team-only",
+              "example": false,
+              "type": "boolean"
+            },
+            "twitter_screen_name": {
+              "description": "Twitter screen name",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "website_url": {
+              "description": "Website URL",
+              "example": "http://yaotti.hatenablog.com",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "description",
+            "facebook_id",
+            "followees_count",
+            "followers_count",
+            "github_login_name",
+            "id",
+            "items_count",
+            "linkedin_id",
+            "location",
+            "name",
+            "organization",
+            "permanent_id",
+            "profile_image_url",
+            "team_only",
+            "twitter_screen_name",
+            "website_url"
+          ],
+          "title": "User"
+        }
+      },
+      "required": [
+        "body",
+        "created_at",
+        "id",
+        "rendered_body",
+        "updated_at",
+        "user"
+      ],
+      "title": "Comment"
+    },
+    "expanded_template": {
+      "description": "You can preview the expanded result of a given template. This is available only on Qiita Team.",
+      "links": [
+        {
+          "description": "Get a template where its variables are expanded.",
+          "href": "/api/v2/expanded_templates",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "The body of this template",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "MTG/%{Year}/%{month}/%{day}",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "A template title where variables are to be expanded",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "tags",
+              "title"
+            ]
+          },
+          "title": "create_expanded_template"
+        }
+      ],
+      "properties": {
+        "expanded_body": {
+          "description": "An item body where variables are expanded",
+          "example": "Weekly MTG on 2000/01/01",
+          "type": "string"
+        },
+        "expanded_tags": {
+          "description": "A list of tags where variables are expanded",
+          "example": [
+            {
+              "name": "MTG/2000/01/01",
+              "versions": [
+                "0.0.1"
+              ]
+            }
+          ],
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "versions": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "expanded_title": {
+          "description": "An item title where variables are expanded",
+          "example": "Weekly MTG on 2015/06/03",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expanded_body",
+        "expanded_tags",
+        "expanded_title"
+      ],
+      "title": "Expanded template"
+    },
+    "group": {
+      "description": "Represents a group on Qiita Team",
+      "properties": {
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "A group unique ID",
+          "example": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "Group name for display.",
+          "example": "Dev",
+          "type": "string"
+        },
+        "private": {
+          "description": "A flag to tell which this group is private or public.",
+          "example": false,
+          "type": "boolean"
+        },
+        "updated_at": {
+          "description": "Date-time when this data was updated",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "url_name": {
+          "description": "Unique name on a team.",
+          "example": "dev",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "id",
+        "name",
+        "private",
+        "updated_at",
+        "url_name"
+      ],
+      "title": "Group"
+    },
+    "item": {
+      "description": "Represents an item posted from a user",
+      "links": [
+        {
+          "description": "List the authenticated user's items in newest order",
+          "href": "/api/v2/authenticated_user/items",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_authenticated_user_items"
+        },
+        {
+          "description": "List items.",
+          "href": "/api/v2/items",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "query": {
+                "description": "Search query",
+                "example": "qiita user:yaotti",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_items"
+        },
+        {
+          "description": "Create an item.",
+          "href": "/api/v2/items",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Item body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "coediting": {
+                "description": "A flag whether this item is co-edit mode (only available on Qiita Team)",
+                "example": false,
+                "type": "boolean"
+              },
+              "group_url_name": {
+                "description": "A group's url_name on which share this item (pass null to make public; only available on Qiita Team)",
+                "example": "dev",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "private": {
+                "description": "A flag whether this item is private (only available on Qiita)",
+                "example": false,
+                "type": "boolean"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "The title of this item",
+                "example": "Example title",
+                "type": "string"
+              },
+              "tweet": {
+                "description": "A flag to post a tweet (only availabble if Twitter integration is enabled)",
+                "example": false,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "body",
+              "tags",
+              "title"
+            ]
+          },
+          "title": "create_item"
+        },
+        {
+          "description": "Delete an item.",
+          "href": "/api/v2/items/:item_id",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_item"
+        },
+        {
+          "description": "Get an item.",
+          "href": "/api/v2/items/:item_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_item"
+        },
+        {
+          "description": "Update an item.",
+          "href": "/api/v2/items/:item_id",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Item body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "coediting": {
+                "description": "A flag whether this item is co-edit mode (only available on Qiita Team)",
+                "example": false,
+                "type": "boolean"
+              },
+              "group_url_name": {
+                "description": "A group's url_name on which share this item (pass null to make public; only available on Qiita Team)",
+                "example": "dev",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "private": {
+                "description": "A flag whether this item is private (only available on Qiita)",
+                "example": false,
+                "type": "boolean"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "The title of this item",
+                "example": "Example title",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "title"
+            ]
+          },
+          "title": "update_item"
+        },
+        {
+          "description": "Create an item by a specific user (only available on Qiita Team. administrative privileges required).",
+          "href": "/api/v2/imported_items",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "Item body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "coediting": {
+                "description": "A flag whether this item is co-edit mode (only available on Qiita Team)",
+                "example": false,
+                "type": "boolean"
+              },
+              "group_url_name": {
+                "description": "A group's url_name on which share this item (pass null to make public; only available on Qiita Team)",
+                "example": "dev",
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "The title of this item",
+                "example": "Example title",
+                "type": "string"
+              },
+              "user_id": {
+                "description": "User ID",
+                "example": "yaotti",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Date-time when this data was created",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "description": "Date-time when this data was updated",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "tags",
+              "title",
+              "user_id"
+            ]
+          },
+          "title": "import_item"
+        },
+        {
+          "description": "<strong>The Like API on Qiita Team has been deprecated since Oct 24 2017. Please use the Emoji reaction API instead.</strong> Unlike an item.",
+          "href": "/api/v2/items/:item_id/like",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "unlike_item"
+        },
+        {
+          "description": "<strong>The Like API on Qiita Team has been deprecated since Oct 24 2017. Please use the Emoji reaction API instead.</strong> Like an item",
+          "href": "/api/v2/items/:item_id/like",
+          "mediaType": "null",
+          "method": "PUT",
+          "rel": "put",
+          "title": "like_item"
+        },
+        {
+          "description": "Stock an item.",
+          "href": "/api/v2/items/:item_id/stock",
+          "mediaType": "null",
+          "method": "PUT",
+          "rel": "put",
+          "title": "stock_item"
+        },
+        {
+          "description": "Unstock an item.",
+          "href": "/api/v2/items/:item_id/stock",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "unstock_item"
+        },
+        {
+          "description": "Check if you stocked an item.",
+          "href": "/api/v2/items/:item_id/stock",
+          "mediaType": "null",
+          "method": "GET",
+          "rel": "check",
+          "title": "get_item_stock"
+        },
+        {
+          "description": "<strong>The Like API on Qiita Team has been deprecated since Oct 24 2017. Please use the Emoji reaction API instead.</strong> Check if you liked an item.",
+          "href": "/api/v2/items/:item_id/like",
+          "mediaType": "null",
+          "method": "GET",
+          "rel": "check",
+          "title": "get_item_like"
+        },
+        {
+          "description": "Stock an item.",
+          "href": "/api/v2/items/:item_id/stock",
+          "mediaType": "null",
+          "method": "PUT",
+          "rel": "put",
+          "title": "stock_item"
+        },
+        {
+          "description": "List tagged items in recently-tagged order.",
+          "href": "/api/v2/tags/:tag_id/items",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_tag_items"
+        },
+        {
+          "description": "List a user's items in newest order.",
+          "href": "/api/v2/users/:user_id/items",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_user_items"
+        },
+        {
+          "description": "List a user's stocked items in recently-stocked order.",
+          "href": "/api/v2/users/:user_id/stocks",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_user_stocks"
+        }
+      ],
+      "properties": {
+        "rendered_body": {
+          "description": "Item body in HTML",
+          "example": "<h1>Example</h1>",
+          "type": "string"
+        },
+        "body": {
+          "description": "Item body in Markdown",
+          "example": "# Example",
+          "type": "string"
+        },
+        "coediting": {
+          "description": "A flag whether this item is co-edit mode (only available on Qiita Team)",
+          "example": false,
+          "type": "boolean"
+        },
+        "comments_count": {
+          "description": "Comments count",
+          "example": 100,
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "group": {
+          "description": "Represents a group on Qiita Team",
+          "properties": {
+            "created_at": {
+              "description": "Date-time when this data was created",
+              "example": "2000-01-01T00:00:00+00:00",
+              "format": "date-time",
+              "type": "string"
+            },
+            "id": {
+              "description": "A group unique ID",
+              "example": 1,
+              "type": "integer"
+            },
+            "name": {
+              "description": "Group name for display.",
+              "example": "Dev",
+              "type": "string"
+            },
+            "private": {
+              "description": "A flag to tell which this group is private or public.",
+              "example": false,
+              "type": "boolean"
+            },
+            "updated_at": {
+              "description": "Date-time when this data was updated",
+              "example": "2000-01-01T00:00:00+00:00",
+              "format": "date-time",
+              "type": "string"
+            },
+            "url_name": {
+              "description": "Unique name on a team.",
+              "example": "dev",
+              "type": "string"
+            }
+          },
+          "required": [
+            "created_at",
+            "id",
+            "name",
+            "private",
+            "updated_at",
+            "url_name"
+          ],
+          "title": "Group"
+        },
+        "id": {
+          "description": "An unique item ID",
+          "example": "4bd431809afb1bb99e4f",
+          "pattern": "^[0-9a-f]{20}$",
+          "type": "string"
+        },
+        "likes_count": {
+          "description": "Likes count (only available on Qiita)",
+          "example": 100,
+          "type": "integer"
+        },
+        "private": {
+          "description": "A flag whether this item is private (only available on Qiita)",
+          "example": false,
+          "type": "boolean"
+        },
+        "reactions_count": {
+          "description": "Emoji reactions count (only availabble on Qiita Team)",
+          "example": 100,
+          "type": "integer"
+        },
+        "tags": {
+          "description": "A list of tags",
+          "example": [
+            {
+              "name": "Ruby",
+              "versions": [
+                "0.0.1"
+              ]
+            }
+          ],
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "versions": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "title": {
+          "description": "The title of this item",
+          "example": "Example title",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Date-time when this data was updated",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL of this item",
+          "example": "https://qiita.com/yaotti/items/4bd431809afb1bb99e4f",
+          "type": "string"
+        },
+        "user": {
+          "description": "A Qiita user (a.k.a. account)",
+          "properties": {
+            "description": {
+              "description": "self-description",
+              "example": "Hello, world.",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "facebook_id": {
+              "description": "Facebook ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "followees_count": {
+              "description": "Followees count",
+              "example": 100,
+              "type": "integer"
+            },
+            "followers_count": {
+              "description": "Followers count",
+              "example": 200,
+              "type": "integer"
+            },
+            "github_login_name": {
+              "description": "GitHub ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "id": {
+              "description": "User ID",
+              "example": "yaotti",
+              "type": "string"
+            },
+            "items_count": {
+              "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+              "example": 300,
+              "type": "integer"
+            },
+            "linkedin_id": {
+              "description": "LinkedIn ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "location": {
+              "description": "Location",
+              "example": "Tokyo, Japan",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "description": "Customized user name",
+              "example": "Hiroshige Umino",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "organization": {
+              "description": "Organization which a user belongs to",
+              "example": "Increments Inc",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "permanent_id": {
+              "description": "Unique integer ID",
+              "example": 1,
+              "type": "integer"
+            },
+            "profile_image_url": {
+              "description": "Profile image URL",
+              "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+              "type": "string"
+            },
+            "team_only": {
+              "description": "A flag whether this user is configured as team-only",
+              "example": false,
+              "type": "boolean"
+            },
+            "twitter_screen_name": {
+              "description": "Twitter screen name",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "website_url": {
+              "description": "Website URL",
+              "example": "http://yaotti.hatenablog.com",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "description",
+            "facebook_id",
+            "followees_count",
+            "followers_count",
+            "github_login_name",
+            "id",
+            "items_count",
+            "linkedin_id",
+            "location",
+            "name",
+            "organization",
+            "permanent_id",
+            "profile_image_url",
+            "team_only",
+            "twitter_screen_name",
+            "website_url"
+          ],
+          "title": "User"
+        },
+        "page_views_count": {
+          "description": "The number of views.",
+          "example": 100,
+          "type": [
+            "null",
+            "integer"
+          ]
+        }
+      },
+      "required": [
+        "rendered_body",
+        "body",
+        "coediting",
+        "comments_count",
+        "created_at",
+        "group",
+        "id",
+        "likes_count",
+        "private",
+        "reactions_count",
+        "tags",
+        "title",
+        "updated_at",
+        "url",
+        "user",
+        "page_views_count"
+      ],
+      "title": "Item"
+    },
+    "like": {
+      "description": "<strong>The Like API on Qiita Team has been deprecated since Oct 24 2017. Please use the Emoji reaction API instead.</strong> Represents a like to an item.",
+      "links": [
+        {
+          "description": "List likes in newest order.",
+          "href": "/api/v2/items/:item_id/likes",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_item_likes"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "user": {
+          "description": "A Qiita user (a.k.a. account)",
+          "properties": {
+            "description": {
+              "description": "self-description",
+              "example": "Hello, world.",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "facebook_id": {
+              "description": "Facebook ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "followees_count": {
+              "description": "Followees count",
+              "example": 100,
+              "type": "integer"
+            },
+            "followers_count": {
+              "description": "Followers count",
+              "example": 200,
+              "type": "integer"
+            },
+            "github_login_name": {
+              "description": "GitHub ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "id": {
+              "description": "User ID",
+              "example": "yaotti",
+              "type": "string"
+            },
+            "items_count": {
+              "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+              "example": 300,
+              "type": "integer"
+            },
+            "linkedin_id": {
+              "description": "LinkedIn ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "location": {
+              "description": "Location",
+              "example": "Tokyo, Japan",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "description": "Customized user name",
+              "example": "Hiroshige Umino",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "organization": {
+              "description": "Organization which a user belongs to",
+              "example": "Increments Inc",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "permanent_id": {
+              "description": "Unique integer ID",
+              "example": 1,
+              "type": "integer"
+            },
+            "profile_image_url": {
+              "description": "Profile image URL",
+              "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+              "type": "string"
+            },
+            "team_only": {
+              "description": "A flag whether this user is configured as team-only",
+              "example": false,
+              "type": "boolean"
+            },
+            "twitter_screen_name": {
+              "description": "Twitter screen name",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "website_url": {
+              "description": "Website URL",
+              "example": "http://yaotti.hatenablog.com",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "description",
+            "facebook_id",
+            "followees_count",
+            "followers_count",
+            "github_login_name",
+            "id",
+            "items_count",
+            "linkedin_id",
+            "location",
+            "name",
+            "organization",
+            "permanent_id",
+            "profile_image_url",
+            "team_only",
+            "twitter_screen_name",
+            "website_url"
+          ],
+          "title": "User"
+        }
+      },
+      "required": [
+        "created_at",
+        "user"
+      ],
+      "title": "Like"
+    },
+    "project": {
+      "description": "Represents a project on Qiita Team (only available on Qiita Team).",
+      "links": [
+        {
+          "description": "List projects in newest order.",
+          "href": "/api/v2/projects",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_projects"
+        },
+        {
+          "description": "Create a new project.",
+          "href": "/api/v2/projects",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "archived": {
+                "description": "A flag whether this project is archived",
+                "example": false,
+                "type": "boolean"
+              },
+              "body": {
+                "description": "The project page body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of a project",
+                "example": "Kobiro Project",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "body",
+              "name"
+            ]
+          },
+          "title": "create_project"
+        },
+        {
+          "description": "Delete a project.",
+          "href": "/api/v2/projects/:project_id",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_project"
+        },
+        {
+          "description": "Get a project.",
+          "href": "/api/v2/projects/:project_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_project"
+        },
+        {
+          "description": "Update a project",
+          "href": "/api/v2/projects/:project_id",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "archived": {
+                "description": "A flag whether this project is archived",
+                "example": false,
+                "type": "boolean"
+              },
+              "body": {
+                "description": "The project page body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of a project",
+                "example": "Kobiro Project",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "body",
+              "name"
+            ]
+          },
+          "title": "update_project"
+        },
+        {
+          "description": "Create a project by a specific user.",
+          "href": "/api/v2/imported_projects",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "archived": {
+                "description": "A flag whether this project is archived",
+                "example": false,
+                "type": "boolean"
+              },
+              "body": {
+                "description": "The project page body in Markdown",
+                "example": "# Example",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of a project",
+                "example": "Kobiro Project",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "Ruby",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "user_id": {
+                "description": "User ID",
+                "example": "yaotti",
+                "type": "string"
+              },
+              "created_at": {
+                "description": "Date-time when this data was created",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              },
+              "updated_at": {
+                "description": "Date-time when this data was updated",
+                "example": "2000-01-01T00:00:00+00:00",
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "name",
+              "user_id"
+            ]
+          },
+          "title": "import_project"
+        }
+      ],
+      "properties": {
+        "rendered_body": {
+          "description": "The projects page body in HTML",
+          "example": "<h1>Example</h1>",
+          "type": "string"
+        },
+        "archived": {
+          "description": "A flag whether this project is archived",
+          "example": false,
+          "type": "boolean"
+        },
+        "body": {
+          "description": "The project page body in Markdown",
+          "example": "# Example",
+          "type": "string"
+        },
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "A project ID unique in its team",
+          "example": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "The name of a project",
+          "example": "Kobiro Project",
+          "type": "string"
+        },
+        "reactions_count": {
+          "description": "Emoji reactions count",
+          "example": 100,
+          "type": "integer"
+        },
+        "updated_at": {
+          "description": "Date-time when this data was updated",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rendered_body",
+        "archived",
+        "body",
+        "created_at",
+        "id",
+        "name",
+        "reactions_count",
+        "updated_at"
+      ],
+      "title": "Project"
+    },
+    "reaction": {
+      "description": "An emoji reaction on Qiita Team (only availabble on Qiita Team).",
+      "links": [
+        {
+          "description": "Add an emoji reaction to a comment.",
+          "href": "/api/v2/comments/:comment_id/reactions",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "name": {
+                "description": "A unique emoji name",
+                "example": "+1",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "title": "create_comment_reaction"
+        },
+        {
+          "description": "Add an emoji reaction to an item.",
+          "href": "/api/v2/items/:item_id/reactions",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "name": {
+                "description": "A unique emoji name",
+                "example": "+1",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "title": "create_item_reaction"
+        },
+        {
+          "description": "Add an emoji reaction to an project.",
+          "href": "/api/v2/projects/:project_id/reactions",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "name": {
+                "description": "A unique emoji name",
+                "example": "+1",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "title": "create_project_reaction"
+        },
+        {
+          "description": "Delete an emoji reaction from a comment.",
+          "href": "/api/v2/comments/:comment_id/reactions/:reaction_name",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_comment_reaction"
+        },
+        {
+          "description": "Delete an emoji reaction from an item.",
+          "href": "/api/v2/items/:item_id/reactions/:reaction_name",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_item_reaction"
+        },
+        {
+          "description": "Delete an emoji reaction from an project.",
+          "href": "/api/v2/projects/:project_id/reactions/:reaction_name",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_project_reaction"
+        },
+        {
+          "description": "List emoji reactions of an comment in recently-created order.",
+          "href": "/api/v2/comments/:comment_id/reactions",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_comment_reactions"
+        },
+        {
+          "description": "List emoji reactions of an item in recently-created order.",
+          "href": "/api/v2/items/:item_id/reactions",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_item_reactions"
+        },
+        {
+          "description": "List emoji reactions of an project in recently-created order.",
+          "href": "/api/v2/projects/:project_id/reactions",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_project_reactions"
+        }
+      ],
+      "properties": {
+        "created_at": {
+          "description": "Date-time when this data was created",
+          "example": "2000-01-01T00:00:00+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "image_url": {
+          "description": "An emoji image URL",
+          "example": "https://cdn.qiita.com/emoji/twemoji/unicode/1f44d.png",
+          "type": "string"
+        },
+        "name": {
+          "description": "A unique emoji name",
+          "example": "+1",
+          "type": "string"
+        },
+        "user": {
+          "description": "A Qiita user (a.k.a. account)",
+          "properties": {
+            "description": {
+              "description": "self-description",
+              "example": "Hello, world.",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "facebook_id": {
+              "description": "Facebook ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "followees_count": {
+              "description": "Followees count",
+              "example": 100,
+              "type": "integer"
+            },
+            "followers_count": {
+              "description": "Followers count",
+              "example": 200,
+              "type": "integer"
+            },
+            "github_login_name": {
+              "description": "GitHub ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "id": {
+              "description": "User ID",
+              "example": "yaotti",
+              "type": "string"
+            },
+            "items_count": {
+              "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+              "example": 300,
+              "type": "integer"
+            },
+            "linkedin_id": {
+              "description": "LinkedIn ID",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "location": {
+              "description": "Location",
+              "example": "Tokyo, Japan",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "name": {
+              "description": "Customized user name",
+              "example": "Hiroshige Umino",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "organization": {
+              "description": "Organization which a user belongs to",
+              "example": "Increments Inc",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "permanent_id": {
+              "description": "Unique integer ID",
+              "example": 1,
+              "type": "integer"
+            },
+            "profile_image_url": {
+              "description": "Profile image URL",
+              "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+              "type": "string"
+            },
+            "team_only": {
+              "description": "A flag whether this user is configured as team-only",
+              "example": false,
+              "type": "boolean"
+            },
+            "twitter_screen_name": {
+              "description": "Twitter screen name",
+              "example": "yaotti",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "website_url": {
+              "description": "Website URL",
+              "example": "http://yaotti.hatenablog.com",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          },
+          "required": [
+            "description",
+            "facebook_id",
+            "followees_count",
+            "followers_count",
+            "github_login_name",
+            "id",
+            "items_count",
+            "linkedin_id",
+            "location",
+            "name",
+            "organization",
+            "permanent_id",
+            "profile_image_url",
+            "team_only",
+            "twitter_screen_name",
+            "website_url"
+          ],
+          "title": "User"
+        }
+      },
+      "required": [
+        "created_at",
+        "image_url",
+        "name",
+        "user"
+      ],
+      "title": "Emoji reaction"
+    },
+    "tag": {
+      "description": "A tag attached to an item",
+      "links": [
+        {
+          "description": "List tags in newest order.",
+          "href": "/api/v2/tags",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "sort": {
+                "description": "Sort order (\"count\" and \"name\" are available)",
+                "example": "count",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_tags"
+        },
+        {
+          "description": "Get a tag.",
+          "href": "/api/v2/tags/:tag_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_tag"
+        },
+        {
+          "description": "List tags a user is following to in recently-tagged order.",
+          "href": "/api/v2/users/:user_id/following_tags",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_user_following_tags"
+        },
+        {
+          "description": "Unfollow a tag.",
+          "href": "/api/v2/tags/:tag_id/following",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "unfollow_tag"
+        },
+        {
+          "description": "Check if you are following a tag or not.",
+          "href": "/api/v2/tags/:tag_id/following",
+          "method": "GET",
+          "rel": "check",
+          "title": "get_tag_following"
+        },
+        {
+          "description": "Follow a tag.",
+          "href": "/api/v2/tags/:tag_id/following",
+          "mediaType": "null",
+          "method": "PUT",
+          "rel": "put",
+          "title": "follow_tag"
+        }
+      ],
+      "properties": {
+        "followers_count": {
+          "description": "Followes count",
+          "example": 100,
+          "type": "integer"
+        },
+        "icon_url": {
+          "description": "Tag Icon URL",
+          "example": "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/9de6a11d330f5694820082438f88ccf4a1b289b2/medium.jpg",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "id": {
+          "description": "Tag name",
+          "example": "qiita",
+          "type": "string"
+        },
+        "items_count": {
+          "description": "Items count",
+          "example": 200,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "followers_count",
+        "icon_url",
+        "id",
+        "items_count"
+      ],
+      "title": "Tag"
+    },
+    "tagging": {
+      "description": "Represents an association between an item and a tag.",
+      "links": [
+        {
+          "description": "Add a tag to an item (only available on Qiita Team)",
+          "href": "/api/v2/items/:item_id/taggings",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "name": {
+                "description": "Tag name",
+                "example": "qiita",
+                "type": "string"
+              },
+              "versions": {
+                "example": [
+                  "0.0.1"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "title": "create_tagging"
+        },
+        {
+          "description": "Remove a tag from an item (only available on Qiita Team)",
+          "href": "/api/v2/items/:item_id/taggings/:tagging_id",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_tagging"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Tag name",
+          "example": "qiita",
+          "type": "string"
+        },
+        "versions": {
+          "example": [
+            "0.0.1"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "versions"
+      ],
+      "title": "Tagging"
+    },
+    "team": {
+      "description": "Represents a team on Qiita Team (only available on Qiita Team).",
+      "links": [
+        {
+          "description": "List teams the user belongs to in newest order.",
+          "href": "/api/v2/teams",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_teams"
+        }
+      ],
+      "properties": {
+        "active": {
+          "description": "A flag whether this team is active or not",
+          "example": true,
+          "type": "boolean"
+        },
+        "id": {
+          "description": "A unique team ID",
+          "example": "increments",
+          "type": "string"
+        },
+        "name": {
+          "description": "The team name configured for this team",
+          "example": "Increments Inc.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "active",
+        "id",
+        "name"
+      ],
+      "title": "Team"
+    },
+    "team_invitation": {
+      "description": "Represents members who are invited to on Qiita Team (only available on Qiita Team. administrative privileges required).",
+      "links": [
+        {
+          "description": "Return list of invited members",
+          "href": "api/v2/team_invitations",
+          "method": "GET",
+          "rel": "instances",
+          "title": "list_team_invitations"
+        },
+        {
+          "description": "Invite a member to the team",
+          "href": "api/v2/team_invitations",
+          "method": "POST",
+          "rel": "create",
+          "title": "create_team_invitation"
+        },
+        {
+          "description": "Revoke the invitation",
+          "href": "api/v2/team_invitations/:email",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_team_invitation"
+        }
+      ],
+      "properties": {
+        "email": {
+          "description": "Email address of the invited member",
+          "example": "example@example.com",
+          "type": "string"
+        },
+        "url": {
+          "description": "Invitation URL. The expiration date is one day.",
+          "example": "https://team-name.qiita.com/registration/confirm?id=3&token=456c84ae60070161a36c08c9e710050abe5852cc",
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "url"
+      ],
+      "title": "Invited member"
+    },
+    "template": {
+      "description": "Represents a template for generating an item boilerplate (only available on Qiita Team).",
+      "links": [
+        {
+          "description": "List templates in a team.",
+          "href": "/api/v2/templates",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_templates"
+        },
+        {
+          "description": "Delete a template.",
+          "href": "/api/v2/templates/:template_id",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "delete_template"
+        },
+        {
+          "description": "Get a template.",
+          "href": "/api/v2/templates/:template_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_template"
+        },
+        {
+          "description": "Create a new template.",
+          "href": "/api/v2/templates",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "The body of this template",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              },
+              "name": {
+                "description": "A template name",
+                "example": "Weekly MTG",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "MTG/%{Year}/%{month}/%{day}",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "A template title where variables are to be expanded",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "name",
+              "tags",
+              "title"
+            ]
+          },
+          "title": "create_template"
+        },
+        {
+          "description": "Update a template.",
+          "href": "/api/v2/templates/:template_id",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "properties": {
+              "body": {
+                "description": "The body of this template",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              },
+              "name": {
+                "description": "A template name",
+                "example": "Weekly MTG",
+                "type": "string"
+              },
+              "tags": {
+                "description": "A list of tags",
+                "example": [
+                  {
+                    "name": "MTG/%{Year}/%{month}/%{day}",
+                    "versions": [
+                      "0.0.1"
+                    ]
+                  }
+                ],
+                "items": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "title": {
+                "description": "A template title where variables are to be expanded",
+                "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+                "type": "string"
+              }
+            },
+            "required": [
+              "body",
+              "name",
+              "tags",
+              "title"
+            ]
+          },
+          "title": "update_template"
+        }
+      ],
+      "properties": {
+        "body": {
+          "description": "The body of this template",
+          "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+          "type": "string"
+        },
+        "id": {
+          "description": "A unique template ID",
+          "example": 1,
+          "type": "integer"
+        },
+        "name": {
+          "description": "A template name",
+          "example": "Weekly MTG",
+          "type": "string"
+        },
+        "expanded_body": {
+          "description": "An item body where variables are expanded",
+          "example": "Weekly MTG on 2000/01/01",
+          "type": "string"
+        },
+        "expanded_tags": {
+          "description": "A list of tags where variables are expanded",
+          "example": [
+            {
+              "name": "MTG/2000/01/01",
+              "versions": [
+                "0.0.1"
+              ]
+            }
+          ],
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "versions": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "expanded_title": {
+          "description": "An item title where variables are expanded",
+          "example": "Weekly MTG on 2015/06/03",
+          "type": "string"
+        },
+        "tags": {
+          "description": "A list of tags",
+          "example": [
+            {
+              "name": "MTG/%{Year}/%{month}/%{day}",
+              "versions": [
+                "0.0.1"
+              ]
+            }
+          ],
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "versions": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "title": {
+          "description": "A template title where variables are to be expanded",
+          "example": "Weekly MTG on %{Year}/%{month}/%{day}",
+          "type": "string"
+        }
+      },
+      "required": [
+        "body",
+        "id",
+        "name",
+        "expanded_body",
+        "expanded_tags",
+        "expanded_title",
+        "tags",
+        "title"
+      ],
+      "title": "Template"
+    },
+    "user": {
+      "description": "A Qiita user (a.k.a. account)",
+      "links": [
+        {
+          "description": "List users who stocked an item in recent-stocked order.",
+          "href": "/api/v2/items/:item_id/stockers",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_item_stockers"
+        },
+        {
+          "description": "List users in newest order.",
+          "href": "/api/v2/users",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_users"
+        },
+        {
+          "description": "Get a user.",
+          "href": "/api/v2/users/:user_id",
+          "method": "GET",
+          "rel": "self",
+          "title": "get_user"
+        },
+        {
+          "description": "List users a user is following.",
+          "href": "/api/v2/users/:user_id/followees",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_user_followees"
+        },
+        {
+          "description": "List users who are following a user.",
+          "href": "/api/v2/users/:user_id/followers",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "properties": {
+              "page": {
+                "description": "Page number (from 1 to 100)",
+                "example": 1,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              },
+              "per_page": {
+                "description": "Records count per page (from 1 to 100)",
+                "example": 20,
+                "pattern": "^[0-9]+$",
+                "type": "string"
+              }
+            }
+          },
+          "title": "list_user_followers"
+        },
+        {
+          "description": "Unfollow a user.",
+          "href": "/api/v2/users/:user_id/following",
+          "mediaType": "null",
+          "method": "DELETE",
+          "rel": "delete",
+          "title": "unfollow_user"
+        },
+        {
+          "description": "Check if the current user is following a user.",
+          "href": "/api/v2/users/:user_id/following",
+          "method": "GET",
+          "rel": "check",
+          "title": "get_user_following"
+        },
+        {
+          "description": "Follow a user.",
+          "href": "/api/v2/users/:user_id/following",
+          "mediaType": "null",
+          "method": "PUT",
+          "rel": "put",
+          "title": "follow_user"
+        }
+      ],
+      "properties": {
+        "description": {
+          "description": "self-description",
+          "example": "Hello, world.",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "facebook_id": {
+          "description": "Facebook ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "followees_count": {
+          "description": "Followees count",
+          "example": 100,
+          "type": "integer"
+        },
+        "followers_count": {
+          "description": "Followers count",
+          "example": 200,
+          "type": "integer"
+        },
+        "github_login_name": {
+          "description": "GitHub ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "id": {
+          "description": "User ID",
+          "example": "yaotti",
+          "type": "string"
+        },
+        "items_count": {
+          "description": "How many items a user posted on qiita.com (Items on Qiita Team are not included)",
+          "example": 300,
+          "type": "integer"
+        },
+        "linkedin_id": {
+          "description": "LinkedIn ID",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "location": {
+          "description": "Location",
+          "example": "Tokyo, Japan",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "name": {
+          "description": "Customized user name",
+          "example": "Hiroshige Umino",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "organization": {
+          "description": "Organization which a user belongs to",
+          "example": "Increments Inc",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "permanent_id": {
+          "description": "Unique integer ID",
+          "example": 1,
+          "type": "integer"
+        },
+        "profile_image_url": {
+          "description": "Profile image URL",
+          "example": "https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg",
+          "type": "string"
+        },
+        "team_only": {
+          "description": "A flag whether this user is configured as team-only",
+          "example": false,
+          "type": "boolean"
+        },
+        "twitter_screen_name": {
+          "description": "Twitter screen name",
+          "example": "yaotti",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "website_url": {
+          "description": "Website URL",
+          "example": "http://yaotti.hatenablog.com",
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "facebook_id",
+        "followees_count",
+        "followers_count",
+        "github_login_name",
+        "id",
+        "items_count",
+        "linkedin_id",
+        "location",
+        "name",
+        "organization",
+        "permanent_id",
+        "profile_image_url",
+        "team_only",
+        "twitter_screen_name",
+        "website_url"
+      ],
+      "title": "User"
+    }
+  },
+  "required": [
+    "access_token",
+    "authenticated_user",
+    "comment",
+    "expanded_template",
+    "group",
+    "item",
+    "like",
+    "project",
+    "reaction",
+    "tag",
+    "tagging",
+    "team",
+    "team_invitation",
+    "template",
+    "user"
+  ],
+  "title": "Qiita API v2 JSON Schema"
+}
