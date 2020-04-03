@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json",
+  "config": {
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 400
+    }
+  },
+  "data": {
+    "name": "data-17c84caa0ca55c01a4e4117a1dec44a0"
+  },
+  "datasets": {
+    "data-17c84caa0ca55c01a4e4117a1dec44a0": [
+      {
+        "Acceleration": 12.0,
+        "Cylinders": 8,
+        "Displacement": 307.0,
+        "Horsepower": 130.0,
+        "Miles_per_Gallon": 18.0,
+        "Name": "chevrolet chevelle malibu",
+        "Origin": "USA",
+        "Weight_in_lbs": 3504,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 11.5,
+        "Cylinders": 8,
+        "Displacement": 350.0,
+        "Horsepower": 165.0,
+        "Miles_per_Gallon": 15.0,
+        "Name": "buick skylark 320",
+        "Origin": "USA",
+        "Weight_in_lbs": 3693,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 11.0,
+        "Cylinders": 8,
+        "Displacement": 318.0,
+        "Horsepower": 150.0,
+        "Miles_per_Gallon": 18.0,
+        "Name": "plymouth satellite",
+        "Origin": "USA",
+        "Weight_in_lbs": 3436,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 12.0,
+        "Cylinders": 8,
+        "Displacement": 304.0,
+        "Horsepower": 150.0,
+        "Miles_per_Gallon": 16.0,
+        "Name": "amc rebel sst",
+        "Origin": "USA",
+        "Weight_in_lbs": 3433,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 10.5,
+        "Cylinders": 8,
+        "Displacement": 302.0,
+        "Horsepower": 140.0,
+        "Miles_per_Gallon": 17.0,
+        "Name": "ford torino",
+        "Origin": "USA",
+        "Weight_in_lbs": 3449,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 10.0,
+        "Cylinders": 8,
+        "Displacement": 429.0,
+        "Horsepower": 198.0,
+        "Miles_per_Gallon": 15.0,
+        "Name": "ford galaxie 500",
+        "Origin": "USA",
+        "Weight_in_lbs": 4341,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 9.0,
+        "Cylinders": 8,
+        "Displacement": 454.0,
+        "Horsepower": 220.0,
+        "Miles_per_Gallon": 14.0,
+        "Name": "chevrolet impala",
+        "Origin": "USA",
+        "Weight_in_lbs": 4354,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 8.5,
+        "Cylinders": 8,
+        "Displacement": 440.0,
+        "Horsepower": 215.0,
+        "Miles_per_Gallon": 14.0,
+        "Name": "plymouth fury iii",
+        "Origin": "USA",
+        "Weight_in_lbs": 4312,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 10.0,
+        "Cylinders": 8,
+        "Displacement": 455.0,
+        "Horsepower": 225.0,
+        "Miles_per_Gallon": 14.0,
+        "Name": "pontiac catalina",
+        "Origin": "USA",
+        "Weight_in_lbs": 4425,
+        "Year": "1970-01-01T00:00:00"
+      },
+      {
+        "Acceleration": 8.5,
+        "Cylinders": 8,
+        "Displacement": 390.0,
+        "Horsepower": 190.0,
+        "Miles_per_Gallon": 15.0,
+        "Name": "amc ambassador dpl",
+        "Origin": "USA",
+        "Weight_in_lbs": 3850,
+        "Year": "1970-01-01T00:00:00"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "Acceleration",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "Horsepower",
+      "type": "quantitative"
+    }
+  },
+  "mark": "point"
+}
