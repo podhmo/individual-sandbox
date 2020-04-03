@@ -10,35 +10,35 @@
 <title>Web Service</title>
 <polygon fill="white" stroke="transparent" points="-144,144 -144,-304 555,-304 555,144 -144,144"/>
 <text text-anchor="middle" x="205.5" y="-7" font-family="Sans-Serif" font-size="15.00" fill="#2d3436">Web Service</text>
-<!-- 9bfac2a2932d10a04a0030cdbf8ef33c -->
+<!-- 0a33e72b5003d217d3910fa64247c61c -->
 <g id="node1" class="node">
-<title>9bfac2a2932d10a04a0030cdbf8ef33c</title>
-<image xlink:href="/Users/kobayashi/venvs/my/individual-sandbox/daily/20200225/example_diagrams/lib/python3.7/site-packages/resources/aws/network/elastic-load-balancing.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="0" y="-142"/>
+<title>0a33e72b5003d217d3910fa64247c61c</title>
+<image xlink:href="/usr/local/lib/python3.7/site-packages/resources/aws/network/elastic-load-balancing.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="0" y="-142"/>
 <text text-anchor="middle" x="50.5" y="-25.6" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">lb</text>
 </g>
-<!-- d58ea4f9fa507805f1879bfeb1784985 -->
+<!-- 5bacb752c708b255f470e390aa9debe4 -->
 <g id="node2" class="node">
-<title>d58ea4f9fa507805f1879bfeb1784985</title>
-<image xlink:href="/Users/kobayashi/venvs/my/individual-sandbox/daily/20200225/example_diagrams/lib/python3.7/site-packages/resources/aws/compute/ec2.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="155" y="-142"/>
+<title>5bacb752c708b255f470e390aa9debe4</title>
+<image xlink:href="/usr/local/lib/python3.7/site-packages/resources/aws/compute/ec2.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="155" y="-142"/>
 <text text-anchor="middle" x="205.5" y="-25.6" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">web</text>
 </g>
-<!-- 9bfac2a2932d10a04a0030cdbf8ef33c&#45;&gt;d58ea4f9fa507805f1879bfeb1784985 -->
+<!-- 0a33e72b5003d217d3910fa64247c61c&#45;&gt;5bacb752c708b255f470e390aa9debe4 -->
 <g id="edge1" class="edge">
-<title>9bfac2a2932d10a04a0030cdbf8ef33c&#45;&gt;d58ea4f9fa507805f1879bfeb1784985</title>
-<path fill="none" stroke="#7b8894" d="M101.25,-91.5C101.25,-91.5 144.9,-91.5 144.9,-91.5"/>
-<polygon fill="#7b8894" stroke="#7b8894" points="144.9,-95 154.9,-91.5 144.9,-88 144.9,-95"/>
+<title>0a33e72b5003d217d3910fa64247c61c&#45;&gt;5bacb752c708b255f470e390aa9debe4</title>
+<path fill="none" stroke="black" d="M101.25,-91.5C101.25,-91.5 144.9,-91.5 144.9,-91.5"/>
+<polygon fill="black" stroke="black" points="144.9,-95 154.9,-91.5 144.9,-88 144.9,-95"/>
 </g>
-<!-- db26a061979c5c35be559f2457d89ac9 -->
+<!-- 69eddad3bbce902336d503c20c38f22b -->
 <g id="node3" class="node">
-<title>db26a061979c5c35be559f2457d89ac9</title>
-<image xlink:href="/Users/kobayashi/venvs/my/individual-sandbox/daily/20200225/example_diagrams/lib/python3.7/site-packages/resources/aws/database/rds.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="310" y="-142"/>
+<title>69eddad3bbce902336d503c20c38f22b</title>
+<image xlink:href="/usr/local/lib/python3.7/site-packages/resources/aws/database/rds.png" width="101px" height="101px" preserveAspectRatio="xMinYMin meet" x="310" y="-142"/>
 <text text-anchor="middle" x="360.5" y="-25.6" font-family="Sans-Serif" font-size="13.00" fill="#2d3436">userdb</text>
 </g>
-<!-- d58ea4f9fa507805f1879bfeb1784985&#45;&gt;db26a061979c5c35be559f2457d89ac9 -->
+<!-- 5bacb752c708b255f470e390aa9debe4&#45;&gt;69eddad3bbce902336d503c20c38f22b -->
 <g id="edge2" class="edge">
-<title>d58ea4f9fa507805f1879bfeb1784985&#45;&gt;db26a061979c5c35be559f2457d89ac9</title>
-<path fill="none" stroke="#7b8894" d="M256.25,-91.5C256.25,-91.5 299.9,-91.5 299.9,-91.5"/>
-<polygon fill="#7b8894" stroke="#7b8894" points="299.9,-95 309.9,-91.5 299.9,-88 299.9,-95"/>
+<title>5bacb752c708b255f470e390aa9debe4&#45;&gt;69eddad3bbce902336d503c20c38f22b</title>
+<path fill="none" stroke="black" d="M256.25,-91.5C256.25,-91.5 299.9,-91.5 299.9,-91.5"/>
+<polygon fill="black" stroke="black" points="299.9,-95 309.9,-91.5 299.9,-88 299.9,-95"/>
 </g>
 </g>
 </svg>

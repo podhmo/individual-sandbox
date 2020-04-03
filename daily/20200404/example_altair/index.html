@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/5.10.1/vega.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/4.9.0/vega-lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.5.2/vega-embed.min.js"></script>
+  <body>
+    <div id="vis"></div>
+  </body>
+  <script>
+// Assign the specification to a local variable vlSpec.
+var vlSpec = {
+  "width":300,
+  "height":300,
+  "data": {
+    "values": [{
+      "a": "C",
+      "b": 2
+    }, {
+      "a": "C",
+      "b": 7
+    }, {
+      "a": "C",
+      "b": 4
+    }, {
+      "a": "D",
+      "b": 1
+    }, {
+      "a": "D",
+      "b": 2
+    }, {
+      "a": "D",
+      "b": 6
+    }, {
+      "a": "E",
+      "b": 8
+    }, {
+      "a": "E",
+      "b": 4
+    }, {
+      "a": "E",
+      "b": 7
+    }]
+  },
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "a",
+      "type": "nominal"
+    },
+    "x": {
+      "aggregate": "average",
+      "field": "b",
+      "type": "quantitative",
+      "axis": {
+        "title": "Average of b"
+      }
+    }
+  }
+};
+
+vegaEmbed('#vis', vlSpec, {mode:"vega-lite"});
+  </script>
+</html>

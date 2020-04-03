@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/5.10.1/vega.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/4.9.0/vega-lite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/6.5.2/vega-embed.min.js"></script>
+  <body>
+    <div id="vis"></div>
+  </body>
+  <script>
+    const vlSpec = "https://gist.githubusercontent.com/podhmo/82fe2258b10155345b195bb311faeb90/raw/5b95db948cbba7e6ba117bddba2b91cdc0f1e273/00cars.py.json";
+  vegaEmbed('#vis', vlSpec, {mode:"vega-lite"});
+  </script>
+</html>

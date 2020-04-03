@@ -1,6 +1,7 @@
 ## altair触ってみたいかも？
 
 - https://altair-viz.github.io/gallery/index.html
+- https://vega.github.io/vega-lite/ecosystem.html
 
 ## jupyter notebook python codeの変換
 
