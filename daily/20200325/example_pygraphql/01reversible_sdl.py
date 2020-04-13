@@ -21,5 +21,6 @@ type Query {
 document_node = graphql.parse(type_defs)
 print(print_ast(document_node))
 
+# or graphql.print_ast(document_node)
 # schema = graphql.build_schema(type_defs)
 

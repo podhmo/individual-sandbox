@@ -1,0 +1,18 @@
+go run 00long-option/main.go -int64 10
+10
+go run 00long-option/main.go --int64 10
+10
+go run 00long-option/main.go -int64=10
+10
+go run 00long-option/main.go --int64=10
+10
+go run 00long-option/main.go --help
+Usage of /var/folders/b7/2rk7xp2d0hb2r21zbzjwxb_m0000gn/T/go-build834042922/b001/exe/main:
+  -int64 int
+    	int64 value (default 2)
+2
+go run 00long-option/main.go -h
+Usage of /var/folders/b7/2rk7xp2d0hb2r21zbzjwxb_m0000gn/T/go-build342836725/b001/exe/main:
+  -int64 int
+    	int64 value (default 2)
+2

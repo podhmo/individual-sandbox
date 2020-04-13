@@ -1,0 +1,465 @@
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:29 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"72121c167f04db6333011875c812686f"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '974'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '0.955975'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: 70d0b096-7bd7-4310-a028-303e44eebe2b
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        # はじめに
+
+        API認証にOAuth2を使う場合、認可サーバでアクセストークンを発行して、リソースサーバ(APIサーバ)にアクセストークン付きでリソースをリクエストするわけですが、認可サーバとリソー...
+      coediting: false
+      comments_count: 2
+      created_at: '2017-10-10T15:27:53+09:00'
+      group: null
+      id: bd76ce780e4551d7c951
+      likes_count: 23
+      private: false
+      reactions_count: 0
+      tags:
+      - name: OAuth
+        versions: []
+      - name: oauth2
+        versions: []
+      - name: Hydra
+        versions: []
+      title: 'RFC7662: OAuth 2.0 Token Introspectionでアクセストークンの検証を行う'
+      updated_at: '2017-11-24T13:15:39+09:00'
+      url: 'https://qiita.com/minamijoyo/items/bd76ce780e4551d7c951'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 1
+        followers_count: 78
+        github_login_name: minamijoyo
+        id: minamijoyo
+        items_count: 86
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 61152
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/61152/profile-images/1473695443'
+        team_only: false
+        twitter_screen_name: minamijoyo
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |-
+        <p>セキュリティ診断のハンズオンなどの目的で、敢えて脆弱性を残しているいわゆる”やられアプリ”。</p>
+
+        <p>元旦から何やってんだという感じはありますが、折角時間があるので兼ねてから攻略したかっ...
+      body: |-
+        セキュリティ診断のハンズオンなどの目的で、敢えて脆弱性を残しているいわゆる”やられアプリ”。
+
+        元旦から何やってんだという感じはありますが、折角時間があるので兼ねてから攻略したかった [OWASP S...
+      coediting: false
+      comments_count: 0
+      created_at: '2020-01-01T16:31:34+09:00'
+      group: null
+      id: d45fd7acbb4919adbc57
+      likes_count: 22
+      private: false
+      reactions_count: 0
+      tags:
+      - name: AWS
+        versions: []
+      - name: セキュリティ
+        versions: []
+      - name: owasp
+        versions: []
+      title: サーバーレスやられアプリを使った脆弱性診断ハンズオン
+      updated_at: '2020-01-07T08:23:09+09:00'
+      url: 'https://qiita.com/yuuhu04/items/d45fd7acbb4919adbc57'
+      user:
+        description: エンジニアです
+        facebook_id: ''
+        followees_count: 9
+        followers_count: 14
+        github_login_name: null
+        id: yuuhu04
+        items_count: 9
+        linkedin_id: ''
+        location: ''
+        name: yu fujioka
+        organization: ''
+        permanent_id: 135861
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/135861/profile-images/1569302017'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: "# はじめに \n\n今回は、Factorization Machines(FM)やMatrix Factorization(MF)とベイズを絡めた研究を調べたのでまとめていきたいと思います。\n\
+        \nFMはI..."
+      coediting: false
+      comments_count: 0
+      created_at: '2019-12-27T17:00:08+09:00'
+      group: null
+      id: b1eb18b554ae3660d313
+      likes_count: 51
+      private: false
+      reactions_count: 0
+      tags:
+      - name: 機械学習
+        versions: []
+      - name: MachineLearning
+        versions: []
+      - name: 論文読み
+        versions: []
+      title: ベイズ×Factorization Machines & Matrix Factorizationの研究まとめ
+      updated_at: '2019-12-27T17:00:08+09:00'
+      url: 'https://qiita.com/guglilac/items/b1eb18b554ae3660d313'
+      user:
+        description: "機械学習全般とプログラミングについて勉強しています。\r\nQiitaの他に、技術ブログの方にも記事をあげています。"
+        facebook_id: ''
+        followees_count: 0
+        followers_count: 10
+        github_login_name: habroptilus
+        id: guglilac
+        items_count: 6
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 449005
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/449005/profile-images/1570769914'
+        team_only: false
+        twitter_screen_name: guglilac
+        website_url: 'https://www.smartbowwow.com/'
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:31 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"c2bb405208f69a15aaaf55f9cea9b074"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '973'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '0.943248'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: 889ba12f-0920-492c-87ed-24391a2a54c5
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=2&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |2-
+
+        <h1>
+        <span id="こんにちは" class="fragment"></span><a href="#%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%...
+      body: |-
+        # こんにちは
+        [NewsPicks Advent Calendar 2018](https://qiita.com/advent-calendar/2018/newspicks)の 5日目を担当させ...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-05T09:02:59+09:00'
+      group: null
+      id: 67ddf03014597552d78b
+      likes_count: 677
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions: []
+      - name: 機械学習
+        versions: []
+      - name: MachineLearning
+        versions: []
+      title: 2018年版もっとも参考になった機械学習系記事ベスト10
+      updated_at: '2018-12-06T13:52:35+09:00'
+      url: 'https://qiita.com/junichiro/items/67ddf03014597552d78b'
+      user:
+        description: NewsPicks のサービス開発エンジニアです。仕事ではまだ機械学習を使うところまではいっていませんが、いずれやりたいと考えています。Perl
+          のキャリアが最も長く、いまはJava を使っています。...
+        facebook_id: junichiro.tobe
+        followees_count: 203
+        followers_count: 257
+        github_login_name: junichiro
+        id: junichiro
+        items_count: 41
+        linkedin_id: junichiro-tobe-879b8b106
+        location: Saitama, Japan
+        name: Junichiro Tobe
+        organization: NewsPicks
+        permanent_id: 121876
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/121876/profile-images/1473715053'
+        team_only: false
+        twitter_screen_name: null
+        website_url: 'https://newspicks.com/user/405272'
+      page_views_count: null
+    - rendered_body: <p>お疲れ様です。真の文字列初心者、<a href="/kampersanda" class="user-mention
+        js-hovercard" title="kampersanda" data...
+      body: |-
+        お疲れ様です。真の文字列初心者、@kampersandaです。今年も恐縮ながら記事を書かせていただきます。
+
+        タイトルにある**ハミング距離**とは文字列間の類似度の一つで、２つの文字列間のハミング距...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-05T00:18:26+09:00'
+      group: null
+      id: 65ae8bf31b71623258e7
+      likes_count: 49
+      private: false
+      reactions_count: 0
+      tags:
+      - name: AdventCalendar
+        versions: []
+      - name: データ構造とアルゴリズム
+        versions: []
+      - name: 類似検索
+        versions: []
+      title: ハミング距離と鳩ノ巣原理
+      updated_at: '2019-04-09T14:56:17+09:00'
+      url: 'https://qiita.com/kampersanda/items/65ae8bf31b71623258e7'
+      user:
+        description: printf("Hello, Tokushima!\n");
+        facebook_id: ''
+        followees_count: 17
+        followers_count: 18
+        github_login_name: kampersanda
+        id: kampersanda
+        items_count: 4
+        linkedin_id: ''
+        location: ''
+        name: Kanda Shunsuke
+        organization: RIKEN AIP
+        permanent_id: 170428
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/170428/profile-images/1566905102'
+        team_only: false
+        twitter_screen_name: kampersanda
+        website_url: 'https://sites.google.com/site/shnskknd/'
+      page_views_count: null
+    - rendered_body: |-
+        <table><tr><td>
+        This article translated <a href="https://nullprogram.com/blog/2014/01/04/" rel="nofo...
+      body: |-
+        <table><tr><td>
+        This article translated <a href="https://nullprogram.com/blog/2014/01/04/">“Emacs By...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-11-27T14:30:27+09:00'
+      group: null
+      id: 4fbbd41d6c5b5fc258a2
+      likes_count: 17
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Emacs
+        versions: []
+      - name: lisp
+        versions: []
+      - name: elisp
+        versions: []
+      title: Emacs Byte-code Internals
+      updated_at: '2018-12-02T07:03:25+09:00'
+      url: 'https://qiita.com/chuntaro/items/4fbbd41d6c5b5fc258a2'
+      user:
+        description: Emacs Lisp/Common Lisp/TypeScript/WebGL/リアルタイム3Dゲーム用 Lisp 制作中/家庭用ゲーム機のプログラマ経験約15年
+        facebook_id: ''
+        followees_count: 1
+        followers_count: 12
+        github_login_name: chuntaro
+        id: chuntaro
+        items_count: 9
+        linkedin_id: ''
+        location: Japan
+        name: ''
+        organization: ''
+        permanent_id: 153538
+        profile_image_url: 'https://avatars.githubusercontent.com/u/7358590?v=3'
+        team_only: false
+        twitter_screen_name: null
+        website_url: 'https://twitter.com/shima_tetsuo'
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:33 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"c4f1684129ed12607930da9239219fe8"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '972'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '1.006141'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: a6c93c42-9d31-4f68-8fe1-4f0cc5497757
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=3&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |-
+        <p>iOS 開発で必須とも言える API クライアントの設計手法を、初心者にもわかりやすく紹介します。</p>
+
+        <h2>
+        <span id="はじめに" class="fragment"></sp...
+      body: |-
+        iOS 開発で必須とも言える API クライアントの設計手法を、初心者にもわかりやすく紹介します。
+
+
+        はじめに
+        -------
+
+        あなたは、どのように API クライアントを設計していますか。
+
+        ま...
+      coediting: false
+      comments_count: 13
+      created_at: '2017-10-23T00:51:59+09:00'
+      group: null
+      id: a972ff2ade643799d1fe
+      likes_count: 294
+      private: false
+      reactions_count: 0
+      tags:
+      - name: iOS
+        versions: []
+      - name: 設計
+        versions: []
+      - name: XCTest
+        versions: []
+      title: Swift の HTTP ライブラリで苦しまないための自作 API クライアント設計
+      updated_at: '2018-08-24T18:36:33+09:00'
+      url: 'https://qiita.com/Kuniwak/items/a972ff2ade643799d1fe'
+      user:
+        description: 若き何かの悩み。
+        facebook_id: ''
+        followees_count: 47
+        followers_count: 229
+        github_login_name: Kuniwak
+        id: Kuniwak
+        items_count: 27
+        linkedin_id: ''
+        location: ''
+        name: Yuki Kokubun
+        organization: DeNA
+        permanent_id: 6281
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/6281/profile-images/1473682753'
+        team_only: false
+        twitter_screen_name: orga_chem
+        website_url: 'http://orgachem.hatenablog.com'
+      page_views_count: null
+    - rendered_body: '<p>このシリーズでは 2018/5/22 にリリースされた <a href="https://github.com/purescript/purescript/releases/tag/v0.12....'
+      body: 'このシリーズでは 2018/5/22 にリリースされた [PureScript 0.12.0](https://github.com/purescript/purescript/releases/ta...'
+      coediting: false
+      comments_count: 0
+      created_at: '2018-06-08T23:30:20+09:00'
+      group: null
+      id: 0ca22c2213b7d9b2a31e
+      likes_count: 14
+      private: false
+      reactions_count: 0
+      tags:
+      - name: purescript
+        versions: []
+      title: PureScript 0.12.0 で何が変わったか - ST編
+      updated_at: '2018-06-08T23:30:20+09:00'
+      url: 'https://qiita.com/hansel_no_kioku/items/0ca22c2213b7d9b2a31e'
+      user:
+        description: "組み込み系(主にC言語)です。\r\n趣味でいろいろ遊んでいます。"
+        facebook_id: ''
+        followees_count: 39
+        followers_count: 20
+        github_login_name: null
+        id: hansel_no_kioku
+        items_count: 8
+        linkedin_id: ''
+        location: ''
+        name: ヘンゼルの記憶
+        organization: ''
+        permanent_id: 216450
+        profile_image_url: 'https://pbs.twimg.com/profile_images/1182347669/myface_normal.jpeg'
+        team_only: false
+        twitter_screen_name: hansel_no_kioku
+        website_url: ''
+      page_views_count: null
+    - rendered_body: '<p>Goを始めてからずっと <a href="https://github.com/tj/robo" rel="nofollow
+        noopener" target="_blank">Robo</a>...'
+      body: 'Goを始めてからずっと [Robo](https://github.com/tj/robo) や [Task](https://github.com/go-task/task)
+        といったYAMLベース...'
+      coediting: false
+      comments_count: 0
+      created_at: '2018-06-04T21:51:25+09:00'
+      group: null
+      id: faad9327927947646a23
+      likes_count: 173
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Go
+        versions: []
+      - name: タスクランナー
+        versions: []
+      title: Goで書けるタスクランナーMageが快適すぎて捗る
+      updated_at: '2018-09-03T08:26:20+09:00'
+      url: 'https://qiita.com/townewgokgok/items/faad9327927947646a23'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 25
+        followers_count: 15
+        github_login_name: townewgokgok
+        id: townewgokgok
+        items_count: 4
+        linkedin_id: ''
+        location: Tokyo, Japan
+        name: K Furukawa
+        organization: SAKURA Internet Inc.
+        permanent_id: 16439
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/16439/profile-images/1558566523'
+        team_only: false
+        twitter_screen_name: townewgokgok
+        website_url: ''
+      page_views_count: null

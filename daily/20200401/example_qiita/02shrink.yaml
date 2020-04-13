@@ -1,0 +1,1854 @@
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:29 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"72121c167f04db6333011875c812686f"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '974'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '0.955975'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: 70d0b096-7bd7-4310-a028-303e44eebe2b
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        # はじめに
+
+        API認証にOAuth2を使う場合、認可サーバでアクセストークンを発行して、リソースサーバ(APIサーバ)にアクセストークン付きでリソースをリクエストするわけですが、認可サーバとリソー...
+      coediting: false
+      comments_count: 2
+      created_at: '2017-10-10T15:27:53+09:00'
+      group: null
+      id: bd76ce780e4551d7c951
+      likes_count: 23
+      private: false
+      reactions_count: 0
+      tags:
+      - name: OAuth
+        versions: []
+      - name: oauth2
+        versions: []
+      - name: Hydra
+        versions: []
+      - name: OAuth
+        versions: []
+      - name: oauth2
+        versions: []
+      - name: Hydra
+        versions: []
+      title: 'RFC7662: OAuth 2.0 Token Introspectionでアクセストークンの検証を行う'
+      updated_at: '2017-11-24T13:15:39+09:00'
+      url: 'https://qiita.com/minamijoyo/items/bd76ce780e4551d7c951'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 1
+        followers_count: 78
+        github_login_name: minamijoyo
+        id: minamijoyo
+        items_count: 86
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 61152
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/61152/profile-images/1473695443'
+        team_only: false
+        twitter_screen_name: minamijoyo
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |-
+        <p>セキュリティ診断のハンズオンなどの目的で、敢えて脆弱性を残しているいわゆる”やられアプリ”。</p>
+
+        <p>元旦から何やってんだという感じはありますが、折角時間があるので兼ねてから攻略したかっ...
+      body: |-
+        セキュリティ診断のハンズオンなどの目的で、敢えて脆弱性を残しているいわゆる”やられアプリ”。
+
+        元旦から何やってんだという感じはありますが、折角時間があるので兼ねてから攻略したかった [OWASP S...
+      coediting: false
+      comments_count: 0
+      created_at: '2020-01-01T16:31:34+09:00'
+      group: null
+      id: d45fd7acbb4919adbc57
+      likes_count: 22
+      private: false
+      reactions_count: 0
+      tags:
+      - name: AWS
+        versions: []
+      - name: セキュリティ
+        versions: []
+      - name: owasp
+        versions: []
+      - name: セキュリティ
+        versions: []
+      - name: owasp
+        versions: []
+      - name: サーバーレスアーキテクチャ
+        versions: []
+      title: サーバーレスやられアプリを使った脆弱性診断ハンズオン
+      updated_at: '2020-01-07T08:23:09+09:00'
+      url: 'https://qiita.com/yuuhu04/items/d45fd7acbb4919adbc57'
+      user:
+        description: エンジニアです
+        facebook_id: ''
+        followees_count: 9
+        followers_count: 14
+        github_login_name: null
+        id: yuuhu04
+        items_count: 9
+        linkedin_id: ''
+        location: ''
+        name: yu fujioka
+        organization: ''
+        permanent_id: 135861
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/135861/profile-images/1569302017'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: "# はじめに \n\n今回は、Factorization Machines(FM)やMatrix Factorization(MF)とベイズを絡めた研究を調べたのでまとめていきたいと思います。\n\
+        \nFMはI..."
+      coediting: false
+      comments_count: 0
+      created_at: '2019-12-27T17:00:08+09:00'
+      group: null
+      id: b1eb18b554ae3660d313
+      likes_count: 51
+      private: false
+      reactions_count: 0
+      tags:
+      - name: 機械学習
+        versions: []
+      - name: MachineLearning
+        versions: []
+      - name: 論文読み
+        versions: []
+      - name: 機械学習
+        versions: []
+      - name: MachineLearning
+        versions: []
+      - name: 論文読み
+        versions: []
+      title: ベイズ×Factorization Machines & Matrix Factorizationの研究まとめ
+      updated_at: '2019-12-27T17:00:08+09:00'
+      url: 'https://qiita.com/guglilac/items/b1eb18b554ae3660d313'
+      user:
+        description: "機械学習全般とプログラミングについて勉強しています。\r\nQiitaの他に、技術ブログの方にも記事をあげています。"
+        facebook_id: ''
+        followees_count: 0
+        followers_count: 10
+        github_login_name: habroptilus
+        id: guglilac
+        items_count: 6
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 449005
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/449005/profile-images/1570769914'
+        team_only: false
+        twitter_screen_name: guglilac
+        website_url: 'https://www.smartbowwow.com/'
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h2>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        ## はじめに
+
+        Recursion schemes(再帰スキーム)とは，再帰的なデータ構造に対する汎用コンビネータの総称のことである．ところで， recursion schemes から導出される再...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-13T11:06:00+09:00'
+      group: null
+      id: d73162057ff276a3238a
+      likes_count: 24
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Haskell
+        versions: []
+      - name: Haskell
+        versions: []
+      title: ASTのための高階代数を元にした recursion schemes
+      updated_at: '2018-12-13T15:17:52+09:00'
+      url: 'https://qiita.com/Mizunashi_Mana/items/d73162057ff276a3238a'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 6
+        followers_count: 35
+        github_login_name: mizunashi-mana
+        id: Mizunashi_Mana
+        items_count: 13
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 138118
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/138118/profile-images/1483788351'
+        team_only: false
+        twitter_screen_name: Mizunashi_Mana
+        website_url: null
+      page_views_count: null
+    - rendered_body: '<p><a href="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.amazonaws.com%2...'
+      body: '![image.png](https://qiita-image-store.s3.amazonaws.com/0/35595/6ff1d383-4cea-9f3a-b832-4f7d6830a830...'
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-09T07:06:15+09:00'
+      group: null
+      id: ac4c19dd36cd182841bc
+      likes_count: 336
+      private: false
+      reactions_count: 0
+      tags:
+      - name: JavaScript
+        versions: []
+      - name: sentry
+        versions: []
+      - name: Firebase
+        versions: []
+      - name: Firebase
+        versions: []
+      - name: Netlify
+        versions: []
+      - name: nuxt.js
+        versions: []
+      title: Nuxt, netlify, Firebase を使ったWebサービス開発と個人開発における技術選定のポイント
+      updated_at: '2019-10-22T12:53:39+09:00'
+      url: 'https://qiita.com/howdy39/items/ac4c19dd36cd182841bc'
+      user:
+        description: 'heyinc (STORES.jp) Front-end engineer, JavaScript, Vue.js, Nuxt.js
+          https://techthetoaster.booth.pm/ '
+        facebook_id: ''
+        followees_count: 58
+        followers_count: 249
+        github_login_name: howdy39
+        id: howdy39
+        items_count: 74
+        linkedin_id: ''
+        location: Tokyo,Japan
+        name: Tatsuya Nakano
+        organization: ''
+        permanent_id: 35595
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/35595/profile-images/1473686778'
+        team_only: false
+        twitter_screen_name: howdy39
+        website_url: 'https://howdy39.dev/'
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        # はじめに
+
+        この記事は[VTuber Tech #1 Advent Calendar 2018](https://qiita.com/advent-calendar/2018/vtuber)の1日...
+      coediting: false
+      comments_count: 1
+      created_at: '2018-10-18T18:26:17+09:00'
+      group: null
+      id: 1ba5dfc0575ed6ddd8ff
+      likes_count: 89
+      private: false
+      reactions_count: 0
+      tags:
+      - name: 'C#'
+        versions: []
+      - name: Unity
+        versions: []
+      - name: Live2D
+        versions: []
+      - name: 'C#'
+        versions: []
+      - name: Unity
+        versions: []
+      - name: Live2D
+        versions: []
+      title: 【初心者向け】UnityとLive2Dで拡張しやすいVTuber配信システムを作る方法
+      updated_at: '2019-05-15T12:47:19+09:00'
+      url: 'https://qiita.com/nkjzm/items/1ba5dfc0575ed6ddd8ff'
+      user:
+        description: 特に明示されていない場合、記事中のソースコードはパブリックドメインです
+        facebook_id: kohki.nakaji
+        followees_count: 741
+        followers_count: 340
+        github_login_name: nkjzm
+        id: nkjzm
+        items_count: 118
+        linkedin_id: ''
+        location: Tokyo
+        name: Kohki Nakaji
+        organization: MyDearest株式会社
+        permanent_id: 55365
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/55365/profile-images/1554647523'
+        team_only: false
+        twitter_screen_name: nkjzm
+        website_url: 'https://nkjzm.github.io/'
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:31 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"c2bb405208f69a15aaaf55f9cea9b074"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '973'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '0.943248'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: 889ba12f-0920-492c-87ed-24391a2a54c5
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=2&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |2-
+
+        <h1>
+        <span id="こんにちは" class="fragment"></span><a href="#%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%...
+      body: |-
+        # こんにちは
+        [NewsPicks Advent Calendar 2018](https://qiita.com/advent-calendar/2018/newspicks)の 5日目を担当させ...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-05T09:02:59+09:00'
+      group: null
+      id: 67ddf03014597552d78b
+      likes_count: 677
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions: []
+      - name: 機械学習
+        versions: []
+      - name: MachineLearning
+        versions: []
+      - name: MachineLearning
+        versions: []
+      - name: TensorFlow
+        versions: []
+      - name: colaboratory
+        versions: []
+      title: 2018年版もっとも参考になった機械学習系記事ベスト10
+      updated_at: '2018-12-06T13:52:35+09:00'
+      url: 'https://qiita.com/junichiro/items/67ddf03014597552d78b'
+      user:
+        description: NewsPicks のサービス開発エンジニアです。仕事ではまだ機械学習を使うところまではいっていませんが、いずれやりたいと考えています。Perl
+          のキャリアが最も長く、いまはJava を使っています。...
+        facebook_id: junichiro.tobe
+        followees_count: 203
+        followers_count: 257
+        github_login_name: junichiro
+        id: junichiro
+        items_count: 41
+        linkedin_id: junichiro-tobe-879b8b106
+        location: Saitama, Japan
+        name: Junichiro Tobe
+        organization: NewsPicks
+        permanent_id: 121876
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/121876/profile-images/1473715053'
+        team_only: false
+        twitter_screen_name: null
+        website_url: 'https://newspicks.com/user/405272'
+      page_views_count: null
+    - rendered_body: <p>お疲れ様です。真の文字列初心者、<a href="/kampersanda" class="user-mention
+        js-hovercard" title="kampersanda" data...
+      body: |-
+        お疲れ様です。真の文字列初心者、@kampersandaです。今年も恐縮ながら記事を書かせていただきます。
+
+        タイトルにある**ハミング距離**とは文字列間の類似度の一つで、２つの文字列間のハミング距...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-12-05T00:18:26+09:00'
+      group: null
+      id: 65ae8bf31b71623258e7
+      likes_count: 49
+      private: false
+      reactions_count: 0
+      tags:
+      - name: AdventCalendar
+        versions: []
+      - name: データ構造とアルゴリズム
+        versions: []
+      - name: 類似検索
+        versions: []
+      - name: データ構造とアルゴリズム
+        versions: []
+      - name: 類似検索
+        versions: []
+      - name: 鳩
+        versions: []
+      title: ハミング距離と鳩ノ巣原理
+      updated_at: '2019-04-09T14:56:17+09:00'
+      url: 'https://qiita.com/kampersanda/items/65ae8bf31b71623258e7'
+      user:
+        description: printf("Hello, Tokushima!\n");
+        facebook_id: ''
+        followees_count: 17
+        followers_count: 18
+        github_login_name: kampersanda
+        id: kampersanda
+        items_count: 4
+        linkedin_id: ''
+        location: ''
+        name: Kanda Shunsuke
+        organization: RIKEN AIP
+        permanent_id: 170428
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/170428/profile-images/1566905102'
+        team_only: false
+        twitter_screen_name: kampersanda
+        website_url: 'https://sites.google.com/site/shnskknd/'
+      page_views_count: null
+    - rendered_body: |-
+        <table><tr><td>
+        This article translated <a href="https://nullprogram.com/blog/2014/01/04/" rel="nofo...
+      body: |-
+        <table><tr><td>
+        This article translated <a href="https://nullprogram.com/blog/2014/01/04/">“Emacs By...
+      coediting: false
+      comments_count: 0
+      created_at: '2018-11-27T14:30:27+09:00'
+      group: null
+      id: 4fbbd41d6c5b5fc258a2
+      likes_count: 17
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Emacs
+        versions: []
+      - name: lisp
+        versions: []
+      - name: elisp
+        versions: []
+      - name: elisp
+        versions: []
+      - name: lang
+        versions: []
+      - name: emacs-lisp
+        versions: []
+      title: Emacs Byte-code Internals
+      updated_at: '2018-12-02T07:03:25+09:00'
+      url: 'https://qiita.com/chuntaro/items/4fbbd41d6c5b5fc258a2'
+      user:
+        description: Emacs Lisp/Common Lisp/TypeScript/WebGL/リアルタイム3Dゲーム用 Lisp 制作中/家庭用ゲーム機のプログラマ経験約15年
+        facebook_id: ''
+        followees_count: 1
+        followers_count: 12
+        github_login_name: chuntaro
+        id: chuntaro
+        items_count: 9
+        linkedin_id: ''
+        location: Japan
+        name: ''
+        organization: ''
+        permanent_id: 153538
+        profile_image_url: 'https://avatars.githubusercontent.com/u/7358590?v=3'
+        team_only: false
+        twitter_screen_name: null
+        website_url: 'https://twitter.com/shima_tetsuo'
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h2>
+        <span id="public-な-const-を定義するのはやめよう" class="fragment"></span><a href="#public-%E3%81%AA-const...
+      body: |2-
+
+        ## `public` な `const` を定義するのはやめよう
+
+        `const`で定義した変数をアセンブリ外に公開すると「const のバージョニング問題」と言われる問題が発生します。
+        どういう...
+      coediting: false
+      comments_count: 4
+      created_at: '2018-06-14T07:48:57+09:00'
+      group: null
+      id: b874fa6c115898e2a9c8
+      likes_count: 205
+      private: false
+      reactions_count: 0
+      tags:
+      - name: 'C#'
+        versions: []
+      - name: 'C#'
+        versions: []
+      title: 'C# の const の間違った使い方をやめよう'
+      updated_at: '2019-08-09T18:29:49+09:00'
+      url: 'https://qiita.com/Nossa/items/b874fa6c115898e2a9c8'
+      user:
+        description: 'C#、TypeScriptが好きです。'
+        facebook_id: ''
+        followees_count: 119
+        followers_count: 180
+        github_login_name: sano-suguru
+        id: Nossa
+        items_count: 79
+        linkedin_id: ''
+        location: ''
+        name: Nossa
+        organization: i-mobile Co., Ltd.
+        permanent_id: 195024
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/195024/profile-images/1533474617'
+        team_only: false
+        twitter_screen_name: nosa_programmer
+        website_url: 'https://twitter.com/nosa_programmer'
+      page_views_count: null
+    - rendered_body: '<p>この記事は<a href="https://qiita.com/advent-calendar/2017/dwango2">第2のドワンゴ
+        Advent Calendar 2017</a> 22...'
+      body: |-
+        この記事は[第2のドワンゴ Advent Calendar 2017](https://qiita.com/advent-calendar/2017/dwango2) 22日目の記事です。
+        ドワンゴで...
+      coediting: false
+      comments_count: 0
+      created_at: '2017-12-21T05:19:18+09:00'
+      group: null
+      id: 5ab7c7f47b245706a67c
+      likes_count: 96
+      private: false
+      reactions_count: 0
+      tags:
+      - name: 設計
+        versions: []
+      - name: React
+        versions: []
+      - name: css-modules
+        versions: []
+      - name: css-modules
+        versions: []
+      - name: AtomicDesign
+        versions: []
+      - name: storybook
+        versions: []
+      title: React + TypeScript + CSS Modules によるコンポーネント指向フロントエンド開発の流れと知見
+      updated_at: '2018-12-26T11:55:58+09:00'
+      url: 'https://qiita.com/misuken/items/5ab7c7f47b245706a67c'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 2
+        followers_count: 10
+        github_login_name: misuken-dev
+        id: misuken
+        items_count: 8
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 41058
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/41058/profile-images/1509561047'
+        team_only: false
+        twitter_screen_name: misuken_now
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="概要" class="fragment"></span><a href="#%E6%A6%82%E8%A6%81"><i class="fa fa-link"></i>...
+      body: |2-
+
+        #概要
+        Rustの標準マクロはかゆいとこに手が届く！
+        Rustのマクロはいいぞ！
+        ――というわけで。Rustで標準で用意されているマクロでも紹介したいと思いまする。
+        #Rust標準マクロのソースコー...
+      coediting: false
+      comments_count: 1
+      created_at: '2018-06-10T19:26:16+09:00'
+      group: null
+      id: f76a47385b2669ec6db3
+      likes_count: 137
+      private: false
+      reactions_count: 0
+      tags:
+      - name: macro
+        versions: []
+      - name: Rust
+        versions: []
+      - name: programming
+        versions: []
+      - name: programming
+        versions: []
+      - name: metaprogramming
+        versions: []
+      - name: まとめ
+        versions: []
+      title: Rustの便利マクロ特集
+      updated_at: '2018-06-12T23:07:58+09:00'
+      url: 'https://qiita.com/elipmoc101/items/f76a47385b2669ec6db3'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 22
+        followers_count: 62
+        github_login_name: elipmoc
+        id: elipmoc101
+        items_count: 10
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 208277
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/208277/profile-images/1572171550'
+        team_only: false
+        twitter_screen_name: elipmoc101
+        website_url: null
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:33 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"c4f1684129ed12607930da9239219fe8"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '972'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '1.006141'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: a6c93c42-9d31-4f68-8fe1-4f0cc5497757
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=3&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |-
+        <p>iOS 開発で必須とも言える API クライアントの設計手法を、初心者にもわかりやすく紹介します。</p>
+
+        <h2>
+        <span id="はじめに" class="fragment"></sp...
+      body: |-
+        iOS 開発で必須とも言える API クライアントの設計手法を、初心者にもわかりやすく紹介します。
+
+
+        はじめに
+        -------
+
+        あなたは、どのように API クライアントを設計していますか。
+
+        ま...
+      coediting: false
+      comments_count: 13
+      created_at: '2017-10-23T00:51:59+09:00'
+      group: null
+      id: a972ff2ade643799d1fe
+      likes_count: 294
+      private: false
+      reactions_count: 0
+      tags:
+      - name: iOS
+        versions: []
+      - name: 設計
+        versions: []
+      - name: XCTest
+        versions: []
+      - name: 設計
+        versions: []
+      - name: XCTest
+        versions: []
+      - name: Swift
+        versions: []
+      title: Swift の HTTP ライブラリで苦しまないための自作 API クライアント設計
+      updated_at: '2018-08-24T18:36:33+09:00'
+      url: 'https://qiita.com/Kuniwak/items/a972ff2ade643799d1fe'
+      user:
+        description: 若き何かの悩み。
+        facebook_id: ''
+        followees_count: 47
+        followers_count: 229
+        github_login_name: Kuniwak
+        id: Kuniwak
+        items_count: 27
+        linkedin_id: ''
+        location: ''
+        name: Yuki Kokubun
+        organization: DeNA
+        permanent_id: 6281
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/6281/profile-images/1473682753'
+        team_only: false
+        twitter_screen_name: orga_chem
+        website_url: 'http://orgachem.hatenablog.com'
+      page_views_count: null
+    - rendered_body: '<p>このシリーズでは 2018/5/22 にリリースされた <a href="https://github.com/purescript/purescript/releases/tag/v0.12....'
+      body: 'このシリーズでは 2018/5/22 にリリースされた [PureScript 0.12.0](https://github.com/purescript/purescript/releases/ta...'
+      coediting: false
+      comments_count: 0
+      created_at: '2018-06-08T23:30:20+09:00'
+      group: null
+      id: 0ca22c2213b7d9b2a31e
+      likes_count: 14
+      private: false
+      reactions_count: 0
+      tags:
+      - name: purescript
+        versions: []
+      - name: purescript
+        versions: []
+      title: PureScript 0.12.0 で何が変わったか - ST編
+      updated_at: '2018-06-08T23:30:20+09:00'
+      url: 'https://qiita.com/hansel_no_kioku/items/0ca22c2213b7d9b2a31e'
+      user:
+        description: "組み込み系(主にC言語)です。\r\n趣味でいろいろ遊んでいます。"
+        facebook_id: ''
+        followees_count: 39
+        followers_count: 20
+        github_login_name: null
+        id: hansel_no_kioku
+        items_count: 8
+        linkedin_id: ''
+        location: ''
+        name: ヘンゼルの記憶
+        organization: ''
+        permanent_id: 216450
+        profile_image_url: 'https://pbs.twimg.com/profile_images/1182347669/myface_normal.jpeg'
+        team_only: false
+        twitter_screen_name: hansel_no_kioku
+        website_url: ''
+      page_views_count: null
+    - rendered_body: '<p>Goを始めてからずっと <a href="https://github.com/tj/robo" rel="nofollow
+        noopener" target="_blank">Robo</a>...'
+      body: 'Goを始めてからずっと [Robo](https://github.com/tj/robo) や [Task](https://github.com/go-task/task)
+        といったYAMLベース...'
+      coediting: false
+      comments_count: 0
+      created_at: '2018-06-04T21:51:25+09:00'
+      group: null
+      id: faad9327927947646a23
+      likes_count: 173
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Go
+        versions: []
+      - name: タスクランナー
+        versions: []
+      - name: Go
+        versions: []
+      - name: タスクランナー
+        versions: []
+      title: Goで書けるタスクランナーMageが快適すぎて捗る
+      updated_at: '2018-09-03T08:26:20+09:00'
+      url: 'https://qiita.com/townewgokgok/items/faad9327927947646a23'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 25
+        followers_count: 15
+        github_login_name: townewgokgok
+        id: townewgokgok
+        items_count: 4
+        linkedin_id: ''
+        location: Tokyo, Japan
+        name: K Furukawa
+        organization: SAKURA Internet Inc.
+        permanent_id: 16439
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/16439/profile-images/1558566523'
+        team_only: false
+        twitter_screen_name: townewgokgok
+        website_url: ''
+      page_views_count: null
+    - rendered_body: '<p><a href="https://qiita.com/advent-calendar/2017/ateam-lifestyle">エイチームライフスタイルアドベントカレンダー2017</a>、1...'
+      body: |2-
+
+        [エイチームライフスタイルアドベントカレンダー2017](https://qiita.com/advent-calendar/2017/ateam-lifestyle)、18日目は[株式会社エイチー...
+      coediting: false
+      comments_count: 0
+      created_at: '2017-12-15T18:56:47+09:00'
+      group: null
+      id: 79a5c7480d85ca76593f
+      likes_count: 122
+      private: false
+      reactions_count: 0
+      tags:
+      - name: ポエム
+        versions: []
+      - name: チーム開発
+        versions: []
+      - name: 上司への愛情
+        versions: []
+      - name: 上司への愛情
+        versions: []
+      - name: チームビルディング
+        versions: []
+      - name: ポエム駆動開発
+        versions: []
+      title: 仕事の進め方が良くなる！アンチパターン10選
+      updated_at: '2017-12-20T13:32:48+09:00'
+      url: 'https://qiita.com/maiton/items/79a5c7480d85ca76593f'
+      user:
+        description: 過去にAteamLifestyleアドベントカレンダーを書いていますが今は所属していません。
+        facebook_id: ''
+        followees_count: 3
+        followers_count: 8
+        github_login_name: null
+        id: maiton
+        items_count: 2
+        linkedin_id: ''
+        location: ''
+        name: ton mai
+        organization: 転々としてる
+        permanent_id: 135881
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/135881/profile-images/1511173717'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+    - rendered_body: '<p>この記事は<a href="http://qiita.com/advent-calendar/2017/wacul">「WACUL
+        Advent Calendar 2017」</a>の18日目で...'
+      body: |-
+        この記事は[「WACUL Advent Calendar 2017」](http://qiita.com/advent-calendar/2017/wacul)の18日目です。
+        WACULでフロントエ...
+      coediting: false
+      comments_count: 6
+      created_at: '2017-12-18T10:54:24+09:00'
+      group: null
+      id: 1575337bef44ae82f4d3
+      likes_count: 639
+      private: false
+      reactions_count: 0
+      tags:
+      - name: JavaScript
+        versions: []
+      - name: game
+        versions: []
+      - name: emulator
+        versions: []
+      - name: JavaScript
+        versions: []
+      - name: game
+        versions: []
+      - name: emulator
+        versions: []
+      title: ファミコンエミュレータの創り方　- Hello, World!編 -
+      updated_at: '2020-02-12T11:34:17+09:00'
+      url: 'https://qiita.com/bokuweb/items/1575337bef44ae82f4d3'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 20
+        followers_count: 59
+        github_login_name: bokuweb
+        id: bokuweb
+        items_count: 5
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 91510
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/91510/profile-images/1473705327'
+        team_only: false
+        twitter_screen_name: bokuweb17
+        website_url: null
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        # はじめに
+        このエントリーは[Advent Calendar Go3 17日目](https://qiita.com/advent-calendar/2017/go3)の記事です。
+        今年は何か書いて...
+      coediting: false
+      comments_count: 0
+      created_at: '2017-12-16T19:21:07+09:00'
+      group: null
+      id: 4ca45cc80be4fc37ab51
+      likes_count: 13
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Go
+        versions: []
+      - name: Go
+        versions: []
+      title: plugin機構を使って簡単なJITもどき（動的コンパイル）を実現して遊ぶ
+      updated_at: '2017-12-17T07:00:47+09:00'
+      url: 'https://qiita.com/yanolab/items/4ca45cc80be4fc37ab51'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 5
+        followers_count: 17
+        github_login_name: yanolab
+        id: yanolab
+        items_count: 7
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 11567
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/11567/profile-images/1473682072'
+        team_only: false
+        twitter_screen_name: yanolab
+        website_url: null
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:38 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"b5b2f0cb7f6f5bd1dabf83af78701d8f"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '969'
+    Rate-Reset: '1585162048'
+    Vary: Origin
+    X-Runtime: '0.852353'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: fcfe55e9-54ca-4934-9d1c-7cadf80455cb
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=6&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |-
+        <p>Pythonの勉強を兼ねて作っていたポモドーロタイマーがいい感じになったので、公開してみる。<br>
+        tmuxとかと組み合わせるといい感じになるんじゃないかと思います。</p>
+
+        <p><a h...
+      body: |2-
+
+        Pythonの勉強を兼ねて作っていたポモドーロタイマーがいい感じになったので、公開してみる。
+        tmuxとかと組み合わせるといい感じになるんじゃないかと思います。
+
+
+        ![po.gif](https:...
+      coediting: false
+      comments_count: 0
+      created_at: '2016-09-05T13:51:21+09:00'
+      group: null
+      id: ae8888b91262d4513c33
+      likes_count: 3
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions: []
+      - name: pomodoro
+        versions: []
+      - name: Python
+        versions: []
+      - name: pomodoro
+        versions: []
+      title: CUIで動作する硬派なポモドーロタイマーを作った
+      updated_at: '2016-09-05T13:54:02+09:00'
+      url: 'https://qiita.com/tortuepin/items/ae8888b91262d4513c33'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 5
+        followers_count: 7
+        github_login_name: tortuepin
+        id: tortuepin
+        items_count: 49
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 97678
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/97678/profile-images/1473707269'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        # はじめに
+        Emacsの起動時間は長い、とよく言われます。
+
+        筆者は昨年にVimからEmacsに移行してきたのですが、カスタマイズを重ねる内に実際とても長く感じられるようになりました。`emacs ...
+      coediting: false
+      comments_count: 0
+      created_at: '2014-12-15T21:23:43+09:00'
+      group: null
+      id: 0f38870817c11b2166bd
+      likes_count: 43
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Emacs
+        versions: []
+      - name: elisp
+        versions: []
+      - name: 高速化
+        versions: []
+      - name: elisp
+        versions: []
+      - name: 高速化
+        versions: []
+      - name: 起動時間短縮
+        versions: []
+      title: Emacsのスタートアップを視覚的に理解する
+      updated_at: '2014-12-15T21:23:43+09:00'
+      url: 'https://qiita.com/yuttie/items/0f38870817c11b2166bd'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 17
+        followers_count: 9
+        github_login_name: yuttie
+        id: yuttie
+        items_count: 2
+        linkedin_id: ''
+        location: ''
+        name: Yuta Taniguchi
+        organization: ''
+        permanent_id: 5905
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/5905/profile-images/1473682369'
+        team_only: false
+        twitter_screen_name: yuttieyuttie
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |-
+        <p>複数のゴルーチンに対して、何かしらの処理が終了したことを伝えるのにチャネルの<code>close</code>が使えます。<br>
+        これはruiさんの以下の記事にも書かれていることですが、ここ...
+      body: |2-
+
+        複数のゴルーチンに対して、何かしらの処理が終了したことを伝えるのにチャネルの`close`が使えます。
+        これはruiさんの以下の記事にも書かれていることですが、ここでは閉じれたチャネルの挙動を見つつ...
+      coediting: false
+      comments_count: 0
+      created_at: '2016-08-31T16:19:59+09:00'
+      group: null
+      id: dd6041d630af7feeec52
+      likes_count: 55
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Go
+        versions: []
+      - name: Go
+        versions: []
+      title: '終了したことを他の複数のゴルーチンに伝えるのにチャネルのcloseを使う #golang'
+      updated_at: '2016-09-01T08:56:43+09:00'
+      url: 'https://qiita.com/tenntenn/items/dd6041d630af7feeec52'
+      user:
+        description: Go engineer / Gopher artist
+        facebook_id: ''
+        followees_count: 122
+        followers_count: 700
+        github_login_name: tenntenn
+        id: tenntenn
+        items_count: 80
+        linkedin_id: ''
+        location: ''
+        name: 上田 拓也
+        organization: Merpay, Inc. (affiliated by Mercari, Inc.)
+        permanent_id: 14952
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/14952/profile-images/1476846346'
+        team_only: false
+        twitter_screen_name: tenntenn
+        website_url: ''
+      page_views_count: null
+    - rendered_body: <p>Angular2のBetaがリリースされたので、Angular2 &amp; TypeScript で、サーバサイドとクライアントサイドのコードを共通化(isomorphic)できるかを試してい...
+      body: |2-
+
+        Angular2のBetaがリリースされたので、Angular2 & TypeScript で、サーバサイドとクライアントサイドのコードを共通化(isomorphic)できるかを試していました。
+        い...
+      coediting: false
+      comments_count: 0
+      created_at: '2015-12-27T21:07:46+09:00'
+      group: null
+      id: 53fc61250608d7281e9d
+      likes_count: 18
+      private: false
+      reactions_count: 0
+      tags:
+      - name: TypeScript
+        versions: []
+      - name: Angular2
+        versions: []
+      - name: TypeScript
+        versions: []
+      - name: Angular2
+        versions: []
+      title: Angular2 & TypeScript で サーバサイドとクライアントサイドのコードを共通化する
+      updated_at: '2015-12-27T21:07:46+09:00'
+      url: 'https://qiita.com/kodo_san/items/53fc61250608d7281e9d'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 8
+        followers_count: 14
+        github_login_name: takeshi
+        id: kodo_san
+        items_count: 8
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 9324
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/9324/profile-images/1473681356'
+        team_only: false
+        twitter_screen_name: kodo_san
+        website_url: null
+      page_views_count: null
+    - rendered_body: |-
+        <p>オブジェクト指向 Advent Calendar というものを見つけたので、Visitor パターンについて書いてみます。<br>
+        嘘です Visitor パターンについて書きたいけれど、Jav...
+      body: |-
+        オブジェクト指向 Advent Calendar というものを見つけたので、Visitor パターンについて書いてみます。
+        嘘です Visitor パターンについて書きたいけれど、Java Adven...
+      coediting: false
+      comments_count: 11
+      created_at: '2015-12-24T00:25:08+09:00'
+      group: null
+      id: bc6126f34a571a2c4f97
+      likes_count: 178
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Java
+        versions: []
+      - name: デザインパターン
+        versions: []
+      - name: Java
+        versions: []
+      - name: デザインパターン
+        versions: []
+      title: Visitor パターン再考
+      updated_at: '2018-02-25T19:07:39+09:00'
+      url: 'https://qiita.com/lyrical_logical/items/bc6126f34a571a2c4f97'
+      user:
+        description: 病人
+        facebook_id: ''
+        followees_count: 2
+        followers_count: 64
+        github_login_name: null
+        id: lyrical_logical
+        items_count: 11
+        linkedin_id: ''
+        location: ''
+        name: lyrical logical
+        organization: ''
+        permanent_id: 588
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/588/profile-images/1473681424'
+        team_only: false
+        twitter_screen_name: lyrical_logical
+        website_url: ''
+      page_views_count: null
+    - rendered_body: <p>どうも、<a href="/laco0416" class="user-mention js-hovercard"
+        title="laco0416" data-hovercard-target-...
+      body: |2-
+
+        どうも、@laco0416です。本アドベントカレンダーでは3回目の投稿です。
+
+        # Angular2のDIを知る
+        今回の目標は「Angular2のDIを知る」ということで、まずは基本的なところからお...
+      coediting: false
+      comments_count: 5
+      created_at: '2015-12-23T02:45:42+09:00'
+      group: null
+      id: 61eed550d1f6070b36ab
+      likes_count: 246
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Angular2
+        versions: []
+      - name: Angular2
+        versions: []
+      title: Angular2のDIを知る
+      updated_at: '2015-12-23T12:16:42+09:00'
+      url: 'https://qiita.com/lacolaco/items/61eed550d1f6070b36ab'
+      user:
+        description: I play Angular and pray for Angular. No Breaking Changes, No
+          Life.
+        facebook_id: ''
+        followees_count: 43
+        followers_count: 513
+        github_login_name: lacolaco
+        id: lacolaco
+        items_count: 104
+        linkedin_id: ''
+        location: Tokyo, Japan
+        name: Suguru Inatomi
+        organization: ''
+        permanent_id: 20253
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/20253/profile-images/1498799173'
+        team_only: false
+        twitter_screen_name: laco2net
+        website_url: ''
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:40 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"986021e96bcccb9bbf9a587068563ebf"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '968'
+    Rate-Reset: '1585162049'
+    Vary: Origin
+    X-Runtime: '0.775057'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: d10609a5-30c4-43f1-8a20-4c1a74db3ec0
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=7&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: '<p>この記事は<a href="http://qiita.com/advent-calendar/2015/se">システムエンジニア
+        Advent Calendar 2015 - Qiita</a...'
+      body: |-
+        この記事は[システムエンジニア Advent Calendar 2015 - Qiita](http://qiita.com/advent-calendar/2015/se)の記事です。
+
+        弊社アーキ...
+      coediting: false
+      comments_count: 2
+      created_at: '2015-12-23T00:06:40+09:00'
+      group: null
+      id: 120109315f671918f28d
+      likes_count: 1107
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Java
+        versions: []
+      - name: JavaScript
+        versions: []
+      - name: Web
+        versions: []
+      - name: Web
+        versions: []
+      - name: アーキテクチャ
+        versions: []
+      - name: 二重サブミット
+        versions: []
+      title: さいきょうの二重サブミット対策
+      updated_at: '2015-12-23T11:28:45+09:00'
+      url: 'https://qiita.com/syobochim/items/120109315f671918f28d'
+      user:
+        description: 私のすべての発言は、人間社会に追い詰められたかなしいかいじゅう達の言葉を代弁したもので、彼らを追い詰めた所属企業を代表するなんてとんでもない！
+        facebook_id: ''
+        followees_count: 22
+        followers_count: 56
+        github_login_name: syobochim
+        id: syobochim
+        items_count: 4
+        linkedin_id: ''
+        location: Tokyo,Japan
+        name: Mizuki Ugajin
+        organization: ''
+        permanent_id: 48812
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/48812/profile-images/1531276218'
+        team_only: false
+        twitter_screen_name: syobochim
+        website_url: 'http://syobochim.hatenablog.com/'
+      page_views_count: null
+    - rendered_body: '<p>この記事は<a href="http://www.adventar.org/calendars/848" rel="nofollow
+        noopener" target="_blank">MLアド...'
+      body: 'この記事は[MLアドベントカレンダー](http://www.adventar.org/calendars/848)23日目の記事です。22日目の記事は
+        autotaker さんの[OCamlの末尾再...'
+      coediting: false
+      comments_count: 2
+      created_at: '2015-12-23T01:31:47+09:00'
+      group: null
+      id: 9ef36dcd719b7d238819
+      likes_count: 10
+      private: false
+      reactions_count: 0
+      tags:
+      - name: OCaml
+        versions: []
+      - name: OCaml
+        versions: []
+      title: '例外処理と末尾再帰（Re: OCamlの末尾再帰について）'
+      updated_at: '2015-12-26T15:03:55+09:00'
+      url: 'https://qiita.com/dico_leque/items/9ef36dcd719b7d238819'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 74
+        followers_count: 57
+        github_login_name: null
+        id: dico_leque
+        items_count: 22
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 2215
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/2215/profile-images/1480572956'
+        team_only: false
+        twitter_screen_name: dico_leque
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="はじめに" class="fragment"></span><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB"><i cla...
+      body: |-
+        はじめに
+        ========
+
+        まもなくリリースされる Emacs 25 の新機能の一つに「ジェネレータ (生成子 generator)」があります。 （ `/lisp/emacs-lisp/gener...
+      coediting: false
+      comments_count: 0
+      created_at: '2015-12-06T19:20:29+09:00'
+      group: null
+      id: 239345c38c431e1feb7d
+      likes_count: 28
+      private: false
+      reactions_count: 0
+      tags:
+      - name: emacs-lisp
+        versions: []
+      - name: emacs-lisp
+        versions: []
+      title: Emacs のジェネレータについて
+      updated_at: '2015-12-30T18:15:41+09:00'
+      url: 'https://qiita.com/kawabata@github/items/239345c38c431e1feb7d'
+      user:
+        description: ''
+        facebook_id: null
+        followees_count: 6
+        followers_count: 21
+        github_login_name: kawabata
+        id: kawabata@github
+        items_count: 7
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 21783
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/21783/profile-images/1481233074'
+        team_only: false
+        twitter_screen_name: kawabata
+        website_url: null
+      page_views_count: null
+    - rendered_body: '<p><a href="http://qiita.com/wonderful_panda/items/dad578ed5b2e77eb58f0"
+        id="reference-5dac7feb2ae49...'
+      body: '[Converterを書くのが面倒だというはなし](http://qiita.com/wonderful_panda/items/dad578ed5b2e77eb58f0)
+        の関係でちょっと試した内容...'
+      coediting: false
+      comments_count: 0
+      created_at: '2015-02-13T23:22:20+09:00'
+      group: null
+      id: dfb12a7de244033aae85
+      likes_count: 9
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions:
+        - '2.7'
+        - '3.4'
+        - '2.7'
+        - '3.4'
+      - name: Python
+        versions:
+        - '2.7'
+        - '3.4'
+        - '2.7'
+        - '3.4'
+        - '2.7'
+        - '3.4'
+      title: ast.NodeTransformerによるコード書き換えの例
+      updated_at: '2015-02-13T23:34:25+09:00'
+      url: 'https://qiita.com/wonderful_panda/items/dfb12a7de244033aae85'
+      user:
+        description: なのるほどのものでは
+        facebook_id: ''
+        followees_count: 20
+        followers_count: 28
+        github_login_name: wonderful-panda
+        id: wonderful_panda
+        items_count: 38
+        linkedin_id: ''
+        location: ''
+        name: ''
+        organization: ''
+        permanent_id: 11109
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/11109/profile-images/1473681921'
+        team_only: false
+        twitter_screen_name: wonderful_panda
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |-
+        <p>Pythonの箱庭環境を作成するツールの一つにbuildoutというものがあります。<br>
+        buildoutの環境を作るためのMakefileを書いてみました</p>
+
+        <h1>
+        <span ...
+      body: |-
+        Pythonの箱庭環境を作成するツールの一つにbuildoutというものがあります。
+        buildoutの環境を作るためのMakefileを書いてみました
+
+        # 始めに...
+
+        Pythonとvirtu...
+      coediting: false
+      comments_count: 0
+      created_at: '2015-01-15T15:16:18+09:00'
+      group: null
+      id: 60a7b0e414885c1793c2
+      likes_count: 2
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions: []
+      - name: buildout
+        versions: []
+      - name: Python
+        versions: []
+      - name: buildout
+        versions: []
+      title: buildoutで環境を作成するための最低限のMakefileとbuildout.cfg
+      updated_at: '2015-01-15T15:29:48+09:00'
+      url: 'https://qiita.com/TakesxiSximada/items/60a7b0e414885c1793c2'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 0
+        followers_count: 48
+        github_login_name: TakesxiSximada
+        id: TakesxiSximada
+        items_count: 62
+        linkedin_id: ''
+        location: ''
+        name: Takesxi Sximada
+        organization: ''
+        permanent_id: 36261
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/36261/profile-images/1473687011'
+        team_only: false
+        twitter_screen_name: TakesxiSximada
+        website_url: ''
+      page_views_count: null
+    - rendered_body: <p>PythonでDBを操作するときに出てくる<code>cursor</code>について、あまりにも実体不明なので調べた。SQL
+        CURSORとPython cursorの違い、SQL CURS...
+      body: PythonでDBを操作するときに出てくる`cursor`について、あまりにも実体不明なので調べた。SQL CURSORとPython cursorの違い、SQL
+        CURSORをどれだけ忠実に実装して...
+      coediting: false
+      comments_count: 0
+      created_at: '2015-02-08T13:02:41+09:00'
+      group: null
+      id: 3d5631505b3f08fa37cc
+      likes_count: 125
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Python
+        versions: []
+      - name: MySQL
+        versions: []
+      - name: SQL
+        versions: []
+      - name: MySQL
+        versions: []
+      - name: SQL
+        versions: []
+      - name: PostgreSQL
+        versions: []
+      title: 'PythonとDB: DBIのcursorを理解する'
+      updated_at: '2019-08-20T00:25:33+09:00'
+      url: 'https://qiita.com/knoguchi/items/3d5631505b3f08fa37cc'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 62
+        followers_count: 71
+        github_login_name: knoguchi
+        id: knoguchi
+        items_count: 15
+        linkedin_id: ''
+        location: Los Angeles, CA, USA
+        name: Kenji Noguchi
+        organization: Verizon Media Group
+        permanent_id: 13775
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/13775/profile-images/1554847836'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+- headers:
+    Date: 'Wed, 25 Mar 2020 18:06:41 GMT'
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    X-Frame-Options: SAMEORIGIN
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: strict-origin-when-cross-origin
+    Link: '<https://qiita.com/api/v2/users/podhmo/stocks?page=1&per_page=100>; rel="first",
+      <https://qiita.com/...'
+    Total-Count: '741'
+    ETag: W/"f03c46b0f17d5ed744bc92b6db757c98"
+    Cache-Control: max-age=0, private, must-revalidate
+    Rate-Limit: '1000'
+    Rate-Remaining: '967'
+    Rate-Reset: '1585162049'
+    Vary: Origin
+    X-Runtime: '0.432818'
+    Strict-Transport-Security: max-age=2592000
+    X-Request-Id: 36460d99-7050-4fdb-9498-4517c035b3f1
+  response:
+    url: 'https://qiita.com/api/v2/users/podhmo/stocks?page=8&per_page=100&per_page=100'
+    status_code: 200
+    content:
+    - rendered_body: |-
+        <p>前置き：</p>
+
+        <ul>
+        <li>特定の言語ではなく、関数型言語一般に関する説明です。</li>
+        <li>ここに書くのが良いのかわかりませんが、それを考える時間ももったいないのでとりあえず書...
+      body: |-
+        前置き：
+
+        * 特定の言語ではなく、関数型言語一般に関する説明です。
+        * ここに書くのが良いのかわかりませんが、それを考える時間ももったいないのでとりあえず書きます。必要が生じたら移転します。
+        * 皆...
+      coediting: false
+      comments_count: 78
+      created_at: '2015-01-27T12:21:36+09:00'
+      group: null
+      id: ec589d138e72e22ea97e
+      likes_count: 749
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Haskell
+        versions: []
+      - name: Scheme
+        versions: []
+      - name: OCaml
+        versions: []
+      - name: OCaml
+        versions: []
+      - name: 関数型言語
+        versions: []
+      - name: 関数型プログラミング
+        versions: []
+      title: 「関数型言語」に関するFAQ形式の一般的説明
+      updated_at: '2019-10-04T07:04:15+09:00'
+      url: 'https://qiita.com/esumii/items/ec589d138e72e22ea97e'
+      user:
+        description: ''
+        facebook_id: ''
+        followees_count: 0
+        followers_count: 191
+        github_login_name: null
+        id: esumii
+        items_count: 3
+        linkedin_id: ''
+        location: ''
+        name: Eijiro Sumii
+        organization: ''
+        permanent_id: 33045
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/33045/profile-images/1473686035'
+        team_only: false
+        twitter_screen_name: esumii
+        website_url: 'https://twitter.com/esumii'
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="intellijのgolang-pluginについて" class="fragment"></span><a href="#intellij%E3%81%AEgolan...
+      body: |-
+        #IntelliJのgolang pluginについて
+        個人的に困っていた問題が解決しているのでIntelliJをメインに利用してます。サーバサイドでの作業時にEmacsを活用してます。
+
+        * [go...
+      coediting: false
+      comments_count: 0
+      created_at: '2015-01-14T07:57:29+09:00'
+      group: null
+      id: 620ebed252ed91bdcb0a
+      likes_count: 19
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Emacs
+        versions: []
+      - name: Go
+        versions: []
+      - name: Emacs
+        versions: []
+      - name: Go
+        versions: []
+      title: Go開発環境をEmacsで整える
+      updated_at: '2015-02-27T17:55:37+09:00'
+      url: 'https://qiita.com/shiwork/items/620ebed252ed91bdcb0a'
+      user:
+        description: null
+        facebook_id: null
+        followees_count: 15
+        followers_count: 22
+        github_login_name: shiwork
+        id: shiwork
+        items_count: 13
+        linkedin_id: null
+        location: null
+        name: ''
+        organization: null
+        permanent_id: 6229
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/6229/profile-images/1473682699'
+        team_only: false
+        twitter_screen_name: shiwork
+        website_url: null
+      page_views_count: null
+    - rendered_body: |-
+        <p>タイトルに書かれていることで全てなのですが、DDDとCQRSの併用について強調している日本語の情報が少ないので、軽くまとめておきます。</p>
+
+        <h3>
+        <span id="cqrsddd" ...
+      body: |2-
+
+        タイトルに書かれていることで全てなのですが、DDDとCQRSの併用について強調している日本語の情報が少ないので、軽くまとめておきます。
+
+        ### CQRS+DDD
+
+        CQRS(コマンドクエリ責務分離...
+      coediting: false
+      comments_count: 0
+      created_at: '2014-12-28T11:51:45+09:00'
+      group: null
+      id: 22b00c65208dffeff7e4
+      likes_count: 659
+      private: false
+      reactions_count: 0
+      tags:
+      - name: DDD
+        versions: []
+      - name: CQRS
+        versions: []
+      - name: DDD
+        versions: []
+      - name: CQRS
+        versions: []
+      title: DDDで設計するならCQRSの利用を検討すべき
+      updated_at: '2015-11-02T16:48:49+09:00'
+      url: 'https://qiita.com/ledmonster/items/22b00c65208dffeff7e4'
+      user:
+        description: ''
+        facebook_id: ledmonster
+        followees_count: 74
+        followers_count: 62
+        github_login_name: ledmonster
+        id: ledmonster
+        items_count: 25
+        linkedin_id: ''
+        location: ''
+        name: Junya Hayashi
+        organization: ''
+        permanent_id: 41336
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/41336/profile-images/1473688759'
+        team_only: false
+        twitter_screen_name: null
+        website_url: ''
+      page_views_count: null
+    - rendered_body: |2-
+
+        <h1>
+        <span id="juliaとは" class="fragment"></span><a href="#julia%E3%81%A8%E3%81%AF"><i class="fa fa-...
+      body: |2-
+
+        # Juliaとは
+        科学計算の用途を想定して作られた言語。
+        裏でBLASとか使っているので、速度は速いとうたっている。
+
+        [R と Julia - RjpWiki](http://www.okada...
+      coediting: false
+      comments_count: 1
+      created_at: '2014-02-16T00:42:16+09:00'
+      group: null
+      id: d090f26dcb31818d6964
+      likes_count: 84
+      private: false
+      reactions_count: 0
+      tags:
+      - name: statistic
+        versions: []
+      - name: Julia
+        versions: []
+      - name: machine_learning
+        versions: []
+      - name: statistic
+        versions: []
+      - name: Julia
+        versions: []
+      - name: machine_learning
+        versions: []
+      title: 科学計算が得意な言語Juliaを試してみた
+      updated_at: '2015-01-20T09:54:56+09:00'
+      url: 'https://qiita.com/chezou/items/d090f26dcb31818d6964'
+      user:
+        description: Rubyのコミュニティをやりながら、データ分析や機械学習が好きな人。最近はPythonやRも触ります。
+        facebook_id: ''
+        followees_count: 12
+        followers_count: 44
+        github_login_name: chezou
+        id: chezou
+        items_count: 38
+        linkedin_id: ''
+        location: Kanagawa, Japan
+        name: Aki Ariga
+        organization: Treasure Data
+        permanent_id: 11143
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/11143/profile-images/1473681932'
+        team_only: false
+        twitter_screen_name: chezou
+        website_url: 'https://chezo.uno/'
+      page_views_count: null
+    - rendered_body: |-
+        <p>MavericksのEmacsがおかしかったので調べていたら、シェルスクリプトをアプリケーションバンドルにする方法を学んでしまったので共有します。</p>
+
+        <p>なお、参考にしたのは以下のペー...
+      body: |-
+        MavericksのEmacsがおかしかったので調べていたら、シェルスクリプトをアプリケーションバンドルにする方法を学んでしまったので共有します。
+
+        なお、参考にしたのは以下のページの記述です。
+
+        -...
+      coediting: false
+      comments_count: 0
+      created_at: '2013-11-04T20:11:21+09:00'
+      group: null
+      id: 1410707dd9e7135d207a
+      likes_count: 46
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Emacs
+        versions: []
+      - name: Bash
+        versions: []
+      - name: MacOSX
+        versions: []
+      - name: Emacs
+        versions: []
+      - name: Bash
+        versions: []
+      - name: MacOSX
+        versions: []
+      title: シェルスクリプトをアプリケーションバンドルにする方法
+      updated_at: '2013-11-04T20:18:59+09:00'
+      url: 'https://qiita.com/h12o/items/1410707dd9e7135d207a'
+      user:
+        description: 'アイコンは稲井ハルカさん https://inaiharuka.com/'
+        facebook_id: h12oblessedgeeks
+        followees_count: 68
+        followers_count: 67
+        github_login_name: h12o
+        id: h12o
+        items_count: 32
+        linkedin_id: h12oblessedgeeks
+        location: Tokyo, Japan
+        name: 細野 英朋
+        organization: ''
+        permanent_id: 4582
+        profile_image_url: 'https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/4582/profile-images/1567514208'
+        team_only: false
+        twitter_screen_name: h12o
+        website_url: 'https://blessedgeeks.org/~h12o'
+      page_views_count: null
+    - rendered_body: '<p>Go Conference 2013 Springのハンズオンで<a href="http://go-tour-jp.appspot.com/"
+        rel="nofollow noopener" ...'
+      body: |2-
+
+        Go Conference 2013 Springのハンズオンで[A Tour of Go](http://go-tour-jp.appspot.com/)やったけど目で読んでも頭に入ってこないので...
+      coediting: false
+      comments_count: 0
+      created_at: '2013-04-15T13:09:47+09:00'
+      group: null
+      id: 0638c0af1002647e3f7a
+      likes_count: 78
+      private: false
+      reactions_count: 0
+      tags:
+      - name: Go
+        versions: []
+      - name: Go
+        versions: []
+      title: 忙しい人のためのA Tour of Go
+      updated_at: '2014-02-27T19:11:33+09:00'
+      url: 'https://qiita.com/makoto_kw/items/0638c0af1002647e3f7a'
+      user:
+        description: 本当は音楽、動画周りの技術ネタを投稿したい
+        facebook_id: ''
+        followees_count: 0
+        followers_count: 91
+        github_login_name: makotokw
+        id: makoto_kw
+        items_count: 59
+        linkedin_id: makotokw
+        location: Tokyo, Japan
+        name: Kawasaki Makoto
+        organization: ''
+        permanent_id: 2435
+        profile_image_url: 'https://qiita-image-store.s3.amazonaws.com/0/2435/profile-images/1473681522'
+        team_only: false
+        twitter_screen_name: makoto_kw
+        website_url: 'http://makotokw.com'
+      page_views_count: null
