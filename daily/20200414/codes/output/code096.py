@@ -1,0 +1,5 @@
+import pygal
+chart = pygal.Bar(width=200)
+chart.add('1', 1)
+chart.add('2', 2)
+print(chart.render(is_unicode=True))
