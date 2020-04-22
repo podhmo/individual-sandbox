@@ -1,0 +1,11 @@
+.
+├── Makefile
+├── cmd
+│   └── hello
+│       └── main.go
+├── definitions.py
+├── go.mod
+└── hello
+    └── hello.go
+
+3 directories, 5 files

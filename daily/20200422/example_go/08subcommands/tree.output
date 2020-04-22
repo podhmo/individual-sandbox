@@ -1,0 +1,10 @@
+.
+├── bye
+│   └── bye.go
+├── go.mod
+├── go.sum
+├── hello
+│   └── hello.go
+└── main.go
+
+2 directories, 5 files
