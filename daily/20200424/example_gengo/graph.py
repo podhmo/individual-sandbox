@@ -1,11 +1,12 @@
 from __future__ import annotations
 import typing as t
+import typing_extensions as tx
 import dataclasses
 import contextlib
 from collections import defaultdict
 from prestring.text import Module as _Module
 
-NodeKind = t.Literal["primitive", "component"]
+NodeKind = tx.Literal["primitive", "component"]
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
