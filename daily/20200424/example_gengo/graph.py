@@ -20,10 +20,19 @@ class Node:
     uid: int
     name: str
     kind: NodeKind
-    deps: t.List[Node]
+    deps: t.List[Node]  # todo: immutable
+    metadata: t.Dict[str, t.Any]  # todo: immutable
 
     def __repr__(self) -> str:
         return f"<Node uid={self.uid} deps={len(self.deps)} name={self.name!r}>"
+
+    @property
+    def is_primitive(self) -> bool:
+        return self.kind == "primitive"
+
+    @property
+    def is_component(self) -> bool:
+        return self.kind == "component"
 
 
 def primitive(name: str) -> Seed:
@@ -36,11 +45,19 @@ def component(name: str) -> Seed:
 
 class Builder:
     def __init__(self) -> None:
+        # todo: str -> int
         self.deps_map: t.Dict[str, t.Set[str]] = defaultdict(set)
         self.node_map: t.Dict[str, Seed] = {}
         self.uid_map: t.Dict[str, int] = defaultdict(lambda: len(self.uid_map))
+        self.metadata_map: t.Dict[str, t.Dict[str, t.Any]] = defaultdict(dict)
 
-    def add_node(self, name: str, *, deps: t.List[t.Union[Seed, str]]) -> None:
+    def add_node(
+        self,
+        name: str,
+        *,
+        deps: t.List[t.Union[Seed, str]],
+        metadata: t.Optional[t.Dict[str, t.Any]] = None,
+    ) -> None:
         dep_node_map: t.List[Seed] = []
         for name_or_node in deps:
             if isinstance(name_or_node, Seed):
@@ -50,6 +67,9 @@ class Builder:
 
         self.deps_map[name].update([dep.name for dep in dep_node_map])
         self.uid_map[name]
+        if metadata is not None:
+            self.metadata_map[name] = metadata
+
         for dep in dep_node_map:
             if dep.name in self.node_map:
                 assert self.node_map[dep.name] == dep
@@ -69,7 +89,11 @@ class Builder:
 
             deps: t.List[Node] = []
             node = node_map[uid] = Node(
-                name=seed.name, kind=seed.kind, uid=uid, deps=deps,
+                name=seed.name,
+                kind=seed.kind,
+                uid=uid,
+                deps=deps,
+                metadata=self.metadata_map[seed.name],
             )
             deps.extend(
                 [create(self.node_map[name]) for name in self.deps_map[seed.name]]
@@ -102,6 +126,23 @@ class Graph:
 
     def __repr__(self) -> str:
         return f"<Graph len={len(self.nodes)}>"
+
+
+def topological_sorted(g: Graph) -> t.List[Node]:
+    seen: t.Set[int] = set()
+    r: t.List[Node] = []
+
+    def visit(node: Node) -> None:
+        if node.uid in seen:
+            return
+        seen.add(node.uid)
+        for dep in node.deps:
+            visit(dep)
+        r.append(node)
+
+    for node in g.nodes:
+        visit(node)
+    return r
 
 
 def visualize(g: Graph) -> Module:

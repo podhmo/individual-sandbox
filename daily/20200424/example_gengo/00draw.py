@@ -1,4 +1,5 @@
-from graph import Builder, visualize, primitive
+from graph import Builder, primitive
+from graph import visualize
 from handofcats import as_command
 
 
