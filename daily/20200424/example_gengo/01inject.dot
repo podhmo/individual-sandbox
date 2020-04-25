@@ -1,0 +1,4 @@
+v0 = Config(filename)
+v1 = X(v0)
+v2 = Y(v0)
+v3 = Z(v1, v2)

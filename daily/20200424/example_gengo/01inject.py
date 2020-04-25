@@ -2,15 +2,15 @@ import typing as t
 from graph import Builder, Graph, primitive
 from graph import topological_sorted
 from handofcats import as_command
+from prestring.python import Module as _Module
+from prestring.codeobject import CodeObjectModuleMixin, Symbol
 
 
-def resolve(g: Graph):
-    from prestring.python import Module as _Module
-    from prestring.codeobject import CodeObjectModuleMixin, Symbol
+class Module(_Module, CodeObjectModuleMixin):
+    pass
 
-    class Module(_Module, CodeObjectModuleMixin):
-        pass
 
+def resolve(g: Graph) -> Module:
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
@@ -20,21 +20,21 @@ def resolve(g: Graph):
             continue
 
         args = []
-        for dep in node.deps:
+        for dep in node.depends:
             args.append(variables[dep.uid])
         variables[node.uid] = m.let(f"v{i}", m.symbol(node.name)(*args))
         i += 1
-    print(m)
+    return m
 
 
 @as_command  # type: ignore
 def run() -> None:
     b = Builder()
 
-    b.add_node("Config", deps=[primitive("filename")])
-    b.add_node("X", deps=["Config"])
-    b.add_node("Y", deps=["Config"])
-    b.add_node("Z", deps=["X", "Y"])
+    b.add_node("Config", depends=[primitive("filename")])
+    b.add_node("X", depends=["Config"])
+    b.add_node("Y", depends=["Config"])
+    b.add_node("Z", depends=["X", "Y"])
 
     g = b.build()
     print(resolve(g))

@@ -1,0 +1,6 @@
+func run() error {
+	v0 := NewMessage()
+	v1 := NewGreeter(v0)
+	v2 := NewEvent(v1)
+	return nil
+}

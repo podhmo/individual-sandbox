@@ -7,7 +7,7 @@ from prestring.go import Module as _Module
 from prestring.codeobject import CodeObjectModuleMixin, Symbol
 
 
-class Module(_Module, CodeObjectModuleMixin):
+class Module(CodeObjectModuleMixin, _Module):
     assign_op = ":="
 
 
@@ -29,26 +29,26 @@ def resolve(g: Graph) -> Module:
                 continue
 
             args = []
-            for dep in node.deps:
+            for dep in node.depends:
                 args.append(variables[dep.uid])
-
+            m.letN
             return_type = node.metadata.get("return_type", "")
             if return_type == "":
-                (variables[node.uid],) = m.letN([f"v{i}"], m.symbol(node.name)(*args))
+                [variables[node.uid]] = m.letN([f"v{i}"], m.symbol(node.name)(*args))
             elif return_type == "with-err":
                 variables[node.uid], err = m.letN(
-                    [f"v{i}", "err"], m.symbol(node.name)(*args)
+                    (f"v{i}", "err"), m.symbol(node.name)(*args)
                 )
                 with m.if_("err != nil"):
                     m.return_("err")
             elif return_type == "with-cleanup":
                 variables[node.uid], cleanup = m.letN(
-                    [f"v{i}", "cleanup"], m.symbol(node.name)(*args)
+                    (f"v{i}", "cleanup"), m.symbol(node.name)(*args)
                 )
                 m.stmt("defer cleanup()")
             elif return_type == "with-cleanup-err":
                 variables[node.uid], cleanup, err = m.letN(
-                    [f"v{i}", "cleanup", "err"], m.symbol(node.name)(*args)
+                    (f"v{i}", "cleanup", "err"), m.symbol(node.name)(*args)
                 )
                 with m.if_("err != nil"):
                     m.return_("err")
@@ -65,11 +65,11 @@ def run() -> None:
     b = Builder()
 
     b.add_node(
-        "Config", deps=[primitive("filename")], metadata={"return_type": "with-err"},
+        "Config", depends=[primitive("filename")], metadata={"return_type": "with-err"},
     )
-    b.add_node("X", deps=["Config"])
-    b.add_node("Y", deps=["Config"])
-    b.add_node("Z", deps=["X", "Y"], metadata={"return_type": "with-cleanup"})
+    b.add_node("X", depends=["Config"])
+    b.add_node("Y", depends=["Config"])
+    b.add_node("Z", depends=["X", "Y"], metadata={"return_type": "with-cleanup"})
 
     g = b.build()
     print(resolve(g))
