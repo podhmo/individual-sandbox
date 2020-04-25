@@ -5,7 +5,7 @@ func run(filename string, version int) error {
 	}
 	v1 := NewX(v0, version)
 	v2 := NewY(v0)
-	v3, teardown := NewZ(v2, v1)
+	v3, teardown := NewZ(v1, v2)
 	defer teardown()
 	return nil
 }

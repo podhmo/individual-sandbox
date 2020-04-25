@@ -13,9 +13,9 @@ NodeKind = tx.Literal["primitive", "component"]
 class Seed:
     name: str
     kind: NodeKind
-    type_: t.Type[t.Any] = t.Any
+    metadata: t.Optional[t.Dict[str, t.Any]] = None
 
-    def equal_without_type(self, other: Seed) -> bool:
+    def equal_without_metadata(self, other: Seed) -> bool:
         return self.name == other.name and self.kind == other.kind
 
 
@@ -26,7 +26,6 @@ class Node:
     kind: NodeKind
     depends: t.List[Node]  # todo: immutable
     metadata: t.Dict[str, t.Any]  # todo: immutable
-    type_: t.Type[t.Any] = t.Any
 
     def __repr__(self) -> str:
         return f"<Node uid={self.uid} depends={len(self.depends)} name={self.name!r}>"
@@ -40,18 +39,18 @@ class Node:
         return self.kind == "component"
 
 
-def primitive(name: str, *, type_: t.Type[t.Any] = t.Any) -> Seed:
-    return Seed(name=name, kind="primitive", type_=type_)
+def primitive(name: str, *, metadata: t.Optional[t.Dict[str, t.Any]] = None) -> Seed:
+    return Seed(name=name, kind="primitive", metadata=metadata)
 
 
-def component(name: str, type_: t.Type[t.Any] = t.Any) -> Seed:
-    return Seed(name=name, kind="component", type_=type_)
+def component(name: str, metadata: t.Optional[t.Dict[str, t.Any]] = None) -> Seed:
+    return Seed(name=name, kind="component", metadata=metadata)
 
 
 class Builder:
     def __init__(self) -> None:
         # todo: str -> int
-        self.depends_map: t.Dict[str, t.Set[str]] = defaultdict(set)
+        self.depends_map: t.Dict[str, t.List[str]] = defaultdict(list)
         self.node_map: t.Dict[str, Seed] = {}
         self.uid_map: t.Dict[str, int] = defaultdict(lambda: len(self.uid_map))
         self.metadata_map: t.Dict[str, t.Dict[str, t.Any]] = defaultdict(dict)
@@ -62,29 +61,28 @@ class Builder:
         *,
         depends: t.Optional[t.List[t.Union[Seed, str]]] = None,
         metadata: t.Optional[t.Dict[str, t.Any]] = None,
-        type_: t.Type[t.Any] = t.Any,
     ) -> None:
         depends = depends or []
-        dep_node_map: t.List[Seed] = []
+        depends_node_map: t.List[Seed] = []
 
         for name_or_node in depends:
             if isinstance(name_or_node, Seed):
-                dep_node_map.append(name_or_node)
+                depends_node_map.append(name_or_node)
             else:
-                dep_node_map.append(component(name_or_node))
+                depends_node_map.append(component(name_or_node))
 
-        self.depends_map[name].update([dep.name for dep in dep_node_map])
+        self.depends_map[name].extend([dep.name for dep in depends_node_map])
         self.uid_map[name]
         if metadata is not None:
             self.metadata_map[name] = metadata
 
-        for dep in dep_node_map:
+        for dep in depends_node_map:
             if dep.name in self.node_map:
-                assert self.node_map[dep.name].equal_without_type(dep)
+                assert self.node_map[dep.name].equal_without_metadata(dep)
                 continue
 
             self.node_map[dep.name] = dep
-        self.node_map[name] = component(name, type_=type_)
+        self.node_map[name] = component(name)
 
     def build(self, *, name: str = "G") -> Graph:
         node_map: t.Dict[int, Node] = {}
@@ -96,14 +94,16 @@ class Builder:
                 return node_map[uid]
 
             depends: t.List[Node] = []
+            if seed.metadata is not None:
+                self.metadata_map[seed.name].update(seed.metadata)
             node = node_map[uid] = Node(
                 uid=uid,
                 name=seed.name,
                 kind=seed.kind,
-                type_=seed.type_,
                 depends=depends,
                 metadata=self.metadata_map[seed.name],
             )
+
             depends.extend(
                 [create(self.node_map[name]) for name in self.depends_map[seed.name]]
             )

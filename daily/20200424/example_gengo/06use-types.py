@@ -66,13 +66,16 @@ class Metadata(tx.TypedDict, total=False):
     provider: str
     return_type: t.Type[t.Any]
     component_type: t.Type[t.Any]
+    type_: t.Type[t.Any]
 
 
 def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
     spec = fnspec(fn)
 
     depends = [
-        primitive(name, type_=typ) if typ.__module__ == "builtins" else typ.__name__
+        primitive(name, metadata={"type_": typ})
+        if typ.__module__ == "builtins"
+        else typ.__name__
         for name, typ, _ in spec.arguments
     ]
 
@@ -86,28 +89,30 @@ def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
     metadata: Metadata = {
         "provider": fn.__name__,
         "return_type": return_type,
+        "type_": component_type,
     }
     return {
         "name": component_type.__name__,
         "depends": depends,
         "metadata": metadata,
-        "type_": component_type,
     }
 
 
 def resolve(g: Graph) -> Module:
+    # TODO: name
+    # TODO: import_
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
 
     def detect_go_primitive_type(node) -> str:
         # todo: use singledispatch?
-        if issubclass(node.type_, int):
+        metadata = t.cast(Metadata, node.metadata)
+        if issubclass(metadata["type_"], int):
             return "int"
         else:
             return "string"
 
-    # TODO: name
     root_args = [
         f"{node.name} {detect_go_primitive_type(node)}"
         for node in g.nodes
