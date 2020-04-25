@@ -5,10 +5,10 @@ func run(filename string, version int) error {
 	}
 	v1 := NewX(v0, version)
 	v2, teardown, err := NewY(v0)
-	defer teardown()
 	if err != nil  {
 		return err
 	}
+	defer teardown()
 	v3, teardown := NewZ(v1, v2)
 	defer teardown()
 	return nil

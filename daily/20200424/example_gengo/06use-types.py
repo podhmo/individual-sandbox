@@ -26,6 +26,7 @@ class Z:
 
 class GoError:
     name = "err"
+    priority = 10
 
     @classmethod
     def emit(self, m: Module, err: Symbol) -> None:
@@ -35,6 +36,7 @@ class GoError:
 
 class GoTeardown:
     name = "teardown"
+    priority = 1
 
     @classmethod
     def emit(self, m: Module, teardown: Symbol) -> None:
@@ -60,7 +62,6 @@ def NewZ(x: X, y: Y) -> t.Tuple[Z, GoTeardown]:
 class Metadata(tx.TypedDict, total=False):
     provider: str
     return_type: t.Type[t.Any]
-    component_type: t.Type[t.Any]
     type_: t.Type[t.Any]
 
 
@@ -135,7 +136,11 @@ def emit(g: Graph) -> Module:
                 var_names, provider_callable(*args)
             )
             if extra_vars:
-                for sym, typ in zip(extra_vars, return_types[1:]):
+                for sym, typ in sorted(
+                    zip(extra_vars, return_types[1:]),
+                    key=lambda pair: getattr(pair[1], "priority", 5),
+                    reverse=True,
+                ):
                     if hasattr(typ, "emit"):
                         typ.emit(m, sym)
 
