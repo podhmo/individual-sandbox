@@ -2,9 +2,7 @@ from __future__ import annotations
 import typing as t
 import typing_extensions as tx
 import dataclasses
-import contextlib
 from collections import defaultdict
-from prestring.text import Module as _Module
 
 NodeKind = tx.Literal["primitive", "component"]
 
@@ -114,19 +112,6 @@ class Builder:
         return Graph(node_map, name=name)
 
 
-class Module(_Module):
-    @contextlib.contextmanager
-    def block(self, expr: str = "") -> t.Iterator[None]:
-        line = []
-        if expr:
-            line.append(expr)
-        line.append("{")
-        self.stmt(" ".join(line))
-        with self.scope():
-            yield
-        self.stmt("}")
-
-
 class Graph:
     def __init__(self, node_map: t.Dict[int, Node], *, name: str) -> None:
         self.name = name
@@ -152,25 +137,3 @@ def topological_sorted(g: Graph) -> t.List[Node]:
     for node in g.nodes:
         visit(node)
     return r
-
-
-def visualize(g: Graph) -> Module:
-    """generate dot file (graphviz)"""
-    m = Module()
-    with m.block(f"digraph {g.name}"):
-        # nodes
-        m.stmt("// nodes")
-        for node in g.nodes:
-            # TODO: change shape by kind
-            # https://www.graphviz.org/doc/info/shapes.html
-            shape = "plain" if node.kind == "primitive" else "oval"
-            m.stmt(f"""g{node.uid} [label="{node.name}", shape={shape}];""")
-
-        m.stmt("")
-
-        # edges
-        m.stmt("// edges")
-        for node in g.nodes:
-            for dep in node.depends:
-                m.stmt(f"g{dep.uid} -> g{node.uid};")
-    return m

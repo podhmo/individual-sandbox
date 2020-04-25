@@ -5,12 +5,7 @@ from graph import topological_sorted
 
 from gogen._fnspec import fnspec
 from handofcats import as_command
-from prestring.go import Module as _Module
-from prestring.codeobject import CodeObjectModuleMixin, Symbol
-
-
-class Module(CodeObjectModuleMixin, _Module):
-    assign_op = ":="
+from prestring.go.codeobject import Module, Symbol
 
 
 class Config:
@@ -54,7 +49,7 @@ def NewX(config: Config, version: int) -> X:
     pass
 
 
-def NewY(config: Config) -> Y:
+def NewY(config: Config) -> t.Tuple[Y, GoTeardown, GoError]:
     pass
 
 
@@ -84,7 +79,7 @@ def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
         component_type = return_type
     else:
         assert return_type.__origin__ == tuple, return_type.__origin__
-        component_type, _ = t.get_args(spec.return_type)
+        component_type, *_ = t.get_args(spec.return_type)
 
     metadata: Metadata = {
         "provider": fn.__name__,
@@ -98,6 +93,20 @@ def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
     }
 
 
+def _get_args(g: Graph) -> t.List[str]:
+    root_args = []
+    for node in g.nodes:
+        if not node.is_primitive:
+            continue
+        metadata = t.cast(Metadata, node.metadata)
+        if issubclass(metadata["type_"], int):
+            gotype = "int"
+        else:
+            gotype = "string"
+        root_args.append(f"{node.name} {gotype}")
+    return root_args
+
+
 def emit(g: Graph) -> Module:
     # TODO: name
     # TODO: import_
@@ -105,20 +114,7 @@ def emit(g: Graph) -> Module:
     m = Module()
     variables: t.Dict[int, Symbol] = {}
 
-    def detect_go_primitive_type(node) -> str:
-        # todo: use singledispatch?
-        metadata = t.cast(Metadata, node.metadata)
-        if issubclass(metadata["type_"], int):
-            return "int"
-        else:
-            return "string"
-
-    root_args = [
-        f"{node.name} {detect_go_primitive_type(node)}"
-        for node in g.nodes
-        if node.is_primitive
-    ]
-    with m.func("run", *root_args, return_="error"):
+    with m.func("run", *_get_args(g), return_="error"):
         for node in topological_sorted(g):
             if node.is_primitive:
                 variables[node.uid] = m.symbol(node.name)

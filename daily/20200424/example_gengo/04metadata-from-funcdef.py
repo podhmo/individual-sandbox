@@ -5,12 +5,7 @@ from graph import topological_sorted
 
 from gogen._fnspec import fnspec
 from handofcats import as_command
-from prestring.go import Module as _Module
-from prestring.codeobject import CodeObjectModuleMixin, Symbol
-
-
-class Module(CodeObjectModuleMixin, _Module):
-    assign_op = ":="
+from prestring.go.codeobject import Module, Symbol
 
 
 class Config:

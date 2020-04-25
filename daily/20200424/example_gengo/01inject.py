@@ -2,12 +2,7 @@ import typing as t
 from graph import Builder, Graph, primitive
 from graph import topological_sorted
 from handofcats import as_command
-from prestring.python import Module as _Module
-from prestring.codeobject import CodeObjectModuleMixin, Symbol
-
-
-class Module(_Module, CodeObjectModuleMixin):
-    pass
+from prestring.python.codeobject import Module, Symbol
 
 
 def emit(g: Graph) -> Module:
