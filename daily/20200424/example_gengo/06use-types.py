@@ -98,7 +98,7 @@ def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
     }
 
 
-def resolve(g: Graph) -> Module:
+def emit(g: Graph) -> Module:
     # TODO: name
     # TODO: import_
     i = 0
@@ -157,4 +157,4 @@ def run() -> None:
     b.add_node(**parse(NewY))
     b.add_node(**parse(NewZ))
     g = b.build()
-    print(resolve(g))
+    print(emit(g))

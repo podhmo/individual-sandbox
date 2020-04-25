@@ -3,7 +3,7 @@
 - graph
 - visualize
 - sorted
-- resolve
+- emit
 - factory
 
 ## graph

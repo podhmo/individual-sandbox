@@ -91,7 +91,7 @@ def parse(fn: t.Callable[..., t.Any]) -> t.Tuple[str, t.List[str], Metadata]:
     return {"name": component_type.__name__, "depends": depends, "metadata": metadata}
 
 
-def resolve(g: Graph) -> Module:
+def emit(g: Graph) -> Module:
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
@@ -138,4 +138,4 @@ def run() -> None:
     b.add_node(**parse(NewY))
     b.add_node(**parse(NewZ))
     g = b.build()
-    print(resolve(g))
+    print(emit(g))

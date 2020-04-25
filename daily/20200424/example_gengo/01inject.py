@@ -10,7 +10,7 @@ class Module(_Module, CodeObjectModuleMixin):
     pass
 
 
-def resolve(g: Graph) -> Module:
+def emit(g: Graph) -> Module:
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
@@ -37,4 +37,4 @@ def run() -> None:
     b.add_node("Z", depends=["X", "Y"])
 
     g = b.build()
-    print(resolve(g))
+    print(emit(g))

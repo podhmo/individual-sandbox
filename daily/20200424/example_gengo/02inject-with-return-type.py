@@ -14,7 +14,7 @@ class Module(CodeObjectModuleMixin, _Module):
 ReturnType = tx.Literal["", "with-err", "with-cleanup", "with-cleanup-err"]
 
 
-def resolve(g: Graph) -> Module:
+def emit(g: Graph) -> Module:
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
@@ -72,4 +72,4 @@ def run() -> None:
     b.add_node("Z", depends=["X", "Y"], metadata={"return_type": "with-cleanup"})
 
     g = b.build()
-    print(resolve(g))
+    print(emit(g))

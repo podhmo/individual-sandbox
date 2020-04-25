@@ -22,7 +22,7 @@ class Metadata(tx.TypedDict, total=False):
 # metadata :: return_type, provider
 
 
-def resolve(g: Graph) -> Module:
+def emit(g: Graph) -> Module:
     i = 0
     m = Module()
     variables: t.Dict[int, Symbol] = {}
@@ -76,4 +76,4 @@ def run() -> None:
     b.add_node("Event", depends=["Greeter"], metadata={"provider": "NewEvent"})
 
     g = b.build()
-    print(resolve(g))
+    print(emit(g))
