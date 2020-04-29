@@ -1,0 +1,1 @@
+../../20200424/example_gengo/00draw.py
