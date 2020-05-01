@@ -5,7 +5,6 @@ internal = import_module("./internal.py", here=__file__)
 
 
 def use(*, grumby: bool) -> None:
-    """hello message"""
     from egoist.generate.clikit import clikit
     from egoist.generate.go import di
     from egoist.internal.graph import Builder
