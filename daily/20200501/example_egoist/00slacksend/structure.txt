@@ -1,0 +1,15 @@
+.
+├── Makefile
+├── api
+│   └── api.go
+├── cmd
+│   └── slacksend
+│       └── main.go
+├── config
+│   └── config.go
+├── definitions.py
+├── go.mod
+├── go.sum
+└── structure.txt
+
+4 directories, 8 files
