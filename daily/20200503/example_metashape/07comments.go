@@ -4,6 +4,6 @@ package main
 // 
 // long description here.
 type Person struct {
-	Name string
-	Age int
+	Name string  // name of person
+	Age int  // age of person
 }

@@ -1,26 +1,13 @@
 from __future__ import annotations
 import typing as t
-import typing_extensions as tx
 import inspect  # doc
 from prestring.go.codeobject import Module, gofile
 from prestring.go import goname
 from prestring.naming import untitleize
 from egoist.go.resolver import get_resolver
 from egoist.go.types import get_gopackage
-from metashape.declarative import MISSING, field  # noqa: F401
-from walker import walk
-
-
-def metadata(*, inline: bool = False, required: bool = True) -> t.Dict[str, t.Any]:
-    # todo: required false?
-    d: Metadata = {"inline": inline, "required": required}
-    return d  # type: ignore
-
-
-class Metadata(tx.TypedDict, total=False):
-    inline: bool
-    required: bool
-    default: t.Any
+from metashape.declarative import field  # noqa: F401
+from walker import walk, metadata  # noqa: F401
 
 
 def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
@@ -28,12 +15,13 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
     r = get_resolver(m)
 
     for item in walk(classes):
-        gopackage = get_gopackage(item.cls)
+        gopackage = get_gopackage(item.type_)
         if gopackage is not None:
             continue
 
-        typename = goname(item.cls.__name__)
-        doc = inspect.getdoc(item.cls)
+        typename = str(r.resolve_gotype(item.type_))
+
+        doc = inspect.getdoc(item.type_)
         if doc:
             lines = doc.split("\n")
             m.stmt(f"// {typename} {lines[0]}")
@@ -42,16 +30,10 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
 
         m.stmt(f"type {typename} struct {{")
         with m.scope():
-            for name, typeinfo, _metadata in item.fields:
-                metadata = t.cast(Metadata, _metadata)
-                if metadata.get("default") == MISSING:
-                    metadata.pop("default")
+            for name, typeinfo, metadata in item.fields:
+                gotype: str = r.resolve_gotype(typeinfo.raw)
 
-                typ = typeinfo.raw
-                if metadata.get("pointer", False):
-                    typ = t.Optional[typ]
-                gotype: str = r.resolve_gotype(typ)
-
+                # handling field (private field?, embedded?)
                 if metadata.get("inline", False):
                     m.append(gotype)
                 elif name.startswith("_"):
@@ -59,12 +41,20 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
                 else:
                     m.append(f"{goname(name)} {gotype}")
 
-                if metadata:
+                # handling comments
+                if metadata.get("inline", False):
                     m.stmt(f"  // {metadata}")
                 else:
-                    m.stmt("")
+                    comment = metadata.get("comment", "")
+                    if comment:
+                        m.stmt(f"  // {comment.split(_NEWLINE, 1)[0]}")
+                    else:
+                        m.stmt("")
 
         m.stmt("}")
         m.sep()
 
     return m
+
+
+_NEWLINE = "\n"
