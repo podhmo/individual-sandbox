@@ -12,7 +12,9 @@ require (
 	github.com/cybozu-go/well v1.10.0 // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.4.0
-	github.com/go-chi/chi v4.0.2+incompatible // indirect
+	github.com/go-chi/chi v4.0.2+incompatible
+	github.com/go-chi/docgen v1.0.5
+	github.com/go-chi/render v1.0.1
 	github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/go-openapi/swag v0.19.8
@@ -49,10 +51,11 @@ require (
 	github.com/slack-go/slack v0.6.4 // indirect
 	github.com/vektah/dataloaden v0.3.0 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
+	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.10.0
 	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914 // indirect
 	golang.org/x/sys v0.0.0-20191119195528-f068ffe820e4 // indirect
-	golang.org/x/tools v0.0.0-20191101200257-8dbcdeb83d3f
+	golang.org/x/tools v0.0.0-20191114200427-caa0b0f7d508
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6 // indirect
