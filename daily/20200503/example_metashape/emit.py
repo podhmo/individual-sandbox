@@ -23,9 +23,9 @@ class Metadata(tx.TypedDict, total=False):
     default: t.Any
 
 
-def emit(classes: t.List[t.Type[t.Any]]) -> Module:
-    r = get_resolver()
-    m = gofile("main")
+def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
+    m = gofile(name)
+    r = get_resolver(m)
 
     for item in walk(classes):
         gopackage = get_gopackage(item.cls)
@@ -51,12 +51,6 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
                 if metadata.get("pointer", False):
                     typ = t.Optional[typ]
                 gotype: str = r.resolve_gotype(typ)
-                gopackage = get_gopackage(
-                    typeinfo.normalized
-                )  # todo: support composite
-
-                if gopackage is not None:
-                    gotype = f"{m.import_(gopackage)}.{gotype}"
 
                 if metadata.get("inline", False):
                     m.append(gotype)
@@ -74,21 +68,3 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
         m.sep()
 
     return m
-
-
-def gofmt(code: str) -> str:
-    import os
-
-    if not bool(os.environ.get("GOFMT")):
-        return code
-
-    import subprocess
-    import tempfile
-
-    with tempfile.TemporaryFile("w+") as wf:
-        wf.write(code)
-        wf.seek(0)
-        p = subprocess.run(
-            ["gofmt"], stdin=wf, stdout=subprocess.PIPE, text=True, check=True
-        )
-        return p.stdout
