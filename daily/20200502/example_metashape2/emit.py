@@ -5,7 +5,7 @@ from prestring.go.codeobject import Module, gofile
 from prestring.go import goname
 from egoist.go.resolver import get_resolver
 from egoist.go.types import get_gopackage
-from metashape.declarative import MISSING
+from metashape.declarative import MISSING, field  # noqa: F401
 from walker import walk
 
 
