@@ -3,9 +3,9 @@ from prestring.go.gofmt import gofmt
 
 
 class Person:
-    """this is person object"""
     name: str
     age: int
+    _private_field: str  # bytes
 
 
 print(gofmt(emit([Person]), always=False))

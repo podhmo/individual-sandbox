@@ -1,8 +1,10 @@
 from __future__ import annotations
 import typing as t
 import typing_extensions as tx
+import inspect  # doc
 from prestring.go.codeobject import Module, gofile
 from prestring.go import goname
+from prestring.naming import untitleize
 from egoist.go.resolver import get_resolver
 from egoist.go.types import get_gopackage
 from metashape.declarative import MISSING, field  # noqa: F401
@@ -50,6 +52,8 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
 
                 if metadata.get("inline", False):
                     m.append(gotype)
+                elif name.startswith("_"):
+                    m.append(f"{untitleize(goname(name))} {gotype}")
                 else:
                     m.append(f"{goname(name)} {gotype}")
 

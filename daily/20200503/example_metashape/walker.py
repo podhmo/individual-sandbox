@@ -15,7 +15,10 @@ def walk(classes: t.List[t.Type[t.Any]]) -> t.Iterator[Item]:
     w = runtime.get_walker(classes)
     for cls in w.walk(kinds=["object", None]):
         fields: t.List[Row] = []
-        for name, typeinfo, metadata in w.for_type(cls).walk():
+        for name, typeinfo, metadata in w.for_type(cls).walk(ignore_private=False):
+            if name.startswith("_") and name.endswith("_"):
+                continue
+
             if metadata is None:
                 metadata = {}
             if typeinfo.normalized.__module__ != "builtins":
