@@ -32,7 +32,15 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
         if gopackage is not None:
             continue
 
-        m.stmt(f"type {goname(item.cls.__name__)} struct {{")
+        typename = goname(item.cls.__name__)
+        doc = inspect.getdoc(item.cls)
+        if doc:
+            lines = doc.split("\n")
+            m.stmt(f"// {typename} {lines[0]}")
+            for line in lines[1:]:
+                m.stmt(f"// {line}")
+
+        m.stmt(f"type {typename} struct {{")
         with m.scope():
             for name, typeinfo, _metadata in item.fields:
                 metadata = t.cast(Metadata, _metadata)
