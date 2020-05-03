@@ -30,11 +30,10 @@ require (
 	github.com/hashicorp/yamux v0.0.0-20190923154419-df201c70410d // indirect
 	github.com/heroku/x v0.0.11
 	github.com/integrii/flaggy v1.4.4 // indirect
-	github.com/jmoiron/sqlx v1.2.0
+	github.com/jmoiron/sqlx v1.2.1-0.20190826204134-d7d95172beb5
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/k1LoW/tbls v1.20.0 // indirect
-	github.com/kr/pty v1.1.8 // indirect
 	github.com/lib/pq v1.2.0
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
@@ -44,6 +43,7 @@ require (
 	github.com/podhmo/ctxlog/zapctxlog v0.3.0 // indirect
 	github.com/podhmo/go-rfc3339 v0.1.0
 	github.com/podhmo/go-webtest v0.4.3 // indirect
+	github.com/podhmo/maperr v0.0.0
 	github.com/podhmo/noerror v0.3.1
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
@@ -53,12 +53,9 @@ require (
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.10.0
-	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914 // indirect
-	golang.org/x/sys v0.0.0-20191119195528-f068ffe820e4 // indirect
-	golang.org/x/tools v0.0.0-20191114200427-caa0b0f7d508
+	golang.org/x/tools v0.0.0-20200422022333-3d57cf2e726e
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
-	gopkg.in/alecthomas/kingpin.v2 v2.2.6 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )

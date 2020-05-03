@@ -7,7 +7,7 @@ from prestring.naming import untitleize
 from egoist.go.resolver import get_resolver
 from egoist.go.types import get_gopackage
 from metashape.declarative import field  # noqa: F401
-from walker import walk, metadata  # noqa: F401
+from walker import walk, metadata, Item  # noqa: F401
 
 
 def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
@@ -15,6 +15,12 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
     r = get_resolver(m)
 
     for item in walk(classes):
+        # Union:
+        if item.is_union:
+            print("@", item)
+            continue
+
+        # Object:
         gopackage = get_gopackage(item.type_)
         if gopackage is not None:
             continue

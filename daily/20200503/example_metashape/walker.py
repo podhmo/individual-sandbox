@@ -27,11 +27,32 @@ Row = t.Tuple[str, t.Any, Metadata]
 class Item:
     type_: t.Type[t.Any]
     fields: t.List[Row]
+    args: t.List[t.Type[t.Any]]
+
+    @property
+    def is_object(self):
+        return not self.args
+
+    @property
+    def is_union(self):
+        return not self.fields
 
 
-def walk(classes: t.List[t.Type[t.Any]]) -> t.Iterator[Item]:
+def walk(
+    classes: t.List[t.Type[t.Any]], *, _nonetype: t.Type[t.Any] = type(None)
+) -> t.Iterator[Item]:
     w = runtime.get_walker(classes)
     for cls in w.walk(kinds=["object", None]):
+        if (
+            getattr(cls, "__origin__", None) == t.Union
+            and _nonetype not in cls.__args__
+        ):
+            yield Item(type_=cls, fields=[], args=cls.__args__)
+            for subtyp in cls.__args__:
+                if subtyp.__module__ != "builtins":
+                    w.append(subtyp)
+            continue
+
         fields: t.List[Row] = []
         for name, typeinfo, _metadata in w.for_type(cls).walk(ignore_private=False):
             if name.startswith("_") and name.endswith("_"):
@@ -49,4 +70,4 @@ def walk(classes: t.List[t.Type[t.Any]]) -> t.Iterator[Item]:
                         w.append(subtyp)
 
             fields.append((name, typeinfo, metadata))
-        yield Item(type_=cls, fields=fields)
+        yield Item(type_=cls, fields=fields, args=[])

@@ -1,3 +1,16 @@
+## go sum type
+
+- https://qiita.com/sxarp/items/cd528a546d1537105b9d
+- https://medium.com/@haya14busa/sum-union-variant-type-in-go-and-static-check-tool-of-switch-case-handling-3bfc61618b1e
+- https://making.pusher.com/alternatives-to-sum-types-in-go/
+- https://eli.thegreenplace.net/2018/go-and-algebraic-data-types/
+
+いろいろな方法がありそう
+
+- "sum type" interface
+- visitor pattern
+
+
 ## metashape python
 
 いろいろ調整してpythonのクラスからgoのstructを生成できようにしてみる。
