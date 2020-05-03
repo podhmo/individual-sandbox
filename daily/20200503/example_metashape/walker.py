@@ -18,6 +18,7 @@ class Metadata(tx.TypedDict, total=False):
     required: bool
     comment: str
     default: t.Any
+    tags: t.Dict[str, t.List[str]]
 
 
 Row = t.Tuple[str, t.Any, Metadata]

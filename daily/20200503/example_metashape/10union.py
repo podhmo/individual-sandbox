@@ -5,11 +5,11 @@ from prestring.go.gofmt import gofmt
 
 
 class Atom:
-    kind: str
+    type_: str
 
 
 class Composite:
-    kind: str
+    type_: str
     args: t.List[Node]
 
 
