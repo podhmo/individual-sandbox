@@ -91,10 +91,10 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
     m.stmt(f"func ({this} {this_type_pointer}) UnmarshalJSON({b} []byte) error {{")
     with m.scope():
 
-        # var err *errmap.Error
+        # var err *maperr.Error
         err = m.symbol("err")
-        errmap_pkg = m.import_("github.com/podhmo/errmap")
-        m.stmt(f"var {err} *{errmap_pkg}.Error")
+        maperr_pkg = m.import_("github.com/podhmo/maperr")
+        m.stmt(f"var {err} *{maperr_pkg}.Error")
         m.sep()
 
         # var inner struct {
@@ -119,7 +119,7 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
         json_pkg = m.import_("encoding/json")
         raw_err = m.symbol("rawErr")
         with m.if_(f"{raw_err} := {json_pkg}.Unmarshal(b, &{inner}); {raw_err} != nil"):
-            m.return_(err.addSummary(raw_err.Error()))
+            m.return_(err.AddSummary(raw_err.Error()))
         m.sep()
 
         # if <field> != nil {
@@ -134,7 +134,7 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
                 m.stmt(f"{this}.{field} = *{inner}.{field}")
             if metadata["required"]:
                 with m.else_():
-                    m.stmt(f'{err} = err.Add("{name}", "required")')
+                    m.stmt(f'{err} = err.Add("{name}", {maperr_pkg}.Message{{Text: "required"}})')
         m.sep()
 
         # return err.Untyped()

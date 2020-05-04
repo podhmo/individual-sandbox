@@ -21,10 +21,10 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
         m.stmt(f"func ({this} {this_type_pointer}) UnmarshalJSON({b} []byte) error {{")
         with m.scope():
 
-            # var err *errmap.Error
+            # var err *maperr.Error
             err = m.symbol("err")
-            errmap_pkg = m.import_("github.com/podhmo/errmap")
-            m.stmt(f"var {err} *{errmap_pkg}.Error")
+            maperr_pkg = m.import_("github.com/podhmo/maperr")
+            m.stmt(f"var {err} *{maperr_pkg}.Error")
             m.sep()
 
             # var inner struct {
