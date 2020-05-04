@@ -56,18 +56,16 @@ const (
 )
 
 
-var ErrInvalidMemoKindType = fmt.Errorf("invalid MemoKind type")
-
 func (v MemoKind) Valid() error {
 	switch v {
 	case MemoKindX, MemoKindY:
 		return nil
 	default:
-		return ErrInvalidMemoKindType
+		return fmt.Errorf("%q is invalid enum value of (X, Y)", v)
 	}
 }
 
-func (v MemoKind) UnmarshalJSON(b []byte) error {
+func (v *MemoKind) UnmarshalJSON(b []byte) error {
 	*v = MemoKind(strings.Trim(string(b), `"`))
 	return v.Valid()
 }

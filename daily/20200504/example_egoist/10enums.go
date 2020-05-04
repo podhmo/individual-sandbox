@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"string"
+	"strings"
 )
 
 type op string
@@ -14,18 +14,16 @@ const (
 )
 
 
-var ErrInvalidopType = fmt.Errorf("invalid op type")
-
 func (v op) Valid() error {
 	switch v {
 	case opAdd, opSub, opMul:
 		return nil
 	default:
-		return ErrInvalidopType
+		return fmt.Errorf("%v is invalid enum value of (add, sub, mul)", v)
 	}
 }
 
-func (v op) UnmarshalJSON(b []byte) error {
-	*v = op(string.Trim(string(b), `"`))
+func (v *op) UnmarshalJSON(b []byte) error {
+	*v = op(strings.Trim(string(b), `"`))
 	return v.Valid()
 }

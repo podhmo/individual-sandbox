@@ -110,6 +110,7 @@ def emit_enums(
     const_names = [getattr(x, "__name__", x) for x in t.get_args(literal_type)]
     const_members = {name: f"{go_type}{goname(name)}" for name in const_names}
     this = m.symbol("v")
+    as_literal = resolver.resolve_default
 
     # type <enum> string
     m.stmt(f"type {go_type} {base_go_type}")
@@ -121,19 +122,7 @@ def emit_enums(
     # )
     with m.const_group() as cg:
         for name in const_names:
-            cg(
-                f"{const_members[name]} {go_type} = {resolver.resolve_default(type(name), name)}"
-            )
-    m.sep()
-
-    # var ErrInvalid<enum>Type = fmt.Errorf("invalid <enum> type")
-    err_invalid_type = m.symbol(f"ErrInvalid{go_type}Type")
-    fmt_pkg = m.import_("fmt")
-    m.stmt(
-        "var {} = {}",
-        err_invalid_type,
-        fmt_pkg.Errorf(resolver.resolve_default(str, f"invalid {go_type} type")),
-    )
+            cg(f"{const_members[name]} {go_type} = {as_literal(type(name), name)}")
     m.sep()
 
     # func (v <enum>) Valid() error {
@@ -144,7 +133,14 @@ def emit_enums(
             with sm.case(", ".join(const_members.values())):
                 sm.return_("nil")
             with sm.default() as sm:
-                sm.return_(err_invalid_type)
+                fmt_pkg = m.import_("fmt")
+                candidates = ", ".join([str(x) for x in const_names])
+                sm.return_(
+                    fmt_pkg.Errorf(
+                        as_literal(str, f"%q is invalid enum value of ({candidates})"),
+                        this,
+                    )
+                )
         sm.unnewline()
 
     # func (v <enum>) UnmarshalJSON(b []byte) error {

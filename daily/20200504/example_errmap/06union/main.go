@@ -59,14 +59,12 @@ const (
 	MemoKindY MemoKind = "Y"
 )
 
-var ErrInvalidMemoKindType = fmt.Errorf("invalid MemoKind type")
-
 func (v MemoKind) Valid() error {
 	switch v {
 	case MemoKindX, MemoKindY:
 		return nil
 	default:
-		return ErrInvalidMemoKindType
+		return fmt.Errorf("%q is invalid enum value of (X, Y)", v)
 	}
 }
 
@@ -140,7 +138,7 @@ func (y *Y) UnmarshalJSON(b []byte) error {
 }
 
 func main() {
-	b := bytes.NewBufferString(`{"name": "foo", "memo": {"$kind": "xxxz", "x": {"name": "foo", "xxxx": "z"}}}`)
+	b := bytes.NewBufferString(`{"name": "foo", "memo": {"$kind": "X", "x": {"name": "foo", "xxx": "z"}}}`)
 	decoder := json.NewDecoder(b)
 
 	var ob Person
