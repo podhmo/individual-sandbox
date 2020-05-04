@@ -4,7 +4,7 @@ import (
 	"github.com/podhmo/maperr"
 	"encoding/json"
 	"fmt"
-	"string"
+	"strings"
 )
 
 type Person struct {
@@ -48,7 +48,7 @@ type Memo struct {
 	Y *Y `json:"y,omitempty"`
 }
 
-type MemoKind Type
+type MemoKind string
 
 const (
 	MemoKindX MemoKind = "X"
@@ -68,7 +68,7 @@ func (v MemoKind) Valid() error {
 }
 
 func (v MemoKind) UnmarshalJSON(b []byte) error {
-	*v = MemoKind(string.Trim(string(b), `"`))
+	*v = MemoKind(strings.Trim(string(b), `"`))
 	return v.Valid()
 }
 

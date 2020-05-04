@@ -101,7 +101,11 @@ def emit_enums(
 ) -> str:
     # literal_type or union_type
     go_type = name or f"{resolver.resolve_gotype(literal_type)}"
-    base_go_type = resolver.resolve_gotype(type(t.get_args(literal_type)[0]))
+
+    first_of_args = t.get_args(literal_type)[0]
+    base_go_type = resolver.resolve_gotype(
+        type(getattr(first_of_args, "__name__", first_of_args))
+    )
 
     const_names = [getattr(x, "__name__", x) for x in t.get_args(literal_type)]
     const_members = {name: f"{go_type}{goname(name)}" for name in const_names}
@@ -146,8 +150,8 @@ def emit_enums(
     # func (v <enum>) UnmarshalJSON(b []byte) error {
     # ...
     # }
-    with m.method(f"{this} {go_type}", "UnmarshalJSON", f"b []byte", returns="error"):
-        strings_pkg = m.import_("string")
+    with m.method(f"{this} *{go_type}", "UnmarshalJSON", f"b []byte", returns="error"):
+        strings_pkg = m.import_("strings")
         m.stmt(f'*{this} = {go_type}({strings_pkg}.Trim(string(b), `"`))')
         m.return_(this.Valid())
     return go_type

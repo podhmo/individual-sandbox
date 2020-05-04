@@ -3,7 +3,9 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"log"
+	"strings"
 
 	"github.com/k0kubun/pp"
 	"github.com/podhmo/maperr"
@@ -45,9 +47,32 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 }
 
 type Memo struct {
-	Kind string `json:"$kind"`
-	X    *X     `json:"x,omitempty"`
-	Y    *Y     `json:"y,omitempty"`
+	Kind MemoKind `json:"$kind"`
+	X    *X       `json:"x,omitempty"`
+	Y    *Y       `json:"y,omitempty"`
+}
+
+type MemoKind string
+
+const (
+	MemoKindX MemoKind = "X"
+	MemoKindY MemoKind = "Y"
+)
+
+var ErrInvalidMemoKindType = fmt.Errorf("invalid MemoKind type")
+
+func (v MemoKind) Valid() error {
+	switch v {
+	case MemoKindX, MemoKindY:
+		return nil
+	default:
+		return ErrInvalidMemoKindType
+	}
+}
+
+func (v *MemoKind) UnmarshalJSON(b []byte) error {
+	*v = MemoKind(strings.Trim(string(b), `"`))
+	return v.Valid()
 }
 
 type X struct {
@@ -115,7 +140,7 @@ func (y *Y) UnmarshalJSON(b []byte) error {
 }
 
 func main() {
-	b := bytes.NewBufferString(`{"name": "foo", "memo": {"$kind": "xxx", "x": {"name": "foo", "xxxx": "z"}}}`)
+	b := bytes.NewBufferString(`{"name": "foo", "memo": {"$kind": "xxxz", "x": {"name": "foo", "xxxx": "z"}}}`)
 	decoder := json.NewDecoder(b)
 
 	var ob Person
