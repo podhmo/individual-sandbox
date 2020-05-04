@@ -52,10 +52,7 @@ def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> None:
                 m.stmt(f"  // {metadata}")
             else:
                 comment = metadata.get("comment", "")
-                if comment:
-                    m.stmt(f"  // {comment.split(_NEWLINE, 1)[0]}")
-                else:
-                    m.stmt("")
+                m.stmt(f"  // {comment.split(_NEWLINE, 1)[0]}" if comment else "")
 
     m.stmt("}")
 

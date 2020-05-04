@@ -1,10 +1,8 @@
-@ {}
-@ {'inline': False, 'required': False, 'comment': ''}
 package main
 
 import (
-	"github.com/podhmo/errmap"
 	"encoding/json"
+	"github.com/podhmo/errmap"
 )
 
 func (p *Person) UnmarshalJSON(b []byte) error {
@@ -12,22 +10,23 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 
 	// loading internal data
 	var inner struct {
-		Name *string `json:"name"`
+		Name     *string `json:"name"` // required
 		Nickname *string `json:"nickname"`
 	}
-	if rawErr := json.Unmarshal(b, &inner); rawErr != nil  {
+	if rawErr := json.Unmarshal(b, &inner); rawErr != nil {
 		return err.addSummary(rawErr.Error())
 	}
 
 	// binding field value and required check
-	if Name != nil  {
-		p.Name = *Name
-	} else  {
+	if inner.Name != nil {
+		p.Name = *inner.Name
+	} else {
 		err = err.Add("name", "required")
 	}
-	if Nickname != nil  {
-		p.Nickname = *Nickname
+	if inner.Nickname != nil {
+		p.Nickname = *inner.Nickname
 	}
 
 	return err.Untyped()
 }
+

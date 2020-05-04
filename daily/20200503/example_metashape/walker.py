@@ -59,9 +59,10 @@ def walk(
             if name.startswith("_") and name.endswith("_"):
                 continue
 
-            metadata = t.cast(Metadata, dict(_metadata).copy() if _metadata else {})
-            if metadata.get("default") == MISSING:
-                metadata.pop("default")
+            filled_metadata: Metadata = metadata()
+            filled_metadata.update(_metadata)
+            if filled_metadata.get("default") == MISSING:
+                filled_metadata.pop("default")
 
             if typeinfo.normalized.__module__ != "builtins":
                 w.append(typeinfo.normalized)
@@ -70,5 +71,5 @@ def walk(
                     if subtyp.__module__ != "builtins":
                         w.append(subtyp)
 
-            fields.append((name, typeinfo, metadata))
+            fields.append((name, typeinfo, filled_metadata))
         yield Item(type_=cls, fields=fields, args=[])

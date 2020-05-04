@@ -39,8 +39,8 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
                         continue  # xxx:
 
                     gotype: str = r.resolve_gotype(typeinfo.raw)
-                    m.stmt(f'{goname(name)} *{gotype} `json:"{name}"`')
-                # todo: handling required
+                    m.append(f'{goname(name)} *{gotype} `json:"{name}"`')
+                    m.stmt("// required" if metadata["required"] else "")
             m.stmt("}")
 
             # if rawErr := json.Unmarshal(b, &inner); rawErr != nil {
@@ -62,9 +62,9 @@ def emit(classes: t.List[t.Type[t.Any]]) -> Module:
             m.stmt("// binding field value and required check")
             for name, typeinfo, metadata in item.fields:
                 field = m.symbol(goname(name))
-                with m.if_(f"{field} != nil"):
-                    m.stmt(f"{this}.{field} = *{field}")
-                if metadata.get("required", True):
+                with m.if_(f"{inner}.{field} != nil"):
+                    m.stmt(f"{this}.{field} = *{inner}.{field}")
+                if metadata["required"]:
                     with m.else_():
                         m.stmt(f'{err} = err.Add("{name}", "required")')
             m.sep()
