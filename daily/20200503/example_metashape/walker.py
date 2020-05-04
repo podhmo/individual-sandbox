@@ -63,6 +63,8 @@ def walk(
             filled_metadata.update(_metadata)
             if filled_metadata.get("default") == MISSING:
                 filled_metadata.pop("default")
+            if getattr(typeinfo, "is_optional", False):  # xxx
+                filled_metadata["required"] = False
 
             if typeinfo.normalized.__module__ != "builtins":
                 w.append(typeinfo.normalized)
