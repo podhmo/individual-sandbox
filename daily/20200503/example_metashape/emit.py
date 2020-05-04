@@ -81,9 +81,7 @@ def emit_union(m: Module, item: Item, *, resolver: Resolver) -> None:
         for subtype in item.args:
             gotype: str = resolver.resolve_gotype(subtype)
             m.append(f"{gotype} *{gotype}")
-
-            tags = {"json": [untitleize(str(gotype)).rstrip("_")]}
-            m.stmt(f" `{build_gotags(tags)}`")
+            m.stmt(f' `json:"{untitleize(str(gotype)).rstrip("_")},omitempty"`')
 
     m.stmt("}")
 

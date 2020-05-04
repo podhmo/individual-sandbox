@@ -10,3 +10,5 @@
 	go run $(shell echo $@*/)main.go
 05:
 	go run $(shell echo $@*/)main.go
+06:
+	go run $(shell echo $@*/)main.go
