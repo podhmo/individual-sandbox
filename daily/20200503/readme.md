@@ -37,3 +37,6 @@ walkerのおかげでクラスをたどるのは楽なのだった。markしな�
 - import付きのcomposite type
 - docstring
 - private field
+- union type
+- inheritance
+

@@ -1,0 +1,1 @@
+../../20200503/example_metashape/walker.py
