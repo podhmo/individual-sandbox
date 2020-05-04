@@ -7,8 +7,8 @@ import (
 
 type Person struct {
 	Name string `json:"name"`
-	Father *Person `json:"father"`
-	Mother *Person `json:"mother"`
+	Children []Person `json:"children"`
+	Children2 []*Person `json:"children2"`
 }
 
 func (p *Person) UnmarshalJSON(b []byte) error {
@@ -17,8 +17,8 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	// loading internal data
 	var inner struct {
 		Name *string `json:"name"`// required
-		Father *json.RawMessage `json:"father"`
-		Mother *json.RawMessage `json:"mother"`
+		Children *json.RawMessage `json:"children"`
+		Children2 *json.RawMessage `json:"children2"`
 	}
 	if rawErr := json.Unmarshal(b, &inner); rawErr != nil  {
 		return err.AddSummary(rawErr.Error())
@@ -30,16 +30,16 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	} else  {
 		err = err.Add("name", maperr.Message{Text: "required"})
 	}
-	if inner.Father != nil  {
-		p.Father = &Person{}
-		if rawerr := json.Unmarshal(*inner.Father, p.Father); rawerr != nil  {
-			err = err.Add("father", maperr.Message{Error: rawerr})
+	if inner.Children != nil  {
+		p.Children = []Person{}
+		if rawerr := json.Unmarshal(*inner.Children, &p.Children); rawerr != nil  {
+			err = err.Add("children", maperr.Message{Error: rawerr})
 		}
 	}
-	if inner.Mother != nil  {
-		p.Mother = &Person{}
-		if rawerr := json.Unmarshal(*inner.Mother, p.Mother); rawerr != nil  {
-			err = err.Add("mother", maperr.Message{Error: rawerr})
+	if inner.Children2 != nil  {
+		p.Children2 = []*Person{}
+		if rawerr := json.Unmarshal(*inner.Children2, &p.Children2); rawerr != nil  {
+			err = err.Add("children2", maperr.Message{Error: rawerr})
 		}
 	}
 

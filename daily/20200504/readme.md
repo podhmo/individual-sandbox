@@ -21,7 +21,7 @@ structの定義はできていて、定数部分の表示はまだという感�
 - metadataなしの場合にはrequired = true
 - t.Optionalの場合にはrequired = false
 
-### 追記 nest舌表現
+### 追記 nestした表現
 
 json.RawMessageを経由したいのだった。
 
@@ -29,4 +29,9 @@ json.RawMessageを経由したいのだった。
 
 あと、errmapってこの形に対応してたっけ。
 
+対応しないとまずいやつ
 
+- object,pointer
+- slices,pointer,primitive
+- map,pointer,primitive
+- (nested)

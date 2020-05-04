@@ -1,6 +1,6 @@
 SHELL := $(shell which bash)
 
-default: 00 01 02 03
+default: 00 01 02 03 04 05
 
 00:
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
@@ -11,4 +11,12 @@ default: 00 01 02 03
 03:
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
 04:
+	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
+05:
+	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
+06:
+	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
+07:
+	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
+08:
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))

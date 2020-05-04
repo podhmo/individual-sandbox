@@ -2,6 +2,7 @@ import typing as t
 import typing_extensions as tx
 import dataclasses
 from metashape import runtime
+from metashape.analyze import typeinfo
 from metashape.declarative import MISSING
 
 
@@ -55,7 +56,7 @@ def walk(
             continue
 
         fields: t.List[Row] = []
-        for name, typeinfo, _metadata in w.for_type(cls).walk(ignore_private=False):
+        for name, info, _metadata in w.for_type(cls).walk(ignore_private=False):
             if name.startswith("_") and name.endswith("_"):
                 continue
 
@@ -63,15 +64,15 @@ def walk(
             filled_metadata.update(_metadata)
             if filled_metadata.get("default") == MISSING:
                 filled_metadata.pop("default")
-            if getattr(typeinfo, "is_optional", False):  # xxx
+            if info.is_optional:
                 filled_metadata["required"] = False
 
-            if typeinfo.normalized.__module__ != "builtins":
-                w.append(typeinfo.normalized)
-            if hasattr(typeinfo.normalized, "__origin__"):  # list, dict, etc..
-                for subtyp in t.get_args(typeinfo.normalized):
+            if info.normalized.__module__ != "builtins":
+                w.append(info.normalized)
+            if hasattr(info.normalized, "__origin__"):  # list, dict, etc..
+                for subtyp in t.get_args(info.normalized):
                     if subtyp.__module__ != "builtins":
                         w.append(subtyp)
 
-            fields.append((name, typeinfo, filled_metadata))
+            fields.append((name, info, filled_metadata))
         yield Item(type_=cls, fields=fields, args=[])
