@@ -21,10 +21,10 @@ def has_class_object(info: typeinfo.TypeInfo) -> bool:
     return any(typeinfo.get_custom(sinfo) is not None for sinfo in info.args)
 
 
-def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> None:
+def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> str:
     gopackage = get_gopackage(item.type_)
     if gopackage is not None:
-        return
+        return ""
 
     typename = str(resolver.resolve_gotype(item.type_))
 
@@ -66,10 +66,12 @@ def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> None:
                 m.stmt(f"  // {comment.split(_NEWLINE, 1)[0]}" if comment else "")
 
     m.stmt("}")
+    return typename
 
 
-def emit_union(m: Module, item: Item, *, resolver: Resolver) -> None:
+def emit_union(m: Module, item: Item, *, resolver: Resolver) -> str:
     typename = goname(item.type_.__name__)
+    kind_typename = typename + "Kind"
 
     # type <typename> {
     #     Kind string `json:"$kind"`
@@ -77,13 +79,78 @@ def emit_union(m: Module, item: Item, *, resolver: Resolver) -> None:
     # }
     m.stmt(f"type {typename} struct {{")
     with m.scope():
-        m.stmt('Kind string `json:"$kind"`')
+        m.stmt(f'Kind {kind_typename} `json:"$kind"`')
         for subtype in item.args:
             gotype: str = resolver.resolve_gotype(subtype)
             m.append(f"{gotype} *{gotype}")
             m.stmt(f' `json:"{untitleize(str(gotype)).rstrip("_")},omitempty"`')
 
     m.stmt("}")
+    m.sep()
+
+    emit_enums(m, item.type_, resolver=resolver, name=kind_typename)
+    return typename
+
+
+def emit_enums(
+    m: Module,
+    literal_type: t.Type[t.Any],
+    *,
+    resolver: Resolver,
+    name: t.Optional[str] = None,
+) -> str:
+    # literal_type or union_type
+    go_type = name or f"{resolver.resolve_gotype(literal_type)}"
+    base_go_type = resolver.resolve_gotype(type(t.get_args(literal_type)[0]))
+
+    const_names = [getattr(x, "__name__", x) for x in t.get_args(literal_type)]
+    const_members = {name: f"{go_type}{goname(name)}" for name in const_names}
+    this = m.symbol("v")
+
+    # type <enum> string
+    m.stmt(f"type {go_type} {base_go_type}")
+    m.sep()
+
+    # const (
+    #     <enum>xxx <enum> = "xxx"
+    # ...
+    # )
+    with m.const_group() as cg:
+        for name in const_names:
+            cg(
+                f"{const_members[name]} {go_type} = {resolver.resolve_default(type(name), name)}"
+            )
+    m.sep()
+
+    # var ErrInvalid<enum>Type = fmt.Errorf("invalid <enum> type")
+    err_invalid_type = m.symbol(f"ErrInvalid{go_type}Type")
+    fmt_pkg = m.import_("fmt")
+    m.stmt(
+        "var {} = {}",
+        err_invalid_type,
+        fmt_pkg.Errorf(resolver.resolve_default(str, f"invalid {go_type} type")),
+    )
+    m.sep()
+
+    # func (v <enum>) Valid() error {
+    # ...
+    # }
+    with m.method(f"{this} {go_type}", "Valid", returns="error"):
+        with m.switch(this) as sm:
+            with sm.case(", ".join(const_members.values())):
+                sm.return_("nil")
+            with sm.default() as sm:
+                sm.return_(err_invalid_type)
+        sm.unnewline()
+
+    # func (v <enum>) UnmarshalJSON(b []byte) error {
+    # ...
+    # }
+    with m.method(f"{this} {go_type}", "UnmarshalJSON", f"b []byte", returns="error"):
+        strings_pkg = m.import_("string")
+        m.stmt(f'*{this} = {go_type}({strings_pkg}.Trim(string(b), `"`))')
+        m.return_(this.Valid())
+    return go_type
 
 
 def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:

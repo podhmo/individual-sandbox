@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/podhmo/errmap"
+	"github.com/podhmo/maperr"
 	"encoding/json"
 )
 
 func (p *Person) UnmarshalJSON(b []byte) error {
-	var err *errmap.Error
+	var err *maperr.Error
 
 	// loading internal data
 	var inner struct {

@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/podhmo/maperr"
 	"encoding/json"
+	"fmt"
+	"string"
 )
 
 type Person struct {
@@ -41,10 +43,35 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 }
 
 type Memo struct {
-	Kind string `json:"$kind"`
+	Kind MemoKind `json:"$kind"`
 	X *X `json:"x,omitempty"`
 	Y *Y `json:"y,omitempty"`
 }
+
+type MemoKind Type
+
+const (
+	MemoKindX MemoKind = "X"
+	MemoKindY MemoKind = "Y"
+)
+
+
+var ErrInvalidMemoKindType = fmt.Errorf("invalid MemoKind type")
+
+func (v MemoKind) Valid() error {
+	switch v {
+	case MemoKindX, MemoKindY:
+		return nil
+	default:
+		return ErrInvalidMemoKindType
+	}
+}
+
+func (v MemoKind) UnmarshalJSON(b []byte) error {
+	*v = MemoKind(string.Trim(string(b), `"`))
+	return v.Valid()
+}
+
 
 type X struct {
 	Name string `json:"name"`

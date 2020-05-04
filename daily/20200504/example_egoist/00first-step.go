@@ -29,3 +29,7 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 
 	return err.Untyped()
 }
+
+func main() {
+
+}
