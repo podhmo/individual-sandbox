@@ -164,7 +164,7 @@ func (n *Node) UnmarshalJSON(b []byte) error {
 }
 
 func main() {
-	b := bytes.NewBufferString(`{"$kind": "Empty","Empty": {}}`)
+	b := bytes.NewBufferString(`{"$kind": "Leaf","Empty": {}}`)
 	decoder := json.NewDecoder(b)
 
 	var ob Tree

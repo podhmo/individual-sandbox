@@ -1,0 +1,8 @@
+** handofcats.customize: DEBUG=1, activate logging **
+level:DEBUG	name:miniconfigL89	message:include plugins.foo where <module '__main__' from '00once.py'>
+level:DEBUG	name:miniconfigL89	message:include plugins.foo where <module '__main__' from '00once.py'>
+level:INFO	name:miniconfigL109	message:<function includeme at 0x1100625e0> is already imported, where <module '__main__' from '00once.py'>
+setup
+before commit
+** foo
+after commit

@@ -1,0 +1,2 @@
+** handofcats.customize: DEBUG=1, activate logging **
+level:DEBUG	name:miniconfigL89	message:include plugins.foo where <module '__main__' from '01conflict.py'>
