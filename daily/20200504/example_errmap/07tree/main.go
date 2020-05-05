@@ -96,24 +96,6 @@ func (v *TreeKind) UnmarshalJSON(b []byte) error {
 type Empty struct {
 }
 
-func (e *Empty) UnmarshalJSON(b []byte) error {
-	var err *maperr.Error
-
-	// loading internal data
-	var inner struct {
-	}
-	if rawErr := json.Unmarshal(b, &inner); rawErr != nil {
-		return err.AddSummary(rawErr.Error())
-	}
-
-	// binding field value and required check
-	{
-
-	}
-
-	return err.Untyped()
-}
-
 type Leaf struct {
 	Value int `json:"value"`
 }
@@ -182,7 +164,7 @@ func (n *Node) UnmarshalJSON(b []byte) error {
 }
 
 func main() {
-	b := bytes.NewBufferString(`{"$kind": "Leaf","Empty": {}}`)
+	b := bytes.NewBufferString(`{"$kind": "Empty","Empty": {}}`)
 	decoder := json.NewDecoder(b)
 
 	var ob Tree

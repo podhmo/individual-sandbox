@@ -1,6 +1,6 @@
 SHELL := $(shell which bash)
 
-default: 00 01 02 03 04 05 06 07 08 09 10
+default: 00 01 02 03 04 05 06 07 08 09 10 11
 
 00:
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))

@@ -45,7 +45,7 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 }
 
 type Memo struct {
-	Kind MemoKind `json:"$kind"`
+	Kind MemoKind `json:"$kind"` // discriminator
 	X *X `json:"x,omitempty"`
 	Y *Y `json:"y,omitempty"`
 }

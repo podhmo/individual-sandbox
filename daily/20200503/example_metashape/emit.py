@@ -87,7 +87,7 @@ def emit_union(m: Module, item: Item, *, resolver: Resolver) -> Definition:
     # }
     m.stmt(f"type {typename} struct {{")
     with m.scope():
-        m.stmt(f'Kind {kind_typename} `json:"$kind"`')
+        m.stmt(f'Kind {kind_typename} `json:"$kind"` // discriminator')
         for subtype in item.args:
             gotype: str = resolver.resolve_gotype(subtype)
             m.append(f"{gotype} *{gotype}")
@@ -305,7 +305,8 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
         else:
             emit_struct(m, item, resolver=r)
             m.sep()
-            emit_unmarshalJSON(m, item, resolver=r)
+            if item.fields:
+                emit_unmarshalJSON(m, item, resolver=r)
             m.sep()
 
     with m.func("main"):
