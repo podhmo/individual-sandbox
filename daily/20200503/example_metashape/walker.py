@@ -2,14 +2,12 @@ import typing as t
 import typing_extensions as tx
 import dataclasses
 from metashape import runtime
-from metashape.analyze import typeinfo
 from metashape.declarative import MISSING
 
 
 def metadata(
     *, inline: bool = False, required: bool = True, comment: str = ""
 ) -> t.Dict[str, t.Any]:
-    # todo: required false?
     d: Metadata = {"inline": inline, "required": required, "comment": comment}
     return d  # type: ignore
 
@@ -20,6 +18,7 @@ class Metadata(tx.TypedDict, total=False):
     comment: str
     default: t.Any
     tags: t.Dict[str, t.List[str]]
+    _override_type: str  # hack
 
 
 Row = t.Tuple[str, t.Any, Metadata]
@@ -37,7 +36,7 @@ class Item:
 
     @property
     def is_union(self):
-        return not self.fields
+        return not self.fields and self.args
 
 
 def walk(

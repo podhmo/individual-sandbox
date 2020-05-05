@@ -19,7 +19,7 @@ func (v op) Valid() error {
 	case opAdd, opSub, opMul:
 		return nil
 	default:
-		return fmt.Errorf("%v is invalid enum value of (add, sub, mul)", v)
+		return fmt.Errorf("%q is invalid enum value of (add, sub, mul)", v)
 	}
 }
 

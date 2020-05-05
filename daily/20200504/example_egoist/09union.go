@@ -48,6 +48,52 @@ type Memo struct {
 	Y *Y `json:"y,omitempty"`
 }
 
+func (m *Memo) UnmarshalJSON(b []byte) error {
+	var err *maperr.Error
+
+	// loading internal data
+	var inner struct {
+		Kind *MemoKind `json:"$kind"`// required
+		X *json.RawMessage `json:"X"`
+		Y *json.RawMessage `json:"Y"`
+	}
+	if rawErr := json.Unmarshal(b, &inner); rawErr != nil  {
+		return err.AddSummary(rawErr.Error())
+	}
+
+	// binding field value and required check
+	if inner.Kind != nil  {
+		m.Kind = *inner.Kind
+	} else  {
+		err = err.Add("$kind", maperr.Message{Text: "required"})
+	}
+	if inner.X != nil  {
+		if rawerr := json.Unmarshal(*inner.X, &m.X); rawerr != nil  {
+			err = err.Add("X", maperr.Message{Error: rawerr})
+		}
+	}
+	if inner.Y != nil  {
+		if rawerr := json.Unmarshal(*inner.Y, &m.Y); rawerr != nil  {
+			err = err.Add("Y", maperr.Message{Error: rawerr})
+		}
+	}
+
+	// one-of?
+	{
+		c := 0
+		if m.X != nil  {
+			c++
+		}
+		if m.Y != nil  {
+			c++
+		}
+		if c != 1  {
+			err.Add("$kind", maperr.Message{Text: "not one-of"})
+		}
+	}
+	return err.Untyped()
+}
+
 type MemoKind string
 
 const (

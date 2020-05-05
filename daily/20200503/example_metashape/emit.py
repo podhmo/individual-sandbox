@@ -1,6 +1,7 @@
 from __future__ import annotations
 import typing as t
 import inspect
+import dataclasses
 from prestring.go.codeobject import Module, gofile
 from prestring.go import goname
 from prestring.naming import untitleize
@@ -21,7 +22,13 @@ def has_class_object(info: typeinfo.TypeInfo) -> bool:
     return any(typeinfo.get_custom(sinfo) is not None for sinfo in info.args)
 
 
-def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> str:
+@dataclasses.dataclass(frozen=True)
+class Definition:
+    name: str
+    code_module: t.Optional[Module]
+
+
+def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> Definition:
     gopackage = get_gopackage(item.type_)
     if gopackage is not None:
         return ""
@@ -65,11 +72,12 @@ def emit_struct(m: Module, item: Item, *, resolver: Resolver) -> str:
                 comment = metadata.get("comment", "")
                 m.stmt(f"  // {comment.split(_NEWLINE, 1)[0]}" if comment else "")
 
+    definition = Definition(name=typename, code_module=None)
     m.stmt("}")
-    return typename
+    return definition
 
 
-def emit_union(m: Module, item: Item, *, resolver: Resolver) -> str:
+def emit_union(m: Module, item: Item, *, resolver: Resolver) -> Definition:
     typename = goname(item.type_.__name__)
     kind_typename = typename + "Kind"
 
@@ -88,8 +96,43 @@ def emit_union(m: Module, item: Item, *, resolver: Resolver) -> str:
     m.stmt("}")
     m.sep()
 
+    # UnmarshalJSON
+    discriminator_field = ("$kind", typeinfo.typeinfo(str), metadata())
+    discriminator_field[-1]["_override_type"] = kind_typename
+
+    pseudo_fields = [
+        (sub_type.__name__, typeinfo.typeinfo(sub_type), metadata(required=False))
+        for sub_type in item.args
+    ]
+    pseudo_item = Item(
+        type_=item.type_, fields=[discriminator_field] + pseudo_fields, args=[],
+    )
+
+    unmarshalJSON_definition = emit_unmarshalJSON(m, pseudo_item, resolver=resolver)
+    m.sep()
+
+    # one-of validation
+    assert unmarshalJSON_definition.code_module is not None
+    this = m.symbol(f"{item.type_.__name__[0].lower()}")
+    maperr_pkg = m.import_("github.com/podhmo/maperr")
+
+    sm = unmarshalJSON_definition.code_module
+    sm.stmt("// one-of?")
+    sm.stmt("{")
+    with sm.scope():
+        sm.stmt("c := 0")
+        for name, info, _ in pseudo_item.fields[1:]:
+            with sm.if_(f"{this}.{name} != nil"):
+                sm.stmt("c++")
+        with sm.if_("c != 1"):
+            sm.stmt(f'err.Add("$kind", {maperr_pkg}.Message{{Text: "not one-of"}})')
+    sm.stmt("}")
+
+    # enums
     emit_enums(m, item.type_, resolver=resolver, name=kind_typename)
-    return typename
+
+    definition = Definition(name=typename, code_module=None)
+    return definition
 
 
 def emit_enums(
@@ -150,10 +193,12 @@ def emit_enums(
         strings_pkg = m.import_("strings")
         m.stmt(f'*{this} = {go_type}({strings_pkg}.Trim(string(b), `"`))')
         m.return_(this.Valid())
-    return go_type
+
+    definition = Definition(name=go_type, code_module=None)
+    return definition
 
 
-def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
+def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> Definition:
     this = m.symbol(f"{item.type_.__name__[0].lower()}")
     this_type = f"{resolver.resolve_gotype(item.type_)}"
     this_type_pointer = f"*{this_type}"
@@ -180,7 +225,9 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
                 if name.startswith("_"):
                     continue  # xxx:
 
-                if has_class_object(info):
+                if "_override_type" in metadata:
+                    gotype: str = metadata["_override_type"]
+                elif has_class_object(info):
                     json_pkg = m.import_("encoding/json")
                     gotype: str = str(json_pkg.RawMessage)
                 else:
@@ -237,9 +284,14 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> None:
                     )
         m.sep()
 
+        # NOTE: for injecting code from extrnal area
+        code_module = m.submodule("", newline=False)
+
         # return err.Untyped()
         m.return_(err.Untyped())
+
     m.stmt("}")
+    return Definition(name="UnmarshalJSON", code_module=code_module)
 
 
 def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
@@ -250,7 +302,6 @@ def emit(classes: t.List[t.Type[t.Any]], *, name: str = "main") -> Module:
         if item.is_union:
             emit_union(m, item, resolver=r)
             m.sep()
-            # todo: unmarshalJSON
         else:
             emit_struct(m, item, resolver=r)
             m.sep()

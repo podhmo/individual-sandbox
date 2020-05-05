@@ -35,3 +35,11 @@ json.RawMessageを経由したいのだった。
 - slices,pointer,primitive
 - map,pointer,primitive
 - (nested)
+
+## 追記
+
+けっこう頑張ったけれど。enumの対応がまだ
+
+- *stringで受け取ってしまう
+- oneOfのvalidationがつかない
+

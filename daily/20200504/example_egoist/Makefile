@@ -24,3 +24,5 @@ default: 00 01 02 03 04 05 06 07 08 09 10
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
 10:
 	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
+11:
+	python $(shell echo $@*.py) |& tee $(patsubst %.py,%.go,$(shell echo $@*.py))
