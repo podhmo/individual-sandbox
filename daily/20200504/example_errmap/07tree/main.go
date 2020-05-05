@@ -23,7 +23,7 @@ func (t *Tree) UnmarshalJSON(b []byte) error {
 
 	// loading internal data
 	var inner struct {
-		Kind  *TreeKind          `json:"$kind"` // required
+		Kind  *TreeKind        `json:"$kind"` // required
 		Empty *json.RawMessage `json:"Empty"`
 		Leaf  *json.RawMessage `json:"Leaf"`
 		Node  *json.RawMessage `json:"Node"`
@@ -33,44 +33,40 @@ func (t *Tree) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Kind != nil {
-		t.Kind = *inner.Kind
-	} else {
-		err = err.Add("$kind", maperr.Message{Text: "required"})
-	}
-	if inner.Empty != nil {
-		if rawerr := json.Unmarshal(*inner.Empty, &t.Empty); rawerr != nil {
-			err = err.Add("Empty", maperr.Message{Error: rawerr})
+	{
+		if inner.Kind != nil {
+			t.Kind = *inner.Kind
+		} else {
+			err = err.Add("$kind", maperr.Message{Text: "required"})
 		}
-	}
-	if inner.Leaf != nil {
-		if rawerr := json.Unmarshal(*inner.Leaf, &t.Leaf); rawerr != nil {
-			err = err.Add("Leaf", maperr.Message{Error: rawerr})
+		if inner.Empty != nil {
+			if rawerr := json.Unmarshal(*inner.Empty, &t.Empty); rawerr != nil {
+				err = err.Add("Empty", maperr.Message{Error: rawerr})
+			}
 		}
-	}
-	if inner.Node != nil {
-		if rawerr := json.Unmarshal(*inner.Node, &t.Node); rawerr != nil {
-			err = err.Add("Node", maperr.Message{Error: rawerr})
+		if inner.Leaf != nil {
+			if rawerr := json.Unmarshal(*inner.Leaf, &t.Leaf); rawerr != nil {
+				err = err.Add("Leaf", maperr.Message{Error: rawerr})
+			}
+		}
+		if inner.Node != nil {
+			if rawerr := json.Unmarshal(*inner.Node, &t.Node); rawerr != nil {
+				err = err.Add("Node", maperr.Message{Error: rawerr})
+			}
 		}
 	}
 
-	return t.Valid(err)
-}
-
-func (t *Tree) Valid(err *maperr.Error) error {
 	// one-of?
-	c := 0
-	if t.Empty != nil {
-		c++
-	}
-	if t.Leaf != nil {
-		c++
-	}
-	if t.Node != nil {
-		c++
-	}
-	if c != 1 {
-		err.Add("$kind", maperr.Message{Text: "not one-of"})
+	{
+		if t.Kind == "Empty" && t.Empty == nil {
+			err = err.Add("Empty", maperr.Message{Text: "treated as Empty, but no data"})
+		}
+		if t.Kind == "Leaf" && t.Leaf == nil {
+			err = err.Add("Leaf", maperr.Message{Text: "treated as Leaf, but no data"})
+		}
+		if t.Kind == "Node" && t.Node == nil {
+			err = err.Add("Node", maperr.Message{Text: "treated as Node, but no data"})
+		}
 	}
 	return err.Untyped()
 }
@@ -111,6 +107,9 @@ func (e *Empty) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
+	{
+
+	}
 
 	return err.Untyped()
 }
@@ -131,10 +130,12 @@ func (l *Leaf) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Value != nil {
-		l.Value = *inner.Value
-	} else {
-		err = err.Add("value", maperr.Message{Text: "required"})
+	{
+		if inner.Value != nil {
+			l.Value = *inner.Value
+		} else {
+			err = err.Add("value", maperr.Message{Text: "required"})
+		}
 	}
 
 	return err.Untyped()
@@ -158,29 +159,30 @@ func (n *Node) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Left != nil {
-		n.Left = Tree{}
-		if rawerr := json.Unmarshal(*inner.Left, &n.Left); rawerr != nil {
-			err = err.Add("left", maperr.Message{Error: rawerr})
+	{
+		if inner.Left != nil {
+			n.Left = Tree{}
+			if rawerr := json.Unmarshal(*inner.Left, &n.Left); rawerr != nil {
+				err = err.Add("left", maperr.Message{Error: rawerr})
+			}
+		} else {
+			err = err.Add("left", maperr.Message{Text: "required"})
 		}
-	} else {
-		err = err.Add("left", maperr.Message{Text: "required"})
-	}
-	if inner.Right != nil {
-		n.Right = Tree{}
-		if rawerr := json.Unmarshal(*inner.Right, &n.Right); rawerr != nil {
-			err = err.Add("right", maperr.Message{Error: rawerr})
+		if inner.Right != nil {
+			n.Right = Tree{}
+			if rawerr := json.Unmarshal(*inner.Right, &n.Right); rawerr != nil {
+				err = err.Add("right", maperr.Message{Error: rawerr})
+			}
+		} else {
+			err = err.Add("right", maperr.Message{Text: "required"})
 		}
-	} else {
-		err = err.Add("right", maperr.Message{Text: "required"})
 	}
 
 	return err.Untyped()
 }
 
-
 func main() {
-	b := bytes.NewBufferString(`{"$kind": "Empty","Empty": {}}`)
+	b := bytes.NewBufferString(`{"$kind": "Leaf","Empty": {}}`)
 	decoder := json.NewDecoder(b)
 
 	var ob Tree

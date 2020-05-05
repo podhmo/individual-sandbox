@@ -25,18 +25,20 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Name != nil  {
-		p.Name = *inner.Name
-	} else  {
-		err = err.Add("name", maperr.Message{Text: "required"})
-	}
-	if inner.Memo != nil  {
-		p.Memo = Memo{}
-		if rawerr := json.Unmarshal(*inner.Memo, &p.Memo); rawerr != nil  {
-			err = err.Add("memo", maperr.Message{Error: rawerr})
+	{
+		if inner.Name != nil  {
+			p.Name = *inner.Name
+		} else  {
+			err = err.Add("name", maperr.Message{Text: "required"})
 		}
-	} else  {
-		err = err.Add("memo", maperr.Message{Text: "required"})
+		if inner.Memo != nil  {
+			p.Memo = Memo{}
+			if rawerr := json.Unmarshal(*inner.Memo, &p.Memo); rawerr != nil  {
+				err = err.Add("memo", maperr.Message{Error: rawerr})
+			}
+		} else  {
+			err = err.Add("memo", maperr.Message{Text: "required"})
+		}
 	}
 
 	return err.Untyped()
@@ -62,33 +64,31 @@ func (m *Memo) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Kind != nil  {
-		m.Kind = *inner.Kind
-	} else  {
-		err = err.Add("$kind", maperr.Message{Text: "required"})
-	}
-	if inner.X != nil  {
-		if rawerr := json.Unmarshal(*inner.X, &m.X); rawerr != nil  {
-			err = err.Add("X", maperr.Message{Error: rawerr})
+	{
+		if inner.Kind != nil  {
+			m.Kind = *inner.Kind
+		} else  {
+			err = err.Add("$kind", maperr.Message{Text: "required"})
 		}
-	}
-	if inner.Y != nil  {
-		if rawerr := json.Unmarshal(*inner.Y, &m.Y); rawerr != nil  {
-			err = err.Add("Y", maperr.Message{Error: rawerr})
+		if inner.X != nil  {
+			if rawerr := json.Unmarshal(*inner.X, &m.X); rawerr != nil  {
+				err = err.Add("X", maperr.Message{Error: rawerr})
+			}
+		}
+		if inner.Y != nil  {
+			if rawerr := json.Unmarshal(*inner.Y, &m.Y); rawerr != nil  {
+				err = err.Add("Y", maperr.Message{Error: rawerr})
+			}
 		}
 	}
 
 	// one-of?
 	{
-		c := 0
-		if m.X != nil  {
-			c++
+		if m.Kind == "X" && m.X == nil  {
+			err = err.Add("X", maperr.Message{Text: "treated as X, but no data"})
 		}
-		if m.Y != nil  {
-			c++
-		}
-		if c != 1  {
-			err.Add("$kind", maperr.Message{Text: "not one-of"})
+		if m.Kind == "Y" && m.Y == nil  {
+			err = err.Add("Y", maperr.Message{Text: "treated as Y, but no data"})
 		}
 	}
 	return err.Untyped()
@@ -135,15 +135,17 @@ func (x *X) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Name != nil  {
-		x.Name = *inner.Name
-	} else  {
-		err = err.Add("name", maperr.Message{Text: "required"})
-	}
-	if inner.Xxx != nil  {
-		x.Xxx = *inner.Xxx
-	} else  {
-		err = err.Add("xxx", maperr.Message{Text: "required"})
+	{
+		if inner.Name != nil  {
+			x.Name = *inner.Name
+		} else  {
+			err = err.Add("name", maperr.Message{Text: "required"})
+		}
+		if inner.Xxx != nil  {
+			x.Xxx = *inner.Xxx
+		} else  {
+			err = err.Add("xxx", maperr.Message{Text: "required"})
+		}
 	}
 
 	return err.Untyped()
@@ -167,15 +169,17 @@ func (y *Y) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Name != nil  {
-		y.Name = *inner.Name
-	} else  {
-		err = err.Add("name", maperr.Message{Text: "required"})
-	}
-	if inner.Yyy != nil  {
-		y.Yyy = *inner.Yyy
-	} else  {
-		err = err.Add("yyy", maperr.Message{Text: "required"})
+	{
+		if inner.Name != nil  {
+			y.Name = *inner.Name
+		} else  {
+			err = err.Add("name", maperr.Message{Text: "required"})
+		}
+		if inner.Yyy != nil  {
+			y.Yyy = *inner.Yyy
+		} else  {
+			err = err.Add("yyy", maperr.Message{Text: "required"})
+		}
 	}
 
 	return err.Untyped()

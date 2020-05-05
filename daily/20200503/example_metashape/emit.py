@@ -120,12 +120,11 @@ def emit_union(m: Module, item: Item, *, resolver: Resolver) -> Definition:
     sm.stmt("// one-of?")
     sm.stmt("{")
     with sm.scope():
-        sm.stmt("c := 0")
-        for name, info, _ in pseudo_item.fields[1:]:
-            with sm.if_(f"{this}.{name} != nil"):
-                sm.stmt("c++")
-        with sm.if_("c != 1"):
-            sm.stmt(f'err.Add("$kind", {maperr_pkg}.Message{{Text: "not one-of"}})')
+        for go_name, info, _ in pseudo_item.fields[1:]:
+            with sm.if_(f'{this}.Kind == "{go_name}" && {this}.{go_name} == nil'):
+                sm.stmt(
+                    f'err = err.Add("{go_name}", {maperr_pkg}.Message{{Text: "treated as {go_name}, but no data"}})'
+                )
     sm.stmt("}")
 
     # enums
@@ -253,35 +252,36 @@ def emit_unmarshalJSON(m: Module, item: Item, *, resolver: Resolver) -> Definiti
         # }
         rawerr = m.symbol("rawerr")
         m.stmt("// binding field value and required check")
-        for name, info, metadata in item.fields:
-            field = m.symbol(goname(name))
-            with m.if_(f"{inner}.{field} != nil"):
-                if has_class_object(info):
-                    # pointer
-                    if info.is_optional:
-                        gotype: str = resolver.resolve_gotype(info.normalized)
-                        m.stmt(f"{this}.{goname(name)} = &{gotype}{{}}")
-                        ref = f"{this}.{field}"
-                    elif hasattr(info, "args"):  # xxx
-                        gotype: str = resolver.resolve_gotype(info.normalized)
-                        m.stmt(f"{this}.{goname(name)} = {gotype}{{}}")
-                        ref = f"&{this}.{field}"
-                    else:
-                        ref = f"&{this}.{field}"
+        with m.block():
+            for name, info, metadata in item.fields:
+                field = m.symbol(goname(name))
+                with m.if_(f"{inner}.{field} != nil"):
+                    if has_class_object(info):
+                        # pointer
+                        if info.is_optional:
+                            gotype: str = resolver.resolve_gotype(info.normalized)
+                            m.stmt(f"{this}.{goname(name)} = &{gotype}{{}}")
+                            ref = f"{this}.{field}"
+                        elif hasattr(info, "args"):  # xxx
+                            gotype: str = resolver.resolve_gotype(info.normalized)
+                            m.stmt(f"{this}.{goname(name)} = {gotype}{{}}")
+                            ref = f"&{this}.{field}"
+                        else:
+                            ref = f"&{this}.{field}"
 
-                    with m.if_(
-                        f"{rawerr} := json.Unmarshal(*{inner}.{field}, {ref}); {rawerr} != nil"
-                    ):
+                        with m.if_(
+                            f"{rawerr} := json.Unmarshal(*{inner}.{field}, {ref}); {rawerr} != nil"
+                        ):
+                            m.stmt(
+                                f'{err} = {err}.Add("{name}", {maperr_pkg}.Message{{Error: {rawerr}}})'
+                            )
+                    else:
+                        m.stmt(f"{this}.{field} = *{inner}.{field}")
+                if metadata["required"]:
+                    with m.else_():
                         m.stmt(
-                            f'{err} = {err}.Add("{name}", {maperr_pkg}.Message{{Error: {rawerr}}})'
+                            f'{err} = err.Add("{name}", {maperr_pkg}.Message{{Text: "required"}})'
                         )
-                else:
-                    m.stmt(f"{this}.{field} = *{inner}.{field}")
-            if metadata["required"]:
-                with m.else_():
-                    m.stmt(
-                        f'{err} = err.Add("{name}", {maperr_pkg}.Message{{Text: "required"}})'
-                    )
         m.sep()
 
         # NOTE: for injecting code from extrnal area

@@ -29,36 +29,38 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Name != nil  {
-		p.Name = *inner.Name
-	} else  {
-		err = err.Add("name", maperr.Message{Text: "required"})
-	}
-	if inner.Skils != nil  {
-		p.Skils = *inner.Skils
-	} else  {
-		err = err.Add("skils", maperr.Message{Text: "required"})
-	}
-	if inner.Children != nil  {
-		p.Children = []Person{}
-		if rawerr := json.Unmarshal(*inner.Children, &p.Children); rawerr != nil  {
-			err = err.Add("children", maperr.Message{Error: rawerr})
+	{
+		if inner.Name != nil  {
+			p.Name = *inner.Name
+		} else  {
+			err = err.Add("name", maperr.Message{Text: "required"})
 		}
-	} else  {
-		err = err.Add("children", maperr.Message{Text: "required"})
-	}
-	if inner.Children2 != nil  {
-		p.Children2 = []*Person{}
-		if rawerr := json.Unmarshal(*inner.Children2, &p.Children2); rawerr != nil  {
-			err = err.Add("children2", maperr.Message{Error: rawerr})
+		if inner.Skils != nil  {
+			p.Skils = *inner.Skils
+		} else  {
+			err = err.Add("skils", maperr.Message{Text: "required"})
 		}
-	} else  {
-		err = err.Add("children2", maperr.Message{Text: "required"})
-	}
-	if inner.Children3 != nil  {
-		p.Children3 = &[]Person{}
-		if rawerr := json.Unmarshal(*inner.Children3, p.Children3); rawerr != nil  {
-			err = err.Add("children3", maperr.Message{Error: rawerr})
+		if inner.Children != nil  {
+			p.Children = []Person{}
+			if rawerr := json.Unmarshal(*inner.Children, &p.Children); rawerr != nil  {
+				err = err.Add("children", maperr.Message{Error: rawerr})
+			}
+		} else  {
+			err = err.Add("children", maperr.Message{Text: "required"})
+		}
+		if inner.Children2 != nil  {
+			p.Children2 = []*Person{}
+			if rawerr := json.Unmarshal(*inner.Children2, &p.Children2); rawerr != nil  {
+				err = err.Add("children2", maperr.Message{Error: rawerr})
+			}
+		} else  {
+			err = err.Add("children2", maperr.Message{Text: "required"})
+		}
+		if inner.Children3 != nil  {
+			p.Children3 = &[]Person{}
+			if rawerr := json.Unmarshal(*inner.Children3, p.Children3); rawerr != nil  {
+				err = err.Add("children3", maperr.Message{Error: rawerr})
+			}
 		}
 	}
 

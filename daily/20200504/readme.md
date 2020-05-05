@@ -42,4 +42,3 @@ json.RawMessageを経由したいのだった。
 
 - *stringで受け取ってしまう
 - oneOfのvalidationがつかない
-

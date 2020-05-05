@@ -21,10 +21,12 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	}
 
 	// binding field value and required check
-	if inner.Name != nil  {
-		p.Name = *inner.Name
-	} else  {
-		err = err.Add("name", maperr.Message{Text: "required"})
+	{
+		if inner.Name != nil  {
+			p.Name = *inner.Name
+		} else  {
+			err = err.Add("name", maperr.Message{Text: "required"})
+		}
 	}
 
 	return err.Untyped()
