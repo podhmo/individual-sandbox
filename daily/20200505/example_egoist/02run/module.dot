@@ -1,0 +1,55 @@
+digraph g {
+    g0 [label="02run.main"]
+    g1 [label="egoist"]
+    g2 [label="egoist.app"]
+    g3 [label="typing"]
+    g4 [label="__future__"]
+    g5 [label="miniconfig"]
+    g6 [label="dataclasses"]
+    g7 [label="egoist.langhelpers"]
+    g8 [label="typing_extensions"]
+    g9 [label="inspect"]
+    g10 [label="copy"]
+    g11 [label="dis"]
+    g12 [label="opcode"]
+    g13 [label="miniconfig.langhelpers"]
+    g14 [label="miniconfig.modulelib"]
+    g15 [label="miniconfig.types"]
+    g16 [label="miniconfig.exceptions"]
+    g17 [label="egoist.directives"]
+    g0 -> g1 [label="0.00035s"]
+    g0 -> g2 [label="0.0236s"]
+    g2 -> g3 [label="0.00285s"]
+    g2 -> g4 [label="0.00018s"]
+    g2 -> g5 [label="0.00812s"]
+    g2 -> g6 [label="0.00784s"]
+    g2 -> g7 [label="0.00057s"]
+    g2 -> g8 [label="0.00084s"]
+    g6 -> g9 [label="0.00453s"]
+    g6 -> g10 [label="0.00092s"]
+    g11 -> g12 [label="0.0007s"]
+    g9 -> g11 [label="0.00175s"]
+    g5 -> g13 [label="0.00084s"]
+    g5 -> g14 [label="0.00096s"]
+    g5 -> g15 [label="0.00114s"]
+    g5 -> g16 [label="0.00083s"]
+    g14 -> g17 [label="0.00043s"]
+}
+// load :venvs/my/egoist/egoist/app.py ... 0.023604154586791992s
+// load :venvs/my/miniconfig/miniconfig/__init__.py ... 0.008116960525512695s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/dataclasses.py ... 0.007838010787963867s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/inspect.py ... 0.004527091979980469s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/typing.py ... 0.002852201461791992s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/dis.py ... 0.0017549991607666016s
+// load :venvs/my/miniconfig/miniconfig/types.py ... 0.0011410713195800781s
+// load :venvs/my/miniconfig/miniconfig/modulelib.py ... 0.0009558200836181641s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/copy.py ... 0.0009181499481201172s
+// load :venvs/my/miniconfig/miniconfig/langhelpers.py ... 0.0008428096771240234s
+// load :venvs/my/lib/python3.8/site-packages/typing_extensions.py ... 0.0008399486541748047s
+// load :venvs/my/miniconfig/miniconfig/exceptions.py ... 0.0008268356323242188s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/opcode.py ... 0.0006978511810302734s
+// load :venvs/my/egoist/egoist/langhelpers.py ... 0.0005691051483154297s
+// load :venvs/my/egoist/egoist/directives.py ... 0.00043392181396484375s
+// load :venvs/my/egoist/egoist/__init__.py ... 0.0003509521484375s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/__future__.py ... 0.00017690658569335938s
+// load /opt/local/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/lib-dynload/_opcode.cpython-38-darwin.so ... 1.0967254638671875e-05s
