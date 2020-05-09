@@ -6,14 +6,17 @@
 ```
 go get -u -v google.golang.org/grpc
 go get -u -v github.com/golang/protobuf/protoc-gen-go
+go get -u -v github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+
 ```
 
 protocもいる
 
 ```
-PB_REL="https://github.com/protocolbuffers/protobuf/releases"
-curl -LO $PB_REL/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip
-unzip protoc*.zip -d $HOME/.local/
+PROTOC_ZIP=protoc-3.11.4-osx-x86_64.zip
+curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/$PROTOC_ZIP
+sudo unzip -o $PROTOC_ZIP -d $HOME/.local
+rm -f $PROTOC_ZIP
 ```
 
 ## go wafを試す
