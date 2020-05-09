@@ -1,0 +1,41 @@
+// https://qiita.com/Hiraku/items/7c8f56e8564158c895f9
+
+
+syntax = "proto3";
+
+package myapp;
+
+import "google/api/annotations.proto";
+import "google/type/date.proto";
+import "google/protobuf/empty.proto";
+
+message User {
+  uint64 id = 1;
+  string first_name = 2;
+  string family_name = 3;
+  Sex sex = 4;
+  uint32 age = 5 [ deprecated = true ];
+  google.type.Date birthday = 6;
+}
+
+enum Sex {
+  SEX_UNKNOWN = 0;
+  MALE = 1;
+  FEMALE = 2;
+  OTHER = 3;
+}
+
+message UserList { repeated User users = 1; }
+
+service UserService {
+  rpc Get(GetRequest) returns (User) {
+    option deprecated = false;
+    option (google.api.http) = {
+      get : "user"
+    };
+  }
+  rpc List(google.protobuf.Empty) returns (UserList) {}
+}
+
+message GetRequest { uint64 id = 1; }
+

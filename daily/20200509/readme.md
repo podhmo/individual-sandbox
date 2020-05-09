@@ -1,3 +1,10 @@
+## pythonからprotobuを考えてみる？
+
+## protobuf
+
+- https://developers.google.com/protocol-buffers/docs/reference/proto3-spec
+- https://qiita.com/yugui/items/160737021d25d761b353#fnref4
+
 ## grpc go
 
 - https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3
@@ -7,7 +14,6 @@
 go get -u -v google.golang.org/grpc
 go get -u -v github.com/golang/protobuf/protoc-gen-go
 go get -u -v github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-
 ```
 
 protocもいる

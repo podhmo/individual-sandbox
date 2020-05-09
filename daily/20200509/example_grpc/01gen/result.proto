@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package myapp;
+
+import "google/type/date.proto";
+import "google/protobuf/empty.proto";
+
+message User {
+    uint64 id = 1;
+    string first_name = 2;
+    string family_name = 3;
+    Sex sex = 4;
+    uint32 age = 5;
+    google.type.Date birthday = 6;
+}
+
+enum Sex {
+    SEX_UNKNOWN = 0;
+    MALE = 1;
+    FEMALE = 2;
+    OTHER = 3;
+}
+
+service UserService {
+    rpc Get(GetRequest) returns (User) {
+
+    }
+    rpc List(google.protobuf.Empty) returns (UserList) {
+
+    }
+}
+
+message GetRequest {
+    uint64 id = 1;
+}
+
+message UserList {
+    repeated User users = 1;
+}

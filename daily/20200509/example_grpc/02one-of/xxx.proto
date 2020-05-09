@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package myapp;
+
+option go_package = ".;myapp";
+
+message X {
+  string name = 1;
+}
+message Y {
+  uint64 id = 1;
+  string name = 2;
+}
+message Node {
+  oneof node {
+    X x = 1;
+    Y y = 2;
+  }
+}
+
