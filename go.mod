@@ -22,6 +22,8 @@ require (
 	github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/go-openapi/swag v0.19.8
+	github.com/go-playground/universal-translator v0.17.0 // indirect
+	github.com/go-playground/validator v9.31.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golangci/gocyclo v0.0.0-20180528144436-0a533e8fa43d // indirect
 	github.com/golangci/revgrep v0.0.0-20180812185044-276a5c0a1039 // indirect
@@ -42,8 +44,9 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/k0kubun/pp v3.0.1+incompatible
 	github.com/k1LoW/tbls v1.20.0 // indirect
+	github.com/labstack/echo/v4 v4.1.16 // indirect
+	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.2.0
-	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
 	github.com/mitchellh/mapstructure v1.3.0 // indirect
@@ -54,7 +57,7 @@ require (
 	github.com/podhmo/ctxlog/zapctxlog v0.3.0 // indirect
 	github.com/podhmo/go-rfc3339 v0.1.0
 	github.com/podhmo/go-webtest v0.4.3 // indirect
-	github.com/podhmo/maperr v0.1.1
+	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
@@ -74,6 +77,7 @@ require (
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.10.0
+	goa.design/goa v2.1.2+incompatible // indirect
 	golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3 // indirect
 	golang.org/x/tools v0.0.0-20200504022951-6b6965ac5dd1
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
