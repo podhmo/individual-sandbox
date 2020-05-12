@@ -1,4 +1,12 @@
-## pythonからprotobuを考えてみる？
+## egoist, metashapeの修正
+
+- egoist -> pointerの対応をしたい
+- metashape -> typeinfoの実装を書き換えたい (unionの分岐が邪魔）
+
+前者はlevelで持つのが正しい気がした。
+後者は結局一つの型だけにした。
+
+## pythonからprotobufを考えてみる？
 
 ## protobuf
 

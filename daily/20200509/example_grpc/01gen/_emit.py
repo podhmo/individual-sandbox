@@ -132,7 +132,7 @@ class TypeResolver:
 def emit(items: t.Iterator[Item], *, name: str) -> Module:
     from metashape.runtime import get_walker
 
-    m = Module()
+    m = Module(indent="  ")
     m.stmt('syntax = "proto3";')
     m.sep()
     m.stmt(f"package {name};")
@@ -184,7 +184,7 @@ def emit_class(m: Module, item: Item, *, w: Walker, resolver: TypeResolver) -> S
     m.stmt(f"message {name} {{")
     with m.scope():
         for name, info, _metadata in w.for_type(cls).walk(ignore_private=False):
-            typ = resolver.resolve_type(info.normalized)
+            typ = resolver.resolve_type(info.type_)
             m.stmt(f"{typ} {name} = {i};")  # todo: deprecated
             i += 1
     m.stmt("}")

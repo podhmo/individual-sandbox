@@ -1,0 +1,47 @@
+--- expected.proto	2020-05-10 23:51:12.000000000 +0900
++++ result.proto	2020-05-10 23:52:30.000000000 +0900
+@@ -2,7 +2,6 @@
+ 
+ package myapp;
+ 
+-import "google/api/annotations.proto";
+ import "google/type/date.proto";
+ import "google/protobuf/empty.proto";
+ 
+@@ -11,7 +10,7 @@
+   string first_name = 2;
+   string family_name = 3;
+   Sex sex = 4;
+-  uint32 age = 5 [ deprecated = true ];
++  uint32 age = 5;
+   google.type.Date birthday = 6;
+ }
+ 
+@@ -22,17 +21,19 @@
+   OTHER = 3;
+ }
+ 
+-message UserList { repeated User users = 1; }
+-
+ service UserService {
+   rpc Get(GetRequest) returns (User) {
+-    option deprecated = false;
+-    option (google.api.http) = {
+-      get : "user"
+-    };
++
++  }
++  rpc List(google.protobuf.Empty) returns (UserList) {
++
+   }
+-  rpc List(google.protobuf.Empty) returns (UserList) {}
+ }
+ 
+-message GetRequest { uint64 id = 1; }
++message GetRequest {
++  uint64 id = 1;
++}
+ 
++message UserList {
++  repeated User users = 1;
++}
