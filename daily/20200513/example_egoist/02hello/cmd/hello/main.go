@@ -27,9 +27,9 @@ func main() {
 		fmt.Fprintln(cmd.Output(), "Usage:")
 		cmd.PrintDefaults()
 	}
-	cmd.StringVar(&opt.Name, "name", "", "-")
-	cmd.IntVar(&opt.Age, "age", 20, "-")
-	cmd.StringVar(&opt.Who, "who", "foo", "-")
+	cmd.StringVar(&opt.Name, "name", "", "the name of target person")
+	cmd.IntVar(&opt.Age, "age", 20, "age of subject")
+	cmd.StringVar(&opt.Who, "who", "foo", "name of subject")
 
 	if err := cmd.Parse(os.Args[1:]); err != nil {
 		if err != flag.ErrHelp {
