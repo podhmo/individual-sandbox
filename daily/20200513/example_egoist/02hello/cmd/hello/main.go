@@ -12,6 +12,8 @@ import (
 // Option ...
 type Option struct {
 	Name string // for `-name`
+	Age int // for `-age`
+	Who string // for `-who`
 	Args []string // cmd.Args
 }
 
@@ -26,6 +28,8 @@ func main() {
 		cmd.PrintDefaults()
 	}
 	cmd.StringVar(&opt.Name, "name", "", "-")
+	cmd.IntVar(&opt.Age, "age", 20, "-")
+	cmd.StringVar(&opt.Who, "who", "foo", "-")
 
 	if err := cmd.Parse(os.Args[1:]); err != nil {
 		if err != flag.ErrHelp {
@@ -40,6 +44,6 @@ func main() {
 }
 
 func run(opt *Option) error {
-	fmt.Printf("hello %s\n", opt.Name)
+	fmt.Printf("%s(%d): hello %s\n", opt.Who, opt.Age, opt.Name)
 	return nil
 }
