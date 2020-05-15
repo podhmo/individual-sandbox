@@ -12,3 +12,6 @@ gen:
 # ng
 02:
 	go run cmd/load/main.go --filename <(echo '{"comments": [{}], "title": "hello world", "content": "Hello worlld, this is my first article. ..."}')
+# ok
+03:
+	go run cmd/load/main.go --filename <(echo '{"title": "hello world", "content": "Hello worlld, this is my first article. ..."}')

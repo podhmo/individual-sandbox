@@ -22,7 +22,7 @@ func (a *Article) UnmarshalJSON(b []byte) error {
 		Title *string `json:"title"`// required
 		Author *json.RawMessage `json:"author"`
 		Content *string `json:"content"`// required
-		Comments *json.RawMessage `json:"comments"`// required
+		Comments *json.RawMessage `json:"comments"`
 	}
 	if rawErr := json.Unmarshal(b, &inner); rawErr != nil  {
 		return err.AddSummary(rawErr.Error())
@@ -51,8 +51,6 @@ func (a *Article) UnmarshalJSON(b []byte) error {
 			if rawerr := json.Unmarshal(*inner.Comments, &a.Comments); rawerr != nil  {
 				err = err.Add("comments", maperr.Message{Error: rawerr})
 			}
-		} else  {
-			err = err.Add("comments", maperr.Message{Text: "required"})
 		}
 	}
 

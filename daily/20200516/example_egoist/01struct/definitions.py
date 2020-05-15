@@ -1,6 +1,7 @@
 from __future__ import annotations
 import typing as t
 from egoist.app import App, SettingsDict, parse_args
+from egoist.generators.structkit.runtime import metadata, field
 
 settings: SettingsDict = {"rootdir": "", "here": __file__}
 app = App(settings)
@@ -18,7 +19,7 @@ class Article:
     title: str
     author: t.Optional[Author]
     content: str
-    comments: t.List[Comment]
+    comments: t.List[Comment] = field(metadata=metadata(required=False))
 
 
 class Comment:
