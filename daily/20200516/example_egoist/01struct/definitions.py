@@ -2,6 +2,7 @@ from __future__ import annotations
 import typing as t
 from egoist.app import App, SettingsDict, parse_args
 from egoist.generators.structkit.runtime import metadata, field
+from egoist.generators.structkit.runtime import set_metadata_handler, Metadata
 
 settings: SettingsDict = {"rootdir": "", "here": __file__}
 app = App(settings)
@@ -30,6 +31,13 @@ class Comment:
 @app.define_struct_set("egoist.generators.structkit:walk")
 def model__objects() -> None:
     from egoist.generators.structkit import runtime, structkit
+
+    @runtime.set_metadata_handler
+    def metadata_handler(
+        cls: t.Type[t.Any], *, name: str, info: t.Any, metadata: runtime.Metadata
+    ) -> None:
+        """Yaml also added"""
+        metadata["tags"] = {"json": [name.rstrip("_")], "yaml": [name.rstrip("_")]}
 
     with runtime.generate(structkit, classes=[Article]) as m:
         m.package("model")

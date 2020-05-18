@@ -16,8 +16,9 @@ def hello(*, name: str, age: int = 20, who: str = "foo") -> None:
     options.age.help = "age of subject"
     options.who.help = "name of subject"
 
-    with runtime.generate(clikit):
-        runtime.printf("%s(%d): hello %s\n", who, age, name)
+    with runtime.generate(clikit) as m:
+        hello_pkg = m.import_("m/internal/hello")
+        m.stmt(hello_pkg.Hello(name, age, who))  # m.stmtを忘れずに
 
 
 if __name__ == "__main__":

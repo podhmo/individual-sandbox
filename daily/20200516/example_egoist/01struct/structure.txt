@@ -1,0 +1,15 @@
+.
+├── Makefile
+├── cmd
+│   └── load
+│       └── main.go
+├── definitions.py
+├── go.mod
+├── go.sum
+├── load
+│   └── load.go
+├── model
+│   └── objects.go
+└── structure.txt
+
+4 directories, 8 files
