@@ -1,0 +1,48 @@
+openapi: 3.0.2
+info:
+  title: egoist
+  version: 0.0.0
+paths:
+  /api/articles:
+    post:
+      summary: '-'
+      tags:
+      - xxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Message:
+      properties:
+        error:
+          oneOf:
+          - type: string
+          - type: object
+        text:
+          type: string
+    HTTPValidationError:
+      $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      properties:
+        messages:
+          additionalProperties:
+            $ref: '#/components/schemas/Message'
+        summary:
+          type: string
+      required:
+      - summary
+      title: ValidationError
