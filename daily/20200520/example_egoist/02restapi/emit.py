@@ -1,16 +1,28 @@
+from __future__ import annotations
 import typing as t
 from collections import defaultdict
 from egoist.internal._fnspec import fnspec, Fnspec
 from app import Metadata
 
+if t.TYPE_CHECKING:
+    from metashape.analyze.walker import Walker
+    from metashape.outputs.openapi.emit import Context
+
 
 class Resolver:
+    def __init__(self, ctx: Context) -> None:
+        self.ctx = ctx
+
     def resolve_schema(self, typ: t.Type[t.Any]) -> t.Dict[str, t.Any]:
-        return {}
+        return self.ctx.state.refs[typ]
 
     def resolve_request_body(self, spec: Fnspec) -> t.Dict[str, t.Any]:
-        typ = {"type": "object"}
-        return {"requestBody": {"content": {"application/json": {"schema": typ}}}}
+        typ = [typ for _, typ, _ in spec.arguments][0]
+        return {
+            "requestBody": {
+                "content": {"application/json": {"schema": self.resolve_schema(typ)}}
+            }
+        }
 
     def resolve_doc(self, spec: Fnspec) -> str:
         return spec.doc or "-"
@@ -68,13 +80,22 @@ class Handler:
         }
 
 
+def get_walker(classes: t.List[t.Type[t.Any]]) -> Walker:
+    from metashape.runtime import get_walker
+    from metashape.analyze.config import Config
+
+    return get_walker(classes, config=Config(option=Config.Option(strict=False)))
+
+
 def emit(
+    w: Walker,
     routes: t.List[t.Tuple[t.Callable[..., t.Any], Metadata]],
     *,
     title: str = "egoist",
     version: str = "0.0.0"
 ) -> t.Dict[str, t.Any]:
-    r = Resolver()
+    from metashape.outputs.openapi.emit import scan
+
     root = {
         "openapi": "3.0.2",
         "info": {"title": title, "version": version},
@@ -83,6 +104,11 @@ def emit(
     }
     paths = root["paths"]
     h = Handler(root)
+
+    # TODO: lazy
+    ctx = scan(w)
+    r = Resolver(ctx)
+    root.update(ctx.result.result)
 
     for fn, metadata in routes:
         spec = fnspec(fn)

@@ -23,10 +23,11 @@ def describe() -> None:
 
 @as_subcommand
 def emit(*, title: str = "egoist", version: str = "0.0.0") -> None:
-    from emit import emit
+    from emit import emit, get_walker
     from dictknife import loading
 
-    root = emit(app.routes, title=title, version=version)
+    w = get_walker([Article])
+    root = emit(w, app.routes, title=title, version=version)
     loading.dumpfile(root)
 
 

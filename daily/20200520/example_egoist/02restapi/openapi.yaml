@@ -12,7 +12,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              $ref: '#/components/schemas/Article'
       responses:
         '200':
           description: Successful Response
@@ -26,6 +26,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Article:
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+      - title
+      - content
     Message:
       properties:
         error:
