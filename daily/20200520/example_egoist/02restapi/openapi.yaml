@@ -17,7 +17,8 @@ paths:
         '200':
           description: Successful Response
           content:
-            application/json: {}
+            application/json:
+              $ref: '#/components/schemas/Article'
         '422':
           description: Validation Error
           content:

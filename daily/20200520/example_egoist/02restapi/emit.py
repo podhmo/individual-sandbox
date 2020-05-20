@@ -29,17 +29,19 @@ class Resolver:
 
 
 class Handler:
-    def __init__(self, root: t.Dict[str, t.Any]):
+    def __init__(self, root: t.Dict[str, t.Any], *, resolver: Resolver):
         self.root = root
+        self.resolver = resolver
         self._filled_in_handle_error = False
 
-    def handle_successful_response(
-        self, *, value: t.Optional[t.Dict[str, t.Any]] = None
-    ):
+    def handle_successful_response(self, *, typ: t.Type[t.Any] = None):
+        value = {}
+        if typ is not None:
+            value = self.resolver.resolve_schema(typ)
         return {
             "200": {
                 "description": "Successful Response",
-                "content": {"application/json": value or {}},
+                "content": {"application/json": value},
             }
         }
 
@@ -103,12 +105,12 @@ def emit(
         "components": {"schemas": {}},
     }
     paths = root["paths"]
-    h = Handler(root)
 
     # TODO: lazy
     ctx = scan(w)
     r = Resolver(ctx)
     root.update(ctx.result.result)
+    h = Handler(root, resolver=r)
 
     for fn, metadata in routes:
         spec = fnspec(fn)
@@ -124,6 +126,6 @@ def emit(
         d.update(r.resolve_request_body(spec))
 
         responses = d["responses"] = {}
-        responses.update(h.handle_successful_response())
+        responses.update(h.handle_successful_response(typ=spec.return_type))
         responses.update(h.handle_validation_error_response())
     return root
