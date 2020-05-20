@@ -1,0 +1,9 @@
+.
+├── commands
+│   ├── __pycache__
+│   │   └── now.cpython-38.pyc
+│   └── now.py
+├── definitions.py
+└── structure.txt
+
+2 directories, 4 files

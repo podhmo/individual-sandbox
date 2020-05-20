@@ -1,0 +1,48 @@
+{
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "$ref": "#/components/schemas/ValidationError",
+        "title": "HTTPValidationError"
+      },
+      "Message": {
+        "properties": {
+          "error": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "summary",
+          "messages"
+        ],
+        "title": "Message"
+      },
+      "ValidationError": {
+        "properties": {
+          "messages": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "summary"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
