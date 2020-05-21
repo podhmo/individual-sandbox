@@ -9,6 +9,7 @@ if t.TYPE_CHECKING:
 
 def get_walker(fns: t.List[t.Callable[..., t.Any]]) -> Walker:
     from metashape.runtime import get_walker as _get_walker
+    from metashape.analyze.config import Config
     from egoist.internal._fnspec import fnspec
 
     dq = deque(fns)
@@ -36,7 +37,8 @@ def get_walker(fns: t.List[t.Callable[..., t.Any]]) -> Walker:
 
         for sub_type in _get_flatten_args(typ):
             dq.append(sub_type)
-    return _get_walker(classes)
+
+    return _get_walker(classes, config=Config(option=Config.Option(strict=False)))
 
 
 @lru_cache(maxsize=256)
@@ -50,3 +52,7 @@ def _get_flatten_args(typ: t.Type[t.Any]) -> t.Tuple[t.Type[t.Any]]:
     for subtype in typ.__args__:
         r.update(_get_flatten_args(subtype))
     return tuple(sorted(r, key=id))  # type: ignore
+
+
+def collect_types(fns: t.List[t.Callable[..., t.Any]]) -> t.List[t.Type[t.Any]]:
+    return list(get_walker(fns).walk())

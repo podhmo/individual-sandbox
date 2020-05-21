@@ -1,4 +1,4 @@
-from _walk import get_walker
+from _walk import collect_types
 
 
 class Article:
@@ -9,5 +9,6 @@ def create_article(article: Article) -> Article:
     pass
 
 
-for cls in get_walker([create_article]).walk():
+fns = [create_article]
+for cls in collect_types(fns):
     print(cls)

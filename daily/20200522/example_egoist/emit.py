@@ -3,21 +3,29 @@ import typing as t
 from collections import defaultdict
 from egoist.internal._fnspec import fnspec, Fnspec
 from app import Metadata
-
-if t.TYPE_CHECKING:
-    from metashape.analyze.walker import Walker
-    from metashape.outputs.openapi.emit import Context
+from _walk import get_walker
 
 
 class Resolver:
-    def __init__(self, ctx: Context) -> None:
-        self.ctx = ctx
+    def __init__(self, *, refs: t.Dict[t.Type[t.Any], str]) -> None:
+        self.refs = refs
 
     def resolve_schema(self, typ: t.Type[t.Any]) -> t.Dict[str, t.Any]:
-        return self.ctx.state.refs[typ]
+        from metashape.outputs.openapi import detect
+        from metashape.typeinfo import typeinfo
 
-    def resolve_request_body(self, spec: Fnspec) -> t.Dict[str, t.Any]:
-        typ = [typ for _, typ, _ in spec.arguments][0]
+        info = typeinfo(typ)
+        schema_type = detect.schema_type(info)
+        # TODO: support dict, oneOf,anyOf,allOf
+        if schema_type == "array":
+            return {
+                "type": "array",
+                "items": self.refs[info.user_defined_type],
+            }
+        else:
+            return self.refs[typ]
+
+    def resolve_request_body(self, typ: t.Type[t.Any]) -> t.Dict[str, t.Any]:
         return {
             "requestBody": {
                 "content": {"application/json": {"schema": self.resolve_schema(typ)}}
@@ -28,6 +36,7 @@ class Resolver:
         return spec.doc or "-"
 
 
+# todo: rename
 class Handler:
     def __init__(self, root: t.Dict[str, t.Any], *, resolver: Resolver):
         self.root = root
@@ -81,16 +90,30 @@ class Handler:
             }
         }
 
+    def handle_path(
+        self, fn: t.Callable[..., t.Any], *, metadata: Metadata
+    ) -> t.Dict[str, t.Any]:
+        d = {}
+        spec = fnspec(fn)
 
-def get_walker(classes: t.List[t.Type[t.Any]]) -> Walker:
-    from metashape.runtime import get_walker
-    from metashape.analyze.config import Config
+        d["summary"] = metadata.get("summary") or self.resolver.resolve_doc(spec)
+        if "description" in metadata:
+            d["description"] = metadata["description"]
+        if "tags" in metadata:
+            d["tags"] = metadata["tags"]
 
-    return get_walker(classes, config=Config(option=Config.Option(strict=False)))
+        if spec.arguments:
+            typ = [typ for _, typ, _ in spec.arguments][0]
+            d.update(self.resolver.resolve_request_body(typ))
+
+        responses = d["responses"] = {}
+        responses.update(self.handle_successful_response(typ=spec.return_type))
+        responses.update(self.handle_validation_error_response())
+
+        return d
 
 
 def emit(
-    w: Walker,
     routes: t.List[t.Tuple[t.Callable[..., t.Any], Metadata]],
     *,
     title: str = "egoist",
@@ -107,25 +130,15 @@ def emit(
     paths = root["paths"]
 
     # TODO: lazy
-    ctx = scan(w)
-    r = Resolver(ctx)
-    root.update(ctx.result.result)
-    h = Handler(root, resolver=r)
+    fns = [fn for fn, _ in routes]
+    w = get_walker(fns)
 
+    ctx = scan(w)
+    root.update(ctx.result.result)
+
+    h = Handler(root, resolver=Resolver(refs=ctx.state.refs))
     for fn, metadata in routes:
-        spec = fnspec(fn)
         path = metadata["path"]
         method = metadata["method"]
-
-        d = paths[path][method] = {}
-        d["summary"] = metadata.get("summary") or r.resolve_doc(spec)
-        if "description" in metadata:
-            d["description"] = metadata["description"]
-        if "tags" in metadata:
-            d["tags"] = metadata["tags"]
-        d.update(r.resolve_request_body(spec))
-
-        responses = d["responses"] = {}
-        responses.update(h.handle_successful_response(typ=spec.return_type))
-        responses.update(h.handle_validation_error_response())
+        paths[path][method] = h.handle_path(fn, metadata=metadata)
     return root

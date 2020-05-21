@@ -10,5 +10,6 @@ def list_article() -> t.List[Article]:
     pass
 
 
-for cls in get_walker([list_article]).walk():
+fns = [list_article]
+for cls in collect_types(fns):
     print(cls)
