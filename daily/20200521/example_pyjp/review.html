@@ -1,0 +1,51 @@
+{% extends "theme.html" %}
+{% block title %}Coffee House{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+    <div class="form-content wrapper">
+        <h2 class="page-title">Review</h2>
+        <p>(debug:  rating={{rating}})<p/>
+        <form method="POST" action="/review">
+            <div>
+                <label for="name">お名前</label>
+                <input placeholder="名前" name="username" type="text"/>
+            </div>
+            <div class="star-rating">
+                <div class="star-rating__wrap">
+                  <input class="star-rating__input" id="star-rating-5" type="radio" name="star" value="5">
+                  <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+                  <input class="star-rating__input" id="star-rating-4" type="radio" name="star" value="4">
+                  <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                  <input class="star-rating__input" id="star-rating-3" type="radio" name="star" value="3">
+                  <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                  <input class="star-rating__input" id="star-rating-2" type="radio" name="star" value="2">
+                  <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                  <input class="star-rating__input" id="star-rating-1" type="radio" name="star" value="1">
+                  <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+                </div>
+            </div>
+            <div>
+                <label for="message">メッセージ</label>
+                <textarea id="message" placeholder="レビュー" name="review"></textarea>
+            </div>
+            <input type="submit" class="button" value="送信">
+        </form>
+    </div>
+{% endblock %}
+{% block content2 %}
+    <div class="wrapper board">
+      <p>name : {{username}}
+      <p>rating : {{star}}
+      <p>message : {{review}}</p>
+    </div>
+{% endblock %}
+{% block footer %}
+    <footer>
+        <div class="wrapper">
+            <p><small>&copy; Coffee House</small></p>
+        </div>
+    </footer>
+{% endblock %}
