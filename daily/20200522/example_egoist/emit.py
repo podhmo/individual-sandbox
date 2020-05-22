@@ -37,34 +37,26 @@ class Resolver:
 
 
 # todo: rename
-class Handler:
-    def __init__(self, root: t.Dict[str, t.Any], *, resolver: Resolver):
-        self.root = root
-        self.resolver = resolver
-        self._filled_in_handle_error = False
+class DefaultPartInjector:
+    def __init__(self):
+        self._error_part_injected = False
 
-    def handle_successful_response(self, *, typ: t.Type[t.Any] = None):
-        value = {}
-        if typ is not None:
-            value = self.resolver.resolve_schema(typ)
-        return {
-            "200": {
-                "description": "Successful Response",
-                "content": {"application/json": value},
-            }
-        }
+    def inject_error_part(self, root: t.Dict[str, t.Any]):
+        if self._error_part_injected:
+            return
 
-    def fill_in_handle_error(self):
-        self.root["components"]["schemas"]["Message"] = {
+        self._error_part_injected = True
+
+        root["components"]["schemas"]["Message"] = {
             "properties": {
                 "error": {"oneOf": [{"type": "string"}, {"type": "object"}]},
                 "text": {"type": "string"},
             }
         }
-        self.root["components"]["schemas"]["HTTPValidationError"] = {
+        root["components"]["schemas"]["HTTPValidationError"] = {
             "$ref": "#/components/schemas/ValidationError",
         }
-        self.root["components"]["schemas"]["ValidationError"] = {
+        root["components"]["schemas"]["ValidationError"] = {
             "properties": {
                 "messages": {
                     "additionalProperties": {"$ref": "#/components/schemas/Message"}
@@ -75,42 +67,8 @@ class Handler:
             "title": "ValidationError",
         }
 
-    def handle_validation_error_response(self):
-        if not self._filled_in_handle_error:
-            self._filled_in_handle_error = True
-            self.fill_in_handle_error()
-        return {
-            "422": {
-                "description": "Validation Error",
-                "content": {
-                    "application/json": {
-                        "schema": {"$ref": "#/components/schemas/HTTPValidationError"}
-                    }
-                },
-            }
-        }
 
-    def handle_path(
-        self, fn: t.Callable[..., t.Any], *, metadata: Metadata
-    ) -> t.Dict[str, t.Any]:
-        d = {}
-        spec = fnspec(fn)
-
-        d["summary"] = metadata.get("summary") or self.resolver.resolve_doc(spec)
-        if "description" in metadata:
-            d["description"] = metadata["description"]
-        if "tags" in metadata:
-            d["tags"] = metadata["tags"]
-
-        if spec.arguments:
-            typ = [typ for _, typ, _ in spec.arguments][0]
-            d.update(self.resolver.resolve_request_body(typ))
-
-        responses = d["responses"] = {}
-        responses.update(self.handle_successful_response(typ=spec.return_type))
-        responses.update(self.handle_validation_error_response())
-
-        return d
+DefaultPartInjectorT = t.TypeVar("DefaultPartInjectorT", bound=DefaultPartInjector)
 
 
 def emit(
@@ -125,20 +83,55 @@ def emit(
         "openapi": "3.0.2",
         "info": {"title": title, "version": version},
         "paths": defaultdict(dict),
-        "components": {"schemas": {}},
     }
-    paths = root["paths"]
 
     # TODO: lazy
-    fns = [fn for fn, _ in routes]
-    w = get_walker(fns)
-
+    w = get_walker([fn for fn, _ in routes])
     ctx = scan(w)
-    root.update(ctx.result.result)
+    root.update(ctx.result.result)  # inject #/components/schemas
+    refs = ctx.state.refs
 
-    h = Handler(root, resolver=Resolver(refs=ctx.state.refs))
+    resolver = Resolver(refs=refs)
+    default_part = DefaultPartInjector()
+
     for fn, metadata in routes:
         path = metadata["path"]
         method = metadata["method"]
-        paths[path][method] = h.handle_path(fn, metadata=metadata)
+        d = root["paths"][path][method] = {}
+
+        spec = fnspec(fn)
+
+        d["summary"] = metadata.get("summary") or resolver.resolve_doc(spec)
+        if "description" in metadata:
+            d["description"] = metadata["description"]
+        if "tags" in metadata:
+            d["tags"] = metadata["tags"]
+
+        if spec.arguments:
+            typ = [typ for _, typ, _ in spec.arguments][0]
+            d.update(resolver.resolve_request_body(typ))
+
+        # responses
+        responses = d["responses"] = {}
+
+        # 200
+        value = {}
+        if spec.return_type is not None:
+            value = resolver.resolve_schema(spec.return_type)
+        responses["200"] = {
+            "description": "Successful Response",
+            "content": {"application/json": value},
+        }
+
+        # 422
+        default_part.inject_error_part(root)
+        responses["422"] = {
+            "description": "Validation Error",
+            "content": {
+                "application/json": {
+                    "schema": {"$ref": "#/components/schemas/HTTPValidationError"}
+                }
+            },
+        }
+
     return root

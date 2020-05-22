@@ -1,5 +1,5 @@
 import typing as t
-from _walk import get_walker
+from _walk import collect_types
 
 
 class Article:
