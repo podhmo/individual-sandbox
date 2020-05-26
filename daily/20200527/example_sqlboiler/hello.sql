@@ -27,13 +27,16 @@ CREATE TABLE IF NOT EXISTS peopleLog (
    birthdayNew DATE,
    birthdayOld DATE,
    action TEXT,
-   timestamp DATE
+   timestamp DATE,
+   FOREIGN KEY(peopleIdOld) REFERENCES people(peopleId),
+   FOREIGN KEY(peopleIdNew) REFERENCES people(peopleId)
 );
 
 CREATE TABLE IF NOT EXISTS books (
    bookId INTEGER PRIMARY KEY AUTOINCREMENT,
    title TEXT,
-   author INTEGER
+   authorId INTEGER,
+   FOREIGN KEY(authorId) REFERENCES people(peopleId)
 );
 
 CREATE TABLE IF NOT EXISTS booksLog (
@@ -45,7 +48,11 @@ CREATE TABLE IF NOT EXISTS booksLog (
    authorOld INTEGER,
    authorNew INTEGER,
    action TEXT,
-   timestamp DATE
+   timestamp DATE,
+   FOREIGN KEY(bookIdOld) REFERENCES books(bookId),
+   FOREIGN KEY(bookIdNew) REFERENCES books(bookId),
+   FOREIGN KEY(authorOld) REFERENCES people(peopleId),
+   FOREIGN KEY(authorNew) REFERENCES people(peopleId)
 );
 
 
@@ -74,21 +81,21 @@ END;
 CREATE TRIGGER IF NOT EXISTS book_update AFTER INSERT ON books
 BEGIN
    INSERT INTO booksLog (bookIdNew, titleNew, authorNew, action, timestamp)
-               values (new.bookId, new.title, new.author, 'INSERT', DATETIME('NOW'));
+               values (new.bookId, new.title, new.authorId, 'INSERT', DATETIME('NOW'));
 END;
 CREATE TRIGGER IF NOT EXISTS book_update AFTER UPDATE ON books
 BEGIN
    INSERT INTO booksLog (bookIdOld, titleOld, authorOld,
                         bookIdNew, titleNew, authorNew,
                         action, timestamp)
-               values (old.bookId, old.title, old.author,
-                       new.bookId, new.title, new.author,
+               values (old.bookId, old.title, old.authorId,
+                       new.bookId, new.title, new.authorId,
                        'UPDATE', DATETIME('NOW'));
 END;
 CREATE TRIGGER IF NOT EXISTS book_update AFTER DELETE ON books
 BEGIN
    INSERT INTO booksLog (bookIdOld, titleOld, authorOld, action, timestamp)
-               values (old.bookId, old.title, old.author, 'DELETE', DATETIME('NOW'));
+               values (old.bookId, old.title, old.authorId, 'DELETE', DATETIME('NOW'));
 END;
    
 
@@ -107,20 +114,20 @@ UPDATE people SET sn = 'Adams' where gn = 'Douglas' AND sn = 'Adam';
 
 
 -- Adds sample data into table "books"
-INSERT INTO books(title, author) VALUES('Miracle of the Bells',       1);
-INSERT INTO books(title, author) VALUES('The Walking Drum',           2);
-INSERT INTO books(title, author) VALUES('Pillars of the Earth',       3);
-INSERT INTO books(title, author) VALUES('The Count of Monte Cristo',  4);
-INSERT INTO books(title, author) VALUES('The Devils Dictionary',      5);
-INSERT INTO books(title, author) VALUES('The Hitchhikers Guide',      6);
-INSERT INTO books(title, author) VALUES('The Hunchback of Notre Dame', 7);
+INSERT INTO books(title, authorId) VALUES('Miracle of the Bells',       1);
+INSERT INTO books(title, authorId) VALUES('The Walking Drum',           2);
+INSERT INTO books(title, authorId) VALUES('Pillars of the Earth',       3);
+INSERT INTO books(title, authorId) VALUES('The Count of Monte Cristo',  4);
+INSERT INTO books(title, authorId) VALUES('The Devils Dictionary',      5);
+INSERT INTO books(title, authorId) VALUES('The Hitchhikers Guide',      6);
+INSERT INTO books(title, authorId) VALUES('The Hunchback of Notre Dame', 7);
 
 
 -- Example queries
 select books.title, people.gn, people.sn
    FROM people
    INNER JOIN books
-   ON books.author=people.peopleId
+   ON books.authorId=people.peopleId
    WHERE books.title LIKE '%Hunchback%'
    ORDER BY people.sn;
 
