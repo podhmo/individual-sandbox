@@ -61,6 +61,7 @@ require (
 	github.com/podhmo/noerror v0.3.1
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
+	github.com/semrush/zenrpc v1.1.1
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd // indirect
 	github.com/sirupsen/logrus v1.6.0 // indirect
@@ -74,6 +75,7 @@ require (
 	github.com/tetafro/godot v0.3.7 // indirect
 	github.com/timakin/bodyclose v0.0.0-20200424151742-cb6215831a94 // indirect
 	github.com/vektah/dataloaden v0.3.0 // indirect
+	github.com/vektah/gqlparser/v2 v2.0.1 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.10.0

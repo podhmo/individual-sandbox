@@ -1,0 +1,157 @@
+{
+  "SMDVersion": "2.0",
+  "contentType": "application/json",
+  "envelope": "JSON-RPC-2.0",
+  "services": {
+    "Divide": {
+      "description": "",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "optional": true,
+        "properties": {
+          "Quo": {
+            "type": "integer"
+          },
+          "Rem": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "Multiply": {
+      "description": "Multiply multiples two digits and returns result.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    },
+    "Pow": {
+      "description": "Pow returns x**y, the base-x exponential of y. If Exp is not set then default value is 2.",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "number"
+        },
+        {
+          "name": "exp",
+          "optional": true,
+          "type": "number"
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "Sum": {
+      "description": "Sum sums two digits and returns error with error code as result and IP from context.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    },
+    "arith.Divide": {
+      "description": "",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "optional": true,
+        "properties": {
+          "Quo": {
+            "type": "integer"
+          },
+          "Rem": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "arith.Multiply": {
+      "description": "Multiply multiples two digits and returns result.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    },
+    "arith.Pow": {
+      "description": "Pow returns x**y, the base-x exponential of y. If Exp is not set then default value is 2.",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "number"
+        },
+        {
+          "name": "exp",
+          "optional": true,
+          "type": "number"
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "arith.Sum": {
+      "description": "Sum sums two digits and returns error with error code as result and IP from context.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    }
+  },
+  "target": "/",
+  "transport": "POST"
+}

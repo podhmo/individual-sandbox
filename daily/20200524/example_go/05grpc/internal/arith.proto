@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package arith;
+option go_package = "./internal";
+
+service ArithService {
+  rpc Mul(MulRequest) returns (MulResponse) {
+    option deprecated = false;
+  }
+}
+
+message MulRequest {
+  int64 a = 1;
+  int64 b = 2;
+}
+
+message MulResponse {
+  int64 result = 1;
+}
