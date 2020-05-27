@@ -2,22 +2,32 @@ package miniq
 
 import (
 	"fmt"
+	"strings"
 )
 
-type WhereClause struct {
-	Prefix string
-	Value  op
-}
+func Where(ops ...op) *WhereClause {
+	values := make([]interface{}, len(ops))
+	for i, op := range ops {
+		values[i] = op
+	}
 
-func Where(ops ...interface{}) *WhereClause {
-	value := And(ops...)
+	value := And(values...)
 	value.WithoutParen = true
 	return &WhereClause{Prefix: "WHERE", Value: value}
 }
 
-func (q *WhereClause) Format(s fmt.State, c rune) {
+type WhereClause struct {
+	Prefix string
+	Value  *Mop
+}
+
+func (q *WhereClause) String() string {
+	if len(q.Value.Values) == 0 {
+		return ""
+	}
+
 	value := Replace(q.Value, "")
-	fmt.Fprintf(s, "%s %v", q.Prefix, value)
+	return fmt.Sprintf("%s %v", q.Prefix, value)
 }
 
 type FromClause struct {
@@ -32,28 +42,25 @@ func From(table Table) *FromClause {
 	}
 }
 
-func (q *FromClause) Format(s fmt.State, c rune) {
-	fmt.Fprintf(s, "%s %s", q.Prefix, q.Table)
+func (q *FromClause) String() string {
+	return fmt.Sprintf("%s %s", q.Prefix, q.Table)
+}
+
+func Select(fields ...Field) *SelectClause {
+	return &SelectClause{Prefix: "SELECT", Fields: fields}
+}
+
+type SelectClause struct {
+	Prefix string
+	Fields []Field
+}
+
+func (q *SelectClause) String() string {
+	names := make([]string, len(q.Fields))
+	for i, f := range q.Fields {
+		names[i] = f.Name()
+	}
+	return fmt.Sprintf("%s %s", q.Prefix, strings.Join(names, ", "))
 }
 
 type Table string
-
-func NewInt64Field(name string) func(format string, value int64) *Uop {
-	return func(format string, value int64) *Uop {
-		return &Uop{
-			Op:           fmt.Sprintf(format, name),
-			Value:        value,
-			WithoutParen: true,
-		}
-	}
-}
-
-func NewStringField(name string) func(format string, value string) *Uop {
-	return func(format string, value string) *Uop {
-		return &Uop{
-			Op:           fmt.Sprintf(format, name),
-			Value:        value,
-			WithoutParen: true,
-		}
-	}
-}

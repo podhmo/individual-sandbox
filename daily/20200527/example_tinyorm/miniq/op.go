@@ -30,7 +30,7 @@ func (q *Uop) Format(s fmt.State, c rune) {
 
 type Bop struct { // binary
 	Op    string
-	Left  interface{}
+	Left  string
 	Right interface{}
 
 	WithoutParen bool
@@ -93,7 +93,7 @@ func replace(op interface{}, defaultVal string) interface{} {
 	case *Bop:
 		return &Bop{
 			Op:           op.Op,
-			Left:         replace(op.Left, defaultVal),
+			Left:         op.Left,
 			Right:        replace(op.Right, defaultVal),
 			WithoutParen: op.WithoutParen,
 		}
@@ -107,6 +107,10 @@ func replace(op interface{}, defaultVal string) interface{} {
 			Values:       values,
 			WithoutParen: op.WithoutParen,
 		}
+	case *Literal:
+		return op
+	case *LiteralFormat:
+		return op
 	default:
 		return defaultVal
 	}
@@ -119,6 +123,10 @@ func Replace(op op, val string) op {
 		return v
 	case *Mop:
 		return v
+	case *Literal:
+		return v
+	case *LiteralFormat:
+		return v
 	default:
 		panic(fmt.Sprintf("unexpected return type %T", v))
 	}
@@ -130,7 +138,6 @@ func Values(op interface{}) []interface{} {
 	case *Uop:
 		r = append(r, Values(op.Value)...)
 	case *Bop:
-		r = append(r, Values(op.Left)...)
 		r = append(r, Values(op.Right)...)
 	case *Mop:
 		for _, v := range op.Values {
@@ -146,10 +153,12 @@ type op interface {
 	op()
 }
 
-func (*Cop) op() {}
-func (*Uop) op() {}
-func (*Bop) op() {}
-func (*Mop) op() {}
+func (*Cop) op()           {}
+func (*Uop) op()           {}
+func (*Bop) op()           {}
+func (*Mop) op()           {}
+func (Literal) op()        {} // xxx
+func (*LiteralFormat) op() {} // xxx
 
 // concrete
 func And(values ...interface{}) *Mop {

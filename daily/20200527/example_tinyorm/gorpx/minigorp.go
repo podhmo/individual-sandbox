@@ -9,15 +9,32 @@ import (
 
 type Table = miniq.Table
 
-func SelectOne(
-	dbmap *gorp.DbMap,
+type DbMapx struct {
+	DbMap *gorp.DbMap
+}
+
+func (x *DbMapx) SelectOne(
 	ob interface{},
-	from *miniq.FromClause,
-	where *miniq.WhereClause,
+	selectClause *miniq.SelectClause,
+	fromClause *miniq.FromClause,
+	whereClause *miniq.WhereClause,
 ) error {
-	return dbmap.SelectOne(
+	return x.DbMap.SelectOne(
 		ob,
-		fmt.Sprintf("select * %v %v", from, where),
-		miniq.Values(where.Value)...,
+		fmt.Sprintf("%v %v %v", selectClause, fromClause, whereClause),
+		miniq.Values(whereClause.Value)...,
+	)
+}
+
+func (x *DbMapx) Select(
+	ob interface{},
+	selectClause *miniq.SelectClause,
+	fromClause *miniq.FromClause,
+	whereClause *miniq.WhereClause,
+) (interface{}, error) {
+	return x.DbMap.Select(
+		ob,
+		fmt.Sprintf("%v %v %v", selectClause, fromClause, whereClause),
+		miniq.Values(whereClause.Value)...,
 	)
 }

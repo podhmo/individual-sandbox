@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
 	"time"
 
 	"github.com/go-gorp/gorp/v3"
@@ -48,15 +49,16 @@ func run() error {
 	defer dbmap.Db.Close()
 
 	// setup trace
-	// dbmap.TraceOn("*trace*", log.New(os.Stdout, "\t", 0))
+	dbmap.TraceOn("*trace*", log.New(os.Stdout, "\t", 0))
 
 	b1 := newBook("The Little Go Book", "http://openmymind.net/The-Little-Go-Book")
 	b2 := newBook("An Introduction to Programming in Go", "http://www.golang-book.com/")
+	b3 := newBook("xxx", "zzz")
 
 	// insert
 	{
 		// insert rows - auto increment PKs will be set properly after the insert
-		if err := dbmap.Insert(&b1, &b2); err != nil {
+		if err := dbmap.Insert(&b1, &b2, &b3); err != nil {
 			return errors.Wrap(err, "Insert failed")
 		}
 	}
@@ -74,6 +76,32 @@ func run() error {
 		}
 		log.Println("p2 rows:")
 		log.Printf("    0: %#+v\n", book)
+	}
+
+	// 集計
+	{
+		type Row struct {
+			ID   int64 `db:"id"`
+			Even bool  `db:"even"`
+			Odd  bool  `db:"odd"`
+		}
+		var rows []Row
+		_, err := dbmap.Select(
+			&rows,
+			`
+select
+  bookId as id,
+  case when bookId % 2 = 0 then 1 else 0 end as even,
+  case when bookId % 2 = 1 then 1 else 0 end as odd
+from Book
+`,
+		)
+		if err != nil {
+			return errors.Wrap(err, "Select failed")
+		}
+		for i, row := range rows {
+			log.Printf("    %d: %#+v\n", i, row)
+		}
 	}
 	return nil
 }

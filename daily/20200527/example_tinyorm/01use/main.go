@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"log"
-	"m/gorpx"
 	"m/miniq"
+	"os"
 	"time"
 
 	"github.com/go-gorp/gorp/v3"
@@ -50,7 +50,7 @@ func run() error {
 	defer dbmap.Db.Close()
 
 	// setup trace
-	// dbmap.TraceOn("*trace*", log.New(os.Stdout, "\t", 0))
+	dbmap.TraceOn("*trace*", log.New(os.Stdout, "\t", 0))
 
 	b1 := newBook("The Little Go Book", "http://openmymind.net/The-Little-Go-Book")
 	b2 := newBook("An Introduction to Programming in Go", "http://www.golang-book.com/")
@@ -66,25 +66,51 @@ func run() error {
 	// fetch one
 	{
 		var book Book
-		err := gorpx.SelectOne(
-			dbmap,
-			&book,
+		err := miniq.Query(
+			miniq.Select(miniq.STAR),
 			miniq.From(miniq.Table("Book")),
-			miniq.Where(BookID("%s = ?", b2.BookID)),
-		)
+			miniq.Where(BookID.Compare("= ?", b2.BookID)),
+		).Do(dbmap.SelectOne, &book)
 		if err != nil {
 			return errors.Wrap(err, "SelectOne failed")
 		}
 		log.Println("p2 rows:")
 		log.Printf("    0: %#+v\n", book)
 	}
+
+	// 集計
+	{
+		type Row struct {
+			ID   int64 `db:"id"`
+			Even bool  `db:"even"`
+			Odd  bool  `db:"odd"`
+		}
+		var rows []Row
+
+		_, err := miniq.Query(
+			miniq.Select(
+				BookID.As("id"),
+				miniq.Literalf("case when %s %% 2 = 0 then 1 else 0 end", BookID).As("even"),
+				miniq.Literalf("case when %s %% 2 = 1 then 1 else 0 end", BookID).As("odd"),
+			),
+			miniq.From(miniq.Table("Book")),
+			miniq.Where(),
+		).DoWithValues(dbmap.Select, &rows)
+
+		if err != nil {
+			return errors.Wrap(err, "Select failed")
+		}
+		for i, row := range rows {
+			log.Printf("    %d: %#+v\n", i, row)
+		}
+	}
 	return nil
 }
 
 var (
-	BookID    = miniq.NewInt64Field("bookId")
-	Published = miniq.NewInt64Field("published")
-	URL       = miniq.NewStringField("url")
+	BookID    = miniq.Int64Field("bookId")
+	Published = miniq.Int64Field("published")
+	URL       = miniq.StringField("url")
 )
 
 func newBook(title, url string) Book {
