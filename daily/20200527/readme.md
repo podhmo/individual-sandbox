@@ -1,3 +1,28 @@
+## go tinyorm -> miniq
+
+こんな感じでまとめられる？
+
+```
+Do (ob interface{}, stmt string, args ...interface{}) error
+DoWithValue (ob interface{}, stmt string, args ...interface{}) (interface{}, error)
+DoWithValues (ob interface{}, stmt string, args ...interface{}) ([]interface{}, error)
+```
+
+mgoの方はどうだろう？
+
+そして以下も必要だった
+
+- OrderBy
+- GroupBy
+- Having
+
+あとはjoin、prefixがつくのと、onでくっつける
+
+- innerJoin
+- leftOuterJoin
+- rightOuterJoin
+- fullOuterJoin
+
 ## go sql log
 
 これめちゃくちゃ便利では？

@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/99designs/gqlgen v0.9.3 // indirect
 	github.com/Cside/jsondiff v0.0.0-20180209072652-0e50d980b458 // indirect
+	github.com/DATA-DOG/go-sqlmock v1.4.1 // indirect
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/agnivade/levenshtein v1.0.2 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
@@ -15,10 +16,13 @@ require (
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.4.0
+	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/go-chi/docgen v1.0.5
 	github.com/go-chi/render v1.0.1
 	github.com/go-critic/go-critic v0.4.3 // indirect
+	github.com/go-gorp/gorp v2.2.0+incompatible
+	github.com/go-gorp/gorp/v3 v3.0.2 // indirect
 	github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/go-openapi/swag v0.19.8
@@ -59,6 +63,7 @@ require (
 	github.com/podhmo/go-webtest v0.4.3 // indirect
 	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
+	github.com/poy/onpar v1.0.0 // indirect
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
 	github.com/semrush/zenrpc v1.1.1
@@ -76,7 +81,11 @@ require (
 	github.com/timakin/bodyclose v0.0.0-20200424151742-cb6215831a94 // indirect
 	github.com/vektah/dataloaden v0.3.0 // indirect
 	github.com/vektah/gqlparser/v2 v2.0.1 // indirect
+	github.com/volatiletech/null v8.0.0+incompatible // indirect
+	github.com/volatiletech/null/v8 v8.1.0 // indirect
+	github.com/volatiletech/sqlboiler v3.7.1+incompatible // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
+	github.com/ziutek/mymysql v1.5.4 // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.10.0
 	goa.design/goa v2.1.2+incompatible // indirect
@@ -85,10 +94,13 @@ require (
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	google.golang.org/protobuf v1.22.0 // indirect
+	gopkg.in/gorp.v1 v1.7.2
 	gopkg.in/ini.v1 v1.55.0 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	honnef.co/go/tools v0.0.1-2020.1.3 // indirect
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect
+	xorm.io/core v0.7.3 // indirect
+	xorm.io/xorm v1.0.1 // indirect
 )

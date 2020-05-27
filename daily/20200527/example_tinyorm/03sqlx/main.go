@@ -100,7 +100,7 @@ func run() error {
 		err := miniq.Query(
 			miniq.Select(miniq.STAR),
 			miniq.From(miniq.Table("Book")),
-			miniq.Where(BookID.Compare("%s = ?", b2.BookID)),
+			miniq.Where(BookID.Compare("= ?", b2.BookID)),
 		).Do(db.Get, &book)
 		if err != nil {
 			return errors.Wrap(err, "SelectOne failed")
@@ -112,7 +112,11 @@ func run() error {
 	// fetch all
 	{
 		var books []Book
-		err := db.SelectContext(ctx, &books, "select * from Book order by bookId")
+		err := miniq.Query(
+			miniq.Select(miniq.STAR),
+			miniq.From(miniq.Table("Book")),
+			miniq.Where(),
+		).Do(db.Select, &books)
 		if err != nil {
 			return errors.Wrap(err, "Select failed")
 		}
