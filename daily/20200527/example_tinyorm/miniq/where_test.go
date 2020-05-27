@@ -1,4 +1,4 @@
-package tinyorm
+package miniq
 
 import (
 	"fmt"
@@ -15,9 +15,9 @@ type Book struct {
 }
 
 func TestWhere(t *testing.T) {
-	BookID := NewInt64Condition("bookId")
-	Published := NewInt64Condition("published")
-	URL := NewStringCondition("url")
+	BookID := NewInt64Field("bookId")
+	Published := NewInt64Field("published")
+	URL := NewStringField("url")
 
 	b := Book{
 		BookID:    1,

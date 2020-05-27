@@ -1,0 +1,39 @@
+--- 00use/main.go	2020-05-27 17:42:45.000000000 +0900
++++ 01use/main.go	2020-05-27 17:37:08.000000000 +0900
+@@ -3,6 +3,8 @@
+ import (
+ 	"database/sql"
+ 	"log"
++	"m/gorpx"
++	"m/miniq"
+ 	"time"
+ 
+ 	"github.com/go-gorp/gorp/v3"
+@@ -64,10 +66,11 @@
+ 	// fetch one
+ 	{
+ 		var book Book
+-		err := dbmap.SelectOne(
++		err := gorpx.SelectOne(
++			dbmap,
+ 			&book,
+-			"select title,url from Book where bookId = ?",
+-			b2.BookID,
++			miniq.From(miniq.Table("Book")),
++			miniq.Where(BookID("%s = ?", b2.BookID)),
+ 		)
+ 		if err != nil {
+ 			return errors.Wrap(err, "SelectOne failed")
+@@ -78,6 +81,12 @@
+ 	return nil
+ }
+ 
++var (
++	BookID    = miniq.NewInt64Field("bookId")
++	Published = miniq.NewInt64Field("published")
++	URL       = miniq.NewStringField("url")
++)
++
+ func newBook(title, url string) Book {
+ 	return Book{
+ 		Published: time.Now().UnixNano(),

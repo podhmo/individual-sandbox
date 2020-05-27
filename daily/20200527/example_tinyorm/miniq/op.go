@@ -1,12 +1,20 @@
-package tinyorm
+package miniq
 
 import (
 	"fmt"
 	"strings"
 )
 
-type Uop struct {
-	OP    string
+type Cop struct { // constant
+	Op string
+}
+
+func (q *Cop) Format(s fmt.State, c rune) {
+	fmt.Fprint(s, q.Op)
+}
+
+type Uop struct { // unary
+	Op    string
 	Value interface{} // with converter?
 
 	WithoutParen bool
@@ -14,14 +22,14 @@ type Uop struct {
 
 func (q *Uop) Format(s fmt.State, c rune) {
 	if q.WithoutParen {
-		fmt.Fprintf(s, "%s %v", q.OP, q.Value)
+		fmt.Fprintf(s, "%s %v", q.Op, q.Value)
 		return
 	}
-	fmt.Fprintf(s, "(%s %v)", q.OP, q.Value)
+	fmt.Fprintf(s, "(%s %v)", q.Op, q.Value)
 }
 
-type Bop struct {
-	OP    string
+type Bop struct { // binary
+	Op    string
 	Left  interface{}
 	Right interface{}
 
@@ -30,14 +38,14 @@ type Bop struct {
 
 func (q *Bop) Format(s fmt.State, c rune) {
 	if q.WithoutParen {
-		fmt.Fprintf(s, "%v %s %v", q.Left, q.OP, q.Right)
+		fmt.Fprintf(s, "%v %s %v", q.Left, q.Op, q.Right)
 		return
 	}
-	fmt.Fprintf(s, "(%v %s %v)", q.Left, q.OP, q.Right)
+	fmt.Fprintf(s, "(%v %s %v)", q.Left, q.Op, q.Right)
 }
 
-type Mop struct {
-	OP     string
+type Mop struct { // multi
+	Op     string
 	Values []interface{}
 
 	WithoutParen bool
@@ -57,7 +65,7 @@ func (q *Mop) Format(s fmt.State, c rune) {
 		b.WriteString("(")
 	}
 
-	op := " " + q.OP + " "
+	op := " " + q.Op + " "
 	for i := range q.Values {
 		b.WriteString("%v")
 		if i < len(q.Values)-1 {
@@ -78,13 +86,13 @@ func replace(op interface{}, defaultVal string) interface{} {
 	switch op := op.(type) {
 	case *Uop:
 		return &Uop{
-			OP:           op.OP,
+			Op:           op.Op,
 			Value:        replace(op.Value, defaultVal),
 			WithoutParen: op.WithoutParen,
 		}
 	case *Bop:
 		return &Bop{
-			OP:           op.OP,
+			Op:           op.Op,
 			Left:         replace(op.Left, defaultVal),
 			Right:        replace(op.Right, defaultVal),
 			WithoutParen: op.WithoutParen,
@@ -95,7 +103,7 @@ func replace(op interface{}, defaultVal string) interface{} {
 			values[i] = replace(val, defaultVal)
 		}
 		return &Mop{
-			OP:           op.OP,
+			Op:           op.Op,
 			Values:       values,
 			WithoutParen: op.WithoutParen,
 		}
@@ -138,6 +146,18 @@ type op interface {
 	op()
 }
 
+func (*Cop) op() {}
 func (*Uop) op() {}
 func (*Bop) op() {}
 func (*Mop) op() {}
+
+// concrete
+func And(values ...interface{}) *Mop {
+	return &Mop{Op: "AND", Values: values}
+}
+func Or(values ...interface{}) *Mop {
+	return &Mop{Op: "OR", Values: values}
+}
+func Not(value interface{}) *Uop {
+	return &Uop{Op: "NOT", Value: value}
+}

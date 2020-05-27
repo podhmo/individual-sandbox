@@ -1,4 +1,4 @@
-package tinyorm
+package miniq
 
 import (
 	"fmt"
