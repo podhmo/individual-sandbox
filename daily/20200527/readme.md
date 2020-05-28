@@ -23,6 +23,10 @@ mgoの方はどうだろう？
 - rightOuterJoin
 - fullOuterJoin
 
+### join
+
+join試してみたい
+
 ## go sql log
 
 これめちゃくちゃ便利では？

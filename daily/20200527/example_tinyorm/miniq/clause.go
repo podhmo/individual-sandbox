@@ -62,5 +62,3 @@ func (q *SelectClause) String() string {
 	}
 	return fmt.Sprintf("%s %s", q.Prefix, strings.Join(names, ", "))
 }
-
-type Table string

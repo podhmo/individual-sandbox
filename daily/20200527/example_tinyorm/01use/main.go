@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
-	"m/miniq"
+	"m/db"
 	"os"
 	"time"
 
@@ -33,11 +33,11 @@ func initDb() (*gorp.DbMap, error) {
 
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.SqliteDialect{}}
 
-	dbmap.AddTableWithName(Book{}, "Book").SetKeys(true, "bookId")
+	dbmap.AddDbWithName(Book{}, "Book").SetKeys(true, "bookId")
 
-	err = dbmap.CreateTablesIfNotExists()
+	err = dbmap.CreateDbsIfNotExists()
 	if err != nil {
-		return nil, errors.Wrap(err, "Create tables failed")
+		return nil, errors.Wrap(err, "Create dbs failed")
 	}
 	return dbmap, nil
 }
@@ -66,10 +66,10 @@ func run() error {
 	// fetch one
 	{
 		var book Book
-		err := miniq.Query(
-			miniq.Select(miniq.STAR),
-			miniq.From(miniq.Table("Book")),
-			miniq.Where(BookID.Compare("= ?", b2.BookID)),
+		err := db.Book.Query(
+			db.Where(
+				db.Book.BookID.Compare("= ?", b2.BookID),
+			),
 		).Do(dbmap.SelectOne, &book)
 		if err != nil {
 			return errors.Wrap(err, "SelectOne failed")
@@ -87,14 +87,12 @@ func run() error {
 		}
 		var rows []Row
 
-		_, err := miniq.Query(
-			miniq.Select(
-				BookID.As("id"),
-				miniq.Literalf("case when %s %% 2 = 0 then 1 else 0 end", BookID).As("even"),
-				miniq.Literalf("case when %s %% 2 = 1 then 1 else 0 end", BookID).As("odd"),
+		_, err := db.Book.Query(
+			db.Select(
+				db.Book.BookID.As("id"),
+				db.Literalf("case when %s %% 2 = 0 then 1 else 0 end", db.Book.BookID).As("even"),
+				db.Literalf("case when %s %% 2 = 1 then 1 else 0 end", db.Book.BookID).As("odd"),
 			),
-			miniq.From(miniq.Table("Book")),
-			miniq.Where(),
 		).DoWithValues(dbmap.Select, &rows)
 
 		if err != nil {
@@ -106,12 +104,6 @@ func run() error {
 	}
 	return nil
 }
-
-var (
-	BookID    = miniq.Int64Field("bookId")
-	Published = miniq.Int64Field("published")
-	URL       = miniq.StringField("url")
-)
 
 func newBook(title, url string) Book {
 	return Book{

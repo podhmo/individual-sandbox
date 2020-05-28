@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"log"
+	"m/db"
 	"m/miniq"
 	"time"
 
@@ -34,21 +35,21 @@ CREATE TABLE Book (
 func initDb(ctx context.Context) (*sqlx.DB, error) {
 	// connect to db using standard Go database/sql API
 	// use whatever database/sql driver you wish
-	db, err := sqlx.ConnectContext(ctx, "sqlite3", ":memory:")
+	sqlxdb, err := sqlx.ConnectContext(ctx, "sqlite3", ":memory:")
 	if err != nil {
 		return nil, errors.Wrap(err, "sql.Open failed")
 
 	}
 
 	// create table
-	db.MustExecContext(ctx, schema)
-	return db, nil
+	sqlxdb.MustExecContext(ctx, schema)
+	return sqlxdb, nil
 }
 
 func run() error {
 	ctx := context.Background()
 
-	db, err := initDb(ctx)
+	sqlxdb, err := initDb(ctx)
 	if err != nil {
 		return err
 	}
@@ -58,7 +59,7 @@ func run() error {
 
 	// insert
 	{
-		r, err := db.NamedExecContext(ctx, `INSERT INTO Book(title, url) VALUES (:title, :url)`, []*Book{&b1, &b2})
+		r, err := sqlxdb.NamedExecContext(ctx, `INSERT INTO Book(title, url) VALUES (:title, :url)`, []*Book{&b1, &b2})
 		// insert rows - auto increment PKs will be set properly after the insert
 		if err != nil {
 			return errors.Wrap(err, "Insert failed")
@@ -73,7 +74,9 @@ func run() error {
 	// count
 	{
 		var c int
-		err := db.GetContext(ctx, &c, "select count(*) from Book")
+		err := db.Book.Query(
+			db.Select(db.Literalf("count(*)")),
+		).Do(sqlxdb.Get, &c)
 		if err != nil {
 			return errors.Wrap(err, "select count(*) failed")
 		}
@@ -97,11 +100,11 @@ func run() error {
 	// fetch one
 	{
 		var book Book
-		err := miniq.Query(
-			miniq.Select(miniq.STAR),
-			miniq.From(miniq.Table("Book")),
-			miniq.Where(BookID.Compare("= ?", b2.BookID)),
-		).Do(db.Get, &book)
+		err := db.Book.Query(
+			db.Where(
+				db.Book.BookID.Compare("= ?", b2.BookID),
+			),
+		).Do(sqlxdb.Get, &book)
 		if err != nil {
 			return errors.Wrap(err, "SelectOne failed")
 		}
@@ -112,11 +115,7 @@ func run() error {
 	// fetch all
 	{
 		var books []Book
-		err := miniq.Query(
-			miniq.Select(miniq.STAR),
-			miniq.From(miniq.Table("Book")),
-			miniq.Where(),
-		).Do(db.Select, &books)
+		err := db.Book.Query().Do(sqlxdb.Select, &books)
 		if err != nil {
 			return errors.Wrap(err, "Select failed")
 		}

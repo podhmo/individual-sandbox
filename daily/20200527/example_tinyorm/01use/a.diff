@@ -1,14 +1,15 @@
 --- 00use/main.go	2020-05-28 00:54:06.000000000 +0900
-+++ 01use/main.go	2020-05-28 00:54:39.000000000 +0900
-@@ -3,6 +3,7 @@
++++ 01use/main.go	2020-05-28 05:54:18.000000000 +0900
+@@ -3,6 +3,8 @@
  import (
  	"database/sql"
  	"log"
 +	"m/miniq"
++	"m/table"
  	"os"
  	"time"
  
-@@ -53,12 +54,11 @@
+@@ -53,12 +55,11 @@
  
  	b1 := newBook("The Little Go Book", "http://openmymind.net/The-Little-Go-Book")
  	b2 := newBook("An Introduction to Programming in Go", "http://www.golang-book.com/")
@@ -22,7 +23,7 @@
  			return errors.Wrap(err, "Insert failed")
  		}
  	}
-@@ -66,11 +66,11 @@
+@@ -66,11 +67,11 @@
  	// fetch one
  	{
  		var book Book
@@ -31,15 +32,15 @@
 -			"select * from Book where bookId = ?",
 -			b2.BookID,
 -		)
-+		err := miniq.Query(
-+			miniq.Select(miniq.STAR),
-+			miniq.From(miniq.Table("Book")),
-+			miniq.Where(BookID.Compare("= ?", b2.BookID)),
++		err := table.Book.Query(
++			table.Book.Where(
++				table.Book.BookID.Compare("= ?", b2.BookID),
++			),
 +		).Do(dbmap.SelectOne, &book)
  		if err != nil {
  			return errors.Wrap(err, "SelectOne failed")
  		}
-@@ -86,16 +86,17 @@
+@@ -86,16 +87,15 @@
  			Odd  bool  `db:"odd"`
  		}
  		var rows []Row
@@ -54,29 +55,14 @@
 -`,
 -		)
 +
-+		_, err := miniq.Query(
-+			miniq.Select(
-+				BookID.As("id"),
-+				miniq.Literalf("case when %s %% 2 = 0 then 1 else 0 end", BookID).As("even"),
-+				miniq.Literalf("case when %s %% 2 = 1 then 1 else 0 end", BookID).As("odd"),
++		_, err := table.Book.Query(
++			table.Book.Select(
++				table.Book.BookID.As("id"),
++				miniq.Literalf("case when %s %% 2 = 0 then 1 else 0 end", table.Book.BookID).As("even"),
++				miniq.Literalf("case when %s %% 2 = 1 then 1 else 0 end", table.Book.BookID).As("odd"),
 +			),
-+			miniq.From(miniq.Table("Book")),
-+			miniq.Where(),
 +		).DoWithValues(dbmap.Select, &rows)
 +
  		if err != nil {
  			return errors.Wrap(err, "Select failed")
  		}
-@@ -106,6 +107,12 @@
- 	return nil
- }
- 
-+var (
-+	BookID    = miniq.Int64Field("bookId")
-+	Published = miniq.Int64Field("published")
-+	URL       = miniq.StringField("url")
-+)
-+
- func newBook(title, url string) Book {
- 	return Book{
- 		Published: time.Now().UnixNano(),
