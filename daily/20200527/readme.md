@@ -1,3 +1,99 @@
+## go miniq join
+
+とりあえずgorpでjoinを書く方法を調べておく。ふつうにmapping用のstructを作るだけ。
+flatになっている分このあたりのinterfaceは手軽っぽい。
+
+```go
+	{
+		query := `
+SELECT
+  p.postId,
+  c.commentId,
+  p.title,
+  c.content
+FROM
+  Post as p join Comment as c on p.postId = c.postId
+`
+		var rows []PostCommentView
+		log.Println("----------------------------------------")
+		if _, err := dbmap.Select(&rows, query); err != nil {
+			return errors.Wrap(err, "Join failed")
+		}
+		for i, row := range rows {
+			log.Printf("    %d: %#+v\n", i, row)
+		}
+	}
+```
+
+必要なものはなんだろう？
+
+- prefix付きのfield
+- join部分の定義
+
+```go
+lhs := db.Post.As("p")
+rhs := db.Comment.As("c")
+lhs.Join(rhs, lhs.PostID.On(rhs.PostID))
+```
+
+hmm
+
+通常のSQLはこう
+
+```
+db.Post.Query(
+  db.Post.Select(db.Literalf("*"))
+).Do(&rows)
+```
+
+こういう感じ？
+
+```
+p := db.Post.As("p")
+c := db.Comment.As("c")
+db.Post.Query(
+    db.From(
+        p.Join(c, p.PostID.On(c.PostID)), // .Join(x, x.PostID.On())
+    ),
+    db.Select(
+        p.PostID, c.CommentID, p.Title, c.Content,
+    ),
+).Do(&rows)
+```
+
+これができるとすると、Asが使えると良い？
+
+```
+p := db.Post.As("p")
+db.Post.Query(db.From(p)).Do(&rows)
+```
+
+InnerJoin,LeftOuterJoinとか使い分ける方法はどうすれば良いんだろう？
+methodにしてしまうと固定されてしまうような気がする。
+
+aliasの型が固定されていないのが辛いな。
+
+### 追記
+
+これならできそう
+
+```go
+p := db.Post // shallow copy
+db.Alias(&p, &db.Post, "p")
+
+c := db.Comment // shallow copy
+db.Alias(&c, &db.Comment, "c")
+
+db.Post.Query(
+    db.From(
+        db.Join(p, c, p.PostID.On(c.PostID)), // .Join(x, x.PostID.On())
+    ),
+    db.Select(
+        p.PostID, c.CommentID, p.Title, c.Content,
+    ),
+).Do(&rows)
+```
+
 ## go tinyorm -> miniq
 
 こんな感じでまとめられる？
@@ -22,10 +118,6 @@ mgoの方はどうだろう？
 - leftOuterJoin
 - rightOuterJoin
 - fullOuterJoin
-
-### join
-
-join試してみたい
 
 ## go sql log
 

@@ -32,10 +32,10 @@ func (q *WhereClause) String() string {
 
 type FromClause struct {
 	Prefix string
-	Table  Table
+	Table  tableLike
 }
 
-func From(table Table) *FromClause {
+func From(table tableLike) *FromClause {
 	return &FromClause{
 		Prefix: "FROM",
 		Table:  table,
@@ -43,7 +43,7 @@ func From(table Table) *FromClause {
 }
 
 func (q *FromClause) String() string {
-	return fmt.Sprintf("%s %s", q.Prefix, q.Table)
+	return fmt.Sprintf("%s %s", q.Prefix, q.Table.TableName())
 }
 
 func Select(fields ...Field) *SelectClause {

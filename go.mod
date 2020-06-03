@@ -69,6 +69,7 @@ require (
 	github.com/semrush/zenrpc v1.1.1
 	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
 	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd // indirect
+	github.com/simukti/sqldb-logger v0.0.0-20200401101904-10de8322a496 // indirect
 	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/slack-go/slack v0.6.4 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
@@ -87,7 +88,7 @@ require (
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	go.uber.org/fx v1.12.0
-	go.uber.org/zap v1.10.0
+	go.uber.org/zap v1.14.1
 	goa.design/goa v2.1.2+incompatible // indirect
 	golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3 // indirect
 	golang.org/x/tools v0.0.0-20200504022951-6b6965ac5dd1
