@@ -5,7 +5,7 @@ settings: SettingsDict = {"rootdir": "", "here": __file__}
 app = create_app(settings)
 
 app.include("egoist.directives.define_struct_set")
-
+app.include("commands/generate_plus")
 
 @app.define_struct_set("egoist.generators.structkit:walk")
 def model__objects() -> None:
