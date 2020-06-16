@@ -11,6 +11,8 @@ require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/bombsimon/wsl/v3 v3.1.0 // indirect
+	github.com/caarlos0/env/v6 v6.2.2 // indirect
+	github.com/craicoverflow/go-environment-variables-example v0.0.0-20190228224948-ee3fabeff275 // indirect
 	github.com/cybozu-go/well v1.10.0 // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/fatih/color v1.9.0 // indirect
@@ -21,7 +23,6 @@ require (
 	github.com/go-chi/docgen v1.0.5
 	github.com/go-chi/render v1.0.1
 	github.com/go-critic/go-critic v0.4.3 // indirect
-	github.com/go-gorp/gorp v2.2.0+incompatible
 	github.com/go-gorp/gorp/v3 v3.0.2 // indirect
 	github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/strfmt v0.19.5
@@ -37,6 +38,9 @@ require (
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
+	github.com/graphql-go/graphql v0.7.9 // indirect
+	github.com/graphql-go/handler v0.2.3 // indirect
+	github.com/graphql-go/relay v0.0.0-20171208134043-54350098cfe5 // indirect
 	github.com/hashicorp/go-hclog v0.10.0
 	github.com/hashicorp/go-plugin v1.0.1
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
@@ -95,7 +99,6 @@ require (
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	google.golang.org/protobuf v1.22.0 // indirect
-	gopkg.in/gorp.v1 v1.7.2
 	gopkg.in/ini.v1 v1.55.0 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	honnef.co/go/tools v0.0.1-2020.1.3 // indirect

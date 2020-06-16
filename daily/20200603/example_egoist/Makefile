@@ -7,3 +7,5 @@
 	python $(shell echo $@*/)definitions.py generate
 03:
 	python $(shell echo $@*/)definitions.py generate
+04:
+	python $(shell echo $@*/)definitions.py generate
