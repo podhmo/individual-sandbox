@@ -149,25 +149,25 @@ ErrorResponse = partial(Response, code=500, description="unexpected error")
 class Query(t.Generic[T]):
     @classmethod
     def __emit__(cls, name: str, base: t.Type[T], d: t.Dict[str, t.Any]) -> Parameter:
-        return Parameter(name=name, in_="query", required=True)
+        return Parameter(name=name, in_="query", required=False, _type=base)
 
 
 class Path(t.Generic[T]):
     @classmethod
     def __emit__(cls, name: str, base: t.Type[T], d: t.Dict[str, t.Any]) -> Parameter:
-        return Parameter(name=name, in_="path", required=True)
+        return Parameter(name=name, in_="path", required=True, _type=base)
 
 
 class Formdata(t.Generic[T]):
     @classmethod
     def __emit__(cls, name: str, base: t.Type[T], d: t.Dict[str, t.Any]) -> Parameter:
-        return Parameter(name=name, in_="formdata", required=True)
+        return Parameter(name=name, in_="formdata", required=True, _type=base)
 
 
 class Body(t.Generic[T]):
     @classmethod
     def __emit__(cls, name: str, base: t.Type[T], d: t.Dict[str, t.Any]) -> Parameter:
-        return Parameter(name=name, in_="formdata", required=True)
+        return Parameter(name=name, in_="formdata", required=True, _type=base)
 
 
 @dataclasses.dataclass(eq=False)
@@ -181,6 +181,7 @@ class Parameter:
     schema: t.Optional[t.Dict[str, t.Any]] = None
 
     _asdict: t.Callable[[Parameter], t.Dict[str, t.Any]] = asdict_default
+    _type: t.Optional[t.Type[t.Any]] = None
     extra_data: t.Optional[t.Dict[str, t.Any]] = None
 
     def asdict(self) -> t.Dict[str, t.Any]:
@@ -193,7 +194,7 @@ def _create_default_runtime_context(
     from contextstack import ContextStack, ArgsAttr
 
     def arg_factory(name: str) -> Parameter:
-        return Parameter(name=name)
+        return Parameter(name=name, _type=str)
 
     def args_attr_factory(names: t.List[t.Any]) -> ArgsAttr[Parameter]:
         return ArgsAttr(names, factory=arg_factory)

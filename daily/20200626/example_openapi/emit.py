@@ -56,10 +56,9 @@ def get_walker(fns: t.List[t.Callable[..., t.Any]]) -> Walker:
 
 def handle_unexpected_type(typ: t.Type[t.Any]) -> TypeInfo:
     from metashape.typeinfo import typeinfo
-    from runtime import Query
 
     origin = t.get_origin(typ)
-    if issubclass(origin, Query):
+    if hasattr(origin, "__emit__"):  # for Query
         return typeinfo(t.get_args(typ)[0])
     raise ValueError(f"unsupported type {typ}")
 
@@ -108,7 +107,11 @@ class Resolver:
         elif schema_type == "object":
             return self.refs[typ]
         else:
-            return {"type": schema_type}
+            prop = {"type": schema_type}
+            if info.is_newtype:
+                if hasattr(info.supertypes[0], "__name__"):
+                    prop["format"] = info.supertypes[0].__name__.replace("_", "-")
+            return prop
 
     def resolve_request_body(self, typ: t.Type[t.Any]) -> t.Dict[str, t.Any]:
         return {
@@ -217,12 +220,12 @@ def emit(
     root = {
         "openapi": "3.0.2",
         "info": {"title": title, "version": version},
-        "paths": defaultdict(dict),
     }
     if license is not None:
         root["info"]["license"] = {"name": license}
     if servers is not None:
         root["servers"] = [{"url": url} for url in servers]
+    root["paths"] = defaultdict(dict)
 
     # TODO: lazy
     routes = list(api.routes)
@@ -268,11 +271,11 @@ def emit(
         for name, typ, kind in spec.parameters:
             origin = runtime.Body
             first_arg = typ
-            if hasattr(typ, "__origin__"):
-                origin = typ.__origin__
+            if hasattr(typ, "__origin__") and hasattr(typ.__origin__, "__emit__"):
+                origin = typ.__origin__  # for Query
                 first_arg = typ.__args__[0]
 
-            p = origin.__emit__(name, typ.__args__[0], d)
+            p = origin.__emit__(name, first_arg, d)
             if issubclass(origin, runtime.Body):
                 p._asdict = partial(resolver.resolve_request_body, first_arg)
             setattr(c, name, p)
@@ -292,6 +295,8 @@ def emit(
                 parameters.append(p.asdict())
         if parameter_args:
             for p in parameter_args:
+                if p.schema is None:
+                    p.schema = resolver.resolve_schema(p._type)
                 parameters.append(p.asdict())
 
         # basic

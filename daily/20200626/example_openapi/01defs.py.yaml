@@ -1,0 +1,40 @@
+openapi: 3.0.2
+info:
+  title: hello
+  version: 0.0.0
+paths:
+  /pets:
+    get:
+      operationId: listPets
+      summary: list all pets
+      tags:
+      - pets
+      parameters:
+      - name: limit
+        required: false
+        schema:
+          type: integer
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        tag:
+          type: string
+      required:
+      - id
+      - name

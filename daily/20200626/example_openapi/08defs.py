@@ -9,8 +9,12 @@ from dictknife import loading
 
 
 # definitions
+int32 = t.NewType("int32", int)
+int64 = t.NewType("int64", int)
+
+
 class Pet:
-    id: str
+    id: int64
     name: str
     tag: t.Optional[str]
 
@@ -19,7 +23,7 @@ Pets = t.List[Pet]
 
 
 class Error:
-    code: int  # int32
+    code: int32
     message: str
 
 
@@ -28,13 +32,11 @@ api = API()
 
 # paths
 @api.get("/pets", metadata={"tags": ["pets"]})
-def listPets(limit: Query[int]) -> t.List[Pet]:
+def listPets(limit: Query[int32]) -> t.List[Pet]:
     """List all pets"""
     c = api.get_current_context()
 
     c.limit.description = "How many items to return at one time (max 100)"
-    c.limit.required = False
-    c.limit.schema = {"type": "integer", "format": "int32"}
 
     c.return_.description = "A paged array of pets"
     c.return_.extra_data = {
@@ -65,14 +67,14 @@ def showPetById() -> Pet:
 
 
 # TODO:
-# - setting type as NewType
 # - v2 support
-d = emit(
-    api,
-    title="Swagger Petstore",
-    version="1.0.0",
-    license="MIT",
-    servers=["http://petstore.swagger.io/v1"],
-    default_error_response=ErrorResponse(Error),
-)
-loading.dumpfile(d, format="yaml")
+if __name__ == "__main__":
+    d = emit(
+        api,
+        title="Swagger Petstore",
+        version="1.0.0",
+        license="MIT",
+        servers=["http://petstore.swagger.io/v1"],
+        default_error_response=ErrorResponse(Error),
+    )
+    loading.dumpfile(d, format="yaml")
