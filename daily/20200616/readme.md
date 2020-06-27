@@ -1,3 +1,28 @@
+## go AST
+
+goでAST触るのにめんどくさい部分はこの辺りだよなー。前者だとGenDecl.Commentに入り後者だとTypeSpec.Doc
+
+```go
+// Post ...
+type Post struct {
+	Id      int64 `db:"post_id"`
+	Created int64
+	Title   string `db:",size:50"`               // Column size set to 50
+	Body    string `db:"article_body,size:1024"` // Set both column name and size
+}
+
+type (
+	// Post2 ...
+	Post2 struct {
+		Id      int64 `db:"post_id"`
+		Created int64
+		Title   string `db:",size:50"`               // Column size set to 50
+		Body    string `db:"article_body,size:1024"` // Set both column name and size
+	}
+)
+```
+
+
 ## go gopackage
 
 - NeedNameだけだと依存パッケージを読まない

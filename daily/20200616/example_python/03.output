@@ -1,0 +1,62 @@
+def get_all_users():
+    """
+    Get all user records
+    """
+    do('''SELECT * FROM users''')
+    data = {
+  "select": "*",
+  "from": "users"
+}
+
+
+def get_user_by_username(username):
+    """
+    Get user with the given username field.
+    """
+    do('''SELECT user_id,
+       username,
+       firstname,
+       lastname
+  FROM users
+ WHERE username = :username''')
+    data = {
+  "select": [
+    {
+      "value": "user_id"
+    },
+    {
+      "value": "username"
+    },
+    {
+      "value": "firstname"
+    },
+    {
+      "value": "lastname"
+    }
+  ],
+  "from": "users",
+  "where": {
+    "eq": [
+      "username",
+      ":username"
+    ]
+  }
+}
+
+
+def get_all_greetings():
+    """
+    Get all the greetings in the database
+    """
+    do('''SELECT greeting_id, greeting FROM greetings''')
+    data = {
+  "select": [
+    {
+      "value": "greeting_id"
+    },
+    {
+      "value": "greeting"
+    }
+  ],
+  "from": "greetings"
+}

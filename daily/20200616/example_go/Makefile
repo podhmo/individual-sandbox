@@ -22,3 +22,10 @@ export GOPACKAGESDEBUG := 1
 # name + files
 08:
 	go run $(shell echo $@*/)main.go ./database
+
+# struct fields
+09:
+	go run $(shell echo $@*/)main.go ./database
+# struct comment
+10:
+	go run $(shell echo $@*/)main.go ./database

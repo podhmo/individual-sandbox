@@ -1,0 +1,3 @@
+aiosql
+aiosqlite
+moz-sql-parser
