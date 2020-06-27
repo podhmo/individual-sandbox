@@ -1,5 +1,6 @@
 from __future__ import annotations
 import typing as t
+import sys
 from collections import defaultdict
 from functools import lru_cache, partial
 from collections import deque
@@ -213,6 +214,7 @@ def emit(
     license: t.Optional[str] = None,  # e.g. "mit"
     servers: t.Optional[t.List[str]] = None,
     default_error_response: t.Optional[runtime.Response] = None,
+    autotags: bool = False,
 ) -> t.Dict[str, t.Any]:
     from metashape.outputs.openapi.emit import scan
     from metashape.marker import mark
@@ -241,6 +243,7 @@ def emit(
     refs = ctx.state.refs
 
     resolver = Resolver(refs=refs)
+    tags_map = {}
 
     default_error_response_dict: t.Dict[str, t.Any] = None
     if default_error_response is not None:
@@ -312,6 +315,13 @@ def emit(
 
         if "tags" in metadata:
             d["tags"] = metadata["tags"]
+        elif autotags:
+            modname = spec.body.__module__
+            tags = tags_map.get(modname)
+            if tags is None:
+                mod = sys.modules.get(modname)
+                tags = tags_map[modname] = getattr(mod, "__TAGS__", None) or [modname]
+            d["tags"] = tags
 
         # parameters
         if parameters:

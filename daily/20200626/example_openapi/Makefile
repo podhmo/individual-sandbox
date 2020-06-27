@@ -35,3 +35,7 @@
 # extra data
 09:
 	python $(shell echo $@*.py) | tee $(shell echo $@*.py).yaml
+
+# auto tags
+10:
+	python $(shell echo $@*.py) | tee $(shell echo $@*.py).yaml
