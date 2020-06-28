@@ -39,3 +39,7 @@
 # auto tags
 10:
 	python $(shell echo $@*.py) | tee $(shell echo $@*.py).yaml
+
+# simple
+20:
+	python $(shell echo $@*.py) | tee $(shell echo $@*.py).yaml
