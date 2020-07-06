@@ -1,0 +1,13 @@
+{
+  "xxx": {
+    "name": "",
+    "token": ""
+  },
+  "yyy": {
+    "name": "yyy",
+    "token": ""
+  },
+  "logger": {
+    "level": "DEBUG"
+  }
+}
