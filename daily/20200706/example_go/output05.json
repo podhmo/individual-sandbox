@@ -1,0 +1,29 @@
+*types.Named struct{Name string; Nickname *string}
+{
+  "m/05pointer": {
+    "name": "person",
+    "path": "m/05pointer",
+    "structs": [
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "Name",
+            "type": {
+              "ident": "string"
+            }
+          },
+          {
+            "name": "Nickname",
+            "type": {
+              "ident": "string",
+              "level": 1
+            }
+          }
+        ]
+      }
+    ],
+    "newTypes": [],
+    "imported": []
+  }
+}

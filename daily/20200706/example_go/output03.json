@@ -1,0 +1,51 @@
+*types.Named struct{Name string; Age int}
+*types.Named struct{Name string; Members []m/03slice.Person}
+{
+  "m/03slice": {
+    "name": "person",
+    "path": "m/03slice",
+    "structs": [
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "Name",
+            "type": {
+              "ident": "string"
+            }
+          },
+          {
+            "name": "Age",
+            "type": {
+              "ident": "int"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Team",
+        "fields": [
+          {
+            "name": "Name",
+            "type": {
+              "ident": "string"
+            }
+          },
+          {
+            "name": "Members",
+            "type": {
+              "ident": "Slice",
+              "args": [
+                {
+                  "ident": "m/03slice.Person"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "newTypes": [],
+    "imported": []
+  }
+}

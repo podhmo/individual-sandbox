@@ -1,0 +1,39 @@
+*types.Named struct{Name string; Age int; CraetedAt time.Time}
+{
+  "m/01time": {
+    "name": "person",
+    "path": "m/01time",
+    "structs": [
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "Name",
+            "type": {
+              "ident": "string"
+            }
+          },
+          {
+            "name": "Age",
+            "type": {
+              "ident": "int"
+            }
+          },
+          {
+            "name": "CraetedAt",
+            "type": {
+              "ident": "time.Time"
+            }
+          }
+        ]
+      }
+    ],
+    "newTypes": [],
+    "imported": [
+      {
+        "name": "time",
+        "path": "time"
+      }
+    ]
+  }
+}

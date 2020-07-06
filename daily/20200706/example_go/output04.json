@@ -1,0 +1,47 @@
+*types.Named struct{Name m/04newtype.Name; Age m/04newtype.Age2}
+{
+  "m/04newtype": {
+    "name": "person",
+    "path": "m/04newtype",
+    "structs": [
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "Name",
+            "type": {
+              "ident": "m/04newtype.Name"
+            }
+          },
+          {
+            "name": "Age",
+            "type": {
+              "ident": "m/04newtype.Age2"
+            }
+          }
+        ]
+      }
+    ],
+    "newTypes": [
+      {
+        "name": "Age",
+        "type": {
+          "ident": "int"
+        }
+      },
+      {
+        "name": "Age2",
+        "type": {
+          "ident": "int"
+        }
+      },
+      {
+        "name": "Name",
+        "type": {
+          "ident": "string"
+        }
+      }
+    ],
+    "imported": []
+  }
+}

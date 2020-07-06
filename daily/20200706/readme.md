@@ -16,6 +16,19 @@ package "m/01time" scope 0xc000106230 {
 }
 ```
 
+### 追記
+
+できていないのが何かがわからないな
+
+- jsonschemaを生成
+- APIを生成
+- embedded
+- structs
+- newTypes
+- factories
+- multi packages
+- multi symbols
+
 ## python sheetconfを作った
 
 spreadsheetを設定ファイルとして扱うやつ
