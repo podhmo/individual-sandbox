@@ -239,7 +239,7 @@ def emit(
         w.append(default_error_response.result)
 
     ctx = scan(w)
-    root.update(ctx.result.result)  # inject #/components/schemas
+    root.update(ctx.result)  # inject #/components/schemas
     refs = ctx.state.refs
 
     resolver = Resolver(refs=refs)

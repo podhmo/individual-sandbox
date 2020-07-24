@@ -10,5 +10,24 @@ export DEBUG ?= 1
 03:
 	python $(shell echo $@*.py)
 
+# for blog
+x0:
+	python $(shell echo $@*.py)
+x1:
+	python $(shell echo $@*.py)
+x3:
+	python $(shell echo $@*.py)
+x4:
+	python $(shell echo $@*.py)
+x5:
+	python $(shell echo $@*.py)
+
+diff-x0x1:
+	diff -u x0* x1*
+diff-x0x3:
+	diff -u x0* x3*
+diff-x0x5:
+	diff -u x0* x5*
+
 token:
 	echo $(SLACK_API_TOKEN)

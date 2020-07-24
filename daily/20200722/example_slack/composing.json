@@ -1,0 +1,80 @@
+{
+  "attachments": [
+    {
+      "blocks": [
+        {
+          "text": {
+            "text": "*Alternative hotel options*",
+            "type": "mrkdwn"
+          },
+          "type": "section"
+        },
+        {
+          "accessory": {
+            "text": {
+              "emoji": true,
+              "text": "View",
+              "type": "plain_text"
+            },
+            "type": "button",
+            "value": "view_alternate_1"
+          },
+          "text": {
+            "text": "<https://example.com|Bates Motel> :star::star:",
+            "type": "mrkdwn"
+          },
+          "type": "section"
+        },
+        {
+          "accessory": {
+            "text": {
+              "emoji": true,
+              "text": "View",
+              "type": "plain_text"
+            },
+            "type": "button",
+            "value": "view_alternate_2"
+          },
+          "text": {
+            "text": "<https://example.com|The Great Northern Hotel> :star::star::star::star:",
+            "type": "mrkdwn"
+          },
+          "type": "section"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "text": {
+        "text": "Danny Torrence left the following review for your property:",
+        "type": "mrkdwn"
+      },
+      "type": "section"
+    },
+    {
+      "accessory": {
+        "alt_text": "Haunted hotel image",
+        "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
+        "type": "image"
+      },
+      "block_id": "section567",
+      "text": {
+        "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s.",
+        "type": "mrkdwn"
+      },
+      "type": "section"
+    },
+    {
+      "block_id": "section789",
+      "fields": [
+        {
+          "text": "*Average Rating*\n1.0",
+          "type": "mrkdwn"
+        }
+      ],
+      "type": "section"
+    }
+  ],
+  "channel": "CBR2V3XEX"
+}

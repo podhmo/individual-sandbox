@@ -1,0 +1,48 @@
+{
+  "attachments": [
+    {
+      "author_icon": "http://a.slack-edge.com/7f18https://a.slack-edge.com/80588/img/api/homepage_custom_integrations-2x.png",
+      "author_name": "Stanford S. Strickland",
+      "fields": [
+        {
+          "short": true,
+          "title": "Volume",
+          "value": "1"
+        },
+        {
+          "short": true,
+          "title": "Issue",
+          "value": "3"
+        }
+      ],
+      "image_url": "http://i.imgur.com/OJkaVOI.jpg?1",
+      "title": "The Further Adventures of Slackbot"
+    },
+    {
+      "text": "After @episod pushed exciting changes to a devious new branch back in Issue 1, Slackbot notifies @don about an unexpected deploy...",
+      "title": "Synopsis"
+    },
+    {
+      "actions": [
+        {
+          "name": "recommend",
+          "text": "Recommend",
+          "type": "button",
+          "value": "recommend"
+        },
+        {
+          "name": "no",
+          "text": "No",
+          "type": "button",
+          "value": "bad"
+        }
+      ],
+      "attachment_type": "default",
+      "callback_id": "comic_1234_xyz",
+      "color": "#3AA3E3",
+      "fallback": "Would you recommend it to customers?",
+      "title": "Would you recommend it to customers?"
+    }
+  ],
+  "text": "New comic book alert!"
+}

@@ -1,0 +1,39 @@
+{
+  "attachments": [
+    {
+      "actions": [
+        {
+          "name": "game",
+          "text": "Chess",
+          "type": "button",
+          "value": "chess"
+        },
+        {
+          "name": "game",
+          "text": "Falken's Maze",
+          "type": "button",
+          "value": "maze"
+        },
+        {
+          "confirm": {
+            "dismiss_text": "No",
+            "ok_text": "Yes",
+            "text": "Wouldn't you prefer a good game of chess?",
+            "title": "Are you sure?"
+          },
+          "name": "game",
+          "style": "danger",
+          "text": "Thermonuclear War",
+          "type": "button",
+          "value": "war"
+        }
+      ],
+      "attachment_type": "default",
+      "callback_id": "wopr_game",
+      "color": "#3AA3E3",
+      "fallback": "You are unable to choose a game",
+      "text": "Choose a game to play"
+    }
+  ],
+  "text": "Would you like to play a game?"
+}
