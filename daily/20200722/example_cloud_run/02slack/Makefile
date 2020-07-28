@@ -15,6 +15,9 @@ deploy:
  --allow-unauthenticated \
  --set-env-vars="SLACK_BOT_TOKEN"="$(SLACK_BOT_TOKEN)","SLACK_VERIFICATION_TOKEN"="$(SLACK_VERIFICATION_TOKEN)"
 
+run-local:
+	SLACK_BOT_TOKEN=$(SLACK_BOT_TOKEN) SLACK_VERIFICATION_TOKEN=$(SLACK_VERIFICATION_TOKEN) python app.py
+
 check-iam:
 	gcloud run services get-iam-policy $(SERVICE_NAME) --region=asia-northeast1 --platform=managed
 

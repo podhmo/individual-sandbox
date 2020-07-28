@@ -37,4 +37,7 @@ TEE = | tee
 	python $(PY_FILE) $(TEE) $(PY_FILE).output
 08:
 	python $(PY_FILE) $(TEE) $(PY_FILE).output
+# callable
+09:
+	python $(PY_FILE) $(TEE) $(PY_FILE).output
 

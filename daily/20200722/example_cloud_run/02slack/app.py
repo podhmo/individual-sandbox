@@ -76,6 +76,12 @@ def message_actions():
     return make_response("", 200)
 
 
+@app.route("/", defaults={"path": ""}, methods=["POST", "GET"])
+@app.route("/<path:path>", methods=["POST", "GET"])
+def all(path):
+    return {"path": path}
+
+
 # Send a Slack message on load. This needs to be _before_ the Flask server is started
 
 # A Dictionary of message attachment options

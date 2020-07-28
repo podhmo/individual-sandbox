@@ -17,6 +17,13 @@ walkする関係を整理してみる。
 - marker
 - guess mark
 
+これが設定できれば良い。その上でguessを手軽に把握できると良いのだけど。
+
+### pythonを設定ファイルとして使う
+
+- 定義 (shape)
+- 設定 -> dataclasses?
+
 ## python metashapeを拡張する
 
 markerの意味付けを登録可能にしたい？

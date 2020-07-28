@@ -1,0 +1,17 @@
+# https://qiita.com/Urotea/items/28fa6a0822de16da02f6
+apiVersion: extensions/v1beta1 # 今は"apps/v1"
+kind: Deployment
+metadata:
+  name: deployment-example
+spec:
+  replicas: 3 # replicasは3未満に制限
+  template:
+    metadata:
+      labels:
+        app: deployment-example
+    spec:
+      containers:
+      - name: sample
+        image: sample # docker imageのtagの省略禁止
+        ports:
+        - containerPort: 8
