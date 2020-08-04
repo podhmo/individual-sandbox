@@ -1,0 +1,19 @@
+{
+  "mappings": {
+    "properties": {
+      "my_text": {
+        "type": "keyword"
+      },
+      "my_vector": {
+        "dims": 3,
+        "type": "dense_vector"
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "number_of_replicas": "0",
+      "number_of_shards": "1"
+    }
+  }
+}

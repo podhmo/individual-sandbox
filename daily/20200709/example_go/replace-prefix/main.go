@@ -26,7 +26,7 @@ func run(args []string) error {
 	path := args[0]
 	pat := args[1] // github.com/<>/<>/%s
 	rep := args[2] // "endpoint"
-	overwrite := true
+	overwrite := false
 
 	fset := token.NewFileSet()
 	cfg := &packages.Config{
@@ -73,11 +73,13 @@ func run(args []string) error {
 
 		// rewrite body
 		f = astutil.Apply(f, func(cur *astutil.Cursor) bool {
-			node := cur.Node()
-			if ident, ok := node.(*ast.Ident); ok {
+			if ident, ok := cur.Node().(*ast.Ident); ok {
 				if ident.Name == prefix {
-					ident.Name = rep
-					return false
+					// <x>.<sel>
+					if _, ok := cur.Parent().(*ast.SelectorExpr); ok {
+						ident.Name = rep
+						return false
+					}
 				}
 			}
 			return true

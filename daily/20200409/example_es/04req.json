@@ -1,0 +1,20 @@
+{
+  "query": {
+    "match_all": {}
+  },
+  "script_fields": {
+    "test2": {
+      "script": {
+        "lang": "painless",
+        "params": {
+          "query_vector": [
+            4,
+            3.4,
+            -0.2
+          ]
+        },
+        "source": "Similarity.cosineSimilarity(params.query_vector, doc['my_vector']) + 1.0"
+      }
+    }
+  }
+}

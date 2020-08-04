@@ -1,0 +1,25 @@
+{
+  "query": {
+    "script_score": {
+      "query": {
+        "match_all": {}
+      },
+      "script": {
+        "params": {
+          "query_vector": [
+            4,
+            3.4,
+            -0.2
+          ]
+        },
+        "source": "cosineSimilarity(params.query_vector, 'my_vector') + 1.0"
+      }
+    }
+  },
+  "sort": [
+    "_score",
+    {
+      "my_text": "desc"
+    }
+  ]
+}
