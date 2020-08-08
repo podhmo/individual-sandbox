@@ -1,0 +1,6 @@
+digraph "classes_with-init" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{Team|members\lname\l|__init__(name, members)\l}", shape="record"];
+"1" [label="{User|age\lname\l|__init__(name, age)\l}", shape="record"];
+}

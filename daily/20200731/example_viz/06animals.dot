@@ -1,0 +1,52 @@
+// http://www.ffnn.nl/pages/articles/media/uml-diagrams-using-graphviz-dot.php
+digraph G {
+        graph [
+                compound = true
+        ]
+
+        node [
+                shape = "record"
+        ]
+
+        edge [
+                dir = "back"
+                arrowtail = "empty"
+                arrowsize = 0.65
+        ]
+
+        Animal [
+                shape = "none"
+                label = <<TABLE BGCOLOR="gray95" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6" ><TR><TD>Animal</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ name : string<BR/>+ age : int</TD></TR><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ die() : void</TD></TR></TABLE>>
+                URL = "#Animal"
+        ]
+
+        subgraph clusterAnimalImpl {
+                label = "Package animal.impl"
+                URL = "#animal.impl"
+
+                Dog [
+                    shape = "none"
+                    label = <<TABLE BGCOLOR="gray95" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6"><TR><TD>Dog</TD></TR><TR><TD CELLPADDING="1"></TD></TR><TR><TD>+ bark() : void</TD></TR></TABLE>>
+                    URL = "#Dog"
+                ]
+
+                Cat [
+                    shape = "none"
+                    label = <<TABLE BGCOLOR="gray95" BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6"><TR><TD>Cat</TD></TR><TR><TD CELLPADDING="1"></TD></TR><TR><TD>+ meow() : void</TD></TR></TABLE>>
+                    URL = "#Cat"
+                ]
+        }
+
+        Animal -> Dog
+        Animal -> Cat
+
+        edge [
+                arrowtail = "none"
+                constraint = false
+
+                headlabel = "0..*"
+                taillabel = "0..*"
+        ]
+
+        Cat -> Dog
+}

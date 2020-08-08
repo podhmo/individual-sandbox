@@ -1,0 +1,48 @@
+// http://www.ffnn.nl/pages/articles/media/uml-diagrams-using-graphviz-dot.php
+digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                dir = "back"
+                arrowtail = "empty"
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+
+        Animal [
+                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
+        ]
+
+        subgraph clusterAnimalImpl {
+                label = "Package animal.impl"
+
+                Dog [
+                        label = "{Dog||+ bark() : void\l}"
+                ]
+
+                Cat [
+                        label = "{Cat||+ meow() : void\l}"
+                ]
+        }
+
+        Animal -> Dog
+        Animal -> Cat
+
+        edge [
+                arrowtail = "none"
+// Warning: flat edge between adjacent nodes one of which has a record shape - replace records with HTML-like labels
+//                constraint = false
+
+                headlabel = "0..*"
+                taillabel = "0..*"
+        ]
+
+        Cat -> Dog
+}

@@ -1,0 +1,10 @@
+// https://fsteeg.wordpress.com/2006/11/17/uml-class-diagrams-with-graphviz/
+digraph hierarchy {
+  randir="RL";
+  size="5,5";
+  edge[dir=forward, arrowhead=empty];
+  node[shape=record,style=filled,fillcolor=gray95];
+
+  AbstractSuffixTree[label = "{AbstractSuffixTree|+ text\n+ root|...}"];
+  SimpleSuffixTree->AbstractSuffixTree;
+}

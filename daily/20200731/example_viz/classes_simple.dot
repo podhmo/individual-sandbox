@@ -1,0 +1,6 @@
+digraph "classes_simple" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{Team|members\lname\l|}", shape="record"];
+"1" [label="{User|age\lname\l|}", shape="record"];
+}

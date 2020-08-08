@@ -1,0 +1,75 @@
+
+diff --git a/doc/doxygen/dot/wayland-architecture.gv b/doc/doxygen/dot/wayland-architecture.gv
+index 2d5db84..f2c3507 100644
+--- a/doc/doxygen/dot/wayland-architecture.gv
++++ b/doc/doxygen/dot/wayland-architecture.gv
+@@ -9,21 +9,18 @@ digraph arch_wayland {
+     ]
+ 
+     node[
+-        shape="Mrecord",
+         color=none,
+-        fillcolor="#ffbc00",
+-        style="filled",
++        margin=0,
+         fontname="DejaVu Sans",
+         fontsize="18",
+    ]
+ 
+-    c1 [label="Wayland Client", URL="#c1"]
+-    c2 [label="Wayland Client", URL="#c2"]
++    c1 [label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>Wayland Client</TD></TR></TABLE>>, URL="#c1"]
++    c2 [label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>Wayland Client</TD></TR></TABLE>>, URL="#c2"]
+ 
+-    comp [tooltip="Wayland Compositor", label="|{|Wayland\nCompositor|}|", URL="#comp"]
+-
+-    impl [tooltip="KMS evdev Kernel", label="|{{KMS|evdev}|Kernel}|", URL="#impl"]
++    comp [tooltip="Wayland Compositor", label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD><BR/>Wayland<BR/>Compositor<BR/><BR/></TD></TR></TABLE>>, URL="#comp"]
+ 
++    impl [tooltip="KMS evdev Kernel", label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>KMS</TD><TD>evdev</TD></TR><TR><TD COLSPAN="2">Kernel</TD></TR></TABLE>>, URL="#impl"]
+ 
+     c1 -> comp [taillabel="③", labeldistance=2.5, URL="#step_3"];
+     c2 -> comp;
+diff --git a/doc/doxygen/dot/x-architecture.gv b/doc/doxygen/dot/x-architecture.gv
+index 4ea49bf..b223d1d 100644
+--- a/doc/doxygen/dot/x-architecture.gv
++++ b/doc/doxygen/dot/x-architecture.gv
+@@ -9,28 +9,27 @@ digraph arch_x {
+     ]
+ 
+     node[
+-        shape="Mrecord",
++        shape="none",
+         color=none,
+-        fillcolor="#ffbc00",
+-        style="filled",
++        margin=0,
+         fontname="DejaVu Sans",
+         fontsize="18",
+     ]
+ 
+     {
+         rank=same;
+-        c1 [label="X Client", URL="#c1"]
+-        c3 [label="X Client", URL="#c3"]
++        c1 [label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>X Client</TD></TR></TABLE>>, URL="#c1"]
++        c3 [label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>X Client</TD></TR></TABLE>>, URL="#c3"]
+     }
+-    c2 [label="X Client", URL="#c2"]
++    c2 [label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>X Client</TD></TR></TABLE>>, URL="#c2"]
+ 
+     {
+         rank=same;
+-        xserver [tooltip="X Server", label="|{|X Server|}|", URL="#xserver"]
+-        comp [tooltip="Compositor", label="|{|Compositor|}|", URL="#comp"]
++        xserver [tooltip="X Server", label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD><BR/>X Server<BR/><BR/></TD></TR></TABLE>>, URL="#xserver"]
++        comp [tooltip="Compositor", label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD><BR/>Compositor<BR/><BR/></TD></TR></TABLE>>, URL="#comp"]
+     }
+ 
+-    impl [tooltip="KMS evdev Kernel", label="|{{KMS|evdev}|Kernel}|", URL="#impl"]
++    impl [tooltip="KMS evdev Kernel", label=<<TABLE STYLE="rounded" BGCOLOR="#ffbc00"><TR><TD>KMS</TD><TD>evdev</TD></TR><TR><TD COLSPAN="2">Kernel</TD></TR></TABLE>>, URL="#impl"]
+ 
+     c1 -> xserver [taillabel="③", labeldistance=2, URL="#step_3"];
+     c2 -> xserver;
+-- 
+2.13.0

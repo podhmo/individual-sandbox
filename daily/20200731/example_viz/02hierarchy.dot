@@ -1,0 +1,20 @@
+// https://fsteeg.wordpress.com/2006/11/17/uml-class-diagrams-with-graphviz/
+digraph hierarchy {
+  size="5,5";
+  node[shape=record,style=filled,fillcolor=gray95];
+  edge[dir=back, arrowtail=empty];
+
+  AbstractSuffixTree[label = "{AbstractSuffixTree|+ text\n+ root|...}"];
+  SimpleSuffixTree[label = "{SimpleSuffixTree|...| + constructTree()\l...}"];
+  CompactSuffixTree[label = "{CompactSuffixTree|...| + compactNodes()\l...}"];
+  SuffixTreeNode[label = "{SuffixTreeNode|...|+ addSuffix(...)\l...}"];
+  SuffixTreeEdge[label = "{SuffixTreeEdge|...|+ compactLabel(...)\l...}"];
+
+  AbstractSuffixTree->SimpleSuffixTree;
+  AbstractSuffixTree->CompactSuffixTree;
+  SuffixTreeNode->SuffixTreeNode[constraint=false, arrowtail=odiamond];
+  SuffixTreeNode->SuffixTreeEdge[arrowtail=odiamond];
+
+  CompactSuffixTree->SimpleSuffixTree[constraint=false, arrowtail=odiamond];
+  AbstractSuffixTree->SuffixTreeNode[constraint=false, arrowtail=odiamond];
+}
