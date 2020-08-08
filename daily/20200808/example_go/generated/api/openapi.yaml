@@ -1,0 +1,37 @@
+openapi: 3.0.2
+info:
+  description: httpbin
+  title: httpbin
+  version: 1.0.0
+servers:
+- url: https://httpbin.org
+paths:
+  /headers:
+    get:
+      operationId: getHeaders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: pet response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
