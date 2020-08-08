@@ -1,3 +1,33 @@
+## どこまでできるんだろう？
+
+- go-vcrは単体のrequest/responseだけが対象
+- 複数のrequestにも対応したい
+
+こういうケースは無理
+
+1. GET /x
+2. PATCH /x
+3. GET /x
+
+1つ目と3つ目は同じパラメーターで別のrequest。
+タグが埋め込めないとダメ。つまりheaderかquery parameterでタグを埋め込む。用途を。
+そもそもデータを取り直す必要がなければ良いのでは？PATCHで全体を返す。
+
+そもそもそんな機会それほどないかも？
+auto-generatedなIDをどう扱うかの方が気にしたい内容では？
+
+- request/response setという単位で利用
+- parameterを指定できる
+- responseに対するtransformもできる
+
+## go httptraceをリニューアルしたくない？
+
+- net/http/httptraceを使う方法も
+- 200以外も取得できる様に
+- 最終的に、harか何かで保存
+- go-vcrを使い回す？
+- 保存するものを絞る
+
 ## go API clientのテストとかきれいに書く方法を整理してみても良いのでは？
 
 そもそものclient libraryを決めないと。参考になりそうな実装はなんだろう？
