@@ -23,13 +23,17 @@ func run() error {
 		return err
 	}
 	defer r.Stop()
-	r.AddFilter(func(i *cassette.Interaction) error {
-		delete(i.Request.Headers, "Authorization")
-		return nil
-	})
-	r.AddPassthrough(func(req *http.Request) bool {
-		return req.URL.Path == "/login"
-	})
+
+	// 此処は省略可能
+	{
+		r.AddFilter(func(i *cassette.Interaction) error {
+			delete(i.Request.Headers, "Authorization")
+			return nil
+		})
+		r.AddPassthrough(func(req *http.Request) bool {
+			return req.URL.Path == "/login"
+		})
+	}
 
 	client := &http.Client{
 		Transport: r,

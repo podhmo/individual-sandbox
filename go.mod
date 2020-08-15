@@ -14,6 +14,7 @@ require (
 	github.com/caarlos0/env/v6 v6.2.2 // indirect
 	github.com/craicoverflow/go-environment-variables-example v0.0.0-20190228224948-ee3fabeff275 // indirect
 	github.com/cybozu-go/well v1.10.0 // indirect
+	github.com/dnaeon/go-vcr v1.0.1 // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
@@ -29,6 +30,8 @@ require (
 	github.com/go-openapi/swag v0.19.8
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible // indirect
+	github.com/go-playground/validator/v10 v10.3.0 // indirect
+	github.com/goccy/go-json v0.1.2 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/golangci/gocyclo v0.0.0-20180528144436-0a533e8fa43d // indirect
 	github.com/golangci/revgrep v0.0.0-20180812185044-276a5c0a1039 // indirect

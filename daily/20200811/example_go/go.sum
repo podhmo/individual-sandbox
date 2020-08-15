@@ -1,0 +1,8 @@
+github.com/goccy/go-json v0.1.2 h1:idVVRZo31AhY4DNg9PE6S85JDMW3PkVjmAXn4sD5rSM=
+github.com/goccy/go-json v0.1.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/goccy/go-json v0.1.3-0.20200811100744-1d52cdb354e0 h1:ZOqBhf/7vvQRZWv1XtHZMCKFrKYwgMmt8HQx5/HlDTk=
+github.com/goccy/go-json v0.1.3-0.20200811100744-1d52cdb354e0/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/goccy/go-json v0.1.3 h1:I/ZG7AuxbGvdUl1yL0ZYYyuAzATXewPMRT3mZfqL+Us=
+github.com/goccy/go-json v0.1.3/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/goccy/go-json v0.1.5-0.20200814100051-aa8099d09ee0 h1:XPAVd+x7Gb3OymCIJNTz92EaFF2jzk2XJXcFC73z6+E=
+github.com/goccy/go-json v0.1.5-0.20200814100051-aa8099d09ee0/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=

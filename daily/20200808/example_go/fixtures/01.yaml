@@ -8,7 +8,7 @@ interactions:
     url: https://httpbin.org/headers
     method: GET
   response:
-    body: "{\n  \"headers\": {\n    \"Accept-Encoding\": \"gzip\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Go-http-client/2.0\", \n    \"X-Amzn-Trace-Id\": \"Root=1-5f2df066-c10182f2bead9a3a6fa774f0\"\n  }\n}\n"
+    body: "{\n  \"headers\": {\n    \"Accept-Encoding\": \"gzip\", \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"Go-http-client/2.0\", \n    \"X-Amzn-Trace-Id\": \"Root=1-5f36b69c-c5b786ff21a06da51a757764\"\n  }\n}\n"
     headers:
       Access-Control-Allow-Credentials:
       - "true"
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 08 Aug 2020 00:23:02 GMT
+      - Fri, 14 Aug 2020 16:06:52 GMT
       Server:
       - gunicorn/19.9.0
     status: 200 OK
