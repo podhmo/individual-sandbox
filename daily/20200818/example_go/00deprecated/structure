@@ -1,0 +1,10 @@
+.
+├── Makefile
+├── go.mod
+├── go.sum
+├── greeting
+│   └── hello.go
+├── main.go
+└── structure
+
+1 directory, 6 files
