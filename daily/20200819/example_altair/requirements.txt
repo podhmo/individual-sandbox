@@ -1,0 +1,8 @@
+altair
+vega_datasets
+notebook
+jinja2
+pdvega
+
+# for me
+nbreversible
