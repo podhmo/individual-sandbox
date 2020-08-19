@@ -1,4 +1,4 @@
-package send
+package model
 
 type User struct {
 	Name string

@@ -5,6 +5,7 @@ package send
 import (
 	"context"
 	"fmt"
+	m_model "m/model"
 	"os"
 	"path/filepath"
 	"testing"
@@ -14,6 +15,13 @@ import (
 type Suite struct {
 	t    *testing.T
 	Pool pool // please, define by hand
+}
+
+// pool: needed for tests
+type pool interface {
+	User() m_model.User
+	X() X
+	N() int
 }
 
 // renderWith: generated?
@@ -62,7 +70,9 @@ func (s *Suite) RenderNotifyCancelled(t *testing.T) {
 		ctx := context.Background()
 		user := s.Pool.User()
 		userPtr := &user
-		if err := n.NotifyCancelled(ctx, userPtr); err != nil {
+		x := s.Pool.X()
+		n := s.Pool.N()
+		if err := n.NotifyCancelled(ctx, userPtr, x, n); err != nil {
 			t.Fatal(err)
 		}
 	})
@@ -75,8 +85,4 @@ func TestRender(t *testing.T) {
 
 	t.Run("NotifyRegistered", s.RenderNotifyRegistered)
 	t.Run("NotifyCancelled", s.RenderNotifyCancelled)
-}
-
-type pool interface {
-	User() User
 }

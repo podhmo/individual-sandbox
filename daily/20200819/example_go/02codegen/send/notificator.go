@@ -3,13 +3,14 @@ package send
 import (
 	"context"
 	"fmt"
+	"m/model"
 )
 
 type Notificator struct {
 	Client Client
 }
 
-func (n *Notificator) NotifyRegistered(ctx context.Context, user User) error {
+func (n *Notificator) NotifyRegistered(ctx context.Context, user model.User) error {
 	n.Client.Send(
 		ctx,
 		"#random",
@@ -19,7 +20,11 @@ registered %s
 	return nil
 }
 
-func (n *Notificator) NotifyCancelled(ctx context.Context, user *User) error {
+type X struct {
+	Name string
+}
+
+func (n *Notificator) NotifyCancelled(ctx context.Context, user *model.User, x X, n int) error {
 	n.Client.Send(
 		ctx,
 		"#random",

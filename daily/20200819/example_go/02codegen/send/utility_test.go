@@ -2,6 +2,7 @@ package send
 
 import (
 	"context"
+	"m/model"
 	"testing"
 )
 
@@ -37,16 +38,19 @@ func AssertWithBox(t *testing.T, n *Notificator, assert func(box Box)) {
 func NewSuite(t *testing.T) (*Suite, func()) {
 	return &Suite{
 		Pool: &Pool{
-			user: &User{Name: "foo"},
+			user: &model.User{Name: "foo"},
 		},
 	}, func() {}
 }
 
 // Pool ...
 type Pool struct {
-	user *User
+	user *model.User
 }
 
-func (p *Pool) User() User {
+func (p *Pool) User() model.User {
 	return *p.user
+}
+func (p *Pool) X() X {
+	return X{Name: "X"}
 }
