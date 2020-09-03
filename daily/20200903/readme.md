@@ -20,3 +20,9 @@ $ terraform apply
 $ terraform apply -target=<target name>
 ```
 
+
+### hello world?
+
+s3などにstateを保存しておくことがお勧めされている。
+
+- https://learn.hashicorp.com/tutorials/terraform/aws-remote
