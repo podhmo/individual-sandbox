@@ -22,3 +22,11 @@ diff:
 	diff -u 00*/main.go 03*/main.go > 03.diff || :
 	diff -u 00*/main.go 04*/main.go > 04.diff || :
 	diff -u 04*/main.go 05*/main.go > 05.diff || :
+
+vet:
+	go vet ./00*/ || :
+	go vet ./01*/ || :
+	go vet ./02*/ || :
+	go vet ./03*/ || :
+	go vet ./04*/ || :
+	go vet ./05*/ || :
