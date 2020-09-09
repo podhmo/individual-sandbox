@@ -1,0 +1,8 @@
+panic: errors: target must be a non-nil pointer
+
+goroutine 1 [running]:
+errors.As(0x10ee4a0, 0xc000090180, 0x10b9100, 0x0, 0x0)
+	/opt/local/lib/go/src/errors/wrap.go:84 +0x54f
+main.main()
+	CWD/02errors-as-ng/main.go:12 +0xa5
+exit status 2

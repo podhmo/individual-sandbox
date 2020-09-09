@@ -1,0 +1,11 @@
+--- 04errors-as-ok/main.go	2020-09-09 14:48:45.000000000 +0900
++++ 05errors-as-ng/main.go	2020-09-09 14:48:44.000000000 +0900
+@@ -13,7 +13,7 @@
+ func main() {
+ 	if _, err := os.Open("non-existing"); err != nil {
+ 		var pathError hasTimeout
+-		if errors.As(err, &pathError) {
++		if errors.As(err, pathError) {
+ 			fmt.Println("Failed at path:", pathError, "!!", pathError.Timeout())
+ 		} else {
+ 			fmt.Println(err)

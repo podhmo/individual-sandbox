@@ -1,0 +1,8 @@
+panic: errors: target cannot be nil
+
+goroutine 1 [running]:
+errors.As(0x10ee4e0, 0xc000090180, 0x0, 0x0, 0x0)
+	/opt/local/lib/go/src/errors/wrap.go:79 +0x5f5
+main.main()
+	CWD/05errors-as-ng/main.go:16 +0x98
+exit status 2

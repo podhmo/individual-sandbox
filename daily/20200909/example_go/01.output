@@ -1,0 +1,8 @@
+panic: errors: *target must be interface or implement error
+
+goroutine 1 [running]:
+errors.As(0x10ee4c0, 0xc000090180, 0x10b9120, 0xc0000901b0, 0x0)
+	/opt/local/lib/go/src/errors/wrap.go:87 +0x533
+main.main()
+	CWD/01errors-as-ng/main.go:12 +0xc5
+exit status 2

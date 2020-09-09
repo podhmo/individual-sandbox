@@ -1,0 +1,23 @@
+--- 00errors-as-ok/main.go	2020-09-09 14:35:45.000000000 +0900
++++ 03errors-as-ng/main.go	2020-09-09 14:25:06.000000000 +0900
+@@ -6,11 +6,18 @@
+ 	"os"
+ )
+ 
++type error struct {
++}
++
++func (e error) Error() string {
++	return "me"
++}
++
+ func main() {
+ 	if _, err := os.Open("non-existing"); err != nil {
+-		var pathError *os.PathError
++		var pathError *error
+ 		if errors.As(err, &pathError) {
+-			fmt.Println("Failed at path:", pathError.Path)
++			fmt.Println("Failed at path:", pathError.Error())
+ 		} else {
+ 			fmt.Println(err)
+ 		}
