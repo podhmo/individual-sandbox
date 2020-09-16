@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"fmt"
 	"m/store"
 	"net/http"
 
@@ -54,5 +55,19 @@ func NewServer() http.Handler {
 		render.Status(r, 201)
 		render.JSON(w, r, &item)
 	})
+
+	// default 404 handler
+	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
+		render.Status(r, 404)
+		render.JSON(w, r, map[string]interface{}{
+			"method":  r.Method,
+			"path":    r.URL.RequestURI(),
+			"query":   r.URL.RawQuery,
+			"code":    "not found",
+			"message": fmt.Sprintf("%s %s is not found", r.Method, r.URL.RequestURI()),
+		})
+	})
+
+	// TODO unauthorized
 	return r
 }
