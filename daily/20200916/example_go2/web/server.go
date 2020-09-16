@@ -3,6 +3,7 @@ package web
 import (
 	"encoding/json"
 	"fmt"
+	"m/config"
 	"m/store"
 	"net/http"
 
@@ -10,9 +11,22 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/httplog"
 	"github.com/go-chi/render"
+	"github.com/rs/zerolog"
 )
 
-func NewServer() http.Handler {
+type Config struct {
+	config.Config
+}
+
+func (c *Config) NewLogger() zerolog.Logger {
+	return httplog.NewLogger(c.Log.Name, httplog.Options{
+		JSON: c.Log.JSON,
+	})
+}
+
+func NewServerFromConfig(cfg config.Config) http.Handler {
+	c := &Config{Config: cfg}
+
 	// Router
 	r := chi.NewRouter()
 	s := store.NewTodoStore()
@@ -22,10 +36,7 @@ func NewServer() http.Handler {
 	// r.Use(middleware.RealIP)
 
 	// Logger (TODO: customize colorful output)
-	name := "app"
-	logger := httplog.NewLogger(name, httplog.Options{
-		JSON: true,
-	})
+	logger := c.NewLogger()
 	r.Use(httplog.RequestLogger(logger))
 
 	r.Use(middleware.Heartbeat("/ping"))
