@@ -2,17 +2,18 @@ package store
 
 import (
 	"context"
+	"m/store/entity"
 	"reflect"
 	"testing"
 )
 
 func TestTodo(t *testing.T) {
 	t.Run("empty list", func(t *testing.T) {
-		var want []*Todo
+		var want []*entity.Todo
 
 		s := NewTodoStore()
 		ctx := context.Background()
-		var got []*Todo
+		var got []*entity.Todo
 		if err := s.List(ctx, &got); err != nil {
 			t.Fatalf("! %+v", err)
 		}
@@ -23,17 +24,17 @@ func TestTodo(t *testing.T) {
 	})
 
 	t.Run("add", func(t *testing.T) {
-		todo := &Todo{
+		todo := &entity.Todo{
 			Title: "Go to bed",
 		}
-		want := []*Todo{todo}
+		want := []*entity.Todo{todo}
 
 		s := NewTodoStore()
 		ctx := context.Background()
 		if err := s.Add(ctx, todo); err != nil {
 			t.Fatalf("! %+v", err)
 		}
-		var got []*Todo
+		var got []*entity.Todo
 		if err := s.List(ctx, &got); err != nil {
 			t.Fatalf("! %+v", err)
 		}

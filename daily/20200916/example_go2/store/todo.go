@@ -1,21 +1,19 @@
 package store
 
-import "context"
-
-type Todo struct {
-	Title string `json:"title"`
-	Done  bool   `json:"done"`
-}
+import (
+	"context"
+	"m/store/entity"
+)
 
 type TodoStore struct {
-	items []*Todo
+	items []*entity.Todo
 }
 
-func (s *TodoStore) Add(ctx context.Context, item *Todo) error {
+func (s *TodoStore) Add(ctx context.Context, item *entity.Todo) error {
 	s.items = append(s.items, item)
 	return nil
 }
-func (s *TodoStore) List(ctx context.Context, r *[]*Todo) error {
+func (s *TodoStore) List(ctx context.Context, r *[]*entity.Todo) error {
 	*r = s.items
 	return nil
 }
