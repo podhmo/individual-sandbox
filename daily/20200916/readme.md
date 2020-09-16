@@ -1,3 +1,19 @@
+## go web api
+
+- logger
+- panic recovery
+- 500 response
+- 404 response
+- 400 response
+- handling dependencies
+- application error
+- handling error by default error handler
+- when error, verbose output only console stream, on error
+- handling config (some CLI)
+- describing api response
+- handling notification
+- testing
+
 ## make
 
 - https://qiita.com/zawawahoge/items/4b15af9cc556ae10c737
