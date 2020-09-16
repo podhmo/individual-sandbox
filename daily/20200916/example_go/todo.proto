@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = ".;todorpc";
+
+package todorpc;
+
+import "google/protobuf/empty.proto";
+
+message Todo {
+  string title = 1;
+  bool done = 2;
+}
+message TodoList { repeated Todo todos = 1; }
+
+
+service TodoBoard {
+  rpc Add (Todo) returns (google.protobuf.Empty) {}
+  rpc List (google.protobuf.Empty) returns (TodoList) {}
+}
+
+
