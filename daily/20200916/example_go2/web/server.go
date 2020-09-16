@@ -14,10 +14,14 @@ import (
 	"github.com/go-chi/render"
 )
 
-func NewServerFromConfig(c config.Config) http.Handler {
+type Server struct {
+	chi.Router
+}
+
+func NewServerFromConfig(c config.Config) *Server {
 	return NewServer(&setup.Setup{Config: c})
 }
-func NewServer(s *setup.Setup) http.Handler {
+func NewServer(s *setup.Setup) *Server {
 	s.Finalize()
 	store := s.Store()
 
@@ -89,5 +93,5 @@ func NewServer(s *setup.Setup) http.Handler {
 	})
 
 	// TODO unauthorized
-	return r
+	return &Server{Router: r}
 }
