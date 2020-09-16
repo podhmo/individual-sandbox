@@ -48,6 +48,7 @@ func NewServer() http.Handler {
 		defer r.Body.Close()
 		s.Add(item)
 		w.WriteHeader(http.StatusCreated)
+		render.JSON(w, r, &item)
 	})
 	return r
 }

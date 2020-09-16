@@ -19,16 +19,20 @@ type server struct {
 	store *store.TodoStore
 }
 
-func (s *server) Add(ctx context.Context, in *todorpc.Todo) (*empty.Empty, error) {
+func (s *server) Add(ctx context.Context, in *todorpc.Todo) (*todorpc.Todo, error) {
 	if in == nil {
 		return nil, errors.New("nil")
 	}
 	log.Printf("Received:%#+v", in)
-	s.store.Add(store.Todo{
+	item := store.Todo{
 		Title: in.GetTitle(),
 		Done:  in.GetDone(),
-	})
-	return &empty.Empty{}, nil
+	}
+	s.store.Add(item)
+	return &todorpc.Todo{
+		Title: item.Title,
+		Done:  item.Done,
+	}, nil
 }
 func (s *server) List(ctx context.Context, in *empty.Empty) (*todorpc.TodoList, error) {
 	items := s.store.List()

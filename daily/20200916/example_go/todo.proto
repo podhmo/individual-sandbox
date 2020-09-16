@@ -14,7 +14,7 @@ message TodoList { repeated Todo todos = 1; }
 
 
 service TodoBoard {
-  rpc Add (Todo) returns (google.protobuf.Empty) {}
+  rpc Add (Todo) returns (Todo) {}
   rpc List (google.protobuf.Empty) returns (TodoList) {}
 }
 
