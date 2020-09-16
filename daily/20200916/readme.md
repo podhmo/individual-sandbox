@@ -41,6 +41,8 @@ func Errorf(format string, a ...interface{}) error {
 ## go web api
 
 - JSON logger
+- in testing, using logger as testing.TB
+- in debugging, the log has verbose-error but the returned response has not one
 - panic recovery
 - 500 response
 - 404 response
