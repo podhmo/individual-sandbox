@@ -8,6 +8,13 @@ run-server:
 run-client:
 	go run cmd/grpc-client/main.go
 
+web-server:
+	go run cmd/web-server/main.go
+web-client:
+	http $(PORT)/api/todos
+	echo '{"title": "Go to bed"}' | jq . |  http --json POST $(PORT)/api/todos
+	http $(PORT)/api/todos
+
 gen: SOURCE ?= todo.proto
 gen:
 	protoc $(SOURCE) \
