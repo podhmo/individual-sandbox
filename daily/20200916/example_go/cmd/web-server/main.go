@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"os"
 
-	// defined by us
-
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
@@ -35,7 +33,8 @@ func NewServer() http.Handler {
 		if items == nil {
 			items = []store.Todo{}
 		}
-		render.JSON(w, r, items)
+		// TODO: https://opensource.zalando.com/restful-api-guidelines
+		render.JSON(w, r, map[string]interface{}{"items": items})
 	})
 	r.Post("/api/todos", func(w http.ResponseWriter, r *http.Request) {
 		decoder := json.NewDecoder(r.Body)
