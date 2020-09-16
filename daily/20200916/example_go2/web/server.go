@@ -1,6 +1,7 @@
 package web
 
 import (
+	"errors"
 	"fmt"
 	"m/config"
 	"m/store"
@@ -13,10 +14,13 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/httplog"
 	"github.com/go-chi/render"
+	"github.com/rs/zerolog"
 )
 
 type Server struct {
 	Router chi.Router
+
+	Logger *zerolog.Logger
 
 	Parser         *parser.Parser
 	Store          *store.Store
@@ -57,6 +61,7 @@ func NewServer(setup *setup.Setup) *Server {
 	setup.Finalize()
 	store := setup.Store()
 	parser := setup.Parser()
+	logger := setup.Logger()
 
 	var s *Server
 	{
@@ -67,10 +72,10 @@ func NewServer(setup *setup.Setup) *Server {
 		// r.Use(middleware.RealIP)
 
 		// Logger (TODO: customize colorful output)
-		r.Use(httplog.RequestLogger(*setup.Logger()))
+		r.Use(httplog.RequestLogger(*logger))
 		// r.Use(middleware.Recoverer)
 
-		s = &Server{Router: r, Parser: parser, Store: store}
+		s = &Server{Router: r, Parser: parser, Store: store, Logger: logger}
 		s.defaultHandler = NewDefaultHandler(s)
 	}
 
@@ -92,13 +97,21 @@ func NewServer(setup *setup.Setup) *Server {
 		return s.SendObjectWithStatus(w, r, &item, 201)
 	})
 
-	s.Get("/_panic", func(w http.ResponseWriter, r *http.Request) error {
-		var n int
-		func() {
-			fmt.Println(1 / n)
-		}()
-		return nil
-	})
+	{
+		// 500 example
+		s.Get("/500", func(w http.ResponseWriter, r *http.Request) error {
+			// return fmt.Errorf("action: %w", pkgerrors.WithStack(errors.New("hmm")))
+			return fmt.Errorf("action: %w", errors.New("hmm"))
+		})
+
+		s.Get("/_panic", func(w http.ResponseWriter, r *http.Request) error {
+			var n int
+			func() {
+				fmt.Println(1 / n)
+			}()
+			return nil
+		})
+	}
 
 	{
 		// TODO: method not allowed handler

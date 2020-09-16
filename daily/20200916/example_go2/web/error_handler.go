@@ -2,6 +2,7 @@ package web
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"runtime/debug"
 
@@ -41,20 +42,34 @@ func NewDefaultHandler(s *Server) func(CustomHandler) http.HandlerFunc {
 				return
 			}
 
-			var rawErr APIError
+			var apiErr APIError
+			var innerErr error = err
 			statusCode := 500
-			message := err.Error()
-			if errors.As(err, &rawErr) {
-				statusCode = rawErr.StatusCode()
-				message = rawErr.Error() // omit unwrapped message
+
+			if errors.As(err, &apiErr) {
+				statusCode = apiErr.StatusCode()
+				innerErr = apiErr
+			}
+			for inner, ok := innerErr.(interface {
+				Unwrap() error
+			}); ok; {
+				next := inner.Unwrap()
+				if innerErr == next {
+					break
+				}
+				innerErr = next
 			}
 
 			// TODO: verbose logging on DEBUG=true
+			if statusCode == 500 {
+				// warn? error ?
+				s.Logger.Error().Str("verbose-error", fmt.Sprintf("%#+v", err)).Msgf("ERROR")
+			}
 
 			// need logging?
 			s.SendObjectWithStatus(w, r, map[string]interface{}{
 				"code":    statusCode,
-				"message": message,
+				"message": innerErr.Error(), // omit unwrapped message,
 			}, statusCode)
 		}
 	}

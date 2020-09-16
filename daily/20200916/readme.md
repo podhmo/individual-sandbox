@@ -1,3 +1,43 @@
+## go error
+
+```go
+fmt.Errorf("action: %w", pkgerrors.WithStack(errors.New("hmm")))
+```
+
+これはだめ？
+
+```
+&fmt.wrapError{msg:\"action: hmm\", err:(*errors.withStack)(0xc00000e880)}
+```
+
+hmm...。潰しちゃうじゃん。
+
+```go
+
+// Errorf formats according to a format specifier and returns the string as a
+// value that satisfies error.
+//
+// If the format specifier includes a %w verb with an error operand,
+// the returned error will implement an Unwrap method returning the operand. It is
+// invalid to include more than one %w verb or to supply it with an operand
+// that does not implement the error interface. The %w verb is otherwise
+// a synonym for %v.
+func Errorf(format string, a ...interface{}) error {
+	p := newPrinter()
+	p.wrapErrs = true
+	p.doPrintf(format, a)
+	s := string(p.buf)
+	var err error
+	if p.wrappedErr == nil {
+		err = errors.New(s)
+	} else {
+		err = &wrapError{s, p.wrappedErr}
+	}
+	p.free()
+	return err
+}
+```
+
 ## go web api
 
 - JSON logger
