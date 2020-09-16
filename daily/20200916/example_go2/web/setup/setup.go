@@ -3,6 +3,7 @@ package setup
 import (
 	"m/config"
 	"m/store"
+	"m/web/parser"
 
 	"github.com/go-chi/httplog"
 	"github.com/rs/zerolog"
@@ -12,7 +13,9 @@ type Setup struct {
 	config.Config
 
 	logger *zerolog.Logger
+
 	store  *store.Store
+	parser *parser.Parser
 }
 
 func (s *Setup) Logger() *zerolog.Logger {
@@ -32,7 +35,15 @@ func (s *Setup) Store() *store.Store {
 	return s.store
 }
 
+func (s *Setup) Parser() *parser.Parser {
+	if s.parser == nil {
+		s.parser = parser.New()
+	}
+	return s.parser
+}
+
 func (s *Setup) Finalize() {
 	s.Logger()
 	s.Store()
+	s.Parser()
 }

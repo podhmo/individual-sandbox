@@ -1,10 +1,10 @@
 package web
 
 import (
-	"encoding/json"
 	"fmt"
 	"m/config"
 	"m/store/entity"
+	"m/web/parser"
 	"m/web/setup"
 	"net/http"
 
@@ -16,6 +16,8 @@ import (
 
 type Server struct {
 	chi.Router
+
+	Parser *parser.Parser
 }
 
 func NewServerFromConfig(c config.Config) *Server {
@@ -24,6 +26,7 @@ func NewServerFromConfig(c config.Config) *Server {
 func NewServer(s *setup.Setup) *Server {
 	s.Finalize()
 	store := s.Store()
+	parser := s.Parser()
 
 	// Router
 	r := chi.NewRouter()
@@ -54,14 +57,12 @@ func NewServer(s *setup.Setup) *Server {
 		render.JSON(w, r, map[string]interface{}{"items": items})
 	})
 	r.Post("/api/todos", func(w http.ResponseWriter, r *http.Request) {
-		decoder := json.NewDecoder(r.Body)
 		var item entity.Todo
-		if err := decoder.Decode(&item); err != nil {
+		if err := parser.Todo(r.Body, &item); err != nil {
 			render.Status(r, 400)
 			render.JSON(w, r, err)
 			return
 		}
-		defer r.Body.Close()
 		if err := store.Todo.Add(r.Context(), &item); err != nil {
 			render.Status(r, 500)
 			render.JSON(w, r, map[string]interface{}{
