@@ -56,6 +56,13 @@ func NewServer() http.Handler {
 		render.JSON(w, r, &item)
 	})
 
+	r.Get("/_panic", func(w http.ResponseWriter, r *http.Request) {
+		var n int
+		func() {
+			fmt.Println(1 / n)
+		}()
+	})
+
 	// default 404 handler
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		render.Status(r, 404)
