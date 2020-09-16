@@ -3,6 +3,7 @@ package web
 import (
 	"fmt"
 	"m/config"
+	"m/store"
 	"m/store/entity"
 	"m/web/parser"
 	"m/web/setup"
@@ -15,84 +16,104 @@ import (
 )
 
 type Server struct {
-	chi.Router
+	Router chi.Router
 
-	Parser *parser.Parser
+	Parser         *parser.Parser
+	Store          *store.Store
+	defaultHandler func(CustomHandler) http.HandlerFunc
+}
+
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	s.Router.ServeHTTP(w, r)
+}
+func (s *Server) Get(path string, handler CustomHandler) {
+	s.Router.Get(path, s.defaultHandler(handler))
+}
+func (s *Server) Post(path string, handler CustomHandler) {
+	s.Router.Post(path, s.defaultHandler(handler))
+}
+
+func (s *Server) SendObject(w http.ResponseWriter, r *http.Request, ob interface{}) error {
+	render.JSON(w, r, ob)
+	return nil
+}
+func (s *Server) SendObjectWithStatus(w http.ResponseWriter, r *http.Request, ob interface{}, statusCode int) error {
+	render.JSON(w, r, ob)
+	return nil
+}
+func (s *Server) SendArray(w http.ResponseWriter, r *http.Request, items interface{}) error {
+	if items == nil {
+		items = []bool{} // zero length array
+	}
+	// TODO: https://opensource.zalando.com/restful-api-guidelines
+	render.JSON(w, r, map[string]interface{}{"items": items})
+	return nil
 }
 
 func NewServerFromConfig(c config.Config) *Server {
 	return NewServer(&setup.Setup{Config: c})
 }
-func NewServer(s *setup.Setup) *Server {
-	s.Finalize()
-	store := s.Store()
-	parser := s.Parser()
+func NewServer(setup *setup.Setup) *Server {
+	setup.Finalize()
+	store := setup.Store()
+	parser := setup.Parser()
 
-	// Router
-	r := chi.NewRouter()
+	var s *Server
+	{
+		// Router
+		r := chi.NewRouter()
+		// A good base middleware stack
+		r.Use(middleware.RequestID)
+		// r.Use(middleware.RealIP)
 
-	// A good base middleware stack
-	r.Use(middleware.RequestID)
-	// r.Use(middleware.RealIP)
+		// Logger (TODO: customize colorful output)
+		r.Use(httplog.RequestLogger(*setup.Logger()))
+		// r.Use(middleware.Recoverer)
 
-	// Logger (TODO: customize colorful output)
-	r.Use(httplog.RequestLogger(*s.Logger()))
+		s = &Server{Router: r, Parser: parser, Store: store}
+		s.defaultHandler = NewDefaultHandler(s)
+	}
 
-	r.Use(middleware.Heartbeat("/ping"))
-	r.Use(middleware.Recoverer)
-
-	r.Get("/api/todos", func(w http.ResponseWriter, r *http.Request) {
+	s.Get("/api/todos", func(w http.ResponseWriter, r *http.Request) error {
 		var items []*entity.Todo
 		if err := store.Todo.List(r.Context(), &items); err != nil {
-			render.Status(r, 500)
-			render.JSON(w, r, map[string]interface{}{
-				"message": err,
-			})
-			return
+			return fmt.Errorf("store: %w", err)
 		}
-		if items == nil {
-			items = []*entity.Todo{}
-		}
-		// TODO: https://opensource.zalando.com/restful-api-guidelines
-		render.JSON(w, r, map[string]interface{}{"items": items})
+		return s.SendArray(w, r, items)
 	})
-	r.Post("/api/todos", func(w http.ResponseWriter, r *http.Request) {
+	s.Post("/api/todos", func(w http.ResponseWriter, r *http.Request) error {
 		var item entity.Todo
 		if err := parser.Todo(r.Body, &item); err != nil {
-			render.Status(r, 400)
-			render.JSON(w, r, err)
-			return
+			return fmt.Errorf("parse: %w", err)
 		}
 		if err := store.Todo.Add(r.Context(), &item); err != nil {
-			render.Status(r, 500)
-			render.JSON(w, r, map[string]interface{}{
-				"message": err,
-			})
-			return
+			return fmt.Errorf("store: %w", err)
 		}
-		render.Status(r, 201)
-		render.JSON(w, r, &item)
+		return s.SendObjectWithStatus(w, r, &item, 201)
 	})
 
-	r.Get("/_panic", func(w http.ResponseWriter, r *http.Request) {
+	s.Get("/_panic", func(w http.ResponseWriter, r *http.Request) error {
 		var n int
 		func() {
 			fmt.Println(1 / n)
 		}()
+		return nil
 	})
 
-	// default 404 handler
-	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
-		render.Status(r, 404)
-		render.JSON(w, r, map[string]interface{}{
-			"method":  r.Method,
-			"path":    r.URL.RequestURI(),
-			"query":   r.URL.RawQuery,
-			"code":    "not found",
-			"message": fmt.Sprintf("%s %s is not found", r.Method, r.URL.RequestURI()),
+	{
+		// TODO: method not allowed handler
+		// default 404 handler
+		s.Router.NotFound(func(w http.ResponseWriter, r *http.Request) {
+			s.SendObjectWithStatus(w, r, map[string]interface{}{
+				"method":  r.Method,
+				"path":    r.URL.RequestURI(),
+				"query":   r.URL.RawQuery,
+				"code":    "not found",
+				"message": fmt.Sprintf("%s %s is not found", r.Method, r.URL.RequestURI()),
+			}, 404)
 		})
-	})
 
-	// TODO unauthorized
-	return &Server{Router: r}
+		// TODO unauthorized
+	}
+	return s
 }
