@@ -1,6 +1,6 @@
 ## go web api
 
-- logger
+- JSON logger
 - panic recovery
 - 500 response
 - 404 response
@@ -13,6 +13,7 @@
 - describing api response
 - handling notification
 - testing
+- health check
 
 ## make
 

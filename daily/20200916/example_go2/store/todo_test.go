@@ -30,7 +30,7 @@ func TestTodo(t *testing.T) {
 
 		s := NewTodoStore()
 		ctx := context.Background()
-		if err := s.Add(ctx, &todo); err != nil {
+		if err := s.Add(ctx, todo); err != nil {
 			t.Fatalf("! %+v", err)
 		}
 		var got []*Todo

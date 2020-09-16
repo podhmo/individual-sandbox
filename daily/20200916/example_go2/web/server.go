@@ -8,17 +8,27 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/httplog"
 	"github.com/go-chi/render"
 )
 
 func NewServer() http.Handler {
+	// Router
 	r := chi.NewRouter()
 	s := store.NewTodoStore()
 
 	// A good base middleware stack
 	r.Use(middleware.RequestID)
 	// r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
+
+	// Logger (TODO: customize colorful output)
+	name := "app"
+	logger := httplog.NewLogger(name, httplog.Options{
+		JSON: true,
+	})
+	r.Use(httplog.RequestLogger(logger))
+
+	r.Use(middleware.Heartbeat("/ping"))
 	r.Use(middleware.Recoverer)
 
 	r.Get("/api/todos", func(w http.ResponseWriter, r *http.Request) {
