@@ -1,0 +1,8 @@
+2020/09/19 08:38:24 ! on f: on g: hmm
+2020/09/19 08:38:24 !!on f:
+    main.f
+        ./03errors/main03.go:15
+  - on g:
+    main.g
+        ./03errors/main03.go:18
+  - hmm

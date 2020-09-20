@@ -42,6 +42,7 @@ func (s *Server) SendObject(w http.ResponseWriter, r *http.Request, ob interface
 	return nil
 }
 func (s *Server) SendObjectWithStatus(w http.ResponseWriter, r *http.Request, ob interface{}, statusCode int) error {
+	render.Status(r, statusCode)
 	render.JSON(w, r, ob)
 	return nil
 }

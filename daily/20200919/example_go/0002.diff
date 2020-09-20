@@ -1,0 +1,11 @@
+--- 00errors/main00.go	2020-09-19 08:06:59.000000000 +0900
++++ 02errors/main02.go	2020-09-19 08:13:19.000000000 +0900
+@@ -12,7 +12,7 @@
+ 	log.Printf("!!%+v", f())
+ }
+ func f() error {
+-	return errors.WithMessage(g(), "on f")
++	return fmt.Errorf("on f: %w", g())
+ }
+ func g() error {
+ 	return errors.Wrap(h(), "on g")

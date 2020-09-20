@@ -1,0 +1,205 @@
+## go もう少し考える
+
+本当にminimumな状態から考えてみるのが正しい気がする。
+
+- todolist
+
+どういうuiがあるかということを考える。
+
+- cli cmd
+- interactive shell
+- web api
+
+interactive shell的なものを何も考えずに実装してみる。
+
+./example_architecture/00minimum
+
+### 追記
+
+何が困るの？
+
+- testが書けない
+- 他のuiを利用できない
+
+どういう機能があるの？
+
+- ui
+
+  - interactive shell
+  - parser
+  - output
+  - error handler
+- controllers
+- interactor
+- router (command dispatcher)
+- commands
+
+  - list
+  - add
+  - done
+  - help
+- store
+  - save()
+  - load()
+  - list()
+  - update()
+
+## go clean architecture?
+
+覗いてみるか。
+
+- https://github.com/Le0tk0k/go-rest-api
+
+
+```console
+$ tree -d
+.
+├── docker
+│   ├── api
+│   └── mysql
+│       └── db
+├── domain
+├── infrastructure
+├── interfaces
+│   ├── controllers
+│   └── database
+└── usecase
+
+10 directories
+```
+
+- dockerディレクトリって何者？
+- domain,infrastructure,interface,usecase
+- main.goはどこ？
+
+### dockerディレクトリって何者?
+
+- Dockerfile置き場っぽい。
+- volume用の場所も兼ねている？
+
+## domain,infrastructure,interface,usecase
+
+mainから覗いていくと以下の様な感じ。
+
+```
+main
+  infrastructure
+```
+
+めんどくさいしimportを覗くか。
+
+```console
+$ xxx() { go list -f "{{if not .Standard}}{{.Imports}}{{end}}" $1 | tr " " "\n" | sed 's/^\[//; s/\]$//'; }
+$ xxx2() { xxx $1 | grep Le0tk0k; }
+
+$ xxx2 .
+github.com/Le0tk0k/go-rest-api/infrastructure
+
+$ xxx2 ./infrastructure/
+github.com/Le0tk0k/go-rest-api/interfaces/controllers
+github.com/Le0tk0k/go-rest-api/interfaces/database
+
+
+$ xxx2 ./interfaces/controllers
+github.com/Le0tk0k/go-rest-api/domain
+github.com/Le0tk0k/go-rest-api/interfaces/database
+github.com/Le0tk0k/go-rest-api/usecase
+
+$ xxx2 ./domain
+
+$ xxx2 ./usecase
+github.com/Le0tk0k/go-rest-api/domain
+```
+
+んー。本体はdomain?
+
+```
+main
+  infrastructure
+    interfaces/controllers
+      domain #=0
+      interfaces/database #=1
+        domain #=0
+      usecase
+        domain #=0
+    interfaces/database #=1
+      domain #=0
+```
+
+### web側を担っているのは何？
+
+```console
+$ git grep -l echo
+README.md
+go.mod
+go.sum
+infrastructure/router.go
+```
+
+infrastructure/router.goか。んー。
+portに当たるものって何？
+
+CLIだけ作ろうとしたときには何をimportすれば良いんだろう？
+webに依存したくないときに、達成できなくない？
+infrastructureにそのまま全部だと全部が全部importされてしまわない？
+
+sqlhandler.goはnamespace的な概念がなくて良いのか？
+
+### interfaces/controllerは？
+
+うーん。機能としてはきらいじゃないけど名前が微妙じゃない？いっその事intractorで良いのでは？
+実装は嫌いではない。
+
+```
+type UserController struct {
+	Interactor usecase.UserInteractor
+}
+
+func NewUserController(sqlHandler database.SqlHandler) *UserController {
+	return &UserController{
+		Interactor: usecase.UserInteractor{
+			UserRepository: &database.UserRepository{
+				SqlHandler: sqlHandler,
+			},
+		},
+	}
+}
+
+func (controller *UserController) CreateUser(c Context) (err error) {
+	u := domain.User{}
+	c.Bind(&u)
+	user, err := controller.Interactor.Add(u)
+
+	if err != nil {
+		c.JSON(500, NewError(err))
+		return
+	}
+	c.JSON(201, user)
+	return
+}
+```
+
+primitiveなobjectはdomainでそれは理に叶っていそう。
+
+### usecaseとは？
+
+usecaseの中にinteractorとrepositoryを入れちゃうのか。
+build時の依存のことを考えることってないのかな？
+まぁでもinteractorとrepositoryがここにあってもありといえばありか。
+interactorに渡されるrepositoryはinterfaceなのか。。storeとかそういう名前のほうが好き。
+
+interactorが保持するinterfaceの実装自体は、interfaces/databaseのところ。
+うーん、interfacesではなくimplementsくらいのほうが良いのでは？ (implementation?)
+（まぁclean architectureがinterfacesだから）
+
+### main.goはどこ？
+
+./server.go っぽい。何かdocker-compose経由で起動する模様。
+
+やっていることはこれだけ
+
+```go
+infrastructure.Init()
+```
+
+環境変数やconfig fileのhandlingはどこでやるんだろう？

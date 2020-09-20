@@ -1,0 +1,14 @@
+2020/09/19 08:07:00 ! on f: on g: hmm
+2020/09/19 08:07:00 !!hmm
+on g
+main.g
+	./00errors/main00.go:18
+main.f
+	./00errors/main00.go:15
+main.main
+	./00errors/main00.go:12
+runtime.main
+	/opt/local/lib/go/src/runtime/proc.go:204
+runtime.goexit
+	/opt/local/lib/go/src/runtime/asm_amd64.s:1374
+on f
