@@ -38,6 +38,8 @@ func Errorf(format string, a ...interface{}) error {
 }
 ```
 
+- https://stackoverflow.com/questions/57945730/stack-trace-and-golang-errors-unwrap
+
 ## go web api
 
 - JSON logger
