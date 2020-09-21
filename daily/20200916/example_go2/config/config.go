@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 type Config struct {
@@ -32,11 +33,14 @@ func New() Config {
 		name = "app"
 	}
 
+	nojson, _ := strconv.ParseBool(os.Getenv("NOJSON"))
+	usejson := !nojson
+
 	return Config{
 		Port: port,
 		Log: LogConfig{
 			Name: name,
-			JSON: true,
+			JSON: usejson,
 		},
 	}
 }

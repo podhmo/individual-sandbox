@@ -1,5 +1,9 @@
 package store
 
+type StoreFactory interface {
+	NewStore() (*Store, error)
+}
+
 type Store struct {
 	Todo *TodoStore
 }

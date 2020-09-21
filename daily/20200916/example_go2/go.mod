@@ -8,4 +8,5 @@ require (
 	github.com/go-chi/render v1.0.1
 	github.com/rs/zerolog v1.18.1-0.20200514152719-663cbb4c8469
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
+	golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7
 )

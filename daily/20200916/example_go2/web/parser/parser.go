@@ -2,9 +2,11 @@ package parser
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"m/store/entity"
+	"strconv"
+
+	"golang.org/x/xerrors"
 )
 
 func New() *Parser {
@@ -13,6 +15,16 @@ func New() *Parser {
 
 type Parser struct {
 	// if needed, see config
+}
+
+func (p *Parser) Int64(s string, n *int64) error {
+	v, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		// TODO: 400 error
+		return xerrors.Errorf("parse: %w", err)
+	}
+	*n = v
+	return nil
 }
 
 func (p *Parser) Todo(r io.Reader, ob *entity.Todo) (err error) {
@@ -28,7 +40,7 @@ func (p *Parser) Todo(r io.Reader, ob *entity.Todo) (err error) {
 
 	err = decoder.Decode(ob)
 	if err != nil {
-		return fmt.Errorf("parse: %w", err)
+		return xerrors.Errorf("parse: %w", err)
 	}
 	return nil
 }

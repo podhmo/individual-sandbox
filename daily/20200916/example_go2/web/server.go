@@ -1,58 +1,38 @@
 package web
 
 import (
-	"errors"
 	"fmt"
 	"m/config"
-	"m/store"
 	"m/store/entity"
-	"m/web/parser"
 	"m/web/setup"
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/httplog"
-	"github.com/go-chi/render"
 	"github.com/rs/zerolog"
 )
 
 type Server struct {
 	Router chi.Router
-
 	Logger *zerolog.Logger
 
-	Parser         *parser.Parser
-	Store          *store.Store
+	setup *setup.Setup
+
 	defaultHandler func(CustomHandler) http.HandlerFunc
 }
 
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.Router.ServeHTTP(w, r)
 }
+
 func (s *Server) Get(path string, handler CustomHandler) {
 	s.Router.Get(path, s.defaultHandler(handler))
 }
 func (s *Server) Post(path string, handler CustomHandler) {
 	s.Router.Post(path, s.defaultHandler(handler))
 }
-
-func (s *Server) SendObject(w http.ResponseWriter, r *http.Request, ob interface{}) error {
-	render.JSON(w, r, ob)
-	return nil
-}
-func (s *Server) SendObjectWithStatus(w http.ResponseWriter, r *http.Request, ob interface{}, statusCode int) error {
-	render.Status(r, statusCode)
-	render.JSON(w, r, ob)
-	return nil
-}
-func (s *Server) SendArray(w http.ResponseWriter, r *http.Request, items interface{}) error {
-	if items == nil {
-		items = []bool{} // zero length array
-	}
-	// TODO: https://opensource.zalando.com/restful-api-guidelines
-	render.JSON(w, r, map[string]interface{}{"items": items})
-	return nil
+func (s *Server) Patch(path string, handler CustomHandler) {
+	s.Router.Patch(path, s.defaultHandler(handler))
 }
 
 func NewServerFromConfig(c config.Config) *Server {
@@ -60,59 +40,77 @@ func NewServerFromConfig(c config.Config) *Server {
 }
 func NewServer(setup *setup.Setup) *Server {
 	setup.Finalize()
-	store := setup.Store()
 	parser := setup.Parser()
+	_ = parser
 	logger := setup.Logger()
 
 	var s *Server
 	{
 		// Router
 		r := chi.NewRouter()
-		// A good base middleware stack
-		r.Use(middleware.RequestID)
-		// r.Use(middleware.RealIP)
 
+		// r.Use(middleware.RealIP)
 		// Logger (TODO: customize colorful output)
 		r.Use(httplog.RequestLogger(*logger))
 		// r.Use(middleware.Recoverer)
 
-		s = &Server{Router: r, Parser: parser, Store: store, Logger: logger}
+		s = &Server{Router: r, setup: setup, Logger: logger}
 		s.defaultHandler = NewDefaultHandler(s)
 	}
 
-	s.Get("/api/todos", func(w http.ResponseWriter, r *http.Request) error {
-		var items []*entity.Todo
-		if err := store.Todo.List(r.Context(), &items); err != nil {
-			return fmt.Errorf("store: %w", err)
+	s.Get("/api/todos", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+		var items []entity.Todo
+
+		u := s.ResolveTodo(as)
+		if err := u.ListTodo(r.Context(), &items); err != nil {
+			return fmt.Errorf("query: %w", err)
 		}
-		return s.SendArray(w, r, items)
+		return s.SendArray(w, r, items, len(items))
 	})
-	s.Post("/api/todos", func(w http.ResponseWriter, r *http.Request) error {
+
+	s.Post("/api/todos", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
 		var item entity.Todo
+
+		u := s.ResolveTodo(as)
 		if err := parser.Todo(r.Body, &item); err != nil {
 			return fmt.Errorf("parse: %w", err)
 		}
-		if err := store.Todo.Add(r.Context(), &item); err != nil {
-			return fmt.Errorf("store: %w", err)
+		if err := u.AddTodo(r.Context(), item); err != nil {
+			return fmt.Errorf("command: %w", err)
 		}
 		return s.SendObjectWithStatus(w, r, &item, 201)
 	})
 
-	{
-		// 500 example
-		s.Get("/500", func(w http.ResponseWriter, r *http.Request) error {
-			// return fmt.Errorf("action: %w", pkgerrors.WithStack(errors.New("hmm")))
-			return fmt.Errorf("action: %w", errors.New("hmm"))
-		})
+	s.Patch("/api/todos/{no}", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+		var items []entity.Todo
+		var no int64
 
-		s.Get("/_panic", func(w http.ResponseWriter, r *http.Request) error {
-			var n int
-			func() {
-				fmt.Println(1 / n)
-			}()
-			return nil
-		})
-	}
+		u := s.ResolveTodo(as)
+		if err := parser.Int64(chi.URLParam(r, "no"), &no); err != nil {
+			return err
+		}
+
+		if err := u.DoneTodo(r.Context(), &items, int(no)); err != nil {
+			return fmt.Errorf("command: %w", err)
+		}
+		return s.SendArray(w, r, &items, len(items))
+	})
+
+	// {
+	// 	// 500 example
+	// 	s.Get("/500", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+	// 		// return fmt.Errorf("action: %w", pkgerrors.WithStack(errors.New("hmm")))
+	// 		return fmt.Errorf("action: %w", errors.New("hmm"))
+	// 	})
+
+	// 	s.Get("/_panic", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+	// 		var n int
+	// 		func() {
+	// 			fmt.Println(1 / n)
+	// 		}()
+	// 		return nil
+	// 	})
+	// }
 
 	{
 		// TODO: method not allowed handler

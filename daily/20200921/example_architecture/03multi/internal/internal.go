@@ -154,8 +154,6 @@ func (ir *Interactor) Done(n int) ([]Todo, error) {
 			item.Done = true
 			found = true
 			fmt.Fprintf(ir.Writer, "done: %#+v\n", store[i])
-			r[i] = item
-			break
 		}
 		r[i] = item
 	}

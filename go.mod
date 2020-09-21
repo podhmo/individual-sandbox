@@ -27,8 +27,9 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8 // indirect
-	github.com/go-chi/chi v4.0.2+incompatible
+	github.com/go-chi/chi v4.1.1+incompatible
 	github.com/go-chi/docgen v1.0.5
+	github.com/go-chi/httplog v0.1.6 // indirect
 	github.com/go-chi/render v1.0.1
 	github.com/go-critic/go-critic v0.4.3 // indirect
 	github.com/go-gorp/gorp/v3 v3.0.2 // indirect
@@ -112,6 +113,7 @@ require (
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
 	golang.org/x/tools v0.0.0-20200609164405-eb789aa7ce50
+	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	google.golang.org/protobuf v1.22.0 // indirect

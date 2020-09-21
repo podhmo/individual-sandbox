@@ -47,3 +47,7 @@ func (s *Setup) Finalize() {
 	s.Store()
 	s.Parser()
 }
+
+func (s *Setup) NewAppSession() *AppSession {
+	return &AppSession{s: s}
+}

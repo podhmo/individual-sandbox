@@ -3,6 +3,7 @@ package web
 import (
 	"errors"
 	"fmt"
+	"m/store"
 	"net/http"
 	"runtime/debug"
 
@@ -14,7 +15,15 @@ type APIError interface {
 	StatusCode() int
 }
 
-type CustomHandler func(http.ResponseWriter, *http.Request) error
+type AppSession interface {
+	store.StoreFactory
+}
+
+type CustomHandler func(
+	AppSession,
+	http.ResponseWriter,
+	*http.Request,
+) error
 
 func NewDefaultHandler(s *Server) func(CustomHandler) http.HandlerFunc {
 	// TODO: stop closure
@@ -37,7 +46,13 @@ func NewDefaultHandler(s *Server) func(CustomHandler) http.HandlerFunc {
 				}
 			}()
 
-			err := handle(w, r)
+			as := s.setup.NewAppSession()
+			err := handle(as, w, r)
+			if closeErr := as.Close(); err != nil {
+				s.Logger.Error().Str("verbose-error", fmt.Sprintf("%#+v", closeErr)).Msgf("ERROR")
+
+			}
+
 			if err == nil {
 				return
 			}

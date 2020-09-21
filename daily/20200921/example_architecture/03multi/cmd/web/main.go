@@ -62,6 +62,10 @@ func run(
 		Writer: os.Stderr,
 		Store:  store,
 	}
+	// xxx: for -save
+	defer func() {
+		store = ir.Store
+	}()
 
 	r := chi.NewRouter()
 	{
@@ -114,10 +118,5 @@ func run(
 			render.JSON(w, r, map[string]interface{}{"items": items})
 		})
 	}
-
-	// xxx: for -save
-	defer func() {
-		store = ir.Store
-	}()
 	return http.ListenAndServe(fmt.Sprintf(":%d", port), r)
 }

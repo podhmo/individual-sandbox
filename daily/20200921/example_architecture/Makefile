@@ -21,3 +21,9 @@
 	go run $(shell echo 03*)/cmd/repl/main.go
 03-web:
 	go run $(shell echo 03*)/cmd/web/main.go
+
+04: STORE = $(shell echo $@*/)store.json
+04:
+	go run $(shell echo $@*/)cmd/cli/main.go \
+ -store $(STORE) \
+ list
