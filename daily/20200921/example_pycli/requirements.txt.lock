@@ -1,0 +1,6 @@
+bullet==2.2.0
+colorama==0.4.3
+commonmark==0.9.1
+Pygments==2.7.1
+rich==7.0.0
+typing-extensions==3.7.4.3

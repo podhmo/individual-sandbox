@@ -1,3 +1,45 @@
+## go interface
+
+- 同じパッケージにinterfaceを置く
+- interfaceと実装を同じパッケージに置くことで起きる問題
+- 異なるパッケージに置く (2者関係, 3者関係)
+- interfaceとデフォルト実装
+- interfaceと実装の階層
+
+
+## go db
+
+- todo list
+- user, board, lane, card
+
+## go 考えたいこと
+
+apikitとかwebkitみたいな名前でWAFを作ってみる（？）
+
+- a.1 controllers, interactorsの意義
+- a.2 custom handler and lifting
+- a.3 app session
+- a.4 client and driver pattern
+- a.5 test-log (with inject logger into context)
+- a.6 runtime openAPI doc generatoin (?)
+
+もう少し考えたいこと
+
+- b.1 fiberでの対応
+- b.2 gorpを使うように変えてみる
+- b.3 app sessionでfile baseのJSON
+- b.4 GAE対応
+- b.5 whole validation
+- b.6 sqsの消費
+- b.7 lambdaへのdeploy
+
+apikit?
+
+- errorの基底を取り出す, loggerでverbose output
+- JSON logとそれ以外の切り替え
+- test-log
+- client library with interceptor
+
 ## go もう少し考える
 
 本当にminimumな状態から考えてみるのが正しい気がする。
