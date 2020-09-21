@@ -44,6 +44,37 @@ interactive shell的なものを何も考えずに実装してみる。
   - list()
   - update()
 
+### もう少し考えてみる
+
+controller, interactorってどういうもの？
+
+`/xxx/{xId}` にはどう対応する？
+
+controllerはあくまで内部の表現に揃えるもの。そんなわけでqueryでとってきたりはしない。
+
+```go
+type XIDRef struct {
+  XID string
+}
+```
+
+例えばこういうstructに変換するということ。
+
+### nil 対応
+
+```go
+func SendArray(w http.ResponseWriter, r *http.Request, items interface{}) error {
+	if items == nil {
+		items = []bool{} // zero length array
+	}
+	// TODO: https://opensource.zalando.com/restful-api-guidelines
+	render.JSON(w, r, map[string]interface{}{"items": items})
+	return nil
+```
+
+これを許すには、untyped nilが返るようにしないとだめ。
+いっその事ここで補填は辞めるかreflectを使う？(sliceの型がわからないので無理)
+
 ## go clean architecture?
 
 覗いてみるか。

@@ -1,7 +1,6 @@
 package web
 
 import (
-	"errors"
 	"fmt"
 	"m/store"
 	"net/http"
@@ -38,11 +37,11 @@ func NewDefaultHandler(s *Server) func(CustomHandler) http.HandlerFunc {
 						middleware.PrintPrettyStack(rvr)
 					}
 
-					s.SendObjectWithStatus(w, r, map[string]interface{}{
+					s.SendObject(w, r, map[string]interface{}{
 						"panic":   true,
 						"code":    500,
 						"message": rvr,
-					}, 500)
+					}, s.WithStatusCode(500))
 				}
 			}()
 
@@ -56,36 +55,9 @@ func NewDefaultHandler(s *Server) func(CustomHandler) http.HandlerFunc {
 			if err == nil {
 				return
 			}
-
-			var apiErr APIError
-			var innerErr error = err
-			statusCode := 500
-
-			if errors.As(err, &apiErr) {
-				statusCode = apiErr.StatusCode()
-				innerErr = apiErr
+			if err := s.SendError(w, r, err); err != nil {
+				panic(err)
 			}
-			for inner, ok := innerErr.(interface {
-				Unwrap() error
-			}); ok; {
-				next := inner.Unwrap()
-				if innerErr == next {
-					break
-				}
-				innerErr = next
-			}
-
-			// TODO: verbose logging on DEBUG=true
-			if statusCode == 500 {
-				// warn? error ?
-				s.Logger.Error().Str("verbose-error", fmt.Sprintf("%#+v", err)).Msgf("ERROR")
-			}
-
-			// need logging?
-			s.SendObjectWithStatus(w, r, map[string]interface{}{
-				"code":    statusCode,
-				"message": innerErr.Error(), // omit unwrapped message,
-			}, statusCode)
 		}
 	}
 }

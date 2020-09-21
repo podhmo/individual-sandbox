@@ -1,6 +1,7 @@
 package web
 
 import (
+	"errors"
 	"fmt"
 	"m/config"
 	"m/store/entity"
@@ -10,6 +11,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/httplog"
 	"github.com/rs/zerolog"
+	"golang.org/x/xerrors"
 )
 
 type Server struct {
@@ -61,68 +63,72 @@ func NewServer(setup *setup.Setup) *Server {
 	s.Get("/api/todos", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
 		var items []entity.Todo
 
-		u := s.ResolveTodo(as)
-		if err := u.ListTodo(r.Context(), &items); err != nil {
-			return fmt.Errorf("query: %w", err)
+		u, err := s.ResolveTodo(as)
+		if err != nil {
+			return xerrors.Errorf("resolve: %w", err)
 		}
-		return s.SendArray(w, r, items, len(items))
+		if err := u.ListTodo(r.Context(), &items); err != nil {
+			return xerrors.Errorf("query: %w", err)
+		}
+		return s.SendArray(w, r, items)
 	})
 
 	s.Post("/api/todos", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
 		var item entity.Todo
 
-		u := s.ResolveTodo(as)
 		if err := parser.Todo(r.Body, &item); err != nil {
-			return fmt.Errorf("parse: %w", err)
+			return xerrors.Errorf("parse: %w", err)
+		}
+		u, err := s.ResolveTodo(as)
+		if err != nil {
+			return xerrors.Errorf("resolve: %w", err)
 		}
 		if err := u.AddTodo(r.Context(), item); err != nil {
-			return fmt.Errorf("command: %w", err)
+			return xerrors.Errorf("command: %w", err)
 		}
-		return s.SendObjectWithStatus(w, r, &item, 201)
+		return s.SendObject(w, r, &item, s.WithStatusCode(201))
 	})
 
 	s.Patch("/api/todos/{no}", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
 		var items []entity.Todo
 		var no int64
 
-		u := s.ResolveTodo(as)
-		if err := parser.Int64(chi.URLParam(r, "no"), &no); err != nil {
-			return err
+		u, err := s.ResolveTodo(as)
+		if err != nil {
+			return xerrors.Errorf("resolve: %w", err)
 		}
-
 		if err := u.DoneTodo(r.Context(), &items, int(no)); err != nil {
-			return fmt.Errorf("command: %w", err)
+			return xerrors.Errorf("command: %w", err)
 		}
-		return s.SendArray(w, r, &items, len(items))
+		return s.SendArray(w, r, &items)
 	})
 
-	// {
-	// 	// 500 example
-	// 	s.Get("/500", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
-	// 		// return fmt.Errorf("action: %w", pkgerrors.WithStack(errors.New("hmm")))
-	// 		return fmt.Errorf("action: %w", errors.New("hmm"))
-	// 	})
+	{
+		// 500 example
+		s.Get("/_500", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+			return xerrors.Errorf("action: %w", errors.New("hmm"))
+		})
 
-	// 	s.Get("/_panic", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
-	// 		var n int
-	// 		func() {
-	// 			fmt.Println(1 / n)
-	// 		}()
-	// 		return nil
-	// 	})
-	// }
+		s.Get("/_panic", func(as AppSession, w http.ResponseWriter, r *http.Request) error {
+			var n int
+			func() {
+				fmt.Println(1 / n)
+			}()
+			return nil
+		})
+	}
 
 	{
 		// TODO: method not allowed handler
 		// default 404 handler
 		s.Router.NotFound(func(w http.ResponseWriter, r *http.Request) {
-			s.SendObjectWithStatus(w, r, map[string]interface{}{
+			s.SendObject(w, r, map[string]interface{}{
 				"method":  r.Method,
 				"path":    r.URL.RequestURI(),
 				"query":   r.URL.RawQuery,
 				"code":    "not found",
 				"message": fmt.Sprintf("%s %s is not found", r.Method, r.URL.RequestURI()),
-			}, 404)
+			}, s.WithStatusCode(404))
 		})
 
 		// TODO unauthorized

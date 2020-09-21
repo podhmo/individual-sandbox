@@ -1,7 +1,15 @@
 package web
 
-import "m/usecase"
+import (
+	"m/usecase"
 
-func (s *Server) ResolveTodo(as AppSession) *usecase.Todo {
-	return &usecase.Todo{StoreFactory: as}
+	"golang.org/x/xerrors"
+)
+
+func (s *Server) ResolveTodo(as AppSession) (*usecase.Todo, error) {
+	store, err := as.NewStore()
+	if err != nil {
+		return nil, xerrors.Errorf("new store: %w", err)
+	}
+	return &usecase.Todo{Store: store}, nil
 }
