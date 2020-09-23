@@ -1,0 +1,22 @@
+<form method="post">
+  <input
+    type="range"
+    name="range"
+    min="0"
+    max="100"
+    step="1"
+    value=""
+    onchange="changeValue(event)"
+  />
+</form>
+<div class="range">
+  <output id="output" name="result">-</output>
+</div>
+
+<script>
+  function changeValue(ev){
+    const v = ev.target.value;
+    const outputEl = document.getElementById("output")
+    outputEl.value = v;
+  }
+</script>

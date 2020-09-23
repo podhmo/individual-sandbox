@@ -27,7 +27,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8 // indirect
-	github.com/go-chi/chi v4.1.1+incompatible
+	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/docgen v1.0.5
 	github.com/go-chi/httplog v0.1.6 // indirect
 	github.com/go-chi/render v1.0.1
@@ -82,6 +82,7 @@ require (
 	github.com/podhmo/go-webtest v0.4.3 // indirect
 	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
+	github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0 // indirect
 	github.com/poy/onpar v1.0.0 // indirect
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect

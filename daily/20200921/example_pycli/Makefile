@@ -75,3 +75,13 @@ export CLIKAN_HOME=.
 	clikan promote 3
 63:
 	clikan show
+
+# npm install -g diff2html-cli
+70:
+	diff -u 50*.py 51*.py > a.diff || :
+	diff2html -i file -- a.diff > a.html
+	diff2html -i file -s side -- a.diff > b.html
+
+clean:
+	rm -f a.diff
+.PHONY: clean

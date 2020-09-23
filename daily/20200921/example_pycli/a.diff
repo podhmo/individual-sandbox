@@ -1,0 +1,52 @@
+--- 50bullet_check.py	2020-09-22 05:10:44.000000000 +0900
++++ 51bullet_classic.py	2020-09-22 05:10:59.000000000 +0900
+@@ -1,36 +1,16 @@
+-from bullet import Check, keyhandler, styles
+-from bullet.charDef import NEWLINE_KEY
++from bullet import Bullet
+ 
+-
+-class MinMaxCheck(Check):
+-    def __init__(self, min_selections=0, max_selections=None, *args, **kwargs):
+-        super().__init__(*args, **kwargs)
+-        self.min_selections = min_selections
+-        self.max_selections = max_selections
+-        if max_selections is None:
+-            self.max_selections = len(self.choices)
+-
+-    @keyhandler.register(NEWLINE_KEY)
+-    def accept(self):
+-        if self.valid():
+-            return super().accept()
+-
+-    def valid(self):
+-        return (
+-            self.min_selections
+-            <= sum(1 for c in self.checked if c)
+-            <= self.max_selections
+-        )
+-
+-
+-client = MinMaxCheck(
+-    prompt="Choose 2 or 3 from the list: ",
+-    min_selections=2,
+-    max_selections=3,
++cli = Bullet(
++    prompt="\nPlease choose a fruit: ",
++    choices=["apple", "banana", "orange", "watermelon", "strawberry"],
++    indent=0,
++    align=5,
++    margin=2,
++    shift=0,
++    bullet="",
++    pad_right=5,
+     return_index=True,
+-    **styles.Example,
+-    **styles.Exam,
+ )
+-print("")
+-result = client.launch()
+-print(result)
++
++result = cli.launch()
++print("You chose:", result)

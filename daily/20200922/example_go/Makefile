@@ -15,3 +15,7 @@ export Addr ?= :44444
 # http :44444/api
 04:
 	go run $(shell echo $@*/)main.go
+
+# http :44444/500
+05:
+	go run $(shell echo $@*/)main.go

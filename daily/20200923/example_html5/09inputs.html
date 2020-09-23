@@ -1,0 +1,23 @@
+<input type="text" id="username1" name="username" required />
+
+<input type="text" id="username2" name="username" required autofocus />
+
+<input
+  type="password"
+  name="password"
+  id="password"
+  placeholder="6-20 chars, at least 1 digit, 1 uppercase and one lowercase letter"
+  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"
+  autofocus
+  required
+/>
+
+<input type="color" onchange="showColor(event)" />
+<p id="colorMe">Color Me!</p>
+
+<script>
+  function showColor(event) {
+    const colorHex = event.target.value;
+    document.getElementById("colorMe").style.color = colorHex;
+  }
+</script>
