@@ -1,3 +1,64 @@
+## go sqlのquery countなど
+
+database/sql/driver.Driverを実装してRegisterする感じっぽい？
+
+```console
+$ go doc database/sql/driver.Driver
+package driver // import "database/sql/driver"
+
+type Driver interface {
+	// Open returns a new connection to the database.
+	// The name is a string in a driver-specific format.
+	//
+	// Open may return a cached connection (one previously
+	// closed), but doing so is unnecessary; the sql package
+	// maintains a pool of idle connections for efficient re-use.
+	//
+	// The returned connection is only used by one goroutine at a
+	// time.
+	Open(name string) (Conn, error)
+}
+    Driver is the interface that must be implemented by a database driver.
+
+    Database drivers may implement DriverContext for access to contexts and to
+    parse the name only once for a pool of connections, instead of once per
+    connection.
+```
+
+ここでConnは
+
+```console
+$ go doc database/sql/driver.Conn
+package driver // import "database/sql/driver"
+
+type Conn interface {
+	// Prepare returns a prepared statement, bound to this connection.
+	Prepare(query string) (Stmt, error)
+
+	// Close invalidates and potentially stops any current
+	// prepared statements and transactions, marking this
+	// connection as no longer in use.
+	//
+	// Because the sql package maintains a free pool of
+	// connections and only calls Close when there's a surplus of
+	// idle connections, it shouldn't be necessary for drivers to
+	// do their own connection caching.
+	//
+	// Drivers must ensure all network calls made by Close
+	// do not block indefinitely (e.g. apply a timeout).
+	Close() error
+
+	// Begin starts and returns a new transaction.
+	//
+	// Deprecated: Drivers should implement ConnBeginTx instead (or additionally).
+	Begin() (Tx, error)
+}
+    Conn is a connection to a database. It is not used concurrently by multiple
+    goroutines.
+
+    Conn is assumed to be stateful.
+```
+
 ## go interface
 
 - 同じパッケージにinterfaceを置く

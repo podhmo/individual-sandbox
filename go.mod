@@ -3,6 +3,7 @@ module github.com/podhmo/individual-sandbox
 go 1.12
 
 require (
+	contrib.go.opencensus.io/integrations/ocsql v0.1.6 // indirect
 	github.com/99designs/gqlgen v0.9.3 // indirect
 	github.com/Cside/jsondiff v0.0.0-20180209072652-0e50d980b458 // indirect
 	github.com/DATA-DOG/go-sqlmock v1.4.1 // indirect
@@ -12,6 +13,7 @@ require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/arsmn/fiber-swagger v1.3.3 // indirect
+	github.com/aws/aws-lambda-go v1.19.1 // indirect
 	github.com/bombsimon/wsl/v3 v3.1.0 // indirect
 	github.com/briandowns/spinner v1.11.1 // indirect
 	github.com/caarlos0/env/v6 v6.2.2 // indirect
@@ -120,7 +122,6 @@ require (
 	google.golang.org/protobuf v1.22.0 // indirect
 	gopkg.in/ini.v1 v1.55.0 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
-	gopkg.in/yaml.v3 v3.0.0-20200506231410-2ff61e1afc86 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.0.20200730203520-2c5dee2fb55d // indirect
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
