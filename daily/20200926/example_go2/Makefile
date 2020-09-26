@@ -10,6 +10,8 @@
 	go run $(shell echo $@*)/main.go
 05: resource.db
 	go run $(shell echo $@*)/main.go
+06:
+	go run $(shell echo $@*)/main.go
 
 resource.db:
 	cat insert.sql | sqlite3 resource.db

@@ -18,6 +18,8 @@
 
 https://github.com/simukti/sqldb-logger
 
+entに対しても適用は手軽。ただgo.modが悲しい感じ。
+
 ## go go-chi permission
 
 With()の使いみちがわかったかもしれない。
