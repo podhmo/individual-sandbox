@@ -13,3 +13,9 @@ export SLACK_TOKEN ?= $(shell jq -r '.slack["api-token"]'  ~/.config/monogusa/co
 	DEBUG=1 go run $(shell echo $@*/)main.go
 05:
 	go test -v ./$(shell echo $@*/)
+06:
+	go test -v ./$(shell echo $@*/)
+06-run:
+	go run ./$(shell echo $(subst -run,,$@)*/)main.go
+07:
+	go test -v ./$(shell echo $@*/)

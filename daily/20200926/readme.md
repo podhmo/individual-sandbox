@@ -4,15 +4,127 @@
 
 - lambda + api gateway + (openAPI doc)
 - githubのissueを横断して検索するくん
-- client,driver pattern
-- go-chiのdocgenを覗いてapi docの生成について考えてみる
+- ok client,driver pattern
+- ok go-chiのdocgenを覗いてapi docの生成について考えてみる
 - permission with app session
 
   - without db
   - with db
 - 歯医者
-- ent/gorpの利用？
-- sql query log
+- ok ent/gorpの利用？
+- ok sql query log
+- apikitに欲しい物の整理
+- hanamiを読む
+
+## 試す
+
+- clientを複数
+
+  - driverという括りにすると綺麗？
+  - 本体がライブラリに依存したくない
+  - 名前がまだ不思議な感じ
+  - たぶん通知系のコードがslackという名前をつけているのが良くない
+
+- `?pretty=1`対応 (renderer)
+- parserを作ってみる (parser?)
+
+  - 変に関数を分ける必要はないのでは？ -> ない理由はrequiredなどのチェックがないため
+  - エラーの対応などのほうがだるい
+- authを考える
+
+## go apikit
+
+- log
+  - request/response log
+  - json log / text log
+  - test log
+- app session
+  - changes db -> transaction, easily (app scope -> request scope)
+  - dependencies handling, easily
+  - caching request scope component
+- custom handler
+  - application error
+  - unwrapped error (response) and verbose error (log)
+- apitest
+- (permission)
+  - authentication
+  - authorization
+  - login/logout/refresh
+  - test helper for permission
+  - session?
+  - api key
+- (pagination)
+- (format check)
+  - parse JSON
+  - parse query
+  - parse path
+  - data binding
+  - error message
+- (interactor)
+- (api doc)
+- (code generation)
+
+## format check
+
+長い型を書きたくない。
+interactorに個別の引数を並べたくない(?)
+とはいえ、いっその事fastAPIのように、、と思ったがgenericsがないので厳しそう。
+
+- entなどのようにfieldを個別に値として定義するか
+- structのfieldとtag
+
+### 思ったこと
+
+すでに存在する値にくっつけるならbind。そうでないならparse。
+値を得るのにrequestが必須という状況は避けたい？
+(parametersをどうする？, bodyをどうする？)
+
+こんなやり方もありか。。？前者で長い型名を書きたくない。
+
+```
+func List(context.Context, ListInput) ([]Item, error)
+func List(context.Context, ...ListOption) ([]Item, error)
+```
+
+bindが嬉しいのはどのような型の値が使われるか分かるからなのだけど。。
+
+```
+var ob ListInput
+c.Bind(req, &ob) // なぜこれではだめなのか？mapが返ってくるみたいなものはコレで行ける。
+
+parser.ParseListInput(reader) // methodが増えていく
+
+parser.Todo().List().ParseWhole(reader) // path含む
+parser.Todo().List().Parse(reader) // bodyのみ
+```
+
+## authentication
+
+login userはやっぱりcontextに持っていたほうが楽なのでは？
+とはいえ、入るときのことを考えるとrequestは必要なのか。
+でも、interactorはrequestに依存したくない。-> interfaceへの依存に。
+たぶん app sessionがrequest,responseを持つというのが正しそう。
+
+
+## client, driver pattern
+
+slack clientについてはできた。他の何かを気にして見る必要はある？
+
+- api client
+- job queue
+
+api clientというか複数のcontextを持ったような何かか。awsとかgoogleのapiみたいなネストしそうな何か。
+あとは、実行結果の戻り値を使いたい場合(not notificator)。
+
+あとは、call countを気にしたいみたいな話もあるのか。それでfactoryをつくるみたいな
+これは別の話になるのでは？
+
+### api client
+
+- request assertion
+- response modification
+- register mock response
+- (可能なら、本物と通信して、自動で更新）
 
 ## go sql query log
 
@@ -27,6 +139,12 @@ paginationの他に。
 djangoなどで言うlogin_required()のdecoratorに通ずる物があるのでは？
 これをdocに連携させたい。
 
+### params
+
+go-chiのContextを利用してよいか？
+
+- URLParams
+- RouteParams
 
 ### doc
 

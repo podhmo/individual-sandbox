@@ -21,6 +21,7 @@ require (
 	github.com/cli/cli v0.7.1-0.20200429012344-d9083200504d
 	github.com/craicoverflow/go-environment-variables-example v0.0.0-20190228224948-ee3fabeff275 // indirect
 	github.com/cybozu-go/well v1.10.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dimfeld/httptreemux v5.0.1+incompatible // indirect
 	github.com/dnaeon/go-vcr v1.0.1 // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
