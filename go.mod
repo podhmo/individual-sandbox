@@ -6,7 +6,6 @@ require (
 	contrib.go.opencensus.io/integrations/ocsql v0.1.6 // indirect
 	github.com/99designs/gqlgen v0.9.3 // indirect
 	github.com/Cside/jsondiff v0.0.0-20180209072652-0e50d980b458 // indirect
-	github.com/DATA-DOG/go-sqlmock v1.4.1 // indirect
 	github.com/MakeNowJust/heredoc v1.0.0 // indirect
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/agnivade/levenshtein v1.0.2 // indirect
@@ -25,6 +24,7 @@ require (
 	github.com/dimfeld/httptreemux v5.0.1+incompatible // indirect
 	github.com/dnaeon/go-vcr v1.0.1 // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
+	github.com/facebook/ent v0.4.3 // indirect
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.4.0
@@ -51,7 +51,6 @@ require (
 	github.com/google/wire v0.3.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.7.3 // indirect
-	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
 	github.com/graphql-go/graphql v0.7.9 // indirect
 	github.com/graphql-go/handler v0.2.3 // indirect
@@ -70,11 +69,10 @@ require (
 	github.com/k1LoW/tbls v1.20.0 // indirect
 	github.com/labstack/echo/v4 v4.1.16 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
-	github.com/lib/pq v1.2.0
+	github.com/lib/pq v1.8.0
 	github.com/mattn/go-isatty v0.0.12
-	github.com/mattn/go-sqlite3 v1.11.0
+	github.com/mattn/go-sqlite3 v1.14.3
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
-	github.com/mitchellh/mapstructure v1.3.0 // indirect
 	github.com/opentracing/opentracing-go v1.1.0 // indirect
 	github.com/osamingo/jsonrpc v0.0.0-20200201080245-1cc375279e6f // indirect
 	github.com/pelletier/go-toml v1.7.0 // indirect
@@ -115,8 +113,8 @@ require (
 	goa.design/goa v2.1.2+incompatible // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
-	golang.org/x/tools v0.0.0-20200609164405-eb789aa7ce50
-	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543
+	golang.org/x/tools v0.0.0-20200904185747-39188db58858
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
 	google.golang.org/grpc v1.25.1 // indirect
 	google.golang.org/protobuf v1.22.0 // indirect
