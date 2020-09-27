@@ -22,25 +22,6 @@ func TestIt(t *testing.T) {
 	var currentT *testing.T
 	c := &http.Client{
 		Transport: TripperFunc(func(r *http.Request) (*http.Response, error) {
-			t := currentT
-
-			b, err := httputil.DumpRequest(r, true /* body */)
-			if err != nil {
-				return nil, err
-			}
-			t.Logf("request: %s", string(b))
-
-			res, err := http.DefaultTransport.RoundTrip(r)
-			if err != nil {
-				return nil, err
-			}
-
-			b, err = httputil.DumpResponse(res, true /* body */)
-			if err != nil {
-				return nil, err
-			}
-			t.Logf("response: %s", string(b))
-			return res, nil
 		}),
 		Timeout: 1 * time.Second,
 	}
