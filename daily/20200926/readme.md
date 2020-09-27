@@ -14,7 +14,18 @@
 - ok ent/gorpの利用？
 - ok sql query log
 - apikitに欲しい物の整理
-- hanamiを読む
+- ok hanamiを読む 
+
+## reqtest
+
+- 名前が良くない reqtest (requestと打ち間違える）
+- webtestと違うの？
+
+  - recorderに対応していない
+  - snapshotが地味に便利
+
+- application JSONなどに変更する
+- cookie,header,form data, json
 
 ## 試す
 
