@@ -16,6 +16,7 @@ write design https://github.com/goadesign/goa#1-design
 
 ```console
 $ goa gen m/design
-
+# 初回だけexampleを生成してscaffold
+$ goa example m/design
 ```
 
