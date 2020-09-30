@@ -5,7 +5,6 @@ import (
 	"m/shape"
 	"os"
 	"reflect"
-	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
 )
@@ -60,22 +59,14 @@ func Emit(ob interface{}) error {
 	return enc.Encode(ob)
 }
 
-func FieldName(s shape.Struct, i int) string {
-	name := s.Fields.Keys[i]
-	if v, ok := s.Tags[i].Lookup("json"); ok {
-		name = strings.SplitN(v, ",", 2)[0] // todo: omitempty, inline
-	}
-	return name
-}
-
 func Transform(s shape.Shape) interface{} {
 	switch s := s.(type) {
 	case shape.Struct:
 		schema := openapi3.NewObjectSchema()
 		for i, v := range s.Fields.Values {
 			// todo: json tag
-			name := FieldName(s, i)
-			switch v.GetKind() {
+			name := s.FieldName(i)
+			switch v.GetReflectKind() {
 			case reflect.String:
 				f := openapi3.NewStringSchema()
 				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
@@ -90,6 +81,9 @@ func Transform(s shape.Shape) interface{} {
 			}
 		}
 		return schema
+	case shape.Function:
+		// as interactor (TODO: meta tag? for specific usecase)
+		panic(s)
 	default:
 		panic(s)
 	}

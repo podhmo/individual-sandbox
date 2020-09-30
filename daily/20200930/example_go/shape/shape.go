@@ -26,7 +26,9 @@ type Shape interface {
 
 	GetName() string
 	GetPackage() string
-	GetKind() reflect.Kind
+
+	GetReflectKind() reflect.Kind
+	GetReflectType() reflect.Type
 
 	inc()
 }
@@ -38,11 +40,11 @@ type ShapeMap struct {
 }
 
 type Info struct {
-	Kind    Kind        `json:"kind"`
-	Name    string      `json:"name"`
-	Lv      int         `json:"lv"` // v is 0, *v is 1
-	Package string      `json:"package"`
-	raw     interface{} `json:"-"`
+	Kind    Kind         `json:"kind"`
+	Name    string       `json:"name"`
+	Lv      int          `json:"lv"` // v is 0, *v is 1
+	Package string       `json:"package"`
+	raw     reflect.Type `json:"-"`
 }
 
 func (v *Info) inc() {
@@ -61,8 +63,11 @@ func (v *Info) GetFullName() string {
 func (v *Info) GetPackage() string {
 	return v.Package
 }
-func (v *Info) GetKind() reflect.Kind {
+func (v *Info) GetReflectKind() reflect.Kind {
 	return reflect.Kind(v.Kind)
+}
+func (v *Info) GetReflectType() reflect.Type {
+	return v.raw
 }
 
 type Primitive struct {
@@ -80,6 +85,14 @@ type Struct struct {
 	*Info
 	Fields ShapeMap `json:"fields"`
 	Tags   []reflect.StructTag
+}
+
+func (v *Struct) FieldName(i int) string {
+	name := v.Fields.Keys[i]
+	if val, ok := v.Tags[i].Lookup("json"); ok {
+		name = strings.SplitN(val, ",", 2)[0] // todo: omitempty, inline
+	}
+	return name
 }
 
 func (v Struct) Format(f fmt.State, c rune) {
@@ -206,7 +219,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    kind.String(), // slice
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
@@ -229,7 +242,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    kind.String(), // slice
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
@@ -258,7 +271,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    name,
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
@@ -299,7 +312,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    name,
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
@@ -324,7 +337,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    name,
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
@@ -335,7 +348,7 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Name:    name,
 				Kind:    Kind(kind),
 				Package: pkgPath,
-				raw:     ob,
+				raw:     rt,
 			},
 		}
 		return s
