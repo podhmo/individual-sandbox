@@ -59,10 +59,17 @@ type Person struct {
 	Age  int    `json:"age"`
 }
 
-func ListPerson() []Person {
+type ListInput struct {
+	Limit int `openapi:"query"` // todo: see int field?
+}
+
+func ListPerson(in ListInput) []Person {
 	return nil
 }
 func GetPerson() Person {
+	return Person{}
+}
+func PutPerson(input PutPersonInput2) Person {
 	return Person{}
 }
 
@@ -141,6 +148,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				}
 			}
 
+			// TODO: primitive
 			name := s.FieldName(i)
 			switch v.GetReflectKind() {
 			case reflect.String:
@@ -179,11 +187,69 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 		op.OperationID = s.GetFullName()
 		op.Responses = openapi3.NewResponses()
 
-		// todo: support (ob, error)
-		retob := s.Returns.Values[0]
-		schema := t.Transform(retob).(*openapi3.Schema) // xxx
-		op.Responses["200"] = &openapi3.ResponseRef{
-			Value: openapi3.NewResponse().WithDescription("").WithJSONSchema(schema),
+		// parameters
+		if len(s.Params.Values) > 0 {
+			// todo: support (ctx, ob)
+
+			// scan body
+			inob := s.Params.Values[0]
+			schema := t.Transform(inob).(*openapi3.Schema) // xxx
+			if len(schema.Properties) > 0 {
+				// todo: required,content,description
+				body := openapi3.NewRequestBody().
+					WithJSONSchema(schema)
+				op.RequestBody = &openapi3.RequestBodyRef{Value: body}
+			}
+
+			// scan other
+			switch inob := inob.(type) {
+			case shape.Struct:
+				params := openapi3.NewParameters()
+				for i, _ := range inob.Fields.Values {
+					paramType, ok := inob.Tags[i].Lookup("openapi")
+					if !ok {
+						continue
+					}
+					// todo: required, type
+					switch strings.ToLower(paramType) {
+					case "json":
+						continue
+					case "path":
+						params = append(params, &openapi3.ParameterRef{
+							Value: openapi3.NewPathParameter(inob.FieldName(i)),
+						})
+					case "query":
+						params = append(params, &openapi3.ParameterRef{
+							Value: openapi3.NewQueryParameter(inob.FieldName(i)),
+						})
+					case "header":
+						params = append(params, &openapi3.ParameterRef{
+							Value: openapi3.NewHeaderParameter(inob.FieldName(i)),
+						})
+					case "cookie":
+						params = append(params, &openapi3.ParameterRef{
+							Value: openapi3.NewCookieParameter(inob.FieldName(i)),
+						})
+					default:
+						panic(paramType)
+					}
+				}
+				if len(params) > 0 {
+					op.Parameters = params
+				}
+			default:
+				panic(inob)
+			}
+		}
+
+		// responses
+		{
+			// todo: support (ob, error)
+			outob := s.Returns.Values[0]
+			schema := t.Transform(outob).(*openapi3.Schema) // xxx
+			op.Responses["200"] = &openapi3.ResponseRef{
+				Value: openapi3.NewResponse().WithDescription("").WithJSONSchema(schema),
+			}
 		}
 		t.cache[rt] = op
 		return op
@@ -223,10 +289,14 @@ func main() {
 	// 	op := v.VisitFunc(GetPerson)
 	// 	doc.AddOperation("/people/{id}", "GET", op)
 	// }
-	// {
-	// 	op := v.VisitFunc(ListPerson)
-	// 	doc.AddOperation("/people", "GET", op)
-	// }
+	{
+		op := v.VisitFunc(PutPerson)
+		doc.AddOperation("/people/{personId}", "PUT", op) // todo: validation
+	}
+	{
+		op := v.VisitFunc(ListPerson)
+		doc.AddOperation("/people", "GET", op)
+	}
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	enc.Encode(doc)
