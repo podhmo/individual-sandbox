@@ -1,0 +1,58 @@
+--- main00.go	2020-09-30 07:02:35.000000000 +0900
++++ main02.go	2020-09-30 07:24:16.000000000 +0900
+@@ -1,13 +1,35 @@
+ package main
+ 
+ import (
++	"bytes"
++	"context"
+ 	"database/sql"
+ 	"fmt"
++	"log"
+ 	"os"
+ 
+ 	_ "github.com/mattn/go-sqlite3"
++	sqldblogger "github.com/simukti/sqldb-logger"
+ )
+ 
++type logAdapter struct {
++	Logger *log.Logger
++}
++
++func (a *logAdapter) Log(
++	ctx context.Context,
++	level sqldbLevel,
++	msg string,
++	data map[string]interface{},
++) {
++	var b bytes.Buffer
++	fmt.Fprintf(&b, "level:%s	msg:%s", level, msg)
++	for k, v := range data {
++		fmt.Fprintf(&b, "	%v:%v", k, v)
++	}
++	a.Logger.Println(b.String())
++}
++
+ func main() {
+ 	driver := os.Getenv("DRIVER")
+ 	if driver == "" {
+@@ -18,12 +40,19 @@
+ 		dbSource = "sample.db"
+ 	}
+ 
++	var db *sql.DB
+ 	db, err := sql.Open(driver, dbSource)
+ 	if err != nil {
+ 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
+ 	}
+ 	defer db.Close()
+ 
++	db = sqldblogger.OpenDriver(
++		dbSource,
++		db.Driver(),
++		&logAdapter{Logger: log.New(os.Stdout, "**", 0)},
++	)
++
+ 	// Prepare statement for inserting data
+ 	stmtIns, err := db.Prepare("INSERT INTO squareNum VALUES( ?, ? )") // ? = placeholder
+ 	if err != nil {

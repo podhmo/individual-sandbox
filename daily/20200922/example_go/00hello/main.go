@@ -21,7 +21,7 @@ func main() {
 		render.JSON(w, r, data)
 	})
 
-	addr := os.Getenv("Addr")
+	addr := os.Getenv("ADDR")
 	if addr == "" {
 		addr = ":4444"
 	}

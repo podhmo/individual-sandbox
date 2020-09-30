@@ -1,0 +1,7 @@
+GET /?base="https://www.google.co.jp" HTTP/2.0
+Host: localhost:8888
+Accept-Encoding: gzip
+Content-Type: application/json
+User-Agent: Go-http-client/2.0
+X-Forwarded-For: 127.0.0.1
+

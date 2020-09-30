@@ -33,3 +33,5 @@ export ADDR := :44444
 	cd ./$(shell echo $@*/) && go test -v -test.testlogfile=log.txt
 11:
 	cd ./$(shell echo $@*/) && go test -v -test.testlogfile=log.txt
+12:
+	go run $(shell echo $@*/)main.go

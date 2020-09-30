@@ -9,7 +9,7 @@ import (
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "hello world")
+	fmt.Fprintf(w, "hello world"+r.URL.Query().Get("suffix"))
 }
 
 // TestUseRecord 通常のhttptest.Recorderを使う例
@@ -25,20 +25,20 @@ func TestUseRecord(t *testing.T) {
 
 	got, _ := ioutil.ReadAll(res.Body)
 	if want := "hello world"; want != string(got) {
-		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, got)
+		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, string(got))
 	}
 }
 
 // このRoundTripperを利用したい
-
-type EchoURL struct {
-	T         *testing.T
+type AddSuffixQuery struct {
 	Transport http.RoundTripper
 }
 
-func (t *EchoURL) RoundTrip(req *http.Request) (*http.Response, error) {
-	t.T.Helper()
-	t.T.Logf("request: %v", req.URL)
+func (t *AddSuffixQuery) RoundTrip(req *http.Request) (*http.Response, error) {
+	q := req.URL.Query()
+	q.Add("suffix", "!!")
+	req.URL.RawQuery = q.Encode()
+
 	tranport := t.Transport
 	if tranport == nil {
 		tranport = http.DefaultTransport
@@ -51,7 +51,7 @@ func TestUseTestServer(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(Handler))
 	defer ts.Close()
 
-	client := &http.Client{Transport: &EchoURL{T: t}}
+	client := &http.Client{Transport: &AddSuffixQuery{}}
 	res, err := client.Get(ts.URL)
 	if err != nil {
 		t.Fatalf("res: %+v", err)
@@ -62,8 +62,8 @@ func TestUseTestServer(t *testing.T) {
 	}
 
 	got, _ := ioutil.ReadAll(res.Body)
-	if want := "hello world"; want != string(got) {
-		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, got)
+	if want := "hello world!!"; want != string(got) {
+		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, string(got))
 	}
 }
 
@@ -80,13 +80,12 @@ func (t *HandlerTripper) RoundTrip(req *http.Request) (*http.Response, error) {
 // TestUseRecordWithTransport そういうTransportを書いてあげれば済む話だ
 func TestUseRecordWithTransport(t *testing.T) {
 	rec := httptest.NewRecorder()
-	client := &http.Client{
-		Transport: &EchoURL{
-			T:         t,
-			Transport: &HandlerTripper{Rec: rec, Handler: Handler},
-		},
+	req := httptest.NewRequest("", "http:", nil)
+
+	transport := &AddSuffixQuery{
+		Transport: &HandlerTripper{Rec: rec, Handler: Handler},
 	}
-	res, err := client.Get("http:")
+	res, err := transport.RoundTrip(req)
 	if err != nil {
 		t.Fatalf("res: %+v", err)
 	}
@@ -96,7 +95,7 @@ func TestUseRecordWithTransport(t *testing.T) {
 	}
 
 	got, _ := ioutil.ReadAll(res.Body)
-	if want := "hello world"; want != string(got) {
-		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, got)
+	if want := "hello world!!"; want != string(got) {
+		t.Errorf("body\nwant\n\t%+v\nbut\n\t%+v", want, string(got))
 	}
 }

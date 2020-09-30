@@ -10,7 +10,7 @@
 
   - without db
   - with db
-- 歯医者
+- ok 歯医者
 - ok ent/gorpの利用？
 - ok sql query log
 - apikitに欲しい物の整理

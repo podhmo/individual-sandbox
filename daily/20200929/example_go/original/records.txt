@@ -1,0 +1,2 @@
+{"file": "0001.req", "url": "https://localhost:8888/?base=\"https://www.google.co.jp\""}
+{"file": "0001.res", "url": "https://localhost:8888/?base=\"https://www.google.co.jp\""}

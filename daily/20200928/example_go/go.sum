@@ -1,0 +1,9 @@
+github.com/go-chi/chi v1.0.0 h1:s/kv1cTXfivYjdKJdyUzNGyAWZ/2t7duW1gKn5ivu+c=
+github.com/go-chi/chi v4.1.2+incompatible h1:fGFk2Gmi/YKXk0OmGfBh0WgmN3XB8lVnEyNz34tQRec=
+github.com/go-chi/chi v4.1.2+incompatible/go.mod h1:eB3wogJHnLi3x/kFX2A+IbTBlXxmMeXJVKy9tTv1XzQ=
+github.com/podhmo/tenuki v0.0.1 h1:c6v00WFN7pCv6Oz3ueqzm8ZGL+MTVH+W+sXzcazGBJY=
+github.com/podhmo/tenuki v0.0.1/go.mod h1:gnvC6oMXHaf8sZO/nE6Eqa9sdNtHKTLu7UL6hDHD7WQ=
+github.com/podhmo/tenuki v0.0.2-0.20200927163158-925059da47de h1:9Zu4ZjLMXQQtR4xcSgw2aQ46noScnK3Q2NOCl4tWPdU=
+github.com/podhmo/tenuki v0.0.2-0.20200927163158-925059da47de/go.mod h1:gnvC6oMXHaf8sZO/nE6Eqa9sdNtHKTLu7UL6hDHD7WQ=
+github.com/podhmo/tenuki v0.0.2 h1:WeLRubqdS/QwRjA+7OJmE1It5xgqYPJ0BRPPswL5ij8=
+github.com/podhmo/tenuki v0.0.2/go.mod h1:gnvC6oMXHaf8sZO/nE6Eqa9sdNtHKTLu7UL6hDHD7WQ=
