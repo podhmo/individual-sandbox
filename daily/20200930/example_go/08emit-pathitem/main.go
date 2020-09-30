@@ -123,7 +123,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				f := openapi3.NewIntegerSchema()
 				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
 			default:
-				panic(v)
+				notImplementedYet(v)
 			}
 
 			// support required
@@ -146,9 +146,27 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 		}
 		t.cache[rt] = op
 		return op
+	case shape.Container:
+		// container is map,slice,array
+		switch s.GetReflectKind() {
+		case reflect.Slice:
+			schema := openapi3.NewArraySchema()
+			inner := t.Transform(s.Args[0]).(*openapi3.Schema)
+			schema.Items = &openapi3.SchemaRef{Value: inner}
+			t.cache[rt] = schema
+			return schema
+		default:
+			notImplementedYet(s)
+		}
+		notImplementedYet(s)
 	default:
-		panic(s)
+		notImplementedYet(s)
 	}
+	panic("never")
+}
+
+func notImplementedYet(ob interface{}) {
+	panic(ob)
 }
 
 func main() {
@@ -156,6 +174,10 @@ func main() {
 	v := NewVisitor()
 	{
 		op := v.VisitFunc(GetPerson)
+		doc.AddOperation("/people/{id}", "GET", op)
+	}
+	{
+		op := v.VisitFunc(ListPerson)
 		doc.AddOperation("/people", "GET", op)
 	}
 	enc := json.NewEncoder(os.Stdout)

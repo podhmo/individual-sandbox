@@ -130,6 +130,7 @@ func (v Interface) Format(f fmt.State, c rune) {
 	)
 }
 
+// for generics
 type Container struct {
 	*Info
 	Args ShapeList `json:"args"`
