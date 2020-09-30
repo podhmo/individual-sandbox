@@ -5,6 +5,7 @@ import (
 	"m/shape"
 	"os"
 	"reflect"
+	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
 )
@@ -12,11 +13,14 @@ import (
 // TODO: reference schema
 // TODO: validation for schema
 // TODO: support path parameter
-// TODO: support query, header with input data
+// TODO: support query, header, cookie with input data
 // TODO: support function input
 // TODO: extra information
 // TODO: integration with net/http.Handler
 // TODO: integration with fasthttp.Handler
+// TODO: json tag inline,omitempty support
+// TODO: schema required, unrequired support
+// TODO: schema nullable support (?)
 
 // type Kind uint
 
@@ -51,8 +55,8 @@ import (
 // )
 
 type Person struct {
-	Title string `json:"title"` // required
-	Age   int    `json:"age"`
+	Name string `json:"name"` // required
+	Age  int    `json:"age"`
 }
 
 func ListPerson() []Person {
@@ -60,6 +64,15 @@ func ListPerson() []Person {
 }
 func GetPerson() Person {
 	return Person{}
+}
+
+type PutPersonInput struct {
+	PersonID string `json:"personId" openapi:"path"`
+	Person   Person `json:"person"` // treat as openapi:"json"
+}
+type PutPersonInput2 struct {
+	PersonID string `json:"personId" openapi:"path"`
+	Person          // inline
 }
 
 func Emit(ob interface{}) error {
@@ -119,7 +132,15 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 
 		schema := openapi3.NewObjectSchema()
 		for i, v := range s.Fields.Values {
-			// todo: json tag
+			oaType, ok := s.Tags[i].Lookup("openapi")
+			if ok {
+				switch strings.ToLower(oaType) {
+				case "cookie", "header", "path", "query":
+					// log.debug: skip this is not body's field
+					continue
+				}
+			}
+
 			name := s.FieldName(i)
 			switch v.GetReflectKind() {
 			case reflect.String:
@@ -131,6 +152,17 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 			case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64: // Uintptr
 				f := openapi3.NewIntegerSchema()
 				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
+			case reflect.Struct, reflect.Ptr:
+				f := t.Transform(v).(*openapi3.Schema) // xxx
+
+				if !s.Metadata[i].Anonymous {
+					schema.Properties[name] = &openapi3.SchemaRef{Value: f}
+				} else { // embedded
+					for subname, subf := range f.Properties {
+						schema.Properties[subname] = subf
+					}
+				}
+
 			default:
 				notImplementedYet(v)
 			}
@@ -182,13 +214,19 @@ func main() {
 	doc := &openapi3.Swagger{}
 	v := NewVisitor()
 	{
-		op := v.VisitFunc(GetPerson)
-		doc.AddOperation("/people/{id}", "GET", op)
+		Emit(v.VisitSchema(PutPersonInput{}))
 	}
 	{
-		op := v.VisitFunc(ListPerson)
-		doc.AddOperation("/people", "GET", op)
+		Emit(v.VisitSchema(PutPersonInput2{}))
 	}
+	// {
+	// 	op := v.VisitFunc(GetPerson)
+	// 	doc.AddOperation("/people/{id}", "GET", op)
+	// }
+	// {
+	// 	op := v.VisitFunc(ListPerson)
+	// 	doc.AddOperation("/people", "GET", op)
+	// }
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	enc.Encode(doc)

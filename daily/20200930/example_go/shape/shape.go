@@ -11,6 +11,7 @@ import (
 // TODO: 埋め込み
 // TODO: コメント
 // TODO: tag
+// TODO: InfoをExtractするとStack Oveflow
 
 type Kind reflect.Kind
 
@@ -81,10 +82,15 @@ func (v Primitive) Format(f fmt.State, c rune) {
 	)
 }
 
+type FieldMetadata struct {
+	Anonymous bool // embedded?
+}
+
 type Struct struct {
 	*Info
-	Fields ShapeMap `json:"fields"`
-	Tags   []reflect.StructTag
+	Fields   ShapeMap `json:"fields"`
+	Tags     []reflect.StructTag
+	Metadata []FieldMetadata
 }
 
 func (v *Struct) FieldName(i int) string {
@@ -189,9 +195,11 @@ func Extract(ob interface{}) Shape {
 }
 
 func extract(path []string, history []reflect.Type, ob interface{}) Shape {
+	// fmt.Println(path)
 	// if len(path) > 10 {
 	// 	panic("x")
 	// }
+
 	rt := history[len(history)-1]
 	name := rt.Name()
 	kind := rt.Kind()
@@ -248,10 +256,12 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 		}
 		return s
 	case reflect.Struct:
-		names := make([]string, rt.NumField())
-		fields := make([]Shape, rt.NumField())
-		tags := make([]reflect.StructTag, rt.NumField())
-		for i := 0; i < len(fields); i++ {
+		n := rt.NumField()
+		names := make([]string, n)
+		fields := make([]Shape, n)
+		tags := make([]reflect.StructTag, n)
+		metadata := make([]FieldMetadata, n)
+		for i := 0; i < n; i++ {
 			f := rt.Field(i)
 			names[i] = f.Name
 			fields[i] = extract(
@@ -260,6 +270,9 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				nil,
 			)
 			tags[i] = f.Tag
+			metadata[i] = FieldMetadata{
+				Anonymous: f.Anonymous,
+			}
 			// todo: anonymous
 		}
 		s := Struct{
@@ -267,7 +280,8 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Keys:   names,
 				Values: fields,
 			},
-			Tags: tags,
+			Tags:     tags,
+			Metadata: metadata,
 			Info: &Info{
 				Name:    name,
 				Kind:    Kind(kind),
