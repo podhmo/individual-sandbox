@@ -6,14 +6,13 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
 )
 
 // TODO: reference schema
 // TODO: validation for schema
-// TODO: support path parameter
-// TODO: support query, header, cookie with input data
 // TODO: support function input
 // TODO: extra information
 // TODO: integration with net/http.Handler
@@ -59,33 +58,7 @@ type Person struct {
 	Age  int    `json:"age"`
 }
 
-type ListInput struct {
-	Limit int `openapi:"query"` // todo: see int field?
-}
-
-func ListPerson(in ListInput) []Person {
-	return nil
-}
-
-type GetInput struct {
-	PersonID string `json:"personId" openapi:"path"`
-}
-
-func GetPerson(in GetInput) Person {
-	return Person{}
-}
-func PutPerson(input PutPersonInput2) Person {
-	return Person{}
-}
-
-type PutPersonInput struct {
-	PersonID string `json:"personId" openapi:"path"`
-	Person   Person `json:"person"` // treat as openapi:"json"
-}
-type PutPersonInput2 struct {
-	PersonID string `json:"personId" openapi:"path"`
-	Person          // inline
-}
+type Int int
 
 func Emit(ob interface{}) error {
 	enc := json.NewEncoder(os.Stdout)
@@ -103,9 +76,12 @@ type Visitor struct {
 
 func NewVisitor() *Visitor {
 	return &Visitor{
-		Transformer: &Transformer{cache: map[reflect.Type]interface{}{}},
-		SchemaRefs:  map[reflect.Type]*openapi3.SchemaRef{},
-		Operations:  map[reflect.Type]*openapi3.Operation{},
+		Transformer: (&Transformer{
+			cache:            map[reflect.Type]interface{}{},
+			interceptFuncMap: map[reflect.Type]func(shape.Shape) *openapi3.Schema{},
+		}).Builtin(),
+		SchemaRefs: map[reflect.Type]*openapi3.SchemaRef{},
+		Operations: map[reflect.Type]*openapi3.Operation{},
 	}
 }
 
@@ -128,6 +104,25 @@ func (v *Visitor) VisitFunc(ob interface{}) *openapi3.Operation {
 type Transformer struct {
 	cache    map[reflect.Type]interface{}
 	CacheHit int
+
+	interceptFuncMap map[reflect.Type]func(shape.Shape) *openapi3.Schema
+}
+
+func (t *Transformer) Builtin() *Transformer {
+	// todo: handling required?
+	{
+		var z []byte
+		t.interceptFuncMap[reflect.ValueOf(z).Type()] = func(s shape.Shape) *openapi3.Schema {
+			return openapi3.NewBytesSchema()
+		}
+	}
+	{
+		var z time.Time
+		t.interceptFuncMap[reflect.ValueOf(z).Type()] = func(s shape.Shape) *openapi3.Schema {
+			return openapi3.NewDateTimeSchema()
+		}
+	}
+	return t
 }
 
 // TODO: cache
@@ -138,10 +133,32 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 		return retval
 	}
 
+	// e.g. for time.Time as {"type": "string", "format": "date-time"}
+	if intercept, ok := t.interceptFuncMap[rt]; ok {
+		retval := intercept(s)
+		t.cache[rt] = retval
+		return retval
+	}
+
 	switch s := s.(type) {
+	case shape.Primitive:
+		switch s.GetReflectKind() {
+		case reflect.Bool:
+			return openapi3.NewBoolSchema()
+		case reflect.String:
+			return openapi3.NewStringSchema()
+		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+			// Todo: use NewInt64Schema?
+			return openapi3.NewIntegerSchema()
+		case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64: // Uintptr
+			return openapi3.NewIntegerSchema()
+		case reflect.Float32, reflect.Float64:
+			return openapi3.NewFloat64Schema()
+		default:
+			notImplementedYet(s)
+		}
 	case shape.Struct:
 		// return *openapi3.Schema (TODO: schema ref?)
-
 		schema := openapi3.NewObjectSchema()
 		for i, v := range s.Fields.Values {
 			oaType, ok := s.Tags[i].Lookup("openapi")
@@ -153,19 +170,12 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				}
 			}
 
-			// TODO: primitive
 			name := s.FieldName(i)
+
+			// todo: support required
+
 			switch v.GetReflectKind() {
-			case reflect.String:
-				f := openapi3.NewStringSchema()
-				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
-			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-				f := openapi3.NewIntegerSchema()
-				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
-			case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64: // Uintptr
-				f := openapi3.NewIntegerSchema()
-				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
-			case reflect.Struct, reflect.Ptr:
+			case reflect.Struct:
 				f := t.Transform(v).(*openapi3.Schema) // xxx
 
 				if !s.Metadata[i].Anonymous {
@@ -175,12 +185,12 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 						schema.Properties[subname] = subf
 					}
 				}
-
+			case reflect.Func, reflect.Chan:
+				continue
 			default:
-				notImplementedYet(v)
+				f := t.Transform(v).(*openapi3.Schema) // xxx
+				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
 			}
-
-			// support required
 		}
 		t.cache[rt] = schema
 		return schema
@@ -282,27 +292,29 @@ func notImplementedYet(ob interface{}) {
 }
 
 func main() {
-	doc := &openapi3.Swagger{}
 	v := NewVisitor()
+	{
+		Emit(v.VisitSchema(Person{}))
+	}
+	{
+		Emit(v.VisitSchema(&Person{}))
+	}
+	{
+		Emit(v.VisitSchema(10))
+	}
+	{
+		Emit(v.VisitSchema("foo"))
+	}
+	{
+		Emit(v.VisitSchema([]byte("foo")))
+	}
+	{
+		Emit(v.VisitSchema(Int(10)))
+	}
 	// {
-	// 	Emit(v.VisitSchema(PutPersonInput{}))
-	// }
-	// {
-	// 	Emit(v.VisitSchema(PutPersonInput2{}))
+	// 	Emit(v.VisitSchema(nil)) // panic
 	// }
 	{
-		op := v.VisitFunc(GetPerson)
-		doc.AddOperation("/people/{personId}", "GET", op)
+		Emit(v.VisitSchema(time.Now()))
 	}
-	{
-		op := v.VisitFunc(PutPerson)
-		doc.AddOperation("/people/{personId}", "PUT", op) // todo: validation
-	}
-	{
-		op := v.VisitFunc(ListPerson)
-		doc.AddOperation("/people", "GET", op)
-	}
-	enc := json.NewEncoder(os.Stdout)
-	enc.SetIndent("", "  ")
-	enc.Encode(doc)
 }

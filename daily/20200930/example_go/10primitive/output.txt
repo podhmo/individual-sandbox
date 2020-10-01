@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "age": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}
+{
+  "properties": {
+    "age": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}
+{
+  "type": "integer"
+}
+{
+  "type": "string"
+}
+{
+  "format": "byte",
+  "type": "string"
+}
+{
+  "type": "integer"
+}
+{
+  "format": "date-time",
+  "type": "string"
+}
+{
+  "type": "integer"
+}

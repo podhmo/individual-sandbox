@@ -16,4 +16,13 @@
 - go/typesは使える？自前で型を定義したほうが良い？
   - 型を定義したほうが良い気がする
 
+### 追記
+
+難問
+
+- enumsの扱い
+- コメントをどうやって取ってくるか
+- reflect.Type上ではbyteとuint8が同じもの
+
+
 ## getkin/kin-openpi/openapi3

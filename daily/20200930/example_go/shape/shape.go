@@ -30,6 +30,7 @@ type Shape interface {
 
 	GetReflectKind() reflect.Kind
 	GetReflectType() reflect.Type
+	GetReflectValue() reflect.Value
 
 	inc()
 }
@@ -41,11 +42,13 @@ type ShapeMap struct {
 }
 
 type Info struct {
-	Kind    Kind         `json:"kind"`
-	Name    string       `json:"name"`
-	Lv      int          `json:"lv"` // v is 0, *v is 1
-	Package string       `json:"package"`
-	raw     reflect.Type `json:"-"`
+	Kind    Kind   `json:"kind"`
+	Name    string `json:"name"`
+	Lv      int    `json:"lv"` // v is 0, *v is 1
+	Package string `json:"package"`
+
+	reflectType  reflect.Type  `json:"-"`
+	reflectValue reflect.Value `json:"-"`
 }
 
 func (v *Info) inc() {
@@ -68,7 +71,10 @@ func (v *Info) GetReflectKind() reflect.Kind {
 	return reflect.Kind(v.Kind)
 }
 func (v *Info) GetReflectType() reflect.Type {
-	return v.raw
+	return v.reflectType
+}
+func (v *Info) GetReflectValue() reflect.Value {
+	return v.reflectValue
 }
 
 type Primitive struct {
@@ -188,85 +194,123 @@ func (v Function) Format(f fmt.State, c rune) {
 }
 
 func Extract(ob interface{}) Shape {
-	rt := reflect.TypeOf(ob)
 	path := []string{""}
-	history := []reflect.Type{rt}
-	return extract(path, history, ob)
+	rts := []reflect.Type{reflect.TypeOf(ob)}   // history
+	rvs := []reflect.Value{reflect.ValueOf(ob)} // history
+	return extract(path, rts, rvs, ob)
 }
 
-func extract(path []string, history []reflect.Type, ob interface{}) Shape {
+var rnil reflect.Value
+
+func init() {
+	rnil = reflect.ValueOf(nil)
+}
+
+func extract(
+	path []string,
+	rts []reflect.Type,
+	rvs []reflect.Value,
+	ob interface{},
+) Shape {
 	// fmt.Println(path)
 	// if len(path) > 10 {
 	// 	panic("x")
 	// }
 
-	rt := history[len(history)-1]
+	rt := rts[len(rts)-1]
+	rv := rvs[len(rvs)-1]
 	name := rt.Name()
 	kind := rt.Kind()
 	pkgPath := rt.PkgPath()
+	var inner reflect.Value
 
 	// todo: switch
 	switch kind {
 	case reflect.Ptr:
+		if rv != rnil {
+			inner = rv.Elem()
+		}
 		s := extract(
 			append(path, "*"),
-			append(history, rt.Elem()),
+			append(rts, rt.Elem()),
+			append(rvs, inner),
 			nil)
 		s.inc()
 		return s
-	case reflect.Slice, reflect.Array, reflect.Chan:
+	case reflect.Slice, reflect.Array:
+		if rv != rnil && rv.Len() > 0 {
+			inner = rv.Index(0)
+		}
 		args := []Shape{
 			extract(
 				append(path, "slice[0]"),
-				append(history, rt.Elem()),
+				append(rts, rt.Elem()),
+				append(rvs, inner),
 				nil,
 			),
 		}
 		s := Container{
 			Args: args,
 			Info: &Info{
-				Name:    kind.String(), // slice
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         kind.String(), // slice
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
 	case reflect.Map:
+		var innerKey reflect.Value
+		if rv != rnil && rv.Len() > 0 {
+			it := rv.MapRange()
+			innerKey = it.Key()
+			inner = it.Value()
+		}
 		args := []Shape{
 			extract(
 				append(path, "map[0]"),
-				append(history, rt.Key()),
+				append(rts, rt.Key()),
+				append(rvs, innerKey),
 				nil,
 			),
 			extract(
 				append(path, "map[1]"),
-				append(history, rt.Elem()),
+				append(rts, rt.Elem()),
+				append(rvs, inner),
 				nil,
 			),
 		}
 		s := Container{
 			Args: args,
 			Info: &Info{
-				Name:    kind.String(), // slice
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         kind.String(), // slice
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
+	case reflect.Chan:
+		panic(fmt.Sprintf("not implemented yet or impossible: (%+v,%+v)", rt, rv))
 	case reflect.Struct:
 		n := rt.NumField()
 		names := make([]string, n)
 		fields := make([]Shape, n)
 		tags := make([]reflect.StructTag, n)
 		metadata := make([]FieldMetadata, n)
+
+		if rv == rnil {
+			rv = reflect.Zero(rt)
+		}
 		for i := 0; i < n; i++ {
 			f := rt.Field(i)
 			names[i] = f.Name
 			fields[i] = extract(
 				append(path, "struct."+f.Name),
-				append(history, f.Type),
+				append(rts, f.Type),
+				append(rvs, rv.Field(i)),
 				nil,
 			)
 			tags[i] = f.Tag
@@ -283,10 +327,11 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 			Tags:     tags,
 			Metadata: metadata,
 			Info: &Info{
-				Name:    name,
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         name,
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
@@ -305,7 +350,8 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 			pnames[i] = "args" + strconv.Itoa(i) //
 			params[i] = extract(
 				append(path, "func.p["+strconv.Itoa(i)+"]"),
-				append(history, v),
+				append(rts, v),
+				append(rvs, rnil),
 				nil)
 		}
 
@@ -316,7 +362,8 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 			rnames[i] = "ret" + strconv.Itoa(i) //
 			returns[i] = extract(
 				append(path, "func.r["+strconv.Itoa(i)+"]"),
-				append(history, v),
+				append(rts, v),
+				append(rvs, rnil),
 				nil)
 		}
 
@@ -324,10 +371,11 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 			Params:  ShapeMap{Keys: pnames, Values: params},
 			Returns: ShapeMap{Keys: rnames, Values: returns},
 			Info: &Info{
-				Name:    name,
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         name,
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
@@ -339,7 +387,8 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 			names[i] = f.Name
 			methods[i] = extract(
 				append(path, "interface."+f.Name),
-				append(history, f.Type),
+				append(rts, f.Type),
+				append(rvs, rnil),
 				nil,
 			)
 		}
@@ -349,10 +398,11 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 				Values: methods,
 			},
 			Info: &Info{
-				Name:    name,
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         name,
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
@@ -360,10 +410,11 @@ func extract(path []string, history []reflect.Type, ob interface{}) Shape {
 		// fmt.Fprintln(os.Stderr, "\t\t", kind.String())
 		s := Primitive{
 			Info: &Info{
-				Name:    name,
-				Kind:    Kind(kind),
-				Package: pkgPath,
-				raw:     rt,
+				Name:         name,
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
 			},
 		}
 		return s
