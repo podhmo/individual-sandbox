@@ -54,13 +54,6 @@ import (
 // 	UnsafePointer
 // )
 
-type Person struct {
-	Name string `json:"name"` // required
-	Age  int    `json:"age"`
-}
-
-type Int int
-
 func Emit(ob interface{}) error {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
@@ -80,6 +73,7 @@ func NewVisitor() *Visitor {
 		Transformer: (&Transformer{
 			cache:            map[reflect.Type]interface{}{},
 			interceptFuncMap: map[reflect.Type]func(shape.Shape) *openapi3.Schema{},
+			Resolver:         &DefaultResolver{},
 		}).Builtin(),
 		SchemaRefs: map[reflect.Type]*openapi3.SchemaRef{},
 		Operations: map[reflect.Type]*openapi3.Operation{},
@@ -107,6 +101,7 @@ type Transformer struct {
 	CacheHit int
 
 	interceptFuncMap map[reflect.Type]func(shape.Shape) *openapi3.Schema
+	Resolver
 }
 
 func (t *Transformer) Builtin() *Transformer {
@@ -126,8 +121,45 @@ func (t *Transformer) Builtin() *Transformer {
 	return t
 }
 
-// TODO: cache
-func (t *Transformer) Transform(s shape.Shape) interface{} {
+type Resolver interface {
+	ResolveSchema(v *openapi3.Schema, s shape.Shape) *openapi3.SchemaRef
+	ResolveParameter(v *openapi3.Parameter, s shape.Shape) *openapi3.ParameterRef
+	ResolveRequestBody(v *openapi3.RequestBody, s shape.Shape) *openapi3.RequestBodyRef
+	ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef
+}
+
+type DefaultResolver struct{}
+
+func (r *DefaultResolver) ResolveSchema(v *openapi3.Schema, s shape.Shape) *openapi3.SchemaRef {
+	return &openapi3.SchemaRef{Value: v}
+}
+func (r *DefaultResolver) ResolveParameter(v *openapi3.Parameter, s shape.Shape) *openapi3.ParameterRef {
+	return &openapi3.ParameterRef{Value: v}
+}
+func (r *DefaultResolver) ResolveRequestBody(v *openapi3.RequestBody, s shape.Shape) *openapi3.RequestBodyRef {
+	return &openapi3.RequestBodyRef{Value: v}
+}
+func (r *DefaultResolver) ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef {
+	return &openapi3.ResponseRef{Value: v}
+}
+
+type UseRefResolver struct {
+}
+
+func (r *UseRefResolver) ResolveSchema(v *openapi3.Schema, s shape.Shape) *openapi3.SchemaRef {
+	return &openapi3.SchemaRef{Value: v}
+}
+func (r *UseRefResolver) ResolveParameter(v *openapi3.Parameter, s shape.Shape) *openapi3.ParameterRef {
+	return &openapi3.ParameterRef{Value: v}
+}
+func (r *UseRefResolver) ResolveRequestBody(v *openapi3.RequestBody, s shape.Shape) *openapi3.RequestBodyRef {
+	return &openapi3.RequestBodyRef{Value: v}
+}
+func (r *UseRefResolver) ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef {
+	return &openapi3.ResponseRef{Value: v}
+}
+
+func (t *Transformer) Transform(s shape.Shape) interface{} { // *Operation | *Schema | *Response
 	rt := s.GetReflectType()
 	if retval, ok := t.cache[rt]; ok {
 		t.CacheHit++
@@ -180,7 +212,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				f := t.Transform(v).(*openapi3.Schema) // xxx
 
 				if !s.Metadata[i].Anonymous {
-					schema.Properties[name] = &openapi3.SchemaRef{Value: f}
+					schema.Properties[name] = t.ResolveSchema(f, v)
 				} else { // embedded
 					for subname, subf := range f.Properties {
 						schema.Properties[subname] = subf
@@ -190,7 +222,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				continue
 			default:
 				f := t.Transform(v).(*openapi3.Schema) // xxx
-				schema.Properties[name] = &openapi3.SchemaRef{Value: f}
+				schema.Properties[name] = t.ResolveSchema(f, v)
 			}
 		}
 		t.cache[rt] = schema
@@ -214,14 +246,14 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 				// todo: required,content,description
 				body := openapi3.NewRequestBody().
 					WithJSONSchema(schema)
-				op.RequestBody = &openapi3.RequestBodyRef{Value: body}
+				op.RequestBody = t.ResolveRequestBody(body, inob)
 			}
 
 			// scan other
 			switch inob := inob.(type) {
 			case shape.Struct:
 				params := openapi3.NewParameters()
-				for i, _ := range inob.Fields.Values {
+				for i, v := range inob.Fields.Values {
 					paramType, ok := inob.Tags[i].Lookup("openapi")
 					if !ok {
 						continue
@@ -231,21 +263,21 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 					case "json":
 						continue
 					case "path":
-						params = append(params, &openapi3.ParameterRef{
-							Value: openapi3.NewPathParameter(inob.FieldName(i)),
-						})
+						params = append(params, t.ResolveParameter(
+							openapi3.NewPathParameter(inob.FieldName(i)), v),
+						)
 					case "query":
-						params = append(params, &openapi3.ParameterRef{
-							Value: openapi3.NewQueryParameter(inob.FieldName(i)),
-						})
+						params = append(params, t.ResolveParameter(
+							openapi3.NewQueryParameter(inob.FieldName(i)), v),
+						)
 					case "header":
-						params = append(params, &openapi3.ParameterRef{
-							Value: openapi3.NewHeaderParameter(inob.FieldName(i)),
-						})
+						params = append(params, t.ResolveParameter(
+							openapi3.NewHeaderParameter(inob.FieldName(i)), v),
+						)
 					case "cookie":
-						params = append(params, &openapi3.ParameterRef{
-							Value: openapi3.NewCookieParameter(inob.FieldName(i)),
-						})
+						params = append(params, t.ResolveParameter(
+							openapi3.NewCookieParameter(inob.FieldName(i)), v),
+						)
 					default:
 						panic(paramType)
 					}
@@ -264,9 +296,10 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 			// todo: support (ob, error)
 			outob := s.Returns.Values[0]
 			schema := t.Transform(outob).(*openapi3.Schema) // xxx
-			op.Responses["200"] = &openapi3.ResponseRef{
-				Value: openapi3.NewResponse().WithDescription("").WithJSONSchema(schema),
-			}
+			op.Responses["200"] = t.ResolveResponse(
+				openapi3.NewResponse().WithDescription("").WithJSONSchema(schema),
+				s.Returns.Values[0],
+			)
 		}
 		t.cache[rt] = op
 		return op
@@ -276,7 +309,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} {
 		case reflect.Slice:
 			schema := openapi3.NewArraySchema()
 			inner := t.Transform(s.Args[0]).(*openapi3.Schema)
-			schema.Items = &openapi3.SchemaRef{Value: inner}
+			schema.Items = t.ResolveSchema(inner, s.Args[0])
 			t.cache[rt] = schema
 			return schema
 		default:
@@ -293,6 +326,13 @@ func notImplementedYet(ob interface{}) {
 	panic(ob)
 }
 
+type Person struct {
+	Name string `json:"name"` // required
+	Age  int    `json:"age"`
+}
+
+type Int int
+
 func main() {
 	v := NewVisitor()
 	{
@@ -300,29 +340,5 @@ func main() {
 	}
 	{
 		Emit(v.VisitSchema(&Person{}))
-	}
-	{
-		Emit(v.VisitSchema(10))
-	}
-	{
-		Emit(v.VisitSchema("foo"))
-	}
-	{
-		Emit(v.VisitSchema([]byte("foo")))
-	}
-	{
-		Emit(v.VisitSchema(Int(10)))
-	}
-	// {
-	// 	Emit(v.VisitSchema(nil)) // panic
-	// }
-	{
-		Emit(v.VisitSchema(time.Now()))
-	}
-	{
-		Emit(v.VisitFunc(func() time.Time { return time.Now() }))
-	}
-	{
-		Emit(v.VisitFunc(func(*string) time.Time { return time.Now() }))
 	}
 }

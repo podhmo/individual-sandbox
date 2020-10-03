@@ -38,5 +38,22 @@
   "type": "string"
 }
 {
-  "type": "integer"
+  "operationId": "main.main.func1",
+  "responses": {
+    "200": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "description": ""
+    },
+    "default": {
+      "description": ""
+    }
+  }
 }
+only struct
