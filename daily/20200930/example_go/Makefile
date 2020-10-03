@@ -21,4 +21,6 @@
 10:
 	go run $(shell echo $@*/)main.go | tee $(shell echo $@*/)output.txt
 11:
-	go run $(shell echo $@*/)main.go
+	go run $(shell echo $@*/)main.go | tee $(shell echo $@*/)output.txt
+12:
+	go run $(shell echo $@*/)main.go | tee $(shell echo $@*/)output.txt

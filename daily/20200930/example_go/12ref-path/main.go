@@ -128,19 +128,25 @@ type Resolver interface {
 	ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef
 }
 
-type DefaultResolver struct{}
+type Binder interface {
+	Bind(doc *openapi3.Swagger)
+}
 
-func (r *DefaultResolver) ResolveSchema(v *openapi3.Schema, s shape.Shape) *openapi3.SchemaRef {
+type NoRefResolver struct{}
+
+func (r *NoRefResolver) ResolveSchema(v *openapi3.Schema, s shape.Shape) *openapi3.SchemaRef {
 	return &openapi3.SchemaRef{Value: v}
 }
-func (r *DefaultResolver) ResolveParameter(v *openapi3.Parameter, s shape.Shape) *openapi3.ParameterRef {
+func (r *NoRefResolver) ResolveParameter(v *openapi3.Parameter, s shape.Shape) *openapi3.ParameterRef {
 	return &openapi3.ParameterRef{Value: v}
 }
-func (r *DefaultResolver) ResolveRequestBody(v *openapi3.RequestBody, s shape.Shape) *openapi3.RequestBodyRef {
+func (r *NoRefResolver) ResolveRequestBody(v *openapi3.RequestBody, s shape.Shape) *openapi3.RequestBodyRef {
 	return &openapi3.RequestBodyRef{Value: v}
 }
-func (r *DefaultResolver) ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef {
+func (r *NoRefResolver) ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef {
 	return &openapi3.ResponseRef{Value: v}
+}
+func (r *NoRefResolver) Bind(doc *openapi3.Swagger) {
 }
 
 type UseRefResolver struct {
@@ -165,6 +171,21 @@ func (r *UseRefResolver) ResolveRequestBody(v *openapi3.RequestBody, s shape.Sha
 }
 func (r *UseRefResolver) ResolveResponse(v *openapi3.Response, s shape.Shape) *openapi3.ResponseRef {
 	return &openapi3.ResponseRef{Value: v}
+}
+func (r *UseRefResolver) Bind(doc *openapi3.Swagger) {
+	if len(r.Schemas) == 0 {
+		return
+	}
+
+	if doc.Components.Schemas == nil {
+		doc.Components.Schemas = map[string]*openapi3.SchemaRef{}
+	}
+	for _, ref := range r.Schemas {
+		ref := ref
+		path := ref.Ref
+		ref.Ref = ""
+		doc.Components.Schemas[path] = ref
+	}
 }
 
 func (t *Transformer) Transform(s shape.Shape) interface{} { // *Operation | *Schema | *Response
@@ -253,7 +274,7 @@ func (t *Transformer) Transform(s shape.Shape) interface{} { // *Operation | *Sc
 			if len(schema.Properties) > 0 {
 				// todo: required,content,description
 				body := openapi3.NewRequestBody().
-					WithJSONSchema(schema)
+					WithJSONSchemaRef(t.ResolveSchema(schema, inob))
 				op.RequestBody = t.ResolveRequestBody(body, inob)
 			}
 
@@ -305,7 +326,9 @@ func (t *Transformer) Transform(s shape.Shape) interface{} { // *Operation | *Sc
 			outob := s.Returns.Values[0]
 			schema := t.Transform(outob).(*openapi3.Schema) // xxx
 			op.Responses["200"] = t.ResolveResponse(
-				openapi3.NewResponse().WithDescription("").WithJSONSchema(schema),
+				openapi3.NewResponse().WithDescription("").WithJSONSchemaRef(
+					t.ResolveSchema(schema, outob),
+				),
 				s.Returns.Values[0],
 			)
 		}
@@ -339,32 +362,48 @@ type Person struct {
 	Age  int    `json:"age"`
 }
 
-type Int int
+type ListInput struct {
+	Limit int `openapi:"query"` // todo: see int field?
+}
+
+func ListPerson(in ListInput) []Person {
+	return nil
+}
+
+type GetInput struct {
+	PersonID string `json:"personId" openapi:"path"`
+}
+
+func GetPerson(in GetInput) Person {
+	return Person{}
+}
+func PutPerson(input PutPersonInput2) Person {
+	return Person{}
+}
+
+type PutPersonInput struct {
+	PersonID string `json:"personId" openapi:"path"`
+	Person   Person `json:"person"` // treat as openapi:"json"
+}
+type PutPersonInput2 struct {
+	PersonID string `json:"personId" openapi:"path"`
+	Person          // inline
+}
 
 func main() {
+	// r := &NoRefResolver{}
 	r := &UseRefResolver{}
 	v := NewVisitor(r)
+	doc := &openapi3.Swagger{}
 	{
-		Emit(v.VisitSchema(Person{}))
+		op := v.VisitFunc(ListPerson)
+		doc.AddOperation("/people", "GET", op)
 	}
-	{
-		Emit(v.VisitSchema(&Person{}))
-	}
-	{
-		Emit(v.VisitSchema([]Person{}))
-	}
-
-	doc := &openapi3.Swagger{
-		Components: openapi3.Components{ // need: NewComponents()
-			Schemas: map[string]*openapi3.SchemaRef{},
-		},
-	}
-	for _, ref := range r.Schemas {
-		ref := ref
-		path := ref.Ref
-		ref.Ref = ""
-		doc.Components.Schemas[path] = ref
-	}
+	// {
+	// 	op := v.VisitFunc(GetPerson)
+	// 	doc.AddOperation("/people/{personId}", "GET", op)
+	// }
+	r.Bind(doc)
 
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
