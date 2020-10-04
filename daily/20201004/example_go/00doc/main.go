@@ -14,7 +14,7 @@ import (
 type User struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
-	Age  string `json:"age"`
+	Age  string `json:"age" required:"false"`
 }
 
 type ListUserInput struct {
