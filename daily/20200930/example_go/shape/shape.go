@@ -193,6 +193,14 @@ func (v Function) Format(f fmt.State, c rune) {
 	)
 }
 
+type Unknown struct {
+	*Info
+}
+
+func (v Function) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "UNKNOWN[%v]", v.Info.GetReflectValue())
+}
+
 func Extract(ob interface{}) Shape {
 	path := []string{""}
 	rts := []reflect.Type{reflect.TypeOf(ob)}   // history
@@ -293,7 +301,17 @@ func extract(
 		}
 		return s
 	case reflect.Chan:
-		panic(fmt.Sprintf("not implemented yet or impossible: (%+v,%+v)", rt, rv))
+		// TODO: if STRICT=1, panic?
+		// panic(fmt.Sprintf("not implemented yet or impossible: (%+v,%+v)", rt, rv))
+		return Unknown{
+			Info: &Info{
+				Name:         kind.String(), // slice
+				Kind:         Kind(kind),
+				Package:      pkgPath,
+				reflectType:  rt,
+				reflectValue: rv,
+			},
+		}
 	case reflect.Struct:
 		n := rt.NumField()
 		names := make([]string, n)

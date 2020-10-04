@@ -12,7 +12,6 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 )
 
-// TODO: reference schema
 // TODO: validation for schema
 // TODO: support function input
 // TODO: extra information
@@ -64,7 +63,7 @@ func Emit(ob interface{}) error {
 type Visitor struct {
 	*Transformer
 	Doc        *openapi3.Swagger
-	SchemaRefs map[reflect.Type]*openapi3.SchemaRef
+	Schemas    map[reflect.Type]*openapi3.Schema
 	Operations map[reflect.Type]*openapi3.Operation
 }
 
@@ -75,25 +74,29 @@ func NewVisitor(resolver Resolver) *Visitor {
 			interceptFuncMap: map[reflect.Type]func(shape.Shape) *openapi3.Schema{},
 			Resolver:         resolver,
 		}).Builtin(),
-		SchemaRefs: map[reflect.Type]*openapi3.SchemaRef{},
+		Schemas:    map[reflect.Type]*openapi3.Schema{},
 		Operations: map[reflect.Type]*openapi3.Operation{},
 	}
 }
 
-func (v *Visitor) VisitSchema(ob interface{}) *openapi3.SchemaRef {
+func (v *Visitor) VisitType(ob interface{}, modifiers ...func(*openapi3.Schema)) *openapi3.SchemaRef {
 	in := shape.Extract(ob)
 	out := v.Transform(in).(*openapi3.Schema)
-	retval := v.ResolveSchema(out, in)
-	v.SchemaRefs[in.GetReflectType()] = retval
-	return retval
+	for _, m := range modifiers {
+		m(out)
+	}
+	v.Schemas[in.GetReflectType()] = out
+	return v.ResolveSchema(out, in)
 }
-func (v *Visitor) VisitFunc(ob interface{}) *openapi3.Operation {
+func (v *Visitor) VisitFunc(ob interface{}, modifiers ...func(*openapi3.Operation)) *openapi3.Operation {
 	// TODO: use schema ref?
 	in := shape.Extract(ob)
 	out := v.Transform(in).(*openapi3.Operation)
-	retval := out
-	v.Operations[in.GetReflectType()] = retval
-	return retval
+	for _, m := range modifiers {
+		m(out)
+	}
+	v.Operations[in.GetReflectType()] = out
+	return out
 }
 
 type Transformer struct {
@@ -395,14 +398,18 @@ func main() {
 	r := &UseRefResolver{}
 	v := NewVisitor(r)
 	doc := &openapi3.Swagger{}
-	{
-		op := v.VisitFunc(ListPerson)
+
+	v.VisitType(Person{}, func(s *openapi3.Schema) {
+		s.Description = "someone using it"
+	})
+	v.VisitFunc(ListPerson, func(op *openapi3.Operation) {
 		doc.AddOperation("/people", "GET", op)
+	})
+	{
+		op := v.VisitFunc(GetPerson)
+		doc.AddOperation("/people/{personId}", "GET", op)
 	}
-	// {
-	// 	op := v.VisitFunc(GetPerson)
-	// 	doc.AddOperation("/people/{personId}", "GET", op)
-	// }
+
 	r.Bind(doc)
 
 	enc := json.NewEncoder(os.Stdout)
