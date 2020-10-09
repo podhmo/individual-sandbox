@@ -22,7 +22,7 @@ func main() {
 func run() error {
 	l := commentlookup.NewLookup()
 	{
-		text, err := l.LookupCommentTextFromFunc()
+		text, err := l.LookupCommentTextFromFunc(F)
 		if err != nil {
 			return err
 		}

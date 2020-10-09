@@ -1,0 +1,2 @@
+package FFF
+func F(){}

@@ -8,3 +8,7 @@ DIR = $(shell echo $@*/)
 	GODEBUG=1 go run $(DIR)main.go
 03:
 	go run $(DIR)main.go
+04:
+	go run $(DIR)main.go
+05:
+	go run $(DIR)main.go
