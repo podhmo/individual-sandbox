@@ -1,0 +1,43 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Example Pet Store",
+    "description" : "A Pet Store API.",
+    "version" : "1.0"
+  },
+  "servers" : [ {
+    "url" : "https://6lx1lvrc5k.execute-api.ap-northeast-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "sandbox"
+      }
+    }
+  } ],
+  "paths" : {
+    "/pets" : {
+      "get" : {
+        "operationId" : "GET HTTP",
+        "responses" : {
+          "default" : {
+            "description" : "Default response for GET /pets"
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "payloadFormatVersion" : "1.0",
+          "type" : "http_proxy",
+          "httpMethod" : "ANY",
+          "uri" : "https://example.net/",
+          "connectionType" : "INTERNET"
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-cors" : {
+    "allowMethods" : [ "GET", "OPTIONS", "POST" ],
+    "allowHeaders" : [ "authorization", "content-type", "x-amz-date", "x-amzm-header", "x-api-key", "x-apigateway-header" ],
+    "maxAge" : -42,
+    "allowCredentials" : false,
+    "allowOrigins" : [ "*" ]
+  },
+  "x-amazon-apigateway-importexport-version" : "1.0"
+}
