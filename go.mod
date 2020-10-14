@@ -83,6 +83,7 @@ require (
 	github.com/podhmo/go-webtest v0.4.3 // indirect
 	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
+	github.com/podhmo/reflect-openapi v0.0.3 // indirect
 	github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0 // indirect
 	github.com/podhmo/tenuki v0.0.2 // indirect
 	github.com/poy/onpar v1.0.0 // indirect
@@ -100,6 +101,7 @@ require (
 	github.com/spf13/cobra v1.0.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/viper v1.6.3 // indirect
+	github.com/stripe/stripe-go v70.15.0+incompatible // indirect
 	github.com/tdakkota/asciicheck v0.0.0-20200416200610-e657995f937b // indirect
 	github.com/tetafro/godot v0.3.7 // indirect
 	github.com/timakin/bodyclose v0.0.0-20200424151742-cb6215831a94 // indirect
