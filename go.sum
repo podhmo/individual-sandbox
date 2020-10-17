@@ -722,6 +722,8 @@ github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0 h1:qIrw6+SH0smoU
 github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0/go.mod h1:EtL6V0BT7VsA2Fvl0SQBpqcRmyy2nMB0AIY8RU3Lb+0=
 github.com/podhmo/tenuki v0.0.2 h1:WeLRubqdS/QwRjA+7OJmE1It5xgqYPJ0BRPPswL5ij8=
 github.com/podhmo/tenuki v0.0.2/go.mod h1:gnvC6oMXHaf8sZO/nE6Eqa9sdNtHKTLu7UL6hDHD7WQ=
+github.com/podhmo/tenuki v0.0.3 h1:/oYMfO1WhXE6sDvKqYs1deenwzVJOmJlAsoACfKqu2g=
+github.com/podhmo/tenuki v0.0.3/go.mod h1:gnvC6oMXHaf8sZO/nE6Eqa9sdNtHKTLu7UL6hDHD7WQ=
 github.com/poy/onpar v0.0.0-20190519213022-ee068f8ea4d1/go.mod h1:nSbFQvMj97ZyhFRSJYtut+msi4sOY6zJDGCdSc+/rZU=
 github.com/poy/onpar v0.0.0-20200406201722-06f95a1c68e8/go.mod h1:nSbFQvMj97ZyhFRSJYtut+msi4sOY6zJDGCdSc+/rZU=
 github.com/poy/onpar v1.0.0 h1:MfdQ9bnas+J1si8vUHAABXKxqOqDVaH4T3LRDYYv5Lo=

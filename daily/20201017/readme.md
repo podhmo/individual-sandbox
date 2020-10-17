@@ -4,6 +4,23 @@
 ライブラリのある世界。確認するたびにmain.goが必要。
 やっぱりCLIもほしくない？
 
+### 追記
+
+テキトーに実装を書いて共有してみるか。tenukiを使いたい。
+
+### 追記
+
+考えてみると、clientの内部でresponseをparseしていると、相性が悪いのかもなー。tenukiと。
+...
+そうでもなかった。transportでだけ管理されているのでけっこう無理ができる。
+
+### 追記
+
+何を気にしたかったのだっけ？
+
+- clientを使ってテストが書ける
+- clientの実装で楽がしたい
+- cliとしても扱いたい(?)
 
 ## go functional options
 
@@ -32,3 +49,9 @@ func (f LimitFunc) ApplyFoo(p *FooParams){
 
 - https://zenn.dev/gagaga/articles/vanilla-spa-yattarude
 - https://github.com/itskihaga/vanilla-spa-sample
+
+## go 便利ライブラリ
+
+- https://github.com/google/go-querystring
+
+これ知らなかった。
