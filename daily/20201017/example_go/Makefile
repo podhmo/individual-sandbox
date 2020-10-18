@@ -14,3 +14,19 @@
 	cd $(shell echo $@*/) && go test
 07:
 	cd $(shell echo $@*/) && go test
+08:
+	cd $(shell echo $@*/) && go test
+09:
+	echo $(shell echo $@*/)main.go
+10:
+	go run $(shell echo $@*/)main.go
+11:
+	go run $(shell echo $@*/)main.go
+12:
+	go run $(shell echo $@*/)main.go
+13:
+	go run $(shell echo $@*/)main.go
+14:
+	go run $(shell echo $@*/)main.go
+15:
+	go run $(shell echo $@*/)main.go

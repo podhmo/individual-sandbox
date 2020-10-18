@@ -1,3 +1,48 @@
+## go code生成
+
+いろいろな方法を試してみていた
+
+- 素直にtext/template
+- astの変換
+- astからtemplateを作成
+
+一番最後が筋が良い気がしている
+
+- Identを利用するというhack
+- TypeName()をまともにしたい
+- ディレクトリ単位で一気に生成したい
+
+## go structgen
+
+notionのやつを作っててstructを表示してほしかった。
+ところで無限再帰してしまうっぽい。
+
+```
+path :: [ * struct.BlockRecords slice[0] * struct.Activity * struct.Edits slice[0] struct.BlockData struct.BlockValue struct.TableViews slice[0] * struct.CollectionView * struct.Format * struct.TableProperties slice[0] *]
+
+rtypes :: [*notionapi.Page notionapi.Page []*notionapi.Record *notionapi.Record notionapi.Record *notionapi.Activity notionapi.Activity []notionapi.Edit notionapi.Edit struct { BlockValue notionapi.Block "json:\"block_value\"" } notionapi.Block []*notionapi.TableView *notionapi.TableView notionapi.TableView *notionapi.CollectionView notionapi.CollectionView *notionapi.FormatTable notionapi.FormatTable []*notionapi.TableProperty *notionapi.TableProperty notionapi.TableProperty]
+panic: x
+```
+
+直したderefがcache効いていなかった。structgenで難しいのはpackage pathの扱いかもしれない。
+
+## go notion
+
+- https://github.com/kjk/notionapi
+
+この辺を参考にしてみるのが良さそう。
+
+- download
+- upload
+
+## go client library
+
+もう少し考えてみる。やっぱりclient libraryの自作がめんどくさい。
+生成されてほしい。
+と、考えてみたのだけど、goaとは何が違うんだろうか？
+
+glueという言葉が適切かもしれない。考えてみると、HTTPのmethodとpathもoptionalかもしれない。
+
 ## go http client
 
 本当にほしいのはhttp clientなんだろうか？

@@ -15,6 +15,10 @@ import (
 	"github.com/podhmo/tenuki"
 )
 
+// とても頑張って以下のendpoitのclientを実装したサンプル
+//
+// - GET /todos []Todo
+
 type Todo struct {
 	Title string `json:"title"`
 	Done  bool   `json:"done"`
@@ -36,7 +40,7 @@ func ListTodo(w http.ResponseWriter, req *http.Request) {
 	tenuki.Render(w, req).JSONArray(200, items)
 }
 
-type Client struct {
+type Backend struct {
 	BaseURL string
 	*Driver
 	*Decoder
@@ -107,8 +111,8 @@ func (t *Decoder) DecodeResult(resp *http.Response, result interface{}) error {
 	return nil
 }
 
-func NewClient(baseURL string, options ...func(*Client)) *Client {
-	client := &Client{
+func NewBackend(baseURL string, options ...func(*Backend)) *Backend {
+	b := &Backend{
 		BaseURL: strings.TrimSuffix(baseURL, "/"),
 		Driver: &Driver{
 			HTTPClient: http.DefaultClient,
@@ -116,22 +120,18 @@ func NewClient(baseURL string, options ...func(*Client)) *Client {
 		Decoder: &Decoder{},
 	}
 	for _, opt := range options {
-		opt(client)
+		opt(b)
 	}
-	return client
-}
-func WithHTTPClient(httpClient *http.Client) func(*Client) {
-	return func(c *Client) {
-		c.HTTPClient = httpClient
-	}
+	return b
 }
 
 type ListInput struct {
-	Limit int
+	Limit  int
+	Offset int
 }
 
 func NewListInput() ListInput {
-	return ListInput{Limit: 10}
+	return ListInput{Limit: 10, Offset: 0}
 }
 
 type withLimitFunc func(*ListInput)
@@ -142,9 +142,27 @@ func WithLimit(limit int) withLimitFunc {
 	}
 }
 
+type withOffsetFunc func(*ListInput)
+
+func WithOffset(offset int) withOffsetFunc {
+	return func(input *ListInput) {
+		input.Offset = offset
+	}
+}
+
 type ListTodoInput struct {
 	ListInput
 }
+
+func (input *ListInput) RequestInput(body io.Reader) RequestInput {
+	rinput := NewRequestInput(body)
+	rinput.Query["limit"] = strconv.Itoa(input.Limit)
+	if input.Offset > 0 {
+		rinput.Query["offset"] = strconv.Itoa(input.Offset)
+	}
+	return rinput
+}
+
 type listTodoInputOption interface {
 	ApplyListTodoInput(*ListTodoInput)
 }
@@ -152,13 +170,19 @@ type listTodoInputOption interface {
 func (f withLimitFunc) ApplyListTodoInput(input *ListTodoInput) {
 	f(&input.ListInput)
 }
+func (f withOffsetFunc) ApplyListTodoInput(input *ListTodoInput) {
+	f(&input.ListInput)
+}
 func (input *ListTodoInput) RequestInput(body io.Reader) RequestInput {
-	rinput := NewRequestInput(body)
-	rinput.Query["limit"] = strconv.Itoa(input.Limit)
+	rinput := input.ListInput.RequestInput(body)
 	return rinput
 }
 
-func (c *Client) ListTodo(options ...listTodoInputOption) ([]Todo, error) {
+type TodoResource struct {
+	*Backend
+}
+
+func (r *TodoResource) List(options ...listTodoInputOption) ([]Todo, error) {
 	input := &ListTodoInput{
 		ListInput: NewListInput(),
 	}
@@ -166,42 +190,68 @@ func (c *Client) ListTodo(options ...listTodoInputOption) ([]Todo, error) {
 		opt.ApplyListTodoInput(input)
 	}
 
-	url := c.BaseURL + "/todo"
-	req, err := c.Driver.NewRequest("GET", url, input.RequestInput(nil))
+	url := r.BaseURL + "/todo"
+	req, err := r.Driver.NewRequest("GET", url, input.RequestInput(nil))
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err, cleanup := c.Driver.Do(req)
+	resp, err, cleanup := r.Driver.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer cleanup()
 
-	if err := c.Decoder.DecodeError(resp); err != nil {
+	if err := r.Decoder.DecodeError(resp); err != nil {
 		return nil, err
 	}
 
 	var items []Todo
-	if c.Decoder.DecodeResult(resp, &items); err != nil {
+	if r.Decoder.DecodeResult(resp, &items); err != nil {
 		return nil, err
 	}
 	return items, nil
 }
- 
+
+type APIClient struct {
+	Todo *TodoResource
+}
+
+func NewAPIClient(b *Backend) *APIClient {
+	return &APIClient{
+		Todo: &TodoResource{Backend: b},
+	}
+}
+
+type Config struct {
+	BaseURL    string
+	HTTPClient *http.Client
+}
+
+func (c *Config) BuildClient() *APIClient {
+	httpClient := c.HTTPClient
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+	b := NewBackend(c.BaseURL)
+	b.HTTPClient = httpClient
+	return NewAPIClient(b)
+}
+
 func TestIt(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(ListTodo))
 	defer ts.Close()
 
 	ct := &tenuki.CapturedTransport{}
-	client := NewClient(
-		ts.URL,
-		WithHTTPClient(&http.Client{Transport: ct}),
-	)
+	cfg := Config{
+		BaseURL:    ts.URL,
+		HTTPClient: &http.Client{Transport: ct},
+	}
+	client := cfg.BuildClient()
 
 	t.Run("list", func(t *testing.T) {
 		defer ct.Capture(t)()
-		got, err := client.ListTodo(WithLimit(1))
+		got, err := client.Todo.List(WithLimit(1))
 		if err != nil {
 			t.Errorf("unexpected error: %+v", err)
 		}
