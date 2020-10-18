@@ -1,3 +1,18 @@
+## go text/template
+
+そういえば、goのtext/templateには不慣れなのだよなー。
+
+- range
+- define
+- template
+
+このあたりを上手く使うといろいろできる？ https://golang.org/pkg/text/template/
+
+あと以下もあるのか
+
+- block
+- with
+
 ## bash completion
 
 - https://iridakos.com/programming/2018/03/01/bash-programmable-completion-tutorial
