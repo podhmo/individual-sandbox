@@ -1,3 +1,55 @@
+## go asttmpl
+
+- 何が嬉しかったのだろう？
+
+  - text/templateから逃れられる点
+  - 普通にコンパイルの通ったものからスタートできる
+
+- 何が不足しているんだろう？
+
+  - 型と値しか書き換えられない。
+  - 任意の場所にコードを埋め込める -> コメントを利用するhackでできる。
+  - まだ構造が変わるようなものなどは埋め込めない？
+
+    - 全体の構造のようなものは直接書き、特定の部分だけブロックとして別に書くことは可能？
+    - そもそもtext/template上でtemplateを実行することは可能？
+
+      - できるし、何ならtemplate上で新しいtemplateを定義することも可能
+
+     - 可能なら、関数呼び出しのような見た目に擬態させたい。
+
+      - 関数の中などならできるかもしれない。
+      - structのフィールドをループで作るとかが無理？
+
+## go cli
+
+requiredってどんな感じで実装するんだろう？
+
+```go
+	seen := make(map[string]bool)
+	flag.Visit(func(f *flag.Flag) { seen[f.Name] = true })
+	for _, req := range __REQUIRED__ {
+		if !seen[req] {
+			log.Printf("missing required -%s argument/flag\n", req)
+			os.Exit(2)
+		}
+	}
+```
+
+こんな感じか。
+
+### 追記
+
+goのastでいい感じにやるやつ。
+
+- commentに混ぜる
+- `__XXX__`に割り当てる
+
+clientのときにどうなるんだろう？引数ごとに使うものを返る。
+サブコマンドごとに引数が別か。flagSetを使うのだった。
+
+最後の実行はJSON?
+
 ## go text/template
 
 そういえば、goのtext/templateには不慣れなのだよなー。
