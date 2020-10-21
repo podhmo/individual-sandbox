@@ -7,10 +7,6 @@ import (
 )
 
 func main() {
-	type S struct {
-		Ans int
-		N   int
-	}
 	var tmpl *template.Template
 	tmpl = template.Must(template.New("root").
 		Funcs(map[string]interface{}{

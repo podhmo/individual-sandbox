@@ -17,6 +17,8 @@ require (
 	github.com/briandowns/spinner v1.11.1 // indirect
 	github.com/caarlos0/env/v6 v6.2.2 // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
+	github.com/charmbracelet/bubbles v0.7.0 // indirect
+	github.com/charmbracelet/bubbletea v0.12.0 // indirect
 	github.com/charmbracelet/glamour v0.2.1-0.20200724174618-1246d13c1684 // indirect
 	github.com/cli/cli v0.7.1-0.20200429012344-d9083200504d
 	github.com/craicoverflow/go-environment-variables-example v0.0.0-20190228224948-ee3fabeff275 // indirect
@@ -27,6 +29,7 @@ require (
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/facebook/ent v0.4.3 // indirect
 	github.com/fatih/color v1.9.0 // indirect
+	github.com/fogleman/ease v0.0.0-20170301025033-8da417bf1776 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8 // indirect
@@ -72,6 +75,7 @@ require (
 	github.com/labstack/echo/v4 v4.1.16 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.8.0
+	github.com/mattn/efm-langserver v0.0.21 // indirect
 	github.com/mattn/go-isatty v0.0.12
 	github.com/mattn/go-sqlite3 v1.14.3
 	github.com/mitchellh/go-testing-interface v1.0.0 // indirect
@@ -111,13 +115,13 @@ require (
 	github.com/volatiletech/null v8.0.0+incompatible // indirect
 	github.com/volatiletech/null/v8 v8.1.0 // indirect
 	github.com/volatiletech/sqlboiler v3.7.1+incompatible // indirect
+	github.com/x-motemen/ghq v1.1.5 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.14.1
 	goa.design/goa v2.1.2+incompatible // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
-	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980
+	golang.org/x/sys v0.0.0-20201015000850-e3ed0017c211
 	golang.org/x/tools v0.0.0-20200904185747-39188db58858
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect

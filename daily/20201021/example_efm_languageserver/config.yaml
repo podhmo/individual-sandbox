@@ -1,0 +1,26 @@
+version: 2
+root-markers:
+  - .git/
+commands:
+  # dictknifeとか使える？
+  - command: open
+    arguments:
+      - ${INPUT}
+    title: メモ帳
+
+tools:
+  markdown-markdownlint: &markdown-markdownlint
+    lint-command: 'markdownlint -s'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l %m'
+      - '%f:%l:%c %m'
+      - '%f: %l: %m'
+    hover-command: 'cat'
+  markdown-pandoc: &markdown-pandoc
+    format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
+
+languages:
+  markdown:
+    - <<: *markdown-markdownlint
+    - <<: *markdown-pandoc
