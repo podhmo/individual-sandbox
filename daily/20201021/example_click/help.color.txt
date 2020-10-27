@@ -1,0 +1,4 @@
+Usage: foo_bar color [OPTIONS] COLOR
+
+Options:
+  -h, --help  Show this message and exit.

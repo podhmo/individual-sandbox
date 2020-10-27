@@ -1,0 +1,8 @@
+Usage: foo_bar [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -h, --help  Show this message and exit.
+
+Commands:
+  color
+  envvar

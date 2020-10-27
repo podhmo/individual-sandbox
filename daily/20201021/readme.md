@@ -1,3 +1,25 @@
+## go generate bash completion
+
+- 補完用のコードどうやって作る？
+- とりあえずtext/templateの方が見やすい？
+- strconv.Quoteを使ってもだめなのか。そもそも空白を使うことはないか。
+
+### 追記
+
+- とりあえずべた書きを考える。
+- 途中にflagがあることは無視しよう。
+- template中で再帰するのはわかりやすいんだろうか？
+
+### 追記
+
+もっと手軽にできるのでは？
+
+- https://dev.to/rrampage/bash-command-completion---finding-all-the-cats-in-your-path-2am2
+
+### multi-command
+
+- https://stackoverflow.com/questions/17879322/how-do-i-autocomplete-nested-multi-level-subcommands
+
 ## go bubbletea
 
 - https://github.com/charmbracelet/bubbletea

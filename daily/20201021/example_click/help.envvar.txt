@@ -1,0 +1,4 @@
+Usage: foo_bar envvar [OPTIONS] ENVVAR
+
+Options:
+  -h, --help  Show this message and exit.

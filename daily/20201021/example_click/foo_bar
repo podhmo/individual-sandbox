@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+import os
+import click
+# https://click.palletsprojects.com/en/7.x/bashcomplete/
+
+
+def get_env_vars(ctx, args, incomplete):
+    return [k for k in os.environ.keys() if incomplete in k]
+
+
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
+def cli():
+    pass
+
+
+@cli.command()
+@click.argument("envvar", type=click.STRING, autocompletion=get_env_vars)
+def envvar(envvar):
+    click.echo("Environment variable: %s" % envvar)
+    click.echo("Value: %s" % os.environ[envvar])
+
+
+def get_colors(ctx, args, incomplete):
+    colors = [
+        ("red", "a warm color"),
+        ("blue", "a cool color"),
+        ("green", "the other starter color"),
+    ]
+    return [c for c in colors if incomplete in c[0]]
+
+
+@cli.command()
+@click.argument("color", type=click.STRING, autocompletion=get_colors)
+def color(color):
+    click.echo("Chosen color is %s" % color)
+
+
+if __name__ == "__main__":
+    cli()
