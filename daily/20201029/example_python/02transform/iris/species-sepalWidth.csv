@@ -1,0 +1,4 @@
+,species,sepalWidth-min,sepalWidth-max,sepalWidth-mean,sepalWidth-std,sepalWidth-count
+0,setosa,2.3,4.4,3.428000000000001,0.3790643690962886,50
+1,versicolor,2.0,3.4,2.7700000000000005,0.3137983233784114,50
+2,virginica,2.2,3.8,2.9739999999999998,0.3224966381726375,50

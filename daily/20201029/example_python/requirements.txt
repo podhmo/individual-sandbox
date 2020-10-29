@@ -1,0 +1,12 @@
+--use-feature=2020-resolver
+pandas
+vega_datasets
+
+handofcats
+
+starlette
+uvicorn
+
+black
+flake8
+jedi
