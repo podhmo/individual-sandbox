@@ -250,15 +250,14 @@ func (p *Printer) PrintPackage(pkg *Package) error {
 	inner := map[*Func]int{}
 	for _, f := range pkg.Funcs {
 		f := f
-		if len(f.Calls) > 0 {
-			roots = append(roots, f)
-			for _, sf := range f.Calls {
-				if sf == f {
-					continue // recursive
-				}
-				inner[sf]++
+		roots = append(roots, f)
+		for _, sf := range f.Calls {
+			if sf == f {
+				continue // recursive
 			}
+			inner[sf]++
 		}
+
 	}
 	sort.Slice(roots, func(i, j int) bool { return roots[i].node.Pos() < roots[j].node.Pos() })
 

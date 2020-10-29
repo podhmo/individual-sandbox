@@ -1,3 +1,5 @@
+# export GOPACKAGESDEBUG := 1
+
 TARGET ?= m/internal/s
 # TARGET ?= go/doc
 
@@ -16,6 +18,9 @@ TARGET ?= m/internal/s
 06:
 	go run $(shell echo $@*/)main.go $(TARGET)
 07:
+	go run $(shell echo $@*/)main.go $(TARGET)
+08: TARGET := m/internal/g
+08:
 	go run $(shell echo $@*/)main.go $(TARGET)
 
 astdump:

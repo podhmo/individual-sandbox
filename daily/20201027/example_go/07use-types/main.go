@@ -29,9 +29,10 @@ import (
 // TODO: grouping by struct
 
 func main() {
-	// mode := ModeIgnoreUnexported
 	var mode InspectMode
-	mode = mode | ModeSelfOnly
+	// mode = mode | ModeSelfOnly
+	// mode = mode | ModeSkipUnexported
+	// mode = mode | ModeIncludeToplevelUnexported
 	inspector := &Inspector{Mode: mode}
 	if err := inspector.Inspect(os.Args[1:]); err != nil {
 		log.Fatalf("!! %+v", err)
@@ -41,7 +42,8 @@ func main() {
 type InspectMode int
 
 const (
-	ModeExportedOnly InspectMode = 1 << iota
+	ModeSkipUnexported InspectMode = 1 << iota
+	ModeIncludeToplevelUnexported
 	ModeSelfOnly
 )
 
@@ -67,7 +69,7 @@ func (i *Inspector) Inspect(pattern []string) error {
 	p := &Package{
 		Name:  pkg.PkgPath,
 		Files: map[string]*File{},
-		Funcs: map[string]*Func{},
+		Funcs: map[types.Object]*Func{},
 		fset:  fset,
 		pkg:   pkg,
 		mode:  i.Mode,
@@ -92,9 +94,9 @@ func (i *Inspector) Inspect(pattern []string) error {
 }
 
 type Package struct {
-	Name  string           `json:"name"`
-	Funcs map[string]*Func `json:"funcs"`
-	Files map[string]*File `json:"-"`
+	Name  string                 `json:"name"`
+	Funcs map[types.Object]*Func `json:"funcs"`
+	Files map[string]*File       `json:"-"`
 
 	fset *token.FileSet
 	pkg  *packages.Package
@@ -135,7 +137,7 @@ func (p *Package) parseFiles(files map[string]*ast.File) error {
 							if target.Pkg() != ob.Pkg() {
 								return true
 							}
-							fun.Calls = append(fun.Calls, p.FuncFromName(t.Name))
+							fun.Calls = append(fun.Calls, p.FuncFromObject(ob))
 						case *ast.SelectorExpr:
 							ob := p.pkg.TypesInfo.ObjectOf(t.Sel)
 							if target.Pkg() != ob.Pkg() {
@@ -162,7 +164,7 @@ func (p *Package) parseFiles(files map[string]*ast.File) error {
 								}
 							}
 							// TODO: only self. どこで？が消えている?
-							fun.Calls = append(fun.Calls, p.FuncFromName(t.Sel.Name))
+							fun.Calls = append(fun.Calls, p.FuncFromObject(ob))
 						case *ast.ArrayType:
 							log.Printf("not supported type: %T", node.Fun)
 							return true
@@ -195,13 +197,13 @@ func (p *Package) parseFiles(files map[string]*ast.File) error {
 	return nil
 }
 
-func (p *Package) FuncFromName(name string) *Func {
-	f, ok := p.Funcs[name]
+func (p *Package) FuncFromObject(ob types.Object) *Func {
+	f, ok := p.Funcs[ob]
 	if ok {
 		return f
 	}
-	f = &Func{Name: name, Calls: []*Func{}, Kind: FuncKindFunction, pkg: p}
-	p.Funcs[name] = f
+	f = &Func{Name: ob.Name(), Calls: []*Func{}, Kind: FuncKindFunction, pkg: p}
+	p.Funcs[ob] = f
 	return f
 }
 func (p *Package) FileFromAST(node *ast.File) *File {
@@ -228,7 +230,7 @@ func (f *File) FuncFromAST(decl *ast.FuncDecl) *Func {
 	name := decl.Name.Name
 	tf := f.pkg.fset.File(f.node.Pos())
 
-	fun := f.pkg.FuncFromName(name)
+	fun := f.pkg.FuncFromObject(f.pkg.pkg.TypesInfo.ObjectOf(decl.Name))
 	f.Funcs[name] = append(f.Funcs[name], fun)
 
 	fun.node = decl
@@ -296,14 +298,15 @@ func (p *Printer) PrintPackage(pkg *Package) error {
 	inner := map[*Func]int{}
 	for _, f := range pkg.Funcs {
 		f := f
-		if len(f.Calls) > 0 {
-			roots = append(roots, f)
-			for _, sf := range f.Calls {
-				if sf == f {
-					continue // recursive
-				}
-				inner[sf]++
+		if f.node == nil {
+			continue // something wrong
+		}
+		roots = append(roots, f)
+		for _, sf := range f.Calls {
+			if sf == f {
+				continue // recursive
 			}
+			inner[sf]++
 		}
 	}
 	sort.Slice(roots, func(i, j int) bool { return roots[i].node.Pos() < roots[j].node.Pos() })
@@ -313,7 +316,7 @@ func (p *Printer) PrintPackage(pkg *Package) error {
 		if _, notOuter := inner[f]; notOuter {
 			continue
 		}
-		if p.mode&ModeExportedOnly != 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
+		if p.mode&ModeIncludeToplevelUnexported == 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
 			continue
 		}
 		if err := p.printFunc(f, seen); err != nil {
@@ -336,7 +339,7 @@ func (p *Printer) printFunc(f *Func, seen map[*Func]int) error {
 		if p.lv <= 1 {
 			return nil
 		}
-		if p.mode&ModeExportedOnly != 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
+		if p.mode&ModeSkipUnexported != 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
 			return nil
 		}
 		fmt.Fprintf(p.w, "%s%s #=%d\n", strings.Repeat(p.indent, p.lv), strings.ReplaceAll(p.info.ObjectOf(f.node.(*ast.FuncDecl).Name).String(), f.pkg.Name+".", ""), id)
@@ -344,7 +347,7 @@ func (p *Printer) printFunc(f *Func, seen map[*Func]int) error {
 	}
 
 	seen[f] = len(seen)
-	if p.mode&ModeExportedOnly != 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
+	if p.mode&ModeSkipUnexported != 0 && f.Name[0] == strings.ToLower(f.Name)[0] {
 		return nil
 	}
 	fmt.Fprintf(p.w, "%s%s\n", strings.Repeat(p.indent, p.lv), strings.ReplaceAll(p.info.ObjectOf(f.node.(*ast.FuncDecl).Name).String(), f.pkg.Name+".", ""))
