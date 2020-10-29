@@ -1,6 +1,8 @@
 --use-feature=2020-resolver
 pandas
+tabulate
 vega_datasets
+
 
 handofcats
 
