@@ -1,0 +1,7 @@
+definitions:
+  A:
+    type: array
+    items:
+      type: integer
+  R:
+    $ref: "#/definitions/A"

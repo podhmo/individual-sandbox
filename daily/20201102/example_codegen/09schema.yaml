@@ -1,0 +1,10 @@
+definitions:
+  S:
+    type: object
+    properties:
+      x:
+        $ref: "#/definitions/S"
+      y:
+        $ref: "#/definitions/Y"
+  Y:
+    $ref: "#/definitions/S"

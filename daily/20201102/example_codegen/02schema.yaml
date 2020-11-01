@@ -1,0 +1,14 @@
+definitions:
+  S:
+    type: object
+    properties:
+      xs:
+        type: array
+        items:
+          type: string
+      ys:
+        type: array
+        items:
+          $ref: "#/definitions/P"
+  P:
+    type: string

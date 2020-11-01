@@ -1,0 +1,16 @@
+definitions:
+  S:
+    type: object
+    properties:
+      x:
+        type: object
+        properties:
+          name:
+            type: string
+      y:
+        $ref: "#/definitions/O"
+  O:
+    type: object
+    properties:
+      name:
+        type: string

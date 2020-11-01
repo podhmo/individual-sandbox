@@ -1,0 +1,13 @@
+version: 3.0.0
+
+components:
+  schemas:
+    Person:
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+      required:
+        - name
+

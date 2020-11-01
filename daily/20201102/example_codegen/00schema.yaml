@@ -1,0 +1,6 @@
+definitions:
+  S:
+    type: object
+    properties:
+      name:
+        type: string

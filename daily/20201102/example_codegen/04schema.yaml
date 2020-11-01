@@ -1,0 +1,26 @@
+definitions:
+  S:
+    type: object
+    properties:
+      xs:
+        type: array
+        items:
+          type: array
+          items:
+            type: string
+      ys:
+        type: array
+        items:
+          $ref: "#/definitions/A"
+      zs:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+  A:
+    type: array
+    items:
+      type: string

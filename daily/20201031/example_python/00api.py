@@ -13,4 +13,17 @@ class DatasetEndpoint(HTTPEndpoint):
         return Response("hello post")
 
 
-app = Starlette(debug=True, routes=[Route("/dataset", DatasetEndpoint)])
+async def on_startup():
+    import os
+    import sys
+
+    sentinel_file = os.environ.get("SENTINEL")
+    if sentinel_file is None:
+        print(f"	** sentinel is not found. skip.", file=sys.stderr)
+        return
+    print(f"	** sentinel is found. removing (ack). {sentinel_file}", file=sys.stderr)
+    os.path.exists(sentinel_file) and os.remove(sentinel_file)
+
+
+routes = [Route("/dataset", DatasetEndpoint)]
+app = Starlette(debug=True, routes=routes, on_startup=[on_startup])

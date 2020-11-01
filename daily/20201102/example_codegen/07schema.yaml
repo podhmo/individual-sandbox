@@ -1,0 +1,39 @@
+definitions:
+  S:
+    type: object
+    properties:
+      x:
+        type: object
+        properties:
+          value:
+            type: integer
+        additionalProperties:
+          type: object
+          properties:
+            name:
+              type: string
+      y:
+        type: object
+        properties:
+          value:
+            type: integer
+        additionalProperties:
+          $ref: "#/definitions/O"
+      z: # ng
+        $ref: "#/definitions/D"
+  O:
+    type: object
+    properties:
+      name:
+        type: string
+  D:
+    type: object
+    properties:
+      value:
+        type: integer
+    additionalProperties:
+      type: object
+      properties:
+        name:
+          type: string
+

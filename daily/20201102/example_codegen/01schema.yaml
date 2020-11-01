@@ -1,0 +1,7 @@
+definitions:
+  S:
+    type: array
+    items:
+      properties:
+        name:
+          type: string

@@ -28,7 +28,7 @@ func (i *MyImporter) Import(filepath string) (*types.Package, error) {
 	log.Println("import", filepath, "as", path.Base(filepath))
 	real, err := i.Internal.Import(filepath)
 	return real, err
-
+	
 	// // importが途中で打ち切られてしまう。。
 	// fake := types.NewPackage(filepath, path.Base(filepath))
 	// fake.MarkComplete()

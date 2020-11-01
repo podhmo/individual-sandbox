@@ -1,0 +1,18 @@
+version: 3.x.x
+components:
+  schemas:
+    S:
+      type: object
+      properties:
+        x:
+          type: object
+          properties:
+            name:
+              type: string
+        y:
+          $ref: "#/components/schemas/O"
+    O:
+      type: object
+      properties:
+        name:
+          type: string

@@ -1,0 +1,1 @@
+{"species":{"0":"setosa","1":"versicolor","2":"virginica"},"sepalLength-min":{"0":4.3,"1":4.9,"2":4.9},"sepalLength-max":{"0":5.8,"1":7.0,"2":7.9},"sepalLength-mean":{"0":5.006,"1":5.936,"2":6.588},"sepalLength-std":{"0":0.3524896872,"1":0.5161711471,"2":0.6358795933},"sepalLength-count":{"0":50,"1":50,"2":50}}

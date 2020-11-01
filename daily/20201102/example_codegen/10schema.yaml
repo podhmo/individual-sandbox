@@ -1,0 +1,5 @@
+definitions:
+  P:
+    type: integer
+  R:
+    $ref: "#/definitions/P"
