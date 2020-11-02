@@ -1,0 +1,9 @@
+definitions:
+  person:
+    type: object
+    properties:
+      name:
+        type: string
+      x-data:
+        additionalProperties:
+          type: string
