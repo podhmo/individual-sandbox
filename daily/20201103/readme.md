@@ -1,3 +1,7 @@
+## python xmlrpc
+
+ちょっとrpcがしたくなった。
+
 ## symlink in windows
 
 (but need admin permission?)
