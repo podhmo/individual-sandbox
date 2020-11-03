@@ -25,3 +25,8 @@
 
 - liftingが機能していない。
 
+
+ln -s ../../shapes/v2 v2src
+ln -s ../../shapes/v3 v3src
+ln -s ../../shapes/expected v2dst
+ln -s ../../shapes/expected v3dst
