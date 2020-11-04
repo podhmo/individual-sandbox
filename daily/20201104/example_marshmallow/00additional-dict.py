@@ -6,5 +6,6 @@ from marshmallow import (
 )
 
 
-class S(Schema):
+class Person(Schema):
     name = fields.String()
+    x_data = fields.Dict(keys=fields.String(), values=fields.String(), data_key='x-data')
