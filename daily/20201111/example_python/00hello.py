@@ -7,11 +7,10 @@ import time
 import subprocess
 import logging
 import contextlib
-import zmq
-from tinyrpc import RPCClient
-from tinyrpc.protocols.jsonrpc import JSONRPCProtocol
-from tinyrpc.transports.zmq import ZmqClientTransport
+import os
+import httpx
 from handofcats import as_command
+
 
 logger = logging.getLogger(__name__)
 
@@ -28,12 +27,8 @@ def _find_free_port(host: str = "0.0.0.0") -> int:
 
 @contextlib.contextmanager
 def connect_server(
-    cmd: t.List[str], *, sentinel: str, port: int
+    server_process: subprocess.Popen, *, sentinel: str,
 ) -> t.Iterator[t.subprocess.Popen]:
-    assert sentinel in cmd
-    assert str(port) in cmd
-
-    server_process = subprocess.Popen(cmd)
     try:
         p = pathlib.Path(sentinel)
         with p.open("w"):
@@ -41,10 +36,10 @@ def connect_server(
 
         ok = False
         st = time.time()
-        for wait_time in [0.1, 0.2, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4]:
+        for connect_time in [0.1, 0.2, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4]:
             if p.exists():
-                print(f"	wait ... {wait_time}", file=sys.stderr)
-                time.sleep(wait_time)
+                print(f"	connect ... {connect_time}", file=sys.stderr)
+                time.sleep(connect_time)
                 continue
             ok = True
             break
@@ -60,23 +55,34 @@ def connect_server(
 
 
 @as_command
-def run() -> None:
-    ctx = zmq.Context()
-
+def run(*, port: int):
     port = _find_free_port()
     sentinel = tempfile.mktemp()
 
-    cmd = [sys.executable, "03server.py", "--port", str(port), "--sentinel", sentinel]
-    with connect_server(cmd, sentinel=sentinel, port=port):
-        print(f"connect ... {port}", file=sys.stderr)
-        rpc_client = RPCClient(
-            JSONRPCProtocol(), ZmqClientTransport.create(ctx, f"tcp://127.0.0.1:{port}")
-        )
-        s = rpc_client.get_proxy()
+    cmd = [
+        sys.executable,
+        "-m",
+        "uvicorn",
+        "x00hello:app",
+        "--port",
+        str(port),
+        "--no-use-colors",
+    ]
+    server_process = subprocess.Popen(cmd, env={"SENTINEL": sentinel})
 
-        print("Returns 2**3 = 8", "->", s.pow(2, 3))
-        print("Returns 5", "->", s.add(2, 3))
-        print("Returns 5*2 = 10", "->", s.mul(5, 2))
-
-        # Print list of available methods
-        print(s.list_methods())
+    # TODO:
+    # - headers
+    # - cookies
+    # - queries
+    # - trace (logging)
+    # - retry
+    # - auth
+    # - post JSON
+    # - post formData
+    with connect_server(server_process, sentinel=sentinel):
+        print("----------------------------------------")
+        url = f"http://localhost:{port}/"
+        res = httpx.request("GET", url, params={"pretty": True})
+        print(res, res.text)
+        print(res.json())
+        print("----------------------------------------")

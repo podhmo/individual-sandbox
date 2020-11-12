@@ -1,0 +1,80 @@
+{
+  "definitions": {
+    "todo": {
+      "properties": {
+        "done": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "type": "object"
+    }
+  },
+  "openapi": "2.0.0",
+  "paths": {
+    "/api/todo": {
+      "get": {
+        "operationId": "listTodo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Todo"
+              },
+              "type": "array"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "addTodo",
+        "parameters": [
+          {
+            "description": "Todo object that needs to be added to the store",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "invalid input"
+          }
+        }
+      }
+    },
+    "/api/todo/{todoId}": {
+      "get": {
+        "operationId": "getTodo",
+        "parameters": [
+          {
+            "description": "id of todo",
+            "in": "path",
+            "name": "todoId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,6 @@ from marshmallow import (
 
 
 class S(Schema):
-    xs = fields.List(fields.String())
-    ys = fields.List(fields.String())
-    zs = fields.Nested(fields.List(many=True))
+    xs = fields.List(fields.List(fields.String()))
+    ys = fields.List(fields.List(fields.String()))
+    zs = fields.List(fields.List(fields.Field()))

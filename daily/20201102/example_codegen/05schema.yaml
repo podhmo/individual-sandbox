@@ -8,10 +8,18 @@ definitions:
       y:
         additionalProperties:
           $ref: "#/definitions/P"
-      z: # ng
+      y2:
+        additionalProperties:
+          $ref: "#/definitions/P2"
+      z:
         $ref: "#/definitions/D"
+      z2: # ng
+        additionalProperties:
+          $ref: "#/definitions/D"
   P:
     type: integer
+  P2:
+    $ref: "#/definitions/P"
   D:
     additionalProperties:
       type: integer
