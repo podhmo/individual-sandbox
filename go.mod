@@ -39,6 +39,7 @@ require (
 	github.com/go-chi/render v1.0.1
 	github.com/go-critic/go-critic v0.4.3 // indirect
 	github.com/go-gorp/gorp/v3 v3.0.2 // indirect
+	github.com/go-macaron/session v1.0.0 // indirect
 	github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/strfmt v0.19.5
 	github.com/go-openapi/swag v0.19.8
@@ -55,7 +56,9 @@ require (
 	github.com/google/wire v0.3.0 // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/mux v1.7.3 // indirect
+	github.com/gosimple/slug v1.9.0 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
+	github.com/grafana/grafana v6.1.6+incompatible // indirect
 	github.com/graphql-go/graphql v0.7.9 // indirect
 	github.com/graphql-go/handler v0.2.3 // indirect
 	github.com/graphql-go/relay v0.0.0-20171208134043-54350098cfe5 // indirect
@@ -65,6 +68,7 @@ require (
 	github.com/hashicorp/yamux v0.0.0-20190923154419-df201c70410d // indirect
 	github.com/henvic/httpretty v0.0.5 // indirect
 	github.com/heroku/x v0.0.11
+	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1 // indirect
 	github.com/integrii/flaggy v1.4.4 // indirect
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
 	github.com/jmoiron/sqlx v1.2.1-0.20190826204134-d7d95172beb5
@@ -108,6 +112,7 @@ require (
 	github.com/spf13/viper v1.6.3 // indirect
 	github.com/stripe/stripe-go v70.15.0+incompatible // indirect
 	github.com/tdakkota/asciicheck v0.0.0-20200416200610-e657995f937b // indirect
+	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/tetafro/godot v0.3.7 // indirect
 	github.com/timakin/bodyclose v0.0.0-20200424151742-cb6215831a94 // indirect
 	github.com/vektah/dataloaden v0.3.0 // indirect
@@ -128,6 +133,7 @@ require (
 	google.golang.org/grpc v1.25.1 // indirect
 	google.golang.org/protobuf v1.22.0 // indirect
 	gopkg.in/ini.v1 v1.55.0 // indirect
+	gopkg.in/macaron.v1 v1.3.9 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	honnef.co/go/tools v0.0.1-2020.1.0.20200730203520-2c5dee2fb55d // indirect
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
