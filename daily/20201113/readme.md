@@ -1,3 +1,75 @@
+## go cli
+
+- https://github.com/cli/cli
+
+コマンドとオプションをtreeにしてみる
+
+
+- `--help`
+- `--version`
+- `-R, --repo`
+- issue
+
+  - create
+
+    - `-b, --body`
+    - `-t, --title`
+    - `-w, --web`
+
+  - list
+
+    - `-a, --assignee`
+    - `-A, --author`
+    - `-L, --limit`
+    - `-s, --state`
+
+  - status
+  - view
+
+    - `-w, --web`
+
+- pr
+
+
+- repo
+
+## go cliのhelpの表示
+
+```
+Work seamlessly with GitHub from the command line.
+
+USAGE
+gh <command> <subcommand> [flags]
+
+CORE COMMANDS
+  issue:      Create and view issues
+  pr:         Create, view, and checkout pull requests
+  repo:       Create, clone, fork, and view repositories
+
+ADDITIONAL COMMANDS
+  completion: Generate shell completion scripts
+  config:     Set and get gh settings
+  help:       Help about any command
+
+FLAGS
+      --help              Show help for command
+  -R, --repo OWNER/REPO   Select another repository using the OWNER/REPO format
+      --version           Show gh version
+
+EXAMPLES
+  $ gh issue create
+  $ gh repo clone
+  $ gh pr checkout 321
+
+LEARN MORE
+  Use "gh <command> <subcommand> --help" for more information about a command.
+  Read the manual at <http://cli.github.com/manual>
+
+FEEDBACK
+  Fill out our feedback form <https://forms.gle/umxd3h31c7aMQFKG7>
+  Open an issue using “gh issue create -R cli/cli”
+```
+
 ## go cli ついにCLIのいい感じのものが思いついた
 
 名前: quick (仮) or gencli
