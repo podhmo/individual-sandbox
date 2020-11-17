@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  influxdb:
+    container_name: influxdb-sandbox
+    image: influxdb:1.7.10
+    volumes:
+      - "$PWD/.local/data/influxdb:/var/lib/influxdb"
+    ports:
+      - "8086:8086"
