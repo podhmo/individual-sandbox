@@ -1,0 +1,27 @@
+{
+  "components": {
+    "schemas": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "father": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "mother": {
+            "$ref": "#/components/schemas/Person"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    }
+  },
+  "openapi": "3.1.0"
+}

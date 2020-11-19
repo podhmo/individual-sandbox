@@ -1,0 +1,10 @@
+{
+  "components": {
+    "schemas": {
+      "MyInt": {
+        "type": "integer"
+      }
+    }
+  },
+  "openapi": "3.1.0"
+}
