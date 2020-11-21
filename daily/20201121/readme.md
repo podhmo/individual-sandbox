@@ -17,3 +17,5 @@
 いろいろ復習
 
 - https://docs.sqlalchemy.org/en/13/core/tutorial.html
+- 1.4からだいぶ変わるらしい https://docs.sqlalchemy.org/en/14/changelog/migration_20.html
+- richでtable表示ができる

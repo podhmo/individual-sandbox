@@ -17,12 +17,12 @@ notes = sa.Table(
 def run(*, format: tx.Literal["json", "tabular"] = "tabular") -> None:
     db_url = "sqlite:///:memory:"
     engine = sa.create_engine(
-        db_url, connect_args={"check_same_thread": False}, echo=True
+        db_url, connect_args={"check_same_thread": False}, echo=True  # , future=True
     )
     metadata.create_all(bind=engine)
 
     # print(notes.insert().values(text="foo", completed=False).compile())
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         conn.execute(
             notes.insert(),
             [
@@ -36,7 +36,10 @@ def run(*, format: tx.Literal["json", "tabular"] = "tabular") -> None:
             ],
         )
 
-        rows = conn.execute(sa.select([notes]))
+        # need transaction?
+        # with conn.begin():
+        # legacy conn.execute(sa.select([notes]))
+        rows = conn.execute(notes.select())
 
         if format == "tabular":
             from rich.console import Console

@@ -20,7 +20,7 @@ def run(*, format: tx.Literal["json", "tabular"] = "tabular") -> None:
 
     db_url = "sqlite:///./notes.db"
     engine = sa.create_engine(
-        db_url, connect_args={"check_same_thread": False}, echo=True
+        db_url, connect_args={"check_same_thread": False}, echo=True  # , future=True
     )
     metadata.drop_all(checkfirst=True, bind=engine)
     metadata.create_all(bind=engine)
