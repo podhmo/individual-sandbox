@@ -3,4 +3,4 @@ sqlalchemy
 handofcats
 rich
 databases
-
+prompt_toolkit

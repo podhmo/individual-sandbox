@@ -3,6 +3,7 @@ import typing_extensions as tx
 from databases import Database
 from handofcats import as_command
 
+# not worked in sqlalchemy>=1.4.0
 metadata = sa.MetaData()
 
 notes = sa.Table(
