@@ -1,0 +1,15 @@
+{
+  "name": "00hello-cdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-cdk": "^1.74.0",
+    "cdktf-cli": "0.0.18-pre.134"
+  }
+}
