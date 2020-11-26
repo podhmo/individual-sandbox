@@ -16,3 +16,7 @@
 	go run $(shell echo $@*/)main.go
 08:
 	go run $(shell echo $@*/)main.go
+09:
+	go run $(shell echo $@*/)main.go
+10:
+	go run $(shell echo $@*/)main.go

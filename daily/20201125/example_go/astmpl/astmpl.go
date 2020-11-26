@@ -54,8 +54,8 @@ func Parse(fname string) (*Template, error) {
 		for _, c := range cg.List {
 			if strings.Contains(c.Text, "// REPLACE:") {
 				varname := strings.TrimSpace(strings.Replace(c.Text, "// REPLACE:", "", 1))
+				// TODO: parse text/template
 				vars[varname] = true
-				c.Text = fmt.Sprintf("{{ .%s }}", varname)
 			}
 		}
 	}

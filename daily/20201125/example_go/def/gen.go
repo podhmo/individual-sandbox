@@ -7,7 +7,7 @@ import (
 // Variables: Name, NameBody, Template
 
 type __Name__Params struct {
-	// REPLACE: NameBody
+	// REPLACE: {{ .NameBody }}
 }
 
 type __Name__Definition struct {
