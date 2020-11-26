@@ -43,6 +43,18 @@
 3. (list lambda関数)
 4. 削除
 
+ログを取り出す部分とかがだいぶ怠いね。。
+
+### lambroll
+
+https://github.com/fujiwara/lambroll
+
+コレで動かそうとしてみる。
+
+```console
+$ go get -v github.com/fujiwara/lambroll/cmd/lambroll
+```
+
 ### create-roleの権限がない
 
 ```

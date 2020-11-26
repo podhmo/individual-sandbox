@@ -1,0 +1,8 @@
+{
+  "FunctionName": "hello",
+  "Handler": "index.handler",
+  "MemorySize": 128,
+  "Role": "arn:aws:iam::784330574880:role/lambda-ex",
+  "Runtime": "nodejs12.x",
+  "Timeout": 3
+}

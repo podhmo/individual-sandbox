@@ -15,7 +15,7 @@ list-role:
 get-role: TARGET ?= lambda-ex
 get-role:
 # これではattach roleの結果を見れない？
-	aws --output json iam get-role --role-name $(TARGET) | jq .Role.Arn -r
+	aws --output json iam get-role --role-name $(TARGET)
 
 identity:
 	aws sts get-caller-identity
