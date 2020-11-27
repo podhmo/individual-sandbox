@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"m/00hand/action"
+	"m/00hand/handler"
 	"net/http"
 	"os"
-	"strconv"
 
 	"github.com/podhmo/tenuki"
 )
@@ -24,7 +23,21 @@ func main() {
 
 func Run(addr string) error {
 	mux := http.DefaultServeMux
-	mux.HandleFunc("/Hello", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		tenuki.Render(w, r).JSON(200, map[string]interface{}{
+			"methods": []string{"Hello"},
+		})
+	})
+	mux.HandleFunc("/Hello", WebAPIAdapter(handler.Hello))
+	mux.HandleFunc("/IsEven", WebAPIAdapter(handler.IsEven))
+
+	log.Printf("listen %s...", addr)
+	return http.ListenAndServe(addr, mux)
+}
+
+func WebAPIAdapter(h handler.HandlerFunc) http.HandlerFunc {
+	name := fmt.Sprintf("%s", h) // todo: fix
+	return func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			t := recover()
 			if t != nil {
@@ -32,26 +45,25 @@ func Run(addr string) error {
 				tenuki.Render(w, r).JSON(500, map[string]string{"message": fmt.Sprintf("%s", t)})
 			}
 		}()
-		var input action.HelloInput
-		if err := tenuki.DecodeJSON(r.Body, &input); err != nil {
-			tenuki.Render(w, r).JSON(400, map[string]string{"message": err.Error()})
-			return
+
+		// TODO:headers and queries
+		ev := handler.Event{
+			Name:    name,
+			Body:    r.Body,
+			Headers: r.URL.Query(), // + headers
 		}
-		short := false
-		if ok, err := strconv.ParseBool(r.URL.Query().Get("short")); err == nil {
-			short = ok
-		}
-		result, err := action.Hello(r.Context(), input, &short)
+
+		ctx := handler.WithEvent(r.Context(), ev)
+		result, err := h(ctx, ev)
 		if err != nil {
 			code := 500
 			if x, ok := err.(interface{ StatusCode() int }); ok {
 				code = x.StatusCode()
 			}
+			// logはどうしよう
 			tenuki.Render(w, r).JSON(code, map[string]string{"message": err.Error()})
 			return
 		}
 		tenuki.Render(w, r).JSON(200, result)
-	})
-	log.Printf("listen %s...", addr)
-	return http.ListenAndServe(addr, mux)
+	}
 }
