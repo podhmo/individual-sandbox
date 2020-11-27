@@ -35,6 +35,8 @@ func Run(addr string) error {
 	return http.ListenAndServe(addr, mux)
 }
 
+// ---
+
 func WebAPIAdapter(h handler.HandlerFunc) http.HandlerFunc {
 	name := fmt.Sprintf("%s", h) // todo: fix
 	return func(w http.ResponseWriter, r *http.Request) {
