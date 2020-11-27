@@ -1,3 +1,21 @@
+## terraform lsp
+
+- https://github.com/hashicorp/terraform-ls
+
+## aws関係 tui
+
+やっぱりaccordionのようなものが欲しい。
+
+- bulletとかは近い。[../20200921/example_pycli/50bullet_check.py](../20200921/example_pycli/50bullet_check.py)
+
+  - ただmulti lineのoutputができないのでむりかも
+
+- bubbleteaとかは表示できたかも [../20201021/example_go]()
+- 無理なら https://github.com/prompt-toolkit/pymux を参考に２画面にする？
+- あるいは本当に２画面立ち上げて通信させる
+
+
+
 ## aws lambdaの使えるruntimeは？
 
 - https://stackoverflow.com/questions/53496412/aws-lambda-to-list-all-available-language-runtimes
@@ -55,7 +73,16 @@ https://github.com/fujiwara/lambroll
 $ go get -v github.com/fujiwara/lambroll/cmd/lambroll
 ```
 
-### create-roleの権限がない
+なるほどできた。
+
+### 外へのアクセス
+
+- https://aws.amazon.com/jp/premiumsupport/knowledge-center/internet-access-lambda-function/
+
+そういえば、VPCの権限が必要だっけ？
+何かを試してみると良さそうだけれど。
+
+## aws create-roleの権限がない
 
 ```
 aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
