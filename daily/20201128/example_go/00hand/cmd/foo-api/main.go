@@ -30,6 +30,8 @@ func Run(addr string) error {
 	})
 	mux.HandleFunc("/Hello", WebAPIAdapter(handler.Hello))
 	mux.HandleFunc("/IsEven", WebAPIAdapter(handler.IsEven))
+	mux.HandleFunc("/AddTodo", WebAPIAdapter(handler.AddTodo))
+	mux.HandleFunc("/ListTodo", WebAPIAdapter(handler.ListTodo))
 
 	log.Printf("listen %s...", addr)
 	return http.ListenAndServe(addr, mux)

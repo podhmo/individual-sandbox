@@ -51,3 +51,18 @@ func IsEven(ctx context.Context, ev Event) (interface{}, error) {
 	}
 	return action.IsEven(ctx, v)
 }
+
+var (
+	service = &action.TodoService{Todos: []action.Todo{{Title: "dummy"}}}
+)
+
+func AddTodo(ctx context.Context, ev Event) (interface{}, error) {
+	var todo action.Todo
+	if err := tenuki.DecodeJSON(ev.Body, &todo); err != nil {
+		return nil, apperror.New(err, 400)
+	}
+	return service.Add(ctx, todo)
+}
+func ListTodo(ctx context.Context, ev Event) (interface{}, error) {
+	return service.List(ctx)
+}

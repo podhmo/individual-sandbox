@@ -11,6 +11,7 @@ import (
 	"m/00hand/handler"
 	"net/url"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -18,6 +19,8 @@ func main() {
 		os.Args[0], []*Command{
 			NewHello(),
 			NewIsEven(),
+			NewAddTodo(),
+			NewListTodo(),
 		},
 	)
 
@@ -54,17 +57,56 @@ func NewIsEven() *Command {
 		Do:      CLIAdapter(handler.IsEven),
 	}
 }
+func NewAddTodo() *Command {
+	fs := flag.NewFlagSet("AddTodo", flag.ExitOnError)
+	var options struct {
+		TodoFileName string          `json:"-"`
+		Todo         json.RawMessage `json:"todo"`
+	}
+	fs.StringVar(&options.TodoFileName, "todo", "", "json-string or @<filename>")
+
+	return &Command{
+		FlagSet: fs,
+		Options: &options,
+		Do: CLIAdapter(handler.AddTodo, func() error {
+			if !strings.HasPrefix(options.TodoFileName, "@") {
+				options.Todo = json.RawMessage(options.TodoFileName)
+			} else {
+				b, err := ioutil.ReadFile(strings.TrimPrefix(options.TodoFileName, "@"))
+				if err != nil {
+					return err
+				}
+				options.Todo = json.RawMessage(b)
+			}
+			return nil
+		}),
+	}
+}
+func NewListTodo() *Command {
+	fs := flag.NewFlagSet("ListTodo", flag.ExitOnError)
+	var options struct {
+	}
+	return &Command{
+		FlagSet: fs,
+		Options: &options,
+		Do:      CLIAdapter(handler.ListTodo),
+	}
+}
 
 // ---
 type DoFunc func(path []*Command, args []string) error
 
-func CLIAdapter(h handler.HandlerFunc) DoFunc {
+func CLIAdapter(h handler.HandlerFunc, callbacks ...func() error) DoFunc {
 	return func(path []*Command, args []string) error {
 		cmd := path[len(path)-1]
 		if err := cmd.Parse(args); err != nil {
 			return err
 		}
-
+		for _, cb := range callbacks {
+			if err := cb(); err != nil {
+				return err
+			}
+		}
 		name := cmd.Name()
 
 		var b bytes.Buffer
@@ -101,20 +143,26 @@ type Command struct {
 }
 
 func NewRouterCommand(name string, subcmds []*Command) *Command {
+	fs := flag.NewFlagSet(name, flag.ExitOnError)
+	fs.Usage = func() {
+		fmt.Fprintf(fs.Output(), "Usage of %s:\n\n", name)
+		fs.PrintDefaults()
+		fmt.Fprintln(fs.Output(), "Available commands")
+		for _, subcmd := range subcmds {
+			fmt.Fprintf(fs.Output(), "  %s\n", subcmd.Name())
+		}
+	}
 	return &Command{
-		FlagSet: flag.NewFlagSet(name, flag.ExitOnError),
+		FlagSet: fs,
 		Do: func(path []*Command, args []string) error {
 			cmd := path[len(path)-1]
 			if err := cmd.Parse(args); err != nil {
 				return err
 			}
-
 			if cmd.NArg() == 0 {
-				fmt.Fprintln(cmd.Output(), "Available commands")
-				for _, subcmd := range subcmds {
-					fmt.Fprintf(cmd.Output(), "  %s\n", subcmd.Name())
-				}
+				cmd.Usage()
 				os.Exit(1)
+				return nil
 			}
 
 			{
@@ -124,9 +172,11 @@ func NewRouterCommand(name string, subcmds []*Command) *Command {
 						return subcmd.Do(append(path, subcmd), args[1:])
 					}
 				}
-				fmt.Fprintf(cmd.Output(), "unexpected command: %s", args[0])
+
+				cmd.Usage()
+				fmt.Fprintf(cmd.Output(), "\nunexpected command: %s\n", args[0])
 				os.Exit(1)
-				return nil // never
+				return nil
 			}
 		},
 	}
