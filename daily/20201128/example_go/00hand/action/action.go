@@ -25,6 +25,8 @@ func IsEven(ctx context.Context, v int) (string, error) {
 	return "ng", apperror.New(fmt.Errorf("not even %+v", v), 400)
 }
 
+// ---
+
 type Todo struct {
 	Title string `json:"title"`
 	Done  bool   `json:"done"`
