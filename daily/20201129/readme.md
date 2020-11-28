@@ -103,6 +103,3 @@ func init() {
 
 - 実際にdbを使ったsampleを追加してみる
 - lambdaでの実行を試してみる
-
-
-
