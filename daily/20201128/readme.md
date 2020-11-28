@@ -1,3 +1,144 @@
+## design
+
+- https://chot.design/
+
+## rpc altenatives
+
+- https://github.com/twitchtv/twirp
+
+## go web api の実装を覗いてみる
+
+- https://github.com/gothinkster/golang-gin-realworld-example-app
+- https://github.com/xesina/golang-echo-realworld-example-app
+- https://github.com/dhax/go-base
+- https://github.com/ardanlabs/service
+
+hmm
+
+- https://github.com/gofiber/fiber 用のものはなかった
+
+### ginの方
+
+3~4年前
+
+- main.goの場所がわからない
+
+  - トップレベルのhello.goらしい
+
+- confはどうなっている？
+
+  - common.Init()だった。直書きだった。というかここからechoのやつの実装がきているのか
+  - hello (main) のところで普通に頑張ってる
+  - commonにDBというグローバル変数を用意して、それに触る GetDB() が用意されているだけっぽい。
+
+- articlesとusersと言うパッケージがあるのか
+
+  - この中にhandlerの定義が書かれているのか
+  - と思ったらこの中にmodelが定義されている。application model的なものが定義されているか
+  
+     - e.g. ArticleModelはgorm.Model
+     - よく見てみたら普通のORMのmodelかも。active record的な。
+
+- viewは？
+
+  - serializerというのがresponseを作るっぽい。
+
+    - `serializer.Response()` とかで済ませてるの。。
+    - serializerはginのcontextとobject(model)を保持するstruct
+    - いたるところにあるコレの意味が分かっていなかった。 `c.MustGet("my_user_model").(UserModel)` 
+
+      - `c.Set("my_user_model", userModelValidator.userModel)` がついになっているのか
+      - validatorはparserを兼ねているみたい
+      - Bindで持っているinputをmodelに注入
+
+### echoの方
+
+2~3年前
+
+- routerは単なるappのfactoryか
+
+  - mainのところでroutingの設定をしているっぽい
+  - storeからそれっぽいものを作って、handlerに渡している
+  - handlerにregisterされているのは何なんだろう？ `h.Register(r.Group("/api"))`
+
+     - 正確に言うとregisterに渡されるのはgroupでhandlerのregisterでいろいろ登録されていた
+
+  - handlerはstoreを保持しているっぽい
+
+    - 全部interfaceなのか、article packageとuser packageで定義
+    - 実際の実装はstore package
+    - 知りたいのは一つだけで、結局handlerがfieldとして持つと言う形ということか。
+
+  - handlerは普通に `func (echo.Context) error` を定義しているっぽい
+  - input/outputはrequest/responseと言う名前で個別に定義しているっぽい
+  - auth部分は、email/passwordを取り出して、emailからuserを取り出すだけっぽい
+
+- confはどうやって設定されているんだろう？
+
+  - confなんてなくdb/db.goのNewDb()などに直書き。
+
+### go-base
+
+https://www.reddit.com/r/golang/comments/dsxvrk/best_practices_for_building_a_restapi/
+で見つけた。
+
+- viperを使っているっぽい。（個人的には苦手）
+
+  - configファイルが存在する？ defaultは `$HOME/.go-base.yaml` らしい。マジ？
+
+- go-chiを使っているのか。gendoc使っているけど。。
+- dbはgo-pg/pgっぽい。
+
+  - storeを作って、それが、Get(),Update(),Delete()を持っている感じ。
+  - あるいはUpdateToken(),DeleteToken()
+
+- handlerはapiパッケージの中かな
+
+  - api/appがある。謎
+  - api.New()でchi.Muxが作られるっぽい。普通にmountもしている。
+  - ServerはHandlerとしてchi.Muxを保持している。
+
+    - graceful shutdownの仕組みを用意しないとなー。
+    - ListenAndServeはgorountineで実行している。
+    - mainの方はsignalを待ち受けて、検知したらServer.Shutdown()を呼ぶ。
+
+### ardanlabs/service
+
+- httptreemuxを使っているっぽい？
+- appの中に色々コマンドがある？
+
+  - sales-admin, sales-api, sidecar
+  - handlers.API()がいろいろapiのrouting設定
+
+    - mid.Authenticate()で個別に呼んでいるっぽい
+
+  - Appを作っている。
+
+- 💭 一番自分が思い描いていたものに近いかも。妥協も含めて
+
+
+## go create-go-app を覗いてみる
+
+- create-go-app/cli
+
+### packageは何を使っているのだろう？
+
+- viper, cobra
+- go-git/go-git
+- AlecAlvazis/survey
+
+最後のわかんないな。
+
+### pkg/embed
+
+このhackすき。
+
+```
+//+build ignore
+
+package main
+```
+
 ## inflexible
 
 やりたいことをまとめる。

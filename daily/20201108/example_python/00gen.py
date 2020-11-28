@@ -11,4 +11,5 @@ def use(gen):
     for i in gen:
         _use(i)
 
+
 use(gen())

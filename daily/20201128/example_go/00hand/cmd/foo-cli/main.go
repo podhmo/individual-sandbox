@@ -8,9 +8,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"m/00hand/action"
 	"m/00hand/handler"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -35,25 +37,34 @@ func main() {
 func NewHello() *Command {
 	fs := flag.NewFlagSet("Hello", flag.ExitOnError)
 	var options struct {
-		Name string `json:"name"`
+		UserFileName string          `json:"-"`
+		User         json.RawMessage `json:"user"`
 	}
-	fs.StringVar(&options.Name, "name", "", "")
+	fs.StringVar(&options.UserFileName, "user", "", "")
 
 	return &Command{
 		FlagSet: fs,
 		Options: &options,
-		Do:      CLIAdapter(handler.Hello),
+		Do: CLIAdapter(handler.Hello, func() (err error) {
+			options.User, err = ExtractRawMessageFromFile(options.UserFileName)
+			if err != nil {
+				return err
+			}
+			return nil
+		}),
 	}
 }
 
 func NewIsEven() *Command {
 	fs := flag.NewFlagSet("IsEven", flag.ExitOnError)
-	var v int
-	fs.IntVar(&v, "v", 0, "")
+	var options struct {
+		V int `json:"v"`
+	}
+	fs.IntVar(&options.V, "v", 0, "")
 
 	return &Command{
 		FlagSet: fs,
-		Options: &v,
+		Options: &options,
 		Do:      CLIAdapter(handler.IsEven),
 	}
 }
@@ -94,6 +105,21 @@ func NewListTodo() *Command {
 }
 
 // ---
+func ExtractRawMessageFromFile(filenameOrContent string) (json.RawMessage, error) {
+	if filenameOrContent == "" {
+		return json.RawMessage(`{}`), nil
+	}
+	if !strings.HasPrefix(filenameOrContent, "@") {
+		return json.RawMessage(filenameOrContent), nil
+	}
+
+	b, err := ioutil.ReadFile(strings.TrimPrefix(filenameOrContent, "@"))
+	if err != nil {
+		return nil, err
+	}
+	return json.RawMessage(b), nil
+}
+
 type DoFunc func(path []*Command, args []string) error
 
 func CLIAdapter(h handler.HandlerFunc, callbacks ...func() error) DoFunc {
@@ -104,6 +130,7 @@ func CLIAdapter(h handler.HandlerFunc, callbacks ...func() error) DoFunc {
 		}
 		for _, cb := range callbacks {
 			if err := cb(); err != nil {
+				cmd.Usage()
 				return err
 			}
 		}
@@ -112,17 +139,25 @@ func CLIAdapter(h handler.HandlerFunc, callbacks ...func() error) DoFunc {
 		var b bytes.Buffer
 		enc := json.NewEncoder(&b)
 		if err := enc.Encode(cmd.Options); err != nil {
+			cmd.Usage()
 			return err
+		}
+
+		if ok, _ := strconv.ParseBool(os.Getenv("DEBUG")); ok {
+			fmt.Fprintln(os.Stderr, "----------------------------------------")
+			fmt.Fprint(os.Stderr, "data: ", b.String())
+			fmt.Fprintln(os.Stderr, "----------------------------------------")
 		}
 
 		var dummy url.Values
 		ev := handler.Event{
 			Name:    name,
-			Body:    ioutil.NopCloser(&b),
+			Body:    ioutil.NopCloser(&b), // TODO: DEBUG=1 show data
 			Headers: dummy,
 		}
 
 		ctx := context.Background()
+		ctx = action.SetupContext(ctx)
 		result, err := h(ctx, ev)
 		if err != nil {
 			return err

@@ -34,22 +34,28 @@ func WithEvent(ctx context.Context, ev Event) context.Context {
 
 // ----------------------------------------
 func Hello(ctx context.Context, ev Event) (interface{}, error) {
-	var input action.HelloInput
+	var input struct {
+		User  action.User `json:"user" validate:"required"`
+		Short bool        `json:"short"`
+	}
 	if err := tenuki.DecodeJSON(ev.Body, &input); err != nil {
 		return nil, apperror.New(err, 400)
 	}
+	// ?
 	short := false
 	if ok, err := strconv.ParseBool(ev.Headers.Get("short")); err == nil {
 		short = ok
 	}
-	return action.Hello(ctx, input, &short)
+	return action.Hello(ctx, input.User, &short)
 }
 func IsEven(ctx context.Context, ev Event) (interface{}, error) {
-	var v int
-	if err := tenuki.DecodeJSON(ev.Body, &v); err != nil {
+	var input struct {
+		V int `json:"v"`
+	}
+	if err := tenuki.DecodeJSON(ev.Body, &input); err != nil {
 		return nil, apperror.New(err, 400)
 	}
-	return action.IsEven(ctx, v)
+	return action.IsEven(ctx, input.V)
 }
 
 var (
@@ -57,12 +63,26 @@ var (
 )
 
 func AddTodo(ctx context.Context, ev Event) (interface{}, error) {
-	var todo action.Todo
-	if err := tenuki.DecodeJSON(ev.Body, &todo); err != nil {
+	var input struct {
+		Todo action.Todo `json:"todo" validate:"required"`
+	}
+	if err := tenuki.DecodeJSON(ev.Body, &input); err != nil {
 		return nil, apperror.New(err, 400)
 	}
-	return service.Add(ctx, todo)
+	return service.Add(ctx, input.Todo)
 }
 func ListTodo(ctx context.Context, ev Event) (interface{}, error) {
 	return service.List(ctx)
+}
+
+// ---
+func Greet(ctx context.Context, ev Event) (interface{}, error) {
+	var input struct {
+		Name string `json:"name"`
+	}
+	if err := tenuki.DecodeJSON(ev.Body, &input); err != nil {
+		return nil, apperror.New(err, 400)
+	}
+	registry := action.GetRegistry(ctx)
+	return action.Greet(ctx, registry.GetGreeter, input.Name)
 }

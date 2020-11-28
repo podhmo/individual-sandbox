@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"m/00hand/action"
 	"m/00hand/handler"
 	"net/http"
 	"os"
@@ -32,6 +33,7 @@ func Run(addr string) error {
 	mux.HandleFunc("/IsEven", WebAPIAdapter(handler.IsEven))
 	mux.HandleFunc("/AddTodo", WebAPIAdapter(handler.AddTodo))
 	mux.HandleFunc("/ListTodo", WebAPIAdapter(handler.ListTodo))
+	mux.HandleFunc("/Greet", WebAPIAdapter(handler.Greet))
 
 	log.Printf("listen %s...", addr)
 	return http.ListenAndServe(addr, mux)
@@ -57,7 +59,7 @@ func WebAPIAdapter(h handler.HandlerFunc) http.HandlerFunc {
 			Headers: r.URL.Query(), // + headers
 		}
 
-		ctx := handler.WithEvent(r.Context(), ev)
+		ctx := handler.WithEvent(action.SetupContext(r.Context()), ev)
 		result, err := h(ctx, ev)
 		if err != nil {
 			code := 500
