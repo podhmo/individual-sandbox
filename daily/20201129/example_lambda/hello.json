@@ -1,0 +1,8 @@
+{
+  "FunctionName": "hello",
+  "Handler": "dst/hello",
+  "MemorySize": 128,
+  "Role": "arn:aws:iam::784330574880:role/lambda-ex",
+  "Runtime": "go1.x",
+  "Timeout": 3
+}

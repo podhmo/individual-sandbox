@@ -20,3 +20,8 @@ x03:
 	http --json POST $(ADDR)/ListTodo
 x04:
 	echo '{"name": "foo"}' | http --json POST $(ADDR)/Greet
+
+01:
+	go run $(shell echo $@*/)main.go
+02:
+	go run $(shell echo $@*/)main.go
