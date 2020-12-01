@@ -3,10 +3,10 @@ package interactor
 import (
 	"bytes"
 	"context"
-	"m/03register-user/component/mailer"
-	"m/03register-user/component/notificator"
-	"m/03register-user/db"
-	"m/03register-user/domain"
+	"m/04register-user/component/mailer"
+	"m/04register-user/component/notificator"
+	"m/04register-user/db"
+	"m/04register-user/domain"
 	"strings"
 	"testing"
 )
@@ -24,8 +24,8 @@ func TestRegisterUser(t *testing.T) {
 
 	err := RegisterUser(
 		ctx,
-		func() domain.Mailer { return &mailer.FakeMailer{W: &mailerBuf} },
-		func() domain.Notificator { return &notificator.FakeNotificator{W: &notificatorBuf} },
+		&mailer.FakeMailer{W: &mailerBuf},
+		&notificator.FakeNotificator{W: &notificatorBuf},
 		user,
 	)
 
@@ -59,7 +59,7 @@ func TestRegisterUser(t *testing.T) {
 	t.Run("notify message", func(t *testing.T) {
 		want := `notify message
 	- - - - - - - - - - - - - - - - - - - - 
-	channel: new user is registered
+	channel: #new-users
 	- - - - - - - - - - - - - - - - - - - - 
 	 registered user: {id: 1, name: "foo"}) .
 `
