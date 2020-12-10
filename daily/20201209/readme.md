@@ -1,3 +1,15 @@
+## go パッケージにmain.goを忍ばせる
+
+```
+// +build main
+
+package main
+
+func main(){ }
+```
+
+go runでmain.goを指定して実行
+
 ## python google api
 
 - 直接JSONファイルを読み込んで実行

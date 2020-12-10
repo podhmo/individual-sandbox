@@ -1,0 +1,16 @@
+struct Host {
+    host: String,
+    port: Nat = 3306,
+}
+
+let main = Host("1.2.3.4", 9033);
+
+let replica = [
+    Host { host = "1.2.3.5" },
+    Host { host = "1.2.3.6" },
+];
+
+{{
+    main = main,
+    replica = replica,
+}}
