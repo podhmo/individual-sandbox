@@ -1,8 +1,7 @@
 from prime import is_prime  # Cython を利用して定義した is_prime() を import
 
 
-def minimum_prime_number():
-    X = int(input().strip())
+def minimum_prime_number(X: int):
     answer = 0
     for i in range(X, (10 ** 14 + 32)):
         if is_prime(i):
@@ -11,5 +10,8 @@ def minimum_prime_number():
     print(answer)
 
 
-if __name__ == '__main__':
-    minimum_prime_number()
+if __name__ == "__main__":
+    import sys
+
+    X = int(sys.argv[1].strip())
+    minimum_prime_number(X)
