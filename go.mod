@@ -92,7 +92,7 @@ require (
 	github.com/podhmo/go-webtest v0.4.3 // indirect
 	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
-	github.com/podhmo/reflect-openapi v0.0.3 // indirect
+	github.com/podhmo/reflect-openapi v0.0.7
 	github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0 // indirect
 	github.com/podhmo/tenuki v0.0.3
 	github.com/poy/onpar v1.0.0 // indirect

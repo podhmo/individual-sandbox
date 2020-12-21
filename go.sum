@@ -830,6 +830,10 @@ github.com/podhmo/noerror v0.2.0/go.mod h1:Cvb4ZKdIo4pLuGL8CrHihkDODevHdjnA4Ldnl
 github.com/podhmo/noerror v0.3.1/go.mod h1:Cvb4ZKdIo4pLuGL8CrHihkDODevHdjnA4LdnltJtTew=
 github.com/podhmo/reflect-openapi v0.0.3 h1:s9vZGRivsHTO10L1J7GV/ezleLlSixVETJDl2vx9W34=
 github.com/podhmo/reflect-openapi v0.0.3/go.mod h1:oTr6vMRd2eZVbdPxkr85wu90k6nBegq10WRy2IQzG+Y=
+github.com/podhmo/reflect-openapi v0.0.6 h1:wtHJgrvhLO77z1pMSjnG+CYtJOwl/rziVHH33XDGkG4=
+github.com/podhmo/reflect-openapi v0.0.6/go.mod h1:oTr6vMRd2eZVbdPxkr85wu90k6nBegq10WRy2IQzG+Y=
+github.com/podhmo/reflect-openapi v0.0.7 h1:FH2jOZjEijUgaMXfLKsm8hBZPZRWuMR2VwSCeHbC36g=
+github.com/podhmo/reflect-openapi v0.0.7/go.mod h1:lKc4iecPvrRsaJ9FZscnDuZYmONMVAibGkpnL14Rh5I=
 github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0 h1:qIrw6+SH0smoUseNDqDauIxnwGH6hjHnLDX9lssdNXk=
 github.com/podhmo/startevent v0.0.0-20200922141506-fbeacf8610f0/go.mod h1:EtL6V0BT7VsA2Fvl0SQBpqcRmyy2nMB0AIY8RU3Lb+0=
 github.com/podhmo/tenuki v0.0.2 h1:WeLRubqdS/QwRjA+7OJmE1It5xgqYPJ0BRPPswL5ij8=
