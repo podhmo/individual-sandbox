@@ -951,8 +951,8 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
-/* PyIntCompare.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, long intval, long inplace);
+/* None.proto */
+static CYTHON_INLINE long __Pyx_mod_long(long, long);
 
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
@@ -1071,8 +1071,6 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'cython' */
-
 /* Module declarations from 'libc.math' */
 
 /* Module declarations from 'prime' */
@@ -1082,6 +1080,7 @@ int __pyx_module_is_main_prime = 0;
 
 /* Implementation of 'prime' */
 static PyObject *__pyx_builtin_range;
+static const char __pyx_k_X[] = "X";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_x[] = "x";
 static const char __pyx_k_main[] = "__main__";
@@ -1093,6 +1092,7 @@ static const char __pyx_k_range[] = "range";
 static const char __pyx_k_is_prime[] = "is_prime";
 static const char __pyx_k_prime_pyx[] = "prime.pyx";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static PyObject *__pyx_n_s_X;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_i;
 static PyObject *__pyx_n_s_is_prime;
@@ -1104,82 +1104,87 @@ static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_stop;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_x;
-static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
-static PyObject *__pyx_int_0;
-static PyObject *__pyx_int_1;
+static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X); /* proto */
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
 
-/* "prime.pyx":7
+/* "prime.pyx":4
  * 
  * 
- * def is_prime(x: long) -> bool:             # <<<<<<<<<<<<<<
- *     cdef:
- *         long i, stop  # C
+ * def is_prime(X: int) -> bool:             # <<<<<<<<<<<<<<
+ *     cdef long i, stop
+ *     cdef long x = X
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_5prime_1is_prime(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
+static PyObject *__pyx_pw_5prime_1is_prime(PyObject *__pyx_self, PyObject *__pyx_v_X); /*proto*/
 static PyMethodDef __pyx_mdef_5prime_1is_prime = {"is_prime", (PyCFunction)__pyx_pw_5prime_1is_prime, METH_O, 0};
-static PyObject *__pyx_pw_5prime_1is_prime(PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_5prime_1is_prime(PyObject *__pyx_self, PyObject *__pyx_v_X) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_prime (wrapper)", 0);
-  __pyx_r = __pyx_pf_5prime_is_prime(__pyx_self, ((PyObject *)__pyx_v_x));
+  __pyx_r = __pyx_pf_5prime_is_prime(__pyx_self, ((PyObject *)__pyx_v_X));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X) {
   long __pyx_v_i;
   long __pyx_v_stop;
+  long __pyx_v_x;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  double __pyx_t_1;
+  long __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  long __pyx_t_4;
-  int __pyx_t_5;
+  int __pyx_t_4;
+  long __pyx_t_5;
   long __pyx_t_6;
-  long __pyx_t_7;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("is_prime", 0);
 
-  /* "prime.pyx":10
- *     cdef:
- *         long i, stop  # C
+  /* "prime.pyx":6
+ * def is_prime(X: int) -> bool:
+ *     cdef long i, stop
+ *     cdef long x = X             # <<<<<<<<<<<<<<
+ * 
+ *     stop = long(sqrt(x) + 1)
+ */
+  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_X); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_v_x = __pyx_t_1;
+
+  /* "prime.pyx":8
+ *     cdef long x = X
+ * 
  *     stop = long(sqrt(x) + 1)             # <<<<<<<<<<<<<<
  *     if x <= 1:
  *         return False
  */
-  __pyx_t_1 = __pyx_PyFloat_AsDouble(__pyx_v_x); if (unlikely((__pyx_t_1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 10, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble((sqrt(__pyx_t_1) + 1.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((sqrt(__pyx_v_x) + 1.0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyLong_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyInt_As_long(__pyx_t_3); if (unlikely((__pyx_t_4 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_t_3); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_stop = __pyx_t_4;
+  __pyx_v_stop = __pyx_t_1;
 
-  /* "prime.pyx":11
- *         long i, stop  # C
+  /* "prime.pyx":9
+ * 
  *     stop = long(sqrt(x) + 1)
  *     if x <= 1:             # <<<<<<<<<<<<<<
  *         return False
  *     for i in range(2, stop):
  */
-  __pyx_t_3 = PyObject_RichCompare(__pyx_v_x, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__pyx_t_5) {
+  __pyx_t_4 = ((__pyx_v_x <= 1) != 0);
+  if (__pyx_t_4) {
 
-    /* "prime.pyx":12
+    /* "prime.pyx":10
  *     stop = long(sqrt(x) + 1)
  *     if x <= 1:
  *         return False             # <<<<<<<<<<<<<<
@@ -1191,8 +1196,8 @@ static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, Py
     __pyx_r = Py_False;
     goto __pyx_L0;
 
-    /* "prime.pyx":11
- *         long i, stop  # C
+    /* "prime.pyx":9
+ * 
  *     stop = long(sqrt(x) + 1)
  *     if x <= 1:             # <<<<<<<<<<<<<<
  *         return False
@@ -1200,38 +1205,33 @@ static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, Py
  */
   }
 
-  /* "prime.pyx":13
+  /* "prime.pyx":11
  *     if x <= 1:
  *         return False
  *     for i in range(2, stop):             # <<<<<<<<<<<<<<
  *         if x % i == 0:
  *             return False
  */
-  __pyx_t_4 = __pyx_v_stop;
-  __pyx_t_6 = __pyx_t_4;
-  for (__pyx_t_7 = 2; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
-    __pyx_v_i = __pyx_t_7;
+  __pyx_t_1 = __pyx_v_stop;
+  __pyx_t_5 = __pyx_t_1;
+  for (__pyx_t_6 = 2; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
+    __pyx_v_i = __pyx_t_6;
 
-    /* "prime.pyx":14
+    /* "prime.pyx":12
  *         return False
  *     for i in range(2, stop):
  *         if x % i == 0:             # <<<<<<<<<<<<<<
  *             return False
  *     return True
  */
-    __pyx_t_3 = __Pyx_PyInt_From_long(__pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Remainder(__pyx_v_x, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 14, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__pyx_t_5) {
+    if (unlikely(__pyx_v_i == 0)) {
+      PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
+      __PYX_ERR(0, 12, __pyx_L1_error)
+    }
+    __pyx_t_4 = ((__Pyx_mod_long(__pyx_v_x, __pyx_v_i) == 0) != 0);
+    if (__pyx_t_4) {
 
-      /* "prime.pyx":15
+      /* "prime.pyx":13
  *     for i in range(2, stop):
  *         if x % i == 0:
  *             return False             # <<<<<<<<<<<<<<
@@ -1242,7 +1242,7 @@ static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, Py
       __pyx_r = Py_False;
       goto __pyx_L0;
 
-      /* "prime.pyx":14
+      /* "prime.pyx":12
  *         return False
  *     for i in range(2, stop):
  *         if x % i == 0:             # <<<<<<<<<<<<<<
@@ -1252,7 +1252,7 @@ static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, Py
     }
   }
 
-  /* "prime.pyx":16
+  /* "prime.pyx":14
  *         if x % i == 0:
  *             return False
  *     return True             # <<<<<<<<<<<<<<
@@ -1262,12 +1262,12 @@ static PyObject *__pyx_pf_5prime_is_prime(CYTHON_UNUSED PyObject *__pyx_self, Py
   __pyx_r = Py_True;
   goto __pyx_L0;
 
-  /* "prime.pyx":7
+  /* "prime.pyx":4
  * 
  * 
- * def is_prime(x: long) -> bool:             # <<<<<<<<<<<<<<
- *     cdef:
- *         long i, stop  # C
+ * def is_prime(X: int) -> bool:             # <<<<<<<<<<<<<<
+ *     cdef long i, stop
+ *     cdef long x = X
  */
 
   /* function exit code */
@@ -1328,6 +1328,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_X, __pyx_k_X, sizeof(__pyx_k_X), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
   {&__pyx_n_s_is_prime, __pyx_k_is_prime, sizeof(__pyx_k_is_prime), 0, 0, 1, 1},
@@ -1342,7 +1343,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 11, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1352,17 +1353,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "prime.pyx":7
+  /* "prime.pyx":4
  * 
  * 
- * def is_prime(x: long) -> bool:             # <<<<<<<<<<<<<<
- *     cdef:
- *         long i, stop  # C
+ * def is_prime(X: int) -> bool:             # <<<<<<<<<<<<<<
+ *     cdef long i, stop
+ *     cdef long x = X
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_stop); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(4, __pyx_n_s_X, __pyx_n_s_i, __pyx_n_s_stop, __pyx_n_s_x); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_prime_pyx, __pyx_n_s_is_prime, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_prime_pyx, __pyx_n_s_is_prime, 4, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1372,8 +1373,6 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1645,22 +1644,22 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "prime.pyx":7
+  /* "prime.pyx":4
  * 
  * 
- * def is_prime(x: long) -> bool:             # <<<<<<<<<<<<<<
- *     cdef:
- *         long i, stop  # C
+ * def is_prime(X: int) -> bool:             # <<<<<<<<<<<<<<
+ *     cdef long i, stop
+ *     cdef long x = X
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5prime_1is_prime, NULL, __pyx_n_s_prime); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5prime_1is_prime, NULL, __pyx_n_s_prime); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_prime, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_prime, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "prime.pyx":1
- * # https://qiita.com/zettaittenani/items/3bb25752d6e6a458332e             # <<<<<<<<<<<<<<
+ * from libc.math cimport sqrt             # <<<<<<<<<<<<<<
  * 
- * import cython
+ * 
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1959,71 +1958,11 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 }
 #endif
 
-/* PyIntCompare */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED long inplace) {
-    if (op1 == op2) {
-        Py_RETURN_TRUE;
-    }
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long a = PyInt_AS_LONG(op1);
-        if (a == b) Py_RETURN_TRUE; else Py_RETURN_FALSE;
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS
-    if (likely(PyLong_CheckExact(op1))) {
-        int unequal;
-        unsigned long uintval;
-        Py_ssize_t size = Py_SIZE(op1);
-        const digit* digits = ((PyLongObject*)op1)->ob_digit;
-        if (intval == 0) {
-            if (size == 0) Py_RETURN_TRUE; else Py_RETURN_FALSE;
-        } else if (intval < 0) {
-            if (size >= 0)
-                Py_RETURN_FALSE;
-            intval = -intval;
-            size = -size;
-        } else {
-            if (size <= 0)
-                Py_RETURN_FALSE;
-        }
-        uintval = (unsigned long) intval;
-#if PyLong_SHIFT * 4 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 4)) {
-            unequal = (size != 5) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[4] != ((uintval >> (4 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 3 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 3)) {
-            unequal = (size != 4) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[3] != ((uintval >> (3 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 2 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 2)) {
-            unequal = (size != 3) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK)) | (digits[2] != ((uintval >> (2 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-#if PyLong_SHIFT * 1 < SIZEOF_LONG*8
-        if (uintval >> (PyLong_SHIFT * 1)) {
-            unequal = (size != 2) || (digits[0] != (uintval & (unsigned long) PyLong_MASK))
-                 | (digits[1] != ((uintval >> (1 * PyLong_SHIFT)) & (unsigned long) PyLong_MASK));
-        } else
-#endif
-            unequal = (size != 1) || (((unsigned long) digits[0]) != (uintval & (unsigned long) PyLong_MASK));
-        if (unequal == 0) Py_RETURN_TRUE; else Py_RETURN_FALSE;
-    }
-    #endif
-    if (PyFloat_CheckExact(op1)) {
-        const long b = intval;
-        double a = PyFloat_AS_DOUBLE(op1);
-        if ((double)a == (double)b) Py_RETURN_TRUE; else Py_RETURN_FALSE;
-    }
-    return (
-        PyObject_RichCompare(op1, op2, Py_EQ));
+/* None */
+static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
+    long r = a % b;
+    r += ((r != 0) & ((r ^ b) < 0)) * b;
+    return r;
 }
 
 /* PyDictVersioning */

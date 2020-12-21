@@ -1,14 +1,4 @@
-import math
-
-
-def is_prime(x: int) -> bool:
-    stop = math.floor(math.sqrt(x) + 1)
-    if x <= 1:
-        return False
-    for i in range(2, stop):
-        if x % i == 0:
-            return False
-    return True
+from prime import is_prime  # Cython を利用して定義した is_prime() を import
 
 
 def minimum_prime_number(X: int):
