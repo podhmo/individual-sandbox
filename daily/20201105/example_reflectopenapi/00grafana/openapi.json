@@ -1,0 +1,91 @@
+{
+  "components": {
+    "schemas": {
+      "AlertListItemDTO": {
+        "properties": {
+          "dashboardId": {
+            "type": "integer"
+          },
+          "dashboardSlug": {
+            "type": "string"
+          },
+          "dashboardUid": {
+            "type": "string"
+          },
+          "evalData": {
+            "$ref": "#/components/schemas/Json"
+          },
+          "evalDate": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "executionError": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "newStateDate": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "panelId": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Json": {
+        "type": "object"
+      },
+      "Time": {
+        "format": "date-time",
+        "type": "string"
+      }
+    }
+  },
+  "info": {
+    "description": "-",
+    "title": "Sample API",
+    "version": "0.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/alerts/": {
+      "get": {
+        "operationId": "main.GetAlerts",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AlertListItemDTO"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8888",
+      "description": "local development server"
+    }
+  ]
+}
