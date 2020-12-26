@@ -1,0 +1,10 @@
+Usage: inv[oke] [--core-opts] clean [--options] [other tasks here ...]
+
+Docstring:
+  none
+
+Options:
+  -b, --bytecode
+  -d, --docs
+  -e STRING, --extra=STRING
+

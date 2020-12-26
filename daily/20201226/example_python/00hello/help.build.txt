@@ -1,0 +1,8 @@
+Usage: inv[oke] [--core-opts] build [--options] [other tasks here ...]
+
+Docstring:
+  none
+
+Options:
+  -d, --docs
+
