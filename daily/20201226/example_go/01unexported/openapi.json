@@ -1,0 +1,45 @@
+{
+  "components": {
+    "schemas": {
+      "HasInterface": {
+        "properties": {
+          "I": {
+            "additionalProperties": true,
+            "description": "this is interface defined by ",
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "HasUnexportedInterface": {
+        "additionalProperties": true,
+        "description": "unclear definition in main.HasUnexportedInterface",
+        "type": "object"
+      },
+      "S": {
+        "properties": {
+          "unexported": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Zero": {
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "-",
+    "title": "Sample API",
+    "version": "0.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {},
+  "servers": [
+    {
+      "url": "http://localhost:8888",
+      "description": "local development server"
+    }
+  ]
+}

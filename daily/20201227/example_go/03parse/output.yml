@@ -1,0 +1,36 @@
+ValidateOrgAlert:
+  ":alertId": ParamsInt64
+GetAlertStatesForDashboard:
+  "dashboardId": QueryInt64
+  "dashboardId": QueryInt64
+GetAlerts:
+  "dashboardQuery": Query
+  "dashboardTag": QueryStrings
+  "dashboardId": QueryStrings
+  "folderId": QueryStrings
+  "panelId": QueryInt64
+  "limit": QueryInt64
+  "query": Query
+  "state": QueryStrings
+AlertTest:
+GetAlert:
+  ":alertId": ParamsInt64
+GetAlertNotifiers:
+GetAlertNotificationLookup:
+GetAlertNotifications:
+GetAlertNotificationByID:
+  "notificationId": ParamsInt64
+GetAlertNotificationByUID:
+  "uid": Params
+CreateAlertNotification:
+UpdateAlertNotification:
+UpdateAlertNotificationByUID:
+  "uid": Params
+DeleteAlertNotification:
+  "notificationId": ParamsInt64
+DeleteAlertNotificationByUID:
+  "uid": Params
+NotificationTest:
+PauseAlert:
+  "alertId": ParamsInt64
+PauseAllAlerts:

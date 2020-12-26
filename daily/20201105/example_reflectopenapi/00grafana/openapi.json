@@ -42,7 +42,93 @@
         },
         "type": "object"
       },
+      "AlertTestCommand": {
+        "properties": {
+          "dashboard": {
+            "$ref": "#/components/schemas/Json"
+          },
+          "panelId": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "AlertTestResult": {
+        "properties": {
+          "conditionEvals": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "firing": {
+            "type": "boolean"
+          },
+          "logs": {
+            "items": {
+              "$ref": "#/components/schemas/AlertTestResultLog"
+            },
+            "type": "array"
+          },
+          "matches": {
+            "items": {
+              "$ref": "#/components/schemas/EvalMatch"
+            },
+            "type": "array"
+          },
+          "state": {
+            "type": "string"
+          },
+          "timeMs": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AlertTestResultLog": {
+        "properties": {
+          "data": {
+            "additionalProperties": true,
+            "description": "Any type",
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "EvalMatch": {
+        "properties": {
+          "metric": {
+            "type": "string"
+          },
+          "tags": {
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "value": {
+            "$ref": "#/components/schemas/Float"
+          }
+        },
+        "type": "object"
+      },
+      "Float": {
+        "properties": {
+          "Float64": {
+            "type": "number"
+          },
+          "Valid": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "Json": {
+        "additionalProperties": true,
+        "description": "unclear definition in github.com/grafana/grafana/pkg/components/simplejson.Json",
+        "nullable": true,
         "type": "object"
       },
       "Time": {
@@ -58,9 +144,73 @@
   },
   "openapi": "3.0.0",
   "paths": {
-    "/alerts/": {
+    "/api/alerts/": {
       "get": {
         "operationId": "main.GetAlerts",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dashboardId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "panelId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "folderId",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dashboardQuery",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "dashboardTag",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -70,6 +220,35 @@
                     "$ref": "#/components/schemas/AlertListItemDTO"
                   },
                   "type": "array"
+                }
+              }
+            },
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/alerts/test": {
+      "post": {
+        "operationId": "main.AlertTest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertTestCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlertTestResult"
                 }
               }
             },

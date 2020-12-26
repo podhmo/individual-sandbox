@@ -1,0 +1,41 @@
+ValidateOrgAlert
+  - c.ParamsInt64()
+  - c.JsonApiErr()
+  - c.JsonApiErr()
+GetAlertStatesForDashboard
+  - c.QueryInt64()
+  - c.QueryInt64()
+GetAlerts
+  - c.Query()
+  - c.QueryStrings()
+  - c.QueryStrings()
+  - c.QueryStrings()
+  - c.QueryInt64()
+  - c.QueryInt64()
+  - c.Query()
+  - c.QueryStrings()
+AlertTest
+GetAlert
+  - c.ParamsInt64()
+GetAlertNotifiers
+GetAlertNotificationLookup
+GetAlertNotifications
+getAlertNotificationsInternal
+GetAlertNotificationByID
+  - c.ParamsInt64()
+GetAlertNotificationByUID
+  - c.Params()
+CreateAlertNotification
+UpdateAlertNotification
+UpdateAlertNotificationByUID
+  - c.Params()
+fillWithSecureSettingsData
+fillWithSecureSettingsDataByUID
+DeleteAlertNotification
+  - c.ParamsInt64()
+DeleteAlertNotificationByUID
+  - c.Params()
+NotificationTest
+PauseAlert
+  - c.ParamsInt64()
+PauseAllAlerts

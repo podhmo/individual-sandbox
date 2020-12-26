@@ -1,0 +1,40 @@
+ValidateOrgAlert
+  - c.ParamsInt64(":alertId")
+GetAlertStatesForDashboard
+  - c.QueryInt64("dashboardId")
+  - c.QueryInt64("dashboardId")
+GetAlerts
+  - c.Query("dashboardQuery")
+  - c.QueryStrings("dashboardTag")
+  - c.QueryStrings("dashboardId")
+  - c.QueryStrings("folderId")
+  - c.QueryInt64("panelId")
+  - c.QueryInt64("limit")
+  - c.Query("query")
+  - c.QueryStrings("state")
+AlertTest
+    -- ??fun.x &ast.SelectorExpr{X:(*ast.CallExpr)(0xc00006fbc0), Sel:(*ast.Ident)(0xc000113420)}
+    -- ??fun.x &ast.SelectorExpr{X:(*ast.SelectorExpr)(0xc0001133a0), Sel:(*ast.Ident)(0xc0001133c0)}
+    -- ??fun.x &ast.SelectorExpr{X:(*ast.SelectorExpr)(0xc00011c240), Sel:(*ast.Ident)(0xc00011c260)}
+GetAlert
+  - c.ParamsInt64(":alertId")
+GetAlertNotifiers
+GetAlertNotificationLookup
+GetAlertNotifications
+GetAlertNotificationByID
+  - c.ParamsInt64("notificationId")
+GetAlertNotificationByUID
+  - c.Params("uid")
+CreateAlertNotification
+UpdateAlertNotification
+UpdateAlertNotificationByUID
+  - c.Params("uid")
+DeleteAlertNotification
+  - c.ParamsInt64("notificationId")
+DeleteAlertNotificationByUID
+  - c.Params("uid")
+NotificationTest
+    -- ??fun.x &ast.SelectorExpr{X:(*ast.SelectorExpr)(0xc000133d80), Sel:(*ast.Ident)(0xc000133da0)}
+PauseAlert
+  - c.ParamsInt64("alertId")
+PauseAllAlerts

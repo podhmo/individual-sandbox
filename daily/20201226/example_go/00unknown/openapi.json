@@ -1,0 +1,32 @@
+{
+  "components": {
+    "schemas": {
+      "Json": {
+        "additionalProperties": true,
+        "description": "unclear definition in main.Json",
+        "type": "object"
+      },
+      "S": {
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/Json"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "-",
+    "title": "Sample API",
+    "version": "0.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {},
+  "servers": [
+    {
+      "url": "http://localhost:8888",
+      "description": "local development server"
+    }
+  ]
+}

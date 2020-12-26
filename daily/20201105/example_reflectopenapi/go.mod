@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
+	github.com/go-delve/delve v1.5.1 // indirect
 	github.com/go-macaron/session v1.0.0 // indirect
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gosimple/slug v1.9.0 // indirect
@@ -19,3 +20,4 @@ require (
 )
 
 replace github.com/podhmo/reflect-openapi => ../../../../../../../ghq/github.com/podhmo/reflect-openapi
+replace github.com/grafana/grafana => ../../../../../../../ghq/github.com/grafana/grafana
