@@ -1,0 +1,68 @@
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_word: c is 1 words[c] is api
+__gh_handle_command: c is 1 words[c] is api
+__gh_handle_command: looking for _gh_api
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_word: c is 1 words[c] is api
+__gh_handle_command: c is 1 words[c] is api
+__gh_handle_command: looking for _gh_api
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_word: c is 1 words[c] is auth
+__gh_handle_command: c is 1 words[c] is auth
+__gh_handle_command: looking for _gh_auth
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_word: c is 1 words[c] is auth
+__gh_handle_command: c is 1 words[c] is auth
+__gh_handle_command: looking for _gh_auth
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply
+__gh_handle_word: c is 0 words[c] is gh
+__gh_handle_command: c is 0 words[c] is gh
+__gh_handle_command: looking for _gh_root_command
+__gh_handle_reply

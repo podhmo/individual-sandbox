@@ -1,0 +1,11 @@
+query($endCursor: String) {
+  viewer {
+    repositories(first: 100, after: $endCursor) {
+      nodes { nameWithOwner createdAt updatedAt isPrivate isFork }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}
