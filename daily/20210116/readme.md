@@ -1,3 +1,9 @@
+## aws cdk
+
+rfc
+
+- https://github.com/aws/aws-cdk-rfcs
+
 ## go params to path
 
 良い名前が思いつかない
@@ -40,9 +46,18 @@ dynamicはどこかに保存される。(今回は X,Y,Z)
 - tagから読み込む時のprefix defaultは""
 - suffix
 
-## どうする？
+### どうする？
 
 - pagination
 - sort
 - condition (e.g. < > >=, <=, and, or)
 - field一個追加したら全部のパスが変わる (まじ？)
+
+### どういうときに使える？
+
+- 速度を気にしないKVS。Vのサイズは大きめ。
+- Keyをもう少し柔軟にしたい。パラメーターで扱いたい。
+
+## s3 kvs
+
+- https://qiita.com/rmanzoku/items/b550a8dc79d67f3fa325

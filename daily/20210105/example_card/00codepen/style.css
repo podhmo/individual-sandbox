@@ -1,0 +1,156 @@
+.card {
+  border: 1px solid #F4F4F4;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #333333;
+  font-family: 'Avenir Next', 'Lato', sans-serif;
+  font-weight: 300;
+  margin: 1rem;
+  padding-top: 1rem;
+  padding-right: 0;
+  padding-bottom: 1rem;
+  padding-left: 0;
+}
+
+.card__right {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+@media screen and (min-width: 40rem) {
+  .card__right {
+    width: 55%;
+    float: right;
+  }
+}
+.card__left {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  height: auto;
+}
+@media screen and (min-width: 40rem) {
+  .card__left {
+    width: 45%;
+  }
+}
+.card__sale-flag, .card__cta {
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  text-align: center;
+  display: inline-block;
+}
+.card__sale-flag {
+  color: #FFF;
+  background-color: #5CC1DE;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+}
+.card__cta {
+  font-size: 1.25rem;
+  letter-spacing: 1.25px;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #6FD830;
+}
+.card__name {
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  font-size: 2.25rem;
+}
+.card__price {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+.card__image {
+  box-sizing: border-box;
+}
+.card {
+  border: 1px solid #F4F4F4;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #333333;
+  font-family: 'Avenir Next', 'Lato', sans-serif;
+  font-weight: 300;
+  margin: 1rem;
+  padding-top: 1rem;
+  padding-right: 0;
+  padding-bottom: 1rem;
+  padding-left: 0;
+}
+
+.card__right {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+@media screen and (min-width: 40rem) {
+  .card__right {
+    width: 55%;
+    float: right;
+  }
+}
+.card__left {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  height: auto;
+}
+@media screen and (min-width: 40rem) {
+  .card__left {
+    width: 45%;
+  }
+}
+.card__sale-flag, .card__cta {
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  text-align: center;
+  display: inline-block;
+}
+.card__sale-flag {
+  color: #FFF;
+  background-color: #5CC1DE;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+}
+.card__cta {
+  font-size: 1.25rem;
+  letter-spacing: 1.25px;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #6FD830;
+}
+.card__name {
+  letter-spacing: 1px;
+  font-weight: 300;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  font-size: 2.25rem;
+}
+.card__price {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+.card__image {
+  box-sizing: border-box;
+}
+.card__image img {
+  width: 100%;
+  background-color: #F4F4F4;
+  border: 1px solid #E8E8E8;
+  border-radius: 0.5rem;
+}
