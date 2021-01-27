@@ -1,0 +1,14 @@
+{
+  "FOO": {
+    "name": "Donald",
+    "location": "Stockholm"
+  },
+  "BAR": {
+    "name": "Walt",
+    "location": "Stockholm"
+  },
+  "BAZ": {
+    "name": "Jack",
+    "location": "Whereever"
+  }
+}

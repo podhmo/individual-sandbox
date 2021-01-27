@@ -1,0 +1,33 @@
+package field // import "github.com/facebook/ent/schema/field"
+
+func Bool(name string) *boolBuilder
+func Bytes(name string) *bytesBuilder
+func Enum(name string) *enumBuilder
+func Float32(name string) *float32Builder
+func Float(name string) *float64Builder
+func Int16(name string) *int16Builder
+func Int32(name string) *int32Builder
+func Int64(name string) *int64Builder
+func Int8(name string) *int8Builder
+func Int(name string) *intBuilder
+func Floats(name string) *jsonBuilder
+func Ints(name string) *jsonBuilder
+func JSON(name string, typ interface{}) *jsonBuilder
+func Strings(name string) *jsonBuilder
+func String(name string) *stringBuilder
+func Text(name string) *stringBuilder
+func Time(name string) *timeBuilder
+func Uint16(name string) *uint16Builder
+func Uint32(name string) *uint32Builder
+func Uint64(name string) *uint64Builder
+func Uint8(name string) *uint8Builder
+func Uint(name string) *uintBuilder
+func UUID(name string, typ driver.Valuer) *uuidBuilder
+type Annotation struct{ ... }
+type Descriptor struct{ ... }
+type EnumValues interface{ ... }
+type RType struct{ ... }
+type Type uint8
+    const TypeInvalid Type = iota ...
+type TypeInfo struct{ ... }
+type ValueScanner interface{ ... }
