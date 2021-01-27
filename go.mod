@@ -123,6 +123,7 @@ require (
 	github.com/x-motemen/ghq v1.1.5 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
+	github.com/zserge/lorca v0.1.9 // indirect
 	go.uber.org/fx v1.12.0
 	go.uber.org/zap v1.14.1
 	goa.design/goa v2.1.2+incompatible // indirect
