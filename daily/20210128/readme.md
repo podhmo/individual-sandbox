@@ -167,4 +167,3 @@ func Iterate(loader Loader[T]) Paginator[T] {
 - sync.Once
 - https://github.com/tmrts/go-patterns/blob/master/profiling/timing.md
 - return typed nil (nil interface value)
-
