@@ -1,0 +1,11 @@
+FROM python:3.8-slim as builder
+
+WORKDIR /opt/app
+
+COPY requirements.lock /opt/app
+RUN python3 -m pip install -r requirements.lock
+
+FROM python:3.8-slim as runner
+COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+#COPY --from=builder /usr/local/bin/boto /usr/local/bin/boto
+CMD ["python3"]
