@@ -1,0 +1,7 @@
+_gitbranches() {
+  git branch $@ --format '%(HEAD) %(refname:short)%09%(committername)%09%(committerdate:relative)'
+}
+
+gitbranches() {
+  _gitbranches $@ | awk -F'\t' '{printf "%-40s\t%-30s\t%s\n", $1, $2, $3 }'
+}

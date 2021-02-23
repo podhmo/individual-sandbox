@@ -1,0 +1,80 @@
+{
+  "components": {
+    "schemas": {
+      "Attachment": {
+        "description": "An object representing a container instance or task attachment.",
+        "properties": {
+          "details": {
+                "$ref": "#/components/schemas/AttachmentDetails"
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/String"
+              },
+              {
+                "description": "The unique identifier for the attachment."
+              }
+            ]
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/String"
+              },
+              {
+                "description": " The status of the attachment. Valid values are <code>PRECREATED</code>, <code>CREATED</code>, <code>ATTACHING</code>, <code>ATTACHED</code>, <code>DETACHING</code>, <code>DETACHED</code>, and <code>DELETED</code>."
+              }
+            ]
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/String"
+              },
+              {
+                "description": "The type of the attachment, such as <code>ElasticNetworkInterface</code>."
+              }
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "AttachmentDetails": {
+        "items": {
+          "$ref": "#/components/schemas/KeyValuePair"
+        },
+        "type": "array"
+      },
+      "KeyValuePair": {
+        "description": "A key-value pair object.",
+        "properties": {
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/String"
+              },
+              {
+                "description": "The name of the key-value pair. For environment variables, this is the name of the environment variable."
+              }
+            ]
+          },
+          "value": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/String"
+              },
+              {
+                "description": "The value of the key-value pair. For environment variables, this is the value of the environment variable."
+              }
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "String": {
+        "type": "string"
+      }
+    }
+  }
+}

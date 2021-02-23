@@ -63,8 +63,10 @@ require (
 	github.com/graphql-go/handler v0.2.3 // indirect
 	github.com/graphql-go/relay v0.0.0-20171208134043-54350098cfe5 // indirect
 	github.com/hashicorp/go-hclog v0.10.0
-	github.com/hashicorp/go-plugin v1.0.1
+	github.com/hashicorp/go-plugin v1.3.0
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
+	github.com/hashicorp/hcl/v2 v2.9.0 // indirect
+	github.com/hashicorp/terraform v0.14.7 // indirect
 	github.com/hashicorp/yamux v0.0.0-20190923154419-df201c70410d // indirect
 	github.com/henvic/httpretty v0.0.5 // indirect
 	github.com/heroku/x v0.0.11
@@ -128,15 +130,11 @@ require (
 	go.uber.org/zap v1.14.1
 	goa.design/goa v2.1.2+incompatible // indirect
 	golang.org/x/sys v0.0.0-20201015000850-e3ed0017c211
-	golang.org/x/tools v0.0.0-20200904185747-39188db58858
+	golang.org/x/tools v0.0.0-20201028111035-eafbe7b904eb
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
-	google.golang.org/genproto v0.0.0-20191115221424-83cc0476cb11 // indirect
-	google.golang.org/grpc v1.25.1 // indirect
-	google.golang.org/protobuf v1.22.0 // indirect
 	gopkg.in/ini.v1 v1.55.0 // indirect
 	gopkg.in/macaron.v1 v1.3.9 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
-	honnef.co/go/tools v0.0.1-2020.1.0.20200730203520-2c5dee2fb55d // indirect
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 	sourcegraph.com/sqs/pbtypes v1.0.0 // indirect

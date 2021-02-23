@@ -1,0 +1,32 @@
+{
+  "components": {
+    "schemas": {
+      "person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "father": {
+            "allOf": [
+              {"$ref": "#/components/schemas/person"},
+              {"description": "父親"}
+            ]
+          },
+          "mother": {
+            "allOf": [
+              {"$ref": "#/components/schemas/person"},
+              {"description": "母親"},
+            ]
+          }
+        }
+      }
+    }
+  },
+  "openapi": "3.0.0",
+  "info": {"title": "xxx", "version": "0.0.0"},
+  "paths": {}
+}
