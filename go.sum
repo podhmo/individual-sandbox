@@ -1046,6 +1046,8 @@ github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d h1:OGKcxcMyRI2RE2r2wH
 github.com/podhmo/handy v0.0.0-20190802173415-ab7573214f6d/go.mod h1:TJZpCkmP7Ofz5fO43pjTYVsoeVaGD0hZ9nPM1sW1k0Y=
 github.com/podhmo/individual-sandbox/daily/20190810/example_gglgen/00getting-started v0.0.0-20190810120810-b12bf0ffdabc h1:eS7bHiSz8RAJrIO8K1ZmfSjS4UhevihwKEc62+iuQQY=
 github.com/podhmo/individual-sandbox/daily/20190810/example_sqlx v0.0.0-20190810120810-b12bf0ffdabc h1:/704UuKSOqXQfcqJmWTU2ryGj5xVm7T9D81AbkCb2jc=
+github.com/podhmo/inflexible v0.0.0-20201212150348-f658c0fbd3d9 h1:Opt2fevRaikx9oipwqP78BBfTMIK01+01Hz9p5mmZLs=
+github.com/podhmo/inflexible v0.0.0-20201212150348-f658c0fbd3d9/go.mod h1:TVMVcThfZ1SbmDVSkqi23i9xi23VcE5pxpns3hFsu8A=
 github.com/podhmo/maperr v0.0.0 h1:IJNISlIM/K3dcerHd89ANplasPW9n9YuCOGVJviimwY=
 github.com/podhmo/maperr v0.0.0/go.mod h1:TNzufTplcfRDySaRqIZ0WiAkzVRLyBsbCVj4NAA+eYk=
 github.com/podhmo/maperr v0.1.1 h1:RLGnAZxO71AAGNTyLJ9ZZIdIZmyrSYOAsIeuEOJfKcQ=

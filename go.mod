@@ -92,6 +92,7 @@ require (
 	github.com/podhmo/ctxlog/zapctxlog v0.3.0 // indirect
 	github.com/podhmo/go-rfc3339 v0.1.0
 	github.com/podhmo/go-webtest v0.4.3 // indirect
+	github.com/podhmo/inflexible v0.0.0-20201212150348-f658c0fbd3d9 // indirect
 	github.com/podhmo/maperr v0.2.4
 	github.com/podhmo/noerror v0.3.1
 	github.com/podhmo/reflect-openapi v0.0.7
