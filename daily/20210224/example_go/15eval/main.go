@@ -148,6 +148,7 @@ func Transform(m M) (string, error) {
 	for _, v := range m.Values {
 		switch v := v.(type) {
 		case Named:
+			// TODO: Named.Named
 			var subs []string
 			for _, x := range v.Values {
 				switch x := x.(type) {
@@ -188,7 +189,7 @@ func ConvertMop(op Mop) string {
 	case MopNOT:
 		return "NOT"
 	case MopNOR:
-		return "NOT OR"
+		return "NOT OR" // xxx
 	case MopOR:
 		return "OR"
 	default:
