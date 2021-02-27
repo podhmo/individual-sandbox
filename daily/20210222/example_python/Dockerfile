@@ -1,4 +1,5 @@
 FROM python:3.8-slim
 
-RUN python3 -m pip install boto3 pandas
+COPY requirements.lock ./
+RUN python3 -m pip --no-cache-dir install -r requirements.lock
 CMD ["python3"]

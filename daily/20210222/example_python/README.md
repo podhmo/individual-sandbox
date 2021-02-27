@@ -2,9 +2,14 @@
 $ make
 $ docker images | ioknife rest | ggrep -P 'foo'
 REPOSITORY                                                               TAG                      IMAGE ID       CREATED              SIZE
-foo                                                                      0.1.0                    813317bd2068   About a minute ago   291MB
-foo                                                                      0.0.0                    883eb7b407c1   17 minutes ago       320MB
+$ docker images | grep foo
+foo                                                                      0.0.1                    de0f50ba0477   9 seconds ago   286MB
+foo                                                                      0.1.0                    813317bd2068   5 days ago      291MB
+foo                                                                      0.0.0                    883eb7b407c1   5 days ago      320MB
 ```
+
+0.0.1 は `--no-cache-dir` をつけたもの。
+
 
 base
 
