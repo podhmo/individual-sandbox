@@ -1,11 +1,18 @@
 ```console
 $ make
-$ docker images | ioknife rest | grep foo
+$ docker images | ioknife rest | ggrep -P 'foo'
 REPOSITORY                                                               TAG                      IMAGE ID       CREATED              SIZE
 foo                                                                      0.1.0                    813317bd2068   About a minute ago   291MB
 foo                                                                      0.0.0                    883eb7b407c1   17 minutes ago       320MB
 ```
 
+base
+
+```console
+$ docker images python:3.8-slim
+REPOSITORY   TAG        IMAGE ID       CREATED      SIZE
+python       3.8-slim   13172ea67a56   7 days ago   118MB
+```
 
 ```console
 $ docker history foo:0.0.0 --no-trunc
