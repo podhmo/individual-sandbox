@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:RunTask"
+      ],
+      "Resource": [
+        "${replace(aws_ecs_task_definition.definition.arn, "/:\\d+$/", ":*")}"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
