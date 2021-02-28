@@ -1,3 +1,10 @@
+## go mongodb sql
+
+- https://docs.mongodb.com/manual/tutorial/query-documents/
+- https://docs.mongodb.com/manual/reference/sql-comparison/
+- https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/#pipe._S_lookup
+
+
 ## terraform aws
 
 自分でやってみる。これに従って作業するのが良さそう。
