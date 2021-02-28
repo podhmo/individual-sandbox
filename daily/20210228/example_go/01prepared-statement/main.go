@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"database/sql"
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/pkg/errors"
@@ -28,12 +28,6 @@ type Inventory struct {
 	SizeH   float64 `db:"sizeH"`
 	SizeUOM string  `db:"sizeUOM,size:15"`
 	Status  string  `db:"status,size:15"` // enum?
-}
-
-func (i Inventory) Format(s fmt.State, verb rune) {
-	// 手抜き
-	json.NewEncoder(s).Encode(i)
-	// fmt.Fprintf(s, `@@%d`, i.ID)
 }
 
 var schema = `
@@ -113,20 +107,13 @@ func run() error {
 		fmt.Println("@", id)
 	}
 
-	// select
 	{
-		// SELECT * FROM inventory
-		log.Println(`db.inventory.find( {} )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories, "select * from inventory;")
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
-		}
-		fmt.Println(inventories)
-		// spew.Dump(inventories)
-	}
 
-	{
+		tx, err := db.Beginx()
+		if err != nil {
+			return errors.Wrap(err, "transaction begin failed")
+		}
+
 		// SELECT * FROM inventory WHERE status in ("A", "D")
 		log.Println(`db.inventory.find( { status: { $in: [ "A", "D" ] } } )`)
 		var inventories []Inventory
@@ -137,60 +124,22 @@ func run() error {
 			return errors.Wrap(err, "sqlx.In failed")
 		}
 
-		err = db.SelectContext(ctx, &inventories, query, args...)
+		query = tx.Rebind(query)
+		stmt, err := tx.Preparex(query)
+		if err != nil {
+			return errors.Wrap(err, "prepared statement failed")
+		}
+
+		err = stmt.SelectContext(ctx, &inventories, args...)
 		if err != nil {
 			return errors.Wrap(err, "Select failed")
 		}
-		fmt.Println(inventories)
-	}
+		spew.Dump(inventories)
 
-	{
-		// SELECT * FROM inventory WHERE status = "A" AND qty < 30
-		log.Println(`db.inventory.find( { status: "A", qty: { $lt: 30 } } )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? AND qty < ?;",
-			"A", 30,
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
+		if err := tx.Commit(); err != nil {
+			return errors.Wrap(err, "transaction commit failed")
 		}
-		fmt.Println(inventories)
 	}
-
-	{
-		// SELECT * FROM inventory WHERE status = "A" OR qty < 30
-		log.Println(`db.inventory.find( { $or: [ { status: "A" }, { qty: { $lt: 30 } } ] } )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? OR qty < ?;",
-			"A", 30,
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
-		}
-		fmt.Println(inventories)
-	}
-
-	{
-		// SELECT * FROM inventory WHERE status = "A" AND ( qty < 30 OR item LIKE "p%")
-		log.Println(`db.inventory.find( {
-     status: "A",
-     $or: [ { qty: { $lt: 30 } }, { item: /^p/ } ]
-} )
-	}`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? AND ( qty < ? OR item LIKE ? );",
-			"A", 30, "p%",
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
-		}
-		fmt.Println(inventories)
-	}
-
-	// TODO: join?, limit
 	return nil
 }
 

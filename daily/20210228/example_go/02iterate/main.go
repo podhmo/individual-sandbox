@@ -113,23 +113,9 @@ func run() error {
 		fmt.Println("@", id)
 	}
 
-	// select
+	// iterate
 	{
-		// SELECT * FROM inventory
-		log.Println(`db.inventory.find( {} )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories, "select * from inventory;")
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
-		}
-		fmt.Println(inventories)
-		// spew.Dump(inventories)
-	}
-
-	{
-		// SELECT * FROM inventory WHERE status in ("A", "D")
 		log.Println(`db.inventory.find( { status: { $in: [ "A", "D" ] } } )`)
-		var inventories []Inventory
 
 		// sqlx.In returns queries with the `?` bindvar, we can rebind it for our backend
 		query, args, err := sqlx.In("select * from inventory where status in (?);", []string{"A", "D"})
@@ -137,60 +123,23 @@ func run() error {
 			return errors.Wrap(err, "sqlx.In failed")
 		}
 
-		err = db.SelectContext(ctx, &inventories, query, args...)
+		rows, err := db.QueryxContext(ctx, query, args...)
 		if err != nil {
 			return errors.Wrap(err, "Select failed")
 		}
-		fmt.Println(inventories)
-	}
-
-	{
-		// SELECT * FROM inventory WHERE status = "A" AND qty < 30
-		log.Println(`db.inventory.find( { status: "A", qty: { $lt: 30 } } )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? AND qty < ?;",
-			"A", 30,
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
+		var x Inventory
+		for i := 0; rows.Next(); i++ {
+			err := rows.StructScan(&x)
+			if err != nil {
+				return errors.Wrapf(err, "scan %d", i)
+			}
+			log.Printf("    %d: %#+v\n", i, x)
 		}
-		fmt.Println(inventories)
-	}
 
-	{
-		// SELECT * FROM inventory WHERE status = "A" OR qty < 30
-		log.Println(`db.inventory.find( { $or: [ { status: "A" }, { qty: { $lt: 30 } } ] } )`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? OR qty < ?;",
-			"A", 30,
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
+		if err := rows.Err(); err != nil {
+			return errors.Wrap(err, "Iterate failed")
 		}
-		fmt.Println(inventories)
 	}
-
-	{
-		// SELECT * FROM inventory WHERE status = "A" AND ( qty < 30 OR item LIKE "p%")
-		log.Println(`db.inventory.find( {
-     status: "A",
-     $or: [ { qty: { $lt: 30 } }, { item: /^p/ } ]
-} )
-	}`)
-		var inventories []Inventory
-		err := db.SelectContext(ctx, &inventories,
-			"select * from inventory where status = ? AND ( qty < ? OR item LIKE ? );",
-			"A", 30, "p%",
-		)
-		if err != nil {
-			return errors.Wrap(err, "Select failed")
-		}
-		fmt.Println(inventories)
-	}
-
-	// TODO: join?, limit
 	return nil
 }
 
