@@ -1,9 +1,41 @@
+## hmm
+
+https://www.reddit.com/r/golang/comments/lpso9c/can_you_recommend_open_source_projects_with_small/
+
+- https://github.com/mdlayher/arp
+- https://github.com/dop251/goja
+- https://github.com/preslavmihaylov/todocheck
+
+## go migrate db
+
+- https://dev.to/techschoolguru/how-to-write-run-database-migration-in-golang-5h6g
+- https://tableplus.com/
+
+んー。
+
+- https://techinscribed.com/create-db-migrations-tool-in-go-from-scratch/
+- https://github.com/praveen001/go-db-migration
+
 ## go mongodb sql
 
 - https://docs.mongodb.com/manual/tutorial/query-documents/
 - https://docs.mongodb.com/manual/reference/sql-comparison/
 - https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/#pipe._S_lookup
 
+
+その前にsqlxの復習が必要そうだ。。
+
+- create table
+- insert
+- parameterized query
+- (partial application)
+- pagination
+
+### pagination
+
+https://ivopereira.net/efficient-pagination-dont-use-offset-limit
+
+これでsortされる場合ってどうなるんだろう？ `order by (xxx, id)` でいける？
 
 ## terraform aws
 
