@@ -137,5 +137,20 @@ type Dialect interface {
 	Filters() []Filter
 	SetParams(params map[string]string)
 }
-
 ```
+
+
+## SQL to struct, function?
+
+https://future-architect.github.io/articles/20200728/
+
+何か期待するそれとは違った
+
+## terraform
+
+
+1047975870
+2047975870
+    
+
+https://dev.classmethod.jp/articles/my-terraform-tips/
