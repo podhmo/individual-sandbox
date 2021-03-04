@@ -154,3 +154,14 @@ https://future-architect.github.io/articles/20200728/
     
 
 https://dev.classmethod.jp/articles/my-terraform-tips/
+
+## python selenium
+
+pythonにselenium moduleなんてあったんだ
+
+```console
+$ brew install chromedriver
+$ pip install selenium
+```
+
+- https://selenium-python.readthedocs.io/getting-started.html
