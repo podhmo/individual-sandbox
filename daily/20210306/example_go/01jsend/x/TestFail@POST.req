@@ -1,0 +1,7 @@
+POST / HTTP/1.1
+Host: example.netarticles
+User-Agent: Go-http-client/1.1
+Content-Length: 35
+Accept-Encoding: gzip
+
+{"content": "Some use ful content"}

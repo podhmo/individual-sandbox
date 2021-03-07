@@ -1,0 +1,48 @@
+{
+  "request": {
+    "ContentLength": 0,
+    "Form": null,
+    "Header": {},
+    "Host": "httpbin.org",
+    "Method": "GET",
+    "MultipartForm": null,
+    "PostForm": null,
+    "Proto": "HTTP/1.1",
+    "ProtoMajor": 1,
+    "ProtoMinor": 1,
+    "RemoteAddr": "",
+    "RequestURI": "",
+    "TransferEncoding": null,
+    "URL": "/"
+  },
+  "response": {
+    "ContentLength": 9593,
+    "Header": {
+      "Access-Control-Allow-Credentials": [
+        "true"
+      ],
+      "Access-Control-Allow-Origin": [
+        "*"
+      ],
+      "Content-Length": [
+        "9593"
+      ],
+      "Content-Type": [
+        "text/html; charset=utf-8"
+      ],
+      "Date": [
+        "Sat, 06 Mar 2021 13:19:06 GMT"
+      ],
+      "Server": [
+        "gunicorn/19.9.0"
+      ]
+    },
+    "Proto": "HTTP/2.0",
+    "ProtoMajor": 2,
+    "ProtoMinor": 0,
+    "Status": "200 OK",
+    "StatusCode": 200,
+    "TransferEncoding": null,
+    "Uncompressed": false
+  }
+}

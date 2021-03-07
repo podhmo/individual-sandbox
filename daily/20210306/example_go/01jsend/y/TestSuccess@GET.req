@@ -1,0 +1,15 @@
+{
+  "ContentLength": 0,
+  "Form": null,
+  "Header": {},
+  "Host": "example.net",
+  "Method": "GET",
+  "MultipartForm": null,
+  "PostForm": null,
+  "Proto": "HTTP/1.1",
+  "ProtoMajor": 1,
+  "ProtoMinor": 1,
+  "RemoteAddr": "",
+  "RequestURI": "",
+  "TransferEncoding": null
+}
