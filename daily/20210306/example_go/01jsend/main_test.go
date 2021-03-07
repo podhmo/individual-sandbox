@@ -5,13 +5,12 @@ import (
 	"testing"
 
 	"github.com/podhmo/tenuki"
-	"github.com/podhmo/tenuki/capture"
 	"github.com/podhmo/tenuki/difftest"
 )
 
-func init() {
-	tenuki.DefaultLayout = capture.OpenAPILayout
-}
+// func init() {
+// 	tenuki.DefaultLayout = capture.OpenAPILayout
+// }
 
 func TestSuccess(t *testing.T) {
 	targetHandler := SuccessHandler

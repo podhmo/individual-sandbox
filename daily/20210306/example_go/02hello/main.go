@@ -25,5 +25,5 @@ func main() {
 	_ = err
 	// fmt.Println(res, err)
 	fmt.Println("-")
-	client.Get("https://httpbin.org")
+	// client.Get("https://httpbin.org")
 }

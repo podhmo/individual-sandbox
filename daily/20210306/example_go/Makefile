@@ -13,6 +13,10 @@
 
 06:
 	go run $(shell echo $@*/)main.go | tee $(shell echo $@*/)x.har
+07:
+	go run $(shell echo $@*/)main.go
+08:
+	go run $(shell echo $@*/)main.go
 
 shapes:
 	dictknife shape --with-type -i json 02*/trace.json > shapes/tenuki.trace
