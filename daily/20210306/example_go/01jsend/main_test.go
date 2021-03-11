@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -40,7 +41,7 @@ func TestFail(t *testing.T) {
 	targetHandler := FailHandler
 
 	f := tenuki.New(t)
-	req := f.NewRequest("POST", "/articles", strings.NewReader(`{"content": "Some useful content"}`))
+	req := f.NewJSONRequest("POST", "/articles", strings.NewReader(`{"content": "Some useful content"}`))
 	res := f.DoHandlerFunc(targetHandler, req,
 		tenuki.AssertStatus(400),
 	)
@@ -75,4 +76,18 @@ func TestError(t *testing.T) {
 	var got interface{}
 	f.Extract().JSON(res, &got)
 	difftest.AssertGotAndWantString(t, got, want)
+}
+
+func TestNetworkUnreached(t *testing.T) {
+	f := tenuki.New(t)
+	req := f.NewRequest("GET", "xxx://localhost.xxx", nil)
+	f.Do(req,
+		tenuki.AssertError(func(err error) error {
+			if err == nil {
+				return fmt.Errorf("something wrong !!!!!!!!!!!!")
+			}
+			t.Logf("ok error is occured %q", err)
+			return nil
+		}),
+	)
 }

@@ -13,6 +13,7 @@ require (
 	github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d // indirect
 	github.com/arsmn/fiber-swagger v1.3.3 // indirect
 	github.com/aws/aws-lambda-go v1.19.1 // indirect
+	github.com/blastrain/vitess-sqlparser v0.0.0-20201030050434-a139afbb1aba // indirect
 	github.com/bombsimon/wsl/v3 v3.1.0 // indirect
 	github.com/briandowns/spinner v1.11.1 // indirect
 	github.com/caarlos0/env/v6 v6.2.2 // indirect
@@ -123,6 +124,7 @@ require (
 	github.com/volatiletech/null v8.0.0+incompatible // indirect
 	github.com/volatiletech/null/v8 v8.1.0 // indirect
 	github.com/volatiletech/sqlboiler v3.7.1+incompatible // indirect
+	github.com/vvakame/go-harlog v0.0.0-20191003034530-b7451982c8b3 // indirect
 	github.com/x-motemen/ghq v1.1.5 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190809123943-df4f5c81cb3b // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
