@@ -1,0 +1,14 @@
+## terraform 実行結果を確認したい
+
+- https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/data_source
+- https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource
+- https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
+
+### external
+
+- stdinで情報を受け取る
+- `{"result": <result value>}` という形で情報を返す
+
+### local_exec
+
+

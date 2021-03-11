@@ -1,8 +1,9 @@
 // https://www.terraform.io/docs/language/functions/templatefile.html
+// https://www.terraform.io/docs/language/expressions/strings.html#string-templates
 
 locals {
  port = 8080
- ip_addrs = ["10.0.0.1", "10.0.0.2"] 
+ ip_addrs = ["10.0.0.1", "10.0.0.2"]
 }
 
 output "result" {
