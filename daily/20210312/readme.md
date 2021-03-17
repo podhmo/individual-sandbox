@@ -43,6 +43,12 @@ pc=program counter, sp = stack pointer, gp = (current) goroutine pointer
 - FuncForPCしてFileLineを取り出しているみたい  https://github.com/pkg/errors/blob/master/stack.go
 - sp,gpは使わない(内部的には必要だけれどfindFuncなど不要にしている)
 
+### try and error
+
+- 上手くendpointにつながらない。だるい。
+- routerで全てのendpointのlookupに失敗したときのhookが欲しい
+
+
 ## hmm
 
 - https://github.com/joomcode/errorx
