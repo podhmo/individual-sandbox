@@ -1,0 +1,29 @@
+package main
+import (
+	 "m/foo"
+	 "m/foo"
+)
+
+func main(){
+	// -- imported symbol --
+	// use as name:                   Hello
+	// use as name with prefix:       foo.Hello
+	// use as name with type info:    Hello func (string) string
+	// use as type:                   func (string) string
+	// use as type with prefix:       func (string) string
+
+
+	// use as name:                   Hello2
+	// use as name with prefix:       foo.Hello2
+	// use as name with type info:    Hello2 foo.MessageFunc
+	// use as type:                   MessageFunc
+	// use as type with prefix:       foo.MessageFunc
+
+
+	// -- in same package --
+	// use as name:                   Byebye
+	// use as name with prefix:       Byebye
+	// use as name with type info:    Byebye func (string) string
+	// use as type:                   func (string) string
+	// use as type with prefix:       func (string) string
+}

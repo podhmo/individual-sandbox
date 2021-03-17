@@ -72,6 +72,28 @@ Describeというものを作った。結構色々と大変かもしれない。
 Variable,Functionって実態はImplementationなのではないか？同じ型として扱って良い？
 Typeもここに含まれる？Symbolからこれが辿れれば十分なのではないか？
 
+### 追記
+
+利用する側についても考えてみたい。Formatで表現を変えるのが良いのではないか？
+
+- `%v` は利用する前提のコード
+- `%+v` はimport prefix付き
+- `%#v` は型情報付き
+- `%T` は型情報
+- `%+T` はimport prefix付きの型情報
+- `%q` はimport時のprefix?
+- `%p` でpointer? (derefは?) -> 未定
+
+あと、prefixがないときにはどうしよう
+
+そうだったsymbolにはlevelがいる。
+実装自体をいつどこで出力するかは悩みどころ
+
+### 追記
+
+packageをimportした先で使うのか同じpackageで使うのかをどうやって判定しようか？
+importを明示的にする必要があるのではないか？
+
 ## go query builder
 
 - mongo like

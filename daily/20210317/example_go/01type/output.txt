@@ -1,0 +1,7 @@
+<pkg m/hello>
+  <function <symbol m/hello.Hello> (emitted=false)>
+  <variable <symbol m/hello.DefaultName> (emitted=false)>
+----------------------------------------
+<pkg m/hello>
+  <function <symbol m/hello.Hello> (emitted=false)>
+  <variable <symbol m/hello.DefaultName> (emitted=false)>
