@@ -132,6 +132,8 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 	case reflect.Struct:
 		typedValidations := map[string][]func(path []string, ob interface{}) []*Error{}
 		stringValidations := map[string][]func(string) error{}
+		sliceValidations := map[string][]func(path []string, ob interface{}) []*Error{}
+
 		for i := 0; i < rt.NumField(); i++ {
 			rf := rt.Field(i)
 			rft := rf.Type
@@ -139,9 +141,18 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 				rft = rft.Elem()
 			}
 			r.mu.RLock()
+
+			isSlice := rft.Kind() == reflect.Slice
+			if isSlice {
+				rft = rft.Elem()
+			}
 			validation, ok := r.types[rft]
 			if ok {
-				typedValidations[rf.Name] = append(typedValidations[rf.Name], validation)
+				if isSlice {
+					sliceValidations[rf.Name] = append(sliceValidations[rf.Name], validation)
+				} else {
+					typedValidations[rf.Name] = append(typedValidations[rf.Name], validation)
+				}
 			}
 			r.mu.RUnlock()
 
@@ -164,6 +175,39 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 			rv := reflect.ValueOf(ob)
 			if rv.Kind() == reflect.Ptr {
 				rv = rv.Elem()
+			}
+			for name, validations := range sliceValidations {
+				rf := rv.FieldByName(name)
+				typ := rf.Type()
+				if typ.Kind() == reflect.Ptr {
+					typ = typ.Elem()
+					rf = rf.Elem()
+				}
+				if rf.IsNil() {
+					continue
+				}
+				typ = typ.Elem() // slice[X] -> X
+
+				newPath := append(path, name)
+				isPtr := typ.Kind() == reflect.Ptr
+				if isPtr {
+					typ = typ.Elem()
+				}
+				for i := 0; i < rf.Len(); i++ {
+					x := rf.Index(i)
+					if isPtr {
+						x = x.Elem()
+					}
+					iface := x.Interface()
+					for _, v := range validations {
+						if v == nil { // recursive definition
+							v = r.types[typ]
+						}
+						if errs := v(append(newPath, strconv.Itoa(i)), iface); errs != nil {
+							errorList = append(errorList, errs...)
+						}
+					}
+				}
 			}
 			for name, validations := range typedValidations {
 				rf := rv.FieldByName(name)
@@ -343,16 +387,22 @@ func main() {
 	r.RegisterType(reflect.TypeOf(Name("")), `pattern=[A-Z]\S+`)
 
 	type Person struct {
-		Name   string `validate:"pattern=[A-Z]\\S+,notzero"`
-		Name2  Name
-		Name3  *Name
-		Father *Person
+		Name     string `validate:"pattern=[A-Z]\\S+,notzero"`
+		Name2    Name
+		Name3    *Name
+		Father   *Person
+		Children []Person
 	}
 	// r.RegisterType(reflect.TypeOf(Person{}))
 
 	var name Name = "XXX"
 	// ob := Person{Name: "foo", Name3: &name}
-	ob := Person{Name: "foo", Father: &Person{Name: "boo", Name3: &name}}
+	// ob := Person{Name: "foo", Father: &Person{Name: "boo", Name3: &name}}
+	ob := Person{
+		Name:     "foo",
+		Father:   &Person{Name: "boo", Name3: &name},
+		Children: []Person{{Name: "XXX"}, {Name: "yyy"}},
+	}
 
 	v := &Validator{Registry: r}
 	if err := v.ValidateStruct(ob); err != nil {
@@ -362,10 +412,10 @@ func main() {
 		// log.Fatalf("!! %+v", err)
 	}
 
-	if err := v.ValidateSlice([]*Person{&ob}); err != nil {
-		enc := json.NewEncoder(os.Stderr)
-		enc.SetIndent("", "  ")
-		enc.Encode(err)
-		// log.Fatalf("!! %+v", err)
-	}
+	// if err := v.ValidateSlice([]*Person{&ob}); err != nil {
+	// 	enc := json.NewEncoder(os.Stderr)
+	// 	enc.SetIndent("", "  ")
+	// 	enc.Encode(err)
+	// 	// log.Fatalf("!! %+v", err)
+	// }
 }
