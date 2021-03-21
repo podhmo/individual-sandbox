@@ -1,0 +1,13 @@
+package main
+import (
+	"package foo (\"m/foo\")"
+	"package foo (\"m/foo\")"
+)
+
+func main(){
+	// -- imported symbol --
+	// use as name:                   func m/foo.Hello(name string) string
+	// use as name with prefix:       func m/foo.Hello(name string) string
+	// use as name with type info:    &types.Func{object:types.object{parent:(*types.Scope)(nil), pos:0, pkg:(*types.Package)(0xc0000552c0), name:"Hello", typ:(*types.Signature)(0xc000056420), order_:0x0, color_:0x1, scopePos_:0}, hasPtrRecv:false}
+
+

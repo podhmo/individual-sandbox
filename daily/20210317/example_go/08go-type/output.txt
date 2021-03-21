@@ -1,0 +1,16 @@
+package
+	package foo ("m/foo")                   	package foo ("m/foo")                   	package foo ("m/foo")
+
+
+types
+	string                                  	string                                  	string
+	bool                                    	bool                                    	bool
+	map[string][]m/foo.MessageFunc          	map[string][]m/foo.MessageFunc          	map[string][]m/foo.MessageFunc
+
+
+object
+	type bool                               	type bool                               	type bool
+	nil                                     	nil                                     	nil
+	builtin len                             	builtin len                             	builtin len
+	var Foo string                          	var Foo string                          	var Foo string
+	func m/foo.Hello(name string) string    	func m/foo.Hello(name string) string    	func m/foo.Hello(name string) string

@@ -76,13 +76,20 @@ Typeもここに含まれる？Symbolからこれが辿れれば十分なので�
 
 利用する側についても考えてみたい。Formatで表現を変えるのが良いのではないか？
 
-- `%v` は利用する前提のコード
+symbolについて
+
+- `%v` は名前
 - `%+v` はimport prefix付き
 - `%#v` は型情報付き
-- `%T` は型情報
-- `%+T` はimport prefix付きの型情報
-- `%q` はimport時のprefix?
-- `%p` でpointer? (derefは?) -> 未定
+- `%t` は型情報
+- `%+t` はimport prefix付きの型情報
+
+packageについて
+
+- `%v` は名前
+- `%t` は型情報 (名前)
+- `%q` はimport時のpath
+- `%+p` はimport時のpathにasで別名付きを強制
 
 あと、prefixがないときにはどうしよう
 

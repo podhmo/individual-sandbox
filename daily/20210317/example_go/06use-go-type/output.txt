@@ -8,9 +8,9 @@ func main(){
 	// -- imported symbol --
 	// use as name:                   Hello
 	// use as name with prefix:       foo.Hello
-	// use as name with type info:    Hello func (string) string
-	// use as type:                   func (string) string
-	// use as type with prefix:       func (string) string
+	// use as name with type info:    Hello func(name string) string
+	// use as type:                   func(name string) string
+	// use as type with prefix:       func(name string) string
 
 
 	// use as name:                   Hello2
@@ -23,9 +23,9 @@ func main(){
 	// -- in same package --
 	// use as name:                   Byebye
 	// use as name with prefix:       Byebye
-	// use as name with type info:    Byebye func (string) string
-	// use as type:                   func (string) string
-	// use as type with prefix:       func (string) string
+	// use as name with type info:    Byebye func(name string) string
+	// use as type:                   func(name string) string
+	// use as type with prefix:       func(name string) string
 
 
 	// -- pointer --
@@ -34,4 +34,12 @@ func main(){
 	// use as name with type info:    val *int
 	// use as type:                   *int
 	// use as type with prefix:       *int
+
+
+	// -- container --
+	// use as name:                   val2
+	// use as name with prefix:       foo.val2
+	// use as name with type info:    val2 map[string][]foo.MessageFunc
+	// use as type:                   map[string][]MessageFunc
+	// use as type with prefix:       map[string][]foo.MessageFunc
 }

@@ -2,53 +2,48 @@ package main
 
 import (
 	"fmt"
+	"go/types"
 	"io"
-	"strings"
 )
 
+// TODO:
+// - remove ImportedPackage
+// - add Here in ImportedSymbol
+// - add AsMap in Here (shared)
+// - use types.NewVar as symbol
+
 func main() {
-	mainPkg := &Package{Name: "main"}
+	mainPkg := types.NewPackage("main", "main")
 	fooPkg := &ImportedPackage{
-		Here: mainPkg,
-		Package: &Package{
-			Name: "foo",
-			Path: "m/foo",
-		},
+		Here:    mainPkg,
+		Package: types.NewPackage("m/foo", "foo"),
 	}
 
-	// defined by foo
-	helloFn := &ImportedSymbol{
-		ImportedPackage: fooPkg,
-		Symbol: &Symbol{
-			Name:      "Hello",
-			Type:      "func (string) string",
-			IsLiteral: true,
-			Package:   fooPkg.Package,
-		},
-	}
-	hello2Fn := &ImportedSymbol{
-		ImportedPackage: fooPkg,
-		Symbol: &Symbol{
-			Name:    "Hello2",
-			Type:    "MessageFunc",
-			Package: fooPkg.Package,
-		},
-	}
-
-	// defined by main
-	byebyeFn := &ImportedSymbol{
-		Symbol: &Symbol{
-			Name:      "Byebye",
-			Type:      "func (string) string",
-			IsLiteral: true,
-			Package:   fooPkg.Package,
-		},
-	}
+	helloFn := fooPkg.NewFunc("Hello",
+		WithParams("name", types.Typ[types.String]),
+		WithReturn(types.Typ[types.String]),
+	)
+	hello2Fn := fooPkg.NewNamed("Helll2", "MessageFunc") // with type?
+	byebyeFn := fooPkg.NewFunc("Byebye",
+		WithParams("name", types.Typ[types.String]),
+		WithReturn(types.Typ[types.String]),
+	)
 	val := &ImportedSymbol{
 		Symbol: &Symbol{
-			Name:  "val",
-			Type:  "int",
-			Level: 1,
+			Name: "val",
+			Type: types.NewPointer(types.Typ[types.Int]),
+		},
+	}
+	val2 := &ImportedSymbol{
+		ImportedPackage: fooPkg, // xxx
+		Symbol: &Symbol{
+			Name: "val2",
+			Type: types.NewMap(types.Typ[types.String], types.NewSlice(types.NewNamed(types.NewTypeName(0, fooPkg.Package, "MessageFunc", types.NewSignature(nil,
+				types.NewTuple(types.NewParam(0, nil, "name", types.Typ[types.String])),
+				types.NewTuple(types.NewParam(0, nil, "", types.Typ[types.String])),
+				false)),
+				nil, nil,
+			))),
 		},
 	}
 
@@ -88,48 +83,48 @@ func main() {
 	fmt.Printf("	// %-30s %#v\n", "use as name with type info:", val)
 	fmt.Printf("	// %-30s %t\n", "use as type:", val)
 	fmt.Printf("	// %-30s %+t\n", "use as type with prefix:", val)
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("	// -- container --")
+	fmt.Printf("	// %-30s %v\n", "use as name:", val2)
+	fmt.Printf("	// %-30s %+v\n", "use as name with prefix:", val2)
+	fmt.Printf("	// %-30s %#v\n", "use as name with type info:", val2)
+	fmt.Printf("	// %-30s %t\n", "use as type:", val2)
+	fmt.Printf("	// %-30s %+t\n", "use as type with prefix:", val2)
 	fmt.Println("}")
 }
 
-type Package struct {
-	Name string
-	Path string
-}
-
 type ImportedPackage struct {
-	*Package
-	Here *Package
+	*types.Package
+	Here *types.Package
 	As   string
 }
 
 func (p *ImportedPackage) Format(f fmt.State, verb rune) {
 	switch verb {
 	case 'q':
-		if p.As != p.Package.Name {
-			fmt.Fprintf(f, "%s %q", p.As, p.Package.Path)
+		if p.As != p.Package.Name() {
+			fmt.Fprintf(f, "%s %q", p.As, p.Package.Path())
 		} else if f.Flag('+') {
-			fmt.Fprintf(f, "%s %q", p.Package.Name, p.Package.Path)
+			fmt.Fprintf(f, "%s %q", p.Package.Name(), p.Package.Path())
 		} else {
-			fmt.Fprintf(f, "%q", p.Package.Path)
+			fmt.Fprintf(f, "%q", p.Package.Path())
 		}
 	case 't', 'v':
 		if p.As != "" {
 			io.WriteString(f, p.As)
 		} else {
-			io.WriteString(f, p.Package.Name)
+			io.WriteString(f, p.Package.Name())
 		}
 	default:
-		io.WriteString(f, p.Package.Name) // TODO: fix
+		io.WriteString(f, p.Package.Name()) // TODO: fix
 	}
 }
 
 type Symbol struct {
 	Name    string
-	Type    string
-	Package *Package
-
-	IsLiteral bool
-	Level     int
+	Type    types.Type
+	Package *types.Package
 }
 
 type ImportedSymbol struct {
@@ -144,35 +139,42 @@ func (s *ImportedSymbol) Format(f fmt.State, verb rune) {
 			// e.g. foo.Foo
 			fmt.Fprintf(f, "%t.%s", s.ImportedPackage, s.Name)
 		} else if f.Flag('#') {
-			prefix := ""
-			if s.Level > 0 {
-				prefix = strings.Repeat("*", s.Level)
-			}
-
-			if s.ImportedPackage != nil && !s.Symbol.IsLiteral {
+			if s.ImportedPackage != nil {
 				// e.g. foo m.String
-				fmt.Fprintf(f, "%s %s%t.%s", s.Name, prefix, s.ImportedPackage, s.Type)
+				fmt.Fprintf(f, "%s %s", s.Name, types.TypeString(s.Type, s.Qualifier))
 			} else {
-				fmt.Fprintf(f, "%s %s%s", s.Name, prefix, s.Type)
+				fmt.Fprintf(f, "%s %s", s.Name, types.TypeString(s.Type, noprefix))
 			}
 		} else {
 			// e.g. Foo
 			io.WriteString(f, s.Name)
 		}
 	case 't':
-		prefix := ""
-		if s.Level > 0 {
-			prefix = strings.Repeat("*", s.Level)
-		}
-
-		if f.Flag('+') && s.ImportedPackage != nil && !s.Symbol.IsLiteral {
+		if f.Flag('+') && s.ImportedPackage != nil {
 			// e.g. m.String
-			fmt.Fprintf(f, "%s%t.%s", prefix, s.ImportedPackage, s.Type)
+			fmt.Fprintf(f, "%s", types.TypeString(s.Type, s.Qualifier))
 		} else {
 			// e.g. String
-			fmt.Fprintf(f, "%s%s", prefix, s.Type)
+			fmt.Fprintf(f, "%s", types.TypeString(s.Type, noprefix))
 		}
 	default:
 		io.WriteString(f, s.Symbol.Name)
 	}
+}
+
+func (s *ImportedSymbol) Qualifier(other *types.Package) string {
+	if s.ImportedPackage == nil {
+		return ""
+	}
+	if s.ImportedPackage.Here == other {
+		return "" // same package; unqualified
+	}
+	if s.ImportedPackage.As != "" {
+		return s.ImportedPackage.As
+	}
+	return other.Name()
+}
+
+func noprefix(other *types.Package) string {
+	return ""
 }

@@ -1,0 +1,14 @@
+	use as name:                   string
+	use as name with prefix:       string
+type X string
+	use as name:                   X
+	use as name with prefix:       X
+type Y string
+	use as name:                   Y
+	use as name with prefix:       foo.Y
+type Z string (in package foo)
+	use as name:                   Foo
+	use as name with prefix:       foo.Foo
+[]Z (in package foo)
+	use as name:                   Foo
+	use as name with prefix:       foo.Foo

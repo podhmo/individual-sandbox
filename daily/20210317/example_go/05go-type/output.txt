@@ -1,0 +1,10 @@
+package foo ("m/foo")
+  -  package fmt ("fmt")
+----------------------------------------
+type m/foo.Foo
+----------------------------------------
+string
+foo.Foo
+foo.Hello
+func(foo foo.Foo) string
+func(foo Foo) string
