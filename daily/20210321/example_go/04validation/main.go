@@ -133,6 +133,7 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 		typedValidations := map[string][]func(path []string, ob interface{}) []*Error{}
 		stringValidations := map[string][]func(string) error{}
 		sliceValidations := map[string][]func(path []string, ob interface{}) []*Error{}
+		mapValidations := map[string][]func(path []string, ob interface{}) []*Error{}
 
 		for i := 0; i < rt.NumField(); i++ {
 			rf := rt.Field(i)
@@ -140,17 +141,21 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 			if rft.Kind() == reflect.Ptr {
 				rft = rft.Elem()
 			}
-			r.mu.RLock()
 
-			isSlice := rft.Kind() == reflect.Slice
-			if isSlice {
+			r.mu.RLock()
+			switch rft.Kind() {
+			case reflect.Slice:
 				rft = rft.Elem()
-			}
-			validation, ok := r.types[rft]
-			if ok {
-				if isSlice {
+				if validation, ok := r.types[rft]; ok {
 					sliceValidations[rf.Name] = append(sliceValidations[rf.Name], validation)
-				} else {
+				}
+			case reflect.Map:
+				rft = rft.Elem()
+				if validation, ok := r.types[rft]; ok {
+					mapValidations[rf.Name] = append(mapValidations[rf.Name], validation)
+				}
+			default:
+				if validation, ok := r.types[rft]; ok {
 					typedValidations[rf.Name] = append(typedValidations[rf.Name], validation)
 				}
 			}
@@ -176,66 +181,113 @@ func (r *Registry) RegisterType(rt reflect.Type, tagString ...string) func([]str
 			if rv.Kind() == reflect.Ptr {
 				rv = rv.Elem()
 			}
-			for name, validations := range sliceValidations {
-				rf := rv.FieldByName(name)
-				typ := rf.Type()
-				if typ.Kind() == reflect.Ptr {
-					typ = typ.Elem()
-					rf = rf.Elem()
-				}
-				if rf.IsNil() {
-					continue
-				}
-				typ = typ.Elem() // slice[X] -> X
 
-				newPath := append(path, name)
-				isPtr := typ.Kind() == reflect.Ptr
-				if isPtr {
-					typ = typ.Elem()
-				}
-				for i := 0; i < rf.Len(); i++ {
-					x := rf.Index(i)
-					if isPtr {
-						x = x.Elem()
+			if len(sliceValidations) > 0 {
+				for name, validations := range sliceValidations {
+					rf := rv.FieldByName(name)
+					typ := rf.Type()
+					if typ.Kind() == reflect.Ptr {
+						typ = typ.Elem()
+						rf = rf.Elem()
 					}
-					iface := x.Interface()
+					if rf.IsNil() {
+						continue
+					}
+					typ = typ.Elem() // slice[X] -> X
+
+					newPath := append(path, name)
+					isPtr := typ.Kind() == reflect.Ptr
+					if isPtr {
+						typ = typ.Elem()
+					}
+					for i := 0; i < rf.Len(); i++ {
+						x := rf.Index(i)
+						if isPtr {
+							x = x.Elem()
+						}
+						iface := x.Interface()
+						for _, v := range validations {
+							if v == nil { // recursive definition
+								v = r.types[typ]
+							}
+							if errs := v(append(newPath, strconv.Itoa(i)), iface); errs != nil {
+								errorList = append(errorList, errs...)
+							}
+						}
+					}
+				}
+			}
+
+			if len(mapValidations) > 0 {
+				for name, validations := range mapValidations {
+					rf := rv.FieldByName(name)
+					typ := rf.Type()
+					if typ.Kind() == reflect.Ptr {
+						typ = typ.Elem()
+						rf = rf.Elem()
+					}
+					if rf.IsNil() {
+						continue
+					}
+					typ = typ.Elem() // map[X] -> X
+
+					newPath := append(path, name)
+					isPtr := typ.Kind() == reflect.Ptr
+					if isPtr {
+						typ = typ.Elem()
+					}
+
+					for iter := rf.MapRange(); iter.Next(); {
+						k := iter.Key()
+						x := iter.Value()
+						if isPtr {
+							x = x.Elem()
+						}
+						iface := x.Interface()
+						for _, v := range validations {
+							if v == nil { // recursive definition
+								v = r.types[typ]
+							}
+							if errs := v(append(newPath, fmt.Sprintf("%v", k.Interface())), iface); errs != nil {
+								errorList = append(errorList, errs...)
+							}
+						}
+					}
+				}
+			}
+
+			if len(typedValidations) > 0 {
+				for name, validations := range typedValidations {
+					rf := rv.FieldByName(name)
+					typ := rf.Type()
+					if typ.Kind() == reflect.Ptr {
+						typ = typ.Elem()
+						if rf.IsNil() {
+							continue
+						}
+						rf = rf.Elem()
+					}
+					newPath := append(path, name)
+					iface := rf.Interface()
 					for _, v := range validations {
 						if v == nil { // recursive definition
 							v = r.types[typ]
 						}
-						if errs := v(append(newPath, strconv.Itoa(i)), iface); errs != nil {
+						if errs := v(newPath, iface); errs != nil {
 							errorList = append(errorList, errs...)
 						}
 					}
 				}
 			}
-			for name, validations := range typedValidations {
-				rf := rv.FieldByName(name)
-				typ := rf.Type()
-				if typ.Kind() == reflect.Ptr {
-					typ = typ.Elem()
-					if rf.IsNil() {
-						continue
-					}
-					rf = rf.Elem()
-				}
-				newPath := append(path, name)
-				iface := rf.Interface()
-				for _, v := range validations {
-					if v == nil { // recursive definition
-						v = r.types[typ]
-					}
-					if errs := v(newPath, iface); errs != nil {
-						errorList = append(errorList, errs...)
-					}
-				}
-			}
-			for name, validations := range stringValidations {
-				rf := rv.FieldByName(name)
-				s := rf.String()
-				for _, v := range validations {
-					if err := v(s); err != nil {
-						errorList = append(errorList, &Error{Path: append(path, name), Message: err.Error()})
+
+			if len(stringValidations) > 0 {
+				for name, validations := range stringValidations {
+					rf := rv.FieldByName(name)
+					s := rf.String()
+					for _, v := range validations {
+						if err := v(s); err != nil {
+							errorList = append(errorList, &Error{Path: append(path, name), Message: err.Error()})
+						}
 					}
 				}
 			}
@@ -327,6 +379,48 @@ func (v *Validator) ValidateSlice(ob interface{}) error {
 	return &FullError{Code: 400, Message: "ValidateSlice", Errors: errorList}
 }
 
+func (v *Validator) ValidateMap(ob interface{}) error {
+	path := []string{}
+	rt := reflect.TypeOf(ob)
+	rv := reflect.ValueOf(ob)
+	if rt.Kind() == reflect.Ptr {
+		rt = rt.Elem()
+		rv = rv.Elem()
+	}
+	if rt.Kind() != reflect.Map {
+		return &FullError{Code: 400, Message: "ValidateMap", Errors: []*Error{{Message: "not map", Path: path}}}
+	}
+	rt = rt.Elem()
+	isPtr := rt.Kind() == reflect.Ptr
+	if isPtr {
+		rt = rt.Elem()
+	}
+
+	v.Registry.mu.RLock()
+	fn, ok := v.Registry.types[rt]
+	v.Registry.mu.RUnlock()
+	if !ok {
+		fn = v.Registry.RegisterType(rt)
+	}
+
+	var errorList []*Error
+	for iter := rv.MapRange(); iter.Next(); {
+		k := rv.Key()
+		x := rv.Value()
+		if isPtr {
+			x = x.Elem()
+		}
+		if err := fn(append(path, fmt.Sprintf("%v", k.Interface())), x.Interface()); err != nil {
+			errorList = append(errorList, err...)
+		}
+	}
+
+	if len(errorList) == 0 {
+		return nil
+	}
+	return &FullError{Code: 400, Message: "ValidateMap", Errors: errorList}
+}
+
 type FullError struct {
 	Code    int      `json:"code"`
 	Message string   `json:"message"`
@@ -392,6 +486,7 @@ func main() {
 		Name3    *Name
 		Father   *Person
 		Children []Person
+		Data     map[string]Person
 	}
 	// r.RegisterType(reflect.TypeOf(Person{}))
 
@@ -402,6 +497,7 @@ func main() {
 		Name:     "foo",
 		Father:   &Person{Name: "boo", Name3: &name},
 		Children: []Person{{Name: "XXX"}, {Name: "yyy"}},
+		Data:     map[string]Person{"x": Person{Name: "xxx"}},
 	}
 
 	v := &Validator{Registry: r}

@@ -10,3 +10,5 @@
 	DEBUG=1 go run $(shell echo $@*/)main.go
 05:
 	go run $(shell echo $@*/)main.go
+07:
+	go run $(shell echo $@*/)main.go
