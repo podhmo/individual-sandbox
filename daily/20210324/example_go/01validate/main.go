@@ -5,6 +5,7 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strconv"
 	"sync"
 
 	"github.com/podhmo/validator/tag"
@@ -36,18 +37,52 @@ func Validate(s *tag.Scanner, ob interface{}) error {
 	// fmt.Fprintln(os.Stderr, kludge.Describe())
 
 	x := root
-	for _, cell := range kludge.Code {
+	pc := 0
+	code := kludge.Code
+
+	type frame struct {
+		val reflect.Value
+		i   int
+		n   int
+		pc  int
+	}
+	stack := []*frame{}
+loop:
+	for {
+		cell := code[pc]
 		switch cell.Op {
+		case tag.OpEnd:
+			break loop
 		case tag.OpField:
 			x = root.FieldByName(cell.Args[0])
 		case tag.OpDeField:
+			fmt.Println("")
 		// case tag.OpMap:
 		// case tag.OpDeMap:
 		case tag.OpSlice:
-			for i, n := 0, x.Len(); i < n; i++ {
-				fmt.Println(i, n)
+			f := &frame{
+				val: x,
+				i:   0,
+				n:   x.Len(),
+				pc:  pc,
 			}
-		// case tag.OpDeSlice:
+			stack = append(stack, f) // push
+			if x.IsNil() {
+				i, _ := strconv.Atoi(cell.Args[0])
+				pc = int(i)
+			} else {
+				x = x.Index(0)
+			}
+		case tag.OpDeSlice:
+			f := stack[len(stack)-1]
+			f.i++
+			if f.i < f.n {
+				pc = f.pc
+				x = f.val
+				x = x.Index(f.i)
+			} else {
+				stack = stack[:len(stack)-1] // pop
+			}
 		case tag.OpCall:
 			pattern := cell.Args[1]
 			err := fn(pattern, x)
@@ -57,8 +92,8 @@ func Validate(s *tag.Scanner, ob interface{}) error {
 		default:
 			return fmt.Errorf("unexpected opcode %+v", cell)
 		}
+		pc++
 	}
-	_ = x
 	return nil
 }
 
@@ -98,17 +133,19 @@ func run() error {
 	s.Tag = "validate"
 
 	configList := []Config{
-		// {Color: "#999"},
-		// {Color: "#999x"},
+		{Color: "#999"},
+		{Color: "#999x"},
+		{ColorList: []string{"#999"}},
 		{ColorList: []string{"#999x"}},
+		{ColorList: []string{"#999"}},
 	}
 	for _, c := range configList {
 		log.Printf("input %#+v", c)
 		err := Validate(s, c)
 		if err != nil {
-			log.Printf("!! %+v", err)
+			log.Printf("	!! %+v", err)
 		} else {
-			log.Printf("ok")
+			log.Printf("	ok")
 		}
 	}
 	return nil
