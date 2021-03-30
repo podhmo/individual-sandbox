@@ -1,0 +1,2 @@
+  Load file "config.hcl"
+  Configuration is main.Config{LogLevel:"info"}
