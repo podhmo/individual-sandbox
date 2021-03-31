@@ -1,0 +1,6 @@
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+greeting = "hello foo from us-west-1a"
+json_result = "{\"age\":20,\"name\":\"foo\"}"

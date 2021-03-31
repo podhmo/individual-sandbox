@@ -1,0 +1,38 @@
+terraform apply -auto-approve
+module.plain.null_resource.echo: Refreshing state... [id=5834646776835244708]
+module.plain.null_resource.echo: Destroying... [id=5834646776835244708]
+module.echo2.null_resource.echo: Creating...
+module.echo1.null_resource.echo: Creating...
+module.plain.null_resource.echo: Destruction complete after 0s
+module.echo1.null_resource.echo: Provisioning with 'local-exec'...
+module.echo2.null_resource.echo: Provisioning with 'local-exec'...
+module.echo1.null_resource.echo (local-exec): Executing: ["/bin/sh" "-c" "echo x=10 y=20 z=30\n"]
+module.echo2.null_resource.echo (local-exec): Executing: ["/bin/sh" "-c" "echo x=100 y=200 z=300\n"]
+module.echo2.null_resource.echo (local-exec): x=100 y=200 z=300
+module.echo1.null_resource.echo (local-exec): x=10 y=20 z=30
+module.echo2.null_resource.echo: Creation complete after 0s [id=1269680042276636852]
+module.echo1.null_resource.echo: Creation complete after 0s [id=8965362161603827784]
+
+Apply complete! Resources: 2 added, 0 changed, 1 destroyed.
+terraform show
+# module.echo2.null_resource.echo:
+resource "null_resource" "echo" {
+    id       = "1269680042276636852"
+    triggers = {
+        "x" = "100"
+        "y" = "200"
+        "z" = "300"
+    }
+}
+
+
+
+# module.echo1.null_resource.echo:
+resource "null_resource" "echo" {
+    id       = "8965362161603827784"
+    triggers = {
+        "x" = "10"
+        "y" = "20"
+        "z" = "30"
+    }
+}

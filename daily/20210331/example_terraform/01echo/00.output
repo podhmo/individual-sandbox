@@ -1,0 +1,19 @@
+00
+terraform apply -auto-approve
+null_resource.echo: Creating...
+null_resource.echo: Provisioning with 'local-exec'...
+null_resource.echo (local-exec): Executing: ["/bin/sh" "-c" "echo x=10 y=20 z=30\n"]
+null_resource.echo (local-exec): x=10 y=20 z=30
+null_resource.echo: Creation complete after 0s [id=2240813459510242007]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+terraform show
+# null_resource.echo:
+resource "null_resource" "echo" {
+    id       = "2240813459510242007"
+    triggers = {
+        "x" = "10"
+        "y" = "20"
+        "z" = "30"
+    }
+}
