@@ -8,3 +8,6 @@ SHELL := bash
 	cd $(shell echo $@*/) && go run main.go |& tee main.output
 04:
 	cd $(shell echo $@*/) && go run main.go |& tee main.output
+05:
+	cd $(shell echo $@*/) && go run main.go |& tee main.output.default
+	cd $(shell echo $@*/) && NAME=XXX go run main.go |& tee main.output

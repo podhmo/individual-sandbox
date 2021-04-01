@@ -5,7 +5,7 @@
 	terraform output
 
 02:
-	terraform apply
+	terraform apply -auto-approve -var='aws_region="xxx"'
 
 fmt:
 	terraform fmt

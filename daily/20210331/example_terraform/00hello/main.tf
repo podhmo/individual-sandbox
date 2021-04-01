@@ -17,5 +17,3 @@ output "json_result" {
 output "greeting" {
   value = "hello ${local.person.name} from ${var.aws_region}"
 }
-
-

@@ -1,0 +1,2 @@
+  Load file "config.hcl"
+  Configuration is main.Config{Variable:[]main.Variable{main.Variable{Value:"project-name", Default:"xxx"}, main.Variable{Value:"user", Default:"foo"}, main.Variable{Value:"ans", Default:"1 + 2 = 3"}}}
