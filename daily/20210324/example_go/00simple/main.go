@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/podhmo/validator/tag"
+	"github.com/podhmo/validator/tagscan"
 )
 
 func main() {
@@ -20,9 +20,9 @@ type Config struct {
 }
 
 func run() error {
-	s := tag.NewScannerDefault()
-	s.Tag = "validate"
-	kludge, err := s.Scan(Config{})
+	cfg := tagscan.NewConfigDefault()
+	cfg.Tag = "validate"
+	kludge, err := cfg.Scanner().Scan(Config{})
 	if err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func run() error {
 	fmt.Println("----------------------------------------")
 	for _, code := range kludge.Code {
 		fmt.Println(code.Addr, code.Op, "-", code.Args)
-		if code.Op == tag.OpDeField {
+		if code.Op == tagscan.OpDeField {
 			fmt.Println("")
 		}
 	}

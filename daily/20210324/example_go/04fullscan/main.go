@@ -1,11 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"reflect"
 	"strconv"
-	"strings"
 
 	"github.com/podhmo/validator/tagscan"
 )
@@ -16,53 +17,54 @@ func main() {
 	}
 }
 
-type S struct {
-	X   string     `op:"@put"`
-	XS  []string   `op:"@@put"`
-	XS2 []string   `op:"@@put, @put"`
-	XSS [][]string `op:"@@@put, @@put, @put"`
+type Person struct {
+	Name string
+	Age  int
 }
 
 func run() error {
 	cfg := tagscan.NewConfigDefault()
-	cfg.Tag = "op"
+	cfg.FullScan = true
+
 	s := cfg.Scanner()
-
-	ob := S{
-		X:   "Foo",
-		XS:  []string{"iii", "jjj", "kkk"},
-		XS2: []string{"xxx", "yyy", "zzz"},
-		XSS: [][]string{[]string{"iii"}, []string{"jjj", "kkk", "yyy"}},
-	}
-
-	kludge, err := s.Scan(ob)
+	kludges, err := s.ScanAll(Person{})
 	if err != nil {
 		return err
 	}
 
-	for _, code := range kludge.Code {
-		fmt.Println(code.Addr, code.Op, "-", code.Args)
-		if code.Op == tagscan.OpDeField {
-			fmt.Println("")
+	w := &Walker{Definitions: map[string]interface{}{}}
+	for _, kludge := range kludges {
+		fmt.Println(kludge.Describe())
+		if err := w.Walk(kludge); err != nil {
+			return err
 		}
 	}
 
-	fmt.Println("----------------------------------------")
-	return Eval(ob, kludge.Code)
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	enc.Encode(map[string]interface{}{
+		"components": map[string]interface{}{
+			"schemas": w.Definitions,
+		},
+	})
+	return nil
 }
 
-func Eval(ob interface{}, code []*tagscan.Cell) error {
-	if ob == nil {
-		return fmt.Errorf("nil") // error?
-	}
+type Walker struct {
+	Definitions map[string]interface{}
+}
 
-	root := reflect.ValueOf(ob)
+func (w *Walker) Walk(kludge *tagscan.Kludge) error {
+	root := reflect.ValueOf(kludge.Value)
 	for root.Kind() == reflect.Ptr {
 		root = root.Elem()
 	}
 
 	x := root
 	pc := 0
+	code := kludge.Code
+
+	props := map[string]interface{}{}
 	type frame struct {
 		val reflect.Value
 		i   int
@@ -78,6 +80,7 @@ loop:
 			break loop
 		case tagscan.OpField:
 			x = root.FieldByName(cell.Args[0])
+			props[cell.Args[0]] = map[string]string{"type": x.Type().String()}
 		case tagscan.OpDeField:
 			fmt.Println("")
 		// case tagscan.OpMap:
@@ -107,11 +110,13 @@ loop:
 				stack = stack[:len(stack)-1] // pop
 			}
 		case tagscan.OpCall:
-			fmt.Println(pc, strings.Repeat("  ", len(stack)), "--", cell.Args[0], x)
 		default:
 			return fmt.Errorf("unexpected opcode %+v", cell)
 		}
 		pc++
 	}
+
+	fmt.Printf("%[1]T: %+[1]v\n", kludge.Value)
+	w.Definitions[root.Type().String()] = props
 	return nil
 }

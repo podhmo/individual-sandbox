@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/podhmo/validator/tag"
+	"github.com/podhmo/validator/tagscan"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	}
 }
 
-func Validate(s *tag.Scanner, ob interface{}) error {
+func Validate(s *tagscan.Scanner, ob interface{}) error {
 	if ob == nil {
 		return fmt.Errorf("nil") // error?
 	}
@@ -51,15 +51,15 @@ loop:
 	for {
 		cell := code[pc]
 		switch cell.Op {
-		case tag.OpEnd:
+		case tagscan.OpEnd:
 			break loop
-		case tag.OpField:
+		case tagscan.OpField:
 			x = root.FieldByName(cell.Args[0])
-		case tag.OpDeField:
+		case tagscan.OpDeField:
 			fmt.Println("")
-		// case tag.OpMap:
-		// case tag.OpDeMap:
-		case tag.OpSlice:
+		// case tagscan.OpMap:
+		// case tagscan.OpDeMap:
+		case tagscan.OpSlice:
 			f := &frame{
 				val: x,
 				i:   0,
@@ -73,7 +73,7 @@ loop:
 			} else {
 				x = x.Index(0)
 			}
-		case tag.OpDeSlice:
+		case tagscan.OpDeSlice:
 			f := stack[len(stack)-1]
 			f.i++
 			if f.i < f.n {
@@ -83,7 +83,7 @@ loop:
 			} else {
 				stack = stack[:len(stack)-1] // pop
 			}
-		case tag.OpCall:
+		case tagscan.OpCall:
 			pattern := cell.Args[1]
 			err := fn(pattern, x)
 			if err != nil {
@@ -129,8 +129,7 @@ func Regexp() func(string, reflect.Value) error {
 }
 
 func run() error {
-	s := tag.NewScannerDefault()
-	s.Tag = "validate"
+	s := tagscan.NewConfigDefault().Scanner()
 
 	configList := []Config{
 		{Color: "#999"},
