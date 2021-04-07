@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  version: 0.0.0
+  title: my api
+components:
+  schemas:
+    person:
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+      required:
+        - name
+      additionalProperties: false
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/person"
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
