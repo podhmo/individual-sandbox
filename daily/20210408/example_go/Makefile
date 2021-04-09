@@ -6,3 +6,5 @@
 	go run $(shell echo $@*)/main.go
 03:
 	DEBUG=1 go run $(shell echo $@*)/main.go
+04:
+	DEBUG=1 go run $(shell echo $@*)/main.go
