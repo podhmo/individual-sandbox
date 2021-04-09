@@ -76,10 +76,11 @@ func Scan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 		code := kludge.Code
 
 		type frame struct {
-			val reflect.Value
-			i   int
-			n   int
-			pc  int
+			val  reflect.Value
+			i    int
+			n    int
+			pc   int
+			iter *reflect.MapIter
 		}
 		stack := []*frame{}
 		for {
@@ -121,8 +122,6 @@ func Scan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 				if err := vfn(cell.Args[0], x); err != nil {
 					return err
 				}
-			// case tagscan.OpMap:
-			// case tagscan.OpDeMap:
 			case tagscan.OpSlice:
 				f := &frame{
 					val: x,
@@ -144,6 +143,29 @@ func Scan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 					pc = f.pc
 					x = f.val
 					x = x.Index(f.i)
+				} else {
+					stack = stack[:len(stack)-1] // pop
+				}
+			case tagscan.OpMap:
+				iter := x.MapRange()
+				f := &frame{
+					val:  x,
+					pc:   pc,
+					iter: iter,
+				}
+				stack = append(stack, f) // push
+				if x.IsNil() {
+					i, _ := strconv.Atoi(cell.Args[0])
+					pc = int(i)
+				} else {
+					iter.Next()
+					x = iter.Value()
+				}
+			case tagscan.OpDeMap:
+				f := stack[len(stack)-1]
+				if f.iter.Next() {
+					pc = f.pc
+					x = f.iter.Value()
 				} else {
 					stack = stack[:len(stack)-1] // pop
 				}
@@ -246,6 +268,14 @@ func run() error {
 		{Color: "#999x"},
 		{Color: "#999", SubConfig: &ColorConfig{Color: "#999"}},
 		{Color: "#999", SubConfig: &ColorConfig{Color: "#999x"}}, // validation
+		{Color: "#999", Data: map[string]ColorConfig{
+			"xxx": ColorConfig{Color: "#999"},
+			"yyy": ColorConfig{Color: "#999"},
+		}},
+		{Color: "#999", Data: map[string]ColorConfig{
+			"xxx": ColorConfig{Color: "#999"},
+			"yyy": ColorConfig{Color: "#999x"},
+		}},
 	}
 	for _, c := range configList {
 		log.Printf("input %#+v", c)
