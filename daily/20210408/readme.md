@@ -10,11 +10,13 @@
 
 やること
 
-- type毎にvalidationを追加
-- validation errorにpathを追加
-- errorを見つけても継続できるようにする
-- 順序に依存をもたせたくない
+- ok type毎にvalidationを追加
+- ok validation errorにpathを追加
+- ok errorを見つけても継続できるようにする
+- map, slice に対応する
 - contextを受け取るようにする
+- 順序に依存をもたせたくない
+- 自己参照
 
 ### schemagen
 
@@ -22,3 +24,4 @@
 - oneOfどうすると良いんだろう？
 
   - interfaceを登録して上書きしてあげられると嬉しいかも？
+
