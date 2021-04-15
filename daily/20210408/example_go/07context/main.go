@@ -19,7 +19,11 @@ func main() {
 	}
 }
 
-type ValidationFunc func(depth int, path []string, arg string, val reflect.Value) []*validator.Error
+type ValidationContext struct {
+	Depth int
+	Path  []string
+}
+type ValidationFunc func(vc *ValidationContext, arg string, val reflect.Value) []*validator.Error
 
 type Registry struct {
 	fieldValidationRegistry map[string]ValidationFunc
@@ -67,7 +71,7 @@ func (v *Validator) OnScan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 
 	v.mu.Lock()
 	defer v.mu.Unlock()
-	v.typeValidationRegistry[rt] = func(depth int, path []string, arg string, root reflect.Value) []*validator.Error {
+	v.typeValidationRegistry[rt] = func(vc *ValidationContext, arg string, root reflect.Value) []*validator.Error {
 		// fmt.Fprintln(os.Stderr, kludge.Describe())
 		for root.Kind() == reflect.Ptr {
 			root = root.Elem()
@@ -76,6 +80,8 @@ func (v *Validator) OnScan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 		x := root
 		pc := 0
 		code := kludge.Code
+		path := vc.Path
+		depth := vc.Depth
 
 		type frame struct {
 			val  reflect.Value
@@ -137,7 +143,7 @@ func (v *Validator) OnScan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 						break loop
 					}
 				}
-				if err := vfn(depth+1, append(path, ":struct", cell.Args[0]), cell.Args[0], x); err != nil {
+				if err := vfn(&ValidationContext{Depth: depth + 1, Path: append(path, ":struct", cell.Args[0])}, cell.Args[0], x); err != nil {
 					errorList = append(errorList, err...)
 				}
 			case tagscan.OpSlice:
@@ -204,7 +210,7 @@ func (v *Validator) OnScan(s *tagscan.Scanner, kludge *tagscan.Kludge) error {
 					errorList = append(errorList, &validator.Error{Code: 500, Path: path, Message: fmt.Sprintf("unexpected vfn, %q is not found", name)})
 					break loop
 				}
-				err := vfn(depth, append(path, ":call:", name), cell.Args[1], x)
+				err := vfn(&ValidationContext{Depth: depth, Path: append(path, ":call:", name)}, cell.Args[1], x)
 				if err != nil {
 					errorList = append(errorList, err...)
 				}
@@ -271,7 +277,7 @@ func (v *Validator) Validate(ob interface{}) error {
 		}
 	}
 
-	errorList := vfn(0, []string{":struct:", typ.String()}, "", reflect.ValueOf(ob))
+	errorList := vfn(&ValidationContext{Depth: 0, Path: []string{":struct:", typ.String()}}, "", reflect.ValueOf(ob))
 	if errorList != nil {
 		return NewFullError(errorList)
 	}
@@ -339,7 +345,7 @@ func Regexp() ValidationFunc {
 	m := map[string]*regexp.Regexp{}
 	var mu sync.RWMutex
 
-	return func(depth int, path []string, pattern string, val reflect.Value) []*validator.Error {
+	return func(vc *ValidationContext, pattern string, val reflect.Value) []*validator.Error {
 		mu.RLock()
 		rx, ok := m[pattern]
 		mu.RUnlock()
@@ -347,7 +353,7 @@ func Regexp() ValidationFunc {
 			log.Printf("compile regexp %q", pattern)
 			x, err := regexp.Compile(pattern)
 			if err != nil {
-				return []*validator.Error{{Code: 500, Path: path, Message: err.Error()}}
+				return []*validator.Error{{Code: 500, Path: vc.Path, Message: err.Error()}}
 			}
 			rx = x
 			mu.Lock()
@@ -355,7 +361,7 @@ func Regexp() ValidationFunc {
 			mu.Unlock()
 		}
 		if !rx.MatchString(val.String()) {
-			return []*validator.Error{{Path: path, Message: fmt.Sprintf("pattern %s is not matched", rx), Value: val.String()}}
+			return []*validator.Error{{Path: vc.Path, Message: fmt.Sprintf("pattern %s is not matched", rx), Value: val.String()}}
 		}
 		return nil
 	}

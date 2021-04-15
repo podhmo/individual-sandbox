@@ -12,3 +12,7 @@
 	DEBUG=1 go run $(shell echo $@*)/main.go
 06:
 	DEBUG=1 go run $(shell echo $@*)/main.go
+07:
+	DEBUG=1 go run $(shell echo $@*)/main.go
+08:
+	DEBUG=1 go run $(shell echo $@*)/main.go
