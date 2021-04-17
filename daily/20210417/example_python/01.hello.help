@@ -1,0 +1,7 @@
+Usage: 01sub-command.py hello [OPTIONS] NAME
+
+Arguments:
+  NAME  [required]
+
+Options:
+  --help  Show this message and exit.

@@ -1,0 +1,12 @@
+Usage: 02help-message.py delete [OPTIONS] USERNAME
+
+  Delete a user with USERNAME.
+
+  If --force is not used, will ask for confirmation.
+
+Arguments:
+  USERNAME  [required]
+
+Options:
+  --force / --no-force  Force deletion without confirmation.  [required]
+  --help                Show this message and exit.

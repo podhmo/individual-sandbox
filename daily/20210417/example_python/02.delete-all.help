@@ -1,0 +1,9 @@
+Usage: 02help-message.py delete-all [OPTIONS]
+
+  Delete ALL users in the database.
+
+  If --force is not used, will ask for confirmation.
+
+Options:
+  --force / --no-force  Force deletion without confirmation.  [required]
+  --help                Show this message and exit.

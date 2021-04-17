@@ -1,0 +1,16 @@
+Usage: 02help-message.py [OPTIONS] COMMAND [ARGS]...
+
+  Awesome CLI user manager.
+
+Options:
+  --install-completion  Install completion for the current shell.
+  --show-completion     Show completion for the current shell, to copy it or
+                        customize the installation.
+
+  --help                Show this message and exit.
+
+Commands:
+  create      Create a new user with USERNAME.
+  delete      Delete a user with USERNAME.
+  delete-all  Delete ALL users in the database.
+  init        Initialize the users database.

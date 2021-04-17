@@ -1,0 +1,6 @@
+Usage: 02help-message.py init [OPTIONS]
+
+  Initialize the users database.
+
+Options:
+  --help  Show this message and exit.

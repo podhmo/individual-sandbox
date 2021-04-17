@@ -1,0 +1,8 @@
+Usage: 01sub-command.py goodbye [OPTIONS] NAME
+
+Arguments:
+  NAME  [required]
+
+Options:
+  --formal / --no-formal  [default: False]
+  --help                  Show this message and exit.
