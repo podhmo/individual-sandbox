@@ -28,7 +28,8 @@ class APIClient(t.Protocol):
         ...
 
 
-class _MockClient(APIClient):
+# implements APIClient
+class _MockClient:
     async def list_clusters(self) -> t.List[str]:
         await asyncio.sleep(0.5)
         return ["app", "spot-batch"]
@@ -71,40 +72,43 @@ class _MockClient(APIClient):
 
 class ActionHandler:
     def __init__(
-        self, results: t.List[t.Dict[str, t.Any]], *, q: asyncio.Queue[t.Optional[Item]]
+        self,
+        client: APIClient,
+        results: t.List[t.Dict[str, t.Any]],
+        *,
+        q: asyncio.Queue[t.Optional[Item]],
     ) -> None:
         self.results = results
+        self.client = client
         self.q = q
 
-    async def do_list_clusters(self, client: APIClient) -> t.Optional[bool]:
-        clusters = await client.list_clusters()
+    async def do_list_clusters(self) -> t.Optional[bool]:
+        clusters = await self.client.list_clusters()
         for c in clusters:
-            await self.q.put(Item(self.do_list_services, (client, c, None)))
+            await self.q.put(Item(self.do_list_services, (c, None)))
         return None
 
     async def do_list_services(
-        self, client: APIClient, cluster: str, next_token: t.Optional[str],
+        self, cluster: str, next_token: t.Optional[str],
     ) -> t.Optional[bool]:
-        services, new_next_token = await client.list_services(
+        services, new_next_token = await self.client.list_services(
             cluster, next_token=next_token
         )
         if new_next_token is not None:
-            await self.q.put(
-                Item(self.do_list_services, (client, cluster, new_next_token))
-            )
+            await self.q.put(Item(self.do_list_services, (cluster, new_next_token)))
         for parts in _chunk(services, n=10):
-            await self.q.put(Item(self.do_describe_services, (client, cluster, parts)))
+            await self.q.put(Item(self.do_describe_services, (cluster, parts)))
         return None
 
     async def do_describe_services(
-        self, client: APIClient, cluster: str, services: t.List[str],
+        self, cluster: str, services: t.List[str],
     ) -> t.Optional[bool]:
-        res = await client.describe_services(cluster, services=services)
-        await self.q.put(Item(self.do_end, (client, cluster, res)))
+        res = await self.client.describe_services(cluster, services=services)
+        await self.q.put(Item(self.do_end, (cluster, res)))
         return None
 
     async def do_end(
-        self, client: APIClient, cluster: str, services: t.List[t.Dict[str, t.Any]]
+        self, cluster: str, services: t.List[t.Dict[str, t.Any]]
     ) -> t.Optional[bool]:
         for s in services:
             self.results.append(s)
@@ -113,14 +117,19 @@ class ActionHandler:
 
 class BulkExecutor:
     def __init__(
-        self, q: asyncio.Queue[t.Optional[Item]], *, debug: bool = False,
+        self,
+        q: asyncio.Queue[t.Optional[Item]],
+        *,
+        debug: bool = False,
+        buffering_time: float = 0.1,
+        max_items: int = -1,
     ):
         self.q = q
         self.debug = debug
+        self.buffering_time = buffering_time
+        self.max_items = max_items
 
-    async def bulk_get(
-        self, *, buffering_time: float = 0.1, max_items: int = -1
-    ) -> t.Tuple[t.List[Item], bool]:
+    async def bulk_get(self) -> t.Tuple[t.List[Item], bool]:
         q = self.q
 
         items: t.List[Item] = []
@@ -146,22 +155,22 @@ class BulkExecutor:
                 items.append(item)
                 if first:
                     break
-                if max_items > 0 and len(items) >= max_items:
+                if self.max_items > 0 and len(items) >= self.max_items:
                     return
 
         try:
             await _bulk_get(first=True)
-            await asyncio.wait_for(_bulk_get(first=False), buffering_time)
+            await asyncio.wait_for(_bulk_get(first=False), self.buffering_time)
         except asyncio.TimeoutError:
             pass
 
         return items, is_end
 
-    async def run(self, *, buffering_time: float = 0.1) -> None:
+    async def run(self) -> None:
         q = self.q
 
         while True:
-            items, is_end = await self.bulk_get(buffering_time=buffering_time)
+            items, is_end = await self.bulk_get()
             if is_end:
                 if q.empty():
                     break
@@ -210,8 +219,9 @@ def run(*, env: t.Optional[str] = None) -> None:
         q: asyncio.Queue[t.Optional[Item]] = asyncio.Queue()
 
         client = _MockClient()
-        ah = ActionHandler(results, q=q)
-        q.put_nowait(Item(ah.do_list_clusters, (client,)))
+        assert isinstance(client, APIClient)
+        ah = ActionHandler(client, results, q=q)
+        q.put_nowait(Item(ah.do_list_clusters, ()))
 
         ex = BulkExecutor(q, debug=debug)
         await ex.run()
