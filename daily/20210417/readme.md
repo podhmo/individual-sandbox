@@ -1,3 +1,7 @@
+## go sumtype
+
+やっぱりgoは難しい
+
 ## python typer
 
 - hello world

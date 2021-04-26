@@ -1,3 +1,9 @@
+import typer
+
+app = typer.Typer(help="Awesome CLI")
+
+
+@app.command()
 def create(username: str):
     """
     Create a new user with USERNAME.
@@ -5,6 +11,7 @@ def create(username: str):
     typer.echo(f"Creating user: {username}")
 
 
+@app.command()
 def delete(
     username: str,
     *,
@@ -20,6 +27,7 @@ def delete(
     else:
         typer.echo("Operation cancelled")
 
+@app.command()
 def delete_all(
     *,
     force: bool,
@@ -37,9 +45,15 @@ def delete_all(
 from functools import cache
 
 # xx
+@app.command()
 @cache # yy
 def init():
     """
     Initialize the users database.
     """
     typer.echo("Initializing user database")
+
+
+if __name__ == "__main__":
+    app()
+
