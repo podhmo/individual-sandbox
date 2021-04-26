@@ -1,0 +1,11 @@
+Usage: 02work-around.py [OPTIONS]
+
+Options:
+  --name TEXT               [required]
+  --verbose / --no-verbose  [default: True]
+  --force / --no-force      [default: False]
+  --install-completion      Install completion for the current shell.
+  --show-completion         Show completion for the current shell, to copy it
+                            or customize the installation.
+
+  --help                    Show this message and exit.
