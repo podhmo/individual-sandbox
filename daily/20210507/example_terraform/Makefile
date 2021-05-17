@@ -12,3 +12,5 @@ export TF_VAR_foo=$(FOO)
 02:
 	cd $(shell echo $@*/)&& terraform init && terraform apply -auto-approve
 	cat $(shell echo $@*/)local.tfstate
+03:
+	cd $(shell echo $@*/)&& terraform init && terraform apply -auto-approve
