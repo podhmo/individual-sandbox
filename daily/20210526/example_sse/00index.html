@@ -1,0 +1,19 @@
+<body>
+  <script>
+    // const evtSource = new EventSource("//localhost:8080/00ssedemo.php", { withCredentials: true } ); 
+    const evtSource = new EventSource("//localhost:8080/00ssedemo.php", { withCredentials: false } ); 
+    evtSource.onmessage = function(e) {
+      var newElement = document.createElement("li");
+      var eventList = document.getElementById('list');
+
+      newElement.innerHTML = "message: " + e.data;
+      eventList.appendChild(newElement);
+    }
+    evtSource.onerror = function(e) {
+      alert("EventSource failed.");
+    }
+  </script>
+<body>
+  <div id="list"></div>
+</body>
+</body>
