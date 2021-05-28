@@ -1,0 +1,4 @@
+dataclass-type-validator
+marshmallow_dataclass
+pydantic
+typesystem
