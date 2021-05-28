@@ -53,5 +53,5 @@ _strptime.py を読み込んで使っている。TimeREのここを変更すれ�
 無理だった。
 
 ```python
-
+ValueError: microsecond must be in 0..999999
 ```

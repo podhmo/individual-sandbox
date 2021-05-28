@@ -186,7 +186,7 @@ class TimeRE(dict):
         base.__init__({
             # The " [1-9]" part of the regex is to make %c from ANSI C work
             'd': r"(?P<d>3[0-1]|[1-2]\d|0[1-9]|[1-9]| [1-9])",
-            'f': r"(?P<f>[0-9]{1,6})",
+            'f': r"(?P<f>[0-9]{1,7})",
             'H': r"(?P<H>2[0-3]|[0-1]\d|\d)",
             'I': r"(?P<I>1[0-2]|0[1-9]|[1-9])",
             'G': r"(?P<G>\d\d\d\d)",
@@ -418,7 +418,7 @@ def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
         elif group_key == 'S':
             second = int(found_dict['S'])
         elif group_key == 'f':
-            s = found_dict['f']
+            s = found_dict['f'][:6]
             # Pad to always return microseconds.
             s += "0" * (6 - len(s))
             fraction = int(s)
@@ -569,6 +569,7 @@ def _strptime_datetime(cls, data_string, format="%a %b %d %H:%M:%S %Y"):
     format string."""
     tt, fraction, gmtoff_fraction = _strptime(data_string, format)
     tzname, gmtoff = tt[-2:]
+
     args = tt[:6] + (fraction,)
     if gmtoff is not None:
         tzdelta = datetime_timedelta(seconds=gmtoff, microseconds=gmtoff_fraction)
