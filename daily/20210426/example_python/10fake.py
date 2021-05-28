@@ -9,7 +9,7 @@ from collections import namedtuple
 
 logger = logging.getLogger(__name__)
 END = None
-ActionItem = namedtuple("ActionItem", "action, args, kwargs")
+ActionItem = namedtuple("ActionItem", "action, args, kwargs, awaitable")
 
 
 @t.runtime_checkable
@@ -51,7 +51,7 @@ class _MockClient:
     async def list_services(
         self, cluster: str, *, next_token: t.Optional[str] = None
     ) -> t.Tuple[t.List[str], t.Optional[str]]:
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(.5)
         if cluster == "app":
             if next_token is None:
                 return [f"app{i:02d}" for i in range(20)], "next_token_00"
@@ -114,6 +114,7 @@ class ActionHandler:
             await self.aq.add_next_action(
                 self.do_list_services, cluster=cluster, next_token=new_next_token
             )
+
         for parts in _chunk(services, n=10):
             await self.aq.add_next_action(
                 self.do_describe_services, cluster=cluster, services=parts
@@ -143,17 +144,24 @@ class BulkActionQueue:
         debug: bool = False,
         buffering_time: float = 0.1,
         max_items: int = -1,
+        aggressive: bool = False,
     ):
         self.q = q
         self.debug = debug
         self.buffering_time = buffering_time
         self.max_items = max_items
+        self.aggressive = aggressive
 
     async def add_next_action(
         self, action: t.Callable[..., t.Awaitable[t.Any]], *args: t.Any, **kwargs: t.Any
     ) -> None:
         inspect.getcallargs(action, *args, **kwargs)
-        await self.q.put(ActionItem(action=action, args=args, kwargs=kwargs))
+        awaitable = None
+        if self.aggressive:
+            awaitable = action(*args, **kwargs)
+        await self.q.put(
+            ActionItem(action=action, args=args, kwargs=kwargs, awaitable=awaitable)
+        )
 
     async def bulk_get_action(self) -> t.Tuple[t.List[ActionItem], bool]:
         q = self.q
@@ -207,7 +215,12 @@ class BulkActionQueue:
 
             # print("@", len(items))
             has_end = False
-            futs = [action(*args, **kwargs) for action, args, kwargs in items]
+            futs = []
+            for item in items:
+                awaitable = item.awaitable
+                if awaitable is None:
+                    awaitable = item.action(*item.args, **item.kwargs)
+                futs.append(awaitable)
             for is_end_or_exc in await asyncio.gather(*futs, return_exceptions=True):
                 q.task_done()
                 if is_end_or_exc is True:
@@ -247,7 +260,7 @@ def run(*, env: t.Optional[str] = None) -> None:
         client = _MockClient()
         assert isinstance(client, APIClient)
 
-        aq = BulkActionQueue(q, debug=debug)
+        aq = BulkActionQueue(q, debug=debug, aggressive=True)
         ah = ActionHandler(client, results, aq=aq)
         await aq.add_next_action(ah.do_list_clusters)
 
