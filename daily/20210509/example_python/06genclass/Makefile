@@ -1,0 +1,2 @@
+default:
+	mypy main.py
