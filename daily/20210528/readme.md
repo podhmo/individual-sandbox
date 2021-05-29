@@ -67,6 +67,21 @@ run()? run_until_complete()?
 
     - 実は asyncio.Futureにおいて `__await__ = __iter__` (諸々やって yield self)
 
+### wait() ? gather() ?
+
+asyncio.wait()にcorountineをそのまま受け渡すのはwarningが出るのか
+
+```python
+    if any(coroutines.iscoroutine(f) for f in fs):
+        warnings.warn("The explicit passing of coroutine objects to "
+                      "asyncio.wait() is deprecated since Python 3.8, and "
+                      "scheduled for removal in Python 3.11.",
+                      DeprecationWarning, stacklevel=2)
+```
+
+gather()を使うかcreate_task()するか。
+１つだけ待ちたいときはwait()を使う必要があるか。
+
 ## python websockets
 
 - https://websockets.readthedocs.io/en/3.0/intro.html
