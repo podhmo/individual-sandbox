@@ -33,6 +33,20 @@ func (sk SortKey) MarshalText() ([]byte, error) {
 	return []byte(sk.Field), nil
 }
 
+func ParseSortKey(s string) (SortKey, error) {
+	var sk SortKey
+	if s == "" {
+		return sk, nil
+	}
+	if s[0] == '-' {
+		sk.Field = s[1:]
+		sk.Desc = true
+		return sk, nil
+	}
+	sk.Field = s
+	return sk, nil
+}
+
 func main() {
 	if err := run(); err != nil {
 		log.Fatalf("!! %+v", err)

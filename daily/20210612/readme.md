@@ -1,8 +1,40 @@
+## go graphql
+
+gqlgenは使いたくない
+
+- https://github.com/graphql-go/graphql
+- https://github.com/graphql-go/handler
+
+
+## go いろいろ仲良くなる
+
+- db, api
+- pointerは辛い -> sql.NullString -> jsonは辛い -> guregu/null.String
+- APIのqueryは? query builderが必要になるのか -> Masterminds/squirrel
+
+
+## go sql.NullStringをJSONに渡すとか
+
+- https://github.com/guregu/null
+
+  - gopkg.in/guregu/null.v4/null
+  - gopkg.in/guregu/null.v4/zero
+
+- https://github.com/golang/go/issues/5901
+
 ## pagination
 
 - graphqlのpaginationの名前を借用すれば良いのでは？
 
   - relay style cursorか
+
+
+### REST API
+
+- https://nordicapis.com/everything-you-need-to-know-about-api-pagination/
+- https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/#
+- https://medium.com/@ignaciochiazzo/paginating-requests-in-apis-d4883d4c1c4c
+- https://jsonapi.org/format/#fetching-pagination
 
 ### relay style cursor
 
@@ -92,6 +124,14 @@ type BackwordPaginationInput {
 ### ent
 
 - https://entgo.io/ja/docs/tutorial-todo-gql-paginate/
+
+## go SQL injectionを防ぐためにquery builderを使うことを強制しなくても良い
+
+- https://github.com/google/go-safeweb
+
+面白いhack
+
+https://github.com/google/go-safeweb/blob/399001ed71a9412ebfa8df9aa1f9ede04bfc5d3b/safesql/safesql.go#L69
 
 ## go query builder?
 
