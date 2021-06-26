@@ -80,9 +80,9 @@ celerybeat-schedule
 .env
 
 # virtualenv
-.venv/
 venv/
 ENV/
+.venv/
 pyvenv.cfg
 
 # pip
