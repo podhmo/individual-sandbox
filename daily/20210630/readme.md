@@ -39,6 +39,9 @@ slack単体のものにするか任意のものに対するproxyにするかは�
 
 429(Too many request)か409(Conflict)を返すイメージだった。
 
+可能なら、一つのproxy、一つのendpointで済ませたい。
+
+
 ### go proxy
 
 - goのproxyでreverse proxy用に特別なものってあるのだっけ？
