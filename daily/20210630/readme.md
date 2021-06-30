@@ -1,3 +1,48 @@
+## terraform output object type value
+
+tfenvはscoopに存在していなかった。
+terraformはscoopに存在していた。
+
+### output as object type
+
+- [amazon web services - Use output value in terraform object - Stack Overflow](https://stackoverflow.com/questions/63461009/use-output-value-in-terraform-object)
+
+### remote state
+
+- https://www.terraform.io/docs/language/settings/backends/remote.html
+
+流石に何か設定が必要か。いや、localでもremote_stateが使えるな。
+
+main.tf
+
+```terraform
+locals {
+    foo = {
+        name = "foo"
+        age = 20
+    }
+}
+
+output "person" {
+    value = local.foo
+}
+````
+
+sub/main.tf
+
+```terraform
+data "terraform_remote_state" "root" {
+    backend = "local"
+    config = {
+        path = "../terraform.state"
+    }
+}
+
+output "message" {
+    value = "hello ${data.terraform_remote_state.outputs.person.name}"
+}
+```
+
 ## go forward proxy
 
 - https://github.com/kazeburo/chocon
