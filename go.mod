@@ -1,6 +1,6 @@
 module m
 
-go 1.15
+go 1.16
 
 require (
 	contrib.go.opencensus.io/integrations/ocsql v0.1.6 // indirect
