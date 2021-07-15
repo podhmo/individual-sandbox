@@ -1,0 +1,14 @@
+# syntax = docker/dockerfile:experimental
+FROM arm64v8/python:3.8-slim-buster
+
+WORKDIR /app
+
+# see; docker-config/config.json; ifconfig | grep en0 -A 3
+
+# RUN apt-get update && apt-get install -y --no-install-recommends curl
+# RUN curl http://httpbin.org/ip
+
+ARG PIP_OPTION=
+# RUN pip3 install -U pip $PIP_OPTION && pip3 install $PIP_OPTION uvicorn
+RUN --mount=type=cache,mode=0755,target=/root/.cache/pip pip3 install --only-binary :all: -U pip $PIP_OPTION uvicorn
+RUN --mount=type=cache,mode=0755,target=/root/.cache/pip pip3 install --only-binary :all: -U pip $PIP_OPTION argon2-cffi
