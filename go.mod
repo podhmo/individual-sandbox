@@ -24,6 +24,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/dimfeld/httptreemux v5.0.1+incompatible // indirect
 	github.com/dnaeon/go-vcr v1.0.1 // indirect
+	github.com/elazarl/goproxy v0.0.0-20210110162100-a92cc753f88e // indirect
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
 	github.com/facebook/ent v0.4.3 // indirect
 	github.com/fogleman/ease v0.0.0-20170301025033-8da417bf1776 // indirect
