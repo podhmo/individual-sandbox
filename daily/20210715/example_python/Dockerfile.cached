@@ -1,0 +1,5 @@
+# syntax = docker/dockerfile:experimental
+FROM python:3.9-slim
+
+RUN --mount=type=cache,mode=0755,target=/root/.cache/pip python3 -m pip install boto3 pandas
+CMD ["python3"]
