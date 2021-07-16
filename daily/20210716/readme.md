@@ -1,3 +1,12 @@
+## python pandas
+
+難しい
+
+- stack, unstack
+- pivot
+- pivot_table
+- melt, unmelt
+
 ## dockerでproxyを使う方法
 
 - https://docs.docker.com/network/proxy/
