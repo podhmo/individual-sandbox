@@ -1,9 +1,6 @@
-from dataclasses import dataclass
 import inspect
 import ast
-import traceback
 import sys
-import linecache
 
 
 def transform(fn, *, globals: dict):
@@ -61,7 +58,13 @@ def transform(fn, *, globals: dict):
             ],
         ),
     ]
+
     ast.fix_missing_locations(node)
+    offset = fn.__code__.co_firstlineno - 1
+    for x in ast.walk(node):
+        if hasattr(x, "lineno"):
+            x.lineno += offset
+
     # todo: bind fn.__code__ (side effect)
     filename = fn.__code__.co_filename
     # filename = "<ast>"
@@ -73,50 +76,18 @@ def transform(fn, *, globals: dict):
     return transformed
 
 
-@dataclass
-class Point:
-    x: int
-    y: int
+def run_dsl(run, *, globals=None, depth=1):
+    if globals is None:
+        frame = sys._getframe(depth)
+        globals = frame.f_globals
 
+    fn = transform(run, globals=globals)
 
-@dataclass
-class Pair:
-    left: Point
-    right: Point
+    resources = fn(y=20)
+    exc: Exception = resources.pop("_exception", None)
+    if exc is not None:
+        # te = traceback.TracebackException.from_exception(exc)
+        # print("".join(te.format()))
+        raise exc from None
 
-
-def run(y: int) -> dict:
-    p0 = Point(x=10, y=y)
-    run1(y)
-    p1 = Point(x=20, y=y0)
-
-
-def run1(y):
-    p0 = Point(x=10, y=y)
-    p1 = Point(x=20, y=y0)
-
-
-fn = transform(run, globals=globals())
-D = fn(y=20)
-if D["_exception"] is not None:
-    exc: Exception = D["_exception"]
-    te = traceback.TracebackException.from_exception(exc)
-
-    print("@Traceback (most recent call last)")
-    for frame in te.stack:
-        if (
-            frame.name == run.__name__ and frame.filename == run.__code__.co_filename
-        ):  # xxx
-            offset = run.__code__.co_firstlineno - 1
-            print(
-                f"@  File '{frame.filename}', line {frame.lineno + offset}, in {frame.name}"
-            )
-            print(
-                f"@    {linecache.getline(frame.filename, frame.lineno + offset).strip()}"
-            )
-        else:
-            print(f"*  File '{frame.filename}', line {frame.lineno}, in {frame.name}")
-            print(f"*    {frame.line}")
-
-    #  print("".join(te.format()))
-print(D)
+    return resources
