@@ -7,13 +7,18 @@ class Point:
     y: int
 
 
+class Pair:
+    left: Point
+    right: Point
+
+
 def use(*, x: int) -> None:
     lpt = make_point(x)
-    print("lpt == ", lpt)
+    print("lpt = ", lpt)
 
     rpt = make_point(x + 10)
-    pair = (lpt, rpt)
-    return pair
+    pair = Pair(lpt, rpt)
+    print("pair = ", pair)
 
 
 def make_point(x: int, *, y: int = 20) -> Point:

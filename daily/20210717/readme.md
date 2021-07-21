@@ -1,3 +1,9 @@
+## terraform
+
+- 普通にドキュメントになっていた https://www.terraform.io/docs/language/modules/develop/composition.html#conditional-creation-of-objects
+- これは使ったほうが良さそう https://github.com/terraform-aws-modules/terraform-aws-vpc/tree/master/examples/simple-vpc
+- thisだけ守りたいかな https://qiita.com/bigwheel/items/a9e8dd4e12062ac12fe8
+
 ## python dis
 
 - dis.BytecodeでInstruction objectが取れるのでこれで管理できそう
@@ -12,6 +18,7 @@
 
 - [Understanding Python Bytecode. Learn about disassembling Python… | by Reza Bagheri | Towards Data Science](https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d)
 - [Bytecode Hacking for Great Justice](https://blog.fastforwardlabs.com/2015/04/23/bytecode-hacking-for-great-justice.html)
+
 - https://github.com/bravegnu/python-byte-code/blob/master/Python%20Byte%20Code%20Hacking.ipynb
 
 ここでopcodeの一覧が見れるのは便利かも
