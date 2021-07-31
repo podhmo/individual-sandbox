@@ -6,6 +6,8 @@ PYTHON ?= .venv/Scripts/python.exe
 	$(PYTHON) $(shell echo $@*.py)
 02:
 	$(PYTHON) $(shell echo $@*.py)
+03:
+	$(PYTHON) $(shell echo $@*.py)
 
 setup: $(PYTHON)
 	$(PYTHON) -m pip install sympy
