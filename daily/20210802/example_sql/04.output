@@ -1,0 +1,11 @@
+  team_id = 1
+team_name = x
+        c = 2
+
+  team_id = 2
+team_name = y
+        c = 0
+
+  team_id = 3
+team_name = z
+        c = 1

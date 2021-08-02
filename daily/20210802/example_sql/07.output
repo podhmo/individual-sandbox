@@ -1,0 +1,39 @@
+     year = 2019
+team_name = x
+        c = 1
+    names = foo
+
+     year = 2020
+team_name = x
+        c = 3
+    names = foo,bar,boo
+
+     year = 2020
+team_name = y
+        c = 1
+    names = foo
+
+     year = 2021
+team_name = x
+        c = 1
+    names = boo
+
+     year = 2021
+team_name = y
+        c = 1
+    names = foo
+
+     year = 2021
+team_name = z
+        c = 1
+    names = bar
+
+     year = 2022
+team_name = x
+        c = 1
+    names = boo
+
+     year = 2022
+team_name = y
+        c = 1
+    names = foo

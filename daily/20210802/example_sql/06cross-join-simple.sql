@@ -1,0 +1,7 @@
+WITH xs AS (
+  SELECT 1 as id UNION ALL SELECT 2 UNION ALL SELECT 3
+),
+ys AS (
+  SELECT 'foo' as name UNION ALL SELECT 'bar' UNION ALL SELECT 'boo'
+)
+SELECT * FROM xs CROSS JOIN ys

@@ -1,0 +1,7 @@
+  team_id = 1
+team_name = x
+ count(*) = 2
+
+  team_id = 3
+team_name = z
+ count(*) = 1

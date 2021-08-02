@@ -1,0 +1,24 @@
+  team_id = 1
+team_name = x
+  user_id = 10
+user_name = foo
+
+  team_id = 1
+team_name = x
+  user_id = 20
+user_name = bar
+
+  team_id = 1
+team_name = x
+  user_id = 30
+user_name = boo
+
+  team_id = 2
+team_name = y
+  user_id = 10
+user_name = foo
+
+  team_id = 3
+team_name = z
+  user_id = 20
+user_name = bar
