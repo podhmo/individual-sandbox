@@ -1,5 +1,21 @@
 #
 
+## go astmpl 引数の受け取り方
+
+引数の受け取り方は２種類くらい考えられる
+
+- constかvarなどで定義を宣言
+- 置き換え対象の関数に余分に引数を追加する
+
+### 追記
+
+重要なこと
+
+- template functionもビルドしたい
+- template functionは実行しない
+- template functionから生成した定義を利用したコードは書きたい
+- template functionのPATHを指定に失敗したくない
+
 ## go astmpl marker
 
 marker的なものの実装をどうしようか？

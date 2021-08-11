@@ -1,0 +1,139 @@
+go run 07transform/main.go
+(*ast.File)(0xc000126000)({
+ Doc: (*ast.CommentGroup)(<nil>),
+ Package: (token.Pos) 1,
+ Name: (*ast.Ident)(0xc000046480)(foo),
+ Decls: ([]ast.Decl) (len=1 cap=1) {
+  (*ast.FuncDecl)(0xc00007c7e0)({
+   Doc: (*ast.CommentGroup)(0xc0000040c0)({
+    List: ([]*ast.Comment) (len=1 cap=1) {
+     (*ast.Comment)(0xc0000040a8)({
+      Slash: (token.Pos) 14,
+      Text: (string) (len=9) "// Foo: -"
+     })
+    }
+   }),
+   Recv: (*ast.FieldList)(<nil>),
+   Name: (*ast.Ident)(0xc0000464a0)(Foo),
+   Type: (*ast.FuncType)(0xc000004180)({
+    Func: (token.Pos) 24,
+    Params: (*ast.FieldList)(0xc00007c750)({
+     Opening: (token.Pos) 32,
+     List: ([]*ast.Field) (len=2 cap=2) {
+      (*ast.Field)(0xc0000220c0)({
+       Doc: (*ast.CommentGroup)(<nil>),
+       Names: ([]*ast.Ident) (len=1 cap=1) {
+        (*ast.Ident)(0xc0000464c0)(name)
+       },
+       Type: (*ast.Ident)(0xc0000464e0)(string),
+       Tag: (*ast.BasicLit)(<nil>),
+       Comment: (*ast.CommentGroup)(<nil>)
+      }),
+      (*ast.Field)(0xc000022140)({
+       Doc: (*ast.CommentGroup)(<nil>),
+       Names: ([]*ast.Ident) (len=1 cap=1) {
+        (*ast.Ident)(0xc000046500)(Mark)
+       },
+       Type: (*ast.FuncType)(0xc0000040d8)({
+        Func: (token.Pos) 51,
+        Params: (*ast.FieldList)(0xc00007c720)({
+         Opening: (token.Pos) 55,
+         List: ([]*ast.Field) (len=1 cap=1) {
+          (*ast.Field)(0xc000022100)({
+           Doc: (*ast.CommentGroup)(<nil>),
+           Names: ([]*ast.Ident) <nil>,
+           Type: (*ast.Ident)(0xc000046520)(string),
+           Tag: (*ast.BasicLit)(<nil>),
+           Comment: (*ast.CommentGroup)(<nil>)
+          })
+         },
+         Closing: (token.Pos) 62
+        }),
+        Results: (*ast.FieldList)(<nil>)
+       }),
+       Tag: (*ast.BasicLit)(<nil>),
+       Comment: (*ast.CommentGroup)(<nil>)
+      })
+     },
+     Closing: (token.Pos) 63
+    }),
+    Results: (*ast.FieldList)(<nil>)
+   }),
+   Body: (*ast.BlockStmt)(0xc00007c7b0)({
+    Lbrace: (token.Pos) 64,
+    List: ([]ast.Stmt) (len=2 cap=2) {
+     (*ast.ExprStmt)(0xc0000443e0)({
+      X: (*ast.CallExpr)(0xc000022180)({
+       Fun: (*ast.Ident)(0xc000046540)(Mark),
+       Lparen: (token.Pos) 87,
+       Args: ([]ast.Expr) (len=1 cap=1) {
+        (*ast.BasicLit)(0xc000046560)({
+         ValuePos: (token.Pos) 88,
+         Kind: (token.Token) STRING,
+         Value: (string) (len=5) "\"xxx\""
+        })
+       },
+       Ellipsis: (token.Pos) 0,
+       Rparen: (token.Pos) 93
+      })
+     }),
+     (*ast.ExprStmt)(0xc000044420)({
+      X: (*ast.CallExpr)(0xc0000221c0)({
+       Fun: (*ast.SelectorExpr)(0xc000004138)({
+        X: (*ast.Ident)(0xc000046580)(fmt),
+        Sel: (*ast.Ident)(0xc0000465c0)(Println)
+       }),
+       Lparen: (token.Pos) 107,
+       Args: ([]ast.Expr) (len=1 cap=1) {
+        (*ast.BasicLit)(0xc0000465e0)({
+         ValuePos: (token.Pos) 108,
+         Kind: (token.Token) STRING,
+         Value: (string) (len=7) "\"Hello\""
+        })
+       },
+       Ellipsis: (token.Pos) 0,
+       Rparen: (token.Pos) 115
+      })
+     })
+    },
+    Rbrace: (token.Pos) 125
+   })
+  })
+ },
+ Scope: (*ast.Scope)(0xc000044330)(scope 0xc000044330 {
+	func Foo
+}
+),
+ Imports: ([]*ast.ImportSpec) <nil>,
+ Unresolved: ([]*ast.Ident) (len=3 cap=4) {
+  (*ast.Ident)(0xc0000464e0)(string),
+  (*ast.Ident)(0xc000046520)(string),
+  (*ast.Ident)(0xc000046580)(fmt)
+ },
+ Comments: ([]*ast.CommentGroup) (len=3 cap=4) {
+  (*ast.CommentGroup)(0xc0000040c0)({
+   List: ([]*ast.Comment) (len=1 cap=1) {
+    (*ast.Comment)(0xc0000040a8)({
+     Slash: (token.Pos) 14,
+     Text: (string) (len=9) "// Foo: -"
+    })
+   }
+  }),
+  (*ast.CommentGroup)(0xc000004108)({
+   List: ([]*ast.Comment) (len=1 cap=1) {
+    (*ast.Comment)(0xc0000040f0)({
+     Slash: (token.Pos) 67,
+     Text: (string) (len=14) "// print hello"
+    })
+   }
+  }),
+  (*ast.CommentGroup)(0xc000004168)({
+   List: ([]*ast.Comment) (len=1 cap=1) {
+    (*ast.Comment)(0xc000004150)({
+     Slash: (token.Pos) 118,
+     Text: (string) (len=6) "// hmm"
+    })
+   }
+  })
+ }
+})
