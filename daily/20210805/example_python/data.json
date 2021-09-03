@@ -1,0 +1,62 @@
+[
+  {
+    "event_month": "2021-05",
+    "id": 1,
+    "type": "A",
+    "v": 10
+  },
+  {
+    "event_month": "2021-06",
+    "id": 1,
+    "type": "A",
+    "v": 20
+  },
+  {
+    "event_month": "2021-07",
+    "id": 1,
+    "type": "A",
+    "v": 30
+  },
+  {
+    "event_month": "2021-08",
+    "id": 1,
+    "type": "A",
+    "v": 40
+  },
+  {
+    "event_month": "2021-05",
+    "id": 2,
+    "type": "A",
+    "v": 100
+  },
+  {
+    "event_month": "2021-06",
+    "id": 2,
+    "type": "A",
+    "v": 200
+  },
+  {
+    "event_month": "2021-07",
+    "id": 2,
+    "type": "A",
+    "v": 300
+  },
+  {
+    "event_month": "2021-08",
+    "id": 2,
+    "type": "A",
+    "v": 400
+  },
+  {
+    "event_month": "2021-07",
+    "id": 3,
+    "type": "B",
+    "v": 3000
+  },
+  {
+    "event_month": "2021-08",
+    "id": 3,
+    "type": "B",
+    "v": 4000
+  }
+]
