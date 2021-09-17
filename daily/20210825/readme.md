@@ -1,3 +1,7 @@
+## aws lambda handler
+
+    - https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/golang-handler.html
+
 ## astmplの理想
 
 引数を呼ぶように実行したい？気がしていた。
