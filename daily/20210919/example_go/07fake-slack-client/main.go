@@ -37,7 +37,7 @@ func (c *FakeConnector) Connect(x string) error {
 	return err
 }
 
-type StdoutConnectorFactory struct{}
+ｍtype StdoutConnectorFactory struct{}
 
 func (f *StdoutConnectorFactory) NewConnector() Connector {
 	return &FakeConnector{W: os.Stdout}
