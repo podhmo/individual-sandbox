@@ -28,7 +28,7 @@ func run() error {
 	if err := json.NewDecoder(bytes.NewBufferString(`
 {
 	"db": {"uri": "localhost:9200"},
-	"anotherDB": {"uri": "localhost:9200"}
+	"anotherDB": {"uri": "localhost:9210"}
 }
 `)).Decode(c); err != nil {
 		return err
