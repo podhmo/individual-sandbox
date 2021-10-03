@@ -1,0 +1,11 @@
+05subconfig/
+05subconfig/config
+05subconfig/config/configanotherDB
+05subconfig/config/configanotherDB/anotherDB.go
+05subconfig/config/configdb
+05subconfig/config/configdb/db.go
+05subconfig/lib
+05subconfig/lib/db
+05subconfig/lib/db/libdb.go
+05subconfig/main.go
+05subconfig/structure.txt
