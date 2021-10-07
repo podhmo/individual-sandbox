@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/go-playground/validator"
 	"github.com/morikuni/failure"
@@ -21,19 +22,25 @@ func Extract(err error) error {
 	if err == nil {
 		return nil
 	}
-	return failure.Custom(failure.Custom(err), failure.WithFormatter(), failure.WithCallStackSkip(1))
-	// i := failure.NewIterator(err)
-	// for i.Next() {
-	// 	if v, ok := i.Error().(interface{ Unexpected() bool }); ok && v.Unexpected() {
-	// 		return i.Error()
-	// 	}
 
-	// 	var c failure.Code
-	// 	if i.As(&c) {
-	// 		return i.Error()
-	// 	}
-	// }
-	// return err
+	i := failure.NewIterator(err)
+	for i.Next() {
+		inner := i.Error()
+		if v, ok := inner.(interface {
+			IsFormatter()
+			Unwrap() error
+		}); ok {
+			if err == inner {
+				return err
+			}
+			prefix := strings.TrimSpace(strings.ReplaceAll(err.Error(), inner.Error(), "")) // todo: lazy
+			return failure.Custom(
+				failure.Custom(v.Unwrap(), failure.Message(prefix)),
+				failure.WithFormatter(), failure.WithCallStackSkip(1),
+			)
+		}
+	}
+	return err
 }
 
 func main() {
@@ -71,11 +78,17 @@ func main() {
 		var z validator.ValidationErrors
 		fmt.Println("error as validate.Errors, ", errors.As(err, &z))
 
-		err = Extract(fmt.Errorf("xxxx %w", fmt.Errorf("WRAPPING, %w", failure.Translate(err, BadInput))))
+		err = fmt.Errorf("xxxx %w", fmt.Errorf("WRAPPING, %w", failure.Translate(err, BadInput)))
+		err = Extract(err)
 		fmt.Println("wrapped error as validate.Errors, ", errors.As(err, &z))
 		fmt.Println(err)
 		fmt.Println(failure.CodeOf(err))
-		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~") // fmt.Errorf()の対応が無理
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~") // fmt.Errorf()の対応が厳しい
+		fmt.Printf("!!%+v\n", err)
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~") // fmt.Errorf()の対応が厳しい
+
+		err = failure.New(BadInput)
+		err = Extract(err)
 		fmt.Printf("!!%+v\n", err)
 	}
 }
