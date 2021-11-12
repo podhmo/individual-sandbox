@@ -1,0 +1,16 @@
+.
+├── Makefile
+├── docker-compose.yml
+├── go.mod
+├── go.sum
+├── main.go
+├── query.sql
+├── schema.sql
+├── sqlc.json
+├── structure.txt
+└── tutorial
+    ├── db.go
+    ├── models.go
+    └── query.sql.go
+
+1 directory, 12 files
