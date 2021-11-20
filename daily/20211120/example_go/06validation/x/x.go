@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"m/runtime"
 	v "m/validation"
+	"reflect"
+	"strconv"
 )
 
 type Person struct {
-	Name   string  `json:"name"`
-	Father *Person `json:"father`
+	Name     string   `json:"name"`
+	Father   *Person  `json:"father`
+	Children []Person `json:"children"`
 }
 
 // Validation is marker method for code-generation
@@ -26,14 +29,16 @@ func (p Person) Validation() []v.FieldValidation {
 
 type Validator struct {
 	Translator *Translator
+	// ValidateStructFunc func(ctx context.Context, ob interface{}, prefix string) *ErrorSet
 }
 
-func (v *Validator) Validate(ctx context.Context, ob interface{}) *ErrorSet {
+func (v *Validator) Validate(ctx context.Context, ob interface{}) error {
 	s := &State{
 		T:             v.Translator,
-		MaxErrorItems: -1,
+		MaxErrorItems: 100,
 	}
-	return s.Struct(ctx, ob, "")
+	perrs, _ := s.Validate(ctx, ob, "")
+	return perrs.NilOrError()
 }
 
 type State struct {
@@ -41,22 +46,95 @@ type State struct {
 	MaxErrorItems int
 }
 
+func (v *State) Validate(ctx context.Context, ob interface{}, prefix string) (_ *ErrorSet, stop bool) {
+	rv := reflect.ValueOf(ob)
+	switch rv.Kind() {
+	case reflect.Ptr, reflect.Struct:
+		rt := rv.Type()
+		if rt.Kind() == reflect.Ptr {
+			rt.Elem()
+		}
+		return v.Struct(ctx, ob, rt.Name()+".")
+	case reflect.Slice, reflect.Array:
+		// TODO: nested slice
+		rt := rv.Type().Elem()
+		isPtr := rt.Kind() == reflect.Ptr
+		if isPtr {
+			rt = rt.Elem()
+		}
+
+		rctx := reflect.ValueOf(ctx)
+		perrs := new(ErrorSet)
+
+		switch rt.Kind() {
+		case reflect.Ptr, reflect.Struct:
+			// return s.Slice(ctx, ob, prefix).NilOrError()
+			fn := reflect.ValueOf(v.Struct)
+			suffix := "." + rt.Name() + "."
+			for i, n := 0, rv.Len(); i < n; i++ {
+				x := rv.Index(i)
+				if isPtr && x.IsNil() {
+					continue
+				}
+				ret := fn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + strconv.Itoa(i) + suffix)})
+				if ret[0].IsNil() {
+					continue
+				}
+				*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
+				if stop := ret[1].Bool(); stop {
+					return perrs, stop
+				}
+				if len(*perrs) > v.MaxErrorItems {
+					return v.NewTooManyErrors(perrs, prefix), true
+				}
+			}
+			return perrs, false
+		case reflect.Slice:
+			fn := reflect.ValueOf(v.Validate)
+			for i, n := 0, rv.Len(); i < n; i++ {
+				x := rv.Index(i)
+				if isPtr && x.IsNil() {
+					continue
+				}
+				ret := fn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + strconv.Itoa(i) + ".")})
+				if ret[0].IsNil() {
+					continue
+				}
+				*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
+				if stop := ret[1].Bool(); stop {
+					return perrs, stop
+				}
+				if len(*perrs) > v.MaxErrorItems {
+					return v.NewTooManyErrors(perrs, prefix), true
+				}
+			}
+			return perrs, false
+		default:
+			return v.NewInternalError(fmt.Sprintf("hmm.. %v, %v", rv.Kind(), rv)), true // xxx
+		}
+	}
+	return v.NewInternalError(fmt.Sprintf("hmm %v, %v", rv.Kind(), rv)), true // xxx
+}
+
 func (v *State) NewInternalError(msg string) *ErrorSet {
 	return &ErrorSet{
 		&FieldError{Translator: v.T, Value: msg},
 	}
 }
+func (v *State) NewTooManyErrors(perrs *ErrorSet, path string) *ErrorSet {
+	fe := &FieldError{Translator: v.T, Value: fmt.Sprintf("too many errors (len(errs) > %d) ...", v.MaxErrorItems)}
+	*perrs = append(*perrs, fe)
+	return perrs
+}
 
-func (v *State) Struct(ctx context.Context, ob interface{}, prefix string) *ErrorSet {
-	var perrs *ErrorSet
+func (v *State) Struct(ctx context.Context, ob interface{}, prefix string) (perrs *ErrorSet, stop bool) {
 	switch ob := ob.(type) {
 	case *Person:
-		if prefix == "" {
-			prefix = "Person."
-		}
-		perrs = v.person(ctx, ob, prefix)
+		perrs, stop = v.person(ctx, ob, prefix)
+	case Person:
+		perrs, stop = v.person(ctx, &ob, prefix)
 	default:
-		return v.NewInternalError(fmt.Sprintf("internal error, unexpected type %T", ob))
+		return v.NewInternalError(fmt.Sprintf("internal error, unexpected type %T", ob)), true
 	}
 
 	if t, ok := ob.(interface {
@@ -71,23 +149,69 @@ func (v *State) Struct(ctx context.Context, ob interface{}, prefix string) *Erro
 			*perrs = append(*perrs, *errs...)
 		}
 	}
-	return perrs.NilOrError()
+	return perrs, stop
 }
 
-func (v *State) person(ctx context.Context, ob *Person, prefix string) *ErrorSet {
+// func (v *State) Slice(ctx context.Context, ob interface{}, prefix string) *ErrorSet {
+// 	perrs := new(ErrorSet)
+// 	switch ob := ob.(type) {
+// 	case []*Person:
+// 		for i, x := range ob {
+// 			if x == nil {
+// 				continue
+// 			}
+// 			if errs := v.Struct(ctx, x, strconv.Itoa(i)+"."+prefix); errs != nil {
+// 				*perrs = append(*perrs, *errs...)
+// 			}
+// 		}
+// 		return perrs
+// 	case []Person:
+// 		for i, x := range ob {
+// 			if errs := v.Struct(ctx, &x, strconv.Itoa(i)+"."+prefix); errs != nil {
+// 				*perrs = append(*perrs, *errs...)
+// 			}
+// 		}
+// 		return perrs
+// 	default:
+// 		return v.NewInternalError(fmt.Sprintf("internal error, unexpected type %T", ob))
+// 	}
+// }
+
+func (v *State) person(ctx context.Context, ob *Person, prefix string) (_ *ErrorSet, stop bool) {
 	perrs := new(ErrorSet)
-	// field: name, validation: required
+
+	// field: name, validation: required, type: string
 	if path, value := prefix+"Name", ob.Name; value == zstring {
 		*perrs = append(*perrs, &FieldError{Translator: v.T, Key: "name", Path: path, Tag: "required", Value: value})
 	}
 
 	// field: father, validation: struct
 	if ob.Father != nil {
-		if errs := v.Struct(ctx, ob.Father, prefix+"Father."); errs != nil {
+		if errs, stop := v.Struct(ctx, ob.Father, prefix+"Father."); errs != nil {
 			*perrs = append(*perrs, *errs...)
+			if stop {
+				return perrs, stop
+			}
 		}
 	}
-	return perrs.NilOrError()
+
+	// field: children, validation: list
+	if len(ob.Children) > 0 {
+		prefix := prefix + "Children"
+		for i, x := range ob.Children {
+			errs, stop := v.Struct(ctx, &x, prefix+strconv.Itoa(i)+".")
+			if errs != nil {
+				*perrs = append(*perrs, *errs...)
+			}
+			if stop {
+				return perrs, stop
+			}
+			if v.MaxErrorItems < len(*perrs) {
+				return v.NewTooManyErrors(perrs, prefix), true
+			}
+		}
+	}
+	return perrs, false
 }
 
 var zstring string
