@@ -55,6 +55,7 @@ func (v *State) Validate(ctx context.Context, ob interface{}, prefix string) (_ 
 		return v.Slice(ctx, rv, prefix)
 	case reflect.Map:
 		return v.Map(ctx, rv, prefix)
+	case reflect.String: // TODO: more primitive type
 	}
 	return v.NewInternalError(fmt.Sprintf("hmm %v, %v", rv.Kind(), rv)), true // xxx
 }
@@ -80,52 +81,36 @@ func (v *State) Slice(ctx context.Context, rv reflect.Value, prefix string) (_ *
 
 	rctx := reflect.ValueOf(ctx)
 	perrs := new(ErrorSet)
+	var rfn reflect.Value
 
 	switch rt.Kind() {
 	case reflect.Ptr, reflect.Struct:
 		// return s.Slice(ctx, ob, prefix).NilOrError()
-		fn := reflect.ValueOf(v.Struct)
-		for i, n := 0, rv.Len(); i < n; i++ {
-			x := rv.Index(i)
-			if isPtr && x.IsNil() {
-				continue
-			}
-			ret := fn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + strconv.Itoa(i) + ".")})
-			if ret[0].IsNil() {
-				continue
-			}
-			*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
-			if stop := ret[1].Bool(); stop {
-				return perrs, stop
-			}
-			if len(*perrs) > v.MaxErrorItems {
-				return v.NewTooManyErrors(perrs, prefix), true
-			}
-		}
-		return perrs, false
-	case reflect.Slice:
-		fn := reflect.ValueOf(v.Validate)
-		for i, n := 0, rv.Len(); i < n; i++ {
-			x := rv.Index(i)
-			if isPtr && x.IsNil() {
-				continue
-			}
-			ret := fn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + strconv.Itoa(i) + ".")})
-			if ret[0].IsNil() {
-				continue
-			}
-			*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
-			if stop := ret[1].Bool(); stop {
-				return perrs, stop
-			}
-			if len(*perrs) > v.MaxErrorItems {
-				return v.NewTooManyErrors(perrs, prefix), true
-			}
-		}
-		return perrs, false
+		rfn = reflect.ValueOf(v.Struct)
+	case reflect.Slice, reflect.Map, reflect.Array:
+		rfn = reflect.ValueOf(v.Validate)
 	default:
 		return v.NewInternalError(fmt.Sprintf("hmm slice.. %v, %v", rv.Kind(), rv)), true // xxx
 	}
+
+	for i, n := 0, rv.Len(); i < n; i++ {
+		x := rv.Index(i)
+		if isPtr && x.IsNil() {
+			continue
+		}
+		ret := rfn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + strconv.Itoa(i) + ".")})
+		if ret[0].IsNil() {
+			continue
+		}
+		*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
+		if stop := ret[1].Bool(); stop {
+			return perrs, stop
+		}
+		if len(*perrs) > v.MaxErrorItems {
+			return v.NewTooManyErrors(perrs, prefix), true
+		}
+	}
+	return perrs, false
 }
 
 func (v *State) Map(ctx context.Context, rv reflect.Value, prefix string) (_ *ErrorSet, stop bool) {
@@ -141,30 +126,37 @@ func (v *State) Map(ctx context.Context, rv reflect.Value, prefix string) (_ *Er
 
 	rctx := reflect.ValueOf(ctx)
 	perrs := new(ErrorSet)
+	var rfn reflect.Value
+
 	switch rt.Kind() {
-	case reflect.Struct, reflect.Ptr:
-		for iter.Next() {
-			rk := iter.Key()
-			x := iter.Value()
-			fn := reflect.ValueOf(v.Struct)
-			if isPtr && x.IsNil() {
-				continue
-			}
-			ret := fn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + fmt.Sprintf("%s", rk) + ".")})
-			if ret[0].IsNil() {
-				continue
-			}
-			*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
-			if stop := ret[1].Bool(); stop {
-				return perrs, stop
-			}
-			if len(*perrs) > v.MaxErrorItems {
-				return v.NewTooManyErrors(perrs, prefix), true
-			}
-		}
-		return perrs, false
+	case reflect.Ptr, reflect.Struct:
+		// return s.Slice(ctx, ob, prefix).NilOrError()
+		rfn = reflect.ValueOf(v.Struct)
+	case reflect.Slice, reflect.Map, reflect.Array:
+		rfn = reflect.ValueOf(v.Validate)
+	default:
+		return v.NewInternalError(fmt.Sprintf("hmm slice.. %v, %v", rv.Kind(), rv)), true // xxx
 	}
-	return v.NewInternalError(fmt.Sprintf("hmm... map %v, %v", rv.Kind(), rv)), true // xxx
+
+	for iter.Next() {
+		rk := iter.Key()
+		x := iter.Value()
+		if isPtr && x.IsNil() {
+			continue
+		}
+		ret := rfn.Call([]reflect.Value{rctx, x, reflect.ValueOf(prefix + fmt.Sprintf("%s", rk) + ".")})
+		if ret[0].IsNil() {
+			continue
+		}
+		*perrs = append(*perrs, *(ret[0].Interface().(*ErrorSet)))
+		if stop := ret[1].Bool(); stop {
+			return perrs, stop
+		}
+		if len(*perrs) > v.MaxErrorItems {
+			return v.NewTooManyErrors(perrs, prefix), true
+		}
+	}
+	return perrs, false
 }
 
 func (v *State) Struct(ctx context.Context, ob interface{}, prefix string) (perrs *ErrorSet, stop bool) {
