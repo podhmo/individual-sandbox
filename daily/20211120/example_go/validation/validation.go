@@ -16,6 +16,15 @@ type Context struct {
 	*vm.CommandEmitter
 
 	History *History
+	seen    map[reflect.Type]bool
+
+	indirectBuf []indirectItem
+}
+type indirectItem struct {
+	Type    reflect.Type
+	Field   reflect.StructField
+	Parent  reflect.Type
+	History *History
 }
 
 func New() *Context {
@@ -77,22 +86,101 @@ func (c *Context) Path() string {
 
 func (c *Context) Visit(ob interface{}) {
 	rt := reflect.TypeOf(ob)
-	t, ok := ob.(HasValidation)
-	if !ok {
-		log.Printf("%v does not implement Validation()", rt)
-		return
+	{
+		k := rt
+		if rt.Kind() == reflect.Ptr {
+			k = rt.Elem()
+		}
+		if c.seen == nil { // xxx
+			c.seen = map[reflect.Type]bool{}
+		}
+		if _, ok := c.seen[k]; ok {
+			return
+		}
+		c.seen[k] = true
 	}
 
 	c.PushFrame(FrameTypeStruct, rt.String(), rt)
-	c.EmitStruct(rt)
 	defer c.PopFrame()
+	c.EmitStruct(rt)
 
-	fields := t.Validation()
-	for _, f := range fields {
-		f.Validation(c)
+	seen := map[string]bool{}
+	t, ok := ob.(HasValidation)
+	if !ok {
+		log.Printf("%v does not implement Validation()", rt)
+	} else {
+		fields := t.Validation()
+		for _, f := range fields {
+			seen[f.Name] = true
+			f.Validation(c)
+		}
 	}
 
-	// TODO: auto attach struct-validation for nested-structure
+	// auto attach struct-validation
+	// TODO: slice, array, map
+	if rt.Kind() == reflect.Ptr {
+		rt = rt.Elem()
+	}
+	if rt.Kind() == reflect.Struct {
+		for i := 0; i < rt.NumField(); i++ {
+			rf := rt.Field(i)
+			if _, ok := seen[rf.Name]; ok {
+				continue
+			}
+			Field(rf.Name).Validation(c)
+		}
+	}
+}
+
+func (c *Context) VisitIndirect() {
+	log.Println("visit indirect...")
+	n := 20            // max depth
+	if c.seen == nil { // xxx
+		c.seen = map[reflect.Type]bool{}
+	}
+
+	for i := 0; i < n; i++ {
+		buf := c.indirectBuf
+		c.indirectBuf = nil
+
+		for _, item := range buf {
+			rt := item.Type
+			k := rt
+			if rt.Kind() == reflect.Ptr {
+				k = rt.Elem()
+			}
+			if _, ok := c.seen[k]; ok {
+				continue
+			}
+			c.seen[k] = true
+
+			c.PushFrame(FrameTypeStruct, rt.String(), rt)
+			defer c.PopFrame()
+			s := c.EmitStruct(rt)
+
+			if rt.Name() == "" { // hmm: find better anonymous struct's name
+				s.Name = fmt.Sprintf("%s_%s", vm.StructOf(c.CommandEmitter, item.Parent).Name, item.Field.Name)
+				s.Anonymous = true
+			}
+
+			// auto attach struct-validation
+			// TODO: slice, array, map
+			if rt.Kind() == reflect.Ptr {
+				rt = rt.Elem()
+			}
+			if rt.Kind() == reflect.Struct {
+				for i := 0; i < rt.NumField(); i++ {
+					rf := rt.Field(i)
+					// struct only?
+					Field(rf.Name).Validation(c)
+				}
+			}
+		}
+
+		if c.indirectBuf == nil {
+			return
+		}
+	}
 }
 
 type FieldValidation struct {
@@ -128,6 +216,12 @@ func Field(name string, options ...ValidationOption) FieldValidation {
 		if rft.Kind() == reflect.Struct {
 			c.PushFrame(FrameTypeOption, "struct", nil)
 			c.EmitOption("struct", lv)
+			c.indirectBuf = append(c.indirectBuf, indirectItem{
+				Type:    rft,
+				Field:   rf,
+				Parent:  rt,
+				History: c.History,
+			})
 			c.PopFrame()
 		}
 

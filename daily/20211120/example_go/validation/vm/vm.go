@@ -21,7 +21,8 @@ type Type struct {
 }
 type Struct struct {
 	Type
-	Fields []*Field
+	Fields    []*Field
+	Anonymous bool // no-name struct (not reflect.StructField.Anonymous)
 }
 type Field struct {
 	Name    string
@@ -59,6 +60,10 @@ func typeOf(rt reflect.Type) Type {
 	return typ
 }
 
+func StructOf(e *CommandEmitter, rt reflect.Type) *Struct {
+	return e.shared[rt]
+}
+
 func (e *CommandEmitter) EmitStruct(rt reflect.Type) *Struct {
 	if e.shared == nil {
 		e.shared = map[reflect.Type]*Struct{}
@@ -70,7 +75,7 @@ func (e *CommandEmitter) EmitStruct(rt reflect.Type) *Struct {
 	e.shared[op.RT] = op
 
 	if e.Debug {
-		fmt.Fprintf(os.Stderr, "\tStruct\tname:%s\tlv:%d\tpath:%q\n", op.Name, op.Lv, op.PkgPath)
+		fmt.Fprintf(os.Stderr, "Struct\tname:%s\tlv:%d\tpath:%q\n", op.Name, op.Lv, op.PkgPath)
 	}
 	return op
 }

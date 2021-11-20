@@ -12,10 +12,23 @@ type Person struct {
 	Father *Person
 }
 
+type X struct {
+	Y Y
+}
+type Y struct {
+	Z Z
+}
+type Z struct {
+	Name string
+	Info struct {
+		Memo string
+	}
+}
+
 func (p Person) Validation() []validation.FieldValidation {
 	return []validation.FieldValidation{
 		validation.Field("Name", validation.Required()),
-		validation.Field("Father"), // TODO: auto
+		// validation.Field("Father"), // TODO: auto  -> DONE
 	}
 }
 
@@ -45,6 +58,8 @@ func main() {
 	c := validation.New()
 	c.Debug = true
 	c.Visit(&Person{})
+	c.Visit(X{})
+	c.VisitIndirect()
 
 	// enc := json.NewEncoder(os.Stdout)
 	// enc.SetIndent("", "  ")
