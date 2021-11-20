@@ -7,11 +7,7 @@ import (
 )
 
 // todo: rename node
-type Command Op
-
-type Op interface {
-	Op() string
-}
+type Command *Struct
 
 type Type struct {
 	Name    string
@@ -35,9 +31,12 @@ type Option struct {
 	Args []interface{}
 }
 
-func (op *Struct) Op() string { return "Struct" }
-func (op *Field) Op() string  { return "Field" }
-func (op *Option) Op() string { return "Option" }
+// type Op interface {
+// 	Op() string
+// }
+// func (op *Struct) Op() string { return "Struct" }
+// func (op *Field) Op() string  { return "Field" }
+// func (op *Option) Op() string { return "Option" }
 
 type CommandEmitter struct {
 	Command []Command

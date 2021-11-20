@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"m/validation"
+	"m/validation/gen"
+	"os"
 	"strings"
 )
 
@@ -64,4 +66,7 @@ func main() {
 	// enc := json.NewEncoder(os.Stdout)
 	// enc.SetIndent("", "  ")
 	// enc.Encode(c.CommandEmitter.Command)
+
+	g := &gen.Generator{W: os.Stdout}
+	g.Generate(c.Command)
 }
