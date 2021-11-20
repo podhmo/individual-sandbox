@@ -22,4 +22,6 @@ func main() {
 	fmt.Println(v.Validate(ctx, [][]*Person{{&p, nil, &p}, {&p, nil, &p}}))
 	fmt.Println("----------------------------------------")
 	fmt.Println(v.Validate(ctx, [][]Person{{p, p}, {p, p}}))
+	fmt.Println("----------------------------------------")
+	fmt.Println(v.Validate(ctx, map[string]Person{"x": p, "y": p}))
 }
