@@ -1,0 +1,87 @@
+go/ast
+0
+----------------------------------------
+go/ast
+ast
+go/ast
+ignored: [/usr/local/go/src/go/ast/ast_typeparams.go /usr/local/go/src/go/ast/walk_typeparams.go]
+exported: 
+gofiles: [/usr/local/go/src/go/ast/ast.go /usr/local/go/src/go/ast/ast_notypeparams.go /usr/local/go/src/go/ast/commentmap.go /usr/local/go/src/go/ast/filter.go /usr/local/go/src/go/ast/import.go /usr/local/go/src/go/ast/print.go /usr/local/go/src/go/ast/resolve.go /usr/local/go/src/go/ast/scope.go /usr/local/go/src/go/ast/walk.go /usr/local/go/src/go/ast/walk_notypeparams.go]
+/usr/local/go/src/go/ast/ast.go
+	Node                *ast.InterfaceType  
+	Expr                *ast.InterfaceType  
+	Stmt                *ast.InterfaceType  
+	Decl                *ast.InterfaceType  
+	Comment             *ast.StructType     
+	CommentGroup        *ast.StructType     
+	Field               *ast.StructType     
+	FieldList           *ast.StructType     
+	BadExpr             *ast.StructType     
+	Ident               *ast.StructType     
+	Ellipsis            *ast.StructType     
+	BasicLit            *ast.StructType     
+	FuncLit             *ast.StructType     
+	CompositeLit        *ast.StructType     
+	ParenExpr           *ast.StructType     
+	SelectorExpr        *ast.StructType     
+	IndexExpr           *ast.StructType     
+	SliceExpr           *ast.StructType     
+	TypeAssertExpr      *ast.StructType     
+	CallExpr            *ast.StructType     
+	StarExpr            *ast.StructType     
+	UnaryExpr           *ast.StructType     
+	BinaryExpr          *ast.StructType     
+	KeyValueExpr        *ast.StructType     
+	ChanDir             *ast.Ident          
+	ArrayType           *ast.StructType     
+	StructType          *ast.StructType     
+	InterfaceType       *ast.StructType     
+	MapType             *ast.StructType     
+	ChanType            *ast.StructType     
+	BadStmt             *ast.StructType     
+	DeclStmt            *ast.StructType     
+	EmptyStmt           *ast.StructType     
+	LabeledStmt         *ast.StructType     
+	ExprStmt            *ast.StructType     
+	SendStmt            *ast.StructType     
+	IncDecStmt          *ast.StructType     
+	AssignStmt          *ast.StructType     
+	GoStmt              *ast.StructType     
+	DeferStmt           *ast.StructType     
+	ReturnStmt          *ast.StructType     
+	BranchStmt          *ast.StructType     
+	BlockStmt           *ast.StructType     
+	IfStmt              *ast.StructType     
+	CaseClause          *ast.StructType     
+	SwitchStmt          *ast.StructType     
+	TypeSwitchStmt      *ast.StructType     
+	CommClause          *ast.StructType     
+	SelectStmt          *ast.StructType     
+	ForStmt             *ast.StructType     
+	RangeStmt           *ast.StructType     
+	Spec                *ast.InterfaceType  
+	ImportSpec          *ast.StructType     
+	ValueSpec           *ast.StructType     
+	BadDecl             *ast.StructType     
+	GenDecl             *ast.StructType     
+	FuncDecl            *ast.StructType     
+	File                *ast.StructType     
+	Package             *ast.StructType     
+/usr/local/go/src/go/ast/ast_notypeparams.go
+	FuncType            *ast.StructType     
+	TypeSpec            *ast.StructType     
+/usr/local/go/src/go/ast/commentmap.go
+	CommentMap          *ast.MapType        
+/usr/local/go/src/go/ast/filter.go
+	Filter              *ast.FuncType       
+	MergeMode           *ast.Ident          
+/usr/local/go/src/go/ast/print.go
+	FieldFilter         *ast.FuncType       
+/usr/local/go/src/go/ast/resolve.go
+	Importer            *ast.FuncType       
+/usr/local/go/src/go/ast/scope.go
+	Scope               *ast.StructType     
+	Object              *ast.StructType     
+	ObjKind             *ast.Ident          
+/usr/local/go/src/go/ast/walk.go
+	Visitor             *ast.InterfaceType  
