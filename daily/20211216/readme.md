@@ -47,3 +47,27 @@ HMRがまともに動いて体験は良い（hello world）的なアプリなせ
 svelteもtsが存在している。document.getElementByIdで要素を指定するのは変わらないなー。
 自分が知りたいのは動的な機能の付け方ではなくレイアウトの技法かもしれない。それも手軽でいい感じにという形で。
 
+## typescript
+
+もっと小さなtypescriptだけの世界を試そうと思ったときにはどうする？
+denoを使えば良いのでは？
+
+### deno
+
+https://deno.land/
+
+```console
+$ sudo apt install unzip
+$ ( export DENO_INSTALL=~/.local/deno; curl -fsSL https://deno.land/x/install/install.sh | sh )
+```
+コードの実行方法
+
+```console
+$ deno run <file>
+```
+
+- そういえば、メソッドは大文字で始まるものとは限らないんだな。
+- `Deno.<something>` がsysみたいなものか。
+- go doc的なものが知りたい。
+
+https://doc.deno.land/
