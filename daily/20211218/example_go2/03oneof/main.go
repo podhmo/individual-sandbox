@@ -104,19 +104,19 @@ func GetOrCreateNewType(rt reflect.Type) P {
 	}
 	innerType := reflect.StructOf(fields)
 
-	outerFields := make([]reflect.StructField, len(ifaceFields)+1)
 	wrapperType := reflect.TypeOf(&OneOfWrapper{}) // todo: cache?
+	outerFields := make([]reflect.StructField, len(ifaceFields)+1)
+	outerFields[0] = reflect.StructField{
+		Type:      reflect.PtrTo(innerType),
+		Name:      rt.Name(),
+		Anonymous: true,
+	}
 	for i, ifaceField := range ifaceFields {
-		outerFields[i] = reflect.StructField{
+		outerFields[i+1] = reflect.StructField{
 			Name: ifaceField.Name,
 			Type: wrapperType,
 			// 本当なら真面目にtagを
 		}
-	}
-	outerFields[len(outerFields)-1] = reflect.StructField{
-		Type:      reflect.PtrTo(innerType),
-		Name:      rt.Name(),
-		Anonymous: true,
 	}
 	outerType := reflect.StructOf(outerFields)
 
@@ -130,11 +130,12 @@ func (a *Account) UnmarshalJSON(b []byte) error {
 	p := GetOrCreateNewType(rv.Type().Elem())
 
 	rw := reflect.New(p.Outer.Elem())
-	rw.Elem().FieldByName("Account").Set(rv.Convert(p.Inner))
+	rw.Elem().Field(0).Set(rv.Convert(p.Inner)) // Account
 	w := rw.Interface()
 	if err := json.Unmarshal(b, w); err != nil {
 		return err
 	}
+
 	if err := unmarshalJSONLink(rw.Elem().FieldByName("Primary").Interface().(*OneOfWrapper), &a.Primary); err != nil {
 		return err
 	}
