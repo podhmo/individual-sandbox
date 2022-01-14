@@ -14,51 +14,45 @@ type Link interface {
 	Link()
 }
 
+type link struct {
+	Type         string `json:"type"`
+	RegisteredAt time.Time
+}
+
+func (*link) Link() {}
+
 // verified, unverified
 // active, inactive(from user), killed(from system)
 
 type EmailLink struct {
+	link
 	EmailAddress string
-	RegisteredAt time.Time
 }
 
 func (link EmailLink) MarshalJSON() ([]byte, error) {
-	type Inner EmailLink
-	type T struct {
-		Type string `json:"$Type"`
-		Data *Inner `json:"$Data"`
-	}
-	return json.Marshal(&T{Type: "EmailLink", Data: (*Inner)(&link)})
+	type T EmailLink
+	link.link.Type = "EmailLink"
+	return json.Marshal((*T)(&link))
 }
 
 type OauthLink struct {
-	ProfileID    string
-	Source       string
-	RegisteredAt time.Time
+	link
+	ProfileID string
+	Source    string
 }
-
-func (link *EmailLink) Link() {}
-func (link *OauthLink) Link() {}
 
 type Account struct {
 	Name         string
 	RegisteredAt time.Time
 
 	Primary Link
-	Other   []Link
-}
-
-// 後で消すかもだけど。Unmarshalを楽にするために
-type OneOfWrapper struct {
-	Type string          `json:"$Type"`
-	Raw  json.RawMessage `json:"$Data"`
+	// Other   []Link
 }
 
 func (a *Account) UnmarshalJSON(b []byte) error {
 	type Inner Account
 	type T struct {
-		Primary *OneOfWrapper
-		Other   []*OneOfWrapper
+		Primary json.RawMessage
 		*Inner
 	}
 	w := T{Inner: (*Inner)(a)}
@@ -69,33 +63,28 @@ func (a *Account) UnmarshalJSON(b []byte) error {
 	if err := unmarshalJSONLink(w.Primary, &a.Primary); err != nil {
 		return err
 	}
-	if w.Other != nil {
-		a.Other = make([]Link, len(w.Other))
-		for i, data := range w.Other {
-			if err := unmarshalJSONLink(data, &a.Other[i]); err != nil {
-				return err
-			}
-		}
-	}
 	return nil
 }
 
-func unmarshalJSONLink(data *OneOfWrapper, ref *Link) error {
-	if data == nil {
-		return nil
+func unmarshalJSONLink(b json.RawMessage, ref *Link) error {
+	type T struct {
+		Type string `json:"type"`
 	}
-
-	switch data.Type {
+	var t T
+	if err := json.Unmarshal(b, &t); err != nil {
+		return err
+	}
+	switch t.Type {
 	case "EmailLink":
 		var inner EmailLink
 		*ref = &inner
-		return json.Unmarshal(data.Raw, &inner)
+		return json.Unmarshal(b, &inner)
 	case "OauthLink":
 		var inner OauthLink
 		*ref = &inner
-		return json.Unmarshal(data.Raw, &inner)
+		return json.Unmarshal(b, &inner)
 	default:
-		return fmt.Errorf("unexpected interface=%q implementation, type=%q", "Link", data.Type)
+		return fmt.Errorf("unexpected interface=%q implementation, type=%q", "Link", t.Type)
 	}
 }
 
@@ -104,7 +93,7 @@ func main() {
 	{
 		foo := Account{
 			Name: "foo", RegisteredAt: now,
-			Primary: &EmailLink{EmailAddress: "foo@example.net", RegisteredAt: now},
+			Primary: &EmailLink{EmailAddress: "foo@example.net", link: link{RegisteredAt: now}},
 		}
 		pencode(foo)
 	}
@@ -114,19 +103,10 @@ func main() {
 		  "Name": "foo",
 		  "RegisteredAt": "2021-12-18T19:14:03.755686099+09:00",
 		  "Primary": {
-			"$Type": "EmailLink",
-			"$Data": {
-			  "EmailAddress": "foo@example.net",
-			  "RegisteredAt": "2021-12-18T19:14:03.755686099+09:00"
-			}
-		  },
-		  "Other": [{
-			"$Type": "EmailLink",
-			"$Data": {
-			  "EmailAddress": "bar@example.net",
-			  "RegisteredAt": "2021-12-18T19:14:03.755686099+09:00"
-			}
-		  }]
+			"type": "EmailLink",
+			"EmailAddress": "foo@example.net",
+			"RegisteredAt": "2021-12-18T19:14:03.755686099+09:00"
+		  }
 		}
 		`
 		var foo Account

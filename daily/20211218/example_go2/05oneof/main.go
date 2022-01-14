@@ -45,7 +45,7 @@ type Account struct {
 	RegisteredAt time.Time
 
 	Primary Link
-	Other   []Link
+	// Other   []Link
 }
 
 // 後で消すかもだけど。Unmarshalを楽にするために
@@ -58,7 +58,6 @@ func (a *Account) UnmarshalJSON(b []byte) error {
 	type Inner Account
 	type T struct {
 		Primary *OneOfWrapper
-		Other   []*OneOfWrapper
 		*Inner
 	}
 	w := T{Inner: (*Inner)(a)}
@@ -68,14 +67,6 @@ func (a *Account) UnmarshalJSON(b []byte) error {
 
 	if err := unmarshalJSONLink(w.Primary, &a.Primary); err != nil {
 		return err
-	}
-	if w.Other != nil {
-		a.Other = make([]Link, len(w.Other))
-		for i, data := range w.Other {
-			if err := unmarshalJSONLink(data, &a.Other[i]); err != nil {
-				return err
-			}
-		}
 	}
 	return nil
 }
@@ -119,14 +110,7 @@ func main() {
 			  "EmailAddress": "foo@example.net",
 			  "RegisteredAt": "2021-12-18T19:14:03.755686099+09:00"
 			}
-		  },
-		  "Other": [{
-			"$Type": "EmailLink",
-			"$Data": {
-			  "EmailAddress": "bar@example.net",
-			  "RegisteredAt": "2021-12-18T19:14:03.755686099+09:00"
-			}
-		  }]
+		  }
 		}
 		`
 		var foo Account

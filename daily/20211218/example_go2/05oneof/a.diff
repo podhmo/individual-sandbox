@@ -1,0 +1,73 @@
+--- 00oneof/main.go	2021-12-18 20:50:11.920938476 +0900
++++ 05oneof/main.go	2021-12-20 01:20:20.529972737 +0900
+@@ -22,18 +22,13 @@
+ 	RegisteredAt time.Time
+ }
+ 
+-func (link *EmailLink) MarshalJSON() ([]byte, error) {
+-	type T EmailLink
+-	b, err := json.Marshal((*T)(link))
+-	if err != nil {
+-		return nil, err
++func (link EmailLink) MarshalJSON() ([]byte, error) {
++	type Inner EmailLink
++	type T struct {
++		Type string `json:"$Type"`
++		Data *Inner `json:"$Data"`
+ 	}
+-
+-	// todo: optimize
+-	buf := bytes.NewBufferString(`{"$Type":"EmailLink","$Data":`)
+-	buf.Write(b)
+-	buf.WriteRune('}')
+-	return buf.Bytes(), nil
++	return json.Marshal(&T{Type: "EmailLink", Data: (*Inner)(&link)})
+ }
+ 
+ type OauthLink struct {
+@@ -60,24 +55,16 @@
+ }
+ 
+ func (a *Account) UnmarshalJSON(b []byte) error {
+-	// type Inner Account // このようにした場合でも埋め込みの方の処理の中でインターフェイスをunmarshalしようとして死ぬ
++	type Inner Account
+ 	type T struct {
+-
+-		// ここのフィールドの定義をなくしたい
+-		Name         string
+-		RegisteredAt time.Time
+-
+-		Primary *OneOfWrapper `json:"primary,omitempty"`
++		Primary *OneOfWrapper
++		*Inner
+ 	}
+-
+-	var w T
++	w := T{Inner: (*Inner)(a)}
+ 	if err := json.Unmarshal(b, &w); err != nil {
+ 		return err
+ 	}
+ 
+-	a.Name = w.Name
+-	a.RegisteredAt = w.RegisteredAt
+-
+ 	if err := unmarshalJSONLink(w.Primary, &a.Primary); err != nil {
+ 		return err
+ 	}
+@@ -127,14 +114,12 @@
+ 		}
+ 		`
+ 		var foo Account
+-		if err := json.NewDecoder(bytes.NewBufferString(s)).Decode(&foo); err != nil {
+-			panic(err)
+-		}
++		decode(s, &foo)
+ 		pencode(foo)
+ 	}
+ }
+ 
+-func dencode(s string, ob interface{}) {
++func decode(s string, ob interface{}) {
+ 	if err := json.NewDecoder(bytes.NewBufferString(s)).Decode(ob); err != nil {
+ 		panic(err)
+ 	}
