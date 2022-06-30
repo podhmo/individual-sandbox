@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"time"
 
+	"github.com/jmoiron/sqlx"
 	_ "modernc.org/sqlite"
 )
 
@@ -21,12 +21,11 @@ type User struct {
 	// TODO: null string, foreign key
 }
 
-func getDB(ctx context.Context, driver string, dsn string) (*sql.DB, error, func()) {
-	pool, err := sql.Open(driver, dsn)
+func getDB(ctx context.Context, driver string, dsn string) (*sqlx.DB, error, func()) {
+	pool, err := sqlx.ConnectContext(ctx, driver, dsn)
 	if err != nil {
-		return nil, fmt.Errorf("sql.Open failed: %w", err), func() {}
+		return nil, fmt.Errorf("connect db: %w", err), func() {}
 	}
-
 	pool.SetConnMaxIdleTime(0)
 	pool.SetMaxIdleConns(3)
 	pool.SetMaxOpenConns(3)
@@ -38,7 +37,7 @@ func getDB(ctx context.Context, driver string, dsn string) (*sql.DB, error, func
 	}
 }
 
-func initDB(ctx context.Context, db *sql.DB) error {
+func initDB(ctx context.Context, db *sqlx.DB) error {
 	{
 		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 		defer cancel()
@@ -69,7 +68,7 @@ func initDB(ctx context.Context, db *sql.DB) error {
 	return nil
 }
 
-func doDB(ctx context.Context, db *sql.DB) error {
+func doDB(ctx context.Context, db *sqlx.DB) error {
 
 	// insert
 	{
@@ -93,37 +92,25 @@ func doDB(ctx context.Context, db *sql.DB) error {
 		// TODO: bulk insert
 	}
 
-	// select
+	// select one
 	{
-		age := 20
-		rows, err := db.QueryContext(ctx, "SELECT name, age FROM User WHERE age=?", age)
-		if err != nil {
+		name := "foo"
+		var u User
+		if err := db.GetContext(ctx, &u, "SELECT name, age FROM User WHERE name=?", name); err != nil {
 			return fmt.Errorf("select: %w", err)
 		}
-		defer rows.Close()
+		fmt.Printf("%s is %d years old\n", u.Name, u.Age)
+	}
 
+	fmt.Println("----------------------------------------")
+
+	// select many
+	{
+		age := 20
 		var users []User
-		for rows.Next() {
-			var u User
-			if err := rows.Scan(&u.Name, &u.Age); err != nil {
-				return fmt.Errorf("scan: %w", err)
-			}
-			users = append(users, u)
+		if err := db.SelectContext(ctx, &users, "SELECT name, age FROM User WHERE age=?", age); err != nil {
+			return fmt.Errorf("select: %w", err)
 		}
-
-		// If the database is being written to ensure to check for Close
-		// errors that may be returned from the driver. The query may
-		// encounter an auto-commit error and be forced to rollback changes.
-		rerr := rows.Close()
-		if rerr != nil {
-			return fmt.Errorf("rows.Close: %w", err)
-		}
-
-		// Rows.Err will report the last error encountered by Rows.Scan.
-		if err := rows.Err(); err != nil {
-			return fmt.Errorf("rows errors: %w", err)
-		}
-
 		for _, u := range users {
 			fmt.Printf("%s is %d years old\n", u.Name, u.Age)
 		}
@@ -143,6 +130,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
+
 	if err := initDB(ctx, db); err != nil {
 		return err
 	}

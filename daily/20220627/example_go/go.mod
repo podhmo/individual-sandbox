@@ -3,12 +3,14 @@ module m
 go 1.17
 
 require (
+	github.com/google/go-cmp v0.5.3
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/mattn/go-sqlite3 v1.14.13
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.27.0
 	github.com/simukti/sqldb-logger v0.0.0-20220521163925-faf2f2be0eb6
 	github.com/simukti/sqldb-logger/logadapter/zerologadapter v0.0.0-20220521163925-faf2f2be0eb6
+	modernc.org/sqlite v1.17.3
 )
 
 require (
@@ -28,7 +30,6 @@ require (
 	modernc.org/mathutil v1.4.1 // indirect
 	modernc.org/memory v1.1.1 // indirect
 	modernc.org/opt v0.1.1 // indirect
-	modernc.org/sqlite v1.17.3 // indirect
 	modernc.org/strutil v1.1.1 // indirect
 	modernc.org/token v1.0.0 // indirect
 )
