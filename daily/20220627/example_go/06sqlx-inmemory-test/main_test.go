@@ -2,12 +2,15 @@ package main
 
 import (
 	"context"
+	"database/sql"
+	"errors"
 	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/jmoiron/sqlx"
+	"github.com/podhmo/or"
 	_ "modernc.org/sqlite"
 )
 
@@ -23,11 +26,7 @@ type User struct {
 type Option func(context.Context, *sqlx.DB) error
 
 func newDB(ctx context.Context, t *testing.T, options ...Option) (*sqlx.DB, func()) {
-	pool, err := sqlx.ConnectContext(ctx, "sqlite", ":memory:")
-	if err != nil {
-		t.Fatalf("connect db: %+v", err)
-	}
-
+	pool := or.Fatal(sqlx.ConnectContext(ctx, "sqlite", ":memory:"))(t)
 	for _, opt := range options {
 		if err := opt(ctx, pool); err != nil {
 			t.Errorf("connect option: %+v", err)
@@ -115,6 +114,93 @@ func TestSelectMany(t *testing.T) {
 	if diff := cmp.Diff(ref{want}, ref{got}, cmpopts.IgnoreFields(User{}, "ID")); diff != "" {
 		t.Errorf("SelectContext() mismatch (-want +got):\n%s", diff)
 	}
+}
+
+func TestSelectOrInsert(t *testing.T) {
+	ctx := context.Background()
+	db, teardown := newDB(ctx, t, withUsers(nil))
+	defer teardown()
+
+	want := User{Name: "foo", Age: 20, ID: 1}
+
+	getOrCreate := func(ctx context.Context, got *User) (created bool, err error) {
+		{
+			stmt := `
+			SELECT 
+				id, name, age
+			FROM
+				User
+			WHERE
+				id = ?
+			`
+			err := db.GetContext(ctx, got, stmt, want.ID)
+			if err == nil {
+				return false, nil
+			}
+			if !errors.Is(err, sql.ErrNoRows) {
+				return false, fmt.Errorf("select: %w", err)
+			}
+		}
+		{
+			stmt := `
+			INSERT INTO User
+				(id, name, age)
+			SELECT :id, :name, :age
+			WHERE
+				NOT EXISTS ( SELECT id FROM User WHERE id = :id )
+			RETURNING id, name, age
+			`
+			stmt, args, err := sqlx.Named(stmt, map[string]interface{}{
+				"id":   want.ID,
+				"name": want.Name,
+				"age":  want.Age,
+			})
+			if err != nil {
+				return false, fmt.Errorf("insert named: %w", err)
+			}
+			err = db.GetContext(ctx, got, stmt, args...)
+			if err == nil {
+				return true, nil
+
+			}
+			return false, fmt.Errorf("insert: %w", err)
+		}
+	}
+	t.Run("insert if 0", func(t *testing.T) {
+		assertUserCount(t, db, "before", 0 /* want */)
+
+		var got User
+		created, err := getOrCreate(ctx, &got)
+		if err != nil {
+			t.Fatalf("unexpected error: %+v", err)
+		}
+		if !created {
+			t.Error("must be created")
+		}
+
+		if diff := cmp.Diff(want, got); diff != "" {
+			t.Errorf("GetContext() mismatch (-want +got):\n%s", diff)
+		}
+		assertUserCount(t, db, "after", 1 /* want */)
+	})
+
+	t.Run("select if 1", func(t *testing.T) {
+		assertUserCount(t, db, "before", 1 /* want */)
+
+		var got User
+		created, err := getOrCreate(ctx, &got)
+		if err != nil {
+			t.Fatalf("unexpected error: %+v", err)
+		}
+		if created {
+			t.Error("must not be created")
+		}
+
+		if diff := cmp.Diff(want, got); diff != "" {
+			t.Errorf("GetContext() mismatch (-want +got):\n%s", diff)
+		}
+		assertUserCount(t, db, "after", 1 /* want */)
+	})
 }
 
 func TestCount(t *testing.T) {
@@ -206,20 +292,8 @@ func TestInsertMany(t *testing.T) {
 
 	db, teardown := newDB(ctx, t, withUsers(nil))
 	defer teardown()
-	assertCount := func(t *testing.T, prefix string, want int) {
-		t.Helper()
-		var got int
-		stmt := "SELECT COUNT(*) FROM User;"
-		if err := db.GetContext(ctx, &got, stmt); err != nil {
-			t.Fatalf("%s COUNT(*) unexpected error: %+v", prefix, err)
-		}
 
-		if want != got {
-			t.Errorf("%s COUNT(*) mismatch want=%d != got=%d", prefix, want, got)
-		}
-	}
-
-	assertCount(t, "before", 0 /* want */)
+	assertUserCount(t, db, "before", 0 /* want */)
 	users := []User{
 		{Name: "foo", Age: 20},
 		{Name: "bar", Age: 20},
@@ -236,5 +310,19 @@ func TestInsertMany(t *testing.T) {
 	for i := range users {
 		users[i].ID = ids[i] // これ保証ある？
 	}
-	assertCount(t, "after", 2 /* want */)
+	assertUserCount(t, db, "after", 2 /* want */)
+}
+
+func assertUserCount(t *testing.T, db *sqlx.DB, prefix string, want int) {
+	t.Helper()
+	ctx := context.Background()
+	var got int
+	stmt := "SELECT COUNT(*) FROM User;"
+	if err := db.GetContext(ctx, &got, stmt); err != nil {
+		t.Fatalf("%s COUNT(*) unexpected error: %+v", prefix, err)
+	}
+
+	if want != got {
+		t.Errorf("%s COUNT(*) mismatch want=%d != got=%d", prefix, want, got)
+	}
 }

@@ -1,6 +1,6 @@
 module m
 
-go 1.17
+go 1.18
 
 require (
 	github.com/google/go-cmp v0.5.3
@@ -18,6 +18,7 @@ require (
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/podhmo/or v0.0.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	golang.org/x/mod v0.4.2 // indirect
 	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect
