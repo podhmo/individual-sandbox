@@ -123,7 +123,8 @@ func TestSelectOrInsert(t *testing.T) {
 
 	want := User{Name: "foo", Age: 20, ID: 1}
 
-	getOrCreate := func(ctx context.Context, got *User) (created bool, err error) {
+	var getOrCreate func(ctx context.Context, got *User) (created bool, err error)
+	getOrCreate = func(ctx context.Context, got *User) (created bool, err error) {
 		{
 			stmt := `
 			SELECT 
@@ -145,9 +146,10 @@ func TestSelectOrInsert(t *testing.T) {
 			stmt := `
 			INSERT INTO User
 				(id, name, age)
-			SELECT :id, :name, :age
-			WHERE
-				NOT EXISTS ( SELECT id FROM User WHERE id = :id )
+			SELECT
+				:id, :name, :age
+				WHERE
+					NOT EXISTS ( SELECT id FROM User WHERE id = :id )
 			RETURNING id, name, age
 			`
 			stmt, args, err := sqlx.Named(stmt, map[string]interface{}{
@@ -161,7 +163,9 @@ func TestSelectOrInsert(t *testing.T) {
 			err = db.GetContext(ctx, got, stmt, args...)
 			if err == nil {
 				return true, nil
-
+			}
+			if errors.Is(err, sql.ErrNoRows) {
+				return getOrCreate(ctx, got)
 			}
 			return false, fmt.Errorf("insert: %w", err)
 		}
