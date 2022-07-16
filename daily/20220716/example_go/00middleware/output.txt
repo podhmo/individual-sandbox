@@ -1,53 +1,88 @@
 ng request ----------------------------------------
-find route: /pets POST map[]
+find route is ok
+	POST /pets HTTP/1.1
+	Host: localhost:8080
+	Content-Type: application/json
+	
+	{}
 validate request is failed: *openapi3filter.RequestError
 validate request: request body has an error: doesn't match the schema: Error at "/name": property "name" is missing
-Schema:
-  {
-    "additionalProperties": false,
-    "properties": {
-      "name": {
-        "type": "string"
-      },
-      "tag": {
-        "type": "string"
-      }
-    },
-    "required": [
-      "name"
-    ],
-    "type": "object"
-  }
+	Schema:
+	  {
+	    "additionalProperties": false,
+	    "properties": {
+	      "name": {
+	        "type": "string"
+	      },
+	      "tag": {
+	        "type": "string"
+	      }
+	    },
+	    "required": [
+	      "name"
+	    ],
+	    "type": "object"
+	  }
+	
+	Value:
+	  {}
+	
 
-Value:
-  {}
 
 ng response ----------------------------------------
-find route: /pets POST map[]
+find route is ok
+	POST /pets HTTP/1.1
+	Host: localhost:8080
+	Content-Type: application/json
+	
+	{"name": "foo"}
 request is ok
+	HTTP/1.1 200 OK
+	Connection: close
+	Content-Type: application/json
+	
+	{}
+	
 valicate response is failed: *openapi3filter.ResponseError
 validate response: response body doesn't match the schema: Error at "/id": property "id" is missing
-Schema:
-  {
-    "additionalProperties": false,
-    "properties": {
-      "id": {
-        "type": "string"
-      },
-      "name": {
-        "type": "string"
-      },
-      "tag": {
-        "type": "string"
-      }
-    },
-    "required": [
-      "id",
-      "name"
-    ],
-    "type": "object"
-  }
+	Schema:
+	  {
+	    "additionalProperties": false,
+	    "properties": {
+	      "id": {
+	        "type": "string"
+	      },
+	      "name": {
+	        "type": "string"
+	      },
+	      "tag": {
+	        "type": "string"
+	      }
+	    },
+	    "required": [
+	      "id",
+	      "name"
+	    ],
+	    "type": "object"
+	  }
+	
+	Value:
+	  {}
+	
 
-Value:
-  {}
 
+ok ----------------------------------------
+find route is ok
+	POST /pets?ok=true HTTP/1.1
+	Host: localhost:8080
+	Content-Type: application/json
+	
+	{"name": "foo"}
+request is ok
+	HTTP/1.1 200 OK
+	Connection: close
+	Content-Type: application/json
+	
+	{"id":"1","name":"foo"}
+	
+response is ok

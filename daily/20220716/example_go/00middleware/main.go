@@ -1,13 +1,16 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"net/http/httputil"
 	"reflect"
 	"strings"
 
@@ -52,18 +55,29 @@ func run() error {
 		}
 		req.Header.Set("Content-Type", "application/json")
 		if err := doRequest(ctx, router, req); err != nil {
-			log.Println(err)
+			log.Println(strings.ReplaceAll(err.Error(), "\n", "\n\t"))
 		}
 	}
 	{
-		log.Println("ng response ----------------------------------------")
+		log.Println("\n\nng response ----------------------------------------")
 		req, err := http.NewRequest("POST", baseURL+"/pets", strings.NewReader(`{"name": "foo"}`))
 		if err != nil {
 			return fmt.Errorf("new request: %w", err)
 		}
 		req.Header.Set("Content-Type", "application/json")
 		if err := doRequest(ctx, router, req); err != nil {
-			log.Println(err)
+			log.Println(strings.ReplaceAll(err.Error(), "\n", "\n\t"))
+		}
+	}
+	{
+		log.Println("\n\nok ----------------------------------------")
+		req, err := http.NewRequest("POST", baseURL+"/pets?ok=true", strings.NewReader(`{"name": "foo"}`))
+		if err != nil {
+			return fmt.Errorf("new request: %w", err)
+		}
+		req.Header.Set("Content-Type", "application/json")
+		if err := doRequest(ctx, router, req); err != nil {
+			log.Println(strings.ReplaceAll(err.Error(), "\n", "\n\t"))
 		}
 	}
 	return nil
@@ -74,7 +88,7 @@ func doRequest(ctx context.Context, router routers.Router, req *http.Request) er
 	if err != nil {
 		return fmt.Errorf("find route: %w", err)
 	}
-	log.Println("find route:", route.Path, route.Method, pathParams)
+	log.Println("find route is ok")
 
 	reqInput := &openapi3filter.RequestValidationInput{
 		Request:     req,
@@ -84,6 +98,13 @@ func doRequest(ctx context.Context, router routers.Router, req *http.Request) er
 		// Options: nil, // ?
 		// ParamDecoder: nil, // ?
 	}
+
+	b, err := httputil.DumpRequest(req, true)
+	if err != nil {
+		log.Printf("[ERROR] dump request: %+v", err)
+	}
+	fmt.Println(strings.ReplaceAll("\t"+string(b), "\n", "\n\t"))
+
 	if err := openapi3filter.ValidateRequest(ctx, reqInput); err != nil {
 		log.Printf("validate request is failed: %T", err)
 		return fmt.Errorf("validate request: %w", err)
@@ -93,10 +114,25 @@ func doRequest(ctx context.Context, router routers.Router, req *http.Request) er
 	rec := httptest.NewRecorder()
 	func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]interface{}{})
+		if req.URL.Query().Has("ok") {
+			json.NewEncoder(w).Encode(map[string]interface{}{"id": "1", "name": "foo"})
+		} else {
+			json.NewEncoder(w).Encode(map[string]interface{}{})
+		}
 	}(rec, req)
 
 	res := rec.Result()
+	buf := new(bytes.Buffer)
+	res.Body = io.NopCloser(io.TeeReader(res.Body, buf))
+
+	b, err = httputil.DumpResponse(res, true)
+	if err != nil {
+		log.Printf("[ERROR] dump request: %+v", err)
+		return err
+	}
+	fmt.Println(strings.ReplaceAll("\t"+string(b), "\n", "\n\t"))
+
+	res.Body = io.NopCloser(buf)
 	resInput := &openapi3filter.ResponseValidationInput{
 		RequestValidationInput: reqInput,
 		Status:                 200,
@@ -108,6 +144,7 @@ func doRequest(ctx context.Context, router routers.Router, req *http.Request) er
 		log.Printf("valicate response is failed: %T", err)
 		return fmt.Errorf("validate response: %w", err)
 	}
+	log.Println("response is ok")
 	return nil
 }
 
