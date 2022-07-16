@@ -1,0 +1,53 @@
+ng request ----------------------------------------
+find route: /pets POST map[]
+validate request is failed: *openapi3filter.RequestError
+validate request: request body has an error: doesn't match the schema: Error at "/name": property "name" is missing
+Schema:
+  {
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "name"
+    ],
+    "type": "object"
+  }
+
+Value:
+  {}
+
+ng response ----------------------------------------
+find route: /pets POST map[]
+request is ok
+valicate response is failed: *openapi3filter.ResponseError
+validate response: response body doesn't match the schema: Error at "/id": property "id" is missing
+Schema:
+  {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "tag": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "name"
+    ],
+    "type": "object"
+  }
+
+Value:
+  {}
+

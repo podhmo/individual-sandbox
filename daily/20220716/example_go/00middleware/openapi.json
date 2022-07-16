@@ -1,0 +1,256 @@
+{
+    "components": {
+      "schemas": {
+        "Empty": {
+          "type": "object"
+        },
+        "Error": {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code"
+          ],
+          "title": "Error",
+          "type": "object"
+        },
+        "Pet": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "tag": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ],
+          "type": "object"
+        }
+      }
+    },
+    "info": {
+      "description": "-",
+      "title": "Swagger Petstore",
+      "version": "1.0.0"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+      "/pets": {
+        "get": {
+          "description": "Returns all pets from the system that the user has access to\n\tNam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.\n\tSed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.",
+          "operationId": "main.FindPets",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "Tags",
+              "schema": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            {
+              "in": "query",
+              "name": "Limit",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "items": {
+                        "items": {
+                          "$ref": "#/components/schemas/Pet"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "items"
+                    ],
+                    "type": "object"
+                  }
+                }
+              },
+              "description": ""
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              },
+              "description": "default error"
+            }
+          },
+          "summary": "returns all pets"
+        },
+        "post": {
+          "description": "Creates a new pet in the store. Duplicates are allowed",
+          "operationId": "main.AddPet",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "tag": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              },
+              "description": ""
+            },
+            "400": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              },
+              "description": "validation error"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              },
+              "description": "default error"
+            }
+          },
+          "summary": "creates a new pet in the store. Duplicates are allowed"
+        }
+      },
+      "/pets/{id}": {
+        "delete": {
+          "description": "delete a single pet based on the ID supplied",
+          "operationId": "main.DeletePet",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Empty"
+                  }
+                }
+              },
+              "description": ""
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              },
+              "description": "default error"
+            }
+          },
+          "summary": "deletes a pet by ID"
+        },
+        "get": {
+          "description": "Returns a pet based on a single ID",
+          "operationId": "main.FindPetByID",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              },
+              "description": ""
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              },
+              "description": "default error"
+            }
+          },
+          "summary": "returns a pet based on a single ID"
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "http://petstore.swagger.io/api"
+      },
+      {
+        "description": "local development",
+        "url": "http://localhost:8080"
+      }
+    ]
+  }
+  
