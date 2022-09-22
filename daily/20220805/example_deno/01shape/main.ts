@@ -8,7 +8,7 @@ type Named = { tag: "named", name: string, type: Type, comment?: string }
 
 type Field = { name: string, required: boolean, type: Type, comment?: string }
 
-function EmitType(ob: Type, buf: string[], spacer: string, indent: string) {
+function emitType(ob: Type, buf: string[], spacer: string, indent: string) {
     switch (ob.tag) {
         case 'named':
             buf.push(ob.name);
@@ -18,18 +18,18 @@ function EmitType(ob: Type, buf: string[], spacer: string, indent: string) {
             break;
         case 'array':
             buf.push('[]')
-            EmitType(ob.value, buf, spacer, indent)
+            emitType(ob.value, buf, spacer, indent)
             break;
         case 'map':
             buf.push('map[')
-            EmitType(ob.key, buf, spacer, indent)
+            emitType(ob.key, buf, spacer, indent)
             buf.push(']')
-            EmitType(ob.value, buf, spacer, indent)
+            emitType(ob.value, buf, spacer, indent)
             break;
         case 'oneof':
             buf.push('(')
             for (const x of ob.values) {
-                EmitType(x, buf, spacer, indent)
+                emitType(x, buf, spacer, indent)
                 buf.push(" | ")
             }
             buf.pop()
@@ -50,7 +50,7 @@ function EmitType(ob: Type, buf: string[], spacer: string, indent: string) {
                 buf.push(indent + spacer)
                 buf.push(f.name)
                 buf.push(" ")
-                EmitType(f.type, buf, spacer, indent + spacer)
+                emitType(f.type, buf, spacer, indent + spacer)
                 if (f.required) {
                     buf.push("!")
                 }
@@ -65,7 +65,7 @@ function EmitType(ob: Type, buf: string[], spacer: string, indent: string) {
     }
 }
 
-function EmitDecl(ob: Type, buf: string[]) {
+function emitDecl(ob: Type, buf: string[]) {
     switch (ob.tag) {
         case "named":
             buf.push("\n")
@@ -80,70 +80,70 @@ function EmitDecl(ob: Type, buf: string[]) {
             buf.push("type ")
             buf.push(ob.name)
             buf.push(" ")
-            EmitType(ob.type, buf, "\t", "")
+            emitType(ob.type, buf, "\t", "")
             break;
         default:
             throw new Error("unexpected type")
     }
 }
 
-function ToPrimitive(name: string): PrimitiveType {
+function toPrimitive(name: string): PrimitiveType {
     return { tag: "primitive", name }
 }
-function ToArray(value: Type): ArrayType {
+function toArray(value: Type): ArrayType {
     return { tag: "array", value }
 }
-function ToMap(key: Type, value: Type): MapType {
+function toMap(key: Type, value: Type): MapType {
     return { tag: "map", key, value }
 }
-function ToOneOf(x: Type, ...xs: Type[]): OneOfType {
+function toOneOf(x: Type, ...xs: Type[]): OneOfType {
     return { tag: "oneof", values: [x, ...xs] }
 }
-function ToNamed(name: string, type: Type): Named {
+function toNamed(name: string, type: Type): Named {
     return { tag: "named", name, type }
 }
-function ToStruct(...fields: Field[]): StructType {
+function toStruct(...fields: Field[]): StructType {
     return { tag: "struct", fields: fields }
 }
 
 
 
-function P(t: Type) {
+function ptype(t: Type) {
     const buf = [];
-    EmitType(t, buf, "\t", "")
+    emitType(t, buf, "\t", "")
     console.log(buf.join(""))
 }
-function PD(t: Type) {
+function pdecl(t: Type) {
     const buf = [];
-    EmitDecl(t, buf)
+    emitDecl(t, buf)
     console.log(buf.join(""))
 }
 
-const string = ToPrimitive("string");
-const int = ToPrimitive("int");
+const string = toPrimitive("string");
+const int = toPrimitive("int");
 {
 
-    P(string)
-    P(ToArray(string))
-    P(ToMap(ToPrimitive("string"), ToArray(ToOneOf(int, string))))
+    ptype(string)
+    ptype(toArray(string))
+    ptype(toMap(toPrimitive("string"), toArray(toOneOf(int, string))))
 }
 {
-    const User = ToNamed("User", ToStruct(
+    const User = toNamed("User", toStruct(
         { name: "Name", type: string, required: true, comment: "name of user" },
         { name: "Age", type: int, required: false, comment: "age of user" },
     ))
     User.comment = "User is user object"
-    PD(User)
+    pdecl(User)
 
-    const Account = ToNamed("Account", ToStruct(
+    const Account = toNamed("Account", toStruct(
         { name: "ID", type: string, required: true },
         { name: "User", type: User, required: true },
     ))
-    PD(Account)
+    pdecl(Account)
 
-    const Account2 = ToNamed("Account2", ToStruct(
+    const Account2 = toNamed("Account2", toStruct(
         { name: "ID", type: string, required: true },
         { name: "User", type: User.type, required: true, comment: "user\nuser,user\nuser,user,user" },
     ))
-    PD(Account2)
+    pdecl(Account2)
 }

@@ -1,0 +1,219 @@
+---
+title: Swagger Petstore
+version: 1.0.0
+---
+
+A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification
+
+- [paths](#paths)
+- [schemas](#schemas)
+
+## paths
+
+| endpoint | operationId | tags | summary |
+| --- | --- | --- | --- |
+| `GET    /pets` | [findPets](#findpets--get-pets)  | | Returns all pets |
+| `POST   /pets` | [addPet](#addpet--post-pets) | | Creates a new pet |
+| `GET    /pets/{id}`| [findPetByID](#findpetbyid--get-petsid) | | Returns a pet by ID |
+| `DELETE /pets/{id}` | [deletePet](#deletepet--delete-petsid) | | Deletes a pet by ID |
+
+<!-- 
+- [findPets  `GET /pets`](#findpets--get-pets) Returns all pets
+- [addPet  `POST/pets`](#addpet--post-pets)  Creates a new pet
+- [findPetByID  `GET /pets/{id}`](#findpetbyid--get-petsid) Returns a pet by ID
+- [deletePet  `DELETE /pets/{id}`](#deletepet--delete-petsid) Deletes a pet by ID
+-->
+
+### findPets  `GET /pets`
+
+Returns all pets
+
+| name | value | 
+| --- | --- |
+| operationId | findPets |
+| endpoint | `GET /pets` |
+
+#### input
+
+```go
+// GET /pets
+
+type Input struct {
+    // tags to filter by
+    Tags []string `in:"query" style:"form" query:"tags"`
+
+    // maximum number of results to return
+    Limit integer `in:"query" format:"int32" query:"limit"`
+}
+```
+
+#### output (application/json)
+
+```go
+// GET /pets  200  
+// pet response
+type Output200 []struct { // Pet
+    // Unique id of the pet
+    Id integer! `json:"id" format:"int64"`
+    
+    // Name of the pet
+    Name string! `json:"name"`
+
+    // Type of the pet
+    Tag string `json:"tag"`
+}
+
+// GET /pets  default
+// unexpected error
+type OutputDefault struct { // Error
+    // Error code
+    Code integer! `json:"code" format:"int32"`
+
+    // Error message
+    Message string! `json:"message"`
+}
+```
+
+examples
+
+```json
+// GET /pets  200  
+[
+    {"id": 1, "name": "foo", "tag": "A"},
+    {"id": 2, "name": "bar", "tag": "A"},
+    {"id": 3, "name": "boo", "tag": "B"},
+]
+
+// GET /pets  default 
+{"code": 444, "message": "unexpected error!"}
+```
+
+#### description
+
+Returns all pets from the system that the user has access to
+Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.
+
+Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
+
+
+### addPet  `POST /pets`
+
+Creates a new pet
+
+| name | value | 
+| --- | --- |
+| operationId | addPet |
+| endpoint | `POST /pets` |
+
+#### input
+
+```go
+// POST /pets
+// Pet to add to the store
+type Input struct {
+    // Pet to add to the store
+    RequestBody struct { // NewPet
+        // Name of the pet
+        Name string! `json:"name"`
+
+        // Type of the pet
+        Tag string `json:"tag"`
+    }!
+}
+```
+
+#### output (application/json)
+
+
+```go
+// POST /pets  200  
+// pet response
+type Output200 struct { // Pet
+    // Unique id of the pet
+    Id integer! `json:"id" format:"int64"`
+    
+    // Name of the pet
+    Name string! `json:"name"`
+
+    // Type of the pet
+    Tag string `json:"tag"`
+}
+
+// POST /pets  default
+// unexpected error
+type OutputDefault struct { // Error
+    // Error code
+    Code integer! `json:"code" format:"int32"`
+
+    // Error message
+    Message string! `json:"message"`
+}
+```
+
+#### description
+
+Creates a new pet in the store. Duplicates are allowed
+
+### findPetByID  `GET /pets/{id}`
+### deletePet  `DELETE /pets/{id}`
+
+
+## schemas
+
+| name | summary | 
+| --- | --- |
+| [Pet](#pet) |  |
+| [NewPet](#newpet) | |
+| [Error](#error) | |
+
+### Pet
+
+```go
+type Pet struct {
+    // Unique id of the pet
+    Id integer! `json:"id" format:"int64"`
+    
+    // Name of the pet
+    Name string! `json:"name"`
+
+    // Type of the pet
+    Tag string `json:"tag"`
+}
+```
+
+- output of [AddPet `POST /pets`](#addpet-post-pets)
+- output of [findPetByID  `GET /pets/{id}`](#findpetbyid--get-petsid)
+
+### NewPet
+
+```go
+type NewPet struct {
+    // Name of the pet
+    Name string! `json:"name"`
+
+    // Type of the pet
+    Tag string `json:"tag"`
+}
+```
+- input of [AddPet `POST /pets`](#addpet-post-pets)
+
+### Error
+
+> **Note**
+> default error schema
+
+```go
+type Error struct { // Error
+    // Error code
+    Code integer! `json:"code" format:"int32"`
+
+    // Error message
+    Message string! `json:"message"`
+}
+```
+
+- output of [findPets  `GET /pets`](#findpets--get-pets)
+- output of [addPet  `POST/pets`](#addpet--post-pets)
+- output of [findPetByID  `GET /pets/{id}`](#findpetbyid--get-petsid)
+- output of [deletePet  `DELETE /pets/{id}`](#deletepet--delete-petsid)
+
