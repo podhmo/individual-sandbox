@@ -1,4 +1,4 @@
-import { Handlers } from "$fresh";
+import { Handlers } from "$fresh/server.ts";
 
 export const handler: Handlers = {
   async GET(req, ctx) {
