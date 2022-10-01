@@ -1,4 +1,4 @@
-## deno
+## deno fresh
 
 - https://deno.com/blog/fresh-1.1
 - https://fresh.deno.dev/docs/getting-started/
@@ -18,6 +18,21 @@ $ deno run -A -r https://fresh.deno.dev my-app
 $ deno task start
 ```
 
+あとは着々と routes 以下をいじっていく
+
+### vscode
+
+my-app を作った結果、vscode/settings.json の設定を以下にする必要があった。
+
+```json
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "deno.config": "my-app/deno.json",
+  "deno.importMap": "my-app/import_map.json"
+}
+```
+
 ### info
 
 - twind用のvscodeのextension https://github.com/tw-in-js/vscode-twind-intellisense
@@ -33,11 +48,12 @@ $ deno task start
 
 fresh自体のこと
 
-- vscodeでの設定 (index.tsxを開いたりするとエラーになる)
-- plugins
+- pluginsの定義方法
+- ドキュメントでは型がついていないctxなどに型を付けたい
 
 それ以外のこと
 
 - `import "preact"` と `import "@preact"` の違い (あと `import "$fresh"`)
 - index.tsxでclassNameとか使われていないけれど、preactではうまくいくの？
 - tailwind(twind)
+- preact用のstorybook
