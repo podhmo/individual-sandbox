@@ -1,6 +1,7 @@
 ## deno
 
 - https://deno.com/blog/fresh-1.1
+- https://fresh.deno.dev/docs/getting-started/
 
 ### 作業
 
@@ -20,7 +21,7 @@ $ deno task start
 ### info
 
 - twind用のvscodeのextension https://github.com/tw-in-js/vscode-twind-intellisense
-
+- preactのdevtool https://chrome.google.com/webstore/detail/preact-developer-tools/ilcajpmogmhpliinlbcdebhbcanbghmd
 
 ### plugin
 
@@ -37,5 +38,6 @@ fresh自体のこと
 
 それ以外のこと
 
+- `import "preact"` と `import "@preact"` の違い (あと `import "$fresh"`)
 - index.tsxでclassNameとか使われていないけれど、preactではうまくいくの？
 - tailwind(twind)

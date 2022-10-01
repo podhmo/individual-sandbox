@@ -1,3 +1,13 @@
+import { Handlers } from "$fresh";
+
+export const handler: Handlers = {
+  async GET(req, ctx) {
+    const resp = await ctx.render();
+    resp.headers.set("X-Custom-Header", "Hello");
+    return resp;
+  },
+};
+
 import Counter from "../islands/Counter.tsx";
 export default function Home() {
   return (
