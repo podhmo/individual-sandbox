@@ -1,9 +1,8 @@
 import Counter from "../islands/Counter.tsx";
-import { tw } from "twind";
 export default function Home() {
   return (
     <div class="p-4 mx-auto max-w-screen-md">
-      <h1 class={tw`text-4xl font-bold`}>hello world</h1>
+      <h1 class="text-4xl font-bold">hello world</h1>
       <img
         src="/logo.svg"
         class="w-32 h-32"
