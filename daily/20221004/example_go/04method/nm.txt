@@ -1,0 +1,2 @@
+  4551e0 T main.(*S).Hello
+  4552c0 T main.(*S).Hello-fm

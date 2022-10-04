@@ -1,0 +1,56 @@
+There are 23 section headers, starting at offset 0x1c8:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         0000000000401000  00001000
+       00000000000542ec  0000000000000000  AX       0     0     32
+  [ 2] .rodata           PROGBITS         0000000000456000  00056000
+       0000000000022677  0000000000000000   A       0     0     32
+  [ 3] .shstrtab         STRTAB           0000000000000000  00078680
+       000000000000017a  0000000000000000           0     0     1
+  [ 4] .typelink         PROGBITS         0000000000478800  00078800
+       00000000000002b0  0000000000000000   A       0     0     32
+  [ 5] .itablink         PROGBITS         0000000000478ab0  00078ab0
+       0000000000000008  0000000000000000   A       0     0     8
+  [ 6] .gosymtab         PROGBITS         0000000000478ab8  00078ab8
+       0000000000000000  0000000000000000   A       0     0     1
+  [ 7] .gopclntab        PROGBITS         0000000000478ac0  00078ac0
+       000000000003bcd8  0000000000000000   A       0     0     32
+  [ 8] .go.buildinfo     PROGBITS         00000000004b5000  000b5000
+       00000000000001f0  0000000000000000  WA       0     0     16
+  [ 9] .noptrdata        PROGBITS         00000000004b5200  000b5200
+       00000000000011a0  0000000000000000  WA       0     0     32
+  [10] .data             PROGBITS         00000000004b63a0  000b63a0
+       00000000000021f0  0000000000000000  WA       0     0     32
+  [11] .bss              NOBITS           00000000004b85a0  000b85a0
+       000000000002eb60  0000000000000000  WA       0     0     32
+  [12] .noptrbss         NOBITS           00000000004e7100  000e7100
+       0000000000005160  0000000000000000  WA       0     0     32
+  [13] .zdebug_abbrev    PROGBITS         00000000004ed000  000b9000
+       0000000000000127  0000000000000000           0     0     1
+  [14] .zdebug_line      PROGBITS         00000000004ed127  000b9127
+       00000000000136a3  0000000000000000           0     0     1
+  [15] .zdebug_frame     PROGBITS         00000000005007ca  000cc7ca
+       0000000000003c4b  0000000000000000           0     0     1
+  [16] .debug_gdb_s[...] PROGBITS         0000000000504415  000d0415
+       000000000000002d  0000000000000000           0     0     1
+  [17] .zdebug_info      PROGBITS         0000000000504442  000d0442
+       0000000000022af4  0000000000000000           0     0     1
+  [18] .zdebug_loc       PROGBITS         0000000000526f36  000f2f36
+       0000000000012223  0000000000000000           0     0     1
+  [19] .zdebug_ranges    PROGBITS         0000000000539159  00105159
+       000000000000660d  0000000000000000           0     0     1
+  [20] .note.go.buildid  NOTE             0000000000400f9c  00000f9c
+       0000000000000064  0000000000000000   A       0     0     4
+  [21] .symtab           SYMTAB           0000000000000000  0010b768
+       0000000000007920  0000000000000018          22    84     8
+  [22] .strtab           STRTAB           0000000000000000  00113088
+       0000000000006f02  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), l (large), p (processor specific)
