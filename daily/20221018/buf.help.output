@@ -1,0 +1,30 @@
+Usage:
+  buf [flags]
+  buf [command]
+
+Available Commands:
+  beta        Beta commands. Unstable and likely to change.
+  breaking    Verify that the input location has no breaking changes compared to the against location.
+  build       Build all Protobuf files from the specified input and output a Buf image.
+  completion  Generate auto-completion scripts for commonly used shells.
+  export      Export the files from the input location to an output location.
+  format      Format all Protobuf files from the specified input and output the result.
+  generate    Generate stubs for protoc plugins using a template.
+  help        Help about any command
+  lint        Verify that the input location passes lint checks.
+  ls-files    List all Protobuf files for the input.
+  mod         Manage Buf modules.
+  push        Push a module to a registry.
+  registry    Manage assets on the Buf Schema Registry.
+
+Flags:
+      --debug               Turn on debug logging.
+  -h, --help                help for buf
+      --log-format string   The log format [text,color,json]. (default "color")
+      --timeout duration    The duration until timing out. (default 2m0s)
+  -v, --verbose             Turn on verbose mode.
+      --version             Print the version.
+
+Use "buf [command] --help" for more information about a command.
+
+Sub-command required.

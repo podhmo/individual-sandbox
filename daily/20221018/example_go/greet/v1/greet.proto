@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package greet.v1;
 
-option go_package = "example/gen/greet/v1;greetv1";
+option go_package = "github.com/podhmo/individual-sandbox/daily/20221018/example_go/gen/greet/v1;greetv1";
 
 message GreetRequest {
   string name = 1;
