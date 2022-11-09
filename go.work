@@ -4,4 +4,5 @@ use (
 	./daily/20220728/example_go
 	./daily/20220929/example_go
 	./daily/20221018/example_go
+	./daily/20221110/example_validation
 )
