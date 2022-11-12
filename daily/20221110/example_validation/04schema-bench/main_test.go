@@ -124,7 +124,9 @@ func BindByCode(ob interface{}, codeMap map[string][]Op, code []Op, data map[str
 		name  string
 		value reflect.Value
 	}
-	stack := []node{{value: reflect.ValueOf(ob)}}
+	stack := make([]node, 0, len(code))
+	stack = append(stack, node{value: reflect.ValueOf(ob)})
+	// stack := []node{{value: reflect.ValueOf(ob)}}
 	current := stack[0]
 	for _, op := range code {
 		switch op.Op {

@@ -3,9 +3,9 @@ goos: linux
 goarch: amd64
 pkg: github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench
 cpu: AMD Ryzen 7 3700U with Radeon Vega Mobile Gfx  
-BenchmarkGorillaSchema-8     	  192621	      5581 ns/op
-BenchmarkByHand-8            	30514875	        38.50 ns/op
-BenchmarkByHandReflect-8     	 5566419	       231.8 ns/op
-BenchmarkByHandReflectVM-8   	 1216064	       888.1 ns/op
+BenchmarkGorillaSchema-8     	  189174	      6956 ns/op
+BenchmarkByHand-8            	30476985	        39.10 ns/op
+BenchmarkByHandReflect-8     	 5699470	       240.6 ns/op
+BenchmarkByHandReflectVM-8   	 1815870	       635.9 ns/op
 PASS
-ok  	github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench	7.679s
+ok  	github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench	7.955s
