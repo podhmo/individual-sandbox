@@ -48,10 +48,12 @@ type Op struct {
 
 func validatePersonCode(ob Person) error {
 	codeMap := map[string][]Op{
-		"Person": []Op{
+		"Person": {
 			{Op: "field", S0: "Name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
 			{Op: "field", S0: "Father"}, {Op: "pointer"}, {Op: "call", S0: "Person"}, {Op: "pop", S0: "pointer"}, {Op: "pop", S0: "field"},
+			// {Op: "field", S0: "Children"}, {Op: "each", S0: "Person.Children"}, {Op: "pop", S0: "field"},
 		},
+		"Person.Children": {{Op: "call", S0: "Person"}},
 	}
 	return validateCode(ob, codeMap, codeMap["Person"])
 }
@@ -90,6 +92,13 @@ func validateCode(ob interface{}, codeMap map[string][]Op, code []Op) error {
 				}
 				return fmt.Errorf("%s -- %w", strings.Join(xs, ", "), err)
 			}
+
+			// case "each":
+		// 	xs := current.value
+		// 	for i, n := 0, xs.Len(); i < n; i++ {
+		// 		x := xs.Index(i)
+		// 	}
+		// case "eachMap":
 		default:
 			return fmt.Errorf("unexpected op: %q", op.Op)
 		}
