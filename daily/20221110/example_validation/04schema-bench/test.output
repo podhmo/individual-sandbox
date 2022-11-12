@@ -1,0 +1,16 @@
+=== RUN   TestIt
+=== RUN   TestIt/gorilla/schema
+    main_test.go:173: main.Person{Name:"foo", Phone:"", Age:10, Admin:false}
+=== RUN   TestIt/byhand
+    main_test.go:182: main.Person{Name:"foo", Phone:"", Age:10, Admin:false}
+=== RUN   TestIt/byhand-reflect
+    main_test.go:191: main.Person{Name:"foo", Phone:"", Age:10, Admin:false}
+=== RUN   TestIt/byhand-reflect-vm
+    main_test.go:208: main.Person{Name:"foo", Phone:"", Age:10, Admin:false}
+--- PASS: TestIt (0.00s)
+    --- PASS: TestIt/gorilla/schema (0.00s)
+    --- PASS: TestIt/byhand (0.00s)
+    --- PASS: TestIt/byhand-reflect (0.00s)
+    --- PASS: TestIt/byhand-reflect-vm (0.00s)
+PASS
+ok  	github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench	0.005s

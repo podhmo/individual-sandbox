@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"go/ast"
 	"go/parser"
 	"go/printer"
@@ -20,9 +21,10 @@ func main() {
 	log.SetFlags(0)
 	log.SetPrefix("log::")
 
-	flag.BoolVar(&config.debug, "debug", config.debug, "debug")
-	flag.BoolVar(&config.replace, "replace", config.replace, "replace")
-	flag.BoolVar(&config.quiet, "quiet", config.quiet, "quiet")
+	flag.BoolVar(&config.debug, "debug", config.debug, "show debug log")
+	flag.BoolVar(&config.replace, "replace", config.replace, "write file instead of output to stdout")
+	flag.BoolVar(&config.quiet, "quiet", config.quiet, "don't printer.Fprint(os.Stdout, fset, tree)")
+	flag.StringVar(&config.tmpdir, "tmpdir", ".", "tmpdir")
 	flag.VisitAll(func(f *flag.Flag) {
 		if v := os.Getenv(strings.ToUpper(f.Name)); v != "" {
 			f.Value.Set(v)
@@ -38,6 +40,7 @@ type Config struct {
 	debug   bool
 	replace bool
 	quiet   bool
+	tmpdir  string
 }
 
 func run(config Config, files []string) error {
@@ -58,15 +61,36 @@ func run(config Config, files []string) error {
 	}
 
 	for _, t := range scanner.targets {
+		filename := fset.File(t.syntax.Pos()).Name()
 		if !t.needFix {
 			if config.debug {
-				log.Printf("%-6s %s", "skip:", fset.File(t.syntax.Pos()).Name())
+				log.Printf("%-6s %s", "skip:", filename)
 			}
 			continue
 		}
 		fixer.Fix(t)
-		if !config.quiet {
-			printer.Fprint(os.Stdout, fset, t.syntax)
+
+		// TODO: use goimports?
+
+		if config.replace {
+			wf, err := os.CreateTemp(config.tmpdir, "*.go")
+			log.Printf("%-6s %s", "write:", filename)
+			if err != nil {
+				return fmt.Errorf("create file: %s, -- %w", filename, err)
+			}
+			if err := printer.Fprint(wf, fset, t.syntax); err != nil {
+				return fmt.Errorf("emit file: %s, -- %w", filename, err)
+			}
+			if err := wf.Close(); err != nil { // xxx: use defer?
+				return fmt.Errorf("emit file..: %s, -- %w", filename, err)
+			}
+			if err := os.Rename(wf.Name(), filename); err != nil {
+				return fmt.Errorf("create file..: %s, -- %w", filename, err)
+			}
+		} else if !config.quiet {
+			if err := printer.Fprint(os.Stdout, fset, t.syntax); err != nil {
+				return fmt.Errorf("emit file: %s, -- %w", filename, err)
+			}
 		}
 	}
 	return nil
@@ -100,6 +124,10 @@ func (s *Scanner) Scan(f *ast.File) {
 			// errors.Wrap() or errors.Wrapf()
 			if fun, ok := n.Fun.(*ast.SelectorExpr); ok {
 				if prefix, ok := fun.X.(*ast.Ident); ok && prefix.Name == "errors" {
+					if s.debug {
+						log.Printf("\t%-6s %10s():%d", "scan:", fun.Sel.Name, fset.File(f.Pos()).Line(n.Pos()))
+					}
+
 					switch fun.Sel.Name {
 					case "Wrap", "Wrapf":
 						if ret, ok := stack[len(stack)-2].(*ast.ReturnStmt); ok {
@@ -135,6 +163,9 @@ func (f *Fixer) Fix(target *Target) {
 	log.Printf("%-6s %s", "fix:", fset.File(syntax.Pos()).Name())
 	for _, call := range target.calls {
 		pos := call.expr.Pos()
+		if f.debug {
+			log.Printf("\t%-6s %10s():%d", "fix:", call.name, fset.File(syntax.Pos()).Line(pos))
+		}
 
 		switch call.name {
 		case "Wrap", "Wrapf": // errors.Wrap(err, "<...>") -> fmt.Errorf("<...> -- %w", err)
