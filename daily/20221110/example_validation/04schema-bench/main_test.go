@@ -99,9 +99,9 @@ func BenchmarkByHandReflectVM(b *testing.B) {
 	codeMap := map[string][]Op{
 		"Person": {
 			{Op: "pointer"},
-			{Op: "field", S0: "Name"}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
-			{Op: "field", S0: "Phone"}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
-			{Op: "field", S0: "Age"}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
+			{Op: "field-index", S0: "Name", I0: 0}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
+			{Op: "field-index", S0: "Phone", I0: 1}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
+			{Op: "field-index", S0: "Age", I0: 2}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
 		},
 	}
 
@@ -116,6 +116,7 @@ func BenchmarkByHandReflectVM(b *testing.B) {
 type Op struct {
 	Op string
 	S0 string
+	I0 int
 }
 
 func BindByCode(ob interface{}, codeMap map[string][]Op, code []Op, data map[string][]string) error {
@@ -129,6 +130,9 @@ func BindByCode(ob interface{}, codeMap map[string][]Op, code []Op, data map[str
 		switch op.Op {
 		case "field":
 			current = node{name: op.S0, value: current.value.FieldByName(op.S0)}
+			stack = append(stack, current)
+		case "field-index":
+			current = node{name: op.S0, value: current.value.Field(op.I0)}
 			stack = append(stack, current)
 		case "pop":
 			stack = stack[:len(stack)-1]
@@ -195,9 +199,9 @@ func TestIt(t *testing.T) {
 		codeMap := map[string][]Op{
 			"Person": {
 				{Op: "pointer"},
-				{Op: "field", S0: "Name"}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
-				{Op: "field", S0: "Phone"}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
-				{Op: "field", S0: "Age"}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
+				{Op: "field-index", S0: "Name", I0: 0}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
+				{Op: "field-index", S0: "Phone", I0: 1}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
+				{Op: "field-index", S0: "Age", I0: 2}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
 			},
 		}
 
