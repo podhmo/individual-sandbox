@@ -1,11 +1,12 @@
-( cd ./04schema-bench/; go test -bench . )
+go test -benchmem -bench . ./04schema-bench/
 goos: linux
 goarch: amd64
 pkg: github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench
 cpu: AMD Ryzen 7 3700U with Radeon Vega Mobile Gfx  
-BenchmarkGorillaSchema-8     	  189174	      6956 ns/op
-BenchmarkByHand-8            	30476985	        39.10 ns/op
-BenchmarkByHandReflect-8     	 5699470	       240.6 ns/op
-BenchmarkByHandReflectVM-8   	 1815870	       635.9 ns/op
+BenchmarkGorillaSchema-8             	   59634	     34418 ns/op	     976 B/op	      29 allocs/op
+BenchmarkByHand-8                    	47700204	        23.04 ns/op	       0 B/op	       0 allocs/op
+BenchmarkByHandReflect-8             	 1251182	      1182 ns/op	      48 B/op	       1 allocs/op
+BenchmarkByHandReflectVM-8           	 1000000	      1752 ns/op	      48 B/op	       1 allocs/op
+BenchmarkByHandReflectVMWithPool-8   	 1000000	      1691 ns/op	      48 B/op	       1 allocs/op
 PASS
-ok  	github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench	7.955s
+ok  	github.com/podhmo/individual-sandbox/daily/20221110/example_validation/04schema-bench	11.127s

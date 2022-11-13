@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"sync"
 	"testing"
 
 	"github.com/gorilla/schema"
@@ -102,6 +103,7 @@ func BenchmarkByHandReflectVM(b *testing.B) {
 			{Op: "field-index", S0: "Name", I0: 0}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
 			{Op: "field-index", S0: "Phone", I0: 1}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
 			{Op: "field-index", S0: "Age", I0: 2}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
+			{Op: "pop", S0: "pointer"},
 		},
 	}
 
@@ -113,20 +115,67 @@ func BenchmarkByHandReflectVM(b *testing.B) {
 	}
 }
 
+func BenchmarkByHandReflectVMWithPool(b *testing.B) {
+	data := map[string][]string{"name": {"foo"}, "phone": {""}, "age": {"10"}}
+	b.ResetTimer()
+
+	codeMap := map[string][]Op{
+		"Person": {
+			{Op: "pointer"},
+			{Op: "field-index", S0: "Name", I0: 0}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
+			{Op: "field-index", S0: "Phone", I0: 1}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
+			{Op: "field-index", S0: "Age", I0: 2}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
+			{Op: "pop", S0: "pointer"},
+		},
+	}
+
+	for i := 0; i < b.N; i++ {
+		var ob Person
+		if err := BindByCodeWithPool(&ob, codeMap, codeMap["Person"], data); err != nil {
+			panic(err)
+		}
+	}
+}
+
 type Op struct {
 	Op string
 	S0 string
 	I0 int
 }
 
+type node struct {
+	name  string
+	value reflect.Value
+}
+
 func BindByCode(ob interface{}, codeMap map[string][]Op, code []Op, data map[string][]string) error {
-	type node struct {
-		name  string
-		value reflect.Value
+	stack := make([]node, 0, 8)
+	return bindByCode(stack, ob, codeMap, code, data)
+}
+
+var pool = &sync.Pool{
+	New: func() interface{} {
+		stack := make([]node, 0, 100)
+		return &stack
+	},
+}
+
+func BindByCodeWithPool(ob interface{}, codeMap map[string][]Op, code []Op, data map[string][]string) error {
+	pooled := pool.Get().(*[]node)
+	stack := (*pooled)[:0]
+	defer pool.Put(pooled)
+	if err := bindByCode(stack, ob, codeMap, code, data); err != nil {
+		return err
 	}
-	stack := make([]node, 0, len(code))
+	return nil
+}
+
+func bindByCode(stack []node, ob interface{}, codeMap map[string][]Op, code []Op, data map[string][]string) error {
+	if len(stack) > 0 {
+		panic(fmt.Sprintf("before assert len(stack)=%d != 0", len(stack)))
+	}
+
 	stack = append(stack, node{value: reflect.ValueOf(ob)})
-	// stack := []node{{value: reflect.ValueOf(ob)}}
 	current := stack[0]
 	for _, op := range code {
 		switch op.Op {
@@ -163,6 +212,11 @@ func BindByCode(ob interface{}, codeMap map[string][]Op, code []Op, data map[str
 		default:
 			return fmt.Errorf("unexpected op: %q", op.Op)
 		}
+	}
+
+	stack = stack[:len(stack)-1] // pop first item
+	if len(stack) > 0 {
+		panic(fmt.Sprintf("after assert len(stack)=%d != 0", len(stack)))
 	}
 	return nil
 }
@@ -204,13 +258,18 @@ func TestIt(t *testing.T) {
 				{Op: "field-index", S0: "Name", I0: 0}, {Op: "setString", S0: "name"}, {Op: "isZero"}, {Op: "pop", S0: "field"},
 				{Op: "field-index", S0: "Phone", I0: 1}, {Op: "setString", S0: "phone"}, {Op: "pop", S0: "field"},
 				{Op: "field-index", S0: "Age", I0: 2}, {Op: "setInt", S0: "age"}, {Op: "pop", S0: "field"},
+				{Op: "pop", S0: "pointer"},
 			},
 		}
 
-		var ob Person
-		if err := BindByCode(&ob, codeMap, codeMap["Person"], data); err != nil {
-			t.Fatal(err)
+		for i := 0; i < 2; i++ {
+			t.Run(fmt.Sprintf("case%d", i), func(t *testing.T) {
+				var ob Person
+				if err := BindByCode(&ob, codeMap, codeMap["Person"], data); err != nil {
+					t.Fatal(err)
+				}
+				t.Logf("%#+v", ob)
+			})
 		}
-		t.Logf("%#+v", ob)
 	})
 }
