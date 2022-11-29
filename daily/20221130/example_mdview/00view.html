@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>hello</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- TODO: highlight-->
+</head>
+<style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+        .markdown-body {
+            padding: 15px;
+        }
+    }
+</style>
+
+<body>
+    <article class="markdown-body" id="output-text">
+        <h1>hello world</h1>
+        <p>これはどのような表示になるかを考えるためのもの</p>
+    </article>
+    <pre id="input-text">
+# サンプルファイル
+
+これはサンプルです。
+https://jsprimer.net/
+
+- サンプル1
+- サンプル2
+
+```python
+def hello(name: str) -> None:
+    print("hello", name)
+
+if __name__ == "__main__":
+    hello("world")
+```
+    </pre>
+</body>
+<script type="module">
+    function getInputText() {
+        return document.getElementById("input-text").textContent
+    }
+
+    setTimeout(() => {
+        document.querySelector("title").textContent = "hello -- changed"
+
+        const text = getInputText()
+        document.getElementById("output-text").innerHTML = marked.parse(text)
+    }, 1000)
+</script>
+<html>
