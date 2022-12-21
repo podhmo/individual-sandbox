@@ -1,0 +1,53 @@
+  5           0 LOAD_FAST                0 (command)
+              2 LOAD_METHOD              0 (split)
+              4 CALL_METHOD              0
+
+  6           6 DUP_TOP
+              8 MATCH_SEQUENCE
+             10 POP_JUMP_IF_FALSE       19 (to 38)
+             12 GET_LEN
+             14 LOAD_CONST               1 (1)
+             16 COMPARE_OP               2 (==)
+             18 POP_JUMP_IF_FALSE       19 (to 38)
+             20 UNPACK_SEQUENCE          1
+             22 STORE_FAST               1 (action)
+             24 POP_TOP
+
+  7          26 LOAD_GLOBAL              1 (print)
+             28 LOAD_CONST               2 ('action0')
+             30 CALL_FUNCTION            1
+             32 POP_TOP
+             34 LOAD_CONST               0 (None)
+             36 RETURN_VALUE
+
+  6     >>   38 POP_TOP
+
+  8          40 MATCH_SEQUENCE
+             42 POP_JUMP_IF_FALSE       37 (to 74)
+             44 GET_LEN
+             46 LOAD_CONST               3 (2)
+             48 COMPARE_OP               2 (==)
+             50 POP_JUMP_IF_FALSE       37 (to 74)
+             52 UNPACK_SEQUENCE          2
+             54 STORE_FAST               1 (action)
+             56 STORE_FAST               2 (obj)
+
+  9          58 LOAD_GLOBAL              1 (print)
+             60 LOAD_CONST               4 ('action1')
+             62 LOAD_FAST                1 (action)
+             64 LOAD_FAST                2 (obj)
+             66 CALL_FUNCTION            3
+             68 POP_TOP
+             70 LOAD_CONST               0 (None)
+             72 RETURN_VALUE
+
+  8     >>   74 POP_TOP
+
+ 10          76 NOP
+
+ 11          78 LOAD_GLOBAL              1 (print)
+             80 LOAD_CONST               5 ('?')
+             82 CALL_FUNCTION            1
+             84 POP_TOP
+             86 LOAD_CONST               0 (None)
+             88 RETURN_VALUE
