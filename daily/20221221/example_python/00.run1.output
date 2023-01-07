@@ -1,43 +1,38 @@
-  7           0 LOAD_FAST                0 (beer_style)
+ 20           0 LOAD_FAST                0 (beer_style)
+              2 LOAD_CONST               1 ('Pilsner')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE        8 (to 16)
 
-  8           2 DUP_TOP
-              4 LOAD_CONST               1 ('Pilsner')
-              6 COMPARE_OP               2 (==)
-              8 POP_JUMP_IF_FALSE       10 (to 20)
-             10 POP_TOP
+ 21           8 LOAD_CONST               2 ('First drink')
+             10 STORE_FAST               1 (result)
 
-  9          12 LOAD_CONST               2 ('First drink')
-             14 STORE_FAST               1 (result)
+ 28          12 LOAD_FAST                1 (result)
+             14 RETURN_VALUE
 
- 16          16 LOAD_FAST                1 (result)
-             18 RETURN_VALUE
+ 22     >>   16 LOAD_FAST                0 (beer_style)
+             18 LOAD_CONST               3 ('IPA')
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE       16 (to 32)
 
- 10     >>   20 DUP_TOP
-             22 LOAD_CONST               3 ('IPA')
-             24 COMPARE_OP               2 (==)
-             26 POP_JUMP_IF_FALSE       19 (to 38)
-             28 POP_TOP
+ 23          24 LOAD_CONST               4 ('I like it')
+             26 STORE_FAST               1 (result)
 
- 11          30 LOAD_CONST               4 ('I like it')
-             32 STORE_FAST               1 (result)
+ 28          28 LOAD_FAST                1 (result)
+             30 RETURN_VALUE
 
- 16          34 LOAD_FAST                1 (result)
-             36 RETURN_VALUE
+ 24     >>   32 LOAD_FAST                0 (beer_style)
+             34 LOAD_CONST               5 ('Hazy IPA')
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       24 (to 48)
 
- 12     >>   38 LOAD_CONST               5 ('Hazy IPA')
-             40 COMPARE_OP               2 (==)
-             42 POP_JUMP_IF_FALSE       26 (to 52)
+ 25          40 LOAD_CONST               6 ('Cloudy and cloudy')
+             42 STORE_FAST               1 (result)
 
- 13          44 LOAD_CONST               6 ('Cloudy and cloudy')
-             46 STORE_FAST               1 (result)
+ 28          44 LOAD_FAST                1 (result)
+             46 RETURN_VALUE
 
- 16          48 LOAD_FAST                1 (result)
-             50 RETURN_VALUE
+ 27     >>   48 LOAD_CONST               7 ('I like most beers')
+             50 STORE_FAST               1 (result)
 
- 14     >>   52 NOP
-
- 15          54 LOAD_CONST               7 ('I like most beers')
-             56 STORE_FAST               1 (result)
-
- 16          58 LOAD_FAST                1 (result)
-             60 RETURN_VALUE
+ 28          52 LOAD_FAST                1 (result)
+             54 RETURN_VALUE

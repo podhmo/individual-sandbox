@@ -33,4 +33,4 @@ print(run("?"))
 with open("00.run0.output", "w") as wf:
     dis.dis(run, file=wf)
 with open("00.run1.output", "w") as wf:
-    dis.dis(run, file=wf)
+    dis.dis(run2, file=wf)

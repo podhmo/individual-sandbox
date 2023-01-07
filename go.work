@@ -6,4 +6,5 @@ use (
 	./daily/20221018/example_go
 	./daily/20221110/example_validation
 	./daily/20221122/example_go
+	./daily/20221229/example_go
 )
