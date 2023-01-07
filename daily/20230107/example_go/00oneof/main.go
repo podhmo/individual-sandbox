@@ -54,7 +54,10 @@ func (ref OneOf[T]) MarshalJSON() ([]byte, error) {
 	if _, err := buf.Write(b[1:]); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+
+	b = buf.Bytes()
+	pool.Put(buf)
+	return b, nil
 }
 
 type inner struct {
