@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "main.TestUser": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "title": "the name",
+          "description": "The name of a friend",
+          "default": "alex",
+          "examples": [
+            "joe",
+            "lucy"
+          ]
+        },
+        "friends": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "The list of IDs, omitted when empty"
+        },
+        "tags": {
+          "type": "object",
+          "description": "TODO: dynamic types (a,foo)"
+        },
+        "birth_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "TODO: oneof_required"
+        },
+        "year_of_birth": {
+          "type": "string"
+        },
+        "metadata": {
+          "description": "oneOf"
+        },
+        "fav_color": {
+          "type": "string",
+          "enum": [
+            "red",
+            "green",
+            "blue"
+          ]
+        }
+      },
+      "additionalProperties": {},
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  },
+  "$ref": "#/defs/main.TestUser"
+}

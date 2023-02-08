@@ -277,7 +277,7 @@ type Recorder struct {
 
 func NewRecorder() *Recorder {
 	rec := &Recorder{
-		cfg:       &reflectshape.Config{SkipComments: true},
+		cfg:       &reflectshape.Config{SkipComments: false},
 		reflector: &reflector{Definitions: orderedmap.New()},
 		seen:      map[int]*Type{},
 	}
@@ -338,6 +338,9 @@ func (r *Recorder) TypeOf(ob interface{}) *Type {
 		fields[f.Name] = &Field{Field: f, Schema: subschema}
 		if schema.Properties == nil {
 			schema.Properties = orderedmap.New()
+		}
+		if f.Doc != "" {
+			subschema.Description = f.Doc
 		}
 		schema.Properties.Set(fieldname, subschema)
 	}
@@ -484,7 +487,7 @@ var (
 
 type TestUser struct {
 	ID      string                 `json:"id"`
-	Name    string                 `json:"name"`
+	Name    string                 `json:"name"` // The name of a friend
 	Friends []int                  `json:"friends,omitempty"`
 	Tags    map[string]interface{} `json:"tags,omitempty" jsonschema_extras:"a=b,foo=bar,foo=bar1"` // TODO: dynamic types (a,foo)
 
@@ -503,7 +506,7 @@ func main() {
 	{
 		st := rec.TypeOf(&TestUser{})
 
-		st.FieldByName("Name").Title("the name").Description("The name of a friend").Example("joe").Example("lucy").Default("alex")
+		st.FieldByName("Name").Title("the name").Example("joe").Example("lucy").Default("alex")
 		st.FieldByName("Friends").Description("The list of IDs, omitted when empty")
 		st.FieldByName("FavColor").Enum("red", "green", "blue")
 	}
