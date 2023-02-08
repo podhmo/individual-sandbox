@@ -21,7 +21,9 @@ type TestUser struct {
 }
 
 func main() {
-	schema := jsonschema.Reflect(&TestUser{})
+	// reflector := &jsonschema.Reflector{DoNotReference: true}
+	reflector := &jsonschema.Reflector{}
+	schema := reflector.Reflect(&TestUser{})
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
 	if err := enc.Encode(schema); err != nil {
