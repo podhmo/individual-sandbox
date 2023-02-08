@@ -16,4 +16,5 @@ type Group struct {
 	Members   []Person
 	Ordering  Ordering
 	Ordering2 Ordering2
+	Any       interface{}
 }
