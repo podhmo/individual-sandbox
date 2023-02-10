@@ -9,4 +9,5 @@ use (
 	./daily/20221229/example_go
 	./daily/20230107/example_go
 	./daily/20230209/example_go
+	./daily/20230210/example_go
 )

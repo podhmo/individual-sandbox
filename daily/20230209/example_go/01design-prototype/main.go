@@ -502,7 +502,6 @@ type TestUser struct {
 func main() {
 	rec := NewRecorder()
 
-	// TODO: extract from comments
 	{
 		st := rec.TypeOf(&TestUser{})
 
