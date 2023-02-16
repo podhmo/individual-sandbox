@@ -23,11 +23,11 @@ func (p *Person) UnmarshalJSON(b []byte) error {
 	if err != nil {
 		return err
 	}
-	p.Friends = CoerceMap[string, string](m)
+	p.Friends = CoerceMap[string](m)
 	return nil
 }
 
-func CoerceMap[K, V comparable](src map[K]any) map[K]V {
+func CoerceMap[V, K comparable](src map[K]any) map[K]V {
 	dst := make(map[K]V, len(src))
 	for k, v := range src {
 		dst[k] = v.(V)
