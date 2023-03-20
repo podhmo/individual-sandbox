@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Stack from '@mui/material/Stack'
 import './App.css'
 
 function App() {
@@ -8,23 +11,30 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+      <h1>Vite + React + MUI</h1>
+      <Card variant='outlined'>
+        <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
-      </div>
+      </Card>
+      <Card variant='elevation'>
+        <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </Button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </Card>
+      <Card>
+        <Stack spacing={2}>
+          <Button>Item 1</Button>
+          <Button>Item 2</Button>
+          <Button>Item 3</Button>
+        </Stack>
+      </Card>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
