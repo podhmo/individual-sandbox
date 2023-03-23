@@ -13,6 +13,8 @@ import Container from '@mui/material/Container';
 import darkScrollbar from '@mui/material/darkScrollbar'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import AppBar from './AppBar'
+
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -46,8 +48,10 @@ export default function SignIn() {
     });
   };
 
+  const onOpen = (event:Element) => { console.log(event)}
   return (
     <ThemeProvider theme={theme}>
+      <AppBar></AppBar>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -113,6 +117,6 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
