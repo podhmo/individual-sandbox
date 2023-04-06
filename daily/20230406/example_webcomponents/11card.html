@@ -1,0 +1,112 @@
+<html>
+<script type="module">
+
+    class CardList extends HTMLElement {
+        constructor() {
+            super();
+            const shadow = this.attachShadow({ mode: 'open' });
+            const style = document.createElement("style")
+            shadow.innerHTML = `
+        <section class="card-list"><slot></slot></section>
+            `
+            style.textContent = `
+        .card-list {
+            display: flex;
+            flex-direction: row;
+        }
+        ::slotted(*) {
+            padding: 10px;
+            width: 200px;
+        }
+            `;
+            shadow.appendChild(style);
+        }
+        render() {
+        }
+    }
+
+    class Card extends HTMLElement {
+        constructor() {
+            super();
+            let avatarSource = "https://www.w3schools.com/howto/img_avatar.png"; // default
+            if (this.hasAttribute("avatar")) {
+                avatarSource = this.getAttribute("avatar")
+            }
+
+            const shadow = this.attachShadow({ mode: 'open' });
+            const style = document.createElement("style")
+            shadow.innerHTML = `
+        <div class="card">
+            <img src="${avatarSource}" alt="Avatar" style="width:100%">
+            <div class="container">
+                <slot></slot>
+            </div>
+        </div>
+            `
+            style.textContent = `
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 16px;
+        }
+            `;
+            shadow.appendChild(style);
+        }
+
+        render() {
+        }
+    }
+
+    customElements.define('my-card-list', CardList);
+    customElements.define('my-card', Card);
+</script>
+
+<body>
+    <h2>Card</h2>
+
+    <my-card-list>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card avatar="https://www.w3schools.com/howto/img_avatar2.png">
+            <h4><b>John Doe</b></h4>
+            <p>Interior Designer</p>
+        </my-card>
+    </my-card-list>
+    <my-card-list>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card>
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+        </my-card>
+        <my-card avatar="https://www.w3schools.com/howto/img_avatar2.png">
+            <h4><b>John Doe</b></h4>
+            <p>Interior Designer</p>
+        </my-card>
+    </my-card-list>
+</body>
+
+</html>

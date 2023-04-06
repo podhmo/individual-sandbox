@@ -1,0 +1,11 @@
+<script type="module">
+    import { Card } from "https://esm.sh/@spectrum-web-components/card@1.0.0?bundle";
+    customElements.define('sp-card', Card);
+</script>
+
+<body>
+    <sp-card heading="Card Heading"> <img alt="" slot="cover-photo" src="https://picsum.photos/200/300" /> <span
+            slot="subheading">JPG photo</span>
+        <div slot="footer">Footer</div>
+    </sp-card>
+</body>
