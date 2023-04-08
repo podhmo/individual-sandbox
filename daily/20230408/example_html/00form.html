@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<script>
+    function toggleAPIKeyVisibility() {
+        const elt = document.getElementById("apikey");
+        elt.type = elt.type === "password" ? "text" : "password";
+    }
+
+    function getAPIKey() {
+        return document.getElementById("apikey").value;
+    }
+
+    // -- handling API
+    function getAPIData() {
+        const apikey = getAPIKey()
+        const username = document.getElementById("username").value.trim();
+        const prompt = document.getElementById("prompt").value.trim();
+        return { prompt, profile: { apikey, username } }
+    }
+
+    async function postAPIData(data) {
+        if (data.profile.apikey === "") {
+            return Promise.reject("api key is not found")
+        }
+        if (data.prompt === "") {
+            return Promise.reject("prompt is empty")
+        }
+
+        const result = await callAPI(data)
+        document.getElementById("request").innerText = JSON.stringify(result.request, null, "\t")
+        document.getElementById("response").innerText = JSON.stringify(result.response, null, "\t")
+    }
+
+    // see: https://platform.openai.com/docs/api-reference/chat/create
+    async function callAPI(data) {
+        const apikey = data.profile.apikey;
+        const username = data.profile.username;
+        const prompt = data.prompt;
+
+        const payload = {
+            'model': 'gpt-3.5-turbo',
+            'messages': [
+                { "role": "system", "content": "要約として適切な絵文字を自信度(0.0~1.0)と共に答えてください。３つ程候補をあげて下さい" },
+                { "role": "user", "content": prompt }
+            ],
+            "user": username,
+        };
+        const response = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${apikey}`,
+            },
+            body: JSON.stringify(payload),
+        })
+        return { request: payload, response: await response.json() }
+    }
+
+
+    // init    
+    document.addEventListener("DOMContentLoaded", (event) => {
+        const form = document.getElementById("prompt-form");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const data = getAPIData();
+            postAPIData(data);
+        })
+    })
+</script>
+
+<body>
+    <form method="POST">
+        <label for="username">username</label>
+        <input type="text" id="username" autocomplete="username" tabindex="-1">
+        <label for="password">apikey</label>
+        <input type="password" id="apikey" autocomplete="current-password" tabindex="-1">
+        <button type="submit" tabindex="-1">save</button>
+    </form>
+
+    <input tabindex="-1" type="checkbox" onclick="toggleAPIKeyVisibility()">Show API key; visit <a tabindex="-1"
+        href="https://platform.openai.com/account/api-keys" target="_blank">Account API Keys - OpenAI API</a>
+
+    <hr />
+
+    <form id="prompt-form">
+        <label for="prompt">prompt</label>
+        <textarea id="prompt" style="resize: both; width: 100%;"></textarea>
+        <button type="submit">send</button>
+    </form>
+
+    request:
+    <pre id="request"></pre>
+
+    response:
+    <pre id="response"></pre>
+</body>
+
+</html>
