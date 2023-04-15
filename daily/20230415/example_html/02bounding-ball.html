@@ -1,0 +1,44 @@
+<style>
+    .bouncing-ball {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #333;
+        position: relative;
+        animation: bounce 1s ease-in-out infinite;
+    }
+
+    .bouncing-ball::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(40px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
+
+<div class="bouncing-ball"></div>
