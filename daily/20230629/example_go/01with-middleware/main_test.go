@@ -21,10 +21,16 @@ func Handler(w http.ResponseWriter, req *http.Request) {
 }
 
 func TestIt(t *testing.T) {
+	hooks := []func(context.Context) context.Context{}
 	middleware := func(inner http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-			v, _ := req.Context().Value(ctxValueKey).([]string)
-			req = req.WithContext(context.WithValue(req.Context(), ctxValueKey, append(v, "MIDDLEWARE")))
+			ctx := req.Context()
+			v, _ := ctx.Value(ctxValueKey).([]string)
+			ctx = context.WithValue(ctx, ctxValueKey, append(v, "MIDDLEWARE"))
+			for _, m := range hooks {
+				ctx = m(ctx)
+			}
+			req = req.WithContext(ctx)
 			inner.ServeHTTP(w, req)
 		})
 	}
@@ -40,8 +46,11 @@ func TestIt(t *testing.T) {
 
 	rec := httptest.NewRecorder()
 	req := httptest.NewRequest("GET", "/", nil)
-	v, _ := req.Context().Value(ctxValueKey).([]string)
-	req = req.WithContext(context.WithValue(req.Context(), ctxValueKey, append(v, "REQUEST")))
+
+	hooks = append(hooks, func(ctx context.Context) context.Context {
+		v, _ := ctx.Value(ctxValueKey).([]string)
+		return context.WithValue(ctx, ctxValueKey, append(v, "REQUEST"))
+	})
 	h.ServeHTTP(rec, req)
 	res := rec.Result()
 	if want, got := http.StatusOK, res.StatusCode; want != got {
