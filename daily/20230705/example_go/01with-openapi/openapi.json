@@ -1,0 +1,23 @@
+{
+  "components": {
+    "schemas": {
+      "Size": {
+        "type": "string",
+        "enum": [
+          "S",
+          "M",
+          "L"
+        ]
+      },
+      "Order": {
+        "type": "string",
+        "description": "順序\n",
+        "enum": [
+          "ASC",
+          "DESC"
+        ],
+        "default": "ASC"
+      }
+    }
+  }
+}
