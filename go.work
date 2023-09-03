@@ -14,4 +14,5 @@ use (
 	./daily/20230620/example_go
 	./daily/20230629/example_go
 	./daily/20230705/example_go
+	./daily/20230903/example_go
 )

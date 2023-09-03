@@ -94,6 +94,18 @@ func main() {
 			t.Msg("Println(\"yay\")")
 		})
 	})
+
+	fmt.Println("----------------------------------------")	
+	Run(func(t *T){
+		t.Run("add(10,20)", func(){
+			t.Msg("value(10)")
+			t.Msg("value(20)")
+		})
+		t.Run("add(30,40)", func(){
+			t.Msg("value(30)")
+			t.Msg("value(40)")
+		})		
+	})
 }
 
 func hello(t *T) {
