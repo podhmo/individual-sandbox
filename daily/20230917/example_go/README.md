@@ -267,11 +267,45 @@ type BooksByTagsRow struct {
 ...
 ```
 
+あと、sqlxはrequiredな引数とoptionalな引数が存在していないみたい。
+補完とかを考えると以下の様な関数になっていると型をわざわざimportしなくても使えるかも？
+
+```go
+func (q *BookQueries) UpdateBook(ctx context.Context, modify func(arg *UpdateBookParams)) error {
+	var arg UpdateBookParams
+	modify(&arg)
+	_, err := q.db.ExecContext(ctx, updateBook, arg.Title, pq.Array(arg.Tags), arg.BookID)
+	return err
+}
+```
+
+以下の様な感じで使える。特にUpdate部分は補完で関数部分が展開されるのでParamsを自分で設定しなくて良い。
+
+```go
+q := booktestnested2.New(nil)
+{
+    book, err := q.Book().GetBook(ctx, bookID)
+    fmt.Println(book, err)
+}
+
+{
+    err := q.Book().UpdateBook(ctx, func(arg *booktestnested2.UpdateBookParams) {
+        arg.BookID = bookID
+        arg.Title = "foo"
+    })
+    fmt.Println(err)
+}
+```
+
+
 ## 結局のところInput,Output,Actionを以下のように保持するか？という話なのでは？
 
 そんな気がする。こんな感じ。これらを何度もpackage名などを行ったり来たりせずに扱いたい。
 
 ```
 Action :: Input => Output
+```
+
+どういう形が良いんだろうか？Namespaceが存在していてInput,Action,Outputが手に入れば良いのでは？
 ```
 

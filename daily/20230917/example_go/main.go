@@ -6,6 +6,8 @@ import (
 
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktest"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestfunc"
+	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested"
+	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested2"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestns"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestvar"
 )
@@ -80,5 +82,38 @@ func main() {
 			fmt.Println(err)
 		}
 
+	}
+
+	// booktestnested
+	{
+		q := booktestnested.New(nil)
+		{
+			book, err := q.Book().GetBook(ctx, bookID)
+			fmt.Println(book, err)
+		}
+		{
+			p := booktestnested.UpdateBookParams{
+				BookID: bookID,
+				Title:  "foo",
+			}
+			err := q.Book().UpdateBook(ctx, p)
+			fmt.Println(err)
+		}
+
+	}
+	// booktestnested2
+	{
+		q := booktestnested2.New(nil)
+		{
+			book, err := q.Book().GetBook(ctx, bookID)
+			fmt.Println(book, err)
+		}
+		{
+			err := q.Book().UpdateBook(ctx, func(arg *booktestnested2.UpdateBookParams) {
+				arg.BookID = bookID
+				arg.Title = "foo"
+			})
+			fmt.Println(err)
+		}
 	}
 }
