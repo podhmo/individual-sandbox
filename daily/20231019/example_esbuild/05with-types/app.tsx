@@ -7,4 +7,9 @@ export function Greet({ name }: { name: string }) {
         <h1>Hello, name!</h1>
     )
 }
-console.log(Server.renderToString(<Greet name="World" />))
+
+console.log(Server.renderToString(
+    <React.StrictMode>
+        <Greet name="World" />
+    </React.StrictMode>
+));
