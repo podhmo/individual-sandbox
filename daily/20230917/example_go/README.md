@@ -309,3 +309,9 @@ Action :: Input => Output
 どういう形が良いんだろうか？Namespaceが存在していてInput,Action,Outputが手に入れば良いのでは？
 ```
 
+
+## sqlc
+
+- rules/sqlc/db-prepareって何者？
+- templatesを分けて使えるんだろうか？
+- "*.sql" とかで読み込めるようにしたい

@@ -8,6 +8,7 @@ import (
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestfunc"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested2"
+	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested2/types"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestns"
 	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestvar"
 )
@@ -109,7 +110,7 @@ func main() {
 			fmt.Println(book, err)
 		}
 		{
-			err := q.Book().UpdateBook(ctx, func(arg *booktestnested2.UpdateBookParams) {
+			err := q.Book().UpdateBook(ctx, func(arg *types.UpdateBookParams) {
 				arg.BookID = bookID
 				arg.Title = "foo"
 			})

@@ -1,4 +1,4 @@
-package booktestnested2
+package types
 
 import (
 	"database/sql"

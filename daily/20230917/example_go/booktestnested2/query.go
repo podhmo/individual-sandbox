@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/lib/pq"
+	"github.com/podhmo/individual-sandbox/daily/20230917/example_go/booktestnested2/types"
 )
 
 type BookQueries struct {
@@ -26,15 +27,15 @@ LEFT JOIN authors ON books.author_id = authors.author_id
 WHERE tags && $1::varchar[]
 `
 
-func (q *BookQueries) BooksByTags(ctx context.Context, dollar_1 []string) ([]BooksByTagsRow, error) {
+func (q *BookQueries) BooksByTags(ctx context.Context, dollar_1 []string) ([]types.BooksByTagsRow, error) {
 	rows, err := q.db.QueryContext(ctx, booksByTags, pq.Array(dollar_1))
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []BooksByTagsRow
+	var items []types.BooksByTagsRow
 	for rows.Next() {
-		var i BooksByTagsRow
+		var i types.BooksByTagsRow
 		if err := rows.Scan(
 			&i.BookID,
 			&i.Title,
@@ -60,8 +61,8 @@ SELECT book_id, author_id, isbn, book_type, title, year, available, tags FROM bo
 WHERE title = $1 AND year = $2
 `
 
-func (q *BookQueries) BooksByTitleYear(ctx context.Context, modify func(arg *BooksByTitleYearParams)) ([]Book, error) {
-	var arg BooksByTitleYearParams
+func (q *BookQueries) BooksByTitleYear(ctx context.Context, modify func(arg *types.BooksByTitleYearParams)) ([]types.Book, error) {
+	var arg types.BooksByTitleYearParams
 	modify(&arg)
 
 	rows, err := q.db.QueryContext(ctx, booksByTitleYear, arg.Title, arg.Year)
@@ -69,9 +70,9 @@ func (q *BookQueries) BooksByTitleYear(ctx context.Context, modify func(arg *Boo
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Book
+	var items []types.Book
 	for rows.Next() {
-		var i Book
+		var i types.Book
 		if err := rows.Scan(
 			&i.BookID,
 			&i.AuthorID,
@@ -108,9 +109,9 @@ INSERT INTO authors (name) VALUES ($1)
 RETURNING author_id, name
 `
 
-func (q *AuthorQueries) CreateAuthor(ctx context.Context, name string) (Author, error) {
+func (q *AuthorQueries) CreateAuthor(ctx context.Context, name string) (types.Author, error) {
 	row := q.db.QueryRowContext(ctx, createAuthor, name)
-	var i Author
+	var i types.Author
 	err := row.Scan(&i.AuthorID, &i.Name)
 	return i, err
 }
@@ -136,8 +137,8 @@ INSERT INTO books (
 RETURNING book_id, author_id, isbn, book_type, title, year, available, tags
 `
 
-func (q *BookQueries) CreateBook(ctx context.Context, modify func(arg *CreateBookParams)) (Book, error) {
-	var arg CreateBookParams
+func (q *BookQueries) CreateBook(ctx context.Context, modify func(arg *types.CreateBookParams)) (types.Book, error) {
+	var arg types.CreateBookParams
 	modify(&arg)
 
 	row := q.db.QueryRowContext(ctx, createBook,
@@ -149,7 +150,7 @@ func (q *BookQueries) CreateBook(ctx context.Context, modify func(arg *CreateBoo
 		arg.Available,
 		pq.Array(arg.Tags),
 	)
-	var i Book
+	var i types.Book
 	err := row.Scan(
 		&i.BookID,
 		&i.AuthorID,
@@ -178,9 +179,9 @@ SELECT author_id, name FROM authors
 WHERE author_id = $1
 `
 
-func (q *AuthorQueries) GetAuthor(ctx context.Context, authorID int32) (Author, error) {
+func (q *AuthorQueries) GetAuthor(ctx context.Context, authorID int32) (types.Author, error) {
 	row := q.db.QueryRowContext(ctx, getAuthor, authorID)
-	var i Author
+	var i types.Author
 	err := row.Scan(&i.AuthorID, &i.Name)
 	return i, err
 }
@@ -190,9 +191,9 @@ SELECT book_id, author_id, isbn, book_type, title, year, available, tags FROM bo
 WHERE book_id = $1
 `
 
-func (q *BookQueries) GetBook(ctx context.Context, bookID int32) (Book, error) {
+func (q *BookQueries) GetBook(ctx context.Context, bookID int32) (types.Book, error) {
 	row := q.db.QueryRowContext(ctx, getBook, bookID)
-	var i Book
+	var i types.Book
 	err := row.Scan(
 		&i.BookID,
 		&i.AuthorID,
@@ -212,8 +213,8 @@ SET title = $1, tags = $2
 WHERE book_id = $3
 `
 
-func (q *BookQueries) UpdateBook(ctx context.Context, modify func(arg *UpdateBookParams)) error {
-	var arg UpdateBookParams
+func (q *BookQueries) UpdateBook(ctx context.Context, modify func(arg *types.UpdateBookParams)) error {
+	var arg types.UpdateBookParams
 	modify(&arg)
 	_, err := q.db.ExecContext(ctx, updateBook, arg.Title, pq.Array(arg.Tags), arg.BookID)
 	return err
@@ -225,8 +226,8 @@ SET title = $1, tags = $2, isbn = $4
 WHERE book_id = $3
 `
 
-func (q *BookQueries) UpdateBookISBN(ctx context.Context, modify func(arg *UpdateBookISBNParams)) error {
-	var arg UpdateBookISBNParams
+func (q *BookQueries) UpdateBookISBN(ctx context.Context, modify func(arg *types.UpdateBookISBNParams)) error {
+	var arg types.UpdateBookISBNParams
 	modify(&arg)
 	_, err := q.db.ExecContext(ctx, updateBookISBN,
 		arg.Title,
