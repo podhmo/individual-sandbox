@@ -1,5 +1,7 @@
 # esbuild
 
+- code [./example_esbuild](./example_esbuild)
+
 ## WSL esbuild
 
 めんどくさいのでbuildする
