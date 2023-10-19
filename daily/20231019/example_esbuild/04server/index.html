@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>esbuild example</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <!-- https://caniuse.com/import-maps -->
+    <script type="importmap">
+        {
+          "imports": {
+            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+            "react": "https://esm.sh/react@18.2.0"
+          }
+        }
+    </script>
+    <script type="module">
+        import { createRoot } from "react-dom/client";
+
+        import { Greet } from "./out.js";
+
+        createRoot(document.getElementById("app")).render(Greet());
+    </script>
+</body>
