@@ -13,8 +13,8 @@
     <script type="importmap">
     {
         "imports": {
-            "preact": "https://esm.sh/preact@10.18.1?dev",
-            "preact/hooks": "https://esm.sh/preact@10.18.1/hooks?dev"
+            "preact": "https://esm.sh/preact@10.18.1",
+            "preact/": "https://esm.sh/preact@10.18.1/"
         }
     }
     </script>
@@ -25,11 +25,12 @@
         <div id="app"></div>
     </div>
 
-<script type="module">
+    <script type="module">
         import { h, Component, render } from "preact";
         import { App } from "./app.js";
 
         render(h(App, null, null), document.querySelector("#app"));
     </script>
 </body>
+
 </html>
