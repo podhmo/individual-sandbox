@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { useState, useCallback } from 'preact/hooks';
+import { useEffect, useState, useCallback } from 'preact/hooks';
 import { memo } from 'preact/compat';
 import type { ComponentChildren } from 'preact';
 
@@ -11,18 +11,35 @@ export const App = () => {
     </>);
 }
 
+async function fetchData() {
+    const id = Math.random();
+    console.log("start %o", id);
+    await new Promise((resolve) => {
+        console.log("load %o", id);
+        setTimeout(() => { resolve(null); }, 500);
+    })
+    console.log("end %o", id);
+    return ["foo", "bar", "boo"];
+}
 
 function Accordion() {
-    const [items, setitems] = useState([]);
-    const lazyItems = useCallback(() => {
-        console.log("called")
-        setitems(["foo", "bar", "boo"]);
-    }, [items]);
+    const [name, setName] = useState("");
+    const [items, setItems] = useState([]);
+
+    const changeName = useCallback((e) => {
+        setName(e.target.value)
+    }, [name]);
+
+    useEffect(async () => {
+        console.log(items);
+        setItems(await fetchData());
+    }, [])
 
     return (<>
-        <details role="list" onClick={lazyItems}>
-            <summary role="button">アコーディオン</summary>
-            <ul>{items.map((x) => <li>{x}</li>)}</ul>
+        <input type="text" onChange={changeName}>{name}</input>
+        <details role="list">
+            <summary role="button">アコーディオン {name}</summary>
+            <ul>{items.map((x) => <li key={x}>{x}</li>)}</ul>
         </details>
     </>);
 }
