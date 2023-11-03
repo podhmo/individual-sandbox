@@ -1,0 +1,71 @@
+:root {
+    --primary-rgba-1: rgba(255, 255, 255, 1);
+    --primary-rgba-2: rgba(255, 255, 255, 0.8);
+    --primary-rgba-3: rgba(255, 255, 255, 0.6);
+    --primary-rgba-4: rgba(255, 255, 255, 0.4);
+    --primary-rgba-5: rgba(255, 255, 255, 0.2);
+    --unit: 2rem;
+    --width: var(--unit);
+    --height: var(--unit);
+}
+
+/* Loading */
+@keyframes animation- {
+    0% {
+        background-color: var(--primary-rgba-1);
+        box-shadow: calc(var(--width)/5) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 2) 0 var(--primary-rgba-3),
+            calc((var(--width)/5) * 3) 0 var(--primary-rgba-4),
+            calc((var(--width)/5) * 4) 0 var(--primary-rgba-5);
+    }
+
+    25% {
+        background-color: var(--primary-rgba-2);
+        box-shadow: calc(var(--width)/5) 0 var(--primary-rgba-1),
+            calc((var(--width)/5) * 2) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 3) 0 var(--primary-rgba-3),
+            calc((var(--width)/5) * 4) 0 var(--primary-rgba-4);
+    }
+
+    50% {
+        background-color: var(--primary-rgba-3);
+        box-shadow: calc(var(--width)/5) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 2) 0 var(--primary-rgba-1),
+            calc((var(--width)/5) * 3) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 4) 0 var(--primary-rgba-3);
+    }
+
+    75% {
+        background-color: var(--primary-rgba-4);
+        box-shadow: calc(var(--width)/5) 0 var(--primary-rgba-3),
+            calc((var(--width)/5) * 2) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 3) 0 var(--primary-rgba-1),
+            calc((var(--width)/5) * 4) 0 var(--primary-rgba-2);
+    }
+
+    100% {
+        background-color: var(--primary-rgba-5);
+        box-shadow: calc(var(--width)/5) 0 var(--primary-rgba-4),
+            calc((var(--width)/5) * 2) 0 var(--primary-rgba-3),
+            calc((var(--width)/5) * 3) 0 var(--primary-rgba-2),
+            calc((var(--width)/5) * 4) 0 var(--primary-rgba-1);
+    }
+}
+
+.loading {
+    position: relative;
+    box-sizing: border-box;
+    width: var(--width);
+    height: var(--height);
+    display: inline-flex;
+    align-items: center;
+}
+
+.loading:before {
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    border-radius: 100%;
+    animation: animation- 1.5s linear infinite alternate;
+}

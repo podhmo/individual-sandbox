@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>loading animation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+
+    <link rel="stylesheet" href="./loading.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "preact": "https://esm.sh/preact@10.18.1",
+            "preact/": "https://esm.sh/preact@10.18.1/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="app"></div>
+    </div>
+
+    <script type="module">
+        import { h, Component, render } from "preact";
+        import { App } from "./app.js";
+
+        render(h(App, null, null), document.querySelector("#app"));
+    </script>
+</body>
+
+</html>
