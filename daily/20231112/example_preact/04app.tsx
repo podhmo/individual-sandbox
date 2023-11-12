@@ -5,11 +5,15 @@ import type { ComponentChildren } from 'preact';
 import type { JSX } from "preact";
 
 // state
-const username = signal<string>("github-notifications");
-const apikey = signal<string>("");
-const query = signal<string>("");
-const participating = signal<boolean>(true);
-const debug = signal<boolean>(false);
+const state = {
+    input: {
+        username: signal<string>("github-notifications"),
+        query: signal<string>(""),
+        participating: signal<boolean>(true),
+        debug: signal<boolean>(false)
+    },
+    apikey: signal<string>(""),
+}
 
 
 export function App() {
@@ -45,12 +49,7 @@ export function App() {
             </p>
 
             <RawOutputPanel
-                input={{
-                    username: username.value,
-                    query: query.value,
-                    participating: participating.value,
-                    debug: debug.value,
-                }}
+                input={state.input}
                 version={version}
                 errorMessage={errorMessage}
             ></RawOutputPanel>
@@ -65,37 +64,39 @@ export function InputFormPanel({
     onSubmit: (ev: JSX.TargetedEvent<HTMLFormElement>) => void,
     loading: boolean;
 }) {
+    const input = state.input; // signals
+    
     const handleUsernameChange = useCallback(
         (ev: JSX.TargetedEvent<HTMLInputElement>) => {
-            if (ev.currentTarget) { username.value = ev.currentTarget.value; }
+            if (ev.currentTarget) { input.username.value = ev.currentTarget.value; }
         },
         []
     );
 
     const handleApikeyChange = useCallback(
         (ev: JSX.TargetedEvent<HTMLInputElement>) => {
-            if (ev.currentTarget) {apikey.value = ev.currentTarget.value; }
+            if (ev.currentTarget) { state.apikey.value = ev.currentTarget.value; }
         },
         []
     );
 
     const handleQueryChange = useCallback(
         (ev: JSX.TargetedEvent<HTMLInputElement>) => {
-            if (ev.currentTarget) {query.value = ev.currentTarget.value; }
+            if (ev.currentTarget) { input.query.value = ev.currentTarget.value; }
         },
         []
     );
 
     const handleParticipatingChange = useCallback(
         (ev: JSX.TargetedEvent<HTMLInputElement>) => {
-            if (ev.currentTarget) {participating.value = ev.currentTarget.checked; }
+            if (ev.currentTarget) { input.participating.value = ev.currentTarget.checked; }
         },
         []
     );
 
     const handleDebugChange = useCallback(
         (ev: JSX.TargetedEvent<HTMLInputElement>) => {
-            if (ev.currentTarget) {debug.value = ev.currentTarget.checked; }
+            if (ev.currentTarget) { input.debug.value = ev.currentTarget.checked; }
         },
         []
     );
@@ -107,21 +108,21 @@ export function InputFormPanel({
                 id="username"
                 placeholder="Enter username"
                 onInput={handleUsernameChange}
-                value={username}
+                value={input.username}
             />
             <input
                 type="text"
                 id="apikey"
                 placeholder="Enter API key"
                 onInput={handleApikeyChange}
-                value={apikey}
+                value={state.apikey}
             />
             <input
                 type="text"
                 id="query"
                 placeholder="Enter query"
                 onInput={handleQueryChange}
-                value={query}
+                value={input.query}
             />
             <div class="grid">
                 <fieldset>
@@ -130,7 +131,7 @@ export function InputFormPanel({
                         <input
                             type="checkbox"
                             id="participating"
-                            checked={participating}
+                            checked={input.participating}
                             onClick={handleParticipatingChange}
                             role="switch"
                         />
@@ -142,7 +143,7 @@ export function InputFormPanel({
                         <input
                             type="checkbox"
                             id="debugStatus"
-                            checked={debug}
+                            checked={input.debug}
                             onClick={handleDebugChange}
                             role="switch"
                         />
@@ -161,7 +162,7 @@ export function RawOutputPanel({
     version,
     errorMessage,
 }: {
-    input: Record<string, string | boolean>;
+    input: typeof state.input;
     version: number;
     errorMessage: string;
 }) {

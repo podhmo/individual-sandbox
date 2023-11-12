@@ -26,8 +26,12 @@
     <div class="container">
         <details>
             <summary>examples</summary>
-            <li><a href="./?app=00app.js">00app.js</a></li>
-            <li><a href="./?app=01app.js">01app.js</a></li>
+            <li><a href="./?app=00app.js">00app.js (hooksを使ったシンプルなカウンター)</a></li>
+            <li><a href="./?app=01app.js">01app.js (signalsを使ったシンプルなカウンター)</a></li>
+            <li><a href="./?app=02app.js">02app.js (グローバル変数の混ざったやつ)</a></li>
+            <li><a href="./?app=03app.js">03app.js (with useState)</a></li>
+            <li><a href="./?app=04app.js">04app.js (with signals)</a></li>
+            <li><a href="./?app=05app.js">05app.js (with useReducer)</a></li>
         </details>
         <div id="app"></div>
     </div>
@@ -37,6 +41,9 @@
         let appName = "00app.js";
         if (location.search.includes("app=")) {
             appName = new URLSearchParams(location.search).get("app");
+            if (appName.search(/^\d+$/) !== -1) { // short hand e.g. ?app=03
+                appName = appName + "app.js";
+            }
         }
         const { App } = await import(`./dist/${appName}`)
         render(h(App, null, null), document.querySelector("#app"));
