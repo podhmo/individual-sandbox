@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "esbuild --serve=8080 --servedir=. --outdir=dist --tsconfig=deno.json *.tsx",
+    "gen": "esbuild --outdir=dist --tsconfig=deno.json *.tsx"
   },
   "imports": {
     "preact": "npm:preact@10.18.1",

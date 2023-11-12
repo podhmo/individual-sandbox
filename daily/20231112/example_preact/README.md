@@ -5,6 +5,13 @@
 
 - [preact トレーニングモード（環境）](https://zenn.dev/podhmo/scraps/4a20ad0e96aef8#comment-969caec296cb01)
 
+開発環境
+
+```console
+$ deno task dev
+# http://localhost:8080
+```
+
 ## 作業
 
 - ok preact sandboxの作成
