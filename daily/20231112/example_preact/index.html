@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>preact sandbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+
+    <script type="importmap">
+    {
+        "imports": {
+            "preact": "https://esm.sh/preact@10.18.1",
+            "preact/": "https://esm.sh/preact@10.18.1/",
+            "@preact/signals": "https://esm.sh/@preact/signals@1.2.1",
+            "./dist/": "./dist/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <details>
+            <summary>examples</summary>
+            <li><a href="./?app=00app.js">00app.js</a></li>
+            <li><a href="./?app=01app.js">01app.js</a></li>
+        </details>
+        <div id="app"></div>
+    </div>
+
+    <script type="module">
+        import { h, Component, render } from "preact";
+        let appName = "00app.js";
+        if (location.search.includes("app=")) {
+            appName = new URLSearchParams(location.search).get("app");
+        }
+        const { App } = await import(`./dist/${appName}`)
+        render(h(App, null, null), document.querySelector("#app"));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "imports": {
+    "preact": "npm:preact@10.18.1",
+    "preact/hooks": "npm:preact@10.18.1/hooks",
+    "@preact/signals": "npm:@preact/signals@1.2.1"
+  },
+  "compilerOptions": {
+    "lib": [
+      "es2022",
+      "dom"
+    ],
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
+  }
+}

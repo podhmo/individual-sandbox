@@ -1,0 +1,27 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:@preact/signals@1.2.1": "npm:@preact/signals@1.2.1_preact@10.18.1",
+      "npm:preact@10.18.1": "npm:preact@10.18.1"
+    },
+    "npm": {
+      "@preact/signals-core@1.5.0": {
+        "integrity": "sha512-U2diO1Z4i1n2IoFgMYmRdHWGObNrcuTRxyNEn7deSq2cru0vj0583HYQZHsAqcs7FE+hQyX3mjIV7LAfHCvy8w==",
+        "dependencies": {}
+      },
+      "@preact/signals@1.2.1_preact@10.18.1": {
+        "integrity": "sha512-hRPvp1C2ooDzOHqfnhdpHgoIFDbYFAXLhoid3+jSItuPPD/J0r/UsiWKv/8ZO/oEhjRaP0M5niuRYsWqmY2GEA==",
+        "dependencies": {
+          "@preact/signals-core": "@preact/signals-core@1.5.0",
+          "preact": "preact@10.18.1"
+        }
+      },
+      "preact@10.18.1": {
+        "integrity": "sha512-mKUD7RRkQQM6s7Rkmi7IFkoEHjuFqRQUaXamO61E6Nn7vqF/bo7EZCmSyrUnp2UWHw0O7XjZ2eeXis+m7tf4lg==",
+        "dependencies": {}
+      }
+    }
+  },
+  "remote": {}
+}
