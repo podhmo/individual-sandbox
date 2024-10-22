@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  title: Pet Store
+  version: 0.0.0
+tags: []
+paths:
+  /pets:
+    get:
+      operationId: Pets_listPets
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+    post:
+      operationId: Pets_createPet
+      parameters: []
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+  /pets/{petId}:
+    get:
+      operationId: Pets_getPet
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: The server cannot find the requested resource.
+    put:
+      operationId: Pets_updatePet
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: The server cannot find the requested resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+    delete:
+      operationId: Pets_deletePet
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+        - age
+        - kind
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          minLength: 1
+        age:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        kind:
+          $ref: '#/components/schemas/petType'
+    petType:
+      type: string
+      enum:
+        - dog
+        - cat
+        - fish
+        - bird
+        - reptile
+servers:
+  - url: https://example.com
+    description: Single server endpoint
+    variables: {}

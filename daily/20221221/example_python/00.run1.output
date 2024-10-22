@@ -1,0 +1,38 @@
+ 20           0 LOAD_FAST                0 (beer_style)
+              2 LOAD_CONST               1 ('Pilsner')
+              4 COMPARE_OP               2 (==)
+              6 POP_JUMP_IF_FALSE        8 (to 16)
+
+ 21           8 LOAD_CONST               2 ('First drink')
+             10 STORE_FAST               1 (result)
+
+ 28          12 LOAD_FAST                1 (result)
+             14 RETURN_VALUE
+
+ 22     >>   16 LOAD_FAST                0 (beer_style)
+             18 LOAD_CONST               3 ('IPA')
+             20 COMPARE_OP               2 (==)
+             22 POP_JUMP_IF_FALSE       16 (to 32)
+
+ 23          24 LOAD_CONST               4 ('I like it')
+             26 STORE_FAST               1 (result)
+
+ 28          28 LOAD_FAST                1 (result)
+             30 RETURN_VALUE
+
+ 24     >>   32 LOAD_FAST                0 (beer_style)
+             34 LOAD_CONST               5 ('Hazy IPA')
+             36 COMPARE_OP               2 (==)
+             38 POP_JUMP_IF_FALSE       24 (to 48)
+
+ 25          40 LOAD_CONST               6 ('Cloudy and cloudy')
+             42 STORE_FAST               1 (result)
+
+ 28          44 LOAD_FAST                1 (result)
+             46 RETURN_VALUE
+
+ 27     >>   48 LOAD_CONST               7 ('I like most beers')
+             50 STORE_FAST               1 (result)
+
+ 28          52 LOAD_FAST                1 (result)
+             54 RETURN_VALUE

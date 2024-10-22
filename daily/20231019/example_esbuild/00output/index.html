@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>esbuild example</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { createRoot } from "https://esm.sh/react-dom@18.2.0/client"
+
+        import { Greet } from "./out.js";
+
+        createRoot(document.getElementById("app")).render(Greet());
+    </script>
+</body>

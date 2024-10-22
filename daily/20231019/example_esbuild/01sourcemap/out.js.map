@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["app.jsx"],
+  "sourcesContent": ["import * as React from 'react'\nimport * as Server from 'react-dom/server'\n\nlet Greet = () => <h1>Hello, world!</h1>\nconsole.log(Server.renderToString(<Greet />))\n\n"],
+  "mappings": "AAAA,YAAY,WAAW;AACvB,YAAY,YAAY;AAExB,IAAI,QAAQ,MAAM,oCAAC,YAAG,eAAa;AACnC,QAAQ,IAAI,OAAO,eAAe,oCAAC,WAAM,CAAE,CAAC;",
+  "names": []
+}

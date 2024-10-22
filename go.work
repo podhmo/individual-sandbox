@@ -6,4 +6,14 @@ use (
 	./daily/20221018/example_go
 	./daily/20221110/example_validation
 	./daily/20221122/example_go
+	./daily/20221229/example_go
+	./daily/20230107/example_go
+	./daily/20230209/example_go
+	./daily/20230210/example_go
+	./daily/20230217/example_go
+	./daily/20230620/example_go
+	./daily/20230629/example_go
+	./daily/20230705/example_go
+	./daily/20230903/example_go
+	./daily/20230917/example_go
 )

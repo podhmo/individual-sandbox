@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Dependency Graph</title>
+    <style>
+      body, html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden;
+          touch-action: none; /* タッチ操作を妨げないように */
+      }
+      #chart-container {
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          position: relative;
+      }
+      svg {
+          width: 100%;
+          height: 100%;
+          touch-action: none; /* パン・ズーム用のタッチ操作 */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart-container">
+      <div class="mermaid">
+        graph TD;
+        A[Module A] --> B[Module B];
+        A --> C[Module C];
+        B --> D[Module D];
+        B --> E[Module E];
+        C --> F[Module F];
+        C --> G[Module G];
+        D --> H[Module H];
+        D --> I[Module I];
+        E --> J[Module J];
+        E --> K[Module K];
+        F --> L[Module L];
+        F --> M[Module M];
+        G --> N[Module N];
+        G --> O[Module O];
+        H --> P[Module P];
+        I --> Q[Module Q];
+        J --> R[Module R];
+        K --> S[Module S];
+        L --> T[Module T];
+        M --> U[Module U];
+        N --> V[Module V];
+      </div>
+    </div>
+
+    <!-- Panzoomライブラリ -->
+    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: false });
+
+
+      await mermaid.run({
+          querySelector: ".mermaid",
+          postRenderCallback: (id) => {
+              console.log(`callback ${id}`); // loop?
+
+              const chartContainer = document.getElementById(id);
+              if (chartContainer) {
+                  // Panzoomライブラリの初期化 (タッチ対応)
+                  const panZoomInstance = Panzoom(chartContainer, {
+                      maxScale: 5,
+                      minScale: 0.5,
+                      contain: 'outside',
+                      handleStartEvent: (e) => {
+                          // タッチ操作の場合、イベントを有効にする
+                          if (e.type === 'touchstart') {
+                              e.preventDefault();
+                          }
+                      }
+                  });
+
+                  // PCでのマウスホイールによるズーム
+                  chartContainer.parentElement.addEventListener('wheel', panZoomInstance.zoomWithWheel);
+
+                  // スマートフォンでのタッチ操作 (ピンチでズーム、スワイプで移動)
+                  chartContainer.parentElement.addEventListener('touchstart', (e) => {
+                      panZoomInstance.pan(e);
+                  });
+
+              }
+          });
+    </script>
+  </body>
+</html>

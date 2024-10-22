@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Pan and Zoom</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      touch-action: none; /* タッチ操作を無効化 */
+    }
+    #chart-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      touch-action: none; /* パン・ズーム用のタッチ操作 */
+    }
+  </style>
+</head>
+<body>
+  <div id="chart-container">
+    <svg id="svg" viewBox="0 0 1000 1000">
+      <g id="chart" transform="translate(0, 0) scale(1)">
+        <rect width="1000" height="1000" fill="lightblue"></rect>
+        <!-- 例としてのモジュール依存グラフ -->
+        <circle cx="200" cy="200" r="50" fill="red"></circle>
+        <circle cx="500" cy="200" r="50" fill="green"></circle>
+        <circle cx="800" cy="200" r="50" fill="blue"></circle>
+        <circle cx="500" cy="500" r="50" fill="yellow"></circle>
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    const svg = document.getElementById("svg");
+    const chart = document.getElementById("chart");
+
+    let isPanning = false;
+    let startX, startY;
+    let currentTranslateX = 0, currentTranslateY = 0;
+    let currentScale = 1;
+
+    // パン (ドラッグによる移動)
+    svg.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    svg.addEventListener('mousemove', (e) => {
+      if (isPanning) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        currentTranslateX += dx;
+        currentTranslateY += dy;
+        chart.setAttribute("transform", `translate(${currentTranslateX}, ${currentTranslateY}) scale(${currentScale})`);
+        startX = e.clientX;
+        startY = e.clientY;
+      }
+    });
+
+    svg.addEventListener('mouseup', () => {
+      isPanning = false;
+    });
+
+    svg.addEventListener('mouseleave', () => {
+      isPanning = false;
+    });
+
+    // ズーム (マウスホイールでの拡大縮小)
+    svg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const scaleAmount = 0.1;
+      if (e.deltaY < 0) {
+        currentScale += scaleAmount;  // ズームイン
+      } else {
+        currentScale -= scaleAmount;  // ズームアウト
+      }
+
+      // 最小・最大ズームの制限
+      currentScale = Math.min(Math.max(0.5, currentScale), 5);
+      chart.setAttribute("transform", `translate(${currentTranslateX}, ${currentTranslateY}) scale(${currentScale})`);
+    });
+
+    // タッチでのズーム（ピンチイン・ピンチアウト）
+    let lastTouchDist = null;
+
+    svg.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        
+        const currentTouchDist = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+        
+        if (lastTouchDist) {
+          const deltaDist = currentTouchDist - lastTouchDist;
+          currentScale += deltaDist * 0.005;  // ズーム倍率調整
+          currentScale = Math.min(Math.max(0.5, currentScale), 5);  // ズーム範囲制限
+          chart.setAttribute("transform", `translate(${currentTranslateX}, ${currentTranslateY}) scale(${currentScale})`);
+        }
+        lastTouchDist = currentTouchDist;
+      }
+    });
+
+    svg.addEventListener('touchend', () => {
+      lastTouchDist = null;
+    });
+
+  </script>
+</body>
+</html>

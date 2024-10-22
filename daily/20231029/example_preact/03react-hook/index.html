@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>components</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+
+    <script type="importmap">
+    {
+        "imports": {
+            "react": "https://esm.sh/react@18.2.0",
+            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="app"></div>
+    </div>
+
+</body>
+
+<script type="module">
+    import { createRoot } from "react-dom/client";
+    import { App } from "./app.js";
+    import React from "react";
+
+    const el = document.getElementById("app");
+    const root = createRoot(el);
+    root.render(React.createElement(React.StrictMode, null, React.createElement(App, null)));
+</script>
+
+</html>

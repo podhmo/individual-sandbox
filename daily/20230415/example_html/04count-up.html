@@ -1,0 +1,38 @@
+<style>
+    .counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+    }
+
+    .count {
+        font-size: 36px;
+        font-weight: bold;
+        color: #333;
+        counter-reset: count;
+        animation: count-up 2s ease-out forwards;
+    }
+
+    @keyframes count-up {
+        from {
+            counter-increment: count 0;
+        }
+
+        to {
+            counter-increment: count 100;
+        }
+    }
+
+    .count::before {
+        content: counter(count);
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+        margin-right: 10px;
+    }
+</style>
+
+<div class="counter">
+    <span class="count">0</span>
+</div>
