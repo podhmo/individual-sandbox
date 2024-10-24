@@ -1,7 +1,11 @@
 # denoでいい感じにコマンドライン引数を解析したい
 
-- `import {parseArgs} from "@std/cli/parse-args"` https://jsr.io/@std/cli/parse
-- `import {parseArgs} from "node:util"` https://docs.deno.com/api/node/util/~/parseArgs
+- `jsm:@std/cli.parseArgs()`
+  - `import {parseArgs} from "@std/cli/parse-args"`
+  - https://jsr.io/@std/cli/parse
+- `node:util.parseArgs()`
+  - `import {parseArgs} from "node:util"`
+  - https://docs.deno.com/api/node/util/~/parseArgs
 
 ## `jsm:@std/cli.parseArgs()` の方
 
@@ -82,19 +86,20 @@ const flags = { ...values, color: !values["no-color"] };
 - booleanのフラグに対して値を反転して設定するようなオプションがない (e.g. `negatable: true`)
 - フラグをタイポしたときのエラーは分かりやすくはない
 
-フラグをタイポしたときのエラーは分かりやすくはない
-
-```console
-$ deno run node-util-parse-args.ts --color=false --version=1.0.0
-error: Uncaught (in promise) TypeError: Option '--color' does not take an argument
-const { values: flags } = parseArgs({
-                          ^
-    at checkOptionUsage (ext:deno_node/internal/util/parse_args/parse_args.js:114:11)
-    at ext:deno_node/internal/util/parse_args/parse_args.js:404:9
-    at Array.forEach (<anonymous>)
-    at parseArgs (ext:deno_node/internal/util/parse_args/parse_args.js:401:3)
-    at file:///Users/podhmo/ghq/github.com/podhmo/individual-sandbox/daily/20241024/example_deno/node-util-parse-args.ts:3:27
-```
+> [!NOTE]
+> フラグをタイポしたときのエラーは分かりやすくはない
+> 
+> ```console
+> $ deno run node-util-parse-args.ts --color=false --version=1.0.0
+> error: Uncaught (in promise) TypeError: Option '--color' does not take an argument
+> const { values: flags } = parseArgs({
+>                           ^
+>     at checkOptionUsage (ext:deno_node/internal/util/parse_args/parse_args.js:114:11)
+>     at ext:deno_node/internal/util/parse_args/parse_args.js:404:9
+>     at Array.forEach (<anonymous>)
+>     at parseArgs (ext:deno_node/internal/util/parse_args/parse_args.js:401:3)
+>     at file:///Users/podhmo/ghq/github.com/podhmo/individual-sandbox/daily/20241024/example_deno/node-util-parse-args.ts:3:27
+> ```
 
 ## 欲しい機能
 
@@ -110,3 +115,43 @@ const { values: flags } = parseArgs({
 - 複数の型に対応したparser (個人的にはstringとbooleanだけで良い)
 - メソッドチェインとかで良い感じに記述するインターフェイス
 
+### ヘルプメッセージ
+
+ヘルプメッセージはこんな感じで表示して欲しい
+
+```
+ $ deno-cli-parse-args.ts --help
+ Description of deno-cli-parse-args
+ 
+ Usage: deno-cli-parse-args [OPTIONS] <PATH>
+ 
+ OPTIONS:
+     -v, --version      Set version (required)
+     --no-color         Run without color
+```
+
+https://scrapbox.io/amutake/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE_usage_%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9
+
+### 捕捉
+
+pythonのargparseは頑張ればわりと満足する表示になる ./python-argparse.py
+
+```console
+$ python python-argparse.py 
+usage: python-argparse [-h] --version VERSION [--no-color] [positionals ...]
+
+description of python-argparse
+
+positional arguments:
+  positionals        Positional arguments (default: [])
+
+options:
+  -h, --help         show this help message and exit
+  --version VERSION  Set version (default: None)
+  --no-color         Disable color (default: True)
+python-argparse: error: the following arguments are required: --version
+```
+
+flagをタイポしたとき
+
+> python-argparse: error: unrecognized arguments: --no-colr

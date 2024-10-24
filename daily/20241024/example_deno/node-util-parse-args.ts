@@ -3,7 +3,7 @@ import { parseArgs } from "node:util";
 const { values, positionals } = parseArgs({
     options: {
         "no-color": { type: 'boolean', default: false },
-        version: { type: 'string' }
+        version: { type: 'string', alias: 'v' }
     },
     allowPositionals: true
 });
