@@ -155,3 +155,6 @@ python-argparse: error: the following arguments are required: --version
 flagをタイポしたとき
 
 > python-argparse: error: unrecognized arguments: --no-colr
+
+> [!IMPORTANT]
+> :warning: mypyを使って型チェックをした時にargparse.Namespaceは実質`Record<string, any>`だった
