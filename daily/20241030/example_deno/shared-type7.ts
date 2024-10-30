@@ -1,7 +1,8 @@
 import { parseArgs as originalParseArgs } from "jsr:@std/cli/parse-args";
 
 // 問題:
-// - vscodeで型名を確認したときに、直接展開された型名が表示されると嬉しい
+// - DefaultKeys をうまく使う方法がわからない
+//     - default が指定されている場合にrequiredに含まれていない場合も string になるようにしたい
 
 // リテラル型配列に限定するためのユーティリティ型
 type EnsureLiteralArray<T> = T extends ReadonlyArray<string>
@@ -10,25 +11,32 @@ type EnsureLiteralArray<T> = T extends ReadonlyArray<string>
     : T
     : never;
 
-type Parsed<StringKeys extends readonly string[], BooleanKeys extends readonly string[], RequiredKeys extends readonly string[]> = {
+type Parsed<StringKeys extends readonly string[], BooleanKeys extends readonly string[], RequiredKeys extends readonly string[], DefaultKeys extends readonly string[]> = {
     [K in StringKeys[number]]: K extends RequiredKeys[number]
     ? string
-    : string | undefined;
+    : (K extends DefaultKeys[number] ? string : string | undefined);
 } & {
     [K in BooleanKeys[number]]: K extends RequiredKeys[number]
     ? boolean
-    : boolean | undefined;
+    : (K extends DefaultKeys[number] ? boolean : boolean | undefined);
 } & { _: string[] };
 
+
 // パース関数の定義
-function parseArgs<StringKeys extends readonly string[], BooleanKeys extends readonly string[], RequiredKeys extends readonly string[]>(
+function parseArgs<
+    StringKeys extends readonly string[],
+    BooleanKeys extends readonly string[],
+    RequiredKeys extends readonly string[],
+>(
     args: string[],
     options: {
         string: EnsureLiteralArray<StringKeys>;
         boolean: EnsureLiteralArray<BooleanKeys>;
         required: EnsureLiteralArray<RequiredKeys[number] extends (StringKeys[number] | BooleanKeys[number]) ? RequiredKeys : never>;
+        default?: { [P in StringKeys[number]]?: string } | { [P in BooleanKeys[number]]?: boolean }
     }
-): Parsed<StringKeys, BooleanKeys, RequiredKeys> {
+) {
+
     if (args.includes("--help")) {
         console.log(buildHelp(options));
         Deno.exit(0);
@@ -40,7 +48,7 @@ function parseArgs<StringKeys extends readonly string[], BooleanKeys extends rea
             Deno.exit(1);
         }
     }
-    return parsed as Parsed<StringKeys, BooleanKeys, RequiredKeys>;
+    return parsed as Parsed<StringKeys, BooleanKeys, RequiredKeys, []>; // ここでDefaultKeysを上手く渡したい
 }
 
 // ヘルプをビルドする関数
@@ -63,14 +71,15 @@ function buildHelp(
 
 // コマンドライン引数を解析する
 const args = parseArgs(Deno.args, {
-    string: ["name", "version"],
+    string: ["name", "version", "nickname"],
     boolean: ["color"],
-    required: ["name", "color"]
+    required: ["name", "color"],
+    default: { nickname: "------", color: false }, // booleanはdefault値として渡せなくても良い気もする
 } as const);
 
 console.dir(args, { depth: null });
 
-// [deno-ts] Type 'Parsed<["name", "version"], ["color"], ["name", "color"]>' is not assignable to type 'never'.
+// [deno-ts] Type 'Parsed<["name", "version", "nickname"], ["color"], ["name", "color"], []>' is not assignable to type 'never'.
 // const x: never = args;
-console.log(args.name, args.version, args.color);
-
+console.log(args.name, args.version, args.color, args.nickname);
+// args.nicknameが string | undefined ではなく string になってほしかった
