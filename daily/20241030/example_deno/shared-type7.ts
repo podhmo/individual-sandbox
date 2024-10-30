@@ -33,15 +33,18 @@ function parseArgs<
         string: EnsureLiteralArray<StringKeys>;
         boolean: EnsureLiteralArray<BooleanKeys>;
         required: EnsureLiteralArray<RequiredKeys[number] extends (StringKeys[number] | BooleanKeys[number]) ? RequiredKeys : never>;
-        default?: { [P in StringKeys[number]]?: string } | { [P in BooleanKeys[number]]?: boolean }
+        default?: { [P in StringKeys[number]]: string } | { [P in BooleanKeys[number]]: boolean };
     }
-) {
+): Parsed<StringKeys, BooleanKeys, RequiredKeys, []> {
 
     if (args.includes("--help")) {
         console.log(buildHelp(options));
         Deno.exit(0);
     }
+
+    // @ts-ignore options["default"] is conflicted?
     const parsed = originalParseArgs(args, options);
+
     for (const key of options.required) {
         if (parsed[key] === undefined) {
             console.error(`--${key} is required`);
