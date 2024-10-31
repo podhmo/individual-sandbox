@@ -1,8 +1,8 @@
 import { parseArgs as originalParseArgs } from "jsr:@std/cli/parse-args";
 
 // 問題:
-// - DefaultKeys をうまく使う方法がわからない
-//     - default が指定されている場合にrequiredに含まれていない場合も string になるようにしたい
+// - originalParseArgs()を呼び出す部分で型が合わない
+
 
 // リテラル型配列に限定するためのユーティリティ型
 type EnsureLiteralArray<T> = T extends ReadonlyArray<string>
@@ -11,14 +11,14 @@ type EnsureLiteralArray<T> = T extends ReadonlyArray<string>
     : T
     : never;
 
-type Parsed<StringKeys extends readonly string[], BooleanKeys extends readonly string[], RequiredKeys extends readonly string[], DefaultKeys extends readonly string[]> = {
+type Parsed<StringKeys extends readonly string[], BooleanKeys extends readonly string[], RequiredKeys extends readonly string[], DefaultKey extends string> = {
     [K in StringKeys[number]]: K extends RequiredKeys[number]
     ? string
-    : (K extends DefaultKeys[number] ? string : string | undefined);
+    : (K extends DefaultKey ? string : string | undefined);
 } & {
     [K in BooleanKeys[number]]: K extends RequiredKeys[number]
     ? boolean
-    : (K extends DefaultKeys[number] ? boolean : boolean | undefined);
+    : (K extends DefaultKey ? boolean : boolean | undefined);
 } & { _: string[] };
 
 
@@ -27,15 +27,17 @@ function parseArgs<
     StringKeys extends readonly string[],
     BooleanKeys extends readonly string[],
     RequiredKeys extends readonly string[],
+    TDefaults extends { [P in StringKeys[number]]?: string } & { [P in BooleanKeys[number]]?: boolean },
+    DefaultKey extends Extract<keyof TDefaults, string>,
 >(
     args: string[],
     options: {
         string: EnsureLiteralArray<StringKeys>;
         boolean: EnsureLiteralArray<BooleanKeys>;
         required: EnsureLiteralArray<RequiredKeys[number] extends (StringKeys[number] | BooleanKeys[number]) ? RequiredKeys : never>;
-        default?: { [P in StringKeys[number]]: string } | { [P in BooleanKeys[number]]: boolean };
+        default?: TDefaults;
     }
-): Parsed<StringKeys, BooleanKeys, RequiredKeys, []> {
+): Parsed<StringKeys, BooleanKeys, RequiredKeys, DefaultKey> {
 
     if (args.includes("--help")) {
         console.log(buildHelp(options));
@@ -43,6 +45,11 @@ function parseArgs<
     }
 
     // @ts-ignore options["default"] is conflicted?
+    // [deno-ts] Argument of type '{ string: EnsureLiteralArray<StringKeys>; boolean: EnsureLiteralArray<BooleanKeys>; required: EnsureLiteralArray<RequiredKeys[number] extends StringKeys[number] | BooleanKeys[number] ? RequiredKeys : never>; default?: TDefaults | undefined; }' is not assignable to parameter of type 'ParseOptions<never, never, undefined, undefined, TDefaults, undefined, undefined>'.
+    // Types of property 'default' are incompatible.
+    //   Type 'TDefaults | undefined' is not assignable to type 'undefined'.
+    //     Type 'TDefaults' is not assignable to type 'undefined'.
+    //       Type '{ [P in StringKeys[number]]?: string | undefined; } & { [P in BooleanKeys[number]]?: boolean | undefined; }' is not assignable to type 'undefined'.
     const parsed = originalParseArgs(args, options);
 
     for (const key of options.required) {
@@ -51,7 +58,7 @@ function parseArgs<
             Deno.exit(1);
         }
     }
-    return parsed as Parsed<StringKeys, BooleanKeys, RequiredKeys, []>; // ここでDefaultKeysを上手く渡したい
+    return parsed as Parsed<StringKeys, BooleanKeys, RequiredKeys, DefaultKey>; // ここでDefaultKeysを上手く渡したい
 }
 
 // ヘルプをビルドする関数
@@ -77,12 +84,12 @@ const args = parseArgs(Deno.args, {
     string: ["name", "version", "nickname"],
     boolean: ["color"],
     required: ["name", "color"],
-    default: { nickname: "------", color: false }, // booleanはdefault値として渡せなくても良い気もする
+    default: { nickname: "------", color: false },
 } as const);
 
 console.dir(args, { depth: null });
 
-// [deno-ts] Type 'Parsed<["name", "version", "nickname"], ["color"], ["name", "color"], []>' is not assignable to type 'never'.
+// [deno-ts] Type 'Parsed<["name", "version", "nickname"], ["color"], ["name", "color"], "nickname" | "color">' is not assignable to type 'never'.
 // const x: never = args;
+
 console.log(args.name, args.version, args.color, args.nickname);
-// args.nicknameが string | undefined ではなく string になってほしかった

@@ -39,4 +39,4 @@ https://chatgpt.com/share/67229794-57f8-8001-81d6-134d7c9870ec
 
 ## shared-type7.ts
 
-defaultに対応してみる。defaultに制約をかけることはできたが、defaultに渡されたオブジェクトのkeyofを取り出してそれに合致したものはundefinedの可能性をなくすということができなかった。
+defaultに対応してみる。それっぽく動くようになったが、元のparseArgs()を呼ぶところで型が合わない。ts-ignoreが必要になってしまった。
