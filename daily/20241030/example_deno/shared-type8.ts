@@ -12,18 +12,18 @@ type EnsureLiteralArray<T> = T extends ReadonlyArray<string>
     : never;
 
 type Parsed<
-    StringKeys extends readonly string[],
-    BooleanKeys extends readonly string[],
-    RequiredKeys extends readonly string[],
-    CollectKeys extends readonly string[],
+    StringKey extends string,
+    BooleanKey extends string,
+    RequiredKey extends string,
+    CollectKey extends string,
     DefaultKey extends string
 > = {
-    [K in StringKeys[number]]:
-    K extends CollectKeys[number]
+    [K in StringKey]:
+    K extends CollectKey
     ? string[]
-    : (K extends (RequiredKeys[number] | DefaultKey) ? string : (string | undefined))
+    : (K extends (RequiredKey | DefaultKey) ? string : (string | undefined))
 } & {
-        [K in BooleanKeys[number]]: K extends RequiredKeys[number]
+        [K in BooleanKey]: K extends RequiredKey
         ? boolean
         : (K extends DefaultKey ? boolean : boolean | undefined);
     } & { _: string[] };
@@ -35,7 +35,7 @@ function parseArgs<
     BooleanKeys extends readonly string[],
     RequiredKeys extends readonly string[],
     CollectKeys extends readonly string[],
-    TDefaults extends { [P in StringKeys[number]]?: string } & { [P in BooleanKeys[number]]?: boolean },
+    TDefaults extends { [P in StringKeys[number]]?: string | string[]},
     DefaultKey extends Extract<keyof TDefaults, string>,
 >(
     args: string[],
@@ -44,9 +44,9 @@ function parseArgs<
         boolean: EnsureLiteralArray<BooleanKeys>;
         collect?: EnsureLiteralArray<CollectKeys>[number] extends StringKeys[number] ? CollectKeys : never;
         required: EnsureLiteralArray<RequiredKeys[number] extends (StringKeys[number] | BooleanKeys[number]) ? RequiredKeys : never>;
-        default?: TDefaults;
+        default?: TDefaults // どうやらこれではdefaultは好きな値をいれられるらしい
     }
-): Parsed<StringKeys, BooleanKeys, RequiredKeys, CollectKeys, DefaultKey> {
+): Parsed<StringKeys[number], BooleanKeys[number], RequiredKeys[number], CollectKeys[number], DefaultKey> {
 
     if (args.includes("--help")) {
         console.log(buildHelp(options));
@@ -68,7 +68,7 @@ function parseArgs<
             Deno.exit(1);
         }
     }
-    return parsed as Parsed<StringKeys, BooleanKeys, RequiredKeys, CollectKeys, DefaultKey>;
+    return parsed as Parsed<StringKeys[number], BooleanKeys[number], RequiredKeys[number], CollectKeys[number], DefaultKey>;
 }
 
 // ヘルプをビルドする関数
@@ -95,12 +95,13 @@ const args = parseArgs(Deno.args, {
     collect: ["items"],
     boolean: ["color"],
     required: ["name", "color"],
-    default: { nickname: "------", color: false },
+    default: { nickname: "------" },
 } as const);
 
 console.dir(args, { depth: null });
 
-// [deno-ts] Type 'Parsed<["name", "version", "nickname"], ["color"], ["name", "color"], "nickname" | "color">' is not assignable to type 'never'.
+
+// [deno-ts] Type 'Parsed<"name" | "version" | "nickname" | "items", "color", "name" | "color", "items", "nickname" | "color">' is not assignable to type 'never'.
 // const x: never = args;
 
 console.log(args.name, args.version, args.color, args.nickname, args.items);
