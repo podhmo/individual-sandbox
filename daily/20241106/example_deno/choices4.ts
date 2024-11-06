@@ -28,6 +28,3 @@ const parsed = parseArgs(["--version", "1.0.0"], {
 // directionの型がstringになってしまう
 const parsed2: typeof parsed & { direction: DirectionType } = requireChoices(parsed, { direction: directions } );
 // let _: never = parsed2;
-
-
-

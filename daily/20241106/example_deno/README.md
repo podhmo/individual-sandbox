@@ -52,9 +52,25 @@ parsed = requireChoices<DirectionType>(parsed, "direction", directions)
 
 しかしこの方法だとconstで記述しきれなくてだるいかも？
 
+### 続き
+
 
 こんな形で推論できないかと思ったがなぜかstringになってしまうな(widing)。
 
 ```ts
 requireChoices(parsed, { direction: directions } )
+```
+
+これらの型は全部違う？
+DirectionTypeはtypeofを呼んでいるから値から型に代わっているのか。
+
+```ts
+const directions = ["north", "south", "east", "west"] as const;
+type DirectionType = typeof directions[number];
+type K = readonly ["north", "south", "east", "west"];
+const _v : K = directions
+
+// DirectionType   is "north" | "south" | "east" | "west"
+// DirectionType[] is ("north" | "south" | "east" | "west")[]
+// K               is readonly ["north", "south", "east", "west"]
 ```
