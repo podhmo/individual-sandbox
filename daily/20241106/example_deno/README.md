@@ -61,6 +61,12 @@ parsed = requireChoices<DirectionType>(parsed, "direction", directions)
 requireChoices(parsed, { direction: directions } )
 ```
 
+こういう感じに頑張って書いてあげると通るけれど
+
+```ts
+requireChoices<typeof parsed, DirectionType, {direction: readonly DirectionType[]}>(parsed, { direction: directions } );
+```
+
 これらの型は全部違う？
 DirectionTypeはtypeofを呼んでいるから値から型に代わっているのか。
 
