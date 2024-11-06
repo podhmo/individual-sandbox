@@ -37,3 +37,24 @@ choices0.tsの方法とchoices2.tsの方法を組み合わせようと頑張っ�
 と思って実装してみたもののやっぱりneverになってしまう。これは型引数を引き回せてなかったからなのかな？。
 
 どうやら `@std/cli` でできていることが `@podhmo/with-help` ではできていない。
+
+## choices4.ts
+
+以下のような関数があれば十分なのでは？とおもったけれどだるいな。。
+
+```ts
+let parsed = parseArgs(Deno.args, {...} as const)
+
+// Parsed<> & {direction: DirectionType} が返ってくる
+// 失敗したらヘルプメッセージを出してDeno.exit()
+parsed = requireChoices<DirectionType>(parsed, "direction", directions)
+```
+
+しかしこの方法だとconstで記述しきれなくてだるいかも？
+
+
+こんな形で推論できないかと思ったがなぜかstringになってしまうな(widing)。
+
+```ts
+requireChoices(parsed, { direction: directions } )
+```
