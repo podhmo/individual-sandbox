@@ -1,9 +1,7 @@
 import { buildHelp, parseArgs as original } from "jsr:@podhmo/with-help@0.3.0";
 
 // 問題:
-// ヘルプメッセージに direction の候補が含まれていない
-// parsed.direction が DirectionType になっていることを保証したい
-// ifでネストが深くなってしまう
+// 型の導出が死んでる (neverになってしまう)
 
 const directions = ["north", "south", "east", "west"] as const;
 type DirectionType = typeof directions[number];
