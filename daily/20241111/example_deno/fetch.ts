@@ -2,13 +2,14 @@ import { parseArgs } from "jsr:@podhmo/with-help@0.4.0";
 
 // const eventType: "completed" | "live" | "upcoming" = "completed"; // with type="video"
 const type_: "video" | "channel" | "playlist" = "channel";
-const order:
-  | "date"
-  | "rating"
-  | "relevance"
-  | "title"
-  | "videoCount"
-  | "viewCount" = "date";
+const orderCandidates = [
+  "date",
+  "rating",
+  "relevance",
+  "title",
+  "videoCount",
+  "viewCount",
+] as const;
 
 async function main() {
   // ...parseArgsみたいな形で一度スプレッドしてあげると型がvscode-denoの上で読みやすく表示されるけれど不毛っぽいきがする
@@ -16,7 +17,7 @@ async function main() {
   const args = {
     ...parseArgs(Deno.args, {
       description: "search youtube",
-      string: ["query", "apikey", "maxResults"],
+      string: ["query", "apikey", "maxResults", "order"],
       required: ["query", "apikey", "maxResults"],
       boolean: ["statistics"],
       negatable: ["statistics"],
@@ -25,9 +26,18 @@ async function main() {
       },
       default: {
         maxResults: "50",
+        order: "date",
+      },
+      flagDescription: {
+        "order":
+          "(default: date) choices of [date, rating, relevance, title, videoCount, viewCount]",
       },
     }),
   };
+  if (!orderCandidates.includes(args.order as typeof orderCandidates[number])) {
+    console.error(`order must be one of ${orderCandidates.join(", ")}`);
+    Deno.exit(1);
+  }
 
   // https://developers.google.com/youtube/v3/docs/search/list
   // https://developers.google.com/youtube/v3/docs/channels/list
@@ -36,7 +46,7 @@ async function main() {
   const maxResults = parseInt(args.maxResults, 10);
   const baseURL = "https://www.googleapis.com/youtube/v3";
   const url =
-    `${baseURL}/search?q=${q}&part=snippet&key=${args.apikey}&type=${type_}&maxResults=${maxResults}&order=${order}`;
+    `${baseURL}/search?q=${q}&part=snippet&key=${args.apikey}&type=${type_}&maxResults=${maxResults}&order=${args.order}`;
 
   const response = await fetch(url);
   const data: Response<SearchItem> = await response.json();
@@ -56,6 +66,7 @@ async function main() {
   if (data.items) {
     for (const item of data.items) {
       const data = {
+        channelId: item.snippet.channelId,
         title: item.snippet.title,
         channelTitle: item.snippet.channelTitle,
         publishedAt: item.snippet.publishedAt,
@@ -82,7 +93,10 @@ async function main() {
           }
         }
       }
-      console.log(JSON.stringify(data, null, 2));
+      // console.log(JSON.stringify(data, null, 2));
+      console.log(
+        `"${data.channelId}", // ${data.title}[${data.statistics.videoCount}] @ ${data.statistics.subscriberCount} -- ${data.publishedAt}`,
+      );
     }
   } else {
     console.log("[]");
