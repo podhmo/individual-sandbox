@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja" data-theme="dark"><head><title></title><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="color-scheme" content="light dark"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/></head><body><main class="container"><article><h1>markdownからjsx経由でhtmlを生成したい</h1>
+<blockquote>
+<p>[!NOTE]
+deno.json無しですすめているけれどなんの縛りプレイなんだろう？</p>
+</blockquote>
+<h2>render0.tsx</h2>
+<p>とりあえず、HTMLで出力するようにしてみる。全部を１ファイルにまとめておく。deno.json無しでも十分書けるんだろうか？</p>
+<p>react-markdownが使えるんだろうか？</p>
+<p><a href="https://github.com/remarkjs/react-markdown">https://github.com/remarkjs/react-markdown</a></p>
+<blockquote>
+<p>This package is ESM only</p>
+</blockquote>
+<p>テキトーなmarkdownを用意しておく。</p>
+<h2>render1.tsx</h2>
+<p>markdownファイルからHTMLを出力するようにしてみる。これはかなりそのままな気がする。</p>
+<h2>render2.tsx</h2>
+<p>cssなどを追加するのはどうすれば良いんだろう？そのまま追加するだけかも？
+以前の結果を使えば良い。</p>
+<p><a href="https://gist.github.com/podhmo/41580702ce448710dcbcc6e06dbec548">JSXを弄りたい gist</a></p>
+<p>型情報が手に入っていない。<code>npm:@types/react</code>が必要？</p>
+<h2>render3.tsx</h2>
+<p>どうやらtableが変換されていないようだ。あとシンタックスハイライトも効いてない気がする。</p>
+<p>どうやらremark-gfmも必要らしい。</p>
+<p><a href="https://github.com/remarkjs/react-markdown#use">https://github.com/remarkjs/react-markdown#use</a></p>
+<p>シンタックスハイライトも別途プラグインが必要らしい</p>
+<p><a href="https://github.com/remarkjs/react-markdown?tab=readme-ov-file#use-custom-components-syntax-highlight">https://github.com/remarkjs/react-markdown?tab=readme-ov-file#use-custom-components-syntax-highlight</a></p>
+<p>できたけれど、なんとなくimportの仕方が気持ち悪い気がする。
+Light Buildが用意されていた。</p>
+<ul>
+<li><a href="https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#light-build">https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#light-build</a></li>
+</ul>
+<h2>参考</h2>
+<ul>
+<li><a href="https://github.com/remarkjs/react-markdown">https://github.com/remarkjs/react-markdown</a></li>
+<li><a href="https://gist.github.com/podhmo/41580702ce448710dcbcc6e06dbec548">https://gist.github.com/podhmo/41580702ce448710dcbcc6e06dbec548</a></li>
+<li><a href="https://docs.deno.com/runtime/reference/jsx/">https://docs.deno.com/runtime/reference/jsx/</a></li>
+<li><a href="https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#light-build">https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#light-build</a></li>
+</ul>
+<hr/>
+<h1>Hello</h1>
+<p>This is a paragraph.</p>
+<ul>
+<li>This is a list item</li>
+<li>This is another list item</li>
+<li>This is a third list item</li>
+</ul>
+<h2>This is a subheading</h2>
+<p>This is another paragraph.<strong>Bold text</strong> and <em>italic text</em>.</p>
+<pre><div style="color:white;background:hsl(30, 20%, 25%);text-shadow:0 -.1em .2em black;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:1em;margin:.5em 0;overflow:auto;border:.3em solid hsl(30, 20%, 40%);border-radius:.5em;box-shadow:1px 1px .5em black inset"><code class="language-js" style="white-space:pre;color:white;background:none;text-shadow:0 -.1em .2em black;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span class="token console class-name">console</span><span class="token" style="-opacity:.7">.</span><span class="token method function property-access">log</span><span class="token" style="-opacity:.7">(</span><span class="token" style="color:hsl(75, 70%, 60%)">&quot;Hello, world!&quot;</span><span class="token" style="-opacity:.7">)</span><span class="token" style="-opacity:.7">;</span></code></div></pre>
+<p>This is a <a href="https://example.com">link</a>.</p>
+<table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Cell 1</td><td>Cell 2</td></tr><tr><td>Cell 3</td><td>Cell 4</td></tr></tbody></table></article></main></body></html>
