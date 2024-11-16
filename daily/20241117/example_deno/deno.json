@@ -1,0 +1,10 @@
+{
+    "tasks": {
+        "check": "deno check **/*.ts"
+    },
+    "imports": {
+        "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.0",
+        "@std/collections": "jsr:@std/collections@^1.0.9",
+        "esbuild": "npm:esbuild@^0.24.0"
+    }
+}
