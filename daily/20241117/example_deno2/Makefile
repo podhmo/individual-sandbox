@@ -1,4 +1,4 @@
-build: dst_main0.ts dst_main1.ts dst_main2.mjs dst_main3.mjs
+build: dst_main0.ts dst_main1.ts dst_main2.mjs dst_main3.mjs dst_main4.mjs
 
 # 直接 jsr:<package> でimportしたファイル
 dst_main0.ts: src_main0.ts tools.ts
@@ -14,6 +14,10 @@ dst_main2.mjs: src_main2.ts tools2.ts
 # esbuildでのbundleを試す用のファイル。相対パスでimportしている。
 dst_main3.mjs: src_main3.ts tools2.ts
 	deno run -A tools2.ts --dst $@ --src $<
+
+# deno.jsonのimportsを見てimportしたファイル
+dst_main4.mjs: src_main4.ts tools2.ts
+	deno run -A tools2.ts --dst $@ --src $< --config=deno.json --debug
 
 clean:
 	rm -rf dst dst_*
