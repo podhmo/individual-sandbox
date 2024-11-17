@@ -55,7 +55,7 @@ function PathReplacePlugin(options: { configPath?: string } = {}) {
                 build.onResolve({ filter: regexp }, (args: esbuild.OnResolveArgs): esbuild.OnResolveResult | null => {
                     debug(`[DEBUG] resolve ${args.path} -> ${path}`);
                     let replaced = args.path.replace(regexp, path + "/");
-                    if(replaced.startsWith("jsr:")) {
+                    if (replaced.startsWith("jsr:")) {
                         replaced = replaced.replace("jsr:", "https://esm.sh/jsr/");
                     }
                     return { path: replaced, external: true }
@@ -68,6 +68,11 @@ function PathReplacePlugin(options: { configPath?: string } = {}) {
                 debug(`[DEBUG] resolve ${args.path}`);
                 return { external: true, path: args.path.replace(/^jsr:/, "https://esm.sh/jsr/") }
             });
+
+
+            // // TODO: generate html importmap
+            // build.onEnd(() => {
+            // });
         }
     }
 }
