@@ -59,3 +59,24 @@ https://jsr.io/@deno/graph
 bundlingしたい？
 考えてみると結局bundleするならesbuildで良いのでは？というわけで昨日の成果を元にesbuildを試してみる。
 
+すごい簡単に作れるかも？
+
+作れた > tools2.ts
+
+考えてみると、esmに変換されるので拡張子は.mjsの方が良いのか。
+
+## 03 src_main3.ts
+
+esbuildにbundlingも任せると普通に相対パスも動くな。。
+
+```js
+// hello.ts
+import { chunk } from "https://esm.sh/jsr/@std/collections@1.0.9/chunk";
+function hello(name) {
+  return `Hello, ${name}!`;
+}
+
+// src_main3.ts
+console.log(hello("world"));
+console.log(chunk([1, 2, 3, 4, 5], 2));
+```

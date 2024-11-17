@@ -7,8 +7,8 @@ function PathResolvePlugin() {
         name: "path-resolve-plugin",
         setup(build: esbuild.PluginBuild) {
             build.onResolve({ filter: /^jsr:.+$/ }, (args: esbuild.OnResolveArgs): esbuild.OnResolveResult | null => {
-                console.log("path-resolve-plugin", JSON.stringify(args));
-                return {path: args.path, external: true};
+                // console.log("path-resolve-plugin", JSON.stringify(args));
+                return {external: true, path: args.path.replace(/^jsr:/, "https://esm.sh/jsr/")}
             })
         }
     }
