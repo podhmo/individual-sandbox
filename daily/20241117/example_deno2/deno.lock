@@ -51,5 +51,9 @@
         "jsr:@ts-morph/common"
       ]
     }
+  },
+  "remote": {
+    "https://esm.sh/jsr/@std/collections@1.0.0/chunk": "9133395c63a5ac78c9ef5e7ee3799f458a6a62f861be7a345a27c3adbc7882e2",
+    "https://esm.sh/v135/@jsr/std__collections@1.0.0/denonext/chunk.js": "1356b010e02d81f8b463ef82aa2afec33a4cc7b19b188a434457ef94642ffbb2"
   }
 }

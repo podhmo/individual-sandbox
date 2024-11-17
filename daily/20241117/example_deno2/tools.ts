@@ -1,7 +1,7 @@
 import { parseArgs } from "jsr:@podhmo/with-help@0.4.0"
 
 import { Project } from "jsr:@ts-morph/ts-morph@24.0.0";
-import { resolve, dirname } from "jsr:@std/path@1.0.8";
+import { resolve, dirname, relative } from "jsr:@std/path@1.0.8";
 
 class ImportResolver {
     constructor(private importMap: Record<string, string>) { }
@@ -13,7 +13,7 @@ class ImportResolver {
         }
         if (importPath.startsWith("jsr:")) {
             const packageName = importPath.slice(4);
-            return `https://esm.sh/${packageName}`;
+            return `https://esm.sh/jsr/${packageName}`;
         }
         if (this.importMap[importPath]) {
             return this.importMap[importPath];
@@ -34,6 +34,7 @@ class Walker {
             return  // すでに処理済みのファイルをスキップ
         }
         this.visited.add(filePath);
+        console.error(`read ${filePath}`);
 
         const sourceFile = project.addSourceFileAtPath(filePath);
 
@@ -61,6 +62,7 @@ class Walker {
 function main() {
     const args = parseArgs(Deno.args, {
         string: ["src", "dst", "config"],
+        boolean: ["dry-run"],
         required: ["src", "dst"],
     })
 
@@ -81,10 +83,20 @@ function main() {
     walker.WalkFile(entryFile, project);
 
     // 変換したファイルを出力
-    Deno.mkdirSync(outputDir, { recursive: true });
+    const absSourceDir = resolve(entryFile, "..");
+
     project.getSourceFiles().forEach((sourceFile) => {
         const filePath = sourceFile.getFilePath();
-        const outputFilePath = resolve(outputDir, filePath);
+        const outputFilePath = filePath.replace(absSourceDir, outputDir)
+        .replace("/src_","/") // この辺はgistに共有する用の変換
+        .replace("dst/","dst_")
+        ;
+
+        // console.dir({ filePath, outputFilePath, outputDir }, { depth: 3 });
+        console.error(`write ${outputFilePath} (dry-run=${args["dry-run"]})`);
+        if (args["dry-run"]) {
+            return;
+        }
         Deno.mkdirSync(dirname(outputFilePath), { recursive: true });
         Deno.writeTextFileSync(outputFilePath, sourceFile.getFullText());
     });
