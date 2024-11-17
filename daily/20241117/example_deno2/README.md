@@ -22,6 +22,11 @@ htmlに一括でbundleされるようなものがほしい？
 
 https://chatgpt.com/share/6739d60d-3c94-8001-a6e7-3b3c5a29cd68
 
+## Files
+
+- tools.ts -- ts-morthを使ってファイルを変換するだけ
+- tools2.ts -- esbuildのpluginを試している
+
 ## 00 src_main0.ts
 
 とりあえず https://jsr.io/@std/collections あたりを使って変換してみる。
@@ -37,3 +42,20 @@ https://github.com/esm-dev/esm.sh?tab=readme-ov-file#supported-registries に書
 - HTML用のimport mapが生成できていない
 - たぶん.tsそのままだとHTMLから実行できない (.ts -> .jsしないとだめかも？)
 - そもそもindex.htmlが生成されない (bundleが必要？)
+
+## 01 src_main1.ts
+
+>[!WARNING]
+> めんどくさいのでスキップした
+
+deno.jsonで `deno add jsr:@std/collections` しているときにうまく変換してくれるようにしたい
+
+実は deno graphとかが優秀かもしれない。
+
+https://jsr.io/@deno/graph
+
+## 02 src_main2.ts
+
+bundlingしたい？
+考えてみると結局bundleするならesbuildで良いのでは？というわけで昨日の成果を元にesbuildを試してみる。
+

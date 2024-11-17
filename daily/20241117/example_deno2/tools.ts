@@ -32,6 +32,7 @@ class ImportResolver {
         if (this.importMap[importPath]) {
             importPath = this.importMap[importPath];
         }
+
         const alias = this.resolveAlias(importPath);
         return alias;
     }
