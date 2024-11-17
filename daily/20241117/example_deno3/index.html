@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+
+<head>
+    <title>.tsx -> .mjs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style -->
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+    <main class="container">
+        <div id="app"></div>
+    </main>
+    <script type="module">
+        import { render, Hello } from './component.mjs';
+
+        render(Hello({ name: "World" }), document.querySelector('#app'));
+    </script>
+</body>
+
+</html>
