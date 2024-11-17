@@ -1,6 +1,6 @@
-# ts-morphでテキトーな変換を作る
+# denoで読み込めるファイルをhtmlで読み込めるesmに変換したい
 
-自分のHTML/CSSの学習用の環境を作りたい
+自分のHTML/CSSの学習用の環境を作りたい。ファイルは最小限の依存だけをリポジトリにcommitしたい。
 
 ## やりたいこと
 
@@ -80,3 +80,16 @@ function hello(name) {
 console.log(hello("world"));
 console.log(chunk([1, 2, 3, 4, 5], 2));
 ```
+
+## 04 src_main4.ts
+
+deno.jsonを見るようにしてみた。一度externalにするとresolveの対象にならない。
+
+欲を言うと、ここでのtree-shakingも実装したい。
+
+https://esm.sh/#docs
+
+> ```
+> import { __await, __rest } from "https://esm.sh/tslib"; // 7.3KB
+> import { __await, __rest } from "https://esm.sh/tslib?exports=__await,_rest"; // 489B
+> ```
