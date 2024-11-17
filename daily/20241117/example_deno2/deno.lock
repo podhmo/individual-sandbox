@@ -17,7 +17,9 @@
     "jsr:@ts-morph/common@0.25": "0.25.0",
     "jsr:@ts-morph/ts-morph@24.0.0": "24.0.0",
     "npm:esbuild@*": "0.24.0",
-    "npm:esbuild@0.24": "0.24.0"
+    "npm:esbuild@0.24": "0.24.0",
+    "npm:preact-render-to-string@*": "6.5.11_preact@10.24.3",
+    "npm:preact@*": "10.24.3"
   },
   "jsr": {
     "@david/code-block-writer@13.0.3": {
@@ -174,10 +176,21 @@
         "@esbuild/win32-ia32",
         "@esbuild/win32-x64"
       ]
+    },
+    "preact-render-to-string@6.5.11_preact@10.24.3": {
+      "integrity": "sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw==",
+      "dependencies": [
+        "preact"
+      ]
+    },
+    "preact@10.24.3": {
+      "integrity": "sha512-Z2dPnBnMUfyQfSQ+GBdsGa16hz35YmLmtTLhM169uW944hYL6xzTYkJjC07j+Wosz733pMWx0fgON3JNw1jJQA=="
     }
   },
   "remote": {
     "https://esm.sh/jsr/@std/collections@1.0.0/chunk": "9133395c63a5ac78c9ef5e7ee3799f458a6a62f861be7a345a27c3adbc7882e2",
+    "https://esm.sh/preact@10.24.3": "3fbc3bf94f04ea2567db840c85244a1e7943a3f0e8ba17d679123f29962095a6",
+    "https://esm.sh/stable/preact@10.24.3/denonext/preact.mjs": "adda7b905b40f0bab844d3ee900378e59da2b16f0f8e716ba9a8d67c15b78c87",
     "https://esm.sh/v135/@jsr/std__collections@1.0.0/denonext/chunk.js": "1356b010e02d81f8b463ef82aa2afec33a4cc7b19b188a434457ef94642ffbb2"
   },
   "workspace": {

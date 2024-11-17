@@ -1,4 +1,4 @@
-build: dst_main0.ts dst_main1.ts dst_main2.mjs dst_main3.mjs dst_main4.mjs
+build: dst_main0.ts dst_main1.ts dst_main2.mjs dst_main3.mjs dst_main4.mjs dst_main5.mjs
 
 # 直接 jsr:<package> でimportしたファイル
 dst_main0.ts: src_main0.ts tools.ts
@@ -18,6 +18,11 @@ dst_main3.mjs: src_main3.ts tools2.ts
 # deno.jsonのimportsを見てimportしたファイル
 dst_main4.mjs: src_main4.ts tools2.ts
 	deno run -A tools2.ts --dst $@ --src $< --config=deno.json --debug
+
+# preactのcomponentを作ってそれを実行してみる
+dst_main5.mjs: src_main5.tsx tools2.ts
+	deno run -A tools2.ts --dst $@ --src $< --config=deno.json --debug
+	deno run -A run5.mjs
 
 clean:
 	rm -rf dst dst_*

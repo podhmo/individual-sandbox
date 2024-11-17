@@ -93,3 +93,49 @@ https://esm.sh/#docs
 > import { __await, __rest } from "https://esm.sh/tslib"; // 7.3KB
 > import { __await, __rest } from "https://esm.sh/tslib?exports=__await,_rest"; // 489B
 > ```
+
+## 05 src_main5.tsx
+
+npmも読むようにしてみた。esbuildならtsxも対応しているでしょということでそれっぽい感じに読むようにしてみた。
+なんか普通にうまくいっているっぽい。
+
+こんなコードが生成される。
+
+```js
+// src_main5.tsx
+import { h } from "https://esm.sh/preact@10.24.3";
+function Code({ children, language }) {
+  return /* @__PURE__ */ h("pre", { ...language ? { language } : {} }, children);
+}
+var Hello = ({ name }) => {
+  return /* @__PURE__ */ h("h1", null, "Hello ", name, "!!");
+};
+export {
+  Code,
+  Hello
+};
+```
+
+そして以下のようなrun5.mjsを書いてdenoで実行してあげていた。
+
+```js
+import { renderToString } from "npm:preact-render-to-string";
+import { Hello } from "./dst_main5.mjs";
+
+// <h1>Hello World !!</h1>
+console.log(renderToString(Hello({ name: "World" })));
+```
+
+run5.htmlというファイルを作り、ここからdst5_main.mjsを読み込んでみたが、このhtmlに書くpreact自体のバージョンを読み込もうとするのが難しいかもしれない。
+いっそのことrenderもdst5_main.mjsに含んでしまったほうが良いかも？
+
+こんな感じになる。
+
+```html
+    <script type="module">
+        import { render } from "https://esm.sh/preact@10.24.3" // ここを揃える必要があるのが難しいかも？
+        import { Hello } from './dst_main5.mjs';
+    
+        render(Hello({name: "World"}), document.querySelector('#app'));
+    </script>
+```
