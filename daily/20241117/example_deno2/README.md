@@ -22,7 +22,7 @@ htmlに一括でbundleされるようなものがほしい？
 
 https://chatgpt.com/share/6739d60d-3c94-8001-a6e7-3b3c5a29cd68
 
-## src_main0.ts
+## 00 src_main0.ts
 
 とりあえず https://jsr.io/@std/collections あたりを使って変換してみる。
 esm.shを読む感じにしてほしい
@@ -32,3 +32,8 @@ https://github.com/esm-dev/esm.sh?tab=readme-ov-file#supported-registries に書
 - `jsr:@std/collections@1.0.0/chunk`
 - `https://esm.sh/jsr/@std/collections@1.0.0/chunk`
 
+とりあえず、動いたが以下が不足
+
+- HTML用のimport mapが生成できていない
+- たぶん.tsそのままだとHTMLから実行できない (.ts -> .jsしないとだめかも？)
+- そもそもindex.htmlが生成されない (bundleが必要？)

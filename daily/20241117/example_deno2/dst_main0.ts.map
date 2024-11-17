@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@std/collections@1.0.0/chunk": "https://esm.sh/jsr/@std/collections@1.0.0/chunk"
+  }
+}
