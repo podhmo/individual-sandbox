@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>hello</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <p id="text"></p>
+</body>
+<script type="importmap">
+{
+    "imports": {
+        "$greeting": "./hello.js",
+        "$greeting/": "./greeting/"
+    }
+}
+</script>
+
+<script type="module">
+    import { hello } from '$greeting';
+    import { bye } from "$greeting/bye.js";
+
+    document.getElementById('text').textContent = `${hello("world")}\n${bye("world")}`;
+</script>
+
+</html>

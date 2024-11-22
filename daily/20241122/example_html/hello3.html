@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>hello</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <p id="text"></p>
+</body>
+<script type="importmap">
+{
+    "imports": {
+        "$hello": "./hello.js",
+        "@hello": "./hello.js",
+        "#hello": "./hello.js",
+        "🤖hello": "./hello.js",
+        "http://example.com/hello": "./hello.js"
+    }
+}
+</script>
+<!--
+"jsr:@hello/hello": "./hello.js"
+Module source URI is not allowed in this document: "jsr:@hello/hello"
+-->
+<script type="module">
+    // import { hello } from '$hello'; // ok
+    // import { hello } from '@hello'; // ok
+    // import { hello } from '#hello'; // ok
+    // import { hello } from '🤖hello'; // ok
+    // import { hello } from 'jsr:@hello/hello'; // ng
+    import { hello } from 'http://example.com/hello'; // ok
+    document.getElementById('text').textContent = hello("world");
+</script>
+
+</html>

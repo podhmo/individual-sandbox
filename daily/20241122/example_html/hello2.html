@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>hello</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <p id="text"></p>
+</body>
+<script type="importmap">
+{
+    "imports": {
+        "hello": "./hello.js"
+    }
+}
+</script>
+<script type="module">
+    import { hello } from 'hello';
+    document.getElementById('text').textContent = hello("world");
+</script>
+
+</html>
