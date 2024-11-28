@@ -13,11 +13,14 @@
 ```console
 $ tree --noreport
 .
-├── Makefile
 ├── README.md
+├── deno.json
 ├── mini-jsx
-│   └── jsx-runtime.ts
-└── use0.tsx
+│   ├── jsx-runtime.ts
+│   └── types.ts
+├── use0.tsx
+├── use1.js
+└── use1.tsx
 ```
 
 ## use0.tsx
@@ -139,4 +142,54 @@ Found 4 errors.
 make: *** [Makefile:12: use2] Error 1
 ```
 
-以下の様な感じで types.tsを作り
+以下の様な感じでtypes.tsを作ってimportした。classNameしか使っていないのでclassNameしか利用可能にしていない。
+
+```ts
+import type * as JSX from "./types.ts"
+export type { JSX }
+
+type Node = JSX.Node
+```
+
+types.ts
+
+```ts
+// JSX namespace
+export interface Node {
+   // deno-lint-ignore ban-types
+   tag: string | Function
+   props: Record<string, unknown> & { children: Node[] }
+   key: string | undefined
+}
+
+
+export type IntrinsicElements = {
+   // [P : string]: {className?: string, children?: Node[]}
+
+   section: {className?: string, children?: Node[]}
+   h1: {className?: string, children?: Node[]}
+}
+```
+
+これでdeno checkは通る様になったが language serverはうまくやってくれないみたい。
+
+## language server側の変更
+
+deno.json側にunstableの情報をもたせれば良いのかもしれない。
+
+```json
+{
+    "unstable": ["sloppy-imports"]
+}
+```
+
+こうなってくると、いっそのことcompilerOptions側に設定を寄せてtsxのところでヒントを書かずに済ませられないかと思ったが無理？
+書いてみたがなんか怪しい。sloppy-importsとの兼ね合いがなんか怪しい気がしている。そもそもsloppy-importsを外したい。
+
+```json
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "./mini-jsx",
+        "jsxImportSourceTypes": "./mini-jsx/types.ts"
+    },
+```
