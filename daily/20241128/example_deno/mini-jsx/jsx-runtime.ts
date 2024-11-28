@@ -1,5 +1,5 @@
 interface Node {
-    tag: string
+    tag: string | Function
     props: Record<string, unknown> & { children: Node[] }
     key: string | undefined
 }

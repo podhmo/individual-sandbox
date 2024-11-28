@@ -65,4 +65,48 @@ $ deno run -A --unstable-sloppy-imports ./use0.tsx
 }
 ```
 
-ちなみに、esbuild経由で変換しようとするとこれだけだと不足するらしい。
+### use1.tsx
+
+ちなみに、use0.tsxのままesbuild経由で変換しようとすると不足するらしい。以下の様な警告が出る。
+
+```console
+▲ [WARNING] The JSX import source cannot be set without also enabling React's "automatic" JSX transform [unsupported-jsx-comment]
+
+    use0.tsx:1:21:
+      1 │ /** @jsxImportSource ./mini-jsx */
+        ╵                      ~~~~~~~~~~
+
+  You can enable React's "automatic" JSX transform for this file by using a "@jsxRuntime automatic"
+  comment.
+
+1 warning
+```
+
+そんなわけで `/** @jsxRuntime automatic */` を付ける。これがuse1.tsx。
+
+```diff
+--- use0.tsx
++++ use1.tsx
+@@ -1,4 +1,5 @@
+ /** @jsxImportSource ./mini-jsx */
++/** @jsxRuntime automatic */
+ 
+ const element = (
+     <section className="container">
+```
+
+それっぽい感じになった。`--bundle`していないのでそのままmini-jsxのimportが残る。
+
+```console
+$ esbuild use1.tsx
+import { Fragment, jsx, jsxs } from "./mini-jsx/jsx-runtime";
+const element = /* @__PURE__ */ jsxs("section", { className: "container", children: [
+  /* @__PURE__ */ jsx("h1", { children: "Hello, World!" }),
+  /* @__PURE__ */ jsx(Fragment, { children: "This is a fragment!" })
+] });
+console.dir(element, { depth: null });
+```
+
+
+
+## 

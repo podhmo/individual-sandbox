@@ -1,4 +1,5 @@
 /** @jsxImportSource ./mini-jsx */
+/** @jsxRuntime automatic */
 
 const element = (
     <section className="container">
