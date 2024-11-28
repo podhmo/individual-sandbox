@@ -1,0 +1,14 @@
+{
+    "tasks": {
+        "check": "deno task check:type",
+        "check:type": "deno check --unstable-sloppy-imports --unstable *.tsx",
+        "run": "deno task run:run0 run:run1",
+        "run:run1": "esbuild ./use1.tsx --outfile=use1.js",
+        "run:run0": "deno run -A --unstable-sloppy-imports ./use1.tsx"
+    },
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "./mini-jsx",
+        "jsxImportSourceTypes": "./mini-jsx/types.ts"
+    }
+}

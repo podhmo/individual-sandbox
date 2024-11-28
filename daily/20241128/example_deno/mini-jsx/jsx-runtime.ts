@@ -1,8 +1,7 @@
-interface Node {
-    tag: string | Function
-    props: Record<string, unknown> & { children: Node[] }
-    key: string | undefined
-}
+import type * as JSX from "./types.ts"
+export type { JSX }
+
+type Node = JSX.Node
 
 export function jsx(
     tag: string,
@@ -23,3 +22,4 @@ export function jsxs(
 export function Fragment(props: Record<string, unknown> & { children: Node[] }) {
     return props.children
 }
+

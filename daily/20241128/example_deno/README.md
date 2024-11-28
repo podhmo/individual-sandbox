@@ -65,7 +65,7 @@ $ deno run -A --unstable-sloppy-imports ./use0.tsx
 }
 ```
 
-### use1.tsx
+## use1.tsx
 
 ちなみに、use0.tsxのままesbuild経由で変換しようとすると不足するらしい。以下の様な警告が出る。
 
@@ -107,6 +107,36 @@ const element = /* @__PURE__ */ jsxs("section", { className: "container", childr
 console.dir(element, { depth: null });
 ```
 
+## 型チェックをどうにか対応させたい
 
+ちなみに現状型チェックは全然だめ。昨日も出てきた `JSX.IntrinsticElements` が存在しないので怒られている。section,h1タグ用の設定がないからのようだ。
+これをglobal declare namespaceなしで真面目に作成するのはどうしたら良いんだろう？
 
-## 
+```console
+$ deno check --unstable-sloppy-imports ./use0.tsx
+Check file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241128/example_deno/use0.tsx
+error: TS7026 [ERROR]: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+    <section className="container">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241128/example_deno/use0.tsx:4:5
+
+TS7026 [ERROR]: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+        <h1>Hello, World!</h1>
+        ~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241128/example_deno/use0.tsx:5:9
+
+TS7026 [ERROR]: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+        <h1>Hello, World!</h1>
+                         ~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241128/example_deno/use0.tsx:5:26
+
+TS7026 [ERROR]: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+    </section>
+    ~~~~~~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241128/example_deno/use0.tsx:9:5
+
+Found 4 errors.
+make: *** [Makefile:12: use2] Error 1
+```
+
+以下の様な感じで types.tsを作り
