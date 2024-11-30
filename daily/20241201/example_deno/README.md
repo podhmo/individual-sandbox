@@ -40,7 +40,23 @@
 
 ## 02 select model
 
+ここは単にmodelを外に出しただけ。
 
+```console
+$ deno run -A call-gemini2.ts --help
+Usage: cli [options]
+
+Options:
+  --apiKey     <string> (required) (default: apiKey="AIzaSyBRcBAfQUtb1Gnna58FuGxUqp1FNYa2R0Y")    (env: GEMINI_API_KEY)
+  --baseUrl    <string> (default: baseUrl="https://generativelanguage.googleapis.com")
+  --model      <string> one of ["gemini-1.5-flash","gemini-1.5-flash-8b","gemini-1.5-pro"], (default: model=gemini-1.5-flash)
+  --debug      (default: debug=false)    (env: DEBUG)
+  --help       show help
+
+$ deno run -A call-gemini2.ts --model gemini-1.5-flash-8b
+```
+
+(全く関係ないけれど `@podhmo/with-help` でRestrictionを使うと渡したoptionのdefinitionが必要になる。これを引数以外のところで使おうとすると補完が効かなくなる。不便)
 
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
