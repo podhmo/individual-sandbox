@@ -185,6 +185,8 @@ async function fetch(url: string, init?: Parameters<typeof globalThis.fetch>[1])
 ここでクラスに...と言っても良いのだけれど、まだまだ関数で頑張れる気がしている。関数を返す関数を書けば良い。
 作った関数(ここでは`buildFetchFunctionForOpenAIAPI()`)を使ってAPIを呼び出すためのfetchを作る。
 
+main()関数の中で全部読んでもよい程度の記述量になった(call-chatgpt4.ts)
+
 ```ts
     const fetch = buildFetchFunctionForOpenAIAPI({ apiKey: args.apiKey, debug: args.debug });
 
