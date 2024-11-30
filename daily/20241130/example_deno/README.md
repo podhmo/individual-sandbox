@@ -23,6 +23,9 @@
     - ベタ書きをやめたい
     - Errorの対応が重複してそうなのでだるい（console.errorが多すぎる）
 
+### debugしづらい
+
+debugしづらいことについてはもう少し説明を追加しておく。
 そのまま実行するとおかしな結果が出るのは問題ない。ただしエラーが以下の様な感じになる。こういうのをやめたい。
 
 ```
@@ -53,7 +56,15 @@ Failed to fetch chat completion: Error: Error: 429 - Too Many Requests
 }
 ```
 
+せめてdebugオプションを有効にしたら生のrequest/responseが見られるようにされてると嬉しい。
+(print debugもdebuggerを起動することもしたくない)
 
+## API Keyを直接コードに記述するのを止める
+
+とりあえず、API Keyを直接コードに記述するのをやめたい。`@std/cli/parse-args` や `@std/dotenv` を使うと便利。
+（個人的には `@std/cli/parse-args` のwrapperを自作したのでこちらを使う）
+
+`@std/dotenv/load` をimportすると自動的に.envを読み込んでくれるらしい。そんな感じで変更したものをcall-chat-gpt1.tsとして作る。
 
 
 
@@ -63,3 +74,5 @@ Failed to fetch chat completion: Error: Error: 429 - Too Many Requests
 - https://platform.openai.com/docs/api-reference/chat/create
 - https://platform.openai.com/docs/models#model-endpoint-compatibility
 - [ChatGPT-API Error Code 429の解決方法 #ChatGPT - Qiita](https://qiita.com/Keichan_15/items/b1aac09f77c6f8580113)
+- https://jsr.io/@std/cli
+- https://jsr.io/@std/dotenv
