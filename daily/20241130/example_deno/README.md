@@ -140,7 +140,49 @@ responseを一度消費してしまうと2回目の消費ができなくなっ�
 大体の場合にここでAPIClientのクラスを作る感じになるけれど、実際のところクラスは不要かもしれないというのが今回の記事の本題だった（なんと今までは前座だっ。た）。
 
 例えば、組み込みの`fetch()`をラップした自分用の`fetch()`を作れば良いだけかもしれない。
+とりあえずそのまま`fetch()`として機能する関数を作ってみる。組み込みの関数はglobalThisを経由して参照すれば良いようだ。
 
+引数や戻り値の形状が変わった場合に備えてちょっとだけトリッキーな形で型を定義している。
+
+```ts
+async function fetch(url: string, init?: Parameters<typeof globalThis.fetch>[1]): ReturnType<typeof globalThis.fetch> {
+  init = init ?? {};
+
+  // path to url
+  if (url.startsWith("/")) {
+    url = "https://api.openai.com" + url;
+  }
+
+  // set Authorization header iff url is OpenAI API
+  const headers = init.headers as Record<string, string> ?? {};
+  if (url.startsWith("https://api.openai.com/") && headers["Authorization"] === undefined) {
+    headers["Content-Type"] = "application/json";
+    headers["Authorization"] = `Bearer ${Deno.env.get("OPENAI_API_KEY")}`;
+  }
+
+  if (DEBUG) {
+    console.dir({ url, method: init?.method, headers, body: init?.body }, { depth: null });
+  }
+  const response = await globalThis.fetch(url, { ...init, headers });
+  if (DEBUG) {
+    if (response.ok) {
+      console.dir({ response }, { depth: null }); // 正常系のときにレスポンスを消費したくない
+    } else {
+      console.dir({ response, text: await response.text() }, { depth: null });
+    }
+  }
+
+  return response
+}
+```
+
+これはこれで良いのだけれど、コマンドライン引数でbaseUrl部分に当たる部分が設定できないし、環境変数経由でAPI Keyを取得しているのが気持ち悪い。
+
+## 05 `fetch()` を返すbuilderを作る
+
+> コマンドライン引数でbaseUrl部分に当たる部分が設定できないし、環境変数経由でAPI Keyを取得しているのが気持ち悪い
+
+ここでクラスに...と言っても良いのだけれど、まだまだ関数で頑張れる気がしている。
 
 
 ## references
