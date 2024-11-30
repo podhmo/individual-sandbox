@@ -2,7 +2,7 @@
 
 なんとなくChatGPTのAPIを利用するコードから整形していき良さそうなコードを探してみる。
 
-## ChatGPTにコードを提案してもらう
+## 00 ChatGPTにコードを提案してもらう
 
 以下の様なプロンプトで提案してもらった。諸々古い部分もあるかもだけれどそれっぽいコード。
 
@@ -59,12 +59,87 @@ Failed to fetch chat completion: Error: Error: 429 - Too Many Requests
 せめてdebugオプションを有効にしたら生のrequest/responseが見られるようにされてると嬉しい。
 (print debugもdebuggerを起動することもしたくない)
 
-## API Keyを直接コードに記述するのを止める
+## 01 API Keyを直接コードに記述するのを止める
 
 とりあえず、API Keyを直接コードに記述するのをやめたい。`@std/cli/parse-args` や `@std/dotenv` を使うと便利。
-（個人的には `@std/cli/parse-args` のwrapperを自作したのでこちらを使う）
+`@std/dotenv/load` をimportすると自動的に.envを読み込んでくれるらしい。
 
-`@std/dotenv/load` をimportすると自動的に.envを読み込んでくれるらしい。そんな感じで変更したものをcall-chat-gpt1.tsとして作る。
+そんな感じで変更したものをcall-chat-gpt1.tsとして作る。個人的には `@std/cli/parse-args` のwrapperを自作したのでこちらを使う。
+実行結果は変わらずヘルプメッセージが以下の様な感じになる(ヘルプメッセージでキーが露出するのは微妙かも？)。
+
+```console
+$ deno run -A call-catgpt1.ts
+Usage: cli [options]
+
+Options:
+  --apiKey    <string> (required) (default: apiKey="sk-proj-...")    (env: OPENAI_API_KEY)
+  --help      show help
+```
+
+このときの.envは以下の様な感じ(もちろん書き換えてる)。
+
+```
+OPENAI_API_KEY=sk-proj-...
+```
+
+## 02 request/responseをトレースしたい
+
+debugしづらいのでデバッグオプションを作る。ついでに環境変数でもdebugができると良い。
+`console.dir()`で雑に出力した。便利。ただstdoutに出力するのが不便かもしれない。
+
+トレースするときには`response.text()`を含める必要がある。
+responseを一度消費してしまうと2回目の消費ができなくなったりするので実行時エラーが起きるかもしれない。
+まぁ今回は気にしないことにする。
+
+(ついでにheaderを出力するときにマスキングしたくなるかもしれない)
+
+```
+{
+  url: "https://api.openai.com/v1/chat/completions",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer sk-proj-..."
+  },
+  body: {
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: "You are a helpful assistant." },
+      { role: "user", content: "What is the capital of France?" }
+    ],
+    max_tokens: 100,
+    temperature: 0.7
+  }
+}
+{
+  response: Response {
+    body: ReadableStream { locked: true },
+    bodyUsed: true,
+    headers: Headers {
+...
+    },
+    ok: false,
+    redirected: false,
+    status: 429,
+    statusText: "Too Many Requests",
+    url: "https://api.openai.com/v1/chat/completions"
+  },
+  text: "{\n" +
+    '    "error": {\n' +
+    '        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",\n' +
+    '        "type": "insufficient_quota",\n' +
+    '        "param": null,\n' +
+    '        "code": "insufficient_quota"\n' +
+    "    }\n" +
+    "}\n"
+}
+```
+
+## 04 `fetch()`を分離したい
+
+ここからはリファクタリング。個別に定義されているfetch部分をいい感じに分離して置きたい。APIを呼ぶのが一度きりとは限らないので。
+大体の場合にここでAPIClientのクラスを作る感じになるけれど、実際のところクラスは不要かもしれないというのが今回の記事の本題だった（なんと今までは前座だっ。た）。
+
+例えば、組み込みの`fetch()`をラップした自分用の`fetch()`を作れば良いだけかもしれない。
 
 
 
