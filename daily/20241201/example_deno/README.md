@@ -58,6 +58,10 @@ $ deno run -A call-gemini2.ts --model gemini-1.5-flash-8b
 
 (全く関係ないけれど `@podhmo/with-help` でRestrictionを使うと渡したoptionのdefinitionが必要になる。これを引数以外のところで使おうとすると補完が効かなくなる。不便)
 
+- :memo: ストリーミングに対応する必要がある
+- :memo: 画像を入力として渡せるようにする
+
+
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
 - https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest

@@ -62,9 +62,9 @@ export function buildFetch(inner: typeof globalThis.fetch, options: { apiKey: st
         inner = withTrace(inner);
     }
 
-    return async function fetchForGemini(path: Endpoint, init?: Parameters<typeof globalThis.fetch>[1] & {model?: Model}) {
+    return async function fetchForGemini(path: Endpoint, init?: Parameters<typeof globalThis.fetch>[1] & { model?: Model }) {
         init = init ?? {};
-    
+
         // path to url with model
         const model: Model = init.model ?? "gemini-1.5-flash"; // default model
         let url = baseUrl + path.replace("${model}", model);; // e.g. *

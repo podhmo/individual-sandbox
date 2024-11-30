@@ -332,7 +332,6 @@ class APIClient {
 
 デバッグ用のトレース部分を分解したいと思うと先ほどのphantom type的な記述が邪魔になってくる。
 
-
 TODO: ミドルウェアみたいに分解したい？ 直和 -> 直積 -> Tuple? -> Unordered? -> Indexed type
 
 ## references

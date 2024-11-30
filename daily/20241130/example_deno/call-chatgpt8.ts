@@ -1,38 +1,36 @@
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.0"
 import "jsr:@std/dotenv/load"  // .envファイルを読み込む
 
-declare const Tag: unique symbol; // for phantom type
-
 type _Fetch = typeof globalThis.fetch;
-export type Fetch = _Fetch & { "openai": true };
 
-export function withTrace(inner: _Fetch): _Fetch & { "trace": true } {
+export function withTrace<T extends _Fetch>(inner: T): T & { "trace": true } {
     const outer = async function traceFetch(url: Parameters<_Fetch>[0], init?: Parameters<_Fetch>[1]) {
         const headers = init?.headers as Record<string, string> ?? {};
         // trace request
-        console.dir({ url, method: init?.method, headers, body: init?.body }, { depth: null });
+        console.error({ url, method: init?.method, headers, body: init?.body });
 
         const response = await inner(url, { ...init, headers });
 
         // trace response
         if (response.ok) {
-            console.dir({ response }, { depth: null }); // 正常系のときにレスポンスを消費したくない
+            console.error({ response }); // 正常系のときにレスポンスを消費したくない
             return response
         } else {
-            console.dir({ response, text: await response.text() }, { depth: null });
+            console.error({ response, text: await response.text() });
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
     }
-    return outer as _Fetch & { "trace": true };
+    return outer as T & { "trace": true };
 }
 
-export function withOpenAI(inner: _Fetch, options: { apiKey: string, baseUrl?: string }) {
+
+export function withOpenAI<T extends _Fetch>(inner: T, options: { apiKey: string, baseUrl?: string }): T & { "openai": true } {
     let baseUrl = options.baseUrl ?? "https://api.openai.com";
     if (baseUrl.endsWith("/")) {
         baseUrl = baseUrl.slice(0, -1);
     }
 
-    return async function fetch(url: Parameters<_Fetch>[0], init?: Parameters<_Fetch>[1]) {
+    const outer = async function fetch(url: Parameters<_Fetch>[0], init?: Parameters<_Fetch>[1]) {
         init = init ?? {};
 
         // path to url
@@ -55,32 +53,46 @@ export function withOpenAI(inner: _Fetch, options: { apiKey: string, baseUrl?: s
         }
         return response
     }
+    return outer as T & { "openai": true };
 }
 
+
+// 利用可能なエンドポイントとそのドキュメントへのリンク
+const APIDoc = {
+    "/v1/chat/completions": "https://beta.openai.com/docs/api-reference/completions/create",
+    "/v1/embeddings": "https://beta.openai.com/docs/api-reference/embeddings/create",
+} as const
+type Endpoint = keyof typeof APIDoc;
+
+type NarrowFirstArgument<
+    // deno-lint-ignore no-explicit-any
+    F extends (arg: string, ...args: any[]) => unknown, // 引数が文字列を受け取る任意の関数型
+    T extends string // 絞り込みに使用するリテラル型
+> = (arg: T, ...args: Parameters<F> extends [unknown, ...infer Rest] ? Rest : never) => ReturnType<F>;
+
+
+export type Fetch = NarrowFirstArgument<_Fetch, Endpoint> & { "openai": true };
 
 type ChatMessage = {
     role: "system" | "user" | "assistant";
     content: string;
 };
 
-class APIClient {
-    constructor(private _fetch: _Fetch) { }
+async function chat(fetch: Fetch, messages: ChatMessage[]): Promise<string> {
+    const response = await fetch("/v1/chat/completions", {
+        method: "POST",
+        body: JSON.stringify({
+            model: "gpt-4o-mini", // 使用するモデルを指定 ("gpt-4", "gpt-3.5-turbo", など)
+            messages: messages,
+            max_tokens: 100, // 必要に応じて変更
+            temperature: 0.7, // 必要に応じて変更
+        }),
+    });
 
-    async chat(messages: ChatMessage[]): Promise<string> {
-        const response = await this._fetch("/v1/chat/completions", {
-            method: "POST",
-            body: JSON.stringify({
-                model: "gpt-4o-mini", // 使用するモデルを指定 ("gpt-4", "gpt-3.5-turbo", など)
-                messages: messages,
-                max_tokens: 100, // 必要に応じて変更
-                temperature: 0.7, // 必要に応じて変更
-            }),
-        });
-
-        const data = await response.json();
-        return data.choices[0]?.message?.content;
-    }
+    const data = await response.json();
+    return data.choices[0]?.message?.content;
 }
+
 
 async function main() {
     const args = parseArgs(Deno.args, {
@@ -96,14 +108,8 @@ async function main() {
         }
     });
 
-    // ここでfetch関数を作成 (呼び間違いを避けるためにfetchとは異なる名前のほうが良いかもしれない)
-    let fetch = globalThis.fetch
-    if (args.debug) {
-        fetch = withTrace(fetch);
-    }
-    fetch = withOpenAI(fetch, args)
-
-    const client = new APIClient(fetch);
+    // ここの定義を手続き的に書くと型の推論がうまくいかない
+    const fetch = withOpenAI((args.debug ? withTrace(globalThis.fetch) : globalThis.fetch), args);
 
     const messages: ChatMessage[] = [
         { role: "system", content: "You are a helpful assistant." },
@@ -111,7 +117,7 @@ async function main() {
     ];
 
     try {
-        const completion = await client.chat(messages);
+        const completion = await chat(fetch, messages);
         if (!completion) {
             throw new Error("No completion found in the response.");
         }
