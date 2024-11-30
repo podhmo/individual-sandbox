@@ -61,8 +61,25 @@ $ deno run -A call-gemini2.ts --model gemini-1.5-flash-8b
 - :memo: ストリーミングに対応する必要がある
 - :memo: 画像を入力として渡せるようにする
 
+## 03 stream support
+
+APIのドキュメントがまた別の箇所に存在していた。
+
+- https://ai.google.dev/api/generate-content?hl=ja#v1beta.models.streamGenerateContent
+
+`alt=sse`を付けて呼び出すとSSEとしてレスポンスを返してくれるようだ。
+とりあえず、テキトーにevent-streamをやってくれる用のライブラリを使ってしまう。
+
+- https://jsr.io/@lukeed/fetch-event-stream
+
+残っている作業
+
+- :memo: 画像を入力として渡せるようにする
+- :memo: SSEの中身を調べる
 
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
 - https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
 - https://aistudio.google.com/app/
+- https://ai.google.dev/api/generate-content?hl=ja#v1beta.models.streamGenerateContent
+- https://jsr.io/@lukeed/fetch-event-stream
