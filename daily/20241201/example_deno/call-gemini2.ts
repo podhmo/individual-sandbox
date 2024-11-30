@@ -1,4 +1,4 @@
-import { parseArgs, Restriction, Options } from "jsr:@podhmo/with-help@0.5.0"
+import { parseArgs, Restriction } from "jsr:@podhmo/with-help@0.5.0"
 import "jsr:@std/dotenv/load"
 
 async function main() {
@@ -33,7 +33,7 @@ async function main() {
         const response = await fetch("/v1beta/models/${model}:generateContent", {
             method: "POST",
             body: JSON.stringify(payload),
-            model: "gemini-1.5-flash-8b",
+            model: args.model,
         });
 
         // 本来はいい感じに取り出す

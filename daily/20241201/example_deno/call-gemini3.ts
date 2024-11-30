@@ -38,7 +38,7 @@ async function main() {
             method: "POST",
             signal: abort.signal,
             body: JSON.stringify(payload),
-            model: "gemini-1.5-flash-8b",
+            model: args.model,
         });
 
         const stream = events(response, abort.signal);
