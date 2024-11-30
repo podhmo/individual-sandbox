@@ -208,9 +208,42 @@ main()関数の中で全部読んでもよい程度の記述量になった(call
 
 この種の関数を外部から取得されるようなライブラリにしてしまうと、前提条件や処理が追いにくくなり厳しい感じになる気もする。
 
-## 06 それでもAPI Clientが作りたい？
+## 06 それでもAPI Clientが作りたいときがある？
 
-それでもAPI Clientを作りたい気持ちになる場合がある。現状のコードではAPIのエンドポイント部分(コード上では `/v1/chat/completions`)は手書きなのでタイポをしてしまうかもしれない。
+それでもAPI Clientを作りたい気持ちになる場合がある。現状のコードではAPIのエンドポイント部分(コード上では `/v1/chat/completions`)は手書きなのでタイポをしてしまうかもしれない。あるいはパラメーターをすべての呼び出しで固定したいかもしれない。その時は先ほどのfetchを受けとるクラスを作る。
+
+```ts
+type ChatMessage = {
+    role: "system" | "user" | "assistant";
+    content: string;
+};
+
+class APIClient {
+    constructor(private fetch: Fetch) { }
+
+    // see: https://beta.openai.com/docs/api-reference/completions/create
+    async chat(messages: ChatMessage[]): Promise<string> {
+        const response = await fetch("/v1/chat/completions", {
+            method: "POST",
+            body: JSON.stringify({
+                model: "gpt-4o-mini", // 使用するモデルを指定 ("gpt-4", "gpt-3.5-turbo", など)
+                messages: messages,
+                max_tokens: 100, // 必要に応じて変更
+                temperature: 0.7, // 必要に応じて変更
+            }),
+        });
+        const data = await response.json();
+        return data.choices[0]?.message?.content; // responseをそのまま返したほうが嬉しいかもしれない
+    }
+}
+```
+
+微妙にうれしくない部分としてこの定義だとfetchに先ほどのbuilderで作ったfetch以外の関数が渡せてしまう。
+`await new APIClient(globalThis.fetch).chat(messages)` とかが型エラーにならずに通ってしまうので嬉しくない。
+
+これならBaseAPIClientを作りそこで先ほどのfetch builder相当のことをして、そのBaseAPIClientを継承したAPIClientを定義したほうが嬉しいのでは？という気持ちになったりする。
+
+
 
 ## references
 
