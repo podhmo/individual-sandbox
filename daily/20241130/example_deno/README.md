@@ -182,8 +182,33 @@ async function fetch(url: string, init?: Parameters<typeof globalThis.fetch>[1])
 
 > コマンドライン引数でbaseUrl部分に当たる部分が設定できないし、環境変数経由でAPI Keyを取得しているのが気持ち悪い
 
-ここでクラスに...と言っても良いのだけれど、まだまだ関数で頑張れる気がしている。
+ここでクラスに...と言っても良いのだけれど、まだまだ関数で頑張れる気がしている。関数を返す関数を書けば良い。
+作った関数(ここでは`buildFetchFunctionForOpenAIAPI()`)を使ってAPIを呼び出すためのfetchを作る。
 
+```ts
+    const fetch = buildFetchFunctionForOpenAIAPI({ apiKey: args.apiKey, debug: args.debug });
+
+    const response = await fetch("/v1/chat/completions", {
+        method: "POST",
+        body: JSON.stringify({
+            model: "gpt-4o-mini", // 使用するモデルを指定 ("gpt-4", "gpt-3.5-turbo", など)
+            messages: messages,
+            max_tokens: 100, // 必要に応じて変更
+            temperature: 0.7, // 必要に応じて変更
+        }),
+    });
+```
+
+「axiosはもう不要いや必要」みたいな問題に関してはそもそも各自のアプリケーションの中で仕様として決めてしまってそれ専用のfetchを作れば良いだけな気がする。どうなんだろう？
+
+誤ってglobalThis.fetchを呼ぶ間違いを避けるためにfetchとは異なる名前のほうが良いかもしれない。
+ただfetchという名前にしておくと名前を変更せずにいろんなところに持っていけて便利な気もする。
+
+この種の関数を外部から取得されるようなライブラリにしてしまうと、前提条件や処理が追いにくくなり厳しい感じになる気もする。
+
+## 06 それでもAPI Clientが作りたい？
+
+それでもAPI Clientを作りたい気持ちになる場合がある。現状のコードではAPIのエンドポイント部分(コード上では `/v1/chat/completions`)は手書きなのでタイポをしてしまうかもしれない。
 
 ## references
 
