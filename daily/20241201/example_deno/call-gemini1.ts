@@ -20,9 +20,10 @@ async function main() {
     try {
         // see: https://ai.google.dev/gemini-api/docs/api-key?hl=ja
         const payload = { "contents": [{ "parts": { "text": "Write a story about a magic backpack." } }] }
-        const response = await fetch("/v1beta/models/gemini-1.5-flash:generateContent", {
+        const response = await fetch("/v1beta/models/${model}:generateContent", {
             method: "POST",
             body: JSON.stringify(payload),
+            model: "gemini-1.5-flash-8b",
         });
 
         // 本来はいい感じに取り出す
@@ -41,10 +42,12 @@ async function main() {
 
 // path -> document url
 interface APIDoc {
-    // TODO: gemini-1.5-flash 以外のモデルも対応する
-    "/v1beta/models/gemini-1.5-flash:generateContent": "https://ai.google.dev/gemini-api/docs/text-generation"
+    "/v1beta/models/${model}:generateContent": "https://ai.google.dev/gemini-api/docs/text-generation"
 }
 
+// model https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja
+const models = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"] as const;
+type Model = typeof models[number];
 
 export type Endpoint = keyof APIDoc;
 export const BASE_URL = "https://generativelanguage.googleapis.com";
@@ -59,11 +62,12 @@ export function buildFetch(inner: typeof globalThis.fetch, options: { apiKey: st
         inner = withTrace(inner);
     }
 
-    return async function fetchForGemini(path: Endpoint, init?: Parameters<typeof globalThis.fetch>[1]) {
+    return async function fetchForGemini(path: Endpoint, init?: Parameters<typeof globalThis.fetch>[1] & {model?: Model}) {
         init = init ?? {};
-
-        // path to url
-        let url = baseUrl + path; // e.g. *
+    
+        // path to url with model
+        const model: Model = init.model ?? "gemini-1.5-flash"; // default model
+        let url = baseUrl + path.replace("${model}", model);; // e.g. *
 
         const u = new URL(url);
         const headers = init.headers as Record<string, string> ?? {};
@@ -71,7 +75,6 @@ export function buildFetch(inner: typeof globalThis.fetch, options: { apiKey: st
         // set api key if not exists
         if ((typeof url === "string" && url.startsWith(baseUrl + "/")) && !u.searchParams.has("key")) {
             headers["Content-Type"] = "application/json";
-            const u = new URL(url);
             u.searchParams.set("key", options.apiKey);
             url = u.toString();
         }

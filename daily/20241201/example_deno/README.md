@@ -2,6 +2,10 @@
 
 ## 00 hello world
 
+とりあえず以下のページにある内容を元にrequestを呼んでみる。
+
+- https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
+
 認証はkeyで済むみたい
 
 ```
@@ -16,6 +20,27 @@
 ```
 
 それっぽい感じで作った。`gemini-1.5-flash` 以外のpathにアクセスしたい。
+
+## 01 call with another model
+
+> それっぽい感じで作った。`gemini-1.5-flash` 以外のpathにアクセスしたい。
+
+現状のpathを推測する記述の方法だとpathに変数が含まれたものに対応できない。
+
+以下のページ元にとりあえずmodelを変えてリクエストしてみる。
+
+- https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja
+- https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
+
+とりあえず、`${model}`という形でpathを保持しておきfetchの中でreplaceすることにしてみた。
+`new URL()`を通して変換した結果のURLはurlencodeされている。それ以前のpathの部分でreplaceしてあげた方が自然かも？
+
+- :memo: ストリーミングに対応する必要がある
+- :memo: modelをコマンドライン引数から選べるようにする
+
+## 02 select model
+
+
 
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
