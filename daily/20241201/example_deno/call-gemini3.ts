@@ -62,8 +62,8 @@ interface APIDoc {
 }
 
 // model https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja
-const models = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"] as const;
-type Model = typeof models[number];
+export const models = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"] as const;
+export type Model = typeof models[number];
 
 export type Endpoint = keyof APIDoc;
 export const BASE_URL = "https://generativelanguage.googleapis.com";
@@ -123,8 +123,6 @@ export function withTrace(inner: typeof globalThis.fetch) {
         return response
     }
 }
-
-// copy from https://jsr.io/@openai/openai/4.71.1/streaming.ts
 
 if (import.meta.main) {
     await main();

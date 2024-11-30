@@ -76,6 +76,7 @@ APIのドキュメントがまた別の箇所に存在していた。
 
 - :memo: 画像を入力として渡せるようにする
 - :memo: SSEの中身を調べる
+- :memo: いままでAPIに渡すパラメーターが同じものだった。
 
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
