@@ -55,6 +55,9 @@ export function buildFetch(inner: typeof globalThis.fetch, options: { apiKey: st
     if (baseUrl.endsWith("/")) {
         baseUrl = baseUrl.slice(0, -1);
     }
+    if (options.debug) {
+        inner = withTrace(inner);
+    }
 
     return async function fetchForGemini(path: Endpoint, init?: Parameters<typeof globalThis.fetch>[1]) {
         init = init ?? {};
@@ -73,24 +76,25 @@ export function buildFetch(inner: typeof globalThis.fetch, options: { apiKey: st
             url = u.toString();
         }
 
+        return await inner(url, { ...init, headers });
+    }
+}
+
+export function withTrace(inner: typeof globalThis.fetch) {
+    return async function fetchWithTrace(url: Parameters<typeof globalThis.fetch>[0], init?: Parameters<typeof globalThis.fetch>[1]) {
+        const headers = init?.headers as Record<string, string> ?? {};
+
         // trace request
-        if (options.debug) {
-            console.error({ url, method: init?.method, headers, body: init?.body });
-        }
+        console.error({ url, method: init?.method, headers, body: init?.body });
 
         const response = await inner(url, { ...init, headers });
 
         // trace response
         if (!response.ok) {
-            if (options.debug) {
-                console.error({ response, text: await response.text() });
-            }
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            console.error({ response, text: await response.text() });
+            throw new Error(`Error: ${response.status} - ${response.statusText}`); // ここで例外を投げないとresponseを後続で消費されてしまう
         }
-        if (options.debug) {
-            console.error({ response }); // 正常系のときにレスポンスを消費したくない
-        }
-
+        console.error({ response }); // 正常系のときにレスポンスを消費したくない
         return response
     }
 }
