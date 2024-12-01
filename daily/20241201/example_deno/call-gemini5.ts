@@ -36,8 +36,8 @@ Available subcommands:
             apiKey: "GEMINI_API_KEY",
             debug: "DEBUG",
         },
-        helpText: helpText,
         stopEarly: true,
+        helpText: helpText,
     });
 
     const rest = args._;

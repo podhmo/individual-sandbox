@@ -88,10 +88,74 @@ APIのドキュメントがまた別の箇所に存在していた。
 - サブコマンドにすることにした
 - json,textのformatを選択できるようにした
 
-## 05 サブコマンドのbase側に共通オプションを持たせてみる (broken)
+```console
+$ deno run -A call-gemini4.ts --help
+Usage: gemini-client
+
+Available subcommands:
+  list-model -- listing models
+  chat       -- chat with model
+
+$ deno run -A call-gemini4.ts list-model --help
+Usage: list-model [options]
+
+Options:
+  --apiKey     <string> (required) (default: apiKey="...")    (env: GEMINI_API_KEY)
+  --baseUrl    <string> (default: baseUrl="https://generativelanguage.googleapis.com")
+  --format     <string> one of ["text","json"], (default: format=text)
+  --debug      (default: debug=false)    (env: DEBUG)
+  --help       show help
+
+
+$ deno run -A call-gemini4.ts chat --help
+Usage: chat [options]
+
+Options:
+  --apiKey     <string> (required) (default: apiKey="...")    (env: GEMINI_API_KEY)
+  --baseUrl    <string> (default: baseUrl="https://generativelanguage.googleapis.com")
+  --model      <string> one of ["gemini-1.5-flash","gemini-1.5-flash-8b","gemini-1.5-pro"], (default: model=gemini-1.5-flash)
+  --debug      (default: debug=false)    (env: DEBUG)
+  --help       show help
+```
+
+## 05 サブコマンドのbase側に共通オプションを持たせてみる
+
+（あんまり重要な変更ではない。どちらかといえばコマンドオプションの解釈的な話）
 
 stopEarlyをつければサブコマンドも定義できはする。
-（ヘルプメッセージが出せない。restrictionだけではなくoptionsも持てないとだめ？）
+
+- ヘルプメッセージを変数に持って自分で書かないとだめかも？
+  - サブコマンドが存在しなかったときにヘルプメッセージを表示できない -> buildHelp()できるような仕組みを作る？
+  - 生成されたヘルプメッセージにサブコマンドの内容を表示できない     -> footerオプションを作る？
+
+```console
+$ deno run -A call-gemini5.ts --help
+Usage: gemini-client [options] <subcommand> [args]
+Options:
+  --apiKey     <string> (required) (env: GEMINI_API_KEY)
+  --baseUrl    <string> (required) (default: baseUrl=https://generativelanguage.googleapis.com)
+  --debug      (default: debug=false)    (env: DEBUG)
+  --help       show help
+
+Available subcommands:
+  list-model -- listing models
+  chat       -- chat with model
+
+
+$ deno run -A call-gemini5.ts list-model --help
+Usage: list-model [options]
+
+Options:
+  --format    <string> one of ["text","json"], (default: format=text)
+  --help      show help
+
+
+$ deno run -A call-gemini5.ts chat --help Usage: chat [options]
+
+Options:
+  --model    <string> one of ["gemini-1.5-flash","gemini-1.5-flash-8b","gemini-1.5-pro"], (default: model=gemini-1.5-flash)
+  --help     show help
+```
 
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
