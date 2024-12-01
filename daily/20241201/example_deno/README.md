@@ -78,6 +78,16 @@ APIのドキュメントがまた別の箇所に存在していた。
 - :memo: SSEの中身を調べる
 - :memo: いままでAPIに渡すパラメーターが同じものだった。
 
+## 04 テキトーにモデルの一覧を表示させてみる (sub command)
+
+サブコマンドを定義しようとすると同じ記述の重複が目立つようになるかもしれない。
+あとは、fetchの利用にmodelが必須になっていた部分が牙を剥く感がある（これはmodelが必須というよりはpath変数部分のdefaultが存在しうるという話かも？）。
+
+特に意味はないが以下のことをした
+
+- サブコマンドにすることにした
+- json,textのformatを選択できるようにした
+
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
 - https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
