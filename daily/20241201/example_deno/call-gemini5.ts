@@ -37,6 +37,7 @@ Available subcommands:
             debug: "DEBUG",
         },
         helpText: helpText,
+        stopEarly: true,
     });
 
     const rest = args._;
@@ -59,7 +60,6 @@ async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
     const formats = ["text", "json"] as const;
     const defaultFormat = "text" as const;
 
-    // FIXME: --helpがbase側に吸われてしまいこのヘルプが表示されない
     const args0 = parseArgs(cliArgs, {
         name: "list-model",
         string: ["format"],

@@ -88,6 +88,11 @@ APIのドキュメントがまた別の箇所に存在していた。
 - サブコマンドにすることにした
 - json,textのformatを選択できるようにした
 
+## 05 サブコマンドのbase側に共通オプションを持たせてみる (broken)
+
+stopEarlyをつければサブコマンドも定義できはする。
+（ヘルプメッセージが出せない。restrictionだけではなくoptionsも持てないとだめ？）
+
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
 - https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
