@@ -1,10 +1,16 @@
-/** これは失敗作!! (see FIXME) */
-
 import { moreStrict, parseArgs } from "jsr:@podhmo/with-help@0.5.1";
 import "jsr:@std/dotenv/load";
 import { events } from "jsr:@lukeed/fetch-event-stream@0.1.5";
 
 export const BASE_URL = "https://generativelanguage.googleapis.com";
+
+interface DefaultOptions {
+    model: Model;
+}
+
+const defaultOptions: DefaultOptions = {
+    model: "gemini-1.5-flash",
+};
 
 interface BaseOptions {
     apiKey: string;
@@ -24,7 +30,7 @@ Available subcommands:
   list-model -- listing models
   chat       -- chat with model`;
 
-    const args = parseArgs(Deno.args, {
+    const baseOptions = parseArgs(Deno.args, {
         name: "gemini-client",
         string: ["apiKey", "baseUrl"],
         boolean: ["debug"],
@@ -40,12 +46,12 @@ Available subcommands:
         helpText: helpText,
     });
 
-    const rest = args._;
+    const rest = baseOptions._;
     switch (rest[0]) {
         case "list-model":
-            return await listModelCommand(rest.slice(1), args);
+            return await listModelCommand(rest.slice(1), baseOptions);
         case "chat":
-            return await chatCommand(rest.slice(1), args);
+            return await chatCommand(rest.slice(1), baseOptions);
         default: {
             // FIXME: helpTextをここで表示するためにはhelpTextを変数に持つ必要がある
             console.error(helpText);
@@ -60,9 +66,10 @@ async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
     const formats = ["text", "json"] as const;
     const defaultFormat = "text" as const;
 
-    const args0 = parseArgs(cliArgs, {
+    const options0 = parseArgs(cliArgs, {
         name: "list-model",
         string: ["format"],
+        boolean: ["debug"],
         required: ["format"],
         default: {
             format: defaultFormat,
@@ -74,20 +81,20 @@ async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
         },
     });
 
-    const choices = moreStrict(args0).choices;
-    const args = { ...args0, format: choices(args0.format, formats) };
+    const choices = moreStrict(options0).choices;
+    const options = { ...options0, format: choices(options0.format, formats) };
 
     const fetch = buildFetch(globalThis.fetch, {
+        ...defaultOptions,
         ...baseOptions,
-        ...args,
-        model: "gemini-1.5-flash-8b", // modelが必要になるのは微妙かもしれない
+        ...options,
     });
 
     try {
         const response = await fetch("/v1beta/models");
         const data = await response.json(); // todo: typing
 
-        switch (args.format) {
+        switch (options.format) {
             case "json":
                 console.log(JSON.stringify(data, null, 2));
                 break;
@@ -99,7 +106,7 @@ async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
                 }
                 break;
             default: {
-                const _: never = args.format;
+                const _: never = options.format;
                 throw new Error("unexpected format");
             }
         }
@@ -109,11 +116,12 @@ async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
 }
 
 async function chatCommand(cliArgs: string[], baseOptions: BaseOptions) {
-    const defaultModel = "gemini-1.5-flash" as const;
-    const args0 = parseArgs(cliArgs, {
+    const defaultModel = defaultOptions.model;
+    const options0 = parseArgs(cliArgs, {
         name: "chat",
         string: ["model"],
         required: ["model"],
+        boolean: ["debug"],
         default: {
             model: defaultModel,
         },
@@ -124,10 +132,14 @@ async function chatCommand(cliArgs: string[], baseOptions: BaseOptions) {
         },
     });
 
-    const choices = moreStrict(args0).choices;
-    const args = { ...args0, model: choices(args0.model, models) };
+    const choices = moreStrict(options0).choices;
+    const options = { ...options0, model: choices(options0.model, models) };
 
-    const fetch = buildFetch(globalThis.fetch, { ...baseOptions, ...args });
+    const fetch = buildFetch(globalThis.fetch, {
+        ...defaultOptions,
+        ...baseOptions,
+        ...options,
+    });
 
     try {
         // see: https://ai.google.dev/gemini-api/docs/api-key?hl=ja
@@ -145,7 +157,7 @@ async function chatCommand(cliArgs: string[], baseOptions: BaseOptions) {
                 method: "POST",
                 signal: abort.signal,
                 body: JSON.stringify(payload),
-                model: args.model,
+                model: options.model,
             },
         );
 

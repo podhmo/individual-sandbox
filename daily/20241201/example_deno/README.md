@@ -150,7 +150,8 @@ Options:
   --help      show help
 
 
-$ deno run -A call-gemini5.ts chat --help Usage: chat [options]
+$ deno run -A call-gemini5.ts chat --help
+Usage: chat [options]
 
 Options:
   --model    <string> one of ["gemini-1.5-flash","gemini-1.5-flash-8b","gemini-1.5-pro"], (default: model=gemini-1.5-flash)
