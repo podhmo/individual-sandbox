@@ -5,21 +5,25 @@ import { events } from "jsr:@lukeed/fetch-event-stream@0.1.5";
 async function main() {
     const showHelp = () => {
         console.error("Usage: gemini-client");
-        console.error("  available subcommands:");
-        console.error("    list-model");
-        console.error("    chat");
+        console.log("")
+        console.error("Available subcommands:");
+        console.error("  list-model -- listing models");
+        console.error("  chat       -- chat with model");
         Deno.exit(1);
     };
+
     if (Deno.args.length === 0) {
         showHelp();
     }
 
-    if (Deno.args[0] == "list-model") {
-        await listModelCommand(Deno.args.slice(1));
-    } else if (Deno.args[0] == "chat") {
-        await chatCommand(Deno.args.slice(1));
-    } else {
-        showHelp();
+    switch (Deno.args[0]) {
+        case "list-model":
+            return await listModelCommand(Deno.args.slice(1));
+        case "chat":
+            return await chatCommand(Deno.args.slice(1));
+        default: {
+            showHelp();
+        }
     }
 }
 
@@ -60,11 +64,20 @@ async function listModelCommand(cliArgs: string[]) {
         const response = await fetch("/v1beta/models");
         const data = await response.json(); // todo: typing
 
-        if (args.format === "json") {
-            console.log(JSON.stringify(data, null, 2));
-        } else { // text
-            for (const m of data.models) {
-                console.log(`${m.name}: ${m.displayName}\n\t${m.description}`);
+        switch (args.format) {
+            case "json":
+                console.log(JSON.stringify(data, null, 2));
+                break;
+            case "text":
+                for (const m of data.models) {
+                    console.log(
+                        `${m.name}: ${m.displayName}\n\t${m.description}`,
+                    );
+                }
+                break;
+            default: {
+                const _: never = args.format;
+                throw new Error("unexpected format");
             }
         }
     } catch (error) {
