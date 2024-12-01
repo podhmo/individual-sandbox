@@ -1,48 +1,71 @@
+/** これは失敗作!! (see FIXME) */
+
 import { moreStrict, parseArgs } from "jsr:@podhmo/with-help@0.5.1";
 import "jsr:@std/dotenv/load";
 import { events } from "jsr:@lukeed/fetch-event-stream@0.1.5";
 
-async function main() {
-    const showHelp = () => {
-        console.error("Usage: gemini-client");
-        console.log("");
-        console.error("Available subcommands:");
-        console.error("  list-model -- listing models");
-        console.error("  chat       -- chat with model");
-        Deno.exit(1);
-    };
+export const BASE_URL = "https://generativelanguage.googleapis.com";
 
-    if (Deno.args.length === 0) {
-        showHelp();
-    }
-
-    switch (Deno.args[0]) {
-        case "list-model":
-            return await listModelCommand(Deno.args.slice(1));
-        case "chat":
-            return await chatCommand(Deno.args.slice(1));
-        default: {
-            showHelp();
-        }
-    }
+interface BaseOptions {
+    apiKey: string;
+    baseUrl: string;
+    debug: boolean;
 }
 
-async function listModelCommand(cliArgs: string[]) {
-    const formats = ["text", "json"] as const;
-    const defaultFormat = "text" as const;
+async function main() {
+    const helpText = `Usage: gemini-client [options] <subcommand> [args]
+Options:
+  --apiKey     <string> (required) (env: GEMINI_API_KEY)
+  --baseUrl    <string> (required) (default: baseUrl=${BASE_URL})
+  --debug      (default: debug=false)    (env: DEBUG)
+  --help       show help
 
-    const args0 = parseArgs(cliArgs, { // ほとんどの引数は共通なので毎回書くのは面倒かもしれない
-        name: "list-model",
-        string: ["apiKey", "baseUrl", "format"],
+Available subcommands:
+  list-model -- listing models
+  chat       -- chat with model`;
+
+    const args = parseArgs(Deno.args, {
+        name: "gemini-client",
+        string: ["apiKey", "baseUrl"],
         boolean: ["debug"],
-        required: ["apiKey", "format"],
+        required: ["apiKey", "baseUrl"],
         default: {
             baseUrl: BASE_URL,
-            format: defaultFormat,
         },
         envvar: {
             apiKey: "GEMINI_API_KEY",
             debug: "DEBUG",
+        },
+        helpText: helpText,
+    });
+
+    const rest = args._;
+    switch (rest[0]) {
+        case "list-model":
+            return await listModelCommand(rest.slice(1), args);
+        case "chat":
+            return await chatCommand(rest.slice(1), args);
+        default: {
+            // FIXME: helpTextをここで表示するためにはhelpTextを変数に持つ必要がある
+            console.error(helpText);
+            console.error("");
+            console.error(`Error: unknown subcommand ${rest[0] ?? ""}`);
+            Deno.exit(1);
+        }
+    }
+}
+
+async function listModelCommand(cliArgs: string[], baseOptions: BaseOptions) {
+    const formats = ["text", "json"] as const;
+    const defaultFormat = "text" as const;
+
+    // FIXME: --helpがbase側に吸われてしまいこのヘルプが表示されない
+    const args0 = parseArgs(cliArgs, {
+        name: "list-model",
+        string: ["format"],
+        required: ["format"],
+        default: {
+            format: defaultFormat,
         },
         flagDescription: {
             "format": `one of ${
@@ -55,6 +78,7 @@ async function listModelCommand(cliArgs: string[]) {
     const args = { ...args0, format: choices(args0.format, formats) };
 
     const fetch = buildFetch(globalThis.fetch, {
+        ...baseOptions,
         ...args,
         model: "gemini-1.5-flash-8b", // modelが必要になるのは微妙かもしれない
     });
@@ -84,20 +108,14 @@ async function listModelCommand(cliArgs: string[]) {
     }
 }
 
-async function chatCommand(cliArgs: string[]) {
+async function chatCommand(cliArgs: string[], baseOptions: BaseOptions) {
     const defaultModel = "gemini-1.5-flash" as const;
     const args0 = parseArgs(cliArgs, {
         name: "chat",
-        string: ["apiKey", "baseUrl", "model"],
-        boolean: ["debug"],
-        required: ["apiKey", "model"],
+        string: ["model"],
+        required: ["model"],
         default: {
-            baseUrl: BASE_URL,
             model: defaultModel,
-        },
-        envvar: {
-            apiKey: "GEMINI_API_KEY",
-            debug: "DEBUG",
         },
         flagDescription: {
             "model": `one of ${
@@ -109,7 +127,7 @@ async function chatCommand(cliArgs: string[]) {
     const choices = moreStrict(args0).choices;
     const args = { ...args0, model: choices(args0.model, models) };
 
-    const fetch = buildFetch(globalThis.fetch, args);
+    const fetch = buildFetch(globalThis.fetch, { ...baseOptions, ...args });
 
     try {
         // see: https://ai.google.dev/gemini-api/docs/api-key?hl=ja
@@ -164,7 +182,6 @@ export const models = [
 export type Model = typeof models[number];
 
 export type Endpoint = keyof APIDoc;
-export const BASE_URL = "https://generativelanguage.googleapis.com";
 
 /** the specialized version of fetch() function for Gemini */
 export function buildFetch(
