@@ -1,16 +1,12 @@
-import { moreStrict, parseArgs } from "jsr:@podhmo/with-help@0.5.1";
+import { moreStrict, parseArgs, printHelp } from "jsr:@podhmo/with-help@0.5.2";
 import "jsr:@std/dotenv/load";
 import { events } from "jsr:@lukeed/fetch-event-stream@0.1.5";
 
 export const BASE_URL = "https://generativelanguage.googleapis.com";
 
-interface DefaultOptions {
-    model: Model;
-}
-
-const defaultOptions: DefaultOptions = {
+const defaultOptions = {
     model: "gemini-1.5-flash",
-};
+} as const;
 
 interface BaseOptions {
     apiKey: string;
@@ -19,19 +15,9 @@ interface BaseOptions {
 }
 
 async function main() {
-    const helpText = `Usage: gemini-client [options] <subcommand> [args]
-Options:
-  --apiKey     <string> (required) (env: GEMINI_API_KEY)
-  --baseUrl    <string> (required) (default: baseUrl=${BASE_URL})
-  --debug      (default: debug=false)    (env: DEBUG)
-  --help       show help
-
-Available subcommands:
-  list-model -- listing models
-  chat       -- chat with model`;
-
     const baseOptions = parseArgs(Deno.args, {
         name: "gemini-client",
+        usageText: "gemini-client [options] <subcommand> [subcommand-options]",
         string: ["apiKey", "baseUrl"],
         boolean: ["debug"],
         required: ["apiKey", "baseUrl"],
@@ -43,7 +29,10 @@ Available subcommands:
             debug: "DEBUG",
         },
         stopEarly: true,
-        helpText: helpText,
+        footer: `
+Subcommands:
+  list-model -- listing models
+  chat       -- chat with model`,
     });
 
     const rest = baseOptions._;
@@ -53,9 +42,7 @@ Available subcommands:
         case "chat":
             return await chatCommand(rest.slice(1), baseOptions);
         default: {
-            // FIXME: helpTextをここで表示するためにはhelpTextを変数に持つ必要がある
-            console.error(helpText);
-            console.error("");
+            printHelp(baseOptions);
             console.error(`Error: unknown subcommand ${rest[0] ?? ""}`);
             Deno.exit(1);
         }
