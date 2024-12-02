@@ -10,7 +10,7 @@ async function main() {
             "gemini-apikey",
             "gemini-model",
         ],
-        boolean: ["debug"],
+        boolean: ["debug", "post"],
         required: ["identifier", "password", "gemini-apikey", "gemini-model"],
         envvar: {
             identifier: "BSKY_IDENTIFIER",
@@ -24,12 +24,12 @@ async function main() {
         },
         flagDescription: {
             content: "content of the post. if not provided, read from stdin",
+            post: "post to bluesky",
         },
     });
 
     // geminiで翻訳してからblueskyに投稿する
     const post = async (content: string) => {
-        console.dir({ ...args, content });
         const fetch = Gemini.buildFetch(globalThis.fetch, {
             apiKey: args["gemini-apikey"],
             model: args["gemini-model"] as Gemini.Model,
@@ -54,9 +54,9 @@ async function main() {
         }
 
         // console.log(JSON.stringify(data, null, 2));
-        console.log("input: ", content);
+        console.log("元の文章: ", content);
         // console.dir(data, { depth: 10 });
-        console.log("output: ", generatedText);
+        console.log("翻訳: ", generatedText);
 
         let revivedText = "";
         {
@@ -74,12 +74,14 @@ async function main() {
             const data = await response.json();
             revivedText = data.candidates[0].content.parts[0].text;
         }
-        console.log("revived: ", revivedText);
+        console.log("再翻訳: ", revivedText);
 
-        const postContent =
-            `元の文章: ${content.trimEnd()}\n\n翻訳: ${generatedText.trimEnd()}\n\n再翻訳: ${revivedText.trimEnd()}`;
+        if (args.post) {
+            const postContent =
+                `元の文章: ${content.trimEnd()}\n\n翻訳: ${generatedText.trimEnd()}\n\n再翻訳: ${revivedText.trimEnd()}`;
 
-        await Bluesky.post({ ...args, content: postContent });
+            await Bluesky.post({ ...args, content: postContent });
+        }
     };
 
     try {
