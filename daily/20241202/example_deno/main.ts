@@ -1,9 +1,54 @@
-// 標準ライブラリだけでHTTPリクエストを行うコード例
-async function postToBluesky(
-    username: string,
-    password: string,
-    content: string,
-) {
+import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
+import "jsr:@std/dotenv/load";
+
+async function main() {
+    const args = parseArgs(Deno.args, {
+        string: ["identifier", "password", "content"],
+        boolean: ["debug"],
+        required: ["identifier", "password"],
+        envvar: {
+            identifier: "BSKY_IDENTIFIER",
+            password: "BSKY_PASSWORD",
+            debug: "DEBUG",
+        },
+        flagDescription: {
+            content: "content of the post. if not provided, read from stdin",
+        },
+    });
+
+    const decoder = new TextDecoder();
+    try {
+        if (args.content !== undefined) {
+            let content = args.content;
+            if (content.startsWith("file:")) {
+                const path = content.slice("file:".length);
+                content = await Deno.readTextFile(path);
+            }
+            await postToBluesky({ ...args, content });
+        } else {
+            for await (const chunk of Deno.stdin.readable) {
+                const content = decoder.decode(chunk);
+                await postToBluesky({ ...args, content });
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function postToBluesky(options: {
+    identifier: string;
+    password: string;
+    content: string;
+    debug: boolean;
+}) {
+    const { identifier, password, content } = options;
+
+    let fetch = globalThis.fetch;
+    if (options.debug) {
+        fetch = withTrace(fetch);
+    }
+
     const baseUrl = "https://bsky.social/xrpc";
 
     // 認証エンドポイント
@@ -16,7 +61,7 @@ async function postToBluesky(
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            identifier: username,
+            identifier: identifier,
             password: password,
         }),
     });
@@ -63,15 +108,32 @@ async function postToBluesky(
     console.log("Post successful:", postResult);
 }
 
-// 使用例
-(async () => {
-    const username = "your-username"; // Blueskyのユーザー名
-    const password = "your-password"; // パスワード
-    const content = "Hello, Bluesky! This is a test post.";
+export function withTrace(inner: typeof globalThis.fetch) {
+    return async function fetchWithTrace(
+        url: Parameters<typeof globalThis.fetch>[0],
+        init?: Parameters<typeof globalThis.fetch>[1],
+    ) {
+        const headers = init?.headers as Record<string, string> ?? {};
 
-    try {
-        await postToBluesky(username, password, content);
-    } catch (error) {
-        console.error(error);
-    }
-})();
+        // trace request
+        console.error({
+            request: { url, method: init?.method, headers, body: init?.body },
+        });
+
+        const response = await inner(url, { ...init, headers });
+
+        // trace response
+        if (!response.ok) {
+            console.error({ response, text: await response.text() });
+            throw new Error(
+                `Error: ${response.status} - ${response.statusText}`,
+            ); // ここで例外を投げないとresponseを後続で消費されてしまう
+        }
+        console.error({ response }); // 正常系のときにレスポンスを消費したくない
+        return response;
+    };
+}
+
+if (import.meta.main) {
+    await main();
+}
