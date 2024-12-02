@@ -158,6 +158,9 @@ Options:
   --help     show help
 ```
 
+>[!NOTE]
+> 追記: 0.5.2 で解決した
+
 ## references
 - https://ai.google.dev/gemini-api/docs/api-key?hl=ja
 - https://ai.google.dev/gemini-api/docs/text-generation?hl=ja&lang=rest
