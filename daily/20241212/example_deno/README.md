@@ -58,9 +58,23 @@ Available Commands:
 
 auth statusと言いつつauth doctorのようなものかも？
 
+- https://docs.bsky.app/docs/api/app-bsky-actor-get-profile
 
+access tokenからdidかhandleを手に入れる方法はあるんだろうか？
+:thought-balloon: .envではなくconfigに情報を書き込みたいかも？
+baseurlを表示したらまずいのでは？
+
+```console
+$ deno run -A main.ts auth status
+https://bsky.social/xrpc
+  ✅️ Logged in to https://bsky.social/xrpc
+  handle: podhmo.bsky.social
+  display name: podhmo
+  access token: **********... length=337
+```  
 
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
 - [gist -- bskyにスレッドで投稿したい](https://gist.github.com/podhmo/19a4e189dd5c9a8d3af871139c51b9fe)
+- https://docs.bsky.app/docs/api/app-bsky-actor-get-profile

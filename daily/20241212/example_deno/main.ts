@@ -61,7 +61,8 @@ namespace AuthCommand {
             footer: `
     Available Commands:
       login:  login to bluesky
-      status: show login status`,
+      status: show login status
+      token: show token`,
         });
 
         const args = options._;
@@ -77,6 +78,9 @@ namespace AuthCommand {
             case "status":
                 await status(args.slice(1), options);
                 break;
+            case "token":
+                token(args.slice(1), options);
+                break;
             default:
                 console.error(
                     `%cunknown command: ${args[0]}`,
@@ -87,6 +91,7 @@ namespace AuthCommand {
         }
     }
 
+    /** login */
     export async function login(args: string[], baseOptions: BaseOptions) {
         const options = parseArgs(args, {
             name: "bsky auth login",
@@ -144,6 +149,7 @@ namespace AuthCommand {
         await Deno.writeTextFile(".env", lines.join("\n"), { append: true });
     }
 
+    /** show login status */
     export async function status(args: string[], baseOptions: BaseOptions) {
         const _options = parseArgs(args, {
             name: "bsky auth status",
@@ -155,7 +161,6 @@ namespace AuthCommand {
                 "actor": "BSKY_HANDLE", // TODO: get actor from access token
             },
         });
-
         const options = { ...baseOptions, ..._options };
 
         console.log(`%c${options.baseUrl}`, "font-weight: bold");
@@ -181,6 +186,22 @@ namespace AuthCommand {
             }... length=${options["access-token"].length}`,
         );
         // console.log("%o", profile);
+    }
+
+    /** show token */
+    function token(args: string[], baseOptions: BaseOptions) {
+        const _options = parseArgs(args, {
+            name: "bsky auth token",
+            string: ["access-token"],
+            boolean: ["debug"],
+            required: ["access-token"],
+            envvar: {
+                "access-token": "BSKY_ACCESS_TOKEN",
+            },
+        });
+        const options = { ...baseOptions, ..._options };
+
+        console.log(`${options["access-token"]}`);
     }
 }
 
