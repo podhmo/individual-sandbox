@@ -14,7 +14,8 @@ async function main() {
         stopEarly: true, // for subcommand
         footer: `
 Available Commands:
-  auth: authentication for bluesky`,
+  auth: authentication for bluesky
+  post: post to bluesky`,
     });
 
     const args = baseOptions._;
@@ -27,6 +28,9 @@ Available Commands:
         case "auth":
             await AuthCommand.main(args.slice(1), baseOptions);
             break;
+        case "post":
+            await PostCommand.main(args.slice(1), baseOptions);
+            break;
         default:
             console.error(
                 `%cunknown command: ${args[0]}`,
@@ -34,6 +38,47 @@ Available Commands:
             );
             printHelp(baseOptions);
             break;
+    }
+}
+
+// deno-lint-ignore no-namespace
+namespace PostCommand {
+    export async function main(
+        baseArgs: string[],
+        baseOptions: { debug: boolean },
+    ) {
+        const _options = parseArgs(baseArgs, {
+            name: "bsky post",
+            boolean: ["debug"],
+            string: ["access-token", "did"],
+            required: ["access-token", "did"],
+            default: {
+                debug: baseOptions.debug,
+            },
+            envvar: {
+                "access-token": "BSKY_ACCESS_TOKEN",
+                "did": "BSKY_DID",
+            },
+        });
+
+        const options = { ...baseOptions, ..._options };
+        const fetch = Bluesky.buildFetch(globalThis.fetch, {
+            accessJwt: options["access-token"],
+            debug: options.debug,
+        });
+
+        const res = await Bluesky.post(fetch, {
+            did: options.did,
+            content: options._.join(" "),
+        });
+        if (!res.ok) {
+            console.error("post failed", res.status, await res.text());
+            return;
+        }
+        console.log(
+            "post success%o",
+            await res.json(),
+        );
     }
 }
 
@@ -393,6 +438,44 @@ namespace Bluesky {
             `${BASE_URL}/app.bsky.actor.getProfile?actor=${input.actor}`,
             {
                 method: "GET",
+            },
+        );
+    }
+
+    /** post */
+    export interface PostInput {
+        did: string; // DID of the account
+
+        content: string;
+        createdAt?: string;
+    }
+    export type PostOutput = unknown;
+
+    export async function post(
+        fetch: Fetch,
+        input: PostInput,
+    ): Promise<Response & { json: () => Promise<PostOutput> }> {
+        const createdAt = input.createdAt ?? new Date().toISOString(); // 現在時刻をISO 8601形式で取得
+
+        const repo = input.did;
+        const content = input.content;
+        return await fetch(
+            `${BASE_URL}/com.atproto.repo.createRecord`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    repo,
+                    collection: "app.bsky.feed.post",
+                    record: { // https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/feed/post.json#L9
+                        $type: "app.bsky.feed.post",
+                        text: content,
+                        createdAt,
+                        // TODO: reply
+                    },
+                }),
             },
         );
     }

@@ -84,6 +84,24 @@ auth tokenを作るときに`--access-token`をrequiredにしておくのは何�
 
 ❇️ denoのdotenvはコメントに対応しているみたいなので便利だった
 
+## 06 投稿する処理を書く
+
+雑に書いてみる。
+こちらはmainをそのまま渡せれば良い気がする。
+
+```console
+$ deno run -A main.ts post hello world
+post success{
+  uri: "at://did:plc:hpog7qvhzybjzzjq3p5eq6ei/app.bsky.feed.post/3ld4gd4lytr2i",
+  cid: "bafyreiccmxud4vop4i4l6arf6rja25tktos5566zdzp5zetaqguqpnarza",
+  commit: {
+    cid: "bafyreidnbhaa2vek3zh4sgcbzvsmejavvgzesa23woowmw2wvst5yjjf5q",
+    rev: "3ld4gd4m7oj2i"
+  },
+  validationStatus: "valid"
+}
+```
+
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
