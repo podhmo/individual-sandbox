@@ -65,7 +65,7 @@ export namespace PostCommand {
 
         const res = await Bluesky.post(fetch, {
             did: options.did,
-            content: options._.join(" "),
+            contents: options._,
         });
         if (!res.ok) {
             console.error("post failed", res.status, await res.text());
@@ -452,38 +452,59 @@ export namespace Bluesky {
         input: {
             did: string; // DID of the account
 
-            content: string;
+            contents: string[];
             createdAt?: string;
         },
     ): Promise<Response & { json: () => Promise<PostOutput> }> {
-        const createdAt = input.createdAt ?? new Date().toISOString(); // 現在時刻をISO 8601形式で取得
+        // TODO: backoff
+        // TODO: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
 
         const repo = input.did;
-        const content = input.content;
 
-        // TODO: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
-        // TODO: threads https://docs.bsky.app/docs/advanced-guides/posts#replies
+        // for replies https://docs.bsky.app/docs/advanced-guides/posts#replies
+        let root: { uri: string; cid: string } | undefined = undefined;
+        let parent: { uri: string; cid: string } | undefined = undefined;
 
-        return await fetch(
-            `${BASE_URL}/com.atproto.repo.createRecord`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    repo,
-                    collection: "app.bsky.feed.post",
-                    record: { // https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/feed/post.json#L9
-                        $type: "app.bsky.feed.post",
-                        text: content,
-                        createdAt,
-                        // langs: ["ja", "en"], // TODO: langs
-                        // TODO: reply
+        let i = 0;
+        for (const content of input.contents) {
+            const createdAt = input.createdAt ?? new Date().toISOString(); // 現在時刻をISO 8601形式で取得
+
+            const res = await fetch(
+                `${BASE_URL}/com.atproto.repo.createRecord`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
                     },
-                }),
-            },
-        );
+                    body: JSON.stringify({
+                        repo,
+                        collection: "app.bsky.feed.post",
+                        record: { // https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/feed/post.json#L9
+                            $type: "app.bsky.feed.post",
+                            text: content,
+                            createdAt,
+                            // langs: ["ja", "en"], // TODO: langs
+                            reply: root ? { root, parent } : undefined, // https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/repo/strongRef.json
+                        },
+                    }),
+                },
+            );
+            if (!res.ok) {
+                return res;
+            }
+
+            i++;
+            if (i === input.contents.length) {
+                return res;
+            }
+
+            const { uri, cid } = await res.json();
+            parent = { uri, cid };
+            if (root === undefined) {
+                root = { ...parent };
+            }
+        }
+        throw new Error("unreachable"); // never
     }
 
     export type Fetch = (

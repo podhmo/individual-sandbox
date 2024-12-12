@@ -104,6 +104,10 @@ post success{
 
 このあとスレッドを追加したりmentionを追加したりしないとダメそう。
 
+## 07 とりあえず引数を分けてスレッドで保存する処理を書く
+
+この辺awaitのためにfor-ofを使うことになるけれど末端だけ返すみたいなコードを書くのがだるいな。。
+
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
