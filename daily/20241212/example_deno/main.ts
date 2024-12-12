@@ -25,7 +25,7 @@ Available Commands:
     }
     switch (args[0]) {
         case "auth":
-            await authCommand(args.slice(1), baseOptions);
+            await AuthCommand.main(args.slice(1), baseOptions);
             break;
         default:
             console.error(
@@ -37,9 +37,13 @@ Available Commands:
     }
 }
 
-async function authCommand(baseArgs: string[], baseOptions: BaseOptions) {
-    async function login(args: string[], baseOptions: BaseOptions) {
-        // login
+// deno-lint-ignore no-namespace
+namespace AuthCommand {
+    export interface BaseOptions {
+        debug: boolean;
+    }
+
+    export async function login(args: string[], baseOptions: BaseOptions) {
         const options = parseArgs(args, {
             name: "bsky auth login",
             string: ["identifier", "password"],
@@ -95,35 +99,37 @@ async function authCommand(baseArgs: string[], baseOptions: BaseOptions) {
         await Deno.writeTextFile(".env", lines.join("\n"), { append: true });
     }
 
-    const options = parseArgs(baseArgs, {
-        name: "bsky auth login",
-        boolean: ["debug"],
-        default: {
-            debug: baseOptions.debug,
-        },
-        stopEarly: true, // for subcommand
-        footer: `
-Available Commands:
-  login: login to bluesky`,
-    });
+    export async function main(baseArgs: string[], baseOptions: BaseOptions) {
+        const options = parseArgs(baseArgs, {
+            name: "bsky auth login",
+            boolean: ["debug"],
+            default: {
+                debug: baseOptions.debug,
+            },
+            stopEarly: true, // for subcommand
+            footer: `
+    Available Commands:
+      login: login to bluesky`,
+        });
 
-    const args = options._;
-    if (args.length === 0) {
-        console.error("%cneed command:", "color: red; font-weight: bold");
-        printHelp(options);
-        return;
-    }
-    switch (args[0]) {
-        case "login":
-            await login(args.slice(1), options);
-            break;
-        default:
-            console.error(
-                `%cunknown command: ${args[0]}`,
-                "color: red; font-weight: bold",
-            );
+        const args = options._;
+        if (args.length === 0) {
+            console.error("%cneed command:", "color: red; font-weight: bold");
             printHelp(options);
-            break;
+            return;
+        }
+        switch (args[0]) {
+            case "login":
+                await login(args.slice(1), options);
+                break;
+            default:
+                console.error(
+                    `%cunknown command: ${args[0]}`,
+                    "color: red; font-weight: bold",
+                );
+                printHelp(options);
+                break;
+        }
     }
 }
 
