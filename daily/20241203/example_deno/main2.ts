@@ -45,7 +45,8 @@ async function main() {
         return;
     }
     const data = await response.json();
-    console.log(JSON.stringify(data, null, 2));
+    const url = data.html_url;
+    console.log(`created a gist: ${url}`);
 }
 
 if (import.meta.main) {
