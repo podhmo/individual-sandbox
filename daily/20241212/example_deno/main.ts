@@ -9,10 +9,12 @@ export async function main() {
         name: "bsky",
         boolean: ["debug"],
         stopEarly: true, // for subcommand
-        footer: `
-Available Commands:
-  auth: authentication for bluesky
-  post: post to bluesky`,
+        footer: [
+            "",
+            "Available Commands:",
+            "  auth: authentication for bluesky",
+            "  post: post to bluesky",
+        ].join("\n"),
     });
 
     const args = baseOptions._;
@@ -100,12 +102,14 @@ export namespace AuthCommand {
                 baseUrl: Bluesky.BASE_URL,
             },
             stopEarly: true, // for subcommand
-            footer: `
-Available Commands:
-    login:  login to bluesky
-    status: show login status
-    token: show token
-    refresh: refresh token`,
+            footer: [
+                "",
+                "Available Commands:",
+                "  login:  login to bluesky",
+                "  status: show login status",
+                "  token: show token",
+                "  refresh: refresh token",
+            ].join("\n"),
         });
 
         const args = options._;
