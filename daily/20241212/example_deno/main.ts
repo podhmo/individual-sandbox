@@ -62,7 +62,8 @@ namespace AuthCommand {
     Available Commands:
       login:  login to bluesky
       status: show login status
-      token: show token`,
+      token: show token
+      refresh: refresh token`,
         });
 
         const args = options._;
@@ -80,6 +81,9 @@ namespace AuthCommand {
                 break;
             case "token":
                 token(args.slice(1), options);
+                break;
+            case "refresh":
+                await refresh(args.slice(1), options);
                 break;
             default:
                 console.error(
@@ -125,11 +129,11 @@ namespace AuthCommand {
             password = input.trim();
         }
 
-        let fetch = globalThis.fetch;
-        if (options.debug) {
-            fetch = withTrace(fetch);
-        }
-        const res = await Bluesky.login(fetch, { identifier, password });
+        const res = await Bluesky.login(fetch, {
+            identifier,
+            password,
+            debug: options.debug,
+        });
         if (!res.ok) {
             console.error("login failed", res.status, await res.text());
             return;
@@ -139,7 +143,9 @@ namespace AuthCommand {
         const session = await res.json();
         const lines: string[] = [];
         lines.push("");
+        lines.push(`# login ${new Date().toISOString()}`);
         lines.push("BSKY_HANDLE = " + session.handle);
+        lines.push("BSKY_DID = " + session.did);
         lines.push(`BSKY_ACCESS_TOKEN = ${session.accessJwt}`);
         lines.push(`BSKY_REFRESH_TOKEN = ${session.refreshJwt}`);
 
@@ -168,16 +174,23 @@ namespace AuthCommand {
             console.error(`  ❌️ Logged in to ${options.baseUrl}`);
             return;
         }
-        console.log(`  ✅️ Logged in to ${options.baseUrl}`);
 
         const fetch = Bluesky.buildFetch(globalThis.fetch, {
             accessJwt: options["access-token"],
             debug: options.debug,
         });
-
-        const profile = await Bluesky.getProfile(fetch, {
+        const res = await Bluesky.getProfile(fetch, {
             actor: options.actor, // TODO: get actor from access token
         });
+        if (!res.ok) {
+            console.error(
+                `  ❌️ Logged in to ${options.baseUrl} with invalid token[${res.status}]`,
+            );
+            return;
+        }
+
+        console.log(`  ✅️ Logged in to ${options.baseUrl}`);
+        const profile = await res.json();
         console.log(`  handle: ${profile.handle}`);
         console.log(`  display name: ${profile.displayName}`);
         console.log(
@@ -202,6 +215,46 @@ namespace AuthCommand {
         const options = { ...baseOptions, ..._options };
 
         console.log(`${options["access-token"]}`);
+    }
+
+    async function refresh(args: string[], baseOptions: BaseOptions) {
+        const _options = parseArgs(args, {
+            name: "bsky auth refresh",
+            string: ["access-token", "refresh-token", "handle", "did"],
+            boolean: ["debug"],
+            required: ["access-token", "refresh-token", "handle", "did"],
+            envvar: {
+                "access-token": "BSKY_ACCESS_TOKEN",
+                "refresh-token": "BSKY_REFRESH_TOKEN",
+                "handle": "BSKY_HANDLE",
+                "did": "BSKY_DID",
+            },
+        });
+        const options = { ...baseOptions, ..._options };
+
+        const res = await Bluesky.refresh(globalThis.fetch, {
+            refreshJwt: options["refresh-token"],
+            debug: options.debug,
+        });
+        if (!res.ok) {
+            console.error("refresh failed", res.status, await res.text());
+            return;
+        }
+
+        console.log("%crefresh success", "color: green; font-weight: bold");
+        const session = await res.json();
+        const lines: string[] = [];
+        lines.push("");
+        lines.push(`# refreshed at ${new Date().toISOString()}`);
+        lines.push("BSKY_HANDLE = " + session.handle);
+        lines.push("BSKY_DID = " + session.did);
+        lines.push(`BSKY_ACCESS_TOKEN = ${session.accessJwt}`);
+        lines.push(`BSKY_REFRESH_TOKEN = ${session.refreshJwt}`);
+
+        if (options.debug) {
+            console.debug("save to .env");
+        }
+        await Deno.writeTextFile(".env", lines.join("\n"), { append: true });
     }
 }
 
@@ -244,14 +297,46 @@ namespace Bluesky {
     /** login */
     export function login(
         fetch: typeof globalThis.fetch,
-        input: LoginInput,
+        input: LoginInput & { debug: boolean },
     ): Promise<Response & { json: () => Promise<LoginOutput> }> {
+        if (input.debug) {
+            fetch = withTrace(fetch);
+        }
         return fetch(`${BASE_URL}/com.atproto.server.createSession`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(input),
+        });
+    }
+
+    export interface RefreshInput {
+        refreshJwt: string;
+    }
+    export interface RefreshOutput {
+        refreshJwt: string;
+        handle: string;
+        did: string;
+        didDoc?: unknown; // TODO
+        active?: boolean;
+        status?: string; // [active, takedown, suspended, deactivated]?
+    }
+
+    /** refresh https://docs.bsky.app/docs/api/com-atproto-server-refresh-session */
+    export function refresh(
+        _fetch: typeof globalThis.fetch,
+        input: RefreshInput & { debug: boolean },
+    ): Promise<Response & { json: () => Promise<RefreshOutput> }> {
+        const fetch = buildFetch(_fetch, {
+            accessJwt: input.refreshJwt, // requires auth using the `refreshJwt` (not the `accessJwt`)
+            debug: input.debug,
+        });
+        return fetch(`${BASE_URL}/com.atproto.server.refreshSession`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
         });
     }
 
@@ -303,14 +388,13 @@ namespace Bluesky {
     export async function getProfile(
         fetch: Fetch,
         input: GetProfileInput,
-    ): Promise<GetProfileOutput> {
-        const res = await fetch(
+    ): Promise<Response & { json: () => Promise<GetProfileOutput> }> {
+        return await fetch(
             `${BASE_URL}/app.bsky.actor.getProfile?actor=${input.actor}`,
             {
                 method: "GET",
             },
         );
-        return await res.json();
     }
 
     export type Fetch = (

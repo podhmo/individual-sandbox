@@ -73,6 +73,17 @@ https://bsky.social/xrpc
   access token: **********... length=337
 ```  
 
+## 04 auth tokenを作る
+
+auth tokenを作るときに`--access-token`をrequiredにしておくのは何か変な気がする？
+
+## 05 auth refreshを作る
+
+基本的にはrefresh tokenで認証するだけ。
+この辺書いていてどのfetchを呼ぶ実装なのかわからなくなってきた。
+
+❇️ denoのdotenvはコメントに対応しているみたいなので便利だった
+
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
