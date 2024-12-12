@@ -118,10 +118,44 @@ $ deno run -A main.ts post hello world
 facetsというものを設定しないとだめなのか
 
 https://docs.bsky.app/docs/advanced-guides/post-richtext
-https://github.com/bluesky-social/atproto/blob/a940c3fceff7a03e434b12b4dc9ce71ceb3bb419/packages/api/src/rich-text/rich-text.ts
+https://www.npmjs.com/package/@atproto/api#rich-text
 
-```ts
+```diff
+--- a/daily/20241212/example_deno/main.ts
++++ b/daily/20241212/example_deno/main.ts
+@@ -2,6 +2,7 @@ import "jsr:@std/dotenv/load";
+ import { parseArgs, printHelp } from "jsr:@podhmo/with-help@0.5.2";
+ import { promptSecret } from "jsr:@std/cli@1.0.8/prompt-secret";
+ import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
++import { RichText } from "npm:@atproto/api@0.13.20";
+ 
+ 
+@@ -469,6 +469,12 @@ export namespace Bluesky {
+         for (const content of input.contents) {
+             const createdAt = input.createdAt ?? new Date().toISOString(); // 迴ｾ蝨ｨ譎ょ綾繧棚SO 8601蠖｢蠑上〒蜿門ｾ・ 
++            // for: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
++            // https://www.npmjs.com/package/@atproto/api#rich-text
++            const rt = new RichText({ text: content });
++            const agent = undefined; // TODO: agent
++            await rt.detectFacets(agent); // detect facets such as links and mentions
++
+             const res = await fetch(
+                 `${BASE_URL}/com.atproto.repo.createRecord`,
+                 {
+@@ -481,7 +487,8 @@ export namespace Bluesky {
+                         collection: "app.bsky.feed.post",
+                         record: { // https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/feed/post.json#L9
+                             $type: "app.bsky.feed.post",
+-                            text: content,
++                            text: rt.text,
++                            facets: rt.facets,
+                             createdAt,
+                             // langs: ["ja", "en"], // TODO: langs
+                             reply: root ? { root, parent } : undefined, // https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/repo/strongRef.json
+
 ```
+
+ただこれをやってもリンクとして機能するだけでPWAなどがやっているthumbnailを付与したカード的な見た目のリンクにはならないみたい。
 
 # references
 
