@@ -44,6 +44,49 @@ namespace AuthCommand {
         baseUrl: string;
     }
 
+    export async function main(
+        baseArgs: string[],
+        baseOptions: { debug: boolean },
+    ) {
+        const options = parseArgs(baseArgs, {
+            name: "bsky auth",
+            boolean: ["debug"],
+            string: ["baseUrl"],
+            required: ["baseUrl"],
+            default: {
+                debug: baseOptions.debug,
+                baseUrl: Bluesky.BASE_URL,
+            },
+            stopEarly: true, // for subcommand
+            footer: `
+    Available Commands:
+      login:  login to bluesky
+      status: show login status`,
+        });
+
+        const args = options._;
+        if (args.length === 0) {
+            console.error("%cneed command:", "color: red; font-weight: bold");
+            printHelp(options);
+            return;
+        }
+        switch (args[0]) {
+            case "login":
+                await login(args.slice(1), options);
+                break;
+            case "status":
+                await status(args.slice(1), options);
+                break;
+            default:
+                console.error(
+                    `%cunknown command: ${args[0]}`,
+                    "color: red; font-weight: bold",
+                );
+                printHelp(options);
+                break;
+        }
+    }
+
     export async function login(args: string[], baseOptions: BaseOptions) {
         const options = parseArgs(args, {
             name: "bsky auth login",
@@ -138,49 +181,6 @@ namespace AuthCommand {
             }... length=${options["access-token"].length}`,
         );
         // console.log("%o", profile);
-    }
-
-    export async function main(
-        baseArgs: string[],
-        baseOptions: { debug: boolean },
-    ) {
-        const options = parseArgs(baseArgs, {
-            name: "bsky auth",
-            boolean: ["debug"],
-            string: ["baseUrl"],
-            required: ["baseUrl"],
-            default: {
-                debug: baseOptions.debug,
-                baseUrl: Bluesky.BASE_URL,
-            },
-            stopEarly: true, // for subcommand
-            footer: `
-    Available Commands:
-      login:  login to bluesky
-      status: show login status`,
-        });
-
-        const args = options._;
-        if (args.length === 0) {
-            console.error("%cneed command:", "color: red; font-weight: bold");
-            printHelp(options);
-            return;
-        }
-        switch (args[0]) {
-            case "login":
-                await login(args.slice(1), options);
-                break;
-            case "status":
-                await status(args.slice(1), options);
-                break;
-            default:
-                console.error(
-                    `%cunknown command: ${args[0]}`,
-                    "color: red; font-weight: bold",
-                );
-                printHelp(options);
-                break;
-        }
     }
 }
 
