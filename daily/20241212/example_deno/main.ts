@@ -41,6 +41,7 @@ Available Commands:
 namespace AuthCommand {
     export interface BaseOptions {
         debug: boolean;
+        baseUrl: string;
     }
 
     export async function login(args: string[], baseOptions: BaseOptions) {
@@ -90,6 +91,7 @@ namespace AuthCommand {
         const session = await res.json();
         const lines: string[] = [];
         lines.push("");
+        lines.push("BSKY_HANDLE = " + session.handle);
         lines.push(`BSKY_ACCESS_TOKEN = ${session.accessJwt}`);
         lines.push(`BSKY_REFRESH_TOKEN = ${session.refreshJwt}`);
 
@@ -99,17 +101,63 @@ namespace AuthCommand {
         await Deno.writeTextFile(".env", lines.join("\n"), { append: true });
     }
 
-    export async function main(baseArgs: string[], baseOptions: BaseOptions) {
-        const options = parseArgs(baseArgs, {
-            name: "bsky auth login",
+    export async function status(args: string[], baseOptions: BaseOptions) {
+        const _options = parseArgs(args, {
+            name: "bsky auth status",
+            string: ["access-token", "actor"],
             boolean: ["debug"],
+            required: ["access-token", "actor"],
+            envvar: {
+                "access-token": "BSKY_ACCESS_TOKEN",
+                "actor": "BSKY_HANDLE", // TODO: get actor from access token
+            },
+        });
+
+        const options = { ...baseOptions, ..._options };
+
+        console.log(`%c${options.baseUrl}`, "font-weight: bold");
+        if (options["access-token"] === undefined) {
+            console.error(`  ❌️ Logged in to ${options.baseUrl}`);
+            return;
+        }
+        console.log(`  ✅️ Logged in to ${options.baseUrl}`);
+
+        const fetch = Bluesky.buildFetch(globalThis.fetch, {
+            accessJwt: options["access-token"],
+            debug: options.debug,
+        });
+
+        const profile = await Bluesky.getProfile(fetch, {
+            actor: options.actor, // TODO: get actor from access token
+        });
+        console.log(`  handle: ${profile.handle}`);
+        console.log(`  display name: ${profile.displayName}`);
+        console.log(
+            `  access token: ${
+                options["access-token"].replaceAll(/./g, "*").substring(0, 10)
+            }... length=${options["access-token"].length}`,
+        );
+        // console.log("%o", profile);
+    }
+
+    export async function main(
+        baseArgs: string[],
+        baseOptions: { debug: boolean },
+    ) {
+        const options = parseArgs(baseArgs, {
+            name: "bsky auth",
+            boolean: ["debug"],
+            string: ["baseUrl"],
+            required: ["baseUrl"],
             default: {
                 debug: baseOptions.debug,
+                baseUrl: Bluesky.BASE_URL,
             },
             stopEarly: true, // for subcommand
             footer: `
     Available Commands:
-      login: login to bluesky`,
+      login:  login to bluesky
+      status: show login status`,
         });
 
         const args = options._;
@@ -121,6 +169,9 @@ namespace AuthCommand {
         switch (args[0]) {
             case "login":
                 await login(args.slice(1), options);
+                break;
+            case "status":
+                await status(args.slice(1), options);
                 break;
             default:
                 console.error(
@@ -135,7 +186,7 @@ namespace AuthCommand {
 
 // deno-lint-ignore no-namespace
 namespace Bluesky {
-    export const baseUrl = "https://bsky.social/xrpc";
+    export const BASE_URL = "https://bsky.social/xrpc";
 
     export interface LoginInput {
         identifier: string;
@@ -169,17 +220,110 @@ namespace Bluesky {
         active: boolean;
     }
 
+    /** login */
     export function login(
         fetch: typeof globalThis.fetch,
         input: LoginInput,
     ): Promise<Response & { json: () => Promise<LoginOutput> }> {
-        return fetch(`${baseUrl}/com.atproto.server.createSession`, {
+        return fetch(`${BASE_URL}/com.atproto.server.createSession`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(input),
         });
+    }
+
+    export interface GetProfileInput {
+        /** actor is Handle or DID of account*/
+        actor: string;
+    }
+    export interface GetProfileOutput {
+        did: string;
+        handle: string;
+        displayName: string;
+        avatar: string;
+        associated: {
+            lists: number;
+            feedgens: number;
+            starterPacks: number;
+            labeler: boolean;
+            chat: {
+                allowIncoming: string;
+            };
+        };
+        viewer: {
+            muted: boolean;
+            blockedBy: boolean;
+            knownFollowers: {
+                count: number;
+                followers: {
+                    did: string;
+                    handle: string;
+                    displayName: string;
+                    avatar: string;
+                    associated: unknown; // TODO
+                    viewer: unknown; // TODO
+                    labels: unknown[]; // TODO
+                    createdAt: string;
+                }[];
+            };
+        };
+        labels: unknown[]; // TODO
+        createdAt: string;
+        description: string;
+        indexedAt: string;
+        followersCount: number;
+        followsCount: number;
+        postsCount: number;
+    }
+
+    /** get profile */
+    export async function getProfile(
+        fetch: Fetch,
+        input: GetProfileInput,
+    ): Promise<GetProfileOutput> {
+        const res = await fetch(
+            `${BASE_URL}/app.bsky.actor.getProfile?actor=${input.actor}`,
+            {
+                method: "GET",
+            },
+        );
+        return await res.json();
+    }
+
+    export type Fetch = (
+        url: string,
+        init?: RequestInit & { headers?: Record<string, string> },
+    ) => Promise<Response>;
+
+    export function buildFetch(
+        inner: typeof globalThis.fetch,
+        options: { accessJwt: string; baseUrl?: string } & { debug?: boolean },
+    ) {
+        if (options.debug) {
+            inner = withTrace(inner);
+        }
+        let baseUrl = options.baseUrl ?? BASE_URL;
+        if (!baseUrl.endsWith("/")) {
+            baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+        }
+
+        return async function fetch(
+            url: string, // url or path
+            init?: RequestInit & { headers?: Record<string, string> }, // Iterable<string[]> を省略
+        ): Promise<Response> {
+            init = init ?? {};
+            const headers = init.headers ?? {};
+
+            if (url.startsWith("/")) {
+                url = `${baseUrl}${url}`;
+            }
+            if (url.startsWith(baseUrl)) {
+                headers["Authorization"] = `Bearer ${options.accessJwt}`;
+            }
+            return await inner(url, { ...init, headers });
+        };
     }
 }
 
