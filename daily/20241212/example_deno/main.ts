@@ -3,11 +3,7 @@ import { parseArgs, printHelp } from "jsr:@podhmo/with-help@0.5.2";
 import { promptSecret } from "jsr:@std/cli@1.0.8/prompt-secret";
 import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
 
-interface BaseOptions {
-    debug: boolean;
-}
-
-async function main() {
+export async function main() {
     const baseOptions = parseArgs(Deno.args, {
         name: "bsky",
         boolean: ["debug"],
@@ -42,7 +38,7 @@ Available Commands:
 }
 
 // deno-lint-ignore no-namespace
-namespace PostCommand {
+export namespace PostCommand {
     export async function main(
         baseArgs: string[],
         baseOptions: { debug: boolean },
@@ -83,7 +79,7 @@ namespace PostCommand {
 }
 
 // deno-lint-ignore no-namespace
-namespace AuthCommand {
+export namespace AuthCommand {
     export interface BaseOptions {
         debug: boolean;
         baseUrl: string;
@@ -304,13 +300,8 @@ Available Commands:
 }
 
 // deno-lint-ignore no-namespace
-namespace Bluesky {
+export namespace Bluesky {
     export const BASE_URL = "https://bsky.social/xrpc";
-
-    export interface LoginInput {
-        identifier: string;
-        password: string;
-    }
 
     export interface LoginOutput {
         did: string;
@@ -342,7 +333,10 @@ namespace Bluesky {
     /** login */
     export function login(
         fetch: typeof globalThis.fetch,
-        input: LoginInput & { debug: boolean },
+        input: {
+            identifier: string;
+            password: string;
+        } & { debug: boolean },
     ): Promise<Response & { json: () => Promise<LoginOutput> }> {
         if (input.debug) {
             fetch = withTrace(fetch);
@@ -356,9 +350,6 @@ namespace Bluesky {
         });
     }
 
-    export interface RefreshInput {
-        refreshJwt: string;
-    }
     export interface RefreshOutput {
         refreshJwt: string;
         handle: string;
@@ -371,7 +362,11 @@ namespace Bluesky {
     /** refresh https://docs.bsky.app/docs/api/com-atproto-server-refresh-session */
     export function refresh(
         _fetch: typeof globalThis.fetch,
-        input: RefreshInput & { debug: boolean },
+        input:
+            & {
+                refreshJwt: string;
+            }
+            & { debug: boolean },
     ): Promise<Response & { json: () => Promise<RefreshOutput> }> {
         const fetch = buildFetch(_fetch, {
             accessJwt: input.refreshJwt, // requires auth using the `refreshJwt` (not the `accessJwt`)
@@ -385,10 +380,6 @@ namespace Bluesky {
         });
     }
 
-    export interface GetProfileInput {
-        /** actor is Handle or DID of account*/
-        actor: string;
-    }
     export interface GetProfileOutput {
         did: string;
         handle: string;
@@ -432,7 +423,10 @@ namespace Bluesky {
     /** get profile */
     export async function getProfile(
         fetch: Fetch,
-        input: GetProfileInput,
+        input: {
+            /** actor is Handle or DID of account*/
+            actor: string;
+        },
     ): Promise<Response & { json: () => Promise<GetProfileOutput> }> {
         return await fetch(
             `${BASE_URL}/app.bsky.actor.getProfile?actor=${input.actor}`,
@@ -442,23 +436,34 @@ namespace Bluesky {
         );
     }
 
-    /** post */
-    export interface PostInput {
-        did: string; // DID of the account
-
-        content: string;
-        createdAt?: string;
+    export interface PostOutput {
+        uri: string;
+        cid: string;
+        commit: {
+            cid: string;
+            rev: string;
+        };
+        validationStatus: string; // "valid" | "invalid"?
     }
-    export type PostOutput = unknown;
 
+    /** post  https://docs.bsky.app/docs/api/com-atproto-repo-create-record */
     export async function post(
         fetch: Fetch,
-        input: PostInput,
+        input: {
+            did: string; // DID of the account
+
+            content: string;
+            createdAt?: string;
+        },
     ): Promise<Response & { json: () => Promise<PostOutput> }> {
         const createdAt = input.createdAt ?? new Date().toISOString(); // 現在時刻をISO 8601形式で取得
 
         const repo = input.did;
         const content = input.content;
+
+        // TODO: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
+        // TODO: threads https://docs.bsky.app/docs/advanced-guides/posts#replies
+
         return await fetch(
             `${BASE_URL}/com.atproto.repo.createRecord`,
             {
@@ -473,6 +478,7 @@ namespace Bluesky {
                         $type: "app.bsky.feed.post",
                         text: content,
                         createdAt,
+                        // langs: ["ja", "en"], // TODO: langs
                         // TODO: reply
                     },
                 }),

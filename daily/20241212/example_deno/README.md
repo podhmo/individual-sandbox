@@ -102,8 +102,11 @@ post success{
 }
 ```
 
+このあとスレッドを追加したりmentionを追加したりしないとダメそう。
+
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
 - [gist -- bskyにスレッドで投稿したい](https://gist.github.com/podhmo/19a4e189dd5c9a8d3af871139c51b9fe)
 - https://docs.bsky.app/docs/api/app-bsky-actor-get-profile
+- https://docs.bsky.app/docs/advanced-guides/posts
