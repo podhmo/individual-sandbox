@@ -59,11 +59,11 @@ namespace AuthCommand {
             },
             stopEarly: true, // for subcommand
             footer: `
-    Available Commands:
-      login:  login to bluesky
-      status: show login status
-      token: show token
-      refresh: refresh token`,
+Available Commands:
+    login:  login to bluesky
+    status: show login status
+    token: show token
+    refresh: refresh token`,
         });
 
         const args = options._;
