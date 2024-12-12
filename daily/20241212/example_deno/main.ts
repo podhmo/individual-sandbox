@@ -2,6 +2,7 @@ import "jsr:@std/dotenv/load";
 import { parseArgs, printHelp } from "jsr:@podhmo/with-help@0.5.2";
 import { promptSecret } from "jsr:@std/cli@1.0.8/prompt-secret";
 import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
+import { RichText } from "npm:@atproto/api@0.13.20";
 
 export async function main() {
     const baseOptions = parseArgs(Deno.args, {
@@ -457,7 +458,6 @@ export namespace Bluesky {
         },
     ): Promise<Response & { json: () => Promise<PostOutput> }> {
         // TODO: backoff
-        // TODO: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
 
         const repo = input.did;
 
@@ -468,6 +468,12 @@ export namespace Bluesky {
         let i = 0;
         for (const content of input.contents) {
             const createdAt = input.createdAt ?? new Date().toISOString(); // 現在時刻をISO 8601形式で取得
+
+            // for: mentions and links https://docs.bsky.app/docs/advanced-guides/posts#mentions-and-links
+            // https://www.npmjs.com/package/@atproto/api#rich-text
+            const rt = new RichText({ text: content });
+            const agent = undefined; // TODO: agent
+            await rt.detectFacets(agent); // detect facets such as links and mentions
 
             const res = await fetch(
                 `${BASE_URL}/com.atproto.repo.createRecord`,
@@ -481,7 +487,8 @@ export namespace Bluesky {
                         collection: "app.bsky.feed.post",
                         record: { // https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/feed/post.json#L9
                             $type: "app.bsky.feed.post",
-                            text: content,
+                            text: rt.text,
+                            facets: rt.facets,
                             createdAt,
                             // langs: ["ja", "en"], // TODO: langs
                             reply: root ? { root, parent } : undefined, // https://github.com/bluesky-social/atproto/blob/main/lexicons/com/atproto/repo/strongRef.json

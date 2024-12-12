@@ -108,9 +108,25 @@ post success{
 
 この辺awaitのためにfor-ofを使うことになるけれど末端だけ返すみたいなコードを書くのがだるいな。。
 
+```console
+# hello -> world というスレッドになる
+$ deno run -A main.ts post hello world
+```
+
+## 08 URLのリンクを反映させる
+
+facetsというものを設定しないとだめなのか
+
+https://docs.bsky.app/docs/advanced-guides/post-richtext
+https://github.com/bluesky-social/atproto/blob/a940c3fceff7a03e434b12b4dc9ce71ceb3bb419/packages/api/src/rich-text/rich-text.ts
+
+```ts
+```
+
 # references
 
 - https://jsr.io/@std/cli/doc/prompt-secret/~/promptSecret
 - [gist -- bskyにスレッドで投稿したい](https://gist.github.com/podhmo/19a4e189dd5c9a8d3af871139c51b9fe)
 - https://docs.bsky.app/docs/api/app-bsky-actor-get-profile
 - https://docs.bsky.app/docs/advanced-guides/posts
+- https://docs.bsky.app/docs/advanced-guides/post-richtext
