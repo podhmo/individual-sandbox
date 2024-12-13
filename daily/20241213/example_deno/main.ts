@@ -2,6 +2,8 @@ import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import "jsr:@std/dotenv/load";
+import { isAspectRatio } from "npm:@atproto/api@0.13.20";
+import _brrp__multiformats_scope_baseX from "../../../../../../../.cache/deno/npm/registry.npmjs.org/multiformats/9.9.0/cjs/vendor/base-x.js";
 
 // Cache for DID, accessJwt, and refreshJwt
 const cache = {
@@ -34,8 +36,8 @@ async function main() {
 
         // Example post
         const contents = [
-            "これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 );  Check out this amazing link: https://example.com",
-            "Here is another follow-up message in the thread.",
+            "これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
+            "そのあとここでコメントを追記してほしい",
         ];
 
         await postToBluesky(agent, contents);
@@ -68,7 +70,6 @@ async function fetchOGP(url: string) {
             doc.querySelector("meta[property='og:image']")?.getAttribute(
                 "content",
             ) || "";
-
         return { ogTitle, ogDescription, ogImage };
     } catch (error) {
         console.error("Failed to fetch OGP data", error);
@@ -110,6 +111,14 @@ async function postToBluesky(
         throw new Error("User is not logged in.");
     }
 
+    interface Ref {
+        uri: string;
+        cid: string;
+        [k: string]: unknown;
+    }
+    let root: Ref | undefined = undefined;
+    let parent: Ref | undefined = undefined;
+
     for (const content of contents) {
         // Detect links and fetch OGP data
         const urlMatch = content.match(/https?:\/\/\S+/);
@@ -122,44 +131,68 @@ async function postToBluesky(
         const richText = new RichText({ text: content });
         await richText.detectFacets(agent);
 
-        interface Ref {
-            uri: string;
-            cid: string;
-            [k: string]: unknown;
-        }
-        let root: Ref | undefined = undefined;
-        let parent: Ref | undefined = undefined;
-
         // Attach OGP data if available
-        const embed = ogpData && ogpData.ogImage
-            ? {
-                $type: "app.bsky.embed.images",
-                images: [
-                    {
-                        alt: ogpData.ogDescription || "",
-                        thumb: {
-                            cid: "",
-                            mimeType: "image/jpeg",
-                            url: ogpData.ogImage,
-                        },
-                        fullsize: {
-                            cid: "",
-                            mimeType: "image/jpeg",
-                            url: ogpData.ogImage,
-                        },
-                    },
-                ],
-            }
-            : undefined;
+        let embed = undefined;
+        if (ogpData && ogpData.ogImage) {
+            const imageRes = await fetch(ogpData.ogImage);
+            const contentType = imageRes.headers.get("content-type");
+            const blob = await imageRes.blob();
 
-            try {
+            // upload blob
+            let headers = {};
+            if (contentType) {
+                headers = { "Content-Type": contentType };
+            }
+            const blobRes = await agent.uploadBlob(blob, { headers });
+
+            // https://docs.bsky.app/docs/advanced-guides/posts#images-embeds
+            embed = {
+                $type: "app.bsky.embed.external",
+                external: {
+                    uri: ogpData.ogImage,
+                    title: ogpData.ogTitle || "",
+                    description: ogpData.ogDescription || "",
+                    thumb: {
+                        "$type": "blob",
+                        "ref": {
+                            "$link": blobRes.data.blob.ref.toString(),
+                        },
+                        "mimetype": blobRes.data.blob.mimeType,
+                        size: blobRes.data.blob.size,
+                    },
+                },
+            };
+            embed = {
+                $type: "app.bsky.embed.images",
+                images: [{
+                    alt: ogpData.ogTitle || "",
+                    aspectRatio: { width: 191, height: 100 }, // guessing aspect ratio?
+                    image: {
+                        $type: "blob",
+                        ref: {
+                            $link: blobRes.data.blob.ref.toString(),
+                        },
+                        mimeType: blobRes.data.blob.mimeType,
+                        size: blobRes.data.blob.size,
+                    },
+                }],
+            };
+        }
+
+        try {
+            console.dir({
+                text: richText.text,
+                facets: richText.facets,
+                reply: root !== undefined ? { root, parent } : undefined,
+                embed: embed,
+            });
             const { uri, cid } = await agent.post({
                 text: richText.text,
                 facets: richText.facets,
                 reply: root !== undefined
                     ? { root, parent: parent ?? root }
                     : undefined,
-                embed,
+                embed: embed,
             });
 
             parent = { uri, cid };

@@ -39,3 +39,17 @@
 
 思ったのはライブラリを使うと不要なメソッドの補完候補が多いかも？あとimportする型を探しに行くのがめんどくさい(雑に手元で定義した)
 fetchを差し替える方法とか調べるのがめんどくさいな。。。
+
+以下の様なエラーが出てだるい。多分不足しているのだろう。
+
+> Failed to post to Bluesky Error: Invalid app.bsky.feed.post record: Record/embed/images/0 must have the property "image"
+
+## 02 埋め込みのコードが全然おかしいことに気づく
+
+- https://github.com/bluesky-social/atproto/blob/13636ba963225407f63c20253b983a92dcfe1bfa/lexicons/app/bsky/embed/record.json#L54
+- https://github.com/bluesky-social/atproto/blob/13636ba963225407f63c20253b983a92dcfe1bfa/lexicons/app/bsky/embed/images.json#L36
+
+何か型の構造が変わってるじゃん。。blobにploadする必要があった（使い回せないんだろうか？）。
+
+- https://docs.bsky.app/docs/advanced-guides/posts
+- https://docs.bsky.app/docs/api/com-atproto-repo-upload-blob
