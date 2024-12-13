@@ -28,3 +28,14 @@
 
 - https://chatgpt.com/share/675b77d8-89bc-8001-85c5-e2e3264806f2
 
+## 01 denoで動くように変更してみる
+
+- npmパッケージを使うようにimportを変更
+- DOMParserを利用できるように修正 https://github.com/b-fuze/deno-dom
+- refresh tokenの実装が読み込めないみたいなのでコメントアウト
+- parseArgs()を追加
+- dotenvの読み込みを追加
+- 型をあわせる
+
+思ったのはライブラリを使うと不要なメソッドの補完候補が多いかも？あとimportする型を探しに行くのがめんどくさい(雑に手元で定義した)
+fetchを差し替える方法とか調べるのがめんどくさいな。。。

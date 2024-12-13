@@ -1,4 +1,7 @@
-import { BskyAgent, RichText } from "@atproto/api";
+import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
+import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
+import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
+import "jsr:@std/dotenv/load";
 
 // Cache for DID, accessJwt, and refreshJwt
 const cache = {
@@ -11,6 +14,35 @@ const cache = {
 const BLUESKY_LOGIN_URL =
     "https://bsky.social/xrpc/com.atproto.server.createSession";
 const OGP_FETCH_TIMEOUT = 5000; // 5 seconds
+
+async function main() {
+    const agent = new BskyAgent({ service: BLUESKY_LOGIN_URL });
+    const options = parseArgs(Deno.args, {
+        string: ["identifier", "password"],
+        required: ["identifier", "password"],
+        envvar: {
+            identifier: "BSKY_IDENTIFIER",
+            password: "BSKY_PASSWORD",
+        },
+    });
+
+    const { identifier, password } = options;
+    try {
+        if (!cache.did || !cache.accessJwt) {
+            await login(agent, identifier, password);
+        }
+
+        // Example post
+        const contents = [
+            "これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 );  Check out this amazing link: https://example.com",
+            "Here is another follow-up message in the thread.",
+        ];
+
+        await postToBluesky(agent, contents);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 // Helper function to fetch OGP data
 async function fetchOGP(url: string) {
@@ -46,20 +78,20 @@ async function fetchOGP(url: string) {
     }
 }
 
-// Helper function to refresh accessJwt
-async function refreshAccessJwt(agent: BskyAgent) {
-    try {
-        const { data } = await agent.refreshSession({
-            refreshJwt: cache.refreshJwt,
-        });
-        cache.accessJwt = data.accessJwt;
-        cache.refreshJwt = data.refreshJwt;
-        return cache.accessJwt;
-    } catch (error) {
-        console.error("Failed to refresh accessJwt", error);
-        throw new Error("Session refresh failed");
-    }
-}
+// // Helper function to refresh accessJwt
+// async function refreshAccessJwt(agent: BskyAgent) {
+//     try {
+//         const { data } = await agent.refreshSession({
+//             refreshJwt: cache.refreshJwt,
+//         });
+//         cache.accessJwt = data.accessJwt;
+//         cache.refreshJwt = data.refreshJwt;
+//         return cache.accessJwt;
+//     } catch (error) {
+//         console.error("Failed to refresh accessJwt", error);
+//         throw new Error("Session refresh failed");
+//     }
+// }
 
 // Login function
 async function login(agent: BskyAgent, identifier: string, password: string) {
@@ -73,13 +105,10 @@ async function login(agent: BskyAgent, identifier: string, password: string) {
 async function postToBluesky(
     agent: BskyAgent,
     contents: string[],
-    rootPostUri?: string,
 ) {
     if (!cache.accessJwt) {
         throw new Error("User is not logged in.");
     }
-
-    let replyUri = rootPostUri;
 
     for (const content of contents) {
         // Detect links and fetch OGP data
@@ -93,9 +122,18 @@ async function postToBluesky(
         const richText = new RichText({ text: content });
         await richText.detectFacets(agent);
 
+        interface Ref {
+            uri: string;
+            cid: string;
+            [k: string]: unknown;
+        }
+        let root: Ref | undefined = undefined;
+        let parent: Ref | undefined = undefined;
+
         // Attach OGP data if available
         const embed = ogpData && ogpData.ogImage
             ? {
+                $type: "app.bsky.embed.images",
                 images: [
                     {
                         alt: ogpData.ogDescription || "",
@@ -114,17 +152,20 @@ async function postToBluesky(
             }
             : undefined;
 
-        try {
-            const { uri } = await agent.post({
+            try {
+            const { uri, cid } = await agent.post({
                 text: richText.text,
                 facets: richText.facets,
-                reply: replyUri
-                    ? { root: rootPostUri, parent: replyUri }
+                reply: root !== undefined
+                    ? { root, parent: parent ?? root }
                     : undefined,
                 embed,
             });
 
-            replyUri = uri; // Update for next post in the thread
+            parent = { uri, cid };
+            if (root === undefined) {
+                root = { uri, cid };
+            }
         } catch (error) {
             console.error("Failed to post to Bluesky", error);
             throw new Error("Post failed");
@@ -132,26 +173,6 @@ async function postToBluesky(
     }
 }
 
-(async () => {
-    const agent = new BskyAgent({ service: BLUESKY_LOGIN_URL });
-
-    // Replace with your credentials
-    const identifier = "your-username";
-    const password = "your-password";
-
-    try {
-        if (!cache.did || !cache.accessJwt) {
-            await login(agent, identifier, password);
-        }
-
-        // Example post
-        const contents = [
-            "Check out this amazing link: https://example.com",
-            "Here is another follow-up message in the thread.",
-        ];
-
-        await postToBluesky(agent, contents);
-    } catch (error) {
-        console.error(error);
-    }
-})();
+if (import.meta.main) {
+    await main();
+}
