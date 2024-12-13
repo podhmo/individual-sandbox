@@ -2,8 +2,6 @@ import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import "jsr:@std/dotenv/load";
-import { isAspectRatio } from "npm:@atproto/api@0.13.20";
-import _brrp__multiformats_scope_baseX from "../../../../../../../.cache/deno/npm/registry.npmjs.org/multiformats/9.9.0/cjs/vendor/base-x.js";
 
 // Cache for DID, accessJwt, and refreshJwt
 const cache = {
@@ -38,6 +36,7 @@ async function main() {
         const contents = [
             "これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
             "そのあとここでコメントを追記してほしい",
+            "リプライはどちらの形式でも動く？ `@podhmo` @podhmo ? `@podhmo.bsky.social` @podhmo.bsky.social ?",
         ];
 
         await postToBluesky(agent, contents);
@@ -180,12 +179,6 @@ async function postToBluesky(
         }
 
         try {
-            console.dir({
-                text: richText.text,
-                facets: richText.facets,
-                reply: root !== undefined ? { root, parent } : undefined,
-                embed: embed,
-            });
             const { uri, cid } = await agent.post({
                 text: richText.text,
                 facets: richText.facets,
