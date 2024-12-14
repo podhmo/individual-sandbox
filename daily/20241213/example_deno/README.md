@@ -184,3 +184,11 @@ https://www.amazon.co.jp/dp/B0CP31L73X/
                          $type: "blob",
                          mimeType: blobRes.data.blob.mimeType,
 ```
+
+## 06 fetch を渡せるようだった。
+
+> fetch を持ってこれた
+> 
+> https://github.com/bluesky-social/atproto/blob/main/packages/api/README.md#bring-your-own-fetch
+
+

@@ -1,6 +1,7 @@
 import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
+import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
 import "jsr:@std/dotenv/load";
 
 // Cache for DID, accessJwt, and refreshJwt
@@ -16,15 +17,22 @@ const BLUESKY_LOGIN_URL =
 const OGP_FETCH_TIMEOUT = 5000; // 5 seconds
 
 async function main() {
-    const agent = new BskyAgent({ service: BLUESKY_LOGIN_URL });
     const options = parseArgs(Deno.args, {
         string: ["identifier", "password"],
         required: ["identifier", "password"],
+        boolean: ["debug"],
         envvar: {
             identifier: "BSKY_IDENTIFIER",
             password: "BSKY_PASSWORD",
+            debug: "DEBUG",
         },
     });
+
+    let fetch = globalThis.fetch;
+    if (options.debug) {
+        fetch = withTrace(fetch);
+    }
+    const agent = new BskyAgent({ service: BLUESKY_LOGIN_URL, fetch: fetch });
 
     const { identifier, password } = options;
     try {
