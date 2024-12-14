@@ -1,6 +1,10 @@
-import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
-import { type Main as ComAtprotoRepoStrongRef } from "npm:@atproto/api@0.13.20/dist/client/types/com/atproto/repo/strongRef.d.ts";
-import { type Main as AppBskyEmbedExternal } from "npm:@atproto/api@0.13.20/dist/client/types/app/bsky/embed/external.d.ts";
+import {
+    AppBskyEmbedExternal,
+    BskyAgent,
+    ComAtprotoRepoStrongRef,
+    RichText,
+} from "npm:@atproto/api@0.13.20";
+
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
@@ -121,8 +125,8 @@ async function postToBluesky(
         throw new Error("User is not logged in.");
     }
 
-    let root: ComAtprotoRepoStrongRef | undefined = undefined;
-    let parent: ComAtprotoRepoStrongRef | undefined = undefined;
+    let root: ComAtprotoRepoStrongRef.Main | undefined = undefined;
+    let parent: ComAtprotoRepoStrongRef.Main | undefined = undefined;
 
     for (const content of contents) {
         // Detect links and fetch OGP data
@@ -137,7 +141,7 @@ async function postToBluesky(
         await richText.detectFacets(agent);
 
         // Attach OGP data if available
-        let embed: AppBskyEmbedExternal | undefined = undefined;
+        let embed: AppBskyEmbedExternal.Main | undefined = undefined;
         if (ogpData && ogpData.ogImage) {
             const imageRes = await fetch(ogpData.ogImage);
             const contentType = imageRes.headers.get("content-type");
@@ -150,7 +154,7 @@ async function postToBluesky(
             }
             const blobRes = await agent.uploadBlob(blob, { headers });
 
-            // https://docs.bsky.app/docs/advanced-guides/posts#images-embeds
+            // https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56#03-%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%81%97%E3%81%A6%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84
             embed = {
                 $type: "app.bsky.embed.external",
                 external: {

@@ -290,3 +290,7 @@ error: TS2353 [ERROR]: Object literal may only specify known properties, and '$t
 このカードのときの問題が型として再現する。
 
 - https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56#03-%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%81%97%E3%81%A6%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84
+
+## 08 import typeを諦める
+
+namespaceとしてのimportをそのまま使ってMainを型として使う。
