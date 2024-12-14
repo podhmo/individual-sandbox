@@ -1,4 +1,4 @@
-import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
+import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48";
 
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import { type Fetch, withTrace } from "jsr:@podhmo/build-fetch@0.1.0";

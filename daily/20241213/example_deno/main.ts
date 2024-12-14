@@ -8,6 +8,7 @@ import {
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
+import { collect as collectOGP, fill as fillOGP } from "jsr:@podhmo/ogp@0.1.0";
 import "jsr:@std/dotenv/load";
 
 // Cache for DID, accessJwt, and refreshJwt
@@ -72,19 +73,8 @@ async function fetchOGP(url: string) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
 
-        const ogTitle =
-            doc.querySelector("meta[property='og:title']")?.getAttribute(
-                "content",
-            ) || "";
-        const ogDescription =
-            doc.querySelector("meta[property='og:description']")?.getAttribute(
-                "content",
-            ) || "";
-        const ogImage =
-            doc.querySelector("meta[property='og:image']")?.getAttribute(
-                "content",
-            ) || "";
-        return { ogTitle, ogDescription, ogImage };
+        const ogp = collectOGP(doc);
+        return fillOGP(ogp, { url });
     } catch (error) {
         console.error("Failed to fetch OGP data", error);
         return null;
@@ -142,35 +132,38 @@ async function postToBluesky(
 
         // Attach OGP data if available
         let embed: AppBskyEmbedExternal.Main | undefined = undefined;
-        if (ogpData && ogpData.ogImage) {
-            const imageRes = await fetch(ogpData.ogImage);
-            const contentType = imageRes.headers.get("content-type");
-            const blob = await imageRes.blob();
-
-            // upload blob
-            let headers = {};
-            if (contentType) {
-                headers = { "Content-Type": contentType };
-            }
-            const blobRes = await agent.uploadBlob(blob, { headers });
-
+        if (ogpData) {
             // https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56#03-%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%81%97%E3%81%A6%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84
             embed = {
                 $type: "app.bsky.embed.external",
                 external: {
-                    uri: ogpData.ogImage,
+                    uri: ogpData.ogUrl || "",
                     title: ogpData.ogTitle || "",
                     description: ogpData.ogDescription || "",
-                    thumb: {
-                        $type: "blob",
-                        mimeType: blobRes.data.blob.mimeType,
-                        size: blobRes.data.blob.size,
-                        ref: {
-                            $link: blobRes.data.blob.ref.toString(),
-                        },
-                    },
                 },
             };
+
+            if (ogpData.ogImage) {
+                const imageRes = await fetch(ogpData.ogImage);
+                const contentType = imageRes.headers.get("content-type");
+                const blob = await imageRes.blob();
+
+                // upload blob
+                let headers = {};
+                if (contentType) {
+                    headers = { "Content-Type": contentType };
+                }
+                const blobRes = await agent.uploadBlob(blob, { headers });
+
+                embed.thumb = {
+                    $type: "blob",
+                    mimeType: blobRes.data.blob.mimeType,
+                    size: blobRes.data.blob.size,
+                    ref: {
+                        $link: blobRes.data.blob.ref.toString(),
+                    },
+                };
+            }
         }
 
         try {
