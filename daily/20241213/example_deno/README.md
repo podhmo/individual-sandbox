@@ -135,3 +135,52 @@ https://www.amazon.co.jp/Kindle-6%E3%82%A4%E3%83%B3%E3%83%81%E3%83%87%E3%82%A3%E
 ```
 https://www.amazon.co.jp/dp/B0CP31L73X/
 ```
+
+## 05 facetsを書き換えるいたずらができてしまう
+
+例えばこんな感じにリンク先のサムネイルと表記とは関係ないリンク先に飛ばせられる？
+
+```diff
+@@ -124,13 +124,26 @@ async function postToBluesky(
+         const urlMatch = content.match(/https?:\/\/\S+/);
+         let ogpData = null;
+         if (urlMatch) {
+-            ogpData = await fetchOGP(urlMatch[0]);
++            ogpData = await fetchOGP(
++                "https://zenn.dev/podhmo/scraps/fd66ac7dd07846",
++            );
+         }
+ 
+         // Create RichText with facets
+         const richText = new RichText({ text: content });
+         await richText.detectFacets(agent);
+ 
++        // いたずら (リンクをexample.netに変更)
++        if (richText?.facets?.length !== undefined) {
++            for (const facet of richText.facets) {
++                for (const feature of facet.features) {
++                    if (feature.$type === "app.bsky.richtext.facet#link") {
++                        feature.uri = "https://example.net";
++                    }
++                }
++            }
++        }
++
+         // Attach OGP data if available
+         let embed = undefined;
+         if (ogpData && ogpData.ogImage) {
+@@ -149,9 +162,10 @@ async function postToBluesky(
+             embed = {
+                 $type: "app.bsky.embed.external",
+                 external: {
+-                    uri: ogpData.ogImage,
+-                    title: ogpData.ogTitle || "",
+-                    description: ogpData.ogDescription || "",
++                    uri: "https://example.net",
++                    title: "クリックしないでください",
++                    description:
++                        "サムネイルはzennのものだしカードのurl表記はexample.netです",
+                     thumb: {
+                         $type: "blob",
+                         mimeType: blobRes.data.blob.mimeType,
+```
