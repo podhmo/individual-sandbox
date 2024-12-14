@@ -192,3 +192,78 @@ https://www.amazon.co.jp/dp/B0CP31L73X/
 > https://github.com/bluesky-social/atproto/blob/main/packages/api/README.md#bring-your-own-fetch
 
 
+## 07 型を真面目に付ける
+
+structural subtypingなのでいいでしょということでRefとかその場で定義していた。
+あと型のない形でembedとかを記述していたのでハマったときにだるかった(post()の引数でしか制約がかからないので)。
+
+> 型のあり方がわかんなかったdist以下か
+> 
+> https://www.npmjs.com/package/@atproto/api?activeTab=code
+> 
+> package.jsonをのぞくとdist/index.d.tsと言ってるし、npmのほうファイルにはdist/index.d.tsが含まれてて便利。雑にぜんぶexportっぽい。それはそうか。
+> 
+> （ところでnpmの方にはpermalinkが無い？）
+
+package.json
+
+```
+  "main": dist/index.js,
+  "types": dist/index.d.ts,
+```
+
+### deno + .d.ts + `import * as <> from ".dts"` の問題？
+
+
+何か上手く `import type { ComAtprotoRepoStrongRef } from "npm:@atproto/api@0.13.20";` とかできないみたい。
+
+```console
+$ deno check *.ts
+Check file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/main.ts
+Check file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/ogp.ts
+error: TS2709 [ERROR]: Cannot use namespace 'ComAtprotoRepoStrongRef' as a type.
+    let root: ComAtprotoRepoStrongRef | undefined = undefined;
+              ~~~~~~~~~~~~~~~~~~~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/main.ts:123:15
+
+TS2709 [ERROR]: Cannot use namespace 'ComAtprotoRepoStrongRef' as a type.
+    let parent: ComAtprotoRepoStrongRef | undefined = undefined;
+                ~~~~~~~~~~~~~~~~~~~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/main.ts:124:17
+
+Found 2 errors.
+```
+
+ついでにgoto definitionの位置が `~/.cache/deno/npm/registry.npmjs.org/@atproto/api/0.13.20/dist/client/types/com/atproto/repo/strongRef.d.ts` とかになっていた。そしてここには型の定義がない。
+
+```ts
+/**
+ * GENERATED CODE - DO NOT MODIFY
+ */
+import { ValidationResult } from '@atproto/lexicon';
+export interface Main {
+    uri: string;
+    cid: string;
+    [k: string]: unknown;
+}
+export declare function isMain(v: unknown): v is Main;
+export declare function validateMain(v: unknown): ValidationResult;
+//# sourceMappingURL=strongRef.d.ts.map
+```
+
+他の箇所でこれをnamespaceとしてimportしていてそれが参照されてしまっているみたいだ。
+
+```
+./client/types/app/bsky/feed/like.d.ts:import * as ComAtprotoRepoStrongRef from '../../../com/atproto/repo/strongRef';
+```
+
+追記:
+
+あ、StrongRef.Mainか。。それはそれで。。import typeができなくない？
+
+こういうのはナンセンスだと思ったりはするのだよな
+
+```ts
+import { type Main as ComAtprotoRepoStrongRef } from "npm:@atproto/api@0.13.20/dist/client/types/com/atproto/repo/strongRef.d.ts";
+import { type Main as AppBskyEmbedExternal } from "npm:@atproto/api@0.13.20/dist/client/types/app/bsky/embed/external.d.ts";
+```

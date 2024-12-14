@@ -1,4 +1,6 @@
 import { BskyAgent, RichText } from "npm:@atproto/api@0.13.20";
+import { type Main as ComAtprotoRepoStrongRef } from "npm:@atproto/api@0.13.20/dist/client/types/com/atproto/repo/strongRef.d.ts";
+import { type Main as AppBskyEmbedExternal } from "npm:@atproto/api@0.13.20/dist/client/types/app/bsky/embed/external.d.ts";
 import { DOMParser } from "jsr:@b-fuze/deno-dom@0.1.48/wasm";
 import { parseArgs } from "jsr:@podhmo/with-help@0.5.2";
 import { withTrace } from "jsr:@podhmo/build-fetch@0.1.0";
@@ -119,13 +121,8 @@ async function postToBluesky(
         throw new Error("User is not logged in.");
     }
 
-    interface Ref {
-        uri: string;
-        cid: string;
-        [k: string]: unknown;
-    }
-    let root: Ref | undefined = undefined;
-    let parent: Ref | undefined = undefined;
+    let root: ComAtprotoRepoStrongRef | undefined = undefined;
+    let parent: ComAtprotoRepoStrongRef | undefined = undefined;
 
     for (const content of contents) {
         // Detect links and fetch OGP data
@@ -140,7 +137,7 @@ async function postToBluesky(
         await richText.detectFacets(agent);
 
         // Attach OGP data if available
-        let embed = undefined;
+        let embed: AppBskyEmbedExternal | undefined = undefined;
         if (ogpData && ogpData.ogImage) {
             const imageRes = await fetch(ogpData.ogImage);
             const contentType = imageRes.headers.get("content-type");
