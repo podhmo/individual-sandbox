@@ -114,3 +114,24 @@ devtoolでwebuiを覗いて見て通信を見てみるとこんな感じ？
 ```
 
 通った。。何なんだ。。
+
+## 04 長いURLが死ぬ
+
+こういうamazonの商品詳細のURLなどを送ることができない。たぶんテキスト自体を縮めてfacetsでlinkを渡していたりしていそう。
+
+> Failed to post to Bluesky Error: Invalid app.bsky.feed.post record: Record/text must not be longer than 300 graphemes
+
+```
+https://www.amazon.co.jp/Kindle-6%E3%82%A4%E3%83%B3%E3%83%81%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4-%E9%9B%BB%E5%AD%90%E6%9B%B8%E7%B1%8D%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC-16GB-%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF-%E5%BA%83%E5%91%8A%E3%81%AA%E3%81%97/dp/B0CP31L73X/ref=mp_s_a_1_1?crid=29GAFXUGABQQ&dib=eyJ2IjoiMSJ9.tAy0qpDNl1JuUuzsizhU_4wzoqcfRXqmCDcVaZMFE9azHwM5LYgVjXr0Adf0fTv_O2RI-z6IetWf3IZYjE8ua4SYMPsG_jr9BNTuekDCIo6YcLfOJMGup20qxtqoK96WZBBiUZuag4QKtNBNzMHiFzeMOtHQz80mgmi_S2p-pqo5zCi63TiRZ26afdKeo1HZC1faon5t6n3tWPsCpOLpAw.vpMLv2crttDL9dziqILs7rcreRc7y0tmHC8gKJ_By2s&dib_tag=se&keywords=kindle+%E3%82%BF%E3%83%96%E3%83%AC%E3%83%83%E3%83%88&qid=1734143731&sprefix=kin%2Caps%2C203&sr=8-1
+```
+
+この前者がわからない
+
+- amazonの表示に対応しているか？
+- 長いURLに対応しているか？
+
+少し縮めてみる
+
+```
+https://www.amazon.co.jp/dp/B0CP31L73X/
+```

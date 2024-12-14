@@ -34,9 +34,10 @@ async function main() {
 
         // Example post
         const contents = [
-            "test: これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
-            "test: そのあとここでコメントを追記してほしい",
-            "test: リプライはどちらの形式でも動く？ `@podhmo` @podhmo ? `@podhmo.bsky.social` @podhmo.bsky.social ?",
+            // "test: これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
+            // "test: そのあとここでコメントを追記してほしい",
+            // "test: リプライはどちらの形式でも動く？ `@podhmo` @podhmo ? `@podhmo.bsky.social` @podhmo.bsky.social ?",
+            "test: これはスクリプトから https://www.amazon.co.jp/Kindle-6%E3%82%A4%E3%83%B3%E3%83%81%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4-%E9%9B%BB%E5%AD%90%E6%9B%B8%E7%B1%8D%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BC-16GB-%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF-%E5%BA%83%E5%91%8A%E3%81%AA%E3%81%97/dp/B0CP31L73X/",
         ];
 
         await postToBluesky(agent, contents);
