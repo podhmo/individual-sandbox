@@ -34,9 +34,9 @@ async function main() {
 
         // Example post
         const contents = [
-            "これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
-            "そのあとここでコメントを追記してほしい",
-            "リプライはどちらの形式でも動く？ `@podhmo` @podhmo ? `@podhmo.bsky.social` @podhmo.bsky.social ?",
+            "test: これはChatGPTに生成してもらったものを整形したもの ( https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56 )",
+            "test: そのあとここでコメントを追記してほしい",
+            "test: リプライはどちらの形式でも動く？ `@podhmo` @podhmo ? `@podhmo.bsky.social` @podhmo.bsky.social ?",
         ];
 
         await postToBluesky(agent, contents);
@@ -152,35 +152,23 @@ async function postToBluesky(
                     title: ogpData.ogTitle || "",
                     description: ogpData.ogDescription || "",
                     thumb: {
-                        "$type": "blob",
-                        "ref": {
-                            "$link": blobRes.data.blob.ref.toString(),
-                        },
-                        "mimetype": blobRes.data.blob.mimeType,
-                        size: blobRes.data.blob.size,
-                    },
-                },
-            };
-            embed = {
-                $type: "app.bsky.embed.images",
-                images: [{
-                    alt: ogpData.ogTitle || "",
-                    aspectRatio: { width: 191, height: 100 }, // guessing aspect ratio?
-                    image: {
                         $type: "blob",
+                        mimeType: blobRes.data.blob.mimeType,
+                        size: blobRes.data.blob.size,
                         ref: {
                             $link: blobRes.data.blob.ref.toString(),
                         },
-                        mimeType: blobRes.data.blob.mimeType,
-                        size: blobRes.data.blob.size,
                     },
-                }],
+                },
             };
         }
 
         try {
             const { uri, cid } = await agent.post({
+                $type: "app.bsky.feed.post",
                 text: richText.text,
+                langs: ["ja"],
+                createdAt: new Date().toISOString(),
                 facets: richText.facets,
                 reply: root !== undefined
                     ? { root, parent: parent ?? root }

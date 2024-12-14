@@ -53,3 +53,64 @@ fetchを差し替える方法とか調べるのがめんどくさいな。。。
 
 - https://docs.bsky.app/docs/advanced-guides/posts
 - https://docs.bsky.app/docs/api/com-atproto-repo-upload-blob
+
+## 03 画像ではなくカードとして表示されてほしい
+
+"app.bsky.embed.images" ではなく "app.bsky.embed.external" を利用する必要があるみたい。
+
+https://docs.bsky.app/docs/advanced-guides/posts#website-card-embeds
+
+素直にドキュメントのまま利用するとエラーになってしまう。
+
+> Failed to post to Bluesky Error: Invalid app.bsky.feed.post record: Record/embed/external/thumb should be a blob ref
+
+この辺の型を持ってくる手軽な方法は何なんだろう？
+
+```ts
+export declare class BlobRef {
+    ref: CID;
+    mimeType: string;
+    size: number;
+    original: JsonBlobRef;
+    constructor(ref: CID, mimeType: string, size: number, original?: JsonBlobRef);
+    static asBlobRef(obj: unknown): BlobRef | null;
+    static fromJsonRef(json: JsonBlobRef): BlobRef;
+    ipld(): TypedJsonBlobRef;
+    toJSON(): unknown;
+}
+```
+
+これ見ると渡せるのはblobだけ？
+
+https://github.com/bluesky-social/atproto/blob/main/lexicons/app/bsky/embed/external.json
+
+devtoolでwebuiを覗いて見て通信を見てみるとこんな感じ？
+
+```json
+{
+    "$type": "app.bsky.feed.post",
+    "createdAt": "2024-12-13T18:39:03.950Z",
+    "embed": {
+        "$type": "app.bsky.embed.external",
+        "external": {
+            "description": "Bluesky posts are repository records with the Lexicon type app.bsky.feed.post.",
+            "thumb": {
+                "$type": "blob",
+                "ref": {
+                    "$link": "bafkreich56ppsya5nphhjbto5q2td4yww7ypjiwioa2yat3koniqhijl7u"
+                },
+                "mimeType": "image/jpeg",
+                "size": 46954
+            },
+            "title": "Creating a post | Bluesky",
+            "uri": "https://docs.bsky.app/docs/tutorials/creating-a-post#website-card-embeds"
+        }
+    },
+    "langs": [
+        "ja"
+    ],
+    "text": "externalの指定が正しかったようだ\n\ndocs.bsky.app/docs/tutoria..."
+}
+```
+
+通った。。何なんだ。。
