@@ -257,7 +257,7 @@ export declare function validateMain(v: unknown): ValidationResult;
 ./client/types/app/bsky/feed/like.d.ts:import * as ComAtprotoRepoStrongRef from '../../../com/atproto/repo/strongRef';
 ```
 
-追記:
+### 追記:
 
 あ、StrongRef.Mainか。。それはそれで。。import typeができなくない？
 
@@ -267,3 +267,26 @@ export declare function validateMain(v: unknown): ValidationResult;
 import { type Main as ComAtprotoRepoStrongRef } from "npm:@atproto/api@0.13.20/dist/client/types/com/atproto/repo/strongRef.d.ts";
 import { type Main as AppBskyEmbedExternal } from "npm:@atproto/api@0.13.20/dist/client/types/app/bsky/embed/external.d.ts";
 ```
+
+### 追記:
+
+そして型定義が壊れていそう？
+
+```console
+$ deno check *.ts
+Check file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/main.ts
+Check file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/ogp.ts
+error: TS2353 [ERROR]: Object literal may only specify known properties, and '$type' does not exist in type 'BlobRef'.
+                        $type: "blob",
+                        ~~~~~
+    at file:///home/po/ghq/github.com/podhmo/individual-sandbox/daily/20241213/example_deno/main.ts:161:25
+
+    The expected type comes from property 'thumb' which is declared here on type 'External'
+        thumb?: BlobRef;
+        ~~~~~
+        at file:///home/po/.cache/deno/npm/registry.npmjs.org/@atproto/api/0.13.20/dist/client/types/app/bsky/embed/external.d.ts:16:5
+```
+
+このカードのときの問題が型として再現する。
+
+- https://gist.github.com/podhmo/c9bcef83c88e40b38fb3eb7519b6cc56#03-%E7%94%BB%E5%83%8F%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%8F%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%81%97%E3%81%A6%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84
