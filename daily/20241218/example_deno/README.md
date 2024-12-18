@@ -47,10 +47,24 @@ $ http -b :8080/hello/deno
 
 ## 02 jsxを使う
 
-今度は雑にindex pageをjsxで記述する
+今度は雑にindex pageをjsxで記述する。
 
+https://hono.dev/docs/guides/jsx
 
+ドキュメントではtsconfig.jsonを記述しているがdenoがそのまま変換してくれてコメントも見てくれないかな？
 
+## 03 client side componentを使う
+
+jsx/dom/clientを使えばclient side componentが使えるらしい。
+
+- https://hono.dev/docs/guides/jsx-dom
+
+配信するにはどうすれば良いんだろう？
+
+- https://hono.dev/docs/getting-started/deno
+- https://docs.deno.com/examples/http_server_files/
+
+- 
 ## references
 
 - https://docs.deno.com/examples/hono/
@@ -59,3 +73,5 @@ $ http -b :8080/hello/deno
 - https://hono.dev/docs/api/routing
 - https://hono.dev/docs/api/context
 - https://hono.dev/docs/api/request
+- https://hono.dev/docs/guides/jsx
+- https://hono.dev/docs/guides/jsx-dom
