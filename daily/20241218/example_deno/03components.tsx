@@ -13,7 +13,7 @@ export const Top = (props: { name?: string }) => {
     return (
         <>
             <h1>hello {name}</h1>
-            <input value={name} onChange={(e)=> setName(e.target.value)}></input>
+            <input name="name" value={name} onChange={(e)=> {debugger; return setName(e.target.value)}}></input>
             <h2>state</h2>
             <pre>name: {name}</pre>
         </>

@@ -9,7 +9,10 @@ var Top = (props) => {
       "hello ",
       name
     ] }),
-    /* @__PURE__ */ jsx("input", { value: name, onChange: (e) => setName(e.target.value) }),
+    /* @__PURE__ */ jsx("input", { name: "name", value: name, onChange: (e) => {
+      debugger;
+      return setName(e.target.value);
+    } }),
     /* @__PURE__ */ jsx("h2", { children: "state" }),
     /* @__PURE__ */ jsxs("pre", { children: [
       "name: ",
