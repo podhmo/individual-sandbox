@@ -297,5 +297,5 @@ namespaceとしてのimportをそのまま使ってMainを型として使う。
 
 ## 09 amazon用のcardを作る
 
-https://jsr.io@podhmo/ogp を作った。
+https://jsr.io/@podhmo/ogp を作った。
 og:imageが取れない場合にもexternalで埋め込むようにした。
