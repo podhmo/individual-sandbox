@@ -38,7 +38,62 @@
         - 本番用のビルドと開発用のビルドが分かれている(開発用のビルドではローカルのキャッシュを使うようにする)
         - npmの依存を排除する        
         
+別に困らないのでhonoは使う
 
-## 00 server HTML, no js
-## 01 server HTML, js
-## 02 server HTML, jsx
+## 00app.ts server HTML, no js
+
+ただただhtmlを返すようなコードを書く。今回はHTMLも最低限度にする
+
+```console
+# $ deno serve --port 8080 00app.ts
+
+$ http -b :8080
+<h1>hello world</h1>
+```
+
+## 01app.ts server HTML, js, hello world
+
+クライアント側でのコードを書く
+
+https://ja.react.dev/learn/installation
+
+```js
+function Greeting({ name }) {
+  return <h1>Hello, {name}</h1>;
+}
+
+export default function App() {
+  return <Greeting name="world" />
+}
+```
+
+https://ja.react.dev/reference/react/StrictMode
+
+```js
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+これらをわけずに書く。
+
+とりあえずすべてを直書きで済ませることにする。jsxからjsの変換も何もかも存在しない形で書く。
+importmapをそれっぽく動かすようにする。
+
+## 02app.ts server HTML, js, counter
+
+シンプルにカウンターを用意する。
+
+
+
+## references
+
+- https://ja.react.dev/learn/installation
+- https://ja.react.dev/reference/react/StrictMode
+- 
