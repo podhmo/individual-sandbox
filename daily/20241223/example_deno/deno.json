@@ -2,7 +2,10 @@
     "compilerOptions": {
         "lib": [
             "deno.ns",
-            "dom"
-        ]
+            "browser"
+        ],
+        "jsx": "react-jsx",
+        "jsxImportSource": "npm:react@18",
+        "jsxImportSourceTypes": "npm:@types/react@18"
     }
 }
