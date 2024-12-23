@@ -5,8 +5,10 @@
 import { StrictMode } from "npm:react@18";
 import { createRoot } from "npm:react-dom@18/client";
 import { useState } from "npm:react@18";
-// import { jsx as _jsx } from 'npm:react@19/react/jsx-runtime';
 
+// ----------------------------------------
+// components
+// ----------------------------------------
 function Counter() {
   const [count, setCount] = useState(0);
 
@@ -17,7 +19,6 @@ function Counter() {
     </div>
   );
 }
-
 export default function App() {
   return (
     <main>
@@ -27,6 +28,9 @@ export default function App() {
   );
 }
 
+// ----------------------------------------
+// main
+// ----------------------------------------
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>

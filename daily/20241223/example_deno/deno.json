@@ -1,8 +1,9 @@
 {
+    "nodeModulesDir": "auto",
     "compilerOptions": {
         "lib": [
             "deno.ns",
-            "browser"
+            "dom"
         ],
         "jsx": "react-jsx",
         "jsxImportSource": "npm:react@18",

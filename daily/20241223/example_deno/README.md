@@ -102,11 +102,59 @@ importmapをそれっぽく動かすようにする。
 - PUREの位置がおかしい気がする？
 - `export {  App as default }; ` とか残ってて大丈夫？
 
-まだ既存のもののコードを上手く取り出せていない。
+## 04app.tsx server jsx, jsx, counter
 
+まだ既存のもののコードを上手く取り出せていない。
+ここでコピペして動かすことはできる。配信側をjsxでやろうとすると難しいということか。
+
+以下の様なことがしたいがバグってしまっている。
+
+- server side jsx (hono)
+- client side jsx (react)
+
+あとはimportをトップレベルでしかつかえないので１ファイルに纏めることができない。
+やるんなら取り出して変換する処理をライブラリの関数として呼び出すという感じにしないとダメそう。
+
+それでも以下の様な感じになりそう
+
+- 04app.tsx
+- 04client.main.tsx -> 04client.main.js に変換
+
+そして生成したコードを `dangerouslySetInnerHTML` でscriptタグとして注入する感じに行けばできそう？(1ファイルは無理そう？)
+
+- https://hono-ja.pages.dev/docs/guides/jsx#%E7%94%9F-html-%E3%81%AE%E6%8C%BF%E5%85%A5
+
+とはいえ、viteと同様にベースのindex.htmlがあれば十分では？
+
+## 04 スクリプトタグ部分を変換する
+
+とりあえずesbuildのpluginで変換してみる
+
+- npm:で関連している部分を変換する必要がある
+- esbuildのpluginを利用した関数を定義したい
+    - ファイル名しか渡せない
+    - deno.json, deno.lockの中を覗いて変換をしてみることにする
+        - あればそれをみて変換とかで良いか
+- どうやら自分自身のresolveを呼ばないみたい
+    - bundle: trueを忘れてたみたい
+
+03で書いたスクリプトをそのまま変換してみる。
+
+## 05app.tsx server jsx, jsx, counter
+
+hono側ではhonoのjsxを利用して実行時にesbuildを動かすことにしてとりあえず無理やり動くようにはなった。
+ここの部分は結局変数で持ってしまっている。
+
+> それでも以下の様な感じになりそう
+> 
+> - 04app.tsx
+> - 04client.main.tsx -> 04client.main.js に変換
+
+(out of context, deno runとdeno serveで分岐させたくなったりもした)
 
 ## references
 
 - https://ja.react.dev/learn/installation
 - https://ja.react.dev/reference/react/StrictMode
-- 
+- https://hono-ja.pages.dev/docs/guides/jsx#%E7%94%9F-html-%E3%81%AE%E6%8C%BF%E5%85%A5
+
