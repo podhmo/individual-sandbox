@@ -1,3 +1,4 @@
+/** @jsxRuntime automatic */
 /** @jsxImportSource jsr:@hono/hono@4.6.14/jsx */
 import { Hono } from "jsr:@hono/hono@4.6.14";
 import { tsxToJs } from "jsr:@podhmo/glue/mini-webapp";
