@@ -47,3 +47,27 @@ if (root !== null) {
 signalのパッケージ名は `@preact/signals` なのか。
 
 なんか動かそうとしてみると上手く反応しない。そしてバージョンを調節したら `r is undefined`みたいなエラーで死んでた。developmentモードでよみこむように `?dev` を付けてあげたら動いた。こういうのがあると嫌になるね。。
+
+>[!NOTE]
+>developmentモードでビルドできるようなオプションが必要かも？
+
+## 02 細々とした調整がだるい appにしてみる
+
+全部自分で書いてしまったほうが楽な気がする。index.htmlを生成するサーバーを作りたい。
+ついでにreactを使う様にしてみるか。deno serveはfetchを持つオブジェクトをdefaultでexportしてるとそれを使う。テキトーに書けばhonoとかがやってくれる。
+
+```console
+$ deno serve --port 8080 -A 02app.ts
+```
+
+クライアント側のコードはリロードするたびにビルドされる。
+
+APIを呼ぶようなコードを書こうと思ったけれどめんどくさいな。。
+
+## 03 APIを呼ぶコードをパクって動かす
+
+以下のやつをそのままパクって動かす
+
+- https://zenn.dev/laiso/articles/c7eba95ce43feb
+- https://github.com/yusukebe/hono-spa-react/tree/main/src
+
