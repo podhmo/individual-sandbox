@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>00client.tsx</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main id=app class="container">
+<h1>...</h1>
+</main>
+<script type="module">
+// 00client.tsx
+import { render } from "https://esm.sh/preact@10.25.3";
+import { jsx } from "https://esm.sh/preact/jsx-runtime";
+function App() {
+  return /* @__PURE__ */ jsx("p", { class: "big", children: "Hello World!" });
+}
+var root = document.getElementById("app");
+if (root !== null) {
+  for (const child of Array.from(root.children)) {
+    root.removeChild(child);
+  }
+  render(/* @__PURE__ */ jsx(App, {}), root);
+}
+
+</script>
+</body>
+</html>

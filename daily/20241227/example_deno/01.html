@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>01client.tsx</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main id=app class="container">
+<h1>...</h1>
+</main>
+<script type="module">
+// 01client.tsx
+import { render } from "https://esm.sh/preact@10.25.3?dev";
+import { signal } from "https://esm.sh/@preact/signals@2.0.0?dev";
+import { Fragment, jsx, jsxs } from "https://esm.sh/preact@10.25.3/jsx-runtime";
+var count = signal(0);
+function Counter() {
+  const value = count.value;
+  const increment = () => {
+    console.log("increment", count.value);
+    count.value++;
+  };
+  const decrement = () => count.value--;
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsxs("p", { children: [
+      "Count: ",
+      count
+    ] }),
+    /* @__PURE__ */ jsxs("button", { onClick: increment, children: [
+      "Increment ",
+      value
+    ] }),
+    /* @__PURE__ */ jsxs("button", { onClick: decrement, children: [
+      "Decrement ",
+      value
+    ] })
+  ] });
+}
+function App() {
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("h1", { children: "Counter" }),
+    /* @__PURE__ */ jsx(Counter, {})
+  ] });
+}
+var root = document.getElementById("app");
+if (root !== null) {
+  for (const child of Array.from(root.children)) {
+    root.removeChild(child);
+  }
+  render(/* @__PURE__ */ jsx(App, {}), root);
+}
+
+</script>
+</body>
+</html>
