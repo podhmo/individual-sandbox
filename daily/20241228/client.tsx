@@ -1,9 +1,9 @@
 /** @jsxRuntime automatic */
-/** @jsxImportSource npm:react@18 */
-/** @jsxImportSourceTypes npm:@types/react@18 */
+/** @jsxImportSource npm:react@19 */
+/** @jsxImportSourceTypes npm:@types/react@19 */
 
-import { StrictMode, useState } from "npm:react@18";
-import { createRoot } from "npm:react-dom@18/client";
+import { StrictMode, useState } from "npm:react@19";
+import { createRoot } from "npm:react-dom@19/client";
 
 function Counter() {
     const [count, setCount] = useState(0);
