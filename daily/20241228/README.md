@@ -105,3 +105,9 @@ error: Uncaught (in promise) TypeError: file name contained an unexpected NUL by
 これを組み込みにしてあげたらふつうに動くのだけど、不要なリクエストを投げる可能性があるのはどうなんだ。。という気持ちになったりもする。
 
 あとpurge用のオプションを用意したりしたほうが良さそう。まぁそれはそれとして早い。
+
+#### もう少し追ってみた
+
+- 起きる jsr:@denosaurs/cache@0.2.15
+- 起きる jsr:@denosaurs/cache@0.2.14
+- 起きない https://deno.land/x/cache@0.2.13/mod.ts
