@@ -111,3 +111,23 @@ error: Uncaught (in promise) TypeError: file name contained an unexpected NUL by
 - 起きる jsr:@denosaurs/cache@0.2.15
 - 起きる jsr:@denosaurs/cache@0.2.14
 - 起きない https://deno.land/x/cache@0.2.13/mod.ts
+
+#### 更にもう少し追ってみる。
+
+以下の様なコードでヌル文字が生成されるということらしい。
+
+
+```ts
+async function hash(url: URL): Promise<string> {
+    const formatted = `${url.pathname}${url.search ? "?" + url.search : ""}`;
+    const encoder = new TextEncoder();
+    const data = encoder.encode(formatted);
+    const hash = await crypto.subtle.digest("SHA-256", data);
+    return new TextDecoder().decode(hash);
+}
+
+const url = "https://esm.sh/stable/react@18";
+const calculatedPath = await hash(new URL(url));
+console.log("calculated path", calculatedPath); // true
+console.log(await Deno.lstat(calculatedPath)); // TypeError: file name contained an unexpected NUL byte:
+```

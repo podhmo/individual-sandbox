@@ -1,18 +1,3 @@
-import { extname, join, resolve } from "jsr:@std/path@1.0.6";
-
-const directory = () => "/home/po/.cache/deno";
-
-async function path(url: URL, ns?: string): Promise<string> {
-    let path = [directory()];
-    if (ns) path.push(ns);
-    path = path.concat([
-        url.protocol.slice(0, -1),
-        url.hostname,
-        await hash(url),
-    ]);
-    return resolve(`${join(...path)}${extname(url.pathname)}`);
-}
-
 async function hash(url: URL): Promise<string> {
     const formatted = `${url.pathname}${url.search ? "?" + url.search : ""}`;
     const encoder = new TextEncoder();
@@ -21,10 +6,12 @@ async function hash(url: URL): Promise<string> {
     return new TextDecoder().decode(hash);
 }
 
+// await Deno.lstat("hello\0world");
+
 const url = "https://esm.sh/stable/react@18";
-const ns = "podhmo-glue";
-const calculatedPath = await path(new URL(url), ns);
+const calculatedPath = await hash(new URL(url));
 console.log("calculated path", calculatedPath);
+console.log("has null byte?", calculatedPath.includes("\0"));
 console.log(await Deno.lstat(calculatedPath));
 
 // $ deno run -A error-example.ts
