@@ -107,3 +107,9 @@ Authorization successful. Authenticated as podhmo
 Publishing @podhmo/glue@0.1.3 ...
 Successfully published @podhmo/glue@0.1.3
 ```
+
+## とりあえず動かす
+
+windowsだと `win + ←` と `win + →` で左右にウィンドウに移動してあげると良さそう。そしてHMRが欲しくなってきた。
+
+ところで、pico.cssもnpmで参照できたほうが嬉しいかというとtsx側に置かないので困らないのか。styled componentみたいなjs側で書くようになってくると変わってくるのかもしれない。
