@@ -28,6 +28,9 @@ app.get("/", async (ctx: Context) => {
 
 app.get("/*", async (ctx: Context): Promise<Response> => {
     const req = ctx.req;
+    if (req.path === "/favicon.ico") {
+        return new Response(null, { status: 404 });
+    }
     let url = new URL(req.path, "https://esm.sh").toString();
     const query = req.query();
     if (Object.keys(query).length > 0) {
