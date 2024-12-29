@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<title>00client.tsx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main id=app class="container">
+<h1>...</h1>
+</main>
+<script type="module">
+// 00client.tsx
+import { StrictMode } from "https://esm.sh/react@18";
+import { createRoot } from "https://esm.sh/react-dom@18/client";
+import { jsx, jsxs } from "https://esm.sh/react@18/jsx-runtime";
+function App() {
+  return /* @__PURE__ */ jsxs("section", { children: [
+    /* @__PURE__ */ jsx("h1", { children: "hello world" }),
+    /* @__PURE__ */ jsx("p", { children: "HMR\u304C\u307B\u3057\u3044\u7406\u7531\u304C\u308F\u304B\u3063\u3066\u304D\u305F" })
+  ] });
+}
+var root = createRoot(document.getElementById("app"));
+root.render(
+  /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(App, {}) })
+);
+
+</script>
+</body>
+</html>
