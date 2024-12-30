@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Reload</title>
+</head>
+
+<body>
+    <h1>Auto Reload Demo</h1>
+    <p>ここの文字を変えるとブラウザがリロードされる</p>
+    <script type="module">
+        const sse = new EventSource("/sse");
+
+        sse.onmessage = (event) => {
+            if (event.data === "reload") {
+                console.log("Reloading page...");
+                location.reload();
+            }
+        };
+    </script>
+</body>
+
+</html>
