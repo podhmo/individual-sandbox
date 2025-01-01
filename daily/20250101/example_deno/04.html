@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+
+<head>
+    <title>記事的なもの</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style -->
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header class="container">
+        <hgroup>
+            <h1>記事的なもの</h1>
+            <p>記事的なものの内容</p>
+        </hgroup>
+        <nav>
+            <ul>
+                <li>
+                    <details class="dropdown">
+                        <summary role="button" class="secondary">Theme</summary>
+                        <ul>
+                            <li><a href="#" data-theme-switcher="auto">auto</a></li>
+                            <li><a href="#" data-theme-switcher="light">light</a></li>
+                            <li><a href="#" data-theme-switcher="dark">dark</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- main -->
+    <main class="container">
+        <section>
+            <h2>タイポグラフィー</h1>
+
+            <div class="grid">
+                <p>ふつうのp要素</p>
+                <p>じゅげむじゅげむ</p>
+            </div>
+            <div class="grid">
+                <p><strong>Bold</strong></p>
+                <p>じゅ<strong>げむ</strong>じゅげむ（強調）</p>
+            </div>
+            <div class="grid">
+                <p>Italic</p>
+                <p>じゅげむ<em>じゅげむ</em>（斜体）</p>
+            </div>
+            <div class="grid">
+                <p><a href="#">Link</a></p>
+                <p>じゅげむ<a href="#">じゅげむ</a>（リンク）</p>
+            </div>
+
+            <h2>引用</h2>
+            <blockquote>
+                Aliquam Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates, consequuntur id labore
+                debitis deserunt vitae omnis eius
+                <footer>
+                    <cite>Someone</cite>
+                </footer>
+            </blockquote>
+
+            <h2>リスト</h2>
+            <ul>
+                <li>リスト1</li>
+                <li>リスト2</li>
+                <li>リスト3</li>
+            </ul>
+            <ol>
+                <li>リスト1</li>
+                <li>リスト2</li>
+                <li>リスト3</li>
+            </ol>
+
+            <h2>テーブル</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目1</th>
+                        <th>項目2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>データ1</td>
+                        <td>データ2</td>
+                    </tr>
+                    <tr>
+                        <td>データ3</td>
+                        <td>データ4</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+        <section>
+            <pre>
+まとめ (vscodeで補完されたものを貼ってる)
+
+- mainだけを使うかと思ったがその外側にheader.containerを使う事があるらしい
+  - role="button"はbutton要素の代わりの表示に使える
+  - secondaryは色の指定(灰色のボタン)
+  - details要素は開閉可能なセクションを作ることができる
+  - summary要素はdetails要素のタイトルを表す
+- blockquoteの中にfooterとciteを使うことで引用元を示すことができる  
+- .gridを使うことで要素を横並びにできる
+
+思ったこと
+- h1,h2,h3のあたりでインデントを付けたい事があるかもしれない
+- https://codesandbox.io/embed/4mrnhq?view=Editor+%2B+Preview&module=%2Findex.html をそのまま見たほうが早い？
+        </pre>
+        </section>
+    </main>
+</body>
+
+</html>
