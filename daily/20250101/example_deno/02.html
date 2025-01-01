@@ -2,7 +2,7 @@
 <html lang="ja" data-theme="dark">
 
 <head>
-    <title>02</title>
+    <title>フォームをテキトーに作って試してみたい</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,18 +13,26 @@
 
 <body>
     <main class="container">
-        <h1><a href="https://picocss.com/docs">pico.css</a>を使ってみる</h1>
-        <form>
-            <input type="text" placeholder="input text">
-            <button>submit</button>
-        </form>
-        <pre>
+        <section>
+            <h1><a href="https://picocss.com/docs">pico.css</a>を使ってみる</h1>
+            <form>
+                <input type="text" placeholder="input text">
+                <button type="submit">submit</button>
+            </form>
+        </section>
+        <section>
+            <pre>
 思ったこと            
 
 - 画面いっぱいに表示させたい
-- ボタンを幅いっぱいに表示させたい
+- ボタンを幅いっぱいに表示させたい(どうやらtype="submit"を指定しないといけない)
 - preタグの要素と他の要素の間にstyleをいじらずに余白を設けたい
+
+CSS的な話
+
+- articleとsectionの違いを分かっていない
         </pre>
+        </section>
     </main>
 </body>
 

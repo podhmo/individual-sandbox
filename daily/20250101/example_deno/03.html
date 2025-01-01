@@ -2,7 +2,7 @@
 <html lang="ja" data-theme="dark">
 
 <head>
-    <title>01</title>
+    <title>ログイン画面</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,18 +13,30 @@
 
 <body>
     <main class="container">
-        <h1><a href="https://picocss.com/docs">pico.css</a>を使ってみる</h1>
-        <form>
-            <input type="text" placeholder="input text">
-            <button>submit</button>
-        </form>
-        <pre>
+        <section>
+            <h1>Sign in</h1>
+            <form>
+                <input type="text" name="" login placeholder="Login" aria-label="Login" autocomplete="username"
+                    required>
+                <input type="password" name="password" placeholder="Password" aria-label="Password"
+                    autocomplete="current-password" required>
+                <fieldset>
+                    <label htmlFor="remember">
+                        <input type="checkbox" role="switch" name="remember" id="remember" />
+                        Remember me
+                    </label>
+                </fieldset>
+                <button>Login</button>
+            </form>
+        </section>
+        <section>
+            <pre>
 思ったこと            
 
-- 画面いっぱいに表示させたい
-- ボタンを幅いっぱいに表示させたい
-- preタグの要素と他の要素の間にstyleをいじらずに余白を設けたい
+- 特にないかも？
+- reactのログインの例を参考にhtmlを書いてみただけ
         </pre>
+        </section>
     </main>
 </body>
 
