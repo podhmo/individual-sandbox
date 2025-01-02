@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<title>client.tsx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main id=app class="container">
+<h1>...</h1>
+</main>
+<script type="module">
+// client.tsx
+import { StrictMode, useState } from "https://esm.sh/react@18";
+import { createRoot } from "https://esm.sh/react-dom@18/client";
+import { Fragment, jsx, jsxs } from "https://esm.sh/react@18/jsx-runtime";
+function Counter() {
+  const [count, setCount] = useState(0);
+  const onIncrement = () => setCount((prev) => prev + 1);
+  const onDecrement = () => setCount((prev) => prev - 1);
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs("p", { children: [
+      "Count: ",
+      count
+    ] }),
+    /* @__PURE__ */ jsx("button", { onClick: onIncrement, children: "Increment" }),
+    /* @__PURE__ */ jsx("button", { onClick: onDecrement, children: "Decrement" })
+  ] });
+}
+function App() {
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("h1", { children: "Counter" }),
+    /* @__PURE__ */ jsx(Counter, {})
+  ] });
+}
+var root = createRoot(document.getElementById("app"));
+root.render(
+  /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(App, {}) })
+);
+
+</script>
+</body>
+</html>
