@@ -1,13 +1,40 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@hono/hono@4.6.15": "4.6.15",
+    "jsr:@podhmo/glue@0.2.1": "0.2.1",
+    "jsr:@std/json@1": "1.0.1",
+    "jsr:@std/jsonc@^1.0.1": "1.0.1",
     "npm:@types/react@18": "18.3.18",
     "npm:@types/react@19": "19.0.2",
+    "npm:esbuild-wasm@0.24.2": "0.24.2",
     "npm:react-dom@18": "18.3.1_react@18.3.1",
     "npm:react-dom@19": "19.0.0_react@19.0.0",
+    "npm:react-router@*": "7.1.1_react@18.3.1_react-dom@18.3.1__react@18.3.1",
     "npm:react-router@7": "7.1.1_react@18.3.1_react-dom@18.3.1__react@18.3.1",
     "npm:react@18": "18.3.1",
     "npm:react@19": "19.0.0"
+  },
+  "jsr": {
+    "@hono/hono@4.6.15": {
+      "integrity": "935b3b12e98e4b22bcd1aa4dbe6587321e431c79829eba61f535b4ede39fd8b1"
+    },
+    "@podhmo/glue@0.2.1": {
+      "integrity": "75ee9c50f20f8b43a032b8ec5ef88fda1fc409e5797a41282e411b863d93ffc5",
+      "dependencies": [
+        "jsr:@std/jsonc",
+        "npm:esbuild-wasm"
+      ]
+    },
+    "@std/json@1.0.1": {
+      "integrity": "1f0f70737e8827f9acca086282e903677bc1bb0c8ffcd1f21bca60039563049f"
+    },
+    "@std/jsonc@1.0.1": {
+      "integrity": "6b36956e2a7cbb08ca5ad7fbec72e661e6217c202f348496ea88747636710dda",
+      "dependencies": [
+        "jsr:@std/json"
+      ]
+    }
   },
   "npm": {
     "@types/cookie@0.6.0": {
@@ -34,6 +61,9 @@
     },
     "csstype@3.1.3": {
       "integrity": "sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw=="
+    },
+    "esbuild-wasm@0.24.2": {
+      "integrity": "sha512-03/7Z1gD+ohDnScFztvI4XddTAbKVmMEzCvvkBpQdWKEXJ+73dTyeNrmdxP1Q0zpDMFjzUJwtK4rLjqwiHbzkw=="
     },
     "js-tokens@4.0.0": {
       "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
@@ -96,14 +126,21 @@
     }
   },
   "redirects": {
-    "https://esm.sh/react-router@7?deps=react@18&dev": "https://esm.sh/react-router@7.1.1?deps=react@18&dev"
+    "https://esm.sh/react-router@7?deps=react@18&dev": "https://esm.sh/react-router@7.1.1?deps=react@18&dev",
+    "https://esm.sh/react-router@7?deps=react@18,react-dom@18": "https://esm.sh/react-router@7.1.1?deps=react@18,react-dom@18"
   },
   "remote": {
     "https://esm.sh/react-router@7.1.1?deps=react@18&dev": "23437da4fd7abc229ef9dba46e25ec4f343b010cbd414e5e956657e3397e3b8b",
+    "https://esm.sh/react-router@7.1.1?deps=react@18,react-dom@18": "d4ede268f790b7e2bb386c79f3189aca82cd2ab2b02322aa121ef72153e0a19e",
     "https://esm.sh/stable/react@18.3.1/denonext/react.development.mjs": "34f7bbf154bf2eb2c87bb05289aaf69ece1c2f69d9dbd1d514250b5d24d42b9b",
+    "https://esm.sh/stable/react@18.3.1/denonext/react.mjs": "fc048ffc55366baf7669519127d186761db72046e2bebf35fe8d0de3964defa3",
     "https://esm.sh/v135/cookie@1.0.2/denonext/cookie.development.mjs": "3ae1411117ad1f03ea9aa63c041828e5673745913d6f1b3b8369403f0dcd202d",
+    "https://esm.sh/v135/cookie@1.0.2/denonext/cookie.mjs": "2f0c16ec948e9ae0c768a4f2793197b9a89afd5b1eeee530759fc8c54e0cd522",
+    "https://esm.sh/v135/react-router@7.1.1/X-ZC9yZWFjdC1kb21AMTguMy4xLHJlYWN0QDE4LjMuMQ/denonext/react-router.mjs": "1e611cd7361daa0184f2baee1bfd479adac890fb3f2204dd8691a3a05ab380b6",
     "https://esm.sh/v135/react-router@7.1.1/X-ZC9yZWFjdEAxOC4zLjE/denonext/react-router.development.mjs": "b7ba761213200ac3bdd34505a3e5ec155503819c9affa4e387fdac6f46cfe4f8",
     "https://esm.sh/v135/set-cookie-parser@2.7.1/denonext/set-cookie-parser.development.mjs": "713ba41d7ec34b4988977170b14dc29ecc2fca5248d78091030f02ac9e4d579f",
-    "https://esm.sh/v135/turbo-stream@2.4.0/denonext/turbo-stream.development.mjs": "258d1937633f4f6bb3a84e7334472d54e5594561b11450deac811d4b79a4bebd"
+    "https://esm.sh/v135/set-cookie-parser@2.7.1/denonext/set-cookie-parser.mjs": "3839ce7acba51c515ca472958f86da09c0d57eceda5bfff5dbb75dcdbf5667ad",
+    "https://esm.sh/v135/turbo-stream@2.4.0/denonext/turbo-stream.development.mjs": "258d1937633f4f6bb3a84e7334472d54e5594561b11450deac811d4b79a4bebd",
+    "https://esm.sh/v135/turbo-stream@2.4.0/denonext/turbo-stream.mjs": "18af95ac474a9351e0a15521ff891eeba63b6df8f2b39a5392484ef3d61685ac"
   }
 }

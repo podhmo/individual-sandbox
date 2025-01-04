@@ -6,7 +6,7 @@ import { HTML, tsxToJs } from "jsr:@podhmo/glue@0.2.1/mini-webapp";
 
 const app = new Hono();
 app.get("/", async (ctx: Context) => {
-  const code = await tsxToJs(Deno.env.get("TSX") || "./00client.tsx");
+  const code = await tsxToJs(Deno.env.get("TSX") || "./00client.tsx", );
   const html = HTML({ code, id: "app", title: "-" });
   return ctx.html(html);
 });

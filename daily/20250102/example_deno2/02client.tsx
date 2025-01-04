@@ -4,7 +4,7 @@
 
 import { StrictMode, useState } from "npm:react@18";
 import { createRoot } from "npm:react-dom@18/client";
-// import { BrowserRouter, Link, Route, Routes } from "npm:react-router@7";
+import { BrowserRouter, Link, Route, Routes } from "npm:react-router";
 import { BrowserRouter, Link, Route, Routes } from "https://esm.sh/react-router@7?deps=react@18,react-dom@18";
 
 // https://reactrouter.com/start/library/routing
