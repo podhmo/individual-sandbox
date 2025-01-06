@@ -55,3 +55,71 @@ http "https://esm.sh/react-markdown@8.0.7?deps=@types/debug@4.1.12,@types/hast@2
 これくらいなら通る。
 
 http "https://esm.sh/react-markdown@8.0.7?deps=react@18.3.1"
+
+## 02 MUI
+
+muiとかはそのまま動くんだろうか？
+
+https://mui.com/material-ui/getting-started/usage/
+
+こちらもダメそうだ。。
+
+```
+import Button from "/@mui/material@6.3.1/Button?deps=@babel/runtime@7.26.0,@emotion/cache@11.14.0,@emotion/hash@0.9.2,@emotion/memoize@0.9.0,@emotion/serialize@1.3.3,@emotion/sheet@1.4.0,@emotion/unitless@0.10.0,@emotion/utils@1.4.2,@emotion/weak-memoize@0.4.0,@mui/core-downloads-tracker@6.3.1,@mui/private-theming@6.3.1,@mui/styled-engine@6.3.1,@mui/system@6.3.1,@mui/types@7.2.21,@mui/utils@6.3.1,@popperjs/core@2.11.8,@types/prop-types@15.7.14,@types/react-transition-group@4.4.12,@types/react@18.3.18,clsx@2.1.1,csstype@3.1.3,dom-helpers@5.2.1,js-tokens@4.0.0,loose-envify@1.4.0,object-assign@4.1.1,prop-types@15.8.1,react-dom@18.3.1,react-is@16.13.1,react-is@19.0.0,react-transition-group@4.4.5,react@18.3.1,regenerator-runtime@0.14.1,scheduler@0.23.2,stylis@4.2.0";
+```
+
+
+## 03 v0
+
+こういうので行けるかと思ったがダメそうだった。next.js用なんだろうか？ package.jsonがない場合にはNext.jsのプロジェクトを作らされる。そしてそこで失敗する。
+
+```
+deno run -A npm:shadcn@latest add "https://v0.dev/chat/b/b_HB9HL0PwJbJ"
+...
+does not contain a package.json file. Would you like to start a new Next.js project? … yes
+✔ What is your project named? … my-app
+⠋ Creating a new Next.js project. This may take a few minutes.┏ ⚠️  Deno requests run access to "npx".
+┠─ Requested by `Deno.Command().spawn()` API.
+┠─ To see a stack trace for this prompt, set the DENO_TRACE_PERMISSIONS environmental variable.
+┠─ Learn more at: https://docs.deno.com/go/--allow-run
+┠─ Run again with --allow-run to bypass this prompt.
+┗ Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all run permissions) > A
+
+
+Something went wrong creating a new Next.js project. Please try again.
+```
+
+仕方がないのでnpxで実行したらなんか作られた。あんまり興味がないのでこの辺でおしまい。
+
+```
+my-app/
+├── README.md
+├── app
+│   ├── favicon.ico
+│   ├── fonts
+│   │   ├── GeistMonoVF.woff
+│   │   └── GeistVF.woff
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components
+│   ├── Timeline.tsx
+│   ├── Tweet.tsx
+│   ├── TweetInput.tsx
+│   └── ui
+│       ├── avatar.tsx
+│       ├── button.tsx
+│       └── textarea.tsx
+├── components.json
+├── lib
+│   └── utils.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
+```
+
+tailwindだけを実行する方法などは把握しておくと良いかもしれない。たぶんラッパー系のものは使えない。
+
