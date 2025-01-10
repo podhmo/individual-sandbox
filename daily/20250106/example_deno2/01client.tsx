@@ -8,7 +8,7 @@ import { createRoot } from "npm:react-dom@19/client";
 import ReactMarkdown from "npm:react-markdown@9";
 
 const readmeURL =
-  "https://gist.githubusercontent.com/podhmo/395689b310af88566f1df31ed218592d/raw/74f9ad1c6897a9d32875338de8734b32383b9aab/README.md";
+  "https://gist.githubusercontent.com/podhmo/395689b310af88566f1df31ed218592d/raw/51ccbb4aeeb6dc4b15cad8b401a38030e014791f/README.md";
 
 function App() {
   const [readme, setReadme] =useState<string | null>(null);
