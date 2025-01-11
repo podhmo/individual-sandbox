@@ -1,6 +1,10 @@
-import { useState } from 'react'
-import TweetInput from './TweetInput'
-import Tweet from './Tweet'
+/** @jsxRuntime automatic */
+/** @jsxImportSource npm:react@19 */
+/** @jsxImportSourceTypes npm:@types/react@19 */
+
+import { useState } from 'npm:react@19'
+import TweetInput from './components__TweetInput.tsx'
+import Tweet from './components__Tweet.tsx'
 
 interface TweetData {
   id: number

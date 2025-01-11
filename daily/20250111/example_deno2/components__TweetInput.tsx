@@ -1,7 +1,11 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+/** @jsxRuntime automatic */
+/** @jsxImportSource npm:react@19 */
+/** @jsxImportSourceTypes npm:@types/react@19 */
+
+import { useState } from 'npm:react@19'
+import { Button } from './components__ui__button.tsx'
+import { Textarea } from './components__ui__textarea.tsx'
+import { Avatar, AvatarFallback, AvatarImage } from './components__ui__avatar.tsx'
 
 interface TweetInputProps {
   onNewTweet: (content: string) => void

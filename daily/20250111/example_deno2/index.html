@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<title>client.tsx</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+<body>
+<main id=root class="container">
+<h1>...</h1>
+</main>
+<script type="module">
+// client.tsx
+import "https://esm.sh/twind/shim";
+import { StrictMode } from "https://esm.sh/react@19";
+import { createRoot } from "https://esm.sh/react-dom@19/client";
+
+// components__Timeline.tsx
+import { useState as useState3 } from "https://esm.sh/react@19";
+
+// components__TweetInput.tsx
+import { useState } from "https://esm.sh/react@19";
+
+// components__ui__button.tsx
+import * as React from "https://esm.sh/react@19";
+import { Slot } from "https://esm.sh/@radix-ui/react-slot";
+import { cva } from "https://esm.sh/class-variance-authority";
+
+// lib__utils.ts
+import { clsx } from "https://esm.sh/clsx";
+import { twMerge } from "https://esm.sh/tailwind-merge";
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+
+// components__ui__button.tsx
+var buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline"
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+var Button = React.forwardRef(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return /* @__PURE__ */ React.createElement(
+      Comp,
+      {
+        className: cn(buttonVariants({ variant, size, className })),
+        ref,
+        ...props
+      }
+    );
+  }
+);
+Button.displayName = "Button";
+
+// components__ui__textarea.tsx
+import * as React2 from "https://esm.sh/react@19";
+var Textarea = React2.forwardRef(({ className, ...props }, ref) => {
+  return /* @__PURE__ */ React2.createElement(
+    "textarea",
+    {
+      className: cn(
+        "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className
+      ),
+      ref,
+      ...props
+    }
+  );
+});
+Textarea.displayName = "Textarea";
+
+// components__ui__avatar.tsx
+import * as React3 from "https://esm.sh/react@19";
+import * as AvatarPrimitive from "https://esm.sh/radix-ui/react-avatar";
+import { jsx } from "https://esm.sh/react@19/jsx-runtime";
+var Avatar = React3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+  AvatarPrimitive.Root,
+  {
+    ref,
+    className: cn(
+      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+      className
+    ),
+    ...props
+  }
+));
+Avatar.displayName = AvatarPrimitive.Root.displayName;
+var AvatarImage = React3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+  AvatarPrimitive.Image,
+  {
+    ref,
+    className: cn("aspect-square h-full w-full", className),
+    ...props
+  }
+));
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+var AvatarFallback = React3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
+  AvatarPrimitive.Fallback,
+  {
+    ref,
+    className: cn(
+      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      className
+    ),
+    ...props
+  }
+));
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+
+// components__TweetInput.tsx
+import { jsx as jsx2, jsxs } from "https://esm.sh/react@19/jsx-runtime";
+function TweetInput({ onNewTweet }) {
+  const [content, setContent] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (content.trim()) {
+      onNewTweet(content);
+      setContent("");
+    }
+  };
+  return /* @__PURE__ */ jsxs("form", { onSubmit: handleSubmit, className: "flex items-start space-x-4 p-4 border-b border-gray-200", children: [
+    /* @__PURE__ */ jsxs(Avatar, { children: [
+      /* @__PURE__ */ jsx2(AvatarImage, { src: "/placeholder.svg?height=40&width=40", alt: "User" }),
+      /* @__PURE__ */ jsx2(AvatarFallback, { children: "U" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: "flex-1", children: [
+      /* @__PURE__ */ jsx2(
+        Textarea,
+        {
+          value: content,
+          onChange: (e) => setContent(e.target.value),
+          placeholder: "What's happening?",
+          className: "w-full mb-2",
+          rows: 3
+        }
+      ),
+      /* @__PURE__ */ jsx2(Button, { type: "submit", disabled: !content.trim(), children: "Tweet" })
+    ] })
+  ] });
+}
+
+// components__Tweet.tsx
+import { useState as useState2 } from "https://esm.sh/react@19";
+import { Heart, MessageCircle, Repeat2 } from "https://esm.sh/lucide-react";
+import { jsx as jsx3, jsxs as jsxs2 } from "https://esm.sh/react@19/jsx-runtime";
+function Tweet({ tweet }) {
+  const [likes, setLikes] = useState2(tweet.likes);
+  const [retweets, setRetweets] = useState2(tweet.retweets);
+  const handleLike = () => setLikes(likes + 1);
+  const handleRetweet = () => setRetweets(retweets + 1);
+  return /* @__PURE__ */ jsxs2("div", { className: "flex space-x-3 p-4", children: [
+    /* @__PURE__ */ jsxs2(Avatar, { children: [
+      /* @__PURE__ */ jsx3(AvatarImage, { src: tweet.avatar, alt: tweet.author }),
+      /* @__PURE__ */ jsx3(AvatarFallback, { children: tweet.author[0] })
+    ] }),
+    /* @__PURE__ */ jsxs2("div", { className: "flex-1", children: [
+      /* @__PURE__ */ jsxs2("div", { className: "flex items-center space-x-1", children: [
+        /* @__PURE__ */ jsx3("span", { className: "font-bold", children: tweet.author }),
+        /* @__PURE__ */ jsx3("span", { className: "text-gray-500", children: tweet.handle }),
+        /* @__PURE__ */ jsx3("span", { className: "text-gray-500", children: "\xB7" }),
+        /* @__PURE__ */ jsx3("span", { className: "text-gray-500", children: tweet.timestamp })
+      ] }),
+      /* @__PURE__ */ jsx3("p", { className: "mt-1", children: tweet.content }),
+      /* @__PURE__ */ jsxs2("div", { className: "flex justify-between mt-3 text-gray-500", children: [
+        /* @__PURE__ */ jsxs2("button", { className: "flex items-center space-x-2 hover:text-blue-500", children: [
+          /* @__PURE__ */ jsx3(MessageCircle, { className: "w-5 h-5" }),
+          /* @__PURE__ */ jsx3("span", { children: "Reply" })
+        ] }),
+        /* @__PURE__ */ jsxs2("button", { className: "flex items-center space-x-2 hover:text-green-500", onClick: handleRetweet, children: [
+          /* @__PURE__ */ jsx3(Repeat2, { className: "w-5 h-5" }),
+          /* @__PURE__ */ jsx3("span", { children: retweets })
+        ] }),
+        /* @__PURE__ */ jsxs2("button", { className: "flex items-center space-x-2 hover:text-red-500", onClick: handleLike, children: [
+          /* @__PURE__ */ jsx3(Heart, { className: "w-5 h-5" }),
+          /* @__PURE__ */ jsx3("span", { children: likes })
+        ] })
+      ] })
+    ] })
+  ] });
+}
+
+// components__Timeline.tsx
+import { jsx as jsx4, jsxs as jsxs3 } from "https://esm.sh/react@19/jsx-runtime";
+var initialTweets = [
+  {
+    id: 1,
+    author: "John Doe",
+    handle: "@johndoe",
+    content: "Just had an amazing coffee at the new caf\xE9 downtown! \u2615\uFE0F #CoffeeLovers",
+    timestamp: "2h",
+    likes: 15,
+    retweets: 5,
+    avatar: "/placeholder.svg?height=40&width=40"
+  },
+  {
+    id: 2,
+    author: "Jane Smith",
+    handle: "@janesmith",
+    content: "Excited to announce my new book 'React Mastery' is now available for pre-order! \u{1F4DA} #ReactJS #WebDev",
+    timestamp: "4h",
+    likes: 32,
+    retweets: 12,
+    avatar: "/placeholder.svg?height=40&width=40"
+  },
+  {
+    id: 3,
+    author: "Tech News",
+    handle: "@technews",
+    content: "Breaking: New AI model can generate realistic 3D scenes from text descriptions. \u{1F916}\u{1F3A8} #AI #MachineLearning",
+    timestamp: "6h",
+    likes: 78,
+    retweets: 45,
+    avatar: "/placeholder.svg?height=40&width=40"
+  }
+];
+function Timeline() {
+  const [tweets, setTweets] = useState3(initialTweets);
+  const handleNewTweet = (content) => {
+    const newTweet = {
+      id: tweets.length + 1,
+      author: "Current User",
+      handle: "@currentuser",
+      content,
+      timestamp: "Just now",
+      likes: 0,
+      retweets: 0,
+      avatar: "/placeholder.svg?height=40&width=40"
+    };
+    setTweets([newTweet, ...tweets]);
+  };
+  return /* @__PURE__ */ jsxs3("div", { className: "max-w-2xl mx-auto", children: [
+    /* @__PURE__ */ jsx4(TweetInput, { onNewTweet: handleNewTweet }),
+    /* @__PURE__ */ jsx4("div", { className: "divide-y divide-gray-200", children: tweets.map((tweet) => /* @__PURE__ */ jsx4(Tweet, { tweet }, tweet.id)) })
+  ] });
+}
+
+// app__page.tsx
+import { jsx as jsx5 } from "https://esm.sh/react@19/jsx-runtime";
+function Home() {
+  return /* @__PURE__ */ jsx5("main", { className: "min-h-screen bg-gray-100 py-8", children: /* @__PURE__ */ jsx5(Timeline, {}) });
+}
+
+// client.tsx
+import { jsx as jsx6 } from "https://esm.sh/react@19/jsx-runtime";
+var root = createRoot(document.getElementById("root"));
+root.render(
+  /* @__PURE__ */ jsx6(StrictMode, { children: /* @__PURE__ */ jsx6(Home, {}) })
+);
+
+</script>
+</body>
+</html>

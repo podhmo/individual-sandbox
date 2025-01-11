@@ -1,6 +1,10 @@
-import { useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Heart, MessageCircle, Repeat2 } from 'lucide-react'
+/** @jsxRuntime automatic */
+/** @jsxImportSource npm:react@19 */
+/** @jsxImportSourceTypes npm:@types/react@19 */
+
+import { useState } from 'npm:react@19'
+import { Avatar, AvatarFallback, AvatarImage } from './components__ui__avatar.tsx'
+import { Heart, MessageCircle, Repeat2 } from 'npm:lucide-react'
 
 interface TweetProps {
   tweet: {
