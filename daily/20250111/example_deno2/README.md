@@ -121,5 +121,16 @@ package.json
 
 一旦それは置いておいてmigrationをする
 
-https://twind.dev/handbook/the-shim.html#basic-usage
+- https://twind.dev/handbook/the-shim.html#basic-usage
+- https://github.com/tw-in-js/twind/tree/main/examples/basic
+
+とりあえずそれっぽくつなげたけれどまだ残っている。
+
+```
+10:13:46.701 scheduler.development.mjs:2 [TWIND_INVALID_CLASS] Unknown class "size-4" found. {detail: 'size-4'}
+10:13:46.715 scheduler.development.mjs:2 [TWIND_INVALID_CLASS] Unknown class "lucide" found. {detail: 'lucide'}
+10:13:46.716 scheduler.development.mjs:2 [TWIND_INVALID_CLASS] Unknown class "lucide-message-circle" found.
+10:13:46.717 scheduler.development.mjs:2 [TWIND_INVALID_CLASS] Unknown class "lucide-repeat2" found. {detail: 'lucide-repeat2'}
+10:13:46.719 scheduler.development.mjs:2 [TWIND_INVALID_CLASS] Unknown class "lucide-heart" found. {detail: 'lucide-heart'}
+```
 

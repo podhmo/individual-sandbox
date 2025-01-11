@@ -5,7 +5,7 @@
 "use client"
 
 import * as React from "npm:react@19"
-import * as AvatarPrimitive from "npm:radix-ui/react-avatar"
+import * as AvatarPrimitive from "npm:@radix-ui/react-avatar"
 
 import { cn } from "./lib__utils.ts"
 

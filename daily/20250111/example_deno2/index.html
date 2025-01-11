@@ -13,24 +13,23 @@
 </main>
 <script type="module">
 // client.tsx
-import "https://esm.sh/twind/shim";
-import { StrictMode } from "https://esm.sh/react@19";
-import { createRoot } from "https://esm.sh/react-dom@19/client";
+import { StrictMode } from "https://next.esm.sh/react@19.0.0?dev";
+import { createRoot } from "https://next.esm.sh/react-dom@19.0.0/client?dev&deps=react@19.0.0,scheduler@0.25.0";
 
 // components__Timeline.tsx
-import { useState as useState3 } from "https://esm.sh/react@19";
+import { useState as useState3 } from "https://next.esm.sh/react@19.0.0?dev";
 
 // components__TweetInput.tsx
-import { useState } from "https://esm.sh/react@19";
+import { useState } from "https://next.esm.sh/react@19.0.0?dev";
 
 // components__ui__button.tsx
-import * as React from "https://esm.sh/react@19";
-import { Slot } from "https://esm.sh/@radix-ui/react-slot";
-import { cva } from "https://esm.sh/class-variance-authority";
+import * as React from "https://next.esm.sh/react@19.0.0?dev";
+import { Slot } from "https://next.esm.sh/@radix-ui/react-slot@1.1.1?dev&deps=@radix-ui/react-compose-refs@1.1.1,@types/react@19.0.3,csstype@3.1.3,react@19.0.0";
+import { cva } from "https://next.esm.sh/class-variance-authority@0.7.1?dev&deps=clsx@2.1.1";
 
 // lib__utils.ts
-import { clsx } from "https://esm.sh/clsx";
-import { twMerge } from "https://esm.sh/tailwind-merge";
+import { clsx } from "https://next.esm.sh/clsx@2.1.1?dev";
+import { twMerge } from "https://next.esm.sh/tailwind-merge@2.6.0?dev";
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
@@ -77,7 +76,7 @@ var Button = React.forwardRef(
 Button.displayName = "Button";
 
 // components__ui__textarea.tsx
-import * as React2 from "https://esm.sh/react@19";
+import * as React2 from "https://next.esm.sh/react@19.0.0?dev";
 var Textarea = React2.forwardRef(({ className, ...props }, ref) => {
   return /* @__PURE__ */ React2.createElement(
     "textarea",
@@ -94,9 +93,9 @@ var Textarea = React2.forwardRef(({ className, ...props }, ref) => {
 Textarea.displayName = "Textarea";
 
 // components__ui__avatar.tsx
-import * as React3 from "https://esm.sh/react@19";
-import * as AvatarPrimitive from "https://esm.sh/radix-ui/react-avatar";
-import { jsx } from "https://esm.sh/react@19/jsx-runtime";
+import * as React3 from "https://next.esm.sh/react@19.0.0?dev";
+import * as AvatarPrimitive from "https://next.esm.sh/@radix-ui/react-avatar@1.1.2?dev&deps=@radix-ui/react-compose-refs@1.1.1,@radix-ui/react-context@1.1.1,@radix-ui/react-primitive@2.0.1,@radix-ui/react-slot@1.1.1,@radix-ui/react-use-callback-ref@1.1.0,@radix-ui/react-use-layout-effect@1.1.0,@types/react@19.0.3,csstype@3.1.3,react-dom@19.0.0,react@19.0.0,scheduler@0.25.0";
+import { jsx } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
 var Avatar = React3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   AvatarPrimitive.Root,
   {
@@ -132,7 +131,7 @@ var AvatarFallback = React3.forwardRef(({ className, ...props }, ref) => /* @__P
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
 // components__TweetInput.tsx
-import { jsx as jsx2, jsxs } from "https://esm.sh/react@19/jsx-runtime";
+import { jsx as jsx2, jsxs } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
 function TweetInput({ onNewTweet }) {
   const [content, setContent] = useState("");
   const handleSubmit = (e) => {
@@ -164,9 +163,9 @@ function TweetInput({ onNewTweet }) {
 }
 
 // components__Tweet.tsx
-import { useState as useState2 } from "https://esm.sh/react@19";
-import { Heart, MessageCircle, Repeat2 } from "https://esm.sh/lucide-react";
-import { jsx as jsx3, jsxs as jsxs2 } from "https://esm.sh/react@19/jsx-runtime";
+import { useState as useState2 } from "https://next.esm.sh/react@19.0.0?dev";
+import { Heart, MessageCircle, Repeat2 } from "https://next.esm.sh/lucide-react@0.471.0?dev&deps=react@19.0.0";
+import { jsx as jsx3, jsxs as jsxs2 } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
 function Tweet({ tweet }) {
   const [likes, setLikes] = useState2(tweet.likes);
   const [retweets, setRetweets] = useState2(tweet.retweets);
@@ -204,7 +203,7 @@ function Tweet({ tweet }) {
 }
 
 // components__Timeline.tsx
-import { jsx as jsx4, jsxs as jsxs3 } from "https://esm.sh/react@19/jsx-runtime";
+import { jsx as jsx4, jsxs as jsxs3 } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
 var initialTweets = [
   {
     id: 1,
@@ -259,13 +258,74 @@ function Timeline() {
 }
 
 // app__page.tsx
-import { jsx as jsx5 } from "https://esm.sh/react@19/jsx-runtime";
+import { jsx as jsx5 } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
 function Home() {
   return /* @__PURE__ */ jsx5("main", { className: "min-h-screen bg-gray-100 py-8", children: /* @__PURE__ */ jsx5(Timeline, {}) });
 }
 
 // client.tsx
-import { jsx as jsx6 } from "https://esm.sh/react@19/jsx-runtime";
+import { defineConfig, install } from "https://next.esm.sh/@twind/core@1.1.3?dev&deps=csstype@3.1.3";
+import presetTailwind from "https://next.esm.sh/@twind/preset-tailwind@1.1.4?dev&deps=@twind/core@1.1.3,csstype@3.1.3";
+import presetAutoprefix from "https://next.esm.sh/@twind/preset-autoprefix@1.0.7?dev&deps=@twind/core@1.1.3,csstype@3.1.3,style-vendorizer@2.2.3";
+import { jsx as jsx6 } from "https://next.esm.sh/react@19.0.0/jsx-runtime?dev";
+install(defineConfig({
+  preflight: false,
+  presets: [presetAutoprefix(), presetTailwind()],
+  theme: {
+    extend: {
+      // size: {
+      //   "4": "1rem", // https://tailwindcss.com/docs/size
+      // },
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))"
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))"
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))"
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))"
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))"
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))"
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))"
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))"
+        }
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)"
+      }
+    }
+  }
+}));
 var root = createRoot(document.getElementById("root"));
 root.render(
   /* @__PURE__ */ jsx6(StrictMode, { children: /* @__PURE__ */ jsx6(Home, {}) })
