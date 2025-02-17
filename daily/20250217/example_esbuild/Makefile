@@ -1,7 +1,7 @@
 default:
-	esbuild --bundle --outfile=app.js hello.js
+	esbuild --bundle --outfile=dist/app.js hello.js
 .PHONY: default
 
 clean:
-	rm -f app.css app.js
+	rm -rf dist
 .PHONY: clean

@@ -14,9 +14,11 @@ $ make
 .
 ├── Makefile
 ├── README.md
-├── app.css # 生成される
-├── app.js  # 生成される
 ├── base.css
+├── code.module.css
+├── dist
+│   ├── app.css
+│   └── app.js
 ├── hello.js
 └── index.html
 ```
