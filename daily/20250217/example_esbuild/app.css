@@ -1,0 +1,14 @@
+/* base.css */
+body {
+  padding: 2rem;
+}
+p {
+  background-color: #ffa;
+  padding: 1rem;
+}
+
+/* code.module.css */
+.code_normal {
+  background-collor: #aaf;
+  padding: 1rem;
+}
