@@ -5,19 +5,13 @@ const filename = "README.md";
 // cat like
 {
     using input = await Deno.open(filename);
-    for await (
-        const line of input
-            .readable.pipeThrough(new TextDecoderStream())
-            .pipeThrough(new TextLineStream())
-    ) {
-        console.log(line);
-    }
-
-    // stdout is closed automatically?
-    // await input.readable.pipeTo(
-    //     Deno.stdout.writable,
-    // );
+    await input.readable
+        .pipeTo(Deno.stdout.writable, {
+            preventClose: true,
+        });
 }
+
+console.log("\n\n");
 
 // cat like with line number
 {
@@ -32,22 +26,24 @@ const filename = "README.md";
     }
 }
 
+console.log("\n\n");
+
 // cat like with line number and pipe
 {
     let i = 1;
     const pipe = new TransformStream({
         transform(chunk, controller) {
-            controller.enqueue(`${i++}: ${chunk}`);
+            controller.enqueue(`${i++}: ${chunk}\n`);
         },
     });
 
     using input = await Deno.open(filename);
-    for await (
-        const line of input
-            .readable.pipeThrough(new TextDecoderStream())
-            .pipeThrough(new TextLineStream())
-            .pipeThrough(pipe)
-    ) {
-        console.log(line);
-    }
+    await input.readable
+        .pipeThrough(new TextDecoderStream())
+        .pipeThrough(new TextLineStream())
+        .pipeThrough(pipe)
+        .pipeThrough(new TextEncoderStream())
+        .pipeTo(Deno.stdout.writable, {
+            preventClose: true,
+        });
 }
