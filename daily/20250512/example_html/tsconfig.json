@@ -1,14 +1,26 @@
+// tsconfig.json
 {
   "compilerOptions": {
-    "target": "ES2020", // またはES6など
-    "module": "ES2020", // またはESNextなど
-    "outDir": "./js",    // コンパイル後のJS出力先
-    "rootDir": "./ts",   // TSソースファイルのルート
+    "target": "ESNext", // Viteは最新のJavaScript構文をサポートしているためESNextでOK
+    "module": "ESNext", // ES Module形式
+    "moduleResolution": "bundler", // Vite v5以降推奨 (以前は "node" でも可)
+    "lib": ["ESNext", "DOM", "DOM.Iterable"], // DOM APIも使用するため
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node" // ES Module importのため
+    "isolatedModules": true, // Vite/esbuildでトランスパイルされるファイルはこれが必要
+    "noEmit": true,          // Viteがビルドするので、tsc自身はJSファイルを出力しない
+
+    // "outDir": "./js",    // Viteでは不要 (Viteがビルドを管理)
+    // "rootDir": "./ts",   // Viteでは不要 (Viteが解決)
+
+    // もしエイリアスを使用する場合 (vite.config.ts と合わせる)
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["ts/*"]
+    // }
   },
-  "include": ["ts/**/*"]
+  "include": ["ts/**/*.ts", "vite.config.ts"], // tsファイルとvite設定ファイルを含める
+  "references": [{ "path": "./tsconfig.node.json" }] // (任意) vite.config.ts を node 環境で型チェックする場合
 }

@@ -1,0 +1,11 @@
+// tsconfig.node.json
+{
+  "compilerOptions": {
+    "composite": true, // references で参照されるために必要
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.ts"]
+}
