@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプト階層管理アプリ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>プロンプトテンプレート</h1>
+        </header>
+
+        <!-- カテゴリ一覧画面 -->
+        <section id="category-list-view">
+            <h2>カテゴリを選択</h2>
+            <div id="category-list-container">
+                <!-- カテゴリリストがここに挿入されます -->
+            </div>
+        </section>
+
+        <!-- テンプレート一覧画面 -->
+        <section id="template-list-view" style="display: none;">
+            <nav aria-label="breadcrumb">
+                <ul>
+                    <li><button id="back-to-category-list" class="secondary outline">カテゴリ一覧へ戻る</button></li>
+                </ul>
+            </nav>
+            <h2 id="template-list-title">テンプレートを選択</h2>
+            <div id="template-list-container">
+                <!-- テンプレートリストがここに挿入されます -->
+            </div>
+        </section>
+
+        <!-- プロンプト生成フォーム画面 -->
+        <section id="prompt-form-view" style="display: none;">
+            <nav aria-label="breadcrumb">
+                <ul>
+                     <li><button id="back-to-template-list" class="secondary outline">テンプレート一覧へ戻る</button></li>
+                </ul>
+            </nav>
+            <article id="prompt-form-container">
+                <h2 id="prompt-template-title">テンプレート名</h2>
+                <details>
+                    <summary>テンプレート本文を確認</summary>
+                    <p id="prompt-template-body-preview" class="template-preview"></p>
+                </details>
+                
+                <form>
+                    <div id="prompt-variable-inputs">
+                        <!-- 変数入力フィールドがここに挿入されます -->
+                    </div>
+                    
+                    <label for="prompt-generated-textarea">生成されたプロンプト:</label>
+                    <textarea id="prompt-generated-textarea" rows="8" aria-label="生成されたプロンプト" readonly></textarea>
+                    
+                    <button type="button" id="prompt-copy-button" disabled>クリップボードにコピー</button>
+                    <small id="prompt-feedback-message" aria-live="polite"></small>
+                </form>
+            </article>
+        </section>
+
+        <footer>
+            <p><small>© 2024 プロンプトアプリ</small></p>
+        </footer>
+    </main>
+
+    <script type="module" src="js/main.js"></script> <!-- コンパイル後のJSファイルを指定 -->
+</body>
+</html>

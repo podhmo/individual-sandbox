@@ -1,0 +1,68 @@
+/* css/style.css */
+
+body {
+    font-family: sans-serif; /* Pico.cssが設定するが、念のため */
+}
+
+main.container {
+    max-width: 768px; /* スマートフォンで見やすい幅に調整 */
+    padding-bottom: 3rem; /* フッターとのスペース */
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: var(--pico-spacing);
+}
+
+/* テンプレート本文のプレビュー用スタイル */
+.template-preview {
+    background-color: var(--pico-card-background-color);
+    border: var(--pico-card-border);
+    padding: var(--pico-spacing);
+    border-radius: var(--pico-border-radius);
+    white-space: pre-wrap; /* 改行を保持 */
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    margin-bottom: var(--pico-spacing);
+}
+
+#prompt-variable-inputs label {
+    margin-top: var(--pico-form-element-spacing-vertical);
+    font-weight: bold;
+}
+
+#prompt-variable-inputs input[type="text"] {
+    margin-bottom: var(--pico-form-element-spacing-vertical);
+}
+
+#prompt-feedback-message {
+    display: inline-block; /* ボタンの横に表示 */
+    margin-left: 1em;
+}
+
+/* リストのマーカーを消す (Pico.cssでrole=list ul li には通常マーカーがつかないが念のため) */
+#category-list-container ul,
+#template-list-container ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* ボタンのスタイル調整 */
+#category-list-container button,
+#template-list-container button {
+    text-align: left; /* ボタン内のテキストを左寄せ */
+    padding-left: var(--pico-spacing); /* 左側にパディングを追加 */
+    padding-right: var(--pico-spacing);
+}
+
+
+/* フッターを画面下部に固定したい場合 (コンテンツが少ない場合) - 必要に応じてコメント解除
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main.container {
+    flex: 1;
+}
+*/

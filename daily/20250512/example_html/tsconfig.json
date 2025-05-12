@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // またはES6など
+    "module": "ES2020", // またはESNextなど
+    "outDir": "./js",    // コンパイル後のJS出力先
+    "rootDir": "./ts",   // TSソースファイルのルート
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node" // ES Module importのため
+  },
+  "include": ["ts/**/*"]
+}
