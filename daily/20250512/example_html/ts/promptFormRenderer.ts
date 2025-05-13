@@ -90,12 +90,13 @@ export class PromptFormRenderer {
           );
           this.feedbackMessageElement.textContent =
             "クリップボードにコピーしました！";
-          this.feedbackMessageElement.style.color = "var(--pico-primary)";
+          this.feedbackMessageElement.style.color = "var(--pico-primary-hover)"; // より目立つようにhover色を使ってみる (要確認)
           setTimeout(() => this.feedbackMessageElement.textContent = "", 3000);
         } catch (err) {
           console.error("クリップボードへのコピーに失敗しました:", err);
           this.feedbackMessageElement.textContent = "コピーに失敗しました。";
-          this.feedbackMessageElement.style.color = "var(--pico-color-red)";
+          this.feedbackMessageElement.style.color =
+            "var(--pico-form-invalid-border-color)"; // フォームの無効なボーダー色 (赤系)
         }
       }
     };
