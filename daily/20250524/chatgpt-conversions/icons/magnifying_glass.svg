@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
   <title>Magnifying Glass Icon</title>
   <style>
-    .icon-stroke { stroke: #333; }
     @media (prefers-color-scheme: dark) {
       .icon-stroke { stroke: #eee; }
+    }
+    @media (prefers-color-scheme: light) {
+      .icon-stroke { stroke: #333; }
     }
   </style>
   <circle cx="42" cy="42" r="30" class="icon-stroke" stroke-width="10" fill="none"/>
