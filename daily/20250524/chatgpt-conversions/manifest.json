@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Conversation Exporter",
+  "version": "1.0.1",
+  "description": "Exports ChatGPT conversation history as raw JSON or formatted text.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "downloads",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/magnifying_glass.svg",
+      "48": "icons/magnifying_glass.svg",
+      "128": "icons/magnifying_glass.svg"
+    }
+  },
+  "icons": {
+    "16": "icons/magnifying_glass.svg",
+    "48": "icons/magnifying_glass.svg",
+    "128": "icons/magnifying_glass.svg"
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ChatGPT Exporter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 250px;
+      padding: 10px;
+      text-align: center;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #e9e9e9;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 0.9em;
+      min-height: 20px; /* Reserve space for messages */
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h3>Export Conversation</h3>
+  <button id="downloadJsonBtn">Download Raw JSON</button>
+  <button id="downloadTextBtn">Download Formatted Text</button>
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
