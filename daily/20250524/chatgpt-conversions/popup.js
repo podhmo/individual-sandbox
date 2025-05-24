@@ -3,36 +3,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadTextBtn = document.getElementById('downloadTextBtn');
   const statusDiv = document.getElementById('status');
 
-  function showStatus(message, isError = false) {
+  let statusClearTimeout;
+
+  function showStatus(message, type = 'info') { // type can be 'info', 'success', 'error'
+    clearTimeout(statusClearTimeout); // Clear existing timeout
     statusDiv.textContent = message;
-    statusDiv.className = isError ? 'error' : 'success';
-    // Clear status after a few seconds unless it's a persistent error
-    if (!isError || message.includes("initiated")) { // Keep error messages longer if they aren't just "initiated"
-        setTimeout(() => {
-            if (statusDiv.textContent === message) { // Clear only if it's the same message
-                statusDiv.textContent = '';
-                statusDiv.className = '';
-            }
-        }, isError ? 8000 : 5000); // Longer display for errors
-    }
+    statusDiv.className = type; // Assign class based on type
+
+    // Auto-clear status after a delay, longer for errors
+    const delay = type === 'error' ? 10000 : 5000;
+    statusClearTimeout = setTimeout(() => {
+        if (statusDiv.textContent === message) { // Clear only if it's the same message
+            statusDiv.textContent = '';
+            statusDiv.className = '';
+        }
+    }, delay);
   }
 
   async function handleDownload(action) {
     downloadJsonBtn.disabled = true;
     downloadTextBtn.disabled = true;
-    statusDiv.textContent = `Processing ${action === 'downloadJson' ? 'JSON' : 'Text'} download...`;
-    statusDiv.className = '';
+    const actionText = action === 'downloadJson' ? 'JSON' : 'Text';
+    showStatus(`Processing ${actionText} download... Please wait.`, 'info');
 
     try {
       const response = await browser.runtime.sendMessage({ action });
       if (response && response.success) {
-        showStatus(`${action === 'downloadJson' ? 'Raw JSON' : 'Formatted text'} download initiated for ${response.filename || 'file'}.`);
+        showStatus(`${actionText} download initiated for ${response.filename || 'file'}.`, 'success');
       } else {
-        showStatus(response.error || `Failed to download ${action === 'downloadJson' ? 'JSON' : 'text'}.`, true);
+        showStatus(response.error || `Failed to download ${actionText}. Check console for details.`, 'error');
       }
     } catch (e) {
       console.error(`Error sending message for ${action} download:`, e);
-      showStatus(`Error: ${e.message || 'Unknown error occurred.'}`, true);
+      showStatus(`Client-side error: ${e.message || 'Unknown error occurred.'}. Check console.`, 'error');
     } finally {
       downloadJsonBtn.disabled = false;
       downloadTextBtn.disabled = false;
@@ -42,20 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
   downloadJsonBtn.addEventListener('click', () => handleDownload("downloadJson"));
   downloadTextBtn.addEventListener('click', () => handleDownload("downloadText"));
 
-  // Check if on a valid ChatGPT page and update UI (optional, more complex to do reliably from popup alone)
+  // Initial check for active tab state
   browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-    if (tabs && tabs.length > 0 && tabs[0].url && tabs[0].url.startsWith("https://chatgpt.com/c/")) {
-      // Potentially enable buttons or show a ready message
+    if (tabs && tabs.length > 0 && tabs[0].url && /^https:\/\/chatgpt\.com\/c\/[a-f0-9-]+(-[a-f0-9-]+)*$/.test(tabs[0].url)) {
+      showStatus("Ready to export. Ensure you've interacted with the chat if it was just loaded.", 'info');
+      downloadJsonBtn.disabled = false;
+      downloadTextBtn.disabled = false;
     } else {
-      showStatus("Please navigate to a ChatGPT conversation page (chatgpt.com/c/...).", true);
+      showStatus("Navigate to a ChatGPT conversation page (e.g., chatgpt.com/c/...). Buttons disabled.", 'error');
       downloadJsonBtn.disabled = true;
       downloadTextBtn.disabled = true;
     }
   }).catch(err => {
     console.error("Error querying tabs:", err);
-    showStatus("Could not determine active tab.", true);
-      downloadJsonBtn.disabled = true;
-      downloadTextBtn.disabled = true;
+    showStatus("Could not determine active tab state. Buttons disabled.", 'error');
+    downloadJsonBtn.disabled = true;
+    downloadTextBtn.disabled = true;
   });
-
 });

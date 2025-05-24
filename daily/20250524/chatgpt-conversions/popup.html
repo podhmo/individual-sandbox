@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: sans-serif;
-      width: 250px;
+      width: 280px; /* Slightly wider for longer messages */
       padding: 10px;
       text-align: center;
     }
@@ -19,30 +19,44 @@
       background-color: #f9f9f9;
       cursor: pointer;
       border-radius: 4px;
+      box-sizing: border-box; /* Ensure padding doesn't make it wider */
     }
     button:hover {
       background-color: #e9e9e9;
     }
     button:disabled {
         background-color: #e0e0e0;
+        color: #999;
         cursor: not-allowed;
     }
     #status {
       margin-top: 10px;
       font-size: 0.9em;
-      min-height: 20px; /* Reserve space for messages */
+      min-height: 30px; /* Reserve space for multi-line messages */
       word-wrap: break-word;
+      text-align: left;
+      padding: 5px;
+      border-radius: 3px;
     }
     .error {
       color: red;
+      background-color: #ffebee;
+      border: 1px solid #ffcdd2;
     }
     .success {
       color: green;
+      background-color: #e8f5e9;
+      border: 1px solid #c8e6c9;
+    }
+    .info {
+      color: #0d47a1;
+      background-color: #e3f2fd;
+      border: 1px solid #bbdefb;
     }
   </style>
 </head>
 <body>
-  <h3>Export Conversation</h3>
+  <h4>ChatGPT Conversation Exporter</h4>
   <button id="downloadJsonBtn">Download Raw JSON</button>
   <button id="downloadTextBtn">Download Formatted Text</button>
   <div id="status"></div>

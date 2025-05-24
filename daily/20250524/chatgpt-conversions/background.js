@@ -1,131 +1,148 @@
 const CONVERSATION_API_URL_PATTERN = "*://*.chatgpt.com/backend-api/conversation/*";
-const CHAT_PAGE_URL_PATTERN = "*://*.chatgpt.com/c/*";
+// const CHAT_PAGE_URL_PATTERN = "*://*.chatgpt.com/c/*"; // Not directly used for matching active tab anymore, but for context.
 
-// Helper to get active tab
-async function getActiveTab() {
+const REQUEST_HEADERS_TO_CAPTURE = [
+  'authorization',
+  'oai-client-version',
+  'user-agent',
+  'accept',
+  'accept-language',
+  'referer', // Will be captured from original request
+  'oai-language',
+  'oai-device-id'
+];
+
+// Helper to get active tab that looks like a ChatGPT chat page
+async function getActiveChatGPTChatTab() {
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   if (tabs && tabs.length > 0) {
-    if (tabs[0].url && tabs[0].url.match(/^https:\/\/chatgpt\.com\/c\/[a-zA-Z0-9-]+$/)) { // More specific match
+    // More robust check for a chat page URL (e.g., https://chatgpt.com/c/conversation-uuid)
+    if (tabs[0].url && /^https:\/\/chatgpt\.com\/c\/[a-f0-9-]+(-[a-f0-9-]+)*$/.test(tabs[0].url)) {
         return tabs[0];
     }
   }
   return null;
 }
 
-// Listener for network requests to capture conversation API URLs and necessary headers
 browser.webRequest.onSendHeaders.addListener(
   async (details) => {
-    if (details.tabId > 0 && details.url.includes("/backend-api/conversation/")) {
-      try {
-        const tab = await browser.tabs.get(details.tabId);
-        // Ensure the tab URL is a chat page
-        if (tab && tab.url && tab.url.match(/^https:\/\/chatgpt\.com\/c\/[a-zA-Z0-9-]+$/)) {
-          const conversationIdFromApiUrl = details.url.split("/conversation/")[1].split("?")[0];
-          
-          let capturedHeaders = {};
-          if (details.requestHeaders) {
-            for (const header of details.requestHeaders) {
-              if (header.name.toLowerCase() === 'authorization' || header.name.toLowerCase() === 'oai-client-version') {
-                capturedHeaders[header.name] = header.value;
-              }
+    // Only process requests for the conversation API and from a tab
+    if (details.tabId <= 0 || !details.url.includes("/backend-api/conversation/")) {
+      return;
+    }
+
+    try {
+      const tab = await browser.tabs.get(details.tabId);
+      // Ensure the tab URL is a chat page (or at least chatgpt.com)
+      if (tab && tab.url && tab.url.startsWith("https://chatgpt.com/")) {
+        const conversationIdFromApiUrl = details.url.split("/conversation/")[1].split("?")[0];
+        
+        let capturedHeaders = {};
+        if (details.requestHeaders) {
+          for (const header of details.requestHeaders) {
+            const lowerCaseHeaderName = header.name.toLowerCase();
+            if (REQUEST_HEADERS_TO_CAPTURE.includes(lowerCaseHeaderName)) {
+              capturedHeaders[header.name] = header.value; // Preserve original case for header name if needed, though HTTP/2 is case-insensitive
             }
           }
+        }
 
-          // If we couldn't get a direct conversation ID from the tab URL (e.g. it's not loaded yet, or URL structure changes)
-          // we rely on the conversationId from the API URL for storage key.
-          // A more robust approach might involve content scripts to read the conversation ID from the page DOM if available.
-          const storageKey = `conversationData_${conversationIdFromApiUrl}`;
-          
-          await browser.storage.local.set({ 
-            [storageKey]: {
-              apiUrl: details.url, // Store the full API URL including any query params if needed
-              headers: capturedHeaders 
-            }
-          });
-          console.log(`Stored API data for conversation ${conversationIdFromApiUrl} (key: ${storageKey}): URL: ${details.url}, Headers:`, capturedHeaders);
-
-          // Also store a mapping from the tab's chat page URL to the conversation ID from API URL
-          // This helps find the correct API URL when the popup is opened on a specific chat page.
-          const chatPageUrlParts = tab.url.split("/c/");
-          if (chatPageUrlParts.length > 1) {
-            const chatPageConversationId = chatPageUrlParts[1].split("?")[0]; // Main part of conv ID from tab
-             if (chatPageConversationId) {
-                const tabUrlToConvIdKey = `tabUrlMap_${tab.url}`; // Map full tab URL to the API's conversation ID
-                await browser.storage.local.set({ [tabUrlToConvIdKey]: conversationIdFromApiUrl });
-                console.log(`Mapped Tab URL ${tab.url} to API Conversation ID ${conversationIdFromApiUrl}`);
-             }
+        const storageKey = `conversationData_${conversationIdFromApiUrl}`;
+        
+        await browser.storage.local.set({ 
+          [storageKey]: {
+            apiUrl: details.url,
+            headers: capturedHeaders 
           }
+        });
+        // console.log(`Stored API data for conversation ${conversationIdFromApiUrl} (key: ${storageKey}): URL: ${details.url}, Headers:`, capturedHeaders);
+
+        // Map the tab's chat page URL to the conversation ID from API URL
+        if (tab.url.includes("/c/")) {
+            const chatPageUrlParts = tab.url.split("/c/");
+            if (chatPageUrlParts.length > 1) {
+                const chatPageConversationId = chatPageUrlParts[1].split("?")[0]; 
+                if (chatPageConversationId) {
+                    // Store a mapping: full tab URL -> API's conversation ID (the one in the API URL)
+                    const tabUrlToApiConvIdKey = `tabUrlMap_${tab.url}`; 
+                    await browser.storage.local.set({ [tabUrlToApiConvIdKey]: conversationIdFromApiUrl });
+                    // console.log(`Mapped Tab URL ${tab.url} to API Conversation ID ${conversationIdFromApiUrl}`);
+                }
+            }
         }
-      } catch (error) {
-        // Suppress "Error: No tab with id: XXX" if tab was closed quickly
-        if (!error.message || !error.message.startsWith("No tab with id:")) {
-            console.error("Error in onSendHeaders listener:", error, "Details:", details);
-        }
+      }
+    } catch (error) {
+      if (!error.message || !error.message.startsWith("No tab with id:")) {
+          console.error("Error in onSendHeaders listener:", error, "Details:", details);
       }
     }
   },
   { urls: [CONVERSATION_API_URL_PATTERN] },
-  ["requestHeaders"] // We need this to access requestHeaders
+  ["requestHeaders"]
 );
 
 
-// Listener for messages from the popup
 browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.action === "downloadJson" || request.action === "downloadText") {
-    const activeTab = await getActiveTab();
+    const activeTab = await getActiveChatGPTChatTab();
     if (!activeTab || !activeTab.url) {
-      console.error("No active ChatGPT chat tab found or tab URL is missing.");
-      sendResponse({ success: false, error: "Active ChatGPT chat tab not found." });
-      return true; // Keep message channel open for async response
+      sendResponse({ success: false, error: "Active ChatGPT chat tab not found. Please open a chat." });
+      return true;
     }
 
     let conversationIdToFetch;
-    // First, try to get the API's conversation ID mapped from the tab's full URL
     const tabUrlMapKey = `tabUrlMap_${activeTab.url}`;
     const tabUrlMapData = await browser.storage.local.get(tabUrlMapKey);
 
     if (tabUrlMapData && tabUrlMapData[tabUrlMapKey]) {
         conversationIdToFetch = tabUrlMapData[tabUrlMapKey];
-        console.log(`Found mapped API conversation ID: ${conversationIdToFetch} for tab ${activeTab.url}`);
     } else {
-        // Fallback: try to extract conversation ID from the tab URL directly
-        // This might not always be the API conversation ID, but it's a best guess
+        // Fallback: try to extract conversation ID from the tab URL (might not be the API one)
         const chatPageUrlParts = activeTab.url.split("/c/");
         if (chatPageUrlParts.length > 1) {
             conversationIdToFetch = chatPageUrlParts[1].split("?")[0];
-            console.log(`Using conversation ID from tab URL as fallback: ${conversationIdToFetch}`);
         } else {
-            console.error("Could not determine conversation ID from tab URL:", activeTab.url);
             sendResponse({ success: false, error: "Could not determine conversation ID for this chat." });
             return true;
         }
     }
     
     const storageKey = `conversationData_${conversationIdToFetch}`;
-    const storedData = await browser.storage.local.get(storageKey);
+    const storedDataResult = await browser.storage.local.get(storageKey);
+    const storedData = storedDataResult ? storedDataResult[storageKey] : null;
 
-    if (!storedData || !storedData[storageKey] || !storedData[storageKey].apiUrl) {
-      console.error("API data (URL/headers) not found in storage for conversation ID:", conversationIdToFetch, "using key:", storageKey);
-      sendResponse({ success: false, error: "Conversation data (API URL/headers) not found for this chat." });
+    if (!storedData || !storedData.apiUrl || !storedData.headers) {
+      sendResponse({ success: false, error: `Conversation data (API URL/headers) not found for ID ${conversationIdToFetch}. Please interact with the chat or reload the page to capture data.` });
       return true;
     }
 
-    const { apiUrl, headers: capturedHeaders } = storedData[storageKey];
+    const { apiUrl, headers: capturedHeaders } = storedData;
+
+    // Ensure 'Referer' is set to the current tab's URL if not captured or if it needs to be dynamic
+    // However, using the captured 'Referer' is generally safer if the API expects the original one.
+    // If capturedHeaders.Referer is not present, or if you decide it MUST be the current tab:
+    if (!capturedHeaders['Referer'] && !capturedHeaders['referer']) { // check both cases
+        capturedHeaders['Referer'] = activeTab.url; 
+    }
+
 
     try {
-      console.log(`Fetching from API URL: ${apiUrl} with headers:`, capturedHeaders);
+      // console.log(`Fetching from API URL: ${apiUrl} with headers:`, JSON.stringify(capturedHeaders, null, 2));
       const response = await fetch(apiUrl, { 
-        credentials: 'include', // Important for session cookies, if any
-        headers: capturedHeaders   // Add the captured headers
+        method: 'GET', // Explicitly GET
+        credentials: 'include', 
+        headers: capturedHeaders
       });
 
       if (!response.ok) {
-        const errorBody = await response.text();
-        throw new Error(`API request failed: ${response.status} ${response.statusText}. Body: ${errorBody.substring(0, 200)}`);
+        let errorBodyText = "Could not read error body.";
+        try {
+            errorBodyText = await response.text();
+        } catch (e) { /* ignore */ }
+        throw new Error(`API request failed: ${response.status} ${response.statusText}. Response: ${errorBodyText.substring(0, 500)}`);
       }
       const jsonData = await response.json();
       
-      // Use conversation_id from JSON if available, otherwise from the fetched ID
       const effectiveConversationId = jsonData.conversation_id || conversationIdToFetch || "unknown_conversation";
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
@@ -133,7 +150,7 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       let filename;
 
       if (request.action === "downloadJson") {
-        blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+        blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json;charset=utf-8' });
         filename = `chatgpt_conversation_raw_${effectiveConversationId}_${timestamp}.json`;
       } else { // downloadText
         const formattedText = formatConversationAsText(jsonData);
@@ -142,118 +159,120 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       }
 
       const downloadUrl = URL.createObjectURL(blob);
-      await browser.downloads.download({
-        url: downloadUrl,
-        filename: filename,
-        saveAs: true // Prompts user for save location
-      });
-      // Consider revoking URL.createObjectURL(blob) after download, e.g., in browser.downloads.onChanged event.
-      sendResponse({ success: true, filename });
+      try {
+        await browser.downloads.download({
+          url: downloadUrl,
+          filename: filename,
+          saveAs: true
+        });
+        sendResponse({ success: true, filename });
+      } catch (downloadError) {
+          console.error("Download failed:", downloadError);
+          sendResponse({ success: false, error: `Download initiation failed: ${downloadError.message}`});
+      } finally {
+          URL.revokeObjectURL(downloadUrl); // Revoke immediately after download is initiated
+      }
+
     } catch (error) {
       console.error("Error during download process:", error);
       sendResponse({ success: false, error: error.message });
     }
-    return true; // Indicates that the response will be sent asynchronously
+    return true;
   }
 });
 
 function formatConversationAsText(jsonData) {
-  if (!jsonData || !jsonData.mapping || !jsonData.current_node) {
-    return "Error: Invalid JSON data or missing 'mapping'/'current_node'. Check raw JSON.";
+  if (!jsonData || typeof jsonData.mapping !== 'object' || !jsonData.current_node) {
+    return "Error: Invalid JSON data structure. 'mapping' or 'current_node' is missing or invalid. Check raw JSON.";
   }
 
   const { mapping, current_node, title, conversation_id } = jsonData;
   let orderedMessages = [];
   let currentNodeId = current_node;
+  const processedNodeIds = new Set(); 
 
-  const processedNodeIds = new Set(); // To avoid infinite loops in malformed data
-
-  while (currentNodeId && !processedNodeIds.has(currentNodeId)) {
+  while (currentNodeId && mapping[currentNodeId] && !processedNodeIds.has(currentNodeId)) {
     processedNodeIds.add(currentNodeId);
     const node = mapping[currentNodeId];
-    if (!node) {
-        console.warn("Node not found in mapping:", currentNodeId);
-        break; 
-    }
-
+    
     if (node.message && node.message.author && node.message.content) {
       const msg = node.message;
-      // Skip system messages with empty content or specific hidden messages (unless content is explicitly provided)
-      if (msg.author.role === "system" && 
-          ( (msg.content.parts && msg.content.parts.join("").trim() === "") || msg.metadata?.is_visually_hidden_from_conversation) &&
-          (!msg.content.text) // Also check for direct text content in system messages
-          ) {
-        // Skip
-      } else if (msg.content.content_type === "text" || 
-                 msg.content.content_type === "model_editable_context" ||
-                 msg.content.content_type === "code" || // Handle code blocks explicitly
-                 msg.content.text // Some messages might just have a 'text' field
-                 ) { 
-        
-        let textContent = "";
+      let textContent = "";
+      let skipMessage = false;
+
+      if (msg.author.role === "system") {
+        if ((!msg.content.parts || msg.content.parts.join("").trim() === "") && 
+            (!msg.content.text || msg.content.text.trim() === "") &&
+            (msg.metadata?.is_visually_hidden_from_conversation || msg.metadata?.gizmo_id)) {
+          skipMessage = true; // Skip purely structural or hidden system messages
+        }
+      }
+      
+      if (!skipMessage) {
         if (msg.content.parts && Array.isArray(msg.content.parts)) {
             textContent = msg.content.parts.map(part => {
                 if (typeof part === 'string') return part;
-                if (typeof part === 'object' && part !== null && part.text) return part.text; // For complex part structures
+                // Handle more complex parts if necessary, e.g. DALL-E images, code interpreter results.
+                // For now, focus on text.
+                if (typeof part === 'object' && part !== null && part.content_type === 'text' && part.text) return part.text;
+                if (typeof part === 'object' && part !== null && part.text) return part.text; // Generic object with text
                 return '';
             }).join("");
-        } else if (msg.content.text) { // Fallback for simple text content
+        } else if (msg.content.text) {
             textContent = msg.content.text;
-        } else if (msg.content.content_type === "code" && msg.content.language && msg.content.text) {
+        } else if (msg.content.content_type === "code" && msg.content.language && typeof msg.content.text === 'string') {
             textContent = "```" + msg.content.language + "\n" + msg.content.text + "\n```";
-        } else if (msg.content.content_type === "model_editable_context" && msg.content.model_set_context) {
+        } else if (msg.content.content_type === "model_editable_context" && typeof msg.content.model_set_context === 'string') {
             textContent = msg.content.model_set_context;
         }
         
         textContent = textContent.trim();
 
-        // Only add if there's actual content or it's a user message (even if empty)
-        if (textContent || msg.author.role === "user") {
+        if (textContent || msg.author.role === "user" || (msg.author.role === "assistant" && node.children && node.children.length === 0) ) { // Include user messages even if empty, or last assistant message
              orderedMessages.push({
                 role: msg.author.role,
+                name: msg.author.name, // Capture author name if available (e.g., for plugins/GPTs)
                 text: textContent,
-                create_time: msg.create_time || node.create_time, // Fallback to node create_time
-                id: msg.id
+                create_time: msg.create_time || node.create_time,
+                id: msg.id || currentNodeId // Use message ID or node ID as fallback
              });
         }
       }
     }
-    currentNodeId = node.parent;
+    currentNodeId = node.parent; // Move to the parent node
   }
 
-  orderedMessages.reverse(); // To get chronological order
+  orderedMessages.reverse(); 
   
-  // Deduplicate based on message ID if present, preferring later entries (though reversal should handle it)
   const uniqueMessages = [];
   const seenIds = new Set();
-  for (let i = orderedMessages.length - 1; i >= 0; i--) {
-      const msg = orderedMessages[i];
+  for (const msg of orderedMessages) { // Iterate forward after reversal
       if (msg.id && !seenIds.has(msg.id)) {
-          uniqueMessages.unshift(msg);
+          uniqueMessages.push(msg);
           seenIds.add(msg.id);
-      } else if (!msg.id) { // If no ID, assume it's unique (or handle differently if needed)
-          uniqueMessages.unshift(msg);
+      } else if (!msg.id && msg.text) { // If no ID, include if it has text
+          uniqueMessages.push(msg);
+      } else if (msg.role === 'user' && !msg.id) { // Include user messages without ID
+          uniqueMessages.push(msg);
       }
   }
-  // Optional: Sort by create_time as a final step if order is critical and IDs aren't fully reliable
+  // Optional: Sort by create_time as a final step
   uniqueMessages.sort((a, b) => (a.create_time || 0) - (b.create_time || 0));
-
 
   let output = `Conversation Title: ${title || 'N/A'}\n`;
   output += `Conversation ID: ${conversation_id || 'N/A'}\n`;
   output += `Exported At: ${new Date().toLocaleString()}\n\n`;
   output += "----------------------------------------\n\n";
 
-
   uniqueMessages.forEach(msg => {
-    // Skip genuinely empty system/assistant messages that might be structural artifacts
-    if ((msg.role === "assistant" || msg.role === "system") && msg.text.trim() === "") return; 
-    
-    let roleDisplay = msg.role.charAt(0).toUpperCase() + msg.role.slice(1);
-    if (msg.author && msg.author.name) { // If author name is available
-        roleDisplay = msg.author.name;
+    if ((msg.role === "assistant" || msg.role === "system") && msg.text.trim() === "" && msg.id && !mapping[msg.id]?.children?.length) {
+        // More aggressive skipping of empty assistant/system messages unless they are leaf nodes
+        // This can be tuned based on observed JSON structure
+        // return; 
     }
-    output += `${roleDisplay}:\n${msg.text}\n\n`;
+    
+    let roleDisplay = msg.name || (msg.role.charAt(0).toUpperCase() + msg.role.slice(1));
+    output += `${roleDisplay}:\n${msg.text || '(empty message)'}\n\n`;
   });
 
   return output.trim();

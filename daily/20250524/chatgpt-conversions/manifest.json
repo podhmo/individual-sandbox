@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Conversation Exporter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Exports ChatGPT conversation history as raw JSON or formatted text, including necessary headers.",
   "permissions": [
     "tabs",
