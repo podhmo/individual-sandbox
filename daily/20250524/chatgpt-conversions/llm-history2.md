@@ -1,3 +1,38 @@
+````json:manifest.json
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Conversation Exporter",
+  "version": "1.0.2",
+  "description": "Exports ChatGPT conversation history as raw JSON or formatted text, including necessary headers.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "downloads",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.chatgpt.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/magnifying_glass.svg",
+      "48": "icons/magnifying_glass.svg",
+      "128": "icons/magnifying_glass.svg"
+    }
+  },
+  "icons": {
+    "16": "icons/magnifying_glass.svg",
+    "48": "icons/magnifying_glass.svg",
+    "128": "icons/magnifying_glass.svg"
+  }
+}
+````
+````javascript:background.js
 const CONVERSATION_API_URL_PATTERN = "*://*.chatgpt.com/backend-api/conversation/*";
 const CHAT_PAGE_URL_PATTERN = "*://*.chatgpt.com/c/*";
 
@@ -258,3 +293,135 @@ function formatConversationAsText(jsonData) {
 
   return output.trim();
 }
+````
+````html:popup.html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ChatGPT Exporter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 250px;
+      padding: 10px;
+      text-align: center;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #e9e9e9;
+    }
+    button:disabled {
+        background-color: #e0e0e0;
+        cursor: not-allowed;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 0.9em;
+      min-height: 20px; /* Reserve space for messages */
+      word-wrap: break-word;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h3>Export Conversation</h3>
+  <button id="downloadJsonBtn">Download Raw JSON</button>
+  <button id="downloadTextBtn">Download Formatted Text</button>
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
+````
+````javascript:popup.js
+document.addEventListener('DOMContentLoaded', () => {
+  const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+  const downloadTextBtn = document.getElementById('downloadTextBtn');
+  const statusDiv = document.getElementById('status');
+
+  function showStatus(message, isError = false) {
+    statusDiv.textContent = message;
+    statusDiv.className = isError ? 'error' : 'success';
+    // Clear status after a few seconds unless it's a persistent error
+    if (!isError || message.includes("initiated")) { // Keep error messages longer if they aren't just "initiated"
+        setTimeout(() => {
+            if (statusDiv.textContent === message) { // Clear only if it's the same message
+                statusDiv.textContent = '';
+                statusDiv.className = '';
+            }
+        }, isError ? 8000 : 5000); // Longer display for errors
+    }
+  }
+
+  async function handleDownload(action) {
+    downloadJsonBtn.disabled = true;
+    downloadTextBtn.disabled = true;
+    statusDiv.textContent = `Processing ${action === 'downloadJson' ? 'JSON' : 'Text'} download...`;
+    statusDiv.className = '';
+
+    try {
+      const response = await browser.runtime.sendMessage({ action });
+      if (response && response.success) {
+        showStatus(`${action === 'downloadJson' ? 'Raw JSON' : 'Formatted text'} download initiated for ${response.filename || 'file'}.`);
+      } else {
+        showStatus(response.error || `Failed to download ${action === 'downloadJson' ? 'JSON' : 'text'}.`, true);
+      }
+    } catch (e) {
+      console.error(`Error sending message for ${action} download:`, e);
+      showStatus(`Error: ${e.message || 'Unknown error occurred.'}`, true);
+    } finally {
+      downloadJsonBtn.disabled = false;
+      downloadTextBtn.disabled = false;
+    }
+  }
+
+  downloadJsonBtn.addEventListener('click', () => handleDownload("downloadJson"));
+  downloadTextBtn.addEventListener('click', () => handleDownload("downloadText"));
+
+  // Check if on a valid ChatGPT page and update UI (optional, more complex to do reliably from popup alone)
+  browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+    if (tabs && tabs.length > 0 && tabs[0].url && tabs[0].url.startsWith("https://chatgpt.com/c/")) {
+      // Potentially enable buttons or show a ready message
+    } else {
+      showStatus("Please navigate to a ChatGPT conversation page (chatgpt.com/c/...).", true);
+      downloadJsonBtn.disabled = true;
+      downloadTextBtn.disabled = true;
+    }
+  }).catch(err => {
+    console.error("Error querying tabs:", err);
+    showStatus("Could not determine active tab.", true);
+      downloadJsonBtn.disabled = true;
+      downloadTextBtn.disabled = true;
+  });
+
+});
+````
+````svg:icons/magnifying_glass.svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+  <title>Magnifying Glass Icon</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .icon-stroke { stroke: #eee; }
+    }
+    @media (prefers-color-scheme: light) {
+      .icon-stroke { stroke: #333; }
+    }
+  </style>
+  <circle cx="42" cy="42" r="30" class="icon-stroke" stroke-width="10" fill="none"/>
+  <line x1="65" y1="65" x2="85" y2="85" class="icon-stroke" stroke-width="12" stroke-linecap="round"/>
+</svg>
+````
