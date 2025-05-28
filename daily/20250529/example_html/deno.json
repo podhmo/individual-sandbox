@@ -1,0 +1,29 @@
+{
+  "tasks": {
+    "serve": "deno run --allow-read --allow-net https://deno.land/std@0.224.0/http/file_server.ts . -p 8000"
+  },
+  "imports": {
+    "preact": "npm:preact@10.22.1",
+    "preact/hooks": "npm:preact@10.22.1/hooks",
+    "htm/preact": "npm:htm@3.1.1/preact"
+  },
+  "lint": {
+    "files": {
+      "include": ["js/", "*.js", "*.json", "*.md", "*.html", "*.css"],
+      "exclude": []
+    },
+    "rules": { "tags": ["recommended"] }
+  },
+  "fmt": {
+    "files": {
+      "include": ["js/", "*.js", "*.json", "*.md", "*.html", "*.css"],
+      "exclude": []
+    },
+    "options": {
+      "useTabs": false,
+      "lineWidth": 80,
+      "indentWidth": 2,
+      "singleQuote": true
+    }
+  }
+}

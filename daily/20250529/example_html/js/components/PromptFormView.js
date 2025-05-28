@@ -10,7 +10,6 @@ function PromptFormView({ template, categoryName, onBackToTemplates }) {
   const [isCopyButtonDisabled, setIsCopyButtonDisabled] = useState(true);
 
   useEffect(() => {
-    // テンプレートが変更されたら変数の初期値を設定
     const initialValues = {};
     template.variables.forEach(varName => {
       initialValues[varName] = '';
@@ -19,12 +18,9 @@ function PromptFormView({ template, categoryName, onBackToTemplates }) {
   }, [template]);
 
   useEffect(() => {
-    // 変数値が変更されたらプロンプトを再生成
     let prompt = template.template;
-    let allFilled = true; // 今回は使わないが、将来的に全入力必須にするなら使える
     template.variables.forEach(varName => {
       const value = variableValues[varName] || '';
-      // if (value.trim() === '') allFilled = false;
       prompt = prompt.replace(new RegExp(`\\{\\{${varName}\\}\\}`, 'g'), value || `{{${varName}}}`);
     });
     setGeneratedPrompt(prompt);
@@ -54,7 +50,6 @@ function PromptFormView({ template, categoryName, onBackToTemplates }) {
 
   return html`
     <section id="prompt-form-view">
-      {/* パンくずはApp.jsで管理 */}
       <article id="prompt-form-container">
         <h2 id="prompt-template-title">${template.name}</h2>
         <details>
@@ -63,6 +58,7 @@ function PromptFormView({ template, categoryName, onBackToTemplates }) {
         </details>
         
         <form onSubmit=${(e) => e.preventDefault()}>
+          <!-- 変数入力フィールド -->
           <div id="prompt-variable-inputs">
             ${template.variables.map(varName => html`
               <label htmlFor="var-${varName}">${varName}:</label>

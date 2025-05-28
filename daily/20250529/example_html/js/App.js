@@ -26,9 +26,9 @@ function App({ initialTemplates }) {
 
   useEffect(() => {
     if (!initialTemplates) {
-      // main.jsで読み込み済みなので、ここではフォールバックのみ
-      // もしAppコンポーネント内で再度読み込みたい場合はここにロジックを追加
-      // 今回はinitialTemplatesが渡される前提
+      // js/main.js で初期データが渡されることを期待
+      setIsLoading(false); 
+    } else {
       setIsLoading(false);
     }
   }, [initialTemplates]);
@@ -40,10 +40,9 @@ function App({ initialTemplates }) {
   }, []);
 
   const handleTemplateSelect = useCallback((templateId, categoryName) => {
-    // categoryNameは念のため受け取るが、基本的にはselectedCategoryNameを使う
     setSelectedTemplateId(templateId);
     if (categoryName && categoryName !== selectedCategoryName) {
-        setSelectedCategoryName(categoryName); // Breadcrumbsなどで使う場合
+        setSelectedCategoryName(categoryName); 
     }
     setCurrentView(VIEWS.PROMPT_FORM);
   }, [selectedCategoryName]);
@@ -57,7 +56,6 @@ function App({ initialTemplates }) {
   const handleBackToTemplates = useCallback(() => {
     setCurrentView(VIEWS.TEMPLATE_LIST);
     setSelectedTemplateId(null); 
-    // selectedCategoryName は保持
   }, []);
 
 
@@ -68,7 +66,7 @@ function App({ initialTemplates }) {
     return html`<p>Error: ${error}</p>`;
   }
   if (!hierarchicalTemplates || hierarchicalTemplates.length === 0) {
-      return html`<p>No templates found. Check your templates.md file.</p>`;
+      return html`<p>No templates found. Check your templates.md file or network issues.</p>`;
   }
   
   const selectedCategory = selectedCategoryName 

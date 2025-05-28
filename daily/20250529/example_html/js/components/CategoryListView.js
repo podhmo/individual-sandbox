@@ -10,6 +10,8 @@ function CategoryListView({ categories, onCategorySelect }) {
   return html`
     <section id="category-list-view">
       <h2>カテゴリを選択</h2>
+      <!-- HTMLコメントの例 -->
+      <!-- <div>カテゴリ一覧がここに表示されます</div> -->
       <div id="category-list-container">
         <ul role="list">
           ${categories.map(category => html`

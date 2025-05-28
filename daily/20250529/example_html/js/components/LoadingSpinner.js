@@ -6,6 +6,7 @@ function LoadingSpinner() {
   return html`
     <div class="loading-spinner" aria-label="読み込み中">
       データを読み込んでいます
+      <!-- HTML コメント -->
     </div>
   `;
 }

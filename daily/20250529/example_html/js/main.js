@@ -11,7 +11,7 @@ async function main() {
   render(html`<${LoadingSpinner} />`, appRoot); // 初期ローディング表示
 
   try {
-    const response = await fetch('/templates.md');
+    const response = await fetch('templates.md'); // ルートからの相対パスに変更
     if (!response.ok) {
       throw new Error(`Failed to fetch templates: ${response.statusText}`);
     }
@@ -21,7 +21,7 @@ async function main() {
     render(html`<${App} initialTemplates=${hierarchicalTemplates} />`, appRoot);
   } catch (error) {
     console.error("Error loading templates:", error);
-    render(html`<p>Error loading templates. Please check the console for details.</p>`, appRoot);
+    render(html`<p>Error loading templates. Please check the console for details and ensure 'templates.md' exists in the root directory.</p>`, appRoot);
   }
 }
 
