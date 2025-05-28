@@ -1,0 +1,78 @@
+/* public/css/style.css */
+:root {
+    /* 必要に応じてカスタム変数を定義 */
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* テンプレートプレビュー用 */
+.template-preview {
+    background-color: var(--pico-card-background-color);
+    border: 1px solid var(--pico-card-border-color);
+    padding: var(--pico-spacing);
+    border-radius: var(--pico-border-radius);
+    white-space: pre-wrap; /* 改行とスペースを保持 */
+    word-break: break-all; /* 長い単語でも折り返す */
+    font-size: 0.9em;
+    line-height: 1.6;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* プロンプト説明文 */
+#prompt-template-description {
+    white-space: pre-wrap;
+    padding: 1rem;
+    line-height: 1.5;
+    background-color: var(--pico-code-background-color);
+    border-radius: var(--pico-border-radius);
+    border: 1px solid var(--pico-card-border-color);
+    font-family: var(--pico-font-family); /* Picoのフォントファミリーを継承 */
+    font-size: 0.9em;
+}
+
+/* ボタンのスタイル調整 */
+.list-button {
+    width: 100%;
+    margin-bottom: var(--pico-spacing);
+}
+
+/* フィードバックメッセージ */
+.feedback-message {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+}
+
+/* ローディングスピナー */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+.loading-spinner::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 3px solid var(--pico-primary-focus);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* パンくずリスト */
+nav[aria-label="breadcrumb"] ul {
+    padding-left: 0; /* Pico.cssのデフォルトスタイルを上書きする場合 */
+}
+nav[aria-label="breadcrumb"] li button {
+    padding: 0.25rem 0.5rem; /* 少し小さめに */
+}
