@@ -94,7 +94,7 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 
 	// Parse all Go files in the package directory.
 	fset := token.NewFileSet()
-	pkgs, err := parser.ParseDir(fset, pkgDir, nil, parser.ParseComments)
+	pkgs, err := parser.ParseDir(fset, pkgDir, nil, 0)
 	if err != nil {
 		return fmt.Errorf("could not parse directory %s for package %s: %w", pkgDir, pkgPath, err)
 	}
