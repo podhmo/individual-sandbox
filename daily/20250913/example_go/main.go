@@ -82,8 +82,6 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 	// Find the file system path for the given package import path.
 	buildPkg, err := build.Import(pkgPath, "", 0)
 	if err != nil {
-		// Some packages listed by "go list std" might be virtual or not have a directory.
-		// For example, "unsafe". We can safely skip these.
 		if _, ok := err.(*build.NoGoError); ok {
 			logger.Debug("Skipping package with no Go source files", "package", pkgPath)
 			return nil
@@ -92,33 +90,34 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 	}
 	pkgDir := buildPkg.Dir
 
-	// Parse all Go files in the package directory.
+	// Parse non-test Go files in the package directory.
 	fset := token.NewFileSet()
-	pkgs, err := parser.ParseDir(fset, pkgDir, nil, 0)
+	pkgs, err := parser.ParseDir(fset, pkgDir, func(fi os.FileInfo) bool {
+		return !strings.HasSuffix(fi.Name(), "_test.go")
+	}, 0)
+
 	if err != nil {
 		return fmt.Errorf("could not parse directory %s for package %s: %w", pkgDir, pkgPath, err)
 	}
 
-	// A package can have multiple variants (e.g., for different OS/arch or tests).
-	// We select the main package definition.
+	// Since we are filtering out _test.go files, there should only be one package.
 	var astPkg *ast.Package
-	for name, p := range pkgs {
-		if !strings.HasSuffix(name, "_test") {
-			astPkg = p
-			break
-		}
+	for _, p := range pkgs {
+		astPkg = p
+		break
 	}
 	if astPkg == nil {
-		return fmt.Errorf("no non-test package found for %s", pkgPath)
+		// This can happen if a directory contains only _test.go files.
+		logger.Debug("No non-test package found", "package", pkgPath)
+		return nil
 	}
 
-	// Merge all files of the package into a single AST file.
-	mergedFile := mergePackageFiles(astPkg)
+	// Merge all files of the package into a single AST file, filtering unexported declarations.
+	mergedFile := mergeAndFilterPackageFiles(astPkg, logger)
 
 	// Inspect the AST and modify function declarations.
 	ast.Inspect(mergedFile, func(n ast.Node) bool {
 		fn, ok := n.(*ast.FuncDecl)
-		// If it's a function declaration and has a body, rewrite it.
 		if ok && fn.Body != nil {
 			rewriteFuncBody(fn)
 		}
@@ -126,7 +125,6 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 	})
 
 	// Prepare the output file path.
-	// The package path might contain slashes, which should be directories.
 	targetPath := filepath.Join(outputDir, pkgPath)
 	if err := os.MkdirAll(filepath.Dir(targetPath), 0755); err != nil {
 		return fmt.Errorf("could not create parent directory for %s: %w", targetPath, err)
@@ -147,7 +145,6 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 	// Format the generated code.
 	formatted, err := format.Source(buf.Bytes())
 	if err != nil {
-		// On formatting errors, write the unformatted code for debugging.
 		logger.Warn("Could not format generated code, writing unformatted version", "package", pkgPath, "error", err)
 		if _, writeErr := outFile.Write(buf.Bytes()); writeErr != nil {
 			return fmt.Errorf("could not write unformatted source for %s: %w", pkgPath, writeErr)
@@ -164,33 +161,74 @@ func processPackage(pkgPath, outputDir string, logger *slog.Logger) error {
 	return nil
 }
 
-// mergePackageFiles combines all ast.File in a package into a single ast.File.
-// It handles merging imports and declarations.
-func mergePackageFiles(pkg *ast.Package) *ast.File {
-	// Create the new, empty file AST.
-	// The Name field must be an *ast.Ident, not a string.
+// mergeAndFilterPackageFiles combines all ast.File in a package into a single ast.File,
+// keeping only exported and non-test declarations.
+func mergeAndFilterPackageFiles(pkg *ast.Package, logger *slog.Logger) *ast.File {
 	merged := &ast.File{
 		Name:  ast.NewIdent(pkg.Name),
 		Decls: []ast.Decl{},
 	}
-	// Use a map to track imports and avoid duplicates.
 	imports := make(map[string]*ast.ImportSpec)
 
 	for _, file := range pkg.Files {
-		// Copy all declarations from the file.
-		for _, decl := range file.Decls {
-			// Don't copy over import declarations directly, we'll handle them separately.
-			if gd, ok := decl.(*ast.GenDecl); ok && gd.Tok == token.IMPORT {
-				continue
-			}
-			merged.Decls = append(merged.Decls, decl)
-		}
-
-		// Collect unique imports.
+		// Collect unique imports from each file.
 		for _, spec := range file.Imports {
 			path := spec.Path.Value
 			if _, ok := imports[path]; !ok {
 				imports[path] = spec
+			}
+		}
+
+		// Process and filter declarations.
+		for _, decl := range file.Decls {
+			switch d := decl.(type) {
+			case *ast.FuncDecl:
+				// Keep function if it's exported and not a test/benchmark/example.
+				name := d.Name.Name
+				if d.Name.IsExported() &&
+					!strings.HasPrefix(name, "Test") &&
+					!strings.HasPrefix(name, "Benchmark") &&
+					!strings.HasPrefix(name, "Example") &&
+					!strings.HasPrefix(name, "Fuzz") {
+					merged.Decls = append(merged.Decls, d)
+				}
+			case *ast.GenDecl:
+				// For general declarations (import, const, var, type), filter specs.
+				if d.Tok == token.IMPORT {
+					continue
+				}
+
+				filteredSpecs := []ast.Spec{}
+				for _, spec := range d.Specs {
+					switch s := spec.(type) {
+					case *ast.TypeSpec:
+						if s.Name.IsExported() {
+							filteredSpecs = append(filteredSpecs, s)
+						}
+					case *ast.ValueSpec:
+						allExported := true
+						for _, name := range s.Names {
+							if !name.IsExported() {
+								allExported = false
+								break
+							}
+						}
+						if allExported {
+							filteredSpecs = append(filteredSpecs, s)
+						}
+					}
+				}
+
+				if len(filteredSpecs) > 0 {
+					newDecl := &ast.GenDecl{
+						Doc:    d.Doc,
+						Tok:    d.Tok,
+						Lparen: d.Lparen,
+						Specs:  filteredSpecs,
+						Rparen: d.Rparen,
+					}
+					merged.Decls = append(merged.Decls, newDecl)
+				}
 			}
 		}
 	}
@@ -199,30 +237,25 @@ func mergePackageFiles(pkg *ast.Package) *ast.File {
 	if len(imports) > 0 {
 		importDecl := &ast.GenDecl{
 			Tok:    token.IMPORT,
-			Lparen: 1, // Indicates a multi-import block `import (...)`
+			Lparen: 1,
 			Specs:  []ast.Spec{},
 		}
 		for _, spec := range imports {
 			importDecl.Specs = append(importDecl.Specs, spec)
 		}
-		// Add the single import declaration to the top of the declarations list.
 		merged.Decls = append([]ast.Decl{importDecl}, merged.Decls...)
 	}
 
 	return merged
 }
 
-// rewriteFuncBody replaces the body of a function.
-// If the function returns values, it adds a `panic("not implemented")` call.
-// Otherwise, it creates an empty body. This ensures the generated code is compilable.
+// rewriteFuncBody replaces the body of a function with a panic statement.
 func rewriteFuncBody(fn *ast.FuncDecl) {
-	// If the function has no return values, an empty body is sufficient.
 	if fn.Type.Results == nil || len(fn.Type.Results.List) == 0 {
 		fn.Body = &ast.BlockStmt{}
 		return
 	}
 
-	// For functions with return values, a panic statement makes it compilable.
 	panicCall := &ast.CallExpr{
 		Fun: &ast.Ident{Name: "panic"},
 		Args: []ast.Expr{
