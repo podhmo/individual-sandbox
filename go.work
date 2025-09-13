@@ -1,4 +1,4 @@
-go 1.18
+go 1.24.3
 
 use (
 	./daily/20220728/example_go
@@ -16,4 +16,5 @@ use (
 	./daily/20230705/example_go
 	./daily/20230903/example_go
 	./daily/20230917/example_go
+	./daily/20250913/example_go
 )
