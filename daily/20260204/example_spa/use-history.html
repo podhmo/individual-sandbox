@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>SPA Login</title>
+</head>
+<body>
+    <form id="login-form">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" autocomplete="username" required>
+        
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+        
+        <button type="submit">ログイン</button>
+    </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // デフォルトのsubmit（POST）を防ぐ
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // ここでクライアントサイドのログイン処理（例: ローカルストレージチェックなど）
+            // 仮に成功したとする
+            console.log('ログイン成功:', username);
+
+            // ブラウザにパスワード保存を促すために、historyを操作
+            history.pushState({}, '', location.href); // 同じURLでOK、または'/logged-in'などに変更
+            // または新しいパス: history.pushState({}, '', '/app');
+
+            // SPAの続きの処理（例: UI更新）
+            alert('ログインしました！');
+        });
+    </script>
+</body>
+</html>
