@@ -1,0 +1,26 @@
+{
+  "name": "modern-ts-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "lint": "oxlint src",
+    "format": "oxfmt --write src/**/*.ts",
+    "typecheck": "tsgo --noEmit",
+    "script": "node src/script.ts",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.3",
+  "devDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20260305.1",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^6.1.1"
+  }
+}
