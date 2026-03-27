@@ -12,7 +12,7 @@
 ;;
 ;; Unlike `python-ts-mode', this mode:
 ;;   - Does NOT inherit from `python-mode' or `python-base-mode'
-;;   - Only configures font-lock; no indentation rules, no imenu (yet)
+;;   - Only configures font-lock and imenu; no indentation rules
 ;;   - Is self-contained; does not depend on python.el internals
 ;;
 ;; Requirements:
@@ -67,6 +67,14 @@
     "^" "^=" "+" "->" "+=" "<" "<<" "<<=" "<=" "<>" "=" ":=" "==" ">" ">="
     ">>" ">>=" "|" "|=" "~" "@" "@=")
   "Python operators for tree-sitter font-lock.")
+
+;;; Imenu settings
+
+(defvar mini-python--treesit-imenu-settings
+  '(("Class"    "\\`class_definition\\'"    nil nil)
+    ("Function" "\\`function_definition\\'" nil nil))
+  "Tree-sitter imenu settings for `mini-python-ts-mode'.
+Classes and functions/methods appear as separate categories.")
 
 ;;; Font-lock rules
 
@@ -133,11 +141,11 @@
 
 ;;;###autoload
 (define-derived-mode mini-python-ts-mode prog-mode "MiniPy[ts]"
-  "Minimal Python major mode using tree-sitter (font-lock only).
+  "Minimal Python major mode using tree-sitter (font-lock + imenu).
 
 This mode uses Emacs's built-in tree-sitter library for syntax
-highlighting.  It does not inherit from `python-mode', and does
-not configure indentation or imenu.
+highlighting and imenu.  It does not inherit from `python-mode',
+and does not configure indentation.
 
 Requires Emacs 29+ and the tree-sitter Python grammar.
 To install the grammar: M-x treesit-install-language-grammar RET python RET
@@ -153,6 +161,7 @@ Run M-x treesit-install-language-grammar RET python RET first.")
                   (builtin constant number)
                   (bracket delimiter operator)))
     (setq-local treesit-font-lock-settings mini-python--treesit-settings)
+    (setq-local treesit-simple-imenu-settings mini-python--treesit-imenu-settings)
     (treesit-major-mode-setup)))
 
 (provide 'mini-python-ts-mode)

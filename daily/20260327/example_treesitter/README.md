@@ -2,16 +2,13 @@
 
 - https://www.masteringemacs.org/article/lets-write-a-treesitter-major-mode
 - https://zenn.dev/link/comments/a11b51216f95b3
+- python.el.gz /Applications/Emacs.app/Contents/Resources/lisp/progmodes/python.el.gz
 
 # やりたいこと
 
-pythonのtree sitterのparserを利用してmini-python-ts-modeを作成したい。
-このmodeはpython-modeを継承しない。
-このmodeはfont-lockの設定だけを使う。
-
-future work
-
-- imenu対応
+- pythonのtree sitterのparserを利用してmini-python-ts-modeを作成したい。
+- このmodeはpython-modeを継承しない。
+- このmodeはfont-lockの設定だけを使う。
 
 # 実装: mini-python-ts-mode
 
@@ -44,7 +41,12 @@ defvar mini-python--treesit-settings    ; treesit-font-lock-rules
    feature 'delimiter → ,.:;
    feature 'operator  → 演算子
 
+defvar mini-python--treesit-imenu-settings  ; imenu設定
+   "Class"    → class_definition ノード
+   "Function" → function_definition ノード（メソッド含む）
+
 define-derived-mode mini-python-ts-mode prog-mode "MiniPy[ts]"
+   treesit-simple-imenu-settings を設定
 ```
 
 ## 事前準備
@@ -71,6 +73,9 @@ M-x mini-python-ts-mode
 その前に `M-x treesit-install-language-grammar` が必要かもしれません。
 > ⛔ Warning (treesit): Cannot activate tree-sitter, because language grammar for python is unavailable (not-found): dlopen(...)
 
+またemacsのバージョンと合わない場合にはタグの指定が必要かもです。 (`v0.23.6`がそれです)
+> ⛔ Warning (treesit): The installed language grammar for python cannot be located or has problems (version-mismatch): 15
+
 ``` emacs-lisp
 (unless (treesit-language-available-p 'python)
     (push '(python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6") treesit-language-source-alist)
@@ -80,13 +85,21 @@ M-x mini-python-ts-mode
 
 その後 `treesit-available-p` で確認してください。
 
+## imenu
+
+`M-x imenu` または `M-x consult-imenu` などで関数・クラスの一覧にジャンプできます。
+
+| カテゴリ | 対象ノード |
+|---------|-----------|
+| Class | `class_definition` |
+| Function | `function_definition`（クラス内メソッドも含む） |
+
 ## python-ts-mode との違い
 
 - `python-mode` / `python-base-mode` を継承しない → `prog-mode` から派生
 - 文字列のdocstring判定なし（シンプルに `font-lock-string-face` を適用）
 - 型ヒント・union型のハイライトなし
 - インデント設定なし
-- imenuなし（future work）
 
 ## 参考: font-lock feature levels
 
